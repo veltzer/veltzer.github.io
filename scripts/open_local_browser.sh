@@ -1,2 +1,3 @@
-#!/bin/sh
-xdg-open http://veltzer.github.io
+#!/bin/bash -eu
+
+xdg-open "http://veltzer.github.io"

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Calendar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .calendar-wrapper {
+            position: relative;
+            padding-bottom: 75%;
+            height: 0;
+            overflow: hidden;
+        }
+        .calendar-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 8px;
+        }
+        .instructions {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .instructions h2 {
+            margin-top: 0;
+            color: #1a73e8;
+        }
+        .instructions ol {
+            margin-bottom: 0;
+        }
+        .instructions code {
+            background: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Public Calendar</h1>
+        
+        <div class="instructions">
+            <h2>Setup Instructions:</h2>
+            <ol>
+                <li>Go to Google Calendar settings</li>
+                <li>Select the calendar you want to share</li>
+                <li>In "Access permissions", check "Make available to public"</li>
+                <li>In "Integrate calendar", copy the "Public URL to this calendar" or the embed code</li>
+                <li>Replace the src URL in the iframe below</li>
+                <li>Commit this file to your GitHub Pages repo</li>
+            </ol>
+        </div>
+        
+        <div class="calendar-wrapper">
+            <!-- Replace YOUR_CALENDAR_ID with your actual calendar ID -->
+            <iframe src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID%40group.calendar.google.com&ctz=Asia%2FJerusalem&mode=WEEK&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=1&showCalendars=0&showTz=1&height=600&wkst=1&bgcolor=%23ffffff&color=%234285F4"
+                    style="border-width:0"
+                    width="800"
+                    height="600"
+                    frameborder="0"
+                    scrolling="no">
+            </iframe>
+        </div>
+        
+        <!-- Alternative: Agenda View -->
+        <!-- 
+        <iframe src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID%40group.calendar.google.com&ctz=Asia%2FJerusalem&mode=AGENDA" 
+                style="border: 0" 
+                width="800" 
+                height="600" 
+                frameborder="0" 
+                scrolling="no">
+        </iframe>
+        -->
+    </div>
+</body>
+</html>
