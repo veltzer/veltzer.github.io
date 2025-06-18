@@ -1,7 +1,7 @@
 <html>
 	<body>
 		Welcome to Mark Veltzer's website on github using github pages.
-		<h2>Local Files</h2>
+		<h2>My calendar integration I'm working on</h2>
 		<%
 			prefix="\t\t"
 			context.write(f"<ul>\n")
