@@ -1,5 +1,6 @@
-<%text>
-<!DOCTYPE html>
+<%!
+	import config.calendar
+%><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -61,10 +62,16 @@
             font-size: 14px;
             margin-bottom: 5px;
         }
+        .event-location {
+            color: #555;
+            font-size: 14px;
+            margin-top: 5px;
+        }
         .event-description {
             color: #555;
             font-size: 14px;
             margin-top: 10px;
+            white-space: pre-wrap;
         }
         .all-day {
             background: #4285f4;
@@ -89,6 +96,10 @@
             margin-bottom: 20px;
             font-size: 14px;
         }
+        .error-list {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
     </style>
 </head>
 <body>
@@ -110,6 +121,14 @@
         const CALENDAR_ID = 'YOUR_CALENDAR_ID@group.calendar.google.com'; // Replace this
         const API_KEY = 'YOUR_API_KEY'; // Replace this
         const MAX_RESULTS = 20; // Number of events to show
+        
+        // Create element with text content (safe from XSS)
+        function createElement(tag, className, textContent) {
+            const element = document.createElement(tag);
+            if (className) element.className = className;
+            if (textContent) element.textContent = textContent;
+            return element;
+        }
         
         // Format date/time
         function formatDateTime(dateTime) {
@@ -149,15 +168,56 @@
             return grouped;
         }
         
+        // Create event element
+        function createEventElement(event) {
+            const eventDiv = createElement('div', 'event');
+            
+            // Title
+            const titleDiv = createElement('div', 'event-title', event.summary || 'Untitled Event');
+            eventDiv.appendChild(titleDiv);
+            
+            // Time
+            const timeDiv = createElement('div', 'event-time');
+            if (event.start.dateTime) {
+                let timeText = formatDateTime(event.start.dateTime);
+                if (event.end.dateTime) {
+                    const endTime = new Date(event.end.dateTime).toLocaleTimeString('en-US', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    timeText += ' - ' + endTime;
+                }
+                timeDiv.textContent = timeText;
+            } else {
+                const allDaySpan = createElement('span', 'all-day', 'All Day');
+                timeDiv.appendChild(allDaySpan);
+            }
+            eventDiv.appendChild(timeDiv);
+            
+            // Location
+            if (event.location) {
+                const locationDiv = createElement('div', 'event-location', '📍 ' + event.location);
+                eventDiv.appendChild(locationDiv);
+            }
+            
+            // Description
+            if (event.description) {
+                const descDiv = createElement('div', 'event-description', event.description);
+                eventDiv.appendChild(descDiv);
+            }
+            
+            return eventDiv;
+        }
+        
         // Fetch events from Google Calendar
         async function fetchEvents() {
             const now = new Date().toISOString();
-            const url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}&timeMin=${now}&maxResults=${MAX_RESULTS}&singleEvents=true&orderBy=startTime`;
+            const url = 'https://www.googleapis.com/calendar/v3/calendars/' + CALENDAR_ID + '/events?key=' + API_KEY + '&timeMin=' + now + '&maxResults=' + MAX_RESULTS + '&singleEvents=true&orderBy=startTime';
             
             try {
                 const response = await fetch(url);
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error('HTTP error! status: ' + response.status);
                 }
                 const data = await response.json();
                 return data.items || [];
@@ -169,10 +229,16 @@
         // Display events
         function displayEvents(events) {
             const container = document.getElementById('events');
-            container.innerHTML = '';
+            // Clear existing content
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
             
             if (events.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: #666;">No upcoming events found.</p>';
+                const noEventsP = createElement('p', null, 'No upcoming events found.');
+                noEventsP.style.textAlign = 'center';
+                noEventsP.style.color = '#666';
+                container.appendChild(noEventsP);
                 return;
             }
             
@@ -180,40 +246,47 @@
             
             Object.keys(groupedEvents).forEach(dateKey => {
                 // Add date header
-                const dateHeader = document.createElement('div');
-                dateHeader.className = 'date-header';
-                dateHeader.textContent = formatDate(dateKey);
+                const dateHeader = createElement('div', 'date-header', formatDate(dateKey));
                 container.appendChild(dateHeader);
                 
                 // Add events for this date
                 groupedEvents[dateKey].forEach(event => {
-                    const eventEl = document.createElement('div');
-                    eventEl.className = 'event';
-                    
-                    let timeStr = '';
-                    if (event.start.dateTime) {
-                        timeStr = formatDateTime(event.start.dateTime);
-                        if (event.end.dateTime) {
-                            const endTime = new Date(event.end.dateTime).toLocaleTimeString('en-US', {
-                                hour: '2-digit',
-                                minute: '2-digit'
-                            });
-                            timeStr += ` - ${endTime}`;
-                        }
-                    } else {
-                        timeStr = '<span class="all-day">All Day</span>';
-                    }
-                    
-                    eventEl.innerHTML = `
-                        <div class="event-title">${'$'}{event.summary ${'||'} "Untitled Event"}</div>
-                        <div class="event-time">${timeStr}</div>
-                        ${event.location ? `<div class="event-location">${event.location}</div>` : ''}
-                        ${event.description ? `<div class="event-description">${event.description}</div>` : ''}
-                    `;
-                    
-                    container.appendChild(eventEl);
+                    const eventElement = createEventElement(event);
+                    container.appendChild(eventElement);
                 });
             });
+        }
+        
+        // Display error
+        function displayError(message) {
+            const errorEl = document.getElementById('error');
+            // Clear existing content
+            while (errorEl.firstChild) {
+                errorEl.removeChild(errorEl.firstChild);
+            }
+            
+            const errorTitle = createElement('strong', null, 'Error loading calendar:');
+            errorEl.appendChild(errorTitle);
+            errorEl.appendChild(document.createElement('br'));
+            errorEl.appendChild(document.createTextNode(message));
+            errorEl.appendChild(document.createElement('br'));
+            errorEl.appendChild(document.createElement('br'));
+            errorEl.appendChild(document.createTextNode('Please check that:'));
+            
+            const errorList = createElement('ul', 'error-list');
+            const checks = [
+                'Your calendar is set to public',
+                'You\'ve replaced YOUR_CALENDAR_ID and YOUR_API_KEY',
+                'The Google Calendar API is enabled for your API key'
+            ];
+            
+            checks.forEach(check => {
+                const li = createElement('li', null, check);
+                errorList.appendChild(li);
+            });
+            
+            errorEl.appendChild(errorList);
+            errorEl.style.display = 'block';
         }
         
         // Initialize
@@ -226,29 +299,23 @@
                 const events = await fetchEvents();
                 loadingEl.style.display = 'none';
                 setupNote.style.display = 'none';
+                errorEl.style.display = 'none';
                 displayEvents(events);
             } catch (error) {
                 loadingEl.style.display = 'none';
-                errorEl.style.display = 'block';
-                errorEl.innerHTML = `
-                    <strong>Error loading calendar:</strong><br>
-                    ${error.message}<br><br>
-                    Please check that:
-                    <ul>
-                        <li>Your calendar is set to public</li>
-                        <li>You've replaced YOUR_CALENDAR_ID and YOUR_API_KEY</li>
-                        <li>The Google Calendar API is enabled for your API key</li>
-                    </ul>
-                `;
+                displayError(error.message);
             }
         }
         
         // Start when page loads
-        init();
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
         
         // Refresh every 5 minutes
         setInterval(init, 5 * 60 * 1000);
     </script>
 </body>
 </html>
-</%text>

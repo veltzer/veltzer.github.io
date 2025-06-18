@@ -1,0 +1,2 @@
+CALENDAR_ID = ""
+CALENDAR_API_KEY = ""
