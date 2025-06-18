@@ -118,8 +118,8 @@
 
     <script>
         // Configuration
-        const CALENDAR_ID = 'YOUR_CALENDAR_ID@group.calendar.google.com'; // Replace this
-        const API_KEY = 'YOUR_API_KEY'; // Replace this
+        const CALENDAR_ID = '${config.calendar.ID}'; // Replace this
+        const API_KEY = '${config.calendar.API_KEY}'; // Replace this
         const MAX_RESULTS = 20; // Number of events to show
         
         // Create element with text content (safe from XSS)

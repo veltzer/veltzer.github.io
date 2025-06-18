@@ -95,8 +95,8 @@
             var calendarEl = document.getElementById('calendar');
             
             // Configuration
-            const CALENDAR_ID = 'YOUR_CALENDAR_ID@group.calendar.google.com'; // Replace with your calendar ID
-            const API_KEY = 'YOUR_API_KEY'; // Replace with your API key
+            const CALENDAR_ID = '${config.calendar.ID}'; // Replace with your calendar ID
+            const API_KEY = '${config.calendar.API_KEY}'; // Replace with your API key
             const TIMEZONE = 'Asia/Jerusalem'; // Your timezone
             
             var calendar = new FullCalendar.Calendar(calendarEl, {
