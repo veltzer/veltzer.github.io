@@ -1,0 +1,4 @@
+- stop hardcoding my API id in my HTML or javascript code.
+	I get warnings about this from github and google!
+	(github and google scan my repositories and code
+	and warn me about this).
