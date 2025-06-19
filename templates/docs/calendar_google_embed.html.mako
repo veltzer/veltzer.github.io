@@ -65,19 +65,6 @@
 <body>
     <div class="container">
         <h1>My Public Calendar</h1>
-        
-        <div class="instructions">
-            <h2>Setup Instructions:</h2>
-            <ol>
-                <li>Go to Google Calendar settings</li>
-                <li>Select the calendar you want to share</li>
-                <li>In "Access permissions", check "Make available to public"</li>
-                <li>In "Integrate calendar", copy the "Public URL to this calendar" or the embed code</li>
-                <li>Replace the src URL in the iframe below</li>
-                <li>Commit this file to your GitHub Pages repo</li>
-            </ol>
-        </div>
-        
         <div class="calendar-wrapper">
             <!-- Replace YOUR_CALENDAR_ID with your actual calendar ID -->
             <iframe src="https://calendar.google.com/calendar/embed?src=${config.calendar.ID}&ctz=Asia%2FJerusalem&mode=WEEK&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=1&showCalendars=0&showTz=1&height=600&wkst=1&bgcolor=%23ffffff&color=%234285F4"

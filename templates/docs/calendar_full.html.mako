@@ -75,18 +75,6 @@
 <body>
     <div class="container">
         <h1>My Public Calendar</h1>
-        
-        <div class="setup-info">
-            <h2>Setup Instructions:</h2>
-            <ol>
-                <li>Make your Google Calendar public (Settings → Access permissions)</li>
-                <li>Get your Calendar ID from Settings → Integrate calendar</li>
-                <li>Get a Google API Key from <a href="https://console.cloud.google.com/apis/credentials" target="_blank">Google Cloud Console</a></li>
-                <li>Enable the Google Calendar API for your project</li>
-                <li>Replace <code>YOUR_CALENDAR_ID</code> and <code>YOUR_API_KEY</code> below</li>
-            </ol>
-        </div>
-        
         <div id="calendar"></div>
     </div>
 
