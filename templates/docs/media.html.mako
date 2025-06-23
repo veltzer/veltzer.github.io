@@ -92,7 +92,7 @@
             // --- Helper Function ---
             function formatDate(dateString) {
                 if (!dateString) return null;
-                // Extracts just the<x_bin_660>-MM-DD part from the UTC string
+                // Extracts just the YYYY-MM-DD part from the UTC string
                 return dateString.substring(0, 10);
             }
 
@@ -122,6 +122,7 @@
                     },
                     renderStats: function(items) {
                         var deviceCounts = {};
+                        var yearCounts = {};
                         var totalSeasons = 0;
                         items.forEach(function(item) {
                             if (item.device) {
@@ -130,6 +131,11 @@
                             if (item.seasons_seen) {
                                 totalSeasons += item.seasons_seen.length;
                             }
+                            var date = formatDate(item.date_utcz);
+                            if (date) {
+                                var year = date.substring(0, 4);
+                                yearCounts[year] = (yearCounts[year] || 0) + 1;
+                            }
                         });
 
                         var statsHtml = '<div class="row g-4 mb-4">';
@@ -137,28 +143,36 @@
                         statsHtml += '<div class="col-md-6"><div class="card stat-card h-100"><div class="card-body"><span class="stat-value">' + totalSeasons + '</span><span class="stat-label">Total Seasons</span></div></div></div>';
                         statsHtml += '</div>';
 
-                        var maxCount = 0;
-                        Object.values(deviceCounts).forEach(function(count) {
-                            if (count > maxCount) {
-                                maxCount = count;
-                            }
-                        });
-
-                        statsHtml += '<div class="card"><div class="card-header"><strong>Device Distribution</strong></div><div class="card-body">';
+                        var maxDeviceCount = Math.max.apply(null, Object.values(deviceCounts));
+                        statsHtml += '<div class="card mb-4"><div class="card-header"><strong>Device Distribution</strong></div><div class="card-body">';
                         var colors = ['#0d6efd', '#6f42c1', '#d63384', '#fd7e14', '#198754', '#dc3545', '#ffc107'];
                         var colorIndex = 0;
                          Object.keys(deviceCounts).sort().forEach(function(device) {
                             var count = deviceCounts[device];
-                            var percentage = (count / maxCount) * 100;
+                            var percentage = (count / maxDeviceCount) * 100;
                             statsHtml += '<div class="mb-3">';
                             statsHtml += '   <p class="mb-1"><strong>' + device + '</strong> <span class="text-muted">(' + count + ' items)</span></p>';
                             statsHtml += '   <div class="progress" style="height: 20px;">';
                             statsHtml += '       <div class="progress-bar" role="progressbar" style="width: ' + percentage + '%; background-color:' + colors[colorIndex % colors.length] + ';" aria-valuenow="' + percentage + '" aria-valuemin="0" aria-valuemax="100"></div>';
-                            statsHtml += '   </div>';
-                            statsHtml += '</div>';
+                            statsHtml += '   </div></div>';
                             colorIndex++;
                         });
                         statsHtml += '</div></div>';
+
+                        var maxYearCount = Math.max.apply(null, Object.values(yearCounts));
+                        statsHtml += '<div class="card"><div class="card-header"><strong>Items per Year</strong></div><div class="card-body">';
+                        colorIndex = 0;
+                        Object.keys(yearCounts).sort().reverse().forEach(function(year) {
+                            var count = yearCounts[year];
+                            var percentage = (count / maxYearCount) * 100;
+                            statsHtml += '<div class="mb-3">';
+                            statsHtml += '   <p class="mb-1"><strong>' + year + '</strong> <span class="text-muted">(' + count + ' items)</span></p>';
+                            statsHtml += '   <div class="progress" style="height: 20px;">';
+                            statsHtml += '       <div class="progress-bar bg-success" role="progressbar" style="width: ' + percentage + '%;" aria-valuenow="' + percentage + '" aria-valuemin="0" aria-valuemax="100"></div>';
+                            statsHtml += '   </div></div>';
+                        });
+                        statsHtml += '</div></div>';
+
                         return statsHtml;
                     }
                 },
@@ -186,6 +200,7 @@
                     },
                     renderStats: function(items) {
                          var deviceCounts = {};
+                         var yearCounts = {};
                          var lecturerSet = new Set();
                          items.forEach(function(item) {
                             if (item.device) {
@@ -196,6 +211,11 @@
                                     lecturerSet.add(lecturer);
                                 });
                             }
+                            var date = formatDate(item.date_utcz || item.date_ended_utcz || item.date_started_utcz);
+                            if (date) {
+                                var year = date.substring(0, 4);
+                                yearCounts[year] = (yearCounts[year] || 0) + 1;
+                            }
                         });
 
                         var statsHtml = '<div class="row g-4 mb-4">';
@@ -203,28 +223,36 @@
                         statsHtml += '<div class="col-md-6"><div class="card stat-card h-100"><div class="card-body"><span class="stat-value">' + lecturerSet.size + '</span><span class="stat-label">Unique Lecturers</span></div></div></div>';
                         statsHtml += '</div>';
                         
-                        var maxCount = 0;
-                        Object.values(deviceCounts).forEach(function(count) {
-                            if (count > maxCount) {
-                                maxCount = count;
-                            }
-                        });
-
-                        statsHtml += '<div class="card"><div class="card-header"><strong>Device Distribution</strong></div><div class="card-body">';
+                        var maxDeviceCount = Math.max.apply(null, Object.values(deviceCounts));
+                        statsHtml += '<div class="card mb-4"><div class="card-header"><strong>Device Distribution</strong></div><div class="card-body">';
                         var colors = ['#0d6efd', '#6f42c1', '#d63384', '#fd7e14', '#198754', '#dc3545', '#ffc107'];
                         var colorIndex = 0;
                          Object.keys(deviceCounts).sort().forEach(function(device) {
                             var count = deviceCounts[device];
-                            var percentage = (count / maxCount) * 100;
+                            var percentage = (count / maxDeviceCount) * 100;
                             statsHtml += '<div class="mb-3">';
                             statsHtml += '   <p class="mb-1"><strong>' + device + '</strong> <span class="text-muted">(' + count + ' items)</span></p>';
                             statsHtml += '   <div class="progress" style="height: 20px;">';
                             statsHtml += '       <div class="progress-bar" role="progressbar" style="width: ' + percentage + '%; background-color:' + colors[colorIndex % colors.length] + ';" aria-valuenow="' + percentage + '" aria-valuemin="0" aria-valuemax="100"></div>';
-                            statsHtml += '   </div>';
-                            statsHtml += '</div>';
+                            statsHtml += '   </div></div>';
                             colorIndex++;
                         });
                         statsHtml += '</div></div>';
+
+                        var maxYearCount = Math.max.apply(null, Object.values(yearCounts));
+                        statsHtml += '<div class="card"><div class="card-header"><strong>Items per Year</strong></div><div class="card-body">';
+                        colorIndex = 0;
+                        Object.keys(yearCounts).sort().reverse().forEach(function(year) {
+                            var count = yearCounts[year];
+                            var percentage = (count / maxYearCount) * 100;
+                            statsHtml += '<div class="mb-3">';
+                            statsHtml += '   <p class="mb-1"><strong>' + year + '</strong> <span class="text-muted">(' + count + ' items)</span></p>';
+                            statsHtml += '   <div class="progress" style="height: 20px;">';
+                            statsHtml += '       <div class="progress-bar bg-success" role="progressbar" style="width: ' + percentage + '%;" aria-valuenow="' + percentage + '" aria-valuemin="0" aria-valuemax="100"></div>';
+                            statsHtml += '   </div></div>';
+                        });
+                        statsHtml += '</div></div>';
+
                         return statsHtml;
                     }
                 }
