@@ -57,6 +57,41 @@
             color: #6b7280;
             margin-top: 0.25rem;
         }
+        /* Tooltip styles */
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip-text {
+            visibility: hidden;
+            width: 220px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 150%;
+            left: 50%;
+            margin-left: -110px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+        .tooltip-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="antialiased text-gray-800">
@@ -90,7 +125,7 @@
     </div>
 
     <footer class="text-center text-gray-500 mt-8 py-4 border-t">
-        <p>Page Visits: <span id="visitor-count">Loading...</span></p>
+        <p>Page Visits: <span id="visitor-count-container"><span id="visitor-count">Loading...</span></span></p>
     </footer>
 
     <script>
@@ -334,10 +369,17 @@
                 .catch(function(error) {
                     // If the fetch fails, update the UI to inform the user.
                     console.error('Error fetching visitor count:', error);
-                    const countElement = document.getElementById('visitor-count');
-                    if (countElement) {
+                    const container = document.getElementById('visitor-count-container');
+                    if (container) {
+                        container.className = 'tooltip-container';
+                        
+                        const countElement = document.getElementById('visitor-count');
                         countElement.textContent = 'N/A';
-                        countElement.title = 'Visitor count could not be loaded. This may be due to a network issue or an ad blocker.';
+                        
+                        const tooltip = document.createElement('span');
+                        tooltip.className = 'tooltip-text';
+                        tooltip.textContent = 'Visitor count could not be loaded. This may be due to a network issue or an ad blocker.';
+                        container.appendChild(tooltip);
                     }
                 });
             }
