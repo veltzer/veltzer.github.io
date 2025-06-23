@@ -352,18 +352,17 @@
 
             // --- 6. Visitor Counter ---
             function updateVisitorCount() {
-                // This function fetches the visitor count from a third-party service.
-                // NOTE: This may be blocked by ad blockers or privacy extensions.
+                // Using a more reliable counter service: counterapi.dev
                 const namespace = window.location.hostname || 'local-file-viewer';
                 const key = 'main-viewer-counter';
-                const apiUrl = 'https://api.countapi.xyz/hit/' + namespace + '/' + key;
+                const apiUrl = 'https://api.counterapi.dev/v1/' + namespace + '/' + key + '/up';
 
                 fetch(apiUrl)
                 .then(function(response) { return response.json(); })
                 .then(function(data) {
                     const countElement = document.getElementById('visitor-count');
                     if (countElement) {
-                        countElement.textContent = data.value;
+                        countElement.textContent = data.count; // Use data.count for this service
                     }
                 })
                 .catch(function(error) {
