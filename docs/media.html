@@ -137,17 +137,28 @@
                         statsHtml += '<div class="col-md-6"><div class="card stat-card h-100"><div class="card-body"><span class="stat-value">' + totalSeasons + '</span><span class="stat-label">Total Seasons</span></div></div></div>';
                         statsHtml += '</div>';
 
-                        var totalDevices = Object.values(deviceCounts).reduce(function(a, b) { return a + b; }, 0);
+                        var maxCount = 0;
+                        Object.values(deviceCounts).forEach(function(count) {
+                            if (count > maxCount) {
+                                maxCount = count;
+                            }
+                        });
+
                         statsHtml += '<div class="card"><div class="card-header"><strong>Device Distribution</strong></div><div class="card-body">';
-                        statsHtml += '<div class="progress" style="height: 30px;">';
                         var colors = ['#0d6efd', '#6f42c1', '#d63384', '#fd7e14', '#198754', '#dc3545', '#ffc107'];
                         var colorIndex = 0;
                          Object.keys(deviceCounts).sort().forEach(function(device) {
-                            var percentage = (deviceCounts[device] / totalDevices) * 100;
-                            statsHtml += '<div class="progress-bar" role="progressbar" style="width: ' + percentage + '%; background-color:' + colors[colorIndex % colors.length] + ';" title="' + device + ' (' + deviceCounts[device] + ')">' + device + '</div>';
+                            var count = deviceCounts[device];
+                            var percentage = (count / maxCount) * 100;
+                            statsHtml += '<div class="mb-3">';
+                            statsHtml += '   <p class="mb-1"><strong>' + device + '</strong> <span class="text-muted">(' + count + ' items)</span></p>';
+                            statsHtml += '   <div class="progress" style="height: 20px;">';
+                            statsHtml += '       <div class="progress-bar" role="progressbar" style="width: ' + percentage + '%; background-color:' + colors[colorIndex % colors.length] + ';" aria-valuenow="' + percentage + '" aria-valuemin="0" aria-valuemax="100"></div>';
+                            statsHtml += '   </div>';
+                            statsHtml += '</div>';
                             colorIndex++;
                         });
-                        statsHtml += '</div></div></div>';
+                        statsHtml += '</div></div>';
                         return statsHtml;
                     }
                 },
@@ -192,17 +203,28 @@
                         statsHtml += '<div class="col-md-6"><div class="card stat-card h-100"><div class="card-body"><span class="stat-value">' + lecturerSet.size + '</span><span class="stat-label">Unique Lecturers</span></div></div></div>';
                         statsHtml += '</div>';
                         
-                        var totalDevices = Object.values(deviceCounts).reduce(function(a, b) { return a + b; }, 0);
+                        var maxCount = 0;
+                        Object.values(deviceCounts).forEach(function(count) {
+                            if (count > maxCount) {
+                                maxCount = count;
+                            }
+                        });
+
                         statsHtml += '<div class="card"><div class="card-header"><strong>Device Distribution</strong></div><div class="card-body">';
-                        statsHtml += '<div class="progress" style="height: 30px;">';
                         var colors = ['#0d6efd', '#6f42c1', '#d63384', '#fd7e14', '#198754', '#dc3545', '#ffc107'];
                         var colorIndex = 0;
                          Object.keys(deviceCounts).sort().forEach(function(device) {
-                            var percentage = (deviceCounts[device] / totalDevices) * 100;
-                            statsHtml += '<div class="progress-bar" role="progressbar" style="width: ' + percentage + '%; background-color:' + colors[colorIndex % colors.length] + ';" title="' + device + ' (' + deviceCounts[device] + ')">' + device + '</div>';
+                            var count = deviceCounts[device];
+                            var percentage = (count / maxCount) * 100;
+                            statsHtml += '<div class="mb-3">';
+                            statsHtml += '   <p class="mb-1"><strong>' + device + '</strong> <span class="text-muted">(' + count + ' items)</span></p>';
+                            statsHtml += '   <div class="progress" style="height: 20px;">';
+                            statsHtml += '       <div class="progress-bar" role="progressbar" style="width: ' + percentage + '%; background-color:' + colors[colorIndex % colors.length] + ';" aria-valuenow="' + percentage + '" aria-valuemin="0" aria-valuemax="100"></div>';
+                            statsHtml += '   </div>';
+                            statsHtml += '</div>';
                             colorIndex++;
                         });
-                        statsHtml += '</div></div></div>';
+                        statsHtml += '</div></div>';
                         return statsHtml;
                     }
                 }
@@ -276,7 +298,7 @@
 
                     const yamlText = await response.text();
                     const data = jsyaml.load(yamlText);
-allItems = data.items || [];
+                    allItems = data.items || [];
                     allItems.sort((a, b) => a.name.localeCompare(b.name));
                     
                     if (showStatsOnly) {
