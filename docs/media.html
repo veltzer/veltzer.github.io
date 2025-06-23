@@ -276,7 +276,7 @@
 
                     const yamlText = await response.text();
                     const data = jsyaml.load(yamlText);
-                    allItems = data.items || [];
+allItems = data.items || [];
                     allItems.sort((a, b) => a.name.localeCompare(b.name));
                     
                     if (showStatsOnly) {
