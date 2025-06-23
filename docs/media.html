@@ -76,6 +76,13 @@
             let allItems = []; // To store the fetched data
             let activeConfig = {}; // To store the config of the current view
             
+            // --- Helper Function ---
+            function formatDate(dateString) {
+                if (!dateString) return null;
+                // Extracts just the YYYY-MM-DD part from the UTC string
+                return dateString.substring(0, 10);
+            }
+
             // --- 1. MASTER CONFIGURATION OBJECT ---
             // This is the single source of truth. Add a new object here to add a new page.
             const dataSources = {
@@ -84,11 +91,18 @@
                     navTitle: 'Video Series',
                     title: 'Watched TV Series',
                     subtitle: "A searchable list of TV series I've watched.",
-                    searchPlaceholder: 'Search by name, review...',
-                    searchFields: ['name', 'review'],
+                    searchPlaceholder: 'Search by name, review, location...',
+                    searchFields: ['name', 'review', 'location'],
                     renderDetails: function(item) {
                         var seasons = item.seasons_seen ? item.seasons_seen.join(', ') : 'N/A';
                         var html = '<p><span class="font-semibold">Seasons Seen:</span> ' + seasons + '</p>';
+                        var date = formatDate(item.date_utcz);
+                        if (date) {
+                             html += '<p><span class="font-semibold">Date Watched:</span> ' + date + '</p>';
+                        }
+                        if (item.location) {
+                            html += '<p><span class="font-semibold">Location:</span> ' + item.location + '</p>';
+                        }
                         if (item.imdb_id) {
                             html += '<p class="mt-2"><a href="https://www.imdb.com/title/tt' + item.imdb_id + '/" target="_blank" class="text-indigo-600 hover:text-indigo-800 transition-colors">IMDb</a></p>';
                         }
@@ -101,10 +115,17 @@
                     title: 'Listened to Audio Courses',
                     subtitle: "A searchable list of audio courses I've listened to.",
                     searchPlaceholder: 'Search by name, review, lecturer...',
-                    searchFields: ['name', 'review', 'lecturers'],
+                    searchFields: ['name', 'review', 'lecturers', 'location'],
                     renderDetails: function(item) {
                         var lecturers = item.lecturers ? item.lecturers.join(', ') : 'N/A';
                         var html = '<p><span class="font-semibold">Lecturer(s):</span> ' + lecturers + '</p>';
+                        var date = formatDate(item.date_utcz || item.date_ended_utcz || item.date_started_utcz);
+                         if (date) {
+                             html += '<p><span class="font-semibold">Date:</span> ' + date + '</p>';
+                        }
+                        if (item.location) {
+                            html += '<p><span class="font-semibold">Location:</span> ' + item.location + '</p>';
+                        }
                         if (item.progress) {
                             html += '<p><span class="font-semibold">Progress:</span> ' + item.progress + '</p>';
                         }
