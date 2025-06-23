@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/favicon.svg">
     <title>My Media Collection</title>
+
+    <!-- Favicon Links -->
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="favicon.svg">
+
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- js-yaml library to parse the YAML file -->
@@ -82,11 +85,13 @@
         <div id="status-message" class="text-center text-xl text-gray-500"></div>
 
         <!-- Container for the Cards -->
-        <main id="items-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Items cards will be injected here by JavaScript -->
-        </main>
+        <main id="items-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></main>
 
     </div>
+
+    <footer class="text-center text-gray-500 mt-8 py-4 border-t">
+        <p>Page Visits: <span id="visitor-count">Loading...</span></p>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -274,8 +279,6 @@
                     statusMessage.textContent = 'No items found matching your search.';
                     return;
                 }
-                // We don't clear the status message if items are found, as the stats take its place
-                // statusMessage.textContent = ''; 
 
                 itemList.forEach(item => {
                     const card = document.createElement('div');
@@ -312,8 +315,33 @@
                 renderItems(filteredItems);
             });
 
+            // --- 6. Visitor Counter ---
+            function updateVisitorCount() {
+                // IMPORTANT: Replace 'your-username.github.io' with your actual site domain
+                const namespace = 'your-username.github.io';
+                const key = 'main-viewer-counter';
+                const apiUrl = 'https://api.countapi.xyz/hit/' + namespace + '/' + key;
+
+                fetch(apiUrl)
+                .then(function(response) { return response.json(); })
+                .then(function(data) {
+                    const countElement = document.getElementById('visitor-count');
+                    if (countElement) {
+                        countElement.textContent = data.value;
+                    }
+                })
+                .catch(function(error) {
+                    console.error('Error fetching visitor count:', error);
+                    const countElement = document.getElementById('visitor-count');
+                    if (countElement) {
+                        countElement.textContent = 'N/A';
+                    }
+                });
+            }
+
             // --- Initial Load ---
             loadData();
+            updateVisitorCount();
         });
     </script>
 </body>
