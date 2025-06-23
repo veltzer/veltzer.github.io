@@ -1,0 +1,614 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/schemas/json/video_series.json
+$schema: "https://veltzer.github.io/schemas/json/video_series.json"
+items:
+  - name: "The Leftovers"
+    device: "netflix"
+    date_utcz: "2019-09-11T15:45:00Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "2699128"
+    location: "home"
+    seasons_seen: [1, 2, 3]
+    rating: 7
+    review: "Didn't like the religious bits"
+  - name: "Into the Night"
+    device: "netflix"
+    date_utcz: "2021-09-11T15:45:00Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "10919486"
+    location: "home"
+    seasons_seen: [1, 2]
+    rating: 7
+    review: "The idea was a bit problematic"
+  - name: "Collateral"
+    device: "netflix"
+    date_utcz: "2021-09-21T15:46:21Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "6729080"
+    location: "home"
+    seasons_seen: [1]
+    rating: 8
+    review: "Not bad"
+  - name: "Westworld"
+    device: "YES"
+    date_utcz: "2016-12-10T20:46:05Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "0475784"
+    location: "home"
+    review: "ok. Some plot issues and too much playing with the footage."
+    rating: 7
+    seasons_seen: [1, 2]
+    seasons_not_seen: [3, 4]
+  - name: "Game of Thrones"
+    device: "YES"
+    date_utcz: "2020-03-15T13:37:26Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "0944947"
+    location: "home"
+    rating: 8
+    review: "pretty good series"
+    seasons_seen: [1, 2, 3, 4, 5, 6, 7, 8]
+  - name: "Homeland"
+    date_utcz: "2018-09-29T08:58:24Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "netflix"
+    imdb_id: "1796960"
+    location: "home"
+    rating: 7
+    review: "ok with some unbelievable parts"
+    seasons_seen: [1, 2, 3, 4, 5, 6, 7, 8]
+  - name: "The Mist"
+    device: "netflix"
+    date_utcz: "2021-09-29T08:58:24Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "5639976"
+    location: "home"
+    seasons_seen: [1]
+    rating: 6
+    review: "Not very interesting."
+  - name: "Star Trek: Discovery"
+    device: "netflix"
+    date_utcz: "2021-11-24T10:52:14Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "5171438"
+    location: "home"
+    seasons_not_seen: [4, 5]
+    seasons_seen: [1, 2, 3]
+    rating: 7
+    review: "too out there with their ideas"
+  - name: "Narcos: Mexico"
+    device: "netflix"
+    date_utcz: "2021-11-24T10:52:14Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "8714904"
+    location: "home"
+    seasons_seen: [1, 2, 3]
+    rating: 8
+    review: "nice one"
+  - name: "Space Force"
+    device: "netflix"
+    date_utcz: "2022-02-19T02:26:27Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "9612516"
+    location: "home"
+    seasons_seen: [1, 2]
+    rating: 7
+    review: "ok but not more"
+  - name: "Vikings"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "2306299"
+    location: "home"
+    seasons_seen: [1, 2, 3, 4, 5, 6]
+    rating: 8
+    review: "Nice series"
+  - name: "Star Trek: The Next Generation"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "0092455"
+    location: "home"
+    seasons_seen: [1, 2, 3, 4, 5, 6, 7]
+    rating: 7
+    review: "Didn't like it too much"
+  - name: "Star Trek: The Original Series"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "0060028"
+    location: "home"
+    seasons_seen: [1, 2, 3]
+    rating: 8
+    review: "Pretty good series"
+  - name: "Better Than Us"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "8285216"
+    location: "home"
+    seasons_seen: [1]
+    rating: 8
+    review: "Some nice ideas"
+  - name: "Brooklyn Nine-Nine"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "2467372"
+    location: "home"
+    seasons_seen: [1, 2, 3, 4, 5, 6, 7, 8]
+    rating: 7
+    review: "Ages after first season"
+  - name: "Breaking Bad"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "0903747"
+    location: "home"
+    seasons_seen: [1, 2, 3, 4, 5]
+    rating: 9
+    review: "Pretty good series"
+  - name: "Designated Survivor"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "5296406"
+    location: "home"
+    seasons_seen: [1, 2, 3]
+    rating: 7
+    review: "Unrealistic"
+  - name: "Fauda"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "4565380"
+    location: "home"
+    seasons_seen: [1, 2, 3]
+    seasons_not_seen: [4]
+    rating: 6
+    review: "Very unrealistic"
+  - name: "Better Call Saul"
+    device: "netflix"
+    date_utcz: "2022-08-19T18:53:28Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "3032476"
+    location: "home"
+    seasons_seen: [1, 2, 3, 4, 5, 6]
+    rating: 7
+    review: "Nice but not memorable"
+  - name: "Another Life"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "8369840"
+    location: "home"
+    seasons_seen: [1, 2]
+    rating: 7
+    review: "Not an interesting plot"
+  - name: "Roman Empire"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "6233538"
+    location: "home"
+    seasons_seen: [1, 2, 3]
+    rating: 7
+    review: "Ok but not special"
+  - name: "Ozark"
+    device: "netflix"
+    date_utcz: "2022-05-07T20:39:45Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "5071412"
+    location: "home"
+    seasons_seen: [1, 2, 3, 4]
+    rating: 8
+    review: "Did find it credible, but it was well made."
+  - name: "Friends"
+    device: "netflix"
+    date_utcz: "2022-07-20T17:07:54Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "0108778"
+    location: "home"
+    seasons_seen: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    rating: 6
+    review: "Very stupid humour"
+  - name: "Black Mirror"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "2085059"
+    location: "home"
+    seasons_seen: [1, 2, 3, 4, 5, 6]
+    rating: 8
+    review: "Very good series"
+  - name: "Bodyguard"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "7493974"
+    location: "home"
+    seasons_seen: [1]
+    rating: 6
+    review: "not credible"
+  - name: "Away"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "8787802"
+    location: "home"
+    seasons_seen: [1]
+    rating: 6
+    review: "not impressive"
+  - name: "House of Cards"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "1856010"
+    location: "home"
+    seasons_seen: [1, 2, 3, 4, 5, 6]
+    rating: 5
+    review: "not credible"
+  - name: "The Spy"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "5952634"
+    location: "home"
+    seasons_seen: [1]
+    rating: 7
+    review: "nice"
+  - name: "Barbarians"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "9184986"
+    location: "home"
+    seasons_seen: [1]
+    rating: 6
+    review: "not very interesting"
+  - name: "The Crown"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "4786824"
+    location: "home"
+    seasons_seen: [1, 2, 3, 4, 5, 6]
+    rating: 6
+    review: "not very interesting"
+  - name: "Into the Night"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "10919486"
+    location: "home"
+    seasons_seen: [1, 2]
+    rating: 7
+    review: "nice idea but gets boring"
+  - name: "Godless"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "5516154"
+    location: "home"
+    seasons_seen: [1]
+    rating: 7
+    review: "nice"
+  - name: "Star Trek: Deep Space Nine"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "0106145"
+    location: "home"
+    seasons_seen: [1, 2, 3, 4, 5, 6, 7]
+    rating: 6
+    review: "ok"
+  - name: "After Life"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "8398600"
+    location: "home"
+    seasons_seen: [1, 2, 3]
+    rating: 8
+    review: "Very interesting idea"
+  - name: "Star Trek: Enterprise"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "0244365"
+    location: "home"
+    seasons_seen: [1, 2, 3, 4]
+    rating: 6
+    review: "ok series"
+  - name: "Messiah"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "7671598"
+    location: "home"
+    seasons_seen: [1]
+    rating: 6
+    review: "bullshit"
+  - name: "The Mist"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "5639976"
+    location: "home"
+    seasons_seen: [1]
+    rating: 5
+    review: "Not impressive"
+  - name: "Space Force"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "9612516"
+    location: "home"
+    seasons_seen: [1, 2]
+    rating: 7
+    review: "funny"
+  - name: "Emily in Paris"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "8962124"
+    location: "home"
+    seasons_seen: [1, 2, 3]
+    rating: 5
+    review: "stupid series"
+  - name: "The Movies That Made Us"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "10681222"
+    location: "home"
+    seasons_seen: [1, 2, 3]
+    rating: 6
+    review: "nice"
+  - name: "November 13: Attack on Paris"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "8194716"
+    location: "home"
+    seasons_seen: [1]
+    rating: 8
+    review: "interesting"
+  - name: "Meltdown: Three Mile Island"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "19757508"
+    location: "home"
+    seasons_seen: [1]
+    rating: 8
+    review: "interesting series"
+  - name: "Turning Point: 9/11 and the War on Terror"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "15260794"
+    location: "home"
+    seasons_seen: [1]
+    rating: 8
+    review: "intersting series"
+  - name: "The Royal House of Windsor"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "6596634"
+    location: "home"
+    seasons_seen: [1]
+    rating: 6
+    review: "Who cares?"
+  - name: "To the Lake"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "9151230"
+    location: "home"
+    seasons_seen: [1]
+    rating: 7
+    review: "nice series"
+  - name: "The Last Czars"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "7949606"
+    location: "home"
+    seasons_seen: [1]
+    rating: 6
+    review: "interesting story"
+  - name: "Dirty Money"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "7889220"
+    location: "home"
+    seasons_seen: [1, 2]
+    rating: 8
+    review: "very good series"
+  - name: "The Queen's Gambit"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "10048342"
+    location: "home"
+    seasons_seen: [1]
+    rating: 8
+    review: "Excellent series"
+  - name: "Vikings: Valhalla"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "11311302"
+    location: "home"
+    seasons_seen: [1, 2]
+    rating: 6
+    review: "ok"
+  - name: "Narcos"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "2707408"
+    location: "home"
+    seasons_seen: [1, 2, 3]
+    rating: 8
+    review: "Good series"
+  - name: "The Office"
+    device: "Prime"
+    date_utcz: "2022-07-30T05:39:04Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "0386676"
+    location: "home"
+    seasons_seen: [1]
+    seasons_not_seen: [2, 3, 4, 5, 6, 7, 8, 9]
+    rating: 7
+    review: "Very good series"
+  - name: "Trapped"
+    device: "netflix"
+    date_utcz: "2022-09-16T11:24:12Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "3561180"
+    location: "home"
+    seasons_seen: [1, 2]
+    rating: 7
+    review: "Pretty nice thriller."
+  - name: "Greatest Events of WWII in Colour"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "9103932"
+    location: "home"
+    seasons_seen: [1]
+    rating: 8
+    review: "Pretty good"
+  - name: "Entrapped"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "21964626"
+    location: "home"
+    seasons_seen: [1]
+    rating: 7
+    review: "Nice thriller"
+  - name: "When Heroes Fly"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "8220344"
+    location: "home"
+    seasons_seen: [1]
+    rating: 7
+    review: "I didn't like the assumption here"
+  - name: "Keep Breathing"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "14117010"
+    location: "home"
+    seasons_not_seen: [1]
+    rating: 5
+    review: "Too psychological"
+  - name: "The Sopranos"
+    device: "netflix"
+    date_utcz: "2015-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "0141842"
+    location: "home"
+    seasons_seen: [1, 2, 3, 4, 5, 6]
+    rating: 7
+    review: "Not bad but I wasn't a huge fan"
+  - name: "MH370: The Plane That Disappeared"
+    device: "netflix"
+    date_utcz: "2023-03-20T04:25:33Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "26739535"
+    location: "home"
+    seasons_seen: [1]
+    rating: 7
+    review: "Interesting but with no answers"
+  - name: "Cunk on Earth"
+    device: "netflix"
+    date_utcz: "2023-06-18T23:56:34Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "16867040"
+    location: "home"
+    seasons_seen: [1]
+    rating: 7
+    review: "nice one"
+  - name: "All the Light We Cannot See"
+    device: "netflix"
+    date_utcz: "2023-11-29T06:15:31Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "15320362"
+    location: "home"
+    seasons_seen: [1]
+    rating: 6
+    review: "Too sweet for my taste"
+  - name: "Star Trek: Voyager"
+    device: "netflix"
+    date_utcz: "2024-03-24T11:33:08Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "0112178"
+    location: "home"
+    seasons_seen: [1, 2, 3, 4, 5, 6, 7]
+    rating: 6
+    review: "the holodeck is a disaster and playing around with time too much"
+  - name: "Seinfeld"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "0098904"
+    location: "home"
+    seasons_seen: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    rating: 7
+    review: "Pretty nice"
+  - name: "The Walking Dead"
+    device: "netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "1520211"
+    location: "home"
+    seasons_seen: [1, 2, 3, 4, 5, 6, 7, 8]
+    seasons_not_seen: [9, 10, 11]
+    rating: 7
+    review: "Nice"
+  - name: "The Good Doctor"
+    device: "netflix"
+    date_utcz: "2024-05-06T09:19:21Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "6470478"
+    location: "home"
+    seasons_seen: [1, 2]
+    seasons_not_seen: [3, 4, 5, 6, 7]
+    rating: 7
+    review: "Ok but not more than that"
+  - name: "Midnight Mass"
+    device: "netflix"
+    date_utcz: "2024-05-09T18:38:52Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "10574558"
+    location: "home"
+    seasons_seen: [1]
+    rating: 5
+    review: "Religious bullshit"
+  - name: "World War II in Colour"
+    device: "netflix"
+    date_utcz: "2024-05-11T09:44:50Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "2069688"
+    location: "home"
+    seasons_seen: [1]
+    rating: 9
+    review: "Very good"
+  - name: "WWII in Color: Road to Victory"
+    device: "netflix"
+    date_utcz: "2024-05-11T09:44:50Z"
+    date_timezone: "Asia/Jerusalem"
+    imdb_id: "16477402"
+    location: "home"
+    seasons_seen: [1]
+    rating: 9
+    review: "Very good"

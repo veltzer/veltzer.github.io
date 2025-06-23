@@ -80,7 +80,7 @@
             // This is the single source of truth. Add a new object here to add a new page.
             const dataSources = {
                 'videos': {
-                    file: 'video_series.yaml',
+                    file: 'data/video_series.yaml',
                     navTitle: 'Video Series',
                     title: 'Watched TV Series',
                     subtitle: "A searchable list of TV series I've watched.",
@@ -96,7 +96,7 @@
                     }
                 },
                 'audio': {
-                    file: 'audio_courses.yaml',
+                    file: 'data/audio_courses.yaml',
                     navTitle: 'Audio Courses',
                     title: 'Listened to Audio Courses',
                     subtitle: "A searchable list of audio courses I've listened to.",
