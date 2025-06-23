@@ -317,8 +317,9 @@
 
             // --- 6. Visitor Counter ---
             function updateVisitorCount() {
-                // IMPORTANT: Replace 'your-username.github.io' with your actual site domain
-                const namespace = 'your-username.github.io';
+                // This will automatically use the site's domain (e.g., your-username.github.io)
+                // or localhost as the namespace, making the counter work without manual changes.
+                const namespace = window.location.hostname || 'local-file-viewer';
                 const key = 'main-viewer-counter';
                 const apiUrl = 'https://api.countapi.xyz/hit/' + namespace + '/' + key;
 
