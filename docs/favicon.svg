@@ -1,0 +1,19 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- 
+    This SVG creates a simple, modern "V" shape.
+    - The <path> element draws the shape.
+    - "M 10 10" moves the "pen" to the starting point (top-left).
+    - "L 50 90" draws a line to the bottom-center point.
+    - "L 90 10" draws a line to the top-right point.
+    - The stroke is set to a dark color (#2D3748).
+    - The stroke-width makes the line thick.
+    - stroke-linecap and stroke-linejoin make the corners sharp and clean.
+    - fill="none" ensures the inside of the V is transparent.
+  -->
+  <path d="M 10 10 L 50 90 L 90 10" 
+        stroke="#2D3748" 
+        stroke-width="18" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        fill="none" />
+</svg>

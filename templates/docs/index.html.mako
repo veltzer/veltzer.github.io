@@ -1,4 +1,8 @@
 <html>
+	<head>
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+		<link rel="apple-touch-icon" href="/favicon.svg">
+	</head>
 	<body>
 		Welcome to Mark Veltzer's website on github using github pages.
 		<h2>My calendar integration I'm working on</h2>
