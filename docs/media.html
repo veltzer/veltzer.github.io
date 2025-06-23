@@ -317,8 +317,8 @@
 
             // --- 6. Visitor Counter ---
             function updateVisitorCount() {
-                // This will automatically use the site's domain (e.g., your-username.github.io)
-                // or localhost as the namespace, making the counter work without manual changes.
+                // This function fetches the visitor count from a third-party service.
+                // NOTE: This may be blocked by ad blockers or privacy extensions.
                 const namespace = window.location.hostname || 'local-file-viewer';
                 const key = 'main-viewer-counter';
                 const apiUrl = 'https://api.countapi.xyz/hit/' + namespace + '/' + key;
@@ -332,10 +332,12 @@
                     }
                 })
                 .catch(function(error) {
+                    // If the fetch fails, update the UI to inform the user.
                     console.error('Error fetching visitor count:', error);
                     const countElement = document.getElementById('visitor-count');
                     if (countElement) {
                         countElement.textContent = 'N/A';
+                        countElement.title = 'Visitor count could not be loaded. This may be due to a network issue or an ad blocker.';
                     }
                 });
             }
