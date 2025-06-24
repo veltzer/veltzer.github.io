@@ -90,14 +90,6 @@
             padding-bottom: 10px;
             border-bottom: 2px solid #e0e0e0;
         }
-        .setup-note {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
         .error-list {
             margin: 10px 0;
             padding-left: 20px;
@@ -272,7 +264,7 @@
             const errorList = createElement('ul', 'error-list');
             const checks = [
                 'Your calendar is set to public',
-                'You\'ve replaced YOUR_CALENDAR_ID and YOUR_API_KEY',
+                'You have replaced YOUR_CALENDAR_ID and YOUR_API_KEY with your actual credentials',
                 'The Google Calendar API is enabled for your API key'
             ];
             
@@ -289,12 +281,10 @@
         async function init() {
             const loadingEl = document.getElementById('loading');
             const errorEl = document.getElementById('error');
-            const setupNote = document.getElementById('setup-note');
             
             try {
                 const events = await fetchEvents();
                 loadingEl.style.display = 'none';
-                setupNote.style.display = 'none';
                 errorEl.style.display = 'none';
                 displayEvents(events);
             } catch (error) {
