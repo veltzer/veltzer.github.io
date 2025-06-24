@@ -71,9 +71,9 @@ items:
     date_utcz: "2017-12-11T22:40:24Z"
     date_timezone: "Asia/Jerusalem"
     device: "Samsung S7"
+    location: "Bus"
     rating: 8
     review: "Great course"
-    location: "Bus"
   - name: "Pelopenisian war"
     lecturers: ["Kenneth W. Harl"]
     date_utcz: "2017-12-11T22:40:24Z"
@@ -233,23 +233,23 @@ items:
     review: "Pretty good"
   - name: "Classics of Russian Literature"
     lecturers: ["Irwin Weil"]
-    device: "Samsung S7"
     date_utcz: "2020-04-17T09:37:21Z"
     date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
     rating: 8
     review: "I liked the lecturer"
   - name: "European Thought and Culture in the 19th Century"
     lecturers: ["Lloyd Kramer"]
-    device: "Samsung S7"
     date_utcz: "2020-04-17T09:38:50Z"
     date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
     rating: 7
     review: "Just a bunch of topics with no progression or interesting insight."
   - name: "European Thought and Culture in the 20th Century"
     lecturers: ["Lloyd Kramer"]
-    device: "Samsung S7"
     date_utcz: "2020-04-17T09:38:50Z"
     date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
     rating: 7
     review: "Just a bunch of topics with no progression or interesting insight."
   - name: "Discovery of Ancient Civilizations"
@@ -259,7 +259,8 @@ items:
     device: "Samsung S7"
     rating: 7
     review: "Nice review of early archeology."
-  - name: "Foundations of Western Civilization II: A History of the Modern Western
+  - name:
+      "Foundations of Western Civilization II: A History of the Modern Western
       World"
     lecturers: ["Robert Bucholz"]
     date_utcz: "2020-06-28T17:18:24Z"
@@ -311,8 +312,8 @@ items:
     review: "not very interesting"
   - name: "Americas in the Revolutionary Era"
     lecturers: ["Marshall C. Eakin"]
-    date_ended_utcz: "2021-10-01T21:31:01Z"
     date_started_utcz: "2020-10-01T21:31:01Z"
+    date_ended_utcz: "2021-10-01T21:31:01Z"
     date_timezone: "UTC"
     device: "Samsung S10"
     location: "Night Walks"
@@ -368,7 +369,8 @@ items:
     location: "Night Walks"
     progress: "8/24"
   - name: "The Bible and Western Culture"
-    lecturers: ["Michael Segrue", "Andrew Ford", "Robert Hollander", "David Thurn"]
+    lecturers:
+      ["Michael Segrue", "Andrew Ford", "Robert Hollander", "David Thurn"]
     date_started_utcz: "2020-10-01T21:31:01Z"
     date_timezone: "Asia/Jerusalem"
     device: "Samsung S10"

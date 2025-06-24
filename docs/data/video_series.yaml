@@ -36,28 +36,28 @@ items:
     date_timezone: "Asia/Jerusalem"
     imdb_id: "0475784"
     location: "Home"
-    review: "ok. Some plot issues and too much playing with the footage."
-    rating: 7
     seasons_seen: [1, 2]
     seasons_not_seen: [3, 4]
+    rating: 7
+    review: "ok. Some plot issues and too much playing with the footage."
   - name: "Game of Thrones"
     device: "YES"
     date_utcz: "2020-03-15T13:37:26Z"
     date_timezone: "Asia/Jerusalem"
     imdb_id: "0944947"
     location: "Home"
+    seasons_seen: [1, 2, 3, 4, 5, 6, 7, 8]
     rating: 8
     review: "pretty good series"
-    seasons_seen: [1, 2, 3, 4, 5, 6, 7, 8]
   - name: "Homeland"
+    device: "Netflix"
     date_utcz: "2018-09-29T08:58:24Z"
     date_timezone: "Asia/Jerusalem"
-    device: "Netflix"
     imdb_id: "1796960"
     location: "Home"
+    seasons_seen: [1, 2, 3, 4, 5, 6, 7, 8]
     rating: 7
     review: "ok with some unbelievable parts"
-    seasons_seen: [1, 2, 3, 4, 5, 6, 7, 8]
   - name: "The Mist"
     device: "Netflix"
     date_utcz: "2021-09-29T08:58:24Z"
@@ -73,8 +73,8 @@ items:
     date_timezone: "Asia/Jerusalem"
     imdb_id: "5171438"
     location: "Home"
-    seasons_not_seen: [4, 5]
     seasons_seen: [1, 2, 3]
+    seasons_not_seen: [4, 5]
     rating: 7
     review: "too out there with their ideas"
   - name: "Narcos: Mexico"
