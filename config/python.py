@@ -1,4 +1,4 @@
-"""python depedencies for this project"""
+""" python deps for this project """
 
 config_requires: list[str] = [
     "pyclassifiers",
