@@ -1,30 +1,20 @@
-""" python depedencies for this project """
+"""python depedencies for this project"""
 
-
-from typing import List
-
-dev_requires: List[str] = [
-    "pypitools",
-    "black",
-]
-config_requires: List[str] = [
+config_requires: list[str] = [
     "pyclassifiers",
 ]
-install_requires: List[str] = [
+install_requires: list[str] = [
     "termcolor",
     "yattag",
 ]
-build_requires: List[str] = [
-    "pymakehelper",
+build_requires: list[str] = [
     "pydmt",
+    "pymakehelper",
 ]
-test_requires: List[str] = [
+test_requires: list[str] = [
     "pylint",
     "pytest",
     "pytest-cov",
-    "flake8",
-    "pyflakes",
-    "pycodestyle",
     "mypy",
     "pyrefly",
     # types
