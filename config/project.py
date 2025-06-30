@@ -1,6 +1,6 @@
 """ project definitions """
 
-name = "pytconf"
+name = ""
 description_short = "Configuration, command line and injection framework for python"
 keywords = [
     "click",
