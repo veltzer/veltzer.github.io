@@ -1,0 +1,518 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/schemas/json/video_features.json
+$schema: "https://veltzer.github.io/schemas/json/video_features.json"
+items:
+  - name: "HyperNormalisation"
+    imdb_id: "6156350"
+    date_utcz: "2017-10-13T08:19:22Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Airbnb, Chishinau"
+    device: "Laptop"
+    rating: 7
+    review: "Don't buy the story which is muddled and anecdotal"
+    with: []
+  - name: "13 Hours"
+    imdb_id: "4172430"
+    date_utcz: "2021-09-12T23:57:43Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Prime TV"
+    rating: 7
+    review: "Good only to pass the time"
+    with: []
+  - name: "The Tomorrow War"
+    imdb_id: "9777666"
+    date_utcz: "2021-09-12T23:57:43Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Prime TV"
+    rating: 7
+    review: "Good only to pass the time"
+    with: []
+  - name: "Without Remorse"
+    imdb_id: "0499097"
+    date_utcz: "2021-09-12T23:57:43Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Prime TV"
+    rating: 7
+    review: "Good only to pass the time"
+    with: []
+  - name: "The Lie"
+    imdb_id: "7945440"
+    date_utcz: "2021-09-12T23:57:43Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Prime TV"
+    rating: 8
+    review: "OK Drama but at some points unbelievable."
+    with: []
+  - name: "Dark Places"
+    imdb_id: "2402101"
+    date_utcz: "2015-11-13T09:50:37Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "YES"
+    rating: 6
+    review: "Pretty standard, seen it all before."
+    with: []
+  - name: "The Losers"
+    imdb_id: "0480255"
+    date_utcz: "2020-01-17T05:36:26Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Partner TV"
+    rating: 6
+    review: "Pretty standard, seen it all before."
+    with: []
+  - name: "The Mercy"
+    imdb_id: "3319730"
+    date_utcz: "2020-01-17T09:07:39Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Partner TV"
+    rating: 7
+    review: "Interesting but not captivating"
+    with: []
+  - name: "Edge of Tomorrow"
+    imdb_id: "1631867"
+    date_utcz: "2020-01-19T02:13:59Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Partner TV"
+    rating: 6
+    review: "stupid"
+    with: []
+  - name: "Apocalypto"
+    imdb_id: "0472043"
+    date_utcz: "2020-01-19T02:13:59Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Partner TV"
+    rating: 8
+    review: "this movie just get better with time"
+    with: []
+  - name: "The Two Popes"
+    imdb_id: "8404614"
+    date_utcz: "2020-02-29T22:00:38Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Cinemateque, Holon"
+    device: "Device at location"
+    rating: 8
+    review: "nice movie"
+    with: ["Doron Veltzer", "Miriam Veltzer"]
+  - name: "San Andreas"
+    imdb_id: "2126355"
+    date_utcz: "2015-11-18T04:54:56Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "YES"
+    rating: 5
+    review: "Are you kidding me?!?"
+    with: []
+  - name: "Kidnapping Mr. Heineken"
+    imdb_id: "2917388"
+    date_utcz: "2015-11-29T06:40:23Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "YES"
+    rating: 6
+    review: "seen it all b4."
+    with: []
+  - name: "Pawn Sacrifice"
+    imdb_id: "1596345"
+    date_utcz: "2016-01-20T08:01:29Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "YES"
+    rating: 7
+    review: "nice one"
+    with: []
+  - name: "How to Be Single"
+    imdb_id: "1292566"
+    date_utcz: "2016-10-02T20:53:23Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Airbnb, Moscow"
+    device: "Laptop"
+    rating: 7
+    review: "great fun"
+    with: ["Irina Arkhipova"]
+  - name: "Southpaw"
+    imdb_id: "1798684"
+    date_utcz: "2015-11-24T17:05:23Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "YES"
+    rating: 7
+    review: "not a bad picture."
+    with: []
+  - name: "Self/less"
+    imdb_id: "2140379"
+    date_utcz: "2015-11-24T17:06:34Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "YES"
+    rating: 6
+    review: "seen it all b4."
+    with: []
+  - name: "John Wick: Chapter 3 - Parabellum"
+    imdb_id: "6146586"
+    date_utcz: "2020-03-15T23:08:47Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Desktop"
+    rating: 6
+    review: "no story to speak of"
+    with: []
+  - name: "Bohemian Rhapsody"
+    imdb_id: "1727824"
+    date_utcz: "2020-04-06T03:58:47Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Desktop"
+    rating: 8
+    review: "nice movie. A little boring at times but great ending."
+    with: []
+  - name: "The Passion of the Christ"
+    imdb_id: "0335345"
+    date_utcz: "2020-04-06T22:29:07Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Desktop"
+    rating: 7
+    review: "ok not more."
+    with: []
+  - name: "You're Not You"
+    imdb_id: "1198156"
+    date_utcz: "2020-04-23T21:35:22Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Partner TV"
+    rating: 8
+    review: "pretty good"
+    with: []
+  - name: "Star Wars: Episode IX - The Rise of Skywalker"
+    imdb_id: "2527338"
+    date_utcz: "2020-04-29T22:45:13Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Desktop"
+    rating: 8
+    review: "very close to the first in spirit."
+    with: []
+  - name: "Where to Invade Next"
+    imdb_id: "4897822"
+    date_utcz: "2020-05-06T18:37:44Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Desktop"
+    rating: 8
+    review: "pretty good"
+    with: []
+  - name: "Triple 9"
+    imdb_id: "1712261"
+    date_utcz: "2020-05-07T08:16:44Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Partner TV"
+    rating: 7
+    review: "ok movie for a thriller."
+    with: []
+  - name: "Taken"
+    imdb_id: "0936501"
+    date_utcz: "2020-12-30T01:03:46Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Partner TV"
+    rating: 7
+    review: "good as an action movie but not beyond that."
+    with: []
+  - name: "The Internship"
+    imdb_id: "2234155"
+    date_utcz: "2016-07-04T21:00:00Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Podol Plaza hotel, Kiev"
+    device: "Laptop"
+    rating: 7
+    review: "good for time spending"
+    with: ["Ada Skleirova"]
+  - name: "Love & Mercy"
+    imdb_id: "0903657"
+    date_utcz: "2015-12-19T14:39:30Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "YES"
+    rating: 6
+    review: "too much 2001 and psychology"
+    with: []
+  - name: "The Beaver"
+    imdb_id: "1321860"
+    date_utcz: "2015-12-26T03:10:53Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "YES"
+    rating: 7
+    review: "not that bad."
+    with: []
+  - name: "Ted 2"
+    imdb_id: "2637276"
+    date_utcz: "2016-01-08T11:42:27Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "YES"
+    rating: 6
+    review: "Not good as the first one."
+    with: []
+  - name: "Midway"
+    imdb_id: "6924650"
+    date_utcz: "2020-12-30T06:05:19Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Partner TV"
+    rating: 7
+    review: "Didn't learn anything from it"
+    with: []
+  - name: "7 Days in Entebbe"
+    imdb_id: "5466186"
+    date_utcz: "2020-12-30T23:27:46Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Partner TV"
+    rating: 7
+    review: "Nice fact telling mode."
+    with: []
+  - name: "Official Secrets"
+    imdb_id: "5431890"
+    date_utcz: "2020-12-31T00:24:52Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Partner TV"
+    rating: 8
+    review: "Nice if you like politics"
+    with: []
+  - name: "Interstellar"
+    imdb_id: "0816692"
+    date_utcz: "2020-12-31T00:24:52Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Partner TV"
+    rating: 8
+    review: "Without the stupid love theme this would be a really good movie."
+    with: []
+  - name: "Killer Joe"
+    imdb_id: "1726669"
+    date_utcz: "2020-12-31T00:24:52Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Partner TV"
+    rating: 6
+    review: "Not memorable."
+    with: []
+  - name: "The Shawshank Redemption"
+    imdb_id: "0111161"
+    date_utcz: "2020-12-31T00:24:52Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Partner TV"
+    rating: 9
+    review: "This one is just great."
+    with: []
+  - name: "Blood Father"
+    imdb_id: "3647498"
+    date_utcz: "2020-12-31T00:24:52Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Partner TV"
+    rating: 6
+    review: "Pass the time thriller"
+    with: []
+  - name: "Fathers & Daughters"
+    imdb_id: "2582502"
+    date_utcz: "2020-12-31T00:24:52Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Partner TV"
+    rating: 7
+    review: "Good if you like psychology"
+    with: []
+  - name: "The Dressmaker"
+    imdb_id: "2910904"
+    date_utcz: "2020-12-31T00:24:52Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Partner TV"
+    rating: 6
+    review: "Not memorable"
+    with: []
+  - name: "Borat Subsequent Moviefilm"
+    imdb_id: "13143964"
+    date_utcz: "2021-01-08T10:29:44Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Prime TV"
+    rating: 7
+    review: "Not nearly as good as the first."
+    with: []
+  - name: "7500"
+    imdb_id: "6436726"
+    date_utcz: "2021-01-08T10:29:44Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Prime TV"
+    rating: 8
+    review: "Pretty good thriller."
+    with: []
+  - name: "The Report"
+    imdb_id: "8236336"
+    date_utcz: "2021-01-08T10:29:44Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Prime TV"
+    rating: 8
+    review: "Pretty interesting if you are interested in how the government works."
+    with: []
+  - name: "Marco Polo: One Hundred Eyes"
+    imdb_id: "5235348"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 6
+    review: "average"
+    with: []
+  - name: "The Gray Man"
+    imdb_id: "1649418"
+    date_utcz: "2022-07-23T04:02:43Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 7
+    review: "Good action"
+    with: []
+  - name: "Argo"
+    imdb_id: "1024648"
+    date_utcz: "2022-07-23T04:02:43Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 7
+    review: "Nice"
+    with: []
+  - name: "Moneyball"
+    imdb_id: "1210166"
+    date_utcz: "2022-07-23T04:02:43Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 7
+    review: "Nice"
+    with: []
+  - name: "The Equalizer 2"
+    imdb_id: "3766354"
+    date_utcz: "2022-07-23T04:02:43Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 5
+    review: "not interesting"
+    with: []
+  - name: "Goodfellas"
+    imdb_id: "0099685"
+    date_utcz: "2022-07-23T04:02:43Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 7
+    review: "Nice"
+    with: []
+  - name: "Interstellar"
+    imdb_id: "0816692"
+    date_utcz: "2022-07-23T04:02:43Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 8
+    review: "I like this one a lot"
+    with: []
+  - name: "Serenity"
+    imdb_id: "6476140"
+    date_utcz: "2022-11-12T06:21:10Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Cellcom TV"
+    rating: 7
+    review: "I didn't like the computer game aspect of it"
+    with: []
+  - name: "The Other Guys"
+    imdb_id: "1386588"
+    date_utcz: "2022-07-23T04:02:43Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Mothers house"
+    device: "YES"
+    rating: 8
+    review: "I love this film"
+    with: ["Doron Veltzer", "Miriam Veltzer", "Aviya Veltzer", "Paz Veltzer"]
+  - name: "The Great Beauty"
+    imdb_id: "2358891"
+    date_utcz: "2023-05-26T14:32:31Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Home TV"
+    rating: 7
+    review: "Seen it before."
+    with: ["Doron Veltzer"]
+  - name: "Hud"
+    imdb_id: "0057163"
+    date_utcz: "2023-06-15T11:17:53Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Desktop"
+    rating: 6
+    review: "Didn't get the point"
+    with: []
+  - name: "Between Two Ferns: The Movie"
+    imdb_id: "9398640"
+    date_utcz: "2023-06-23T17:03:34Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 6
+    review: "Didn't like it very much"
+    with: ["Doron Veltzer"]
+  - name: "The Left Handed Gun"
+    imdb_id: "0051849"
+    date_utcz: "2024-01-29T22:22:05Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Brothers house"
+    device: "Desktop"
+    rating: 7
+    review: "Didn't like it very much"
+    with: ["Doron Veltzer"]
+  - name: "Norm Macdonald: Hitler's Dog, Gossip & Trickery"
+    imdb_id: "6878486"
+    date_utcz: "2022-07-23T04:02:43Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 7
+    review: "Nice one"
+    with: ["Doron Veltzer"]
+  - name: "Oppenheimer"
+    imdb_id: "15398776"
+    date_utcz: "2025-06-06T14:10:43Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 8
+    review: "Nice one"
+    with: []
+  - name: "Carry-On"
+    imdb_id: "21382296"
+    date_utcz: "2025-06-07T19:57:54Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 5
+    review: "not interesting"
+    with: []
