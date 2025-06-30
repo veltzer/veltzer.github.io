@@ -65,6 +65,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
+    <script src="plugin-movies.js"></script>
+    <script src="plugin-series.js"></script>
+    <script src="plugin-audio-courses.js"></script>
+    <script src="plugin-audible.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const itemsContainer = document.getElementById('items-container');
@@ -82,254 +87,14 @@
             // --- Helper Function ---
             function formatDate(dateString) {
                 if (!dateString) return null;
-                // Extracts just the YYYY-MM-DD part from the UTC string
+                // Extracts just the<x_bin_660>-MM-DD part from the UTC string
                 return dateString.substring(0, 10);
             }
+            
+            // --- Master Configuration Object (populated by plugins) ---
+            const dataSources = window.mediaPlugins || {};
 
-            // --- 1. MASTER CONFIGURATION OBJECT ---
-            const dataSources = {
-                'videos': {
-                    file: 'data/video_series.yaml',
-                    navTitle: 'Video Series',
-                    title: 'Watched TV Series',
-                    subtitle: "A searchable list of TV series I've watched.",
-                    searchPlaceholder: 'Search by name, review, location...',
-                    searchFields: ['name', 'review', 'location'],
-                    renderDetails: function(item) {
-                        var seasons = item.seasons_seen ? item.seasons_seen.join(', ') : 'N/A';
-                        var html = '<li class="list-group-item"><strong>Seasons Seen:</strong> ' + seasons + '</li>';
-                        var date = formatDate(item.date_utcz);
-                        if (date) {
-                             html += '<li class="list-group-item"><strong>Date Watched:</strong> ' + date + '</li>';
-                        }
-                        if (item.location) {
-                            html += '<li class="list-group-item"><strong>Location:</strong> ' + item.location + '</li>';
-                        }
-                        if (item.imdb_id) {
-                            html += '<li class="list-group-item"><a href="https://www.imdb.com/title/tt' + item.imdb_id + '/" target="_blank">View on IMDb</a></li>';
-                        }
-                        return html;
-                    },
-                    renderStats: function(items) {
-                        var deviceCounts = {};
-                        var yearCounts = {};
-                        var totalSeasons = 0;
-                        items.forEach(function(item) {
-                            if (item.device) {
-                                deviceCounts[item.device] = (deviceCounts[item.device] || 0) + 1;
-                            }
-                            if (item.seasons_seen) {
-                                totalSeasons += item.seasons_seen.length;
-                            }
-                            var date = formatDate(item.date_utcz);
-                            if (date) {
-                                var year = date.substring(0, 4);
-                                yearCounts[year] = (yearCounts[year] || 0) + 1;
-                            }
-                        });
-
-                        var statsHtml = '<div class="row g-4 mb-4">';
-                        statsHtml += '<div class="col-md-6"><div class="card stat-card h-100"><div class="card-body"><span class="stat-value">' + items.length + '</span><span class="stat-label">Total Series</span></div></div></div>';
-                        statsHtml += '<div class="col-md-6"><div class="card stat-card h-100"><div class="card-body"><span class="stat-value">' + totalSeasons + '</span><span class="stat-label">Total Seasons</span></div></div></div>';
-                        statsHtml += '</div>';
-
-                        var maxDeviceCount = Math.max.apply(null, Object.values(deviceCounts));
-                        statsHtml += '<div class="card mb-4"><div class="card-header"><strong>Device Distribution</strong></div><div class="card-body">';
-                        var colors = ['#0d6efd', '#6f42c1', '#d63384', '#fd7e14', '#198754', '#dc3545', '#ffc107'];
-                        var colorIndex = 0;
-                         Object.keys(deviceCounts).sort().forEach(function(device) {
-                            var count = deviceCounts[device];
-                            var percentage = (count / maxDeviceCount) * 100;
-                            statsHtml += '<div class="mb-3">';
-                            statsHtml += '   <p class="mb-1"><strong>' + device + '</strong> <span class="text-muted">(' + count + ' items)</span></p>';
-                            statsHtml += '   <div class="progress" style="height: 20px;">';
-                            statsHtml += '       <div class="progress-bar" role="progressbar" style="width: ' + percentage + '%; background-color:' + colors[colorIndex % colors.length] + ';" aria-valuenow="' + percentage + '" aria-valuemin="0" aria-valuemax="100"></div>';
-                            statsHtml += '   </div></div>';
-                            colorIndex++;
-                        });
-                        statsHtml += '</div></div>';
-
-                        var maxYearCount = Math.max.apply(null, Object.values(yearCounts));
-                        statsHtml += '<div class="card"><div class="card-header"><strong>Items per Year</strong></div><div class="card-body">';
-                        colorIndex = 0;
-                        Object.keys(yearCounts).sort().reverse().forEach(function(year) {
-                            var count = yearCounts[year];
-                            var percentage = (count / maxYearCount) * 100;
-                            statsHtml += '<div class="mb-3">';
-                            statsHtml += '   <p class="mb-1"><strong>' + year + '</strong> <span class="text-muted">(' + count + ' items)</span></p>';
-                            statsHtml += '   <div class="progress" style="height: 20px;">';
-                            statsHtml += '       <div class="progress-bar bg-success" role="progressbar" style="width: ' + percentage + '%;" aria-valuenow="' + percentage + '" aria-valuemin="0" aria-valuemax="100"></div>';
-                            statsHtml += '   </div></div>';
-                        });
-                        statsHtml += '</div></div>';
-
-                        return statsHtml;
-                    }
-                },
-                'audio': {
-                    file: 'data/audio_courses.yaml',
-                    navTitle: 'Audio Courses',
-                    title: 'Listened to Audio Courses',
-                    subtitle: "A searchable list of audio courses I've listened to.",
-                    searchPlaceholder: 'Search by name, review, lecturer...',
-                    searchFields: ['name', 'review', 'lecturers', 'location'],
-                    renderDetails: function(item) {
-                        var lecturers = item.lecturers ? item.lecturers.join(', ') : 'N/A';
-                        var html = '<li class="list-group-item"><strong>Lecturer(s):</strong> ' + lecturers + '</li>';
-                        var date = formatDate(item.date_utcz || item.date_ended_utcz || item.date_started_utcz);
-                         if (date) {
-                             html += '<li class="list-group-item"><strong>Date:</strong> ' + date + '</li>';
-                        }
-                        if (item.location) {
-                            html += '<li class="list-group-item"><strong>Location:</strong> ' + item.location + '</li>';
-                        }
-                        if (item.progress) {
-                            html += '<li class="list-group-item"><strong>Progress:</strong> ' + item.progress + '</li>';
-                        }
-                        return html;
-                    },
-                    renderStats: function(items) {
-                         var deviceCounts = {};
-                         var yearCounts = {};
-                         var lecturerSet = new Set();
-                         items.forEach(function(item) {
-                            if (item.device) {
-                                deviceCounts[item.device] = (deviceCounts[item.device] || 0) + 1;
-                            }
-                            if (item.lecturers) {
-                                item.lecturers.forEach(function(lecturer) {
-                                    lecturerSet.add(lecturer);
-                                });
-                            }
-                            var date = formatDate(item.date_utcz || item.date_ended_utcz || item.date_started_utcz);
-                            if (date) {
-                                var year = date.substring(0, 4);
-                                yearCounts[year] = (yearCounts[year] || 0) + 1;
-                            }
-                        });
-
-                        var statsHtml = '<div class="row g-4 mb-4">';
-                        statsHtml += '<div class="col-md-6"><div class="card stat-card h-100"><div class="card-body"><span class="stat-value">' + items.length + '</span><span class="stat-label">Total Courses</span></div></div></div>';
-                        statsHtml += '<div class="col-md-6"><div class="card stat-card h-100"><div class="card-body"><span class="stat-value">' + lecturerSet.size + '</span><span class="stat-label">Unique Lecturers</span></div></div></div>';
-                        statsHtml += '</div>';
-                        
-                        var maxDeviceCount = Math.max.apply(null, Object.values(deviceCounts));
-                        statsHtml += '<div class="card mb-4"><div class="card-header"><strong>Device Distribution</strong></div><div class="card-body">';
-                        var colors = ['#0d6efd', '#6f42c1', '#d63384', '#fd7e14', '#198754', '#dc3545', '#ffc107'];
-                        var colorIndex = 0;
-                         Object.keys(deviceCounts).sort().forEach(function(device) {
-                            var count = deviceCounts[device];
-                            var percentage = (count / maxDeviceCount) * 100;
-                            statsHtml += '<div class="mb-3">';
-                            statsHtml += '   <p class="mb-1"><strong>' + device + '</strong> <span class="text-muted">(' + count + ' items)</span></p>';
-                            statsHtml += '   <div class="progress" style="height: 20px;">';
-                            statsHtml += '       <div class="progress-bar" role="progressbar" style="width: ' + percentage + '%; background-color:' + colors[colorIndex % colors.length] + ';" aria-valuenow="' + percentage + '" aria-valuemin="0" aria-valuemax="100"></div>';
-                            statsHtml += '   </div></div>';
-                            colorIndex++;
-                        });
-                        statsHtml += '</div></div>';
-
-                        var maxYearCount = Math.max.apply(null, Object.values(yearCounts));
-                        statsHtml += '<div class="card"><div class="card-header"><strong>Items per Year</strong></div><div class="card-body">';
-                        colorIndex = 0;
-                        Object.keys(yearCounts).sort().reverse().forEach(function(year) {
-                            var count = yearCounts[year];
-                            var percentage = (count / maxYearCount) * 100;
-                            statsHtml += '<div class="mb-3">';
-                            statsHtml += '   <p class="mb-1"><strong>' + year + '</strong> <span class="text-muted">(' + count + ' items)</span></p>';
-                            statsHtml += '   <div class="progress" style="height: 20px;">';
-                            statsHtml += '       <div class="progress-bar bg-success" role="progressbar" style="width: ' + percentage + '%;" aria-valuenow="' + percentage + '" aria-valuemin="0" aria-valuemax="100"></div>';
-                            statsHtml += '   </div></div>';
-                        });
-                        statsHtml += '</div></div>';
-
-                        return statsHtml;
-                    }
-                },
-                'audible': {
-                    file: 'data/audible.yaml',
-                    navTitle: 'Audible',
-                    title: 'Audible Library',
-                    subtitle: "A searchable list of my Audible books.",
-                    searchPlaceholder: 'Search by title, author, narrator...',
-                    searchFields: ['title', 'authors', 'narrators'],
-                    renderDetails: function(item) {
-                        let html = '';
-                        if (item.authors) {
-                            html += '<li class="list-group-item"><strong>Author(s):</strong> ' + item.authors + '</li>';
-                        }
-                        if (item.narrators) {
-                            html += '<li class="list-group-item"><strong>Narrator(s):</strong> ' + item.narrators + '</li>';
-                        }
-                        let status = 'Not Started';
-                        if (item.is_finished) {
-                            status = '<span class="fw-bold text-success">Finished</span>';
-                        } else if (parseFloat(item.percent_complete) > 0) {
-                            status = 'In Progress (' + item.percent_complete + '%)';
-                        }
-                        html += '<li class="list-group-item"><strong>Status:</strong> ' + status + '</li>';
-                         var date = formatDate(item.date_added);
-                        if (date) {
-                             html += '<li class="list-group-item"><strong>Date Added:</strong> ' + date + '</li>';
-                        }
-                        return html;
-                    },
-                    renderStats: function(items) {
-                        let finishedCount = 0;
-                        let inProgressCount = 0;
-                        const authorSet = new Set();
-                        const yearCounts = {};
-
-                        items.forEach(function(item) {
-                            if (item.is_finished) {
-                                finishedCount++;
-                            } else {
-                                inProgressCount++;
-                            }
-                            if (item.authors) {
-                                // Assuming authors is a string, split if it's a list in YAML
-                                const authors = typeof item.authors === 'string' ? item.authors.split(',') : [item.authors];
-                                authors.forEach(author => authorSet.add(author.trim()));
-                            }
-                            const date = formatDate(item.date_added);
-                            if (date) {
-                                const year = date.substring(0, 4);
-                                yearCounts[year] = (yearCounts[year] || 0) + 1;
-                            }
-                        });
-
-                        let statsHtml = '<div class="row g-4 mb-4">';
-                        statsHtml += '<div class="col-md-6"><div class="card stat-card h-100"><div class="card-body"><span class="stat-value">' + items.length + '</span><span class="stat-label">Total Books</span></div></div></div>';
-                        statsHtml += '<div class="col-md-6"><div class="card stat-card h-100"><div class="card-body"><span class="stat-value">' + authorSet.size + '</span><span class="stat-label">Unique Authors</span></div></div></div>';
-                        statsHtml += '</div>';
-
-                        statsHtml += '<div class="card mb-4"><div class="card-header"><strong>Completion Status</strong></div><div class="card-body">';
-                        const totalBooks = items.length;
-                        const finishedPercentage = (finishedCount / totalBooks) * 100;
-                        const inProgressPercentage = (inProgressCount / totalBooks) * 100;
-                        statsHtml += '<div class="mb-3"><p class="mb-1"><strong>Finished:</strong> ' + finishedCount + ' books</p><div class="progress" style="height: 20px;"><div class="progress-bar bg-success" role="progressbar" style="width: ' + finishedPercentage + '%;" aria-valuenow="' + finishedPercentage + '" aria-valuemin="0" aria-valuemax="100">' + Math.round(finishedPercentage) + '%</div></div></div>';
-                        statsHtml += '<div><p class="mb-1"><strong>In Progress / Unfinished:</strong> ' + inProgressCount + ' books</p><div class="progress" style="height: 20px;"><div class="progress-bar bg-info" role="progressbar" style="width: ' + inProgressPercentage + '%;" aria-valuenow="' + inProgressPercentage + '" aria-valuemin="0" aria-valuemax="100">' + Math.round(inProgressPercentage) + '%</div></div></div>';
-                        statsHtml += '</div></div>';
-                        
-                        const maxYearCount = Math.max.apply(null, Object.values(yearCounts));
-                        statsHtml += '<div class="card"><div class="card-header"><strong>Books Added per Year</strong></div><div class="card-body">';
-                        Object.keys(yearCounts).sort().reverse().forEach(function(year) {
-                            const count = yearCounts[year];
-                            const percentage = (count / maxYearCount) * 100;
-                            statsHtml += '<div class="mb-3">';
-                            statsHtml += '   <p class="mb-1"><strong>' + year + '</strong> <span class="text-muted">(' + count + ' books)</span></p>';
-                            statsHtml += '   <div class="progress" style="height: 20px;">';
-                            statsHtml += '       <div class="progress-bar bg-primary" role="progressbar" style="width: ' + percentage + '%;" aria-valuenow="' + percentage + '" aria-valuemin="0" aria-valuemax="100"></div>';
-                            statsHtml += '   </div></div>';
-                        });
-                        statsHtml += '</div></div>';
-
-                        return statsHtml;
-                    }
-                }
-            };
-
-            // --- 2. Dynamically Generate Navigation ---
+            // --- Dynamically Generate Navigation ---
             function generateNav(activeDataType, showStatsOnly) {
                 mainNav.innerHTML = ''; // Clear existing nav
                 for (const [key, config] of Object.entries(dataSources)) {
@@ -358,7 +123,7 @@
                 mainNav.appendChild(statsToggle);
             }
 
-            // --- 3. Fetch and Parse YAML Data ---
+            // --- Fetch and Parse YAML Data ---
             async function loadData() {
                 const urlParams = new URLSearchParams(window.location.search);
                 const dataType = urlParams.get('data') || Object.keys(dataSources)[0]; 
@@ -366,7 +131,7 @@
                 activeConfig = dataSources[dataType];
 
                 if (!activeConfig) {
-                    statusMessage.innerHTML = '<div class="alert alert-danger">Error: Invalid data type in URL.</div>';
+                    statusMessage.innerHTML = '<div class="alert alert-danger">Error: Invalid data type in URL or plugins not loaded.</div>';
                     return;
                 }
                 
@@ -421,7 +186,7 @@
                 }
             }
 
-            // --- 4. Render Item Cards to the DOM (Generic) ---
+            // --- Render Item Cards to the DOM (Generic) ---
             function renderItems(itemList) {
                 itemsContainer.innerHTML = '';
                 if (itemList.length === 0) {
@@ -451,7 +216,7 @@
                 });
             }
 
-            // --- 5. Handle Search Input ---
+            // --- Handle Search Input ---
             searchInput.addEventListener('input', (e) => {
                 const searchTerm = e.target.value.toLowerCase().trim();
                 const filteredItems = allItems.filter(item => {
@@ -464,7 +229,7 @@
                 renderItems(filteredItems);
             });
 
-            // --- 6. Visitor Counter ---
+            // --- Visitor Counter ---
             function updateVisitorCount() {
                 const namespace = window.location.hostname || 'local-file-viewer';
                 const key = 'main-viewer-counter';
