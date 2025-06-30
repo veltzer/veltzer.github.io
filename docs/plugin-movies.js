@@ -1,7 +1,7 @@
 window.mediaPlugins = window.mediaPlugins || {};
 
 window.mediaPlugins['features'] = {
-    file: 'video_features.yaml',
+    file: 'data/video_features.yaml',
     navTitle: 'Movies',
     title: 'Watched Movies',
     subtitle: "A searchable list of movies I've watched.",
