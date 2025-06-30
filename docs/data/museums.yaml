@@ -3,7 +3,7 @@
 # yaml-language-server: $schema=https://veltzer.github.io/schemas/json/museums.json
 $schema: "https://veltzer.github.io/schemas/json/museums.json"
 items:
-  - name: "Tel Aviv museum"
+  - name: "Tel Aviv Museum"
     date_utcz: "2017-05-27T14:33:21Z"
     date_timezone: "Asia/Jerusalem"
     city: "Tel-Aviv"
@@ -11,14 +11,14 @@ items:
     review: "pretty good experience"
     with: ["Irina Kocherga"]
     url: "http://www.tamuseum.org.il"
-  - name: "MET"
+  - name: "The Metropolitan Museum of Art"
     date_utcz: "1998-10-27T15:33:21Z"
     date_timezone: "America/New_York"
     city: "New York"
     rating: 9
     review: "Amazing museum"
     with: []
-  - name: "Gugenheim"
+  - name: "Solomon R. Guggenheim Museum"
     date_utcz: "1998-10-27T15:33:21Z"
     date_timezone: "America/New_York"
     city: "New York"
@@ -26,35 +26,35 @@ items:
     review: "Not my favorite museum"
     with: ["Yoram Avidan"]
     tickets: 2
-  - name: "Natural History"
+  - name: "American Museum of Natural History"
     date_utcz: "1998-10-27T15:33:21Z"
     date_timezone: "America/New_York"
     city: "New York"
     rating: 7
     review: "Museums for natural history are not the best"
     with: []
-  - name: "MOMA"
+  - name: "Museum of Modern Art"
     date_dmy: "14-09-1999"
     date_timezone: "America/New_York"
     city: "New York"
     rating: 7
     review: "Modern art is not my favourite"
     with: ["Doron Veltzer"]
-  - name: "MET"
+  - name: "The Metropolitan Museum of Art"
     date_dmy: "15-09-1999"
     date_timezone: "America/New_York"
     city: "New York"
     rating: 8
     review: "Always a good museum"
     with: ["Doron Veltzer"]
-  - name: "Gugenheim"
+  - name: "Solomon R. Guggenheim Museum"
     date_dmy: "17-09-1999"
     date_timezone: "America/New_York"
     city: "New York"
     rating: 7
     review: "Not my favorite"
     with: ["Doron Veltzer"]
-  - name: "Science museum"
+  - name: "Science Museum"
     date_utcz: "2006-12-09T09:51:18Z"
     date_timezone: "Europe/London"
     city: "London"
@@ -62,7 +62,7 @@ items:
     review: "Not the best museum in my optinion"
     with: []
     remark: "during a layover from San-Francisco"
-  - name: "Westmister Abbery"
+  - name: "Westminster Abbey"
     date_utcz: "2006-12-09T02:51:18Z"
     date_timezone: "Europe/London"
     city: "London"
@@ -70,14 +70,15 @@ items:
     review: "nice"
     with: []
     remark: "during a layover from San-Francisco"
-  - name: "Kremlin Armory Museum"
+  - name: "Moscow Kremlin Museums"
     date_dmy: "01-10-2008"
     date_timezone: "Europe/Moscow"
     city: "Moscow"
     rating: 7
     review: "For people who like this sort of thing"
     with: []
-  - name: "Hertzel Museum in Mt. Hertzel"
+    remark: "I visited the armory section"
+  - name: "Herzl Museum"
     date_dmy: "12-12-2008"
     date_timezone: "Asia/Jerusalem"
     city: "Jerusalem"
@@ -95,7 +96,7 @@ items:
         "Yaniv Michaeli",
       ]
     remark: "Ory's 37'th birthday celebrations"
-  - name: "Picsso museum"
+  - name: "Picsso Museum"
     date_dmy: "24-02-2010"
     date_timezone: "Europe/Madrid"
     city: "Barcelona"
@@ -109,7 +110,7 @@ items:
     rating: 9
     review: "Amazing. A must visit"
     with: []
-  - name: "casa mila museum"
+  - name: "Casa Milà"
     date_dmy: "26-02-2010"
     date_timezone: "Europe/Madrid"
     city: "Barcelona"
