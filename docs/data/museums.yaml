@@ -1,0 +1,181 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/schemas/json/museums.json
+$schema: "https://veltzer.github.io/schemas/json/museums.json"
+items:
+  - name: "Tel Aviv museum"
+    date_utcz: "2017-05-27T14:33:21Z"
+    date_timezone: "Asia/Jerusalem"
+    city: "Tel-Aviv"
+    rating: 8
+    review: "pretty good experience"
+    with: ["Irina Kocherga"]
+    url: "http://www.tamuseum.org.il"
+  - name: "MET"
+    date_utcz: "1998-10-27T15:33:21Z"
+    date_timezone: "America/New_York"
+    city: "New York"
+    rating: 9
+    review: "Amazing museum"
+    with: []
+  - name: "Gugenheim"
+    date_utcz: "1998-10-27T15:33:21Z"
+    date_timezone: "America/New_York"
+    city: "New York"
+    rating: 8
+    review: "Not my favorite museum"
+    with: ["Yoram Avidan"]
+    tickets: 2
+  - name: "Natural History"
+    date_utcz: "1998-10-27T15:33:21Z"
+    date_timezone: "America/New_York"
+    city: "New York"
+    rating: 7
+    review: "Museums for natural history are not the best"
+    with: []
+  - name: "MOMA"
+    date_dmy: "14-09-1999"
+    date_timezone: "America/New_York"
+    city: "New York"
+    rating: 7
+    review: "Modern art is not my favourite"
+    with: ["Doron Veltzer"]
+  - name: "MET"
+    date_dmy: "15-09-1999"
+    date_timezone: "America/New_York"
+    city: "New York"
+    rating: 8
+    review: "Always a good museum"
+    with: ["Doron Veltzer"]
+  - name: "Gugenheim"
+    date_dmy: "17-09-1999"
+    date_timezone: "America/New_York"
+    city: "New York"
+    rating: 7
+    review: "Not my favorite"
+    with: ["Doron Veltzer"]
+  - name: "Science museum"
+    date_utcz: "2006-12-09T09:51:18Z"
+    date_timezone: "Europe/London"
+    city: "London"
+    rating: 7
+    review: "Not the best museum in my optinion"
+    with: []
+    remark: "during a layover from San-Francisco"
+  - name: "Westmister Abbery"
+    date_utcz: "2006-12-09T02:51:18Z"
+    date_timezone: "Europe/London"
+    city: "London"
+    rating: 7
+    review: "nice"
+    with: []
+    remark: "during a layover from San-Francisco"
+  - name: "Kremlin Armory Museum"
+    date_dmy: "01-10-2008"
+    date_timezone: "Europe/Moscow"
+    city: "Moscow"
+    rating: 7
+    review: "For people who like this sort of thing"
+    with: []
+  - name: "Hertzel Museum in Mt. Hertzel"
+    date_dmy: "12-12-2008"
+    date_timezone: "Asia/Jerusalem"
+    city: "Jerusalem"
+    rating: 6
+    review: "Not very impressive"
+    with:
+      [
+        "Ory Amitay",
+        "Shay Sarid",
+        "Yaron Ben-Ami",
+        "Shir Ben-Ami",
+        "Effie Amitay",
+        "Tal Yaron",
+        "David Alexander",
+        "Yaniv Michaeli",
+      ]
+    remark: "Ory's 37'th birthday celebrations"
+  - name: "Picsso museum"
+    date_dmy: "24-02-2010"
+    date_timezone: "Europe/Madrid"
+    city: "Barcelona"
+    rating: 8
+    review: "Good museum"
+    with: []
+  - name: "La Sagrada Familia"
+    date_dmy: "25-02-2010"
+    date_timezone: "Europe/Madrid"
+    city: "Barcelona"
+    rating: 9
+    review: "Amazing. A must visit"
+    with: []
+  - name: "casa mila museum"
+    date_dmy: "26-02-2010"
+    date_timezone: "Europe/Madrid"
+    city: "Barcelona"
+    rating: 8
+    review: "Loved it"
+    with: ["Kiti Silveira Basso"]
+  - name: "Louvre"
+    date_dmy: "01-03-2010"
+    date_timezone: "Europe/Paris"
+    city: "Paris"
+    rating: 9
+    review: "The best"
+    with: []
+  - name: "D'Orsey"
+    date_dmy: "02-03-2010"
+    date_timezone: "Europe/Paris"
+    city: "Paris"
+    rating: 9
+    review: "Small but amazing"
+    with: []
+  - name: "Louvre"
+    date_dmy: "03-03-2010"
+    date_timezone: "Europe/Paris"
+    city: "Paris"
+    rating: 9
+    review: "Always good"
+    with: []
+  - name: "Natural History Museum"
+    date_dmy: "04-03-2010"
+    date_timezone: "Europe/London"
+    city: "London"
+    rating: 6
+    review: "I don't like this kind of museum"
+    with: []
+  - name: "Tate Modern Museum"
+    date_dmy: "07-03-2010"
+    date_timezone: "Europe/London"
+    city: "London"
+    rating: 7
+    review: "Not my favourite museum"
+    with: []
+  - name: "British Museum"
+    date_utcz: "2011-09-23T18:02:21Z"
+    date_timezone: "Europe/London"
+    city: "London"
+    rating: 8
+    review: "Very good museum"
+    with: []
+  - name: "National Portrait Gallery"
+    date_utcz: "2011-09-24T16:02:21Z"
+    date_timezone: "Europe/London"
+    city: "London"
+    rating: 8
+    review: "Very good museum"
+    with: []
+  - name: "Tretekovskaya Gelleria"
+    date_utcz: "2016-10-01T10:04:12Z"
+    date_timezone: "Europe/Moscow"
+    city: "Moscow"
+    rating: 9
+    review: "Excellent Art"
+    with: ["Irina Arkhipova"]
+  - name: "East and West Art"
+    date_dmy: "07-05-2016"
+    date_timezone: "Europe/Kiev"
+    city: "Kiev"
+    rating: 8
+    review: "Good museum"
+    with: ["Ada Skleirova"]
