@@ -1,7 +1,7 @@
 window.mediaPlugins = window.mediaPlugins || {};
 
 window.mediaPlugins['audible'] = {
-    file: 'audible.yaml',
+    file: 'data/audible.yaml',
     navTitle: 'Audible',
     title: 'Audible Library',
     subtitle: "A searchable list of my Audible books.",
