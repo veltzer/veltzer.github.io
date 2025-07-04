@@ -9,13 +9,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- chessboard.js for the visual board -->
-    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css" xintegrity="sha384-q94+BZGI/DcVSkQu3UdtoShftBqwBCDFsAWYoOA2V0ciTFlKXekJ/5+XpfZqrPrN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css" integrity="sha384-q94+BZGI/DcVSkQu3UdtoShftBqwBCDFsAWYoOA2V0ciTFlKXekJ/5+XpfZqrPrN" crossorigin="anonymous">
     
     <!-- jQuery is a dependency for chessboard.js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" xintegrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script>
     
     <!-- chessboard.js library -->
-    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js" xintegrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3iGDIPd44a5WLgCFsengh+rrV6RGIadDRL" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js" integrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3iGDIPd44a5WLgCFsengh+rrV6RGIadDRL" crossorigin="anonymous"></script>
     
     <!-- chess.js for game logic and PGN parsing -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.min.js"></script>
