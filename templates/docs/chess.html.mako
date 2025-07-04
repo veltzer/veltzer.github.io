@@ -9,13 +9,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- cm-chessboard library (CSS) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cm-chessboard@8/styles/cm-chessboard.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cm-chessboard@8.6.0/dist/cm-chessboard.css"/>
     
     <!-- chess.js for game logic -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
     
     <!-- cm-chessboard library (JavaScript Bundle) -->
-    <script src="https://cdn.jsdelivr.net/npm/cm-chessboard@8/dist/cm-chessboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cm-chessboard@8.6.0/dist/cm-chessboard.js"></script>
 
     <style>
         body {
@@ -99,7 +99,7 @@
                 position: "start",
                 // The sprite uses SVG for sharp, scalable pieces
                 sprite: {
-                    url: "https://cdn.jsdelivr.net/npm/cm-chessboard@8/assets/images/chessboard-sprite.svg",
+                    url: "https://cdn.jsdelivr.net/npm/cm-chessboard@8.6.0/assets/images/chessboard-sprite.svg",
                     size: 40,
                     cache: true
                 }
