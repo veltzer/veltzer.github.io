@@ -8,14 +8,9 @@
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- chessboard.js for the visual board -->
-    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css" xintegrity="sha384-q94+BZGI/DcVSkQu3UdtoShftBqwBCDFsAWYoOA2V0ciTFlKXekJ/5+XpfZqrPrN" crossorigin="anonymous">
-    
-    <!-- jQuery is a dependency for chessboard.js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" xintegrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script>
-    
-    <!-- chessboard.js library -->
-    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js" xintegrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3iGDIPd44a5WLgCFsengh+rrV6RGIadDRL" crossorigin="anonymous"></script>
+    <!-- cm-chessboard library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cm-chessboard@7/styles/cm-chessboard.css"/>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/cm-chessboard@7/src/cm-chessboard/Chessboard.js"></script>
     
     <!-- chess.js for game logic and PGN parsing -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.min.js"></script>
@@ -48,6 +43,7 @@
         #gameBoard {
             width: 100%;
             max-width: 600px; /* Set a max-width for larger screens */
+            margin: 0 auto;
         }
     </style>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
@@ -106,205 +102,207 @@
         </main>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // --- Global State Variables ---
-            let board = null;
-            let chess = new Chess();
-            let games = [];
-            let gameHistory = [];
-            let currentMove = -1;
+    <script type="module">
+        import { Chessboard } from "https://cdn.jsdelivr.net/npm/cm-chessboard@7/src/cm-chessboard/Chessboard.js"
 
-            // --- DOM Element References ---
-            const gameSelect = document.getElementById('gameSelect');
-            const gameInfoDiv = document.getElementById('gameInfo');
-            const moveHistoryDiv = document.getElementById('moveHistory');
-            const navigationDiv = document.getElementById('navigation');
-            const boardDiv = document.getElementById('gameBoard');
-            
-            const whitePlayerSpan = document.getElementById('whitePlayer');
-            const blackPlayerSpan = document.getElementById('blackPlayer');
-            const gameResultSpan = document.getElementById('gameResult');
-            const moveCounterSpan = document.getElementById('moveCounter');
+        // --- Global State Variables ---
+        let board = null;
+        const chess = new Chess();
+        let games = [];
+        let gameHistory = [];
+        let currentMove = -1;
 
-            const btnStart = document.getElementById('btnStart');
-            const btnPrev = document.getElementById('btnPrev');
-            const btnNext = document.getElementById('btnNext');
-            const btnEnd = document.getElementById('btnEnd');
+        // --- DOM Element References ---
+        const gameSelect = document.getElementById('gameSelect');
+        const gameInfoDiv = document.getElementById('gameInfo');
+        const moveHistoryDiv = document.getElementById('moveHistory');
+        const navigationDiv = document.getElementById('navigation');
+        const boardDiv = document.getElementById('gameBoard');
+        
+        const whitePlayerSpan = document.getElementById('whitePlayer');
+        const blackPlayerSpan = document.getElementById('blackPlayer');
+        const gameResultSpan = document.getElementById('gameResult');
+        const moveCounterSpan = document.getElementById('moveCounter');
 
-            // --- Chessboard Configuration ---
-            const boardConfig = {
-                draggable: false, // Games are for review only
-                position: 'start',
-                pieceTheme: 'https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/img/chesspieces/wikipedia/{piece}.png'
-            };
-            board = Chessboard('gameBoard', boardConfig);
-            $(window).resize(board.resize); // Make the board responsive
+        const btnStart = document.getElementById('btnStart');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        const btnEnd = document.getElementById('btnEnd');
 
-            // --- Event Listeners ---
-            gameSelect.addEventListener('change', loadSelectedGame, false);
-            btnStart.addEventListener('click', () => updateToMove(-1));
-            btnPrev.addEventListener('click', () => updateToMove(currentMove - 1));
-            btnNext.addEventListener('click', () => updateToMove(currentMove + 1));
-            btnEnd.addEventListener('click', () => updateToMove(gameHistory.length - 1));
+        // --- Chessboard Configuration ---
+        const boardConfig = {
+            position: "start",
+            sprite: {
+                url: "https://cdn.jsdelivr.net/npm/cm-chessboard@7/assets/images/chessboard-sprite.svg",
+                size: 40,
+                cache: true
+            }
+        };
+        board = new Chessboard(boardDiv, boardConfig);
 
-            /**
-             * Fetches the PGN file from a URL and processes it.
-             * @param {string} url The URL of the PGN file.
-             */
-            async function loadPgnFromUrl(url) {
-                try {
-                    const response = await fetch(url);
-                    if (!response.ok) {
-                        throw new Error('HTTP error! status: ' + response.status);
-                    }
-                    const pgnData = await response.text();
-                    
-                    // Split the PGN data into individual games.
-                    games = pgnData.split('\n[Event "').map((g, i) => i > 0 ? '[Event "' + g : g).filter(g => g.trim() !== "");
-                    
-                    if (games.length > 0) {
-                        populateGameSelect();
-                        loadSelectedGame(); // Load the first game by default
-                    } else {
-                        gameSelect.innerHTML = '<option>No games found in file.</option>';
-                        console.error("No games found in the PGN file.");
-                    }
-                } catch (error) {
-                    console.error('Could not fetch PGN file:', error);
-                    gameSelect.innerHTML = '<option>Error loading games.</option>';
+        // --- Event Listeners ---
+        gameSelect.addEventListener('change', loadSelectedGame, false);
+        btnStart.addEventListener('click', () => updateToMove(-1));
+        btnPrev.addEventListener('click', () => updateToMove(currentMove - 1));
+        btnNext.addEventListener('click', () => updateToMove(currentMove + 1));
+        btnEnd.addEventListener('click', () => updateToMove(gameHistory.length - 1));
+
+        /**
+         * Fetches the PGN file from a URL and processes it.
+         * @param {string} url The URL of the PGN file.
+         */
+        async function loadPgnFromUrl(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('HTTP error! status: ' + response.status);
                 }
-            }
-
-            /**
-             * Populates the game selection dropdown with games found in the PGN.
-             */
-            function populateGameSelect() {
-                gameSelect.innerHTML = '';
-                games.forEach((pgn, index) => {
-                    const tempChess = new Chess();
-                    tempChess.load_pgn(pgn);
-                    const headers = tempChess.header();
-                    const white = headers.White || 'Unknown';
-                    const black = headers.Black || 'Unknown';
-                    const option = document.createElement('option');
-                    option.value = index;
-                    option.textContent = white + ' vs ' + black;
-                    gameSelect.appendChild(option);
-                });
-                gameSelect.disabled = false;
-            }
-
-            /**
-             * Loads the game selected from the dropdown into the chess engine.
-             */
-            function loadSelectedGame() {
-                const selectedIndex = gameSelect.value;
-                if (selectedIndex < 0 || selectedIndex >= games.length) return;
-
-                const pgn = games[selectedIndex];
-                const loadSuccessful = chess.load_pgn(pgn);
-
-                if (loadSuccessful) {
-                    gameHistory = chess.history({ verbose: true });
-                    const headers = chess.header();
-                    
-                    // Display game info
-                    whitePlayerSpan.textContent = headers.White || 'N/A';
-                    blackPlayerSpan.textContent = headers.Black || 'N/A';
-                    gameResultSpan.textContent = headers.Result || 'N/A';
-                    gameInfoDiv.classList.remove('hidden');
-                    navigationDiv.classList.remove('hidden');
-                    moveHistoryDiv.classList.remove('hidden');
-
-                    populateMoveHistory();
-                    updateToMove(-1); // Go to the starting position
+                const pgnData = await response.text();
+                
+                // Split the PGN data into individual games.
+                games = pgnData.split('\n[Event "').map((g, i) => i > 0 ? '[Event "' + g : g).filter(g => g.trim() !== "");
+                
+                if (games.length > 0) {
+                    populateGameSelect();
+                    loadSelectedGame(); // Load the first game by default
                 } else {
-                    console.error("Error loading the selected game PGN.");
+                    gameSelect.innerHTML = '<option>No games found in file.</option>';
+                    console.error("No games found in the PGN file.");
                 }
+            } catch (error) {
+                console.error('Could not fetch PGN file:', error);
+                gameSelect.innerHTML = '<option>Error loading games.</option>';
             }
+        }
 
-            /**
-             * Creates and displays the full list of moves for the current game.
-             */
-            function populateMoveHistory() {
-                moveHistoryDiv.innerHTML = '';
-                let moveNumber = 1;
-                for (let i = 0; i < gameHistory.length; i += 2) {
-                    const whiteMove = gameHistory[i];
-                    const blackMove = gameHistory[i + 1];
-                    
-                    const movePair = document.createElement('div');
-                    movePair.className = 'move-pair mb-1';
-                    
-                    let html = '<span class="text-gray-500 mr-2">' + moveNumber + '.</span>';
-                    html += '<span class="font-semibold cursor-pointer" data-move-index="' + i + '">' + whiteMove.san + '</span>';
-                    
-                    if (blackMove) {
-                        html += ' <span class="font-semibold cursor-pointer ml-2" data-move-index="' + (i + 1) + '">' + blackMove.san + '</span>';
-                    }
-                    
-                    movePair.innerHTML = html;
-                    moveHistoryDiv.appendChild(movePair);
-                    moveNumber++;
-                }
-
-                // Add click listeners to moves
-                moveHistoryDiv.querySelectorAll('[data-move-index]').forEach(span => {
-                    span.addEventListener('click', (e) => {
-                        const moveIndex = parseInt(e.target.getAttribute('data-move-index'));
-                        updateToMove(moveIndex);
-                    });
-                });
-            }
-
-            /**
-             * Updates the board and UI to a specific move index.
-             * @param {number} moveIndex The index in the gameHistory array. -1 for start.
-             */
-            function updateToMove(moveIndex) {
-                if (moveIndex < -1 || moveIndex >= gameHistory.length) return;
-
-                currentMove = moveIndex;
-
-                // To get the FEN at a specific move, we replay the game from the start.
+        /**
+         * Populates the game selection dropdown with games found in the PGN.
+         */
+        function populateGameSelect() {
+            gameSelect.innerHTML = '';
+            games.forEach((pgn, index) => {
                 const tempChess = new Chess();
-                for (let i = 0; i <= currentMove; i++) {
-                    tempChess.move(gameHistory[i].san);
+                tempChess.load_pgn(pgn);
+                const headers = tempChess.header();
+                const white = headers.White || 'Unknown';
+                const black = headers.Black || 'Unknown';
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = white + ' vs ' + black;
+                gameSelect.appendChild(option);
+            });
+            gameSelect.disabled = false;
+        }
+
+        /**
+         * Loads the game selected from the dropdown into the chess engine.
+         */
+        function loadSelectedGame() {
+            const selectedIndex = gameSelect.value;
+            if (selectedIndex < 0 || selectedIndex >= games.length) return;
+
+            const pgn = games[selectedIndex];
+            const loadSuccessful = chess.load_pgn(pgn);
+
+            if (loadSuccessful) {
+                gameHistory = chess.history({ verbose: true });
+                const headers = chess.header();
+                
+                // Display game info
+                whitePlayerSpan.textContent = headers.White || 'N/A';
+                blackPlayerSpan.textContent = headers.Black || 'N/A';
+                gameResultSpan.textContent = headers.Result || 'N/A';
+                gameInfoDiv.classList.remove('hidden');
+                navigationDiv.classList.remove('hidden');
+                moveHistoryDiv.classList.remove('hidden');
+
+                populateMoveHistory();
+                updateToMove(-1); // Go to the starting position
+            } else {
+                console.error("Error loading the selected game PGN.");
+            }
+        }
+
+        /**
+         * Creates and displays the full list of moves for the current game.
+         */
+        function populateMoveHistory() {
+            moveHistoryDiv.innerHTML = '';
+            let moveNumber = 1;
+            for (let i = 0; i < gameHistory.length; i += 2) {
+                const whiteMove = gameHistory[i];
+                const blackMove = gameHistory[i + 1];
+                
+                const movePair = document.createElement('div');
+                movePair.className = 'move-pair mb-1';
+                
+                let html = '<span class="text-gray-500 mr-2">' + moveNumber + '.</span>';
+                html += '<span class="font-semibold cursor-pointer" data-move-index="' + i + '">' + whiteMove.san + '</span>';
+                
+                if (blackMove) {
+                    html += ' <span class="font-semibold cursor-pointer ml-2" data-move-index="' + (i + 1) + '">' + blackMove.san + '</span>';
                 }
                 
-                board.position(tempChess.fen());
-                updateUI();
+                movePair.innerHTML = html;
+                moveHistoryDiv.appendChild(movePair);
+                moveNumber++;
             }
 
-            /**
-             * Updates all UI elements based on the current move state.
-             */
-            function updateUI() {
-                // Update move counter
-                moveCounterSpan.textContent = (currentMove + 1) + ' / ' + gameHistory.length;
+            // Add click listeners to moves
+            moveHistoryDiv.querySelectorAll('[data-move-index]').forEach(span => {
+                span.addEventListener('click', (e) => {
+                    const moveIndex = parseInt(e.target.getAttribute('data-move-index'));
+                    updateToMove(moveIndex);
+                });
+            });
+        }
 
-                // Update navigation button states
-                btnStart.disabled = currentMove <= -1;
-                btnPrev.disabled = currentMove <= -1;
-                btnNext.disabled = currentMove >= gameHistory.length - 1;
-                btnEnd.disabled = currentMove >= gameHistory.length - 1;
+        /**
+         * Updates the board and UI to a specific move index.
+         * @param {number} moveIndex The index in the gameHistory array. -1 for start.
+         */
+        function updateToMove(moveIndex) {
+            if (moveIndex < -1 || moveIndex >= gameHistory.length) return;
 
-                // Highlight current move in the list
-                moveHistoryDiv.querySelectorAll('.current-move').forEach(el => el.classList.remove('current-move'));
-                if (currentMove > -1) {
-                    const currentMoveEl = moveHistoryDiv.querySelector('[data-move-index="' + currentMove + '"]');
-                    if (currentMoveEl) {
-                        currentMoveEl.classList.add('current-move');
-                        // Scroll to the highlighted move
-                        currentMoveEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }
+            currentMove = moveIndex;
+
+            // To get the FEN at a specific move, we replay the game from the start.
+            const tempChess = new Chess();
+            for (let i = 0; i <= currentMove; i++) {
+                tempChess.move(gameHistory[i].san);
+            }
+            
+            board.setPosition(tempChess.fen());
+            updateUI();
+        }
+
+        /**
+         * Updates all UI elements based on the current move state.
+         */
+        function updateUI() {
+            // Update move counter
+            moveCounterSpan.textContent = (currentMove + 1) + ' / ' + gameHistory.length;
+
+            // Update navigation button states
+            btnStart.disabled = currentMove <= -1;
+            btnPrev.disabled = currentMove <= -1;
+            btnNext.disabled = currentMove >= gameHistory.length - 1;
+            btnEnd.disabled = currentMove >= gameHistory.length - 1;
+
+            // Highlight current move in the list
+            moveHistoryDiv.querySelectorAll('.current-move').forEach(el => el.classList.remove('current-move'));
+            if (currentMove > -1) {
+                const currentMoveEl = moveHistoryDiv.querySelector('[data-move-index="' + currentMove + '"]');
+                if (currentMoveEl) {
+                    currentMoveEl.classList.add('current-move');
+                    // Scroll to the highlighted move
+                    currentMoveEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }
             }
+        }
 
-            // --- Initial Load ---
-            loadPgnFromUrl('data/games.pgn');
-        });
+        // --- Initial Load ---
+        loadPgnFromUrl('data/games.pgn');
     </script>
 
 </body>
