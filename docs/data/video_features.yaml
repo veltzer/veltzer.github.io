@@ -516,3 +516,12 @@ items:
     rating: 5
     review: "not interesting"
     with: []
+  - name: "Einstein and the Bomb"
+    imdb_id: "28756876"
+    date_utcz: "2025-07-04T07:03:35Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 7
+    review: "okay"
+    with: []
