@@ -156,7 +156,7 @@
                 try {
                     const response = await fetch(url);
                     if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
+                        throw new Error('HTTP error! status: ' + response.status);
                     }
                     const pgnData = await response.text();
                     
@@ -189,7 +189,7 @@
                     const black = headers.Black || 'Unknown';
                     const option = document.createElement('option');
                     option.value = index;
-                    option.textContent = `${white} vs ${black}`;
+                    option.textContent = white + ' vs ' + black;
                     gameSelect.appendChild(option);
                 });
                 gameSelect.disabled = false;
@@ -237,11 +237,11 @@
                     const movePair = document.createElement('div');
                     movePair.className = 'move-pair mb-1';
                     
-                    let html = `<span class="text-gray-500 mr-2">${moveNumber}.</span>`;
-                    html += `<span class="font-semibold cursor-pointer" data-move-index="${i}">${whiteMove.san}</span>`;
+                    let html = '<span class="text-gray-500 mr-2">' + moveNumber + '.</span>';
+                    html += '<span class="font-semibold cursor-pointer" data-move-index="' + i + '">' + whiteMove.san + '</span>';
                     
                     if (blackMove) {
-                        html += ` <span class="font-semibold cursor-pointer ml-2" data-move-index="${i + 1}">${blackMove.san}</span>`;
+                        html += ' <span class="font-semibold cursor-pointer ml-2" data-move-index="' + (i + 1) + '">' + blackMove.san + '</span>';
                     }
                     
                     movePair.innerHTML = html;
@@ -282,7 +282,7 @@
              */
             function updateUI() {
                 // Update move counter
-                moveCounterSpan.textContent = `${currentMove + 1} / ${gameHistory.length}`;
+                moveCounterSpan.textContent = (currentMove + 1) + ' / ' + gameHistory.length;
 
                 // Update navigation button states
                 btnStart.disabled = currentMove <= -1;
@@ -293,7 +293,7 @@
                 // Highlight current move in the list
                 moveHistoryDiv.querySelectorAll('.current-move').forEach(el => el.classList.remove('current-move'));
                 if (currentMove > -1) {
-                    const currentMoveEl = moveHistoryDiv.querySelector(`[data-move-index="${currentMove}"]`);
+                    const currentMoveEl = moveHistoryDiv.querySelector('[data-move-index="' + currentMove + '"]');
                     if (currentMoveEl) {
                         currentMoveEl.classList.add('current-move');
                         // Scroll to the highlighted move
