@@ -3,24 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Chess Game Viewer</title>
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/favicon.svg">
+    <title>Simple SVG Chess Viewer</title>
     
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- chessboard.js CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css" xintegrity="sha384-q94+BZGI/DcVSkQu3UdtoShftBqwBCDFsAWYoOA2V0ciTFlKXekJ/5+XpfZqrPrN" crossorigin="anonymous">
+    <!-- cm-chessboard library (CSS) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cm-chessboard@8/styles/cm-chessboard.css"/>
     
-    <!-- jQuery is a dependency for chessboard.js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" xintegrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script>
-    
-    <!-- chess.js for game logic (browser-compatible version) -->
+    <!-- chess.js for game logic -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
     
-    <!-- chessboard.js library -->
-    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js" xintegrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3iGDIPd44a5WLgCFsengh+rrV6RGIadDRL" crossorigin="anonymous"></script>
+    <!-- cm-chessboard library (JavaScript Bundle) -->
+    <script src="https://cdn.jsdelivr.net/npm/cm-chessboard@8/dist/cm-chessboard.js"></script>
 
     <style>
         body {
@@ -53,7 +48,7 @@
     </div>
 
     <script>
-        window.onload = function () {
+        function initializeApp() {
             // --- Global State Variables ---
             let board = null;
             const game = new Chess();
@@ -65,16 +60,9 @@
                 [Event "A Night at the Opera"]
                 [Site "Paris, France"]
                 [Date "1858.11.02"]
-                [EventDate "?"]
-                [Round "?"]
                 [Result "1-0"]
                 [White "Paul Morphy"]
                 [Black "Duke Karl / Count Isouard"]
-                [ECO "C41"]
-                [WhiteElo "?"]
-                [BlackElo "?"]
-                [PlyCount "33"]
-
                 1.e4 e5 2.Nf3 d6 3.d4 Bg4 4.dxe5 Bxf3 5.Qxf3 dxe5 6.Bc4 Nf6 7.Qb3 Qe7
                 8.Nc3 c6 9.Bg5 b5 10.Nxb5 cxb5 11.Bxb5+ Nbd7 12.O-O-O Rd8
                 13.Rxd7 Rxd7 14.Rd1 Qe6 15.Bxd7+ Nxd7 16.Qb8+ Nxb8 17.Rd8# 1-0
@@ -88,13 +76,14 @@
             // --- Function to update the board and UI ---
             function updateStatus() {
                 const move = moveHistory[currentMove - 1] || { san: 'Start' };
-                // Mako-safe string concatenation
                 statusEl.textContent = 'Move ' + currentMove + ': ' + move.san;
                 
                 // Set board to the current position
                 const tempGame = new Chess();
                 moveHistory.slice(0, currentMove).forEach(m => tempGame.move(m.san));
-                board.position(tempGame.fen());
+                
+                // Use the setPosition method with a FEN string
+                board.setPosition(tempGame.fen(), true);
 
                 // Update button states
                 btnPrev.disabled = currentMove === 0;
@@ -107,10 +96,16 @@
 
             // --- Initialize the Board ---
             const boardConfig = {
-                draggable: false,
-                position: 'start'
+                position: "start",
+                // The sprite uses SVG for sharp, scalable pieces
+                sprite: {
+                    url: "https://cdn.jsdelivr.net/npm/cm-chessboard@8/assets/images/chessboard-sprite.svg",
+                    size: 40,
+                    cache: true
+                }
             };
-            board = Chessboard('gameBoard', boardConfig);
+            // Use the global Chessboard object from the new library
+            board = new Chessboard(document.getElementById('gameBoard'), boardConfig);
 
             // --- Event Listeners ---
             btnPrev.addEventListener('click', () => {
@@ -129,7 +124,15 @@
 
             // --- Initial Render ---
             updateStatus();
-        };
+        }
+
+        // Poll until the Chessboard library is loaded
+        const libraryCheckInterval = setInterval(() => {
+            if (typeof Chessboard !== 'undefined' && typeof Chess !== 'undefined') {
+                clearInterval(libraryCheckInterval);
+                initializeApp();
+            }
+        }, 100);
     </script>
 
 </body>
