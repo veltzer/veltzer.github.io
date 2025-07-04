@@ -105,8 +105,7 @@
     </div>
 
     <script>
-        // Use window.onload to ensure all external scripts are loaded before our code runs
-        window.onload = function () {
+        function initializeApp() {
             // --- Global State Variables ---
             let board = null;
             const chess = new Chess();
@@ -271,7 +270,6 @@
 
                 // To get the FEN at a specific move, we replay the game from the start.
                 const tempChess = new Chess();
-                // FIXED: The for loop was missing i++ causing an infinite loop.
                 for (let i = 0; i <= currentMove; i++) {
                     tempChess.move(gameHistory[i].san);
                 }
@@ -307,7 +305,15 @@
 
             // --- Initial Load ---
             loadPgnFromUrl('data/games.pgn');
-        };
+        }
+
+        // Poll until the CM and Chess libraries are loaded
+        const libraryCheckInterval = setInterval(() => {
+            if (typeof CM !== 'undefined' && typeof Chess !== 'undefined') {
+                clearInterval(libraryCheckInterval);
+                initializeApp();
+            }
+        }, 100);
     </script>
 
 </body>
