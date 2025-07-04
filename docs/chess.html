@@ -14,8 +14,8 @@
     <!-- jQuery is a dependency for chessboard.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" xintegrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script>
     
-    <!-- chess.js for game logic -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/1.0.0-beta.6/chess.min.js"></script>
+    <!-- chess.js for game logic (browser-compatible version) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
     
     <!-- chessboard.js library -->
     <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js" xintegrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3iGDIPd44a5WLgCFsengh+rrV6RGIadDRL" crossorigin="anonymous"></script>
@@ -100,7 +100,7 @@
             }
 
             // --- Initialize the Game ---
-            game.loadPgn(pgn);
+            game.load_pgn(pgn);
             moveHistory = game.history({ verbose: true });
 
             // --- Initialize the Board ---
