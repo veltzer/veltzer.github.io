@@ -2,6 +2,9 @@
   "dependencies": {
     "ajv-cli": "latest",
     "ajv-formats": "latest",
+    "browserify": "latest",
+    "chess.js": "latest",
+    "cm-chessboard": "latest",
     "jshint": "latest"
   }
 }
