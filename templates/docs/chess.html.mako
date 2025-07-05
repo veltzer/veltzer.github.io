@@ -8,14 +8,14 @@
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- cm-chessboard library (CSS) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cm-chessboard@8.6.0/dist/cm-chessboard.css"/>
+    <!-- cm-chessboard library (CSS from unpkg) -->
+    <link rel="stylesheet" href="https://unpkg.com/cm-chessboard@8.6.0/dist/cm-chessboard.css"/>
     
     <!-- chess.js for game logic -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
     
-    <!-- cm-chessboard library (JavaScript Bundle) -->
-    <script src="https://cdn.jsdelivr.net/npm/cm-chessboard@8.6.0/dist/cm-chessboard.js"></script>
+    <!-- cm-chessboard library (JavaScript Bundle from unpkg) -->
+    <script src="https://unpkg.com/cm-chessboard@8.6.0/dist/cm-chessboard.js"></script>
 
     <style>
         body {
@@ -48,7 +48,9 @@
     </div>
 
     <script>
-        function initializeApp() {
+        // Use DOMContentLoaded to ensure the HTML is fully loaded and parsed before running the script.
+        // This is the standard and correct way to wait for the DOM to be ready.
+        document.addEventListener('DOMContentLoaded', function() {
             // --- Global State Variables ---
             let board = null;
             const game = new Chess();
@@ -99,7 +101,7 @@
                 position: "start",
                 // The sprite uses SVG for sharp, scalable pieces
                 sprite: {
-                    url: "https://cdn.jsdelivr.net/npm/cm-chessboard@8.6.0/assets/images/chessboard-sprite.svg",
+                    url: "https://unpkg.com/cm-chessboard@8.6.0/assets/images/chessboard-sprite.svg",
                     size: 40,
                     cache: true
                 }
@@ -124,15 +126,7 @@
 
             // --- Initial Render ---
             updateStatus();
-        }
-
-        // Poll until the Chessboard library is loaded
-        const libraryCheckInterval = setInterval(() => {
-            if (typeof Chessboard !== 'undefined' && typeof Chess !== 'undefined') {
-                clearInterval(libraryCheckInterval);
-                initializeApp();
-            }
-        }, 100);
+        });
     </script>
 
 </body>
