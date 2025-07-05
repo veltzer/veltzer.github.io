@@ -48,9 +48,9 @@
     </div>
 
     <script>
-        // Use DOMContentLoaded to ensure the HTML is fully loaded and parsed before running the script.
-        // This is the standard and correct way to wait for the DOM to be ready.
-        document.addEventListener('DOMContentLoaded', function() {
+        // Use window.onload to ensure all resources, including external scripts,
+        // are fully loaded before the code runs. This prevents race conditions.
+        window.onload = function() {
             // --- Global State Variables ---
             let board = null;
             const game = new Chess();
@@ -126,7 +126,7 @@
 
             // --- Initial Render ---
             updateStatus();
-        });
+        };
     </script>
 
 </body>
