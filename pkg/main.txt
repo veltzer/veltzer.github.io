@@ -1,0 +1,2 @@
+cm-chessboard@latest
+chess.js@latest

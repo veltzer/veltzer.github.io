@@ -7,12 +7,17 @@ DO_MKDBG:=0
 DO_ALLDEP:=1
 # do you want to check the javascript code?
 DO_JS_CHECK:=1
+# do you want to do js packaging?
+DO_JS_PACKAGE:=0
 
 ########
 # code #
 ########
 HTML_SRC:=$(shell find docs -type f -and -name "*.html")
 HTML_CHECK:=$(addprefix out/, $(addsuffix .check, $(basename $(HTML_SRC))))
+
+PKG_SRC:=$(shell find pkg -type f -and -name "*.txt")
+PKG_CHECK:=$(addprefix out/, $(addsuffix .check, $(basename $(PKG_SRC))))
 
 # silent stuff
 ifeq ($(DO_MKDBG),1)
@@ -26,6 +31,10 @@ endif # DO_MKDBG
 ifeq ($(DO_JS_CHECK),1)
 ALL+=$(HTML_CHECK)
 endif # DO_JS_CHECK
+
+ifeq ($(DO_JS_PACKAGE),1)
+ALL+=$(PKG_CHECK)
+endif # DO_JS_PACKAGE
 
 #########
 # rules #
@@ -43,6 +52,8 @@ debug:
 	$(info YAML_JSON is $(YAML_JSON))
 	$(info HTML_SRC is $(HTML_SRC))
 	$(info HTML_CHECK is $(HTML_CHECK))
+	$(info PKG_SRC is $(PKG_SRC))
+	$(info PKG_CHECK is $(PKG_CHECK))
 
 .PHONY: clean
 clean:
@@ -69,6 +80,10 @@ $(YAML_CHECK): out/check/%.stamp: %
 $(HTML_CHECK): out/%.check: %.html .jshintrc
 	$(info doing [$@])
 	$(Q)node_modules/.bin/jshint --extract=auto $<
+	$(Q)pymakehelper touch_mkdir $@
+$(PKG_CHECK): out/%.check: %.txt scripts/package.sh
+	$(info doing [$@])
+	$(Q)scripts/package.sh -j docs/$(basename $(notdir $<)).js -c docs/$(basename $(notdir $<)).css $<
 	$(Q)pymakehelper touch_mkdir $@
 
 # $(JSON_VALIDATE): out/validate/%.stamp: %
