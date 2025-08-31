@@ -525,3 +525,66 @@ items:
     rating: 7
     review: "okay"
     with: []
+  - name: "Titan: The OceanGate Disaster"
+    imdb_id: "35628853"
+    date_utcz: "2025-08-02T06:55:11Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 7
+    review: "okay"
+    with: []
+  - name: "Happy Gilmore 2"
+    imdb_id: "31868189"
+    date_utcz: "2025-08-03T05:09:14Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 5
+    review: "bad movie"
+    with: []
+  - name: "Apollo 13: Survival"
+    imdb_id: "31852716"
+    date_utcz: "2025-08-03T22:28:49Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 8
+    review: "pretty good"
+    with: []
+  - name: "Jim Jefferies: Two Limb Policy"
+    imdb_id: "37649515"
+    date_utcz: "2025-08-12T13:50:43Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 7
+    review: "ok"
+    with: []
+  - name: "Britain and the Blitz"
+    imdb_id: "36462227"
+    date_utcz: "2025-08-25T07:43:51Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 6
+    review: "Not much analysis, just stories"
+    with: []
+  - name: "Darkest Hour"
+    imdb_id: "4555426"
+    date_utcz: "2025-08-27T00:20:44Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 7
+    review: "Just ok"
+    with: []
+  - name: "Anthony Jeselnik: Fire in the Maternity Ward"
+    imdb_id: "10050780"
+    date_utcz: "2025-08-29T15:25:36Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Netflix"
+    rating: 7
+    review: "Just ok"
+    with: []
