@@ -12,10 +12,16 @@
 			import os
 			current_dir = "templates/docs"
 			for f in sorted(os.listdir(current_dir)):
-				if os.path.isfile(os.path.join(current_dir, f)) and not f.startswith("."):
-					no_mako = f.rsplit('.', 1)[0]
-					base = f.split('.')[0]
-					context.write(f"{prefix}\t<li><a href=\"{no_mako}\">{base}</a></li>\n")
+				full = os.path.join(current_dir, f)
+				if not os.path.isfile(full):
+					continue
+				if f.startswith("."):
+					continue
+				if not f.endswith(".html.mako"):
+					continue
+				no_mako = f.rsplit('.', 1)[0]
+				base = f.split('.')[0]
+				context.write(f"{prefix}\t<li><a href=\"{no_mako}\">{base}</a></li>\n")
 			context.write(f"{prefix}</ul>")
 		%>
 	</body>

@@ -5,6 +5,7 @@ import config.shared
 install_requires: list[str] = [
     "termcolor",
     "yattag",
+    "mkdocs",
 ]
 build_requires: list[str] = config.shared.BUILD
 test_requires: list[str] = config.shared.TEST
