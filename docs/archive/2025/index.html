@@ -506,7 +506,37 @@
   </header>
   <div class="md-post__content md-typeset">
     <h2 id="how-to-upgrade-ubuntu-without-their-upgrade-tool"><a class="toclink" href="../../2025/09/04/how-to-upgrade-ubuntu-without-their-upgrade-tool/">How to upgrade Ubuntu without their upgrade tool</a></h2>
-<p>TBD</p>
+<h3 id="the-problem"><a class="toclink" href="../../2025/09/04/how-to-upgrade-ubuntu-without-their-upgrade-tool/#the-problem">The problem</a></h3>
+<p>The heart of the problem is that sometimes when you try to upgrade ubuntu the upgrade fails.
+This happened to me when trying to upgrade to <code>plucky (25.04)</code>. The tool would just fail and
+I tried to waiting it out hoping that ubuntu will solve the bug. No such luck. Finally
+I decided to upgrade it myself manually and it worked like a charm.</p>
+<h3 id="the-solution"><a class="toclink" href="../../2025/09/04/how-to-upgrade-ubuntu-without-their-upgrade-tool/#the-solution">The solution</a></h3>
+<h4 id="sync-up"><a class="toclink" href="../../2025/09/04/how-to-upgrade-ubuntu-without-their-upgrade-tool/#sync-up">Sync up</a></h4>
+<p>The first thing you need to do is sync up with the previous release:</p>
+<pre><code class="language-sh">$ sudo apt update
+$ sudo apt dist-upgrade
+</code></pre>
+<h4 id="disable-third-party-repos"><a class="toclink" href="../../2025/09/04/how-to-upgrade-ubuntu-without-their-upgrade-tool/#disable-third-party-repos">Disable third party repos</a></h4>
+<p>The next thing is to manially disable any non ubuntu source of packages from <code>/etc/apt/sources.list.d</code>.
+I usually just create a folder called <code>/etc/apt/sources.list.moved</code> and move all but ubuntu there.</p>
+<h4 id="setup-the-ubuntu-source-to-the-new-distribution"><a class="toclink" href="../../2025/09/04/how-to-upgrade-ubuntu-without-their-upgrade-tool/#setup-the-ubuntu-source-to-the-new-distribution">Setup the ubuntu source to the new distribution</a></h4>
+<p>update <code>/etc/apt/sources.list.d/ubuntu.sources</code> to the following content (replace your distro name):</p>
+<pre><code class="language-txt">Enabled: yes
+Types: deb
+URIs: http://us.archive.ubuntu.com/ubuntu
+Suites: plucky plucky-updates plucky-security plucky-backports
+Components: main restricted universe multiverse
+Architectures: amd64
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+</code></pre>
+<h4 id="upgrade-and-solve-all-issues"><a class="toclink" href="../../2025/09/04/how-to-upgrade-ubuntu-without-their-upgrade-tool/#upgrade-and-solve-all-issues">Upgrade and solve all issues</a></h4>
+<pre><code class="language-sh">$ sudo apt update
+$ sudo apt dist-upgrade
+</code></pre>
+<p>You will need to solve issues along the way but they are standard things.</p>
+<h4 id="reboot"><a class="toclink" href="../../2025/09/04/how-to-upgrade-ubuntu-without-their-upgrade-tool/#reboot">Reboot</a></h4>
+<p>And that's it.</p>
     
   </div>
 </article>

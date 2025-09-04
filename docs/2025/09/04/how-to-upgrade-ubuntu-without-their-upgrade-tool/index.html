@@ -463,6 +463,83 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      The problem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      The solution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sync-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sync up
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disable-third-party-repos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disable third party repos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-the-ubuntu-source-to-the-new-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup the ubuntu source to the new distribution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrade-and-solve-all-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrade and solve all issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reboot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reboot
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -535,7 +612,37 @@
 
 
 <h1 id="how-to-upgrade-ubuntu-without-their-upgrade-tool">How to upgrade Ubuntu without their upgrade tool</h1>
-<p>TBD</p>
+<h2 id="the-problem">The problem</h2>
+<p>The heart of the problem is that sometimes when you try to upgrade ubuntu the upgrade fails.
+This happened to me when trying to upgrade to <code>plucky (25.04)</code>. The tool would just fail and
+I tried to waiting it out hoping that ubuntu will solve the bug. No such luck. Finally
+I decided to upgrade it myself manually and it worked like a charm.</p>
+<h2 id="the-solution">The solution</h2>
+<h3 id="sync-up">Sync up</h3>
+<p>The first thing you need to do is sync up with the previous release:</p>
+<pre><code class="language-sh">$ sudo apt update
+$ sudo apt dist-upgrade
+</code></pre>
+<h3 id="disable-third-party-repos">Disable third party repos</h3>
+<p>The next thing is to manially disable any non ubuntu source of packages from <code>/etc/apt/sources.list.d</code>.
+I usually just create a folder called <code>/etc/apt/sources.list.moved</code> and move all but ubuntu there.</p>
+<h3 id="setup-the-ubuntu-source-to-the-new-distribution">Setup the ubuntu source to the new distribution</h3>
+<p>update <code>/etc/apt/sources.list.d/ubuntu.sources</code> to the following content (replace your distro name):</p>
+<pre><code class="language-txt">Enabled: yes
+Types: deb
+URIs: http://us.archive.ubuntu.com/ubuntu
+Suites: plucky plucky-updates plucky-security plucky-backports
+Components: main restricted universe multiverse
+Architectures: amd64
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+</code></pre>
+<h3 id="upgrade-and-solve-all-issues">Upgrade and solve all issues</h3>
+<pre><code class="language-sh">$ sudo apt update
+$ sudo apt dist-upgrade
+</code></pre>
+<p>You will need to solve issues along the way but they are standard things.</p>
+<h3 id="reboot">Reboot</h3>
+<p>And that's it.</p>
 
 
 
