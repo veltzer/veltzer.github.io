@@ -1,0 +1,12 @@
+site_name: My Docs
+theme:
+  name: material
+docs_dir: blog
+site_dir: docs
+plugins:
+  - search:
+  - blog:
+      blog_dir: .
+nav:
+  - 'Home': 'index.md' # This is your blog's main page
+  - 'About Me': 'about.md' # Assuming you have an about.md
