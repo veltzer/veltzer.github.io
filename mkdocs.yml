@@ -1,13 +1,14 @@
-site_name: My Docs
-site_url: https://veltzer.github.io
+site_name: "Mark Veltzer's personal site"
+site_url: "https://veltzer.github.io"
 theme:
-  name: material
-docs_dir: blog
-site_dir: docs
+  name: "material"
+docs_dir: "blog"
+site_dir: "docs"
 plugins:
   - search:
   - blog:
       blog_dir: .
 nav:
-  - 'Home': 'index.md' # This is your blog's main page
-  - 'About Me': 'about.md' # Assuming you have an about.md
+  - 'Home': 'index.md'
+  - 'About Me': 'about.md'
+  - 'Calendar': '/calendar_full.html'
