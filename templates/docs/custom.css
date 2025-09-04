@@ -1,0 +1,4 @@
+/* Hide the site name in the navigation sidebar */
+.md-nav__title {
+  display: none;
+}
