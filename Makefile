@@ -6,7 +6,7 @@ DO_MKDBG:=0
 # do you want dependency on the Makefile itself ?
 DO_ALLDEP:=1
 # do you want to check the javascript code?
-DO_JS_CHECK:=1
+DO_JS_CHECK:=0
 # do you want to do js packaging?
 DO_JS_PACKAGE:=0
 

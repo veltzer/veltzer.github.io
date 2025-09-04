@@ -1,1 +1,1 @@
-{"config":{"lang":["en"],"separator":"[\\s\\-]+","pipeline":["stopWordFilter"]},"docs":[{"location":"archive/2025/","title":"2025","text":""}]}
+{"config":{"lang":["en"],"separator":"[\\s\\-]+","pipeline":["stopWordFilter"]},"docs":[{"location":"","title":"Blog Entries","text":"<p>Welcome! This page lists all my technical articles, notes, and findings.</p> <p>Here are the latest entries:</p>"},{"location":"archive/2025/","title":"2025","text":""}]}
