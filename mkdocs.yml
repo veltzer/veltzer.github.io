@@ -11,4 +11,9 @@ plugins:
 nav:
   - 'Home': 'index.md'
   - 'About Me': 'about.md'
-  - 'Calendar': '/calendar_full.html'
+  - 'My Media Consumption': '/media.html'
+  - 'Calendar full': '/calendar_full.html'
+  - 'Calendar google embed': '/calendar_google_embed.html'
+  - 'Calendar list view': '/calendar_list_view.html'
+  - 'Chess': '/chess.html'
+  - 'Board': '/board.html'
