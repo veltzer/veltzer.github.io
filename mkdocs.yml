@@ -1,4 +1,5 @@
 site_name: My Docs
+site_url: https://veltzer.github.io
 theme:
   name: material
 docs_dir: blog

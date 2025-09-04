@@ -1,3 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://veltzer.github.io/</loc>
+         <lastmod>2025-09-04</lastmod>
+    </url>
+    <url>
+         <loc>https://veltzer.github.io/about/</loc>
+         <lastmod>2025-09-04</lastmod>
+    </url>
+    <url>
+         <loc>https://veltzer.github.io/2025/09/01/move-from-google-chrome-to-firefox-on-linux/</loc>
+         <lastmod>2025-09-04</lastmod>
+    </url>
+    <url>
+         <loc>https://veltzer.github.io/2025/09/03/problems-with-netflix-web-and-netflix-webos-clients/</loc>
+         <lastmod>2025-09-04</lastmod>
+    </url>
+    <url>
+         <loc>https://veltzer.github.io/2025/09/03/this-is-the-first-post/</loc>
+         <lastmod>2025-09-04</lastmod>
+    </url>
+    <url>
+         <loc>https://veltzer.github.io/archive/2025/</loc>
+         <lastmod>2025-09-04</lastmod>
+    </url>
 </urlset>
