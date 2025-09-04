@@ -1,9 +1,7 @@
 ---
-date: 2025-09-03
+date: 2025-09-04
 ---
 
-# This is the first post
+# How to upgrade Ubuntu without their upgrade tool
 
-```python
-print("Hello, World!")
-```
+TBD

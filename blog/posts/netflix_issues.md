@@ -1,5 +1,5 @@
 ---
-date: 2025-09-03
+date: 2025-09-01
 ---
 
 # Problems with Netflix web and Netflix webos clients
