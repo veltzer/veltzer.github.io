@@ -1,0 +1,14 @@
+# THIS IS AN AUTO-GENERATED FILE. DO NOT EDIT!
+mkdocs
+mypy
+pyclassifiers
+pycmdtools
+pydmt
+pylint
+pymakehelper
+pytest
+ruff
+termcolor
+types-PyYAML
+types-termcolor
+yattag
