@@ -24,7 +24,7 @@ $ sudo apt dist-upgrade
 
 ### Disable third party repos
 
-The next thing is to manially disable any non ubuntu source of packages from `/etc/apt/sources.list.d`.
+The next thing is to manually disable any non ubuntu source of packages from `/etc/apt/sources.list.d`.
 I usually just create a folder called `/etc/apt/sources.list.moved` and move all but ubuntu there.
 
 ### Setup the ubuntu source to the new distribution
