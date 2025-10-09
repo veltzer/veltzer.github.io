@@ -8,7 +8,7 @@ date: 2025-09-04
 
 The heart of the problem is that sometimes when you try to upgrade ubuntu the upgrade fails.
 This happened to me when trying to upgrade to `plucky (25.04)`. The tool would just fail and
-I tried to waiting it out hoping that ubuntu will solve the bug. No such luck. Finally
+I tried waiting it out hoping that ubuntu will solve the bug. No such luck. Finally
 I decided to upgrade it myself manually and it worked like a charm.
 
 ## The solution
