@@ -20,6 +20,9 @@ window.mediaPlugins['podcasts'] = {
                 if (ch.date_utcz) {
                     parts.push(ch.date_utcz.substring(0, 10));
                 }
+                if (ch.device) {
+                    parts.push(ch.device);
+                }
                 if (ch.location) {
                     parts.push(ch.location);
                 }

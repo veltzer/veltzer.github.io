@@ -209,7 +209,7 @@
                                 '<p class="card-text mb-4">' + (item.review || item.subtitle || 'No description.') + '</p>' +
                                 '<ul class="list-group list-group-flush mt-auto">' +
                                     '<li class="list-group-item"><strong>Rating:</strong> <span class="badge bg-primary rounded-pill fs-6">' + (item.rating || '?') + ' / 10</span></li>' +
-                                    '<li class="list-group-item"><strong>Device:</strong> ' + (item.device || 'N/A') + '</li>' +
+                                    (item.device ? '<li class="list-group-item"><strong>Device:</strong> ' + item.device + '</li>' : '') +
                                     specificDetails +
                                 '</ul>' +
                             '</div>' +
