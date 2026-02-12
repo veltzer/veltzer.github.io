@@ -1,0 +1,36 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/schemas/json/podcasts.json
+$schema: "https://veltzer.github.io/schemas/json/podcasts.json"
+items:
+  - name: "The rest is history"
+    url: "https://therestishistory.com/club"
+    chapters:
+      - name: "Trailer"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - name: "1"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - name: "2"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - name: "3"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - name: "4"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - name: "5"
+        location: "Night Walks"
+        device: "Samsung S25"
+    rating: 8
+    review: "Generally a good podcast"
+  - name: "Hardcore History"
+    url: "https://www.dancarlin.com/hardcore-history-series/"
+    chapters:
+      - name: "Supernova in the East I"
+        location: "Night Walks"
+        device: "Samsung S25"
+    rating: 9
+    review: "One of the best history podcasts out there"
