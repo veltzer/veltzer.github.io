@@ -70,6 +70,7 @@
     <script src="plugin-series.js"></script>
     <script src="plugin-audio-courses.js"></script>
     <script src="plugin-audible.js"></script>
+    <script src="plugin-podcasts.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
