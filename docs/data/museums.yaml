@@ -18,6 +18,7 @@ items:
     rating: 9
     review: "Amazing museum"
     with: []
+    url: "https://www.metmuseum.org/"
   - name: "Solomon R. Guggenheim Museum"
     date_utcz: "1998-10-27T15:33:21Z"
     date_timezone: "America/New_York"
@@ -26,6 +27,7 @@ items:
     review: "Not my favorite museum"
     with: ["Yoram Avidan"]
     tickets: 2
+    url: "https://www.guggenheim.org/"
   - name: "American Museum of Natural History"
     date_utcz: "1998-10-27T15:33:21Z"
     date_timezone: "America/New_York"
@@ -33,6 +35,7 @@ items:
     rating: 7
     review: "Museums for natural history are not the best"
     with: []
+    url: "https://www.amnh.org/"
   - name: "Museum of Modern Art"
     date_dmy: "14-09-1999"
     date_timezone: "America/New_York"
@@ -40,6 +43,7 @@ items:
     rating: 7
     review: "Modern art is not my favourite"
     with: ["Doron Veltzer"]
+    url: "https://www.moma.org/"
   - name: "The Metropolitan Museum of Art"
     date_dmy: "15-09-1999"
     date_timezone: "America/New_York"
@@ -47,6 +51,7 @@ items:
     rating: 8
     review: "Always a good museum"
     with: ["Doron Veltzer"]
+    url: "https://www.metmuseum.org/"
   - name: "Solomon R. Guggenheim Museum"
     date_dmy: "17-09-1999"
     date_timezone: "America/New_York"
@@ -54,6 +59,7 @@ items:
     rating: 7
     review: "Not my favorite"
     with: ["Doron Veltzer"]
+    url: "https://www.guggenheim.org/"
   - name: "Science Museum"
     date_utcz: "2006-12-09T09:51:18Z"
     date_timezone: "Europe/London"
@@ -62,6 +68,7 @@ items:
     review: "Not the best museum in my optinion"
     with: []
     remark: "during a layover from San-Francisco"
+    url: "https://www.sciencemuseum.org.uk/"
   - name: "Westminster Abbey"
     date_utcz: "2006-12-09T02:51:18Z"
     date_timezone: "Europe/London"
@@ -70,6 +77,7 @@ items:
     review: "nice"
     with: []
     remark: "during a layover from San-Francisco"
+    url: "https://www.westminster-abbey.org/"
   - name: "Moscow Kremlin Museums"
     date_dmy: "01-10-2008"
     date_timezone: "Europe/Moscow"
@@ -78,6 +86,7 @@ items:
     review: "For people who like this sort of thing"
     with: []
     remark: "I visited the armory section"
+    url: "https://kreml.ru/en"
   - name: "Herzl Museum"
     date_dmy: "12-12-2008"
     date_timezone: "Asia/Jerusalem"
@@ -96,6 +105,7 @@ items:
         "Yaniv Michaeli",
       ]
     remark: "Ory's 37'th birthday celebrations"
+    url: "https://www.herzl.org.il"
   - name: "Picsso Museum"
     date_dmy: "24-02-2010"
     date_timezone: "Europe/Madrid"
@@ -103,6 +113,7 @@ items:
     rating: 8
     review: "Good museum"
     with: []
+    url: "https://museupicassobcn.cat/en"
   - name: "La Sagrada Familia"
     date_dmy: "25-02-2010"
     date_timezone: "Europe/Madrid"
@@ -110,6 +121,7 @@ items:
     rating: 9
     review: "Amazing. A must visit"
     with: []
+    url: "https://sagradafamilia.org/en/"
   - name: "Casa Milà"
     date_dmy: "26-02-2010"
     date_timezone: "Europe/Madrid"
@@ -117,6 +129,7 @@ items:
     rating: 8
     review: "Loved it"
     with: ["Kiti Silveira Basso"]
+    url: "https://www.lapedrera.com/en/"
   - name: "Louvre"
     date_dmy: "01-03-2010"
     date_timezone: "Europe/Paris"
@@ -124,6 +137,7 @@ items:
     rating: 9
     review: "The best"
     with: []
+    url: "https://www.louvre.fr/en"
   - name: "D'Orsey"
     date_dmy: "02-03-2010"
     date_timezone: "Europe/Paris"
@@ -131,6 +145,7 @@ items:
     rating: 9
     review: "Small but amazing"
     with: []
+    url: "https://www.musee-orsay.fr/en"
   - name: "Louvre"
     date_dmy: "03-03-2010"
     date_timezone: "Europe/Paris"
@@ -138,6 +153,7 @@ items:
     rating: 9
     review: "Always good"
     with: []
+    url: "https://www.louvre.fr/en"
   - name: "Natural History Museum"
     date_dmy: "04-03-2010"
     date_timezone: "Europe/London"
@@ -145,6 +161,7 @@ items:
     rating: 6
     review: "I don't like this kind of museum"
     with: []
+    url: "https://www.nhm.ac.uk/"
   - name: "Tate Modern Museum"
     date_dmy: "07-03-2010"
     date_timezone: "Europe/London"
@@ -152,6 +169,7 @@ items:
     rating: 7
     review: "Not my favourite museum"
     with: []
+    url: "https://www.tate.org.uk/visit/tate-modern"
   - name: "British Museum"
     date_utcz: "2011-09-23T18:02:21Z"
     date_timezone: "Europe/London"
@@ -159,6 +177,7 @@ items:
     rating: 8
     review: "Very good museum"
     with: []
+    url: "https://www.britishmuseum.org/"
   - name: "National Portrait Gallery"
     date_utcz: "2011-09-24T16:02:21Z"
     date_timezone: "Europe/London"
@@ -166,6 +185,7 @@ items:
     rating: 8
     review: "Very good museum"
     with: []
+    url: "https://www.npg.org.uk/"
   - name: "Tretekovskaya Gelleria"
     date_utcz: "2016-10-01T10:04:12Z"
     date_timezone: "Europe/Moscow"
@@ -173,6 +193,7 @@ items:
     rating: 9
     review: "Excellent Art"
     with: ["Irina Arkhipova"]
+    url: "https://www.tretyakovgallery.ru/"
   - name: "East and West Art"
     date_dmy: "07-05-2016"
     date_timezone: "Europe/Kiev"
@@ -180,3 +201,4 @@ items:
     rating: 8
     review: "Good museum"
     with: ["Ada Skleirova"]
+    url: "https://khanenko.museum/en/"
