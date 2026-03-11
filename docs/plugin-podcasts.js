@@ -5,6 +5,7 @@ window.mediaPlugins['podcasts'] = {
     navTitle: 'Podcasts',
     title: 'Listened Podcasts',
     subtitle: "A searchable list of podcasts I've listened to.",
+    ratingScale: 10,
     searchPlaceholder: 'Search by name, review, chapter...',
     searchFields: ['name', 'review', 'url'],
     renderDetails: function(item) {

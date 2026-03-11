@@ -5,6 +5,7 @@ window.mediaPlugins['audible'] = {
     navTitle: 'Audible',
     title: 'Audible Library',
     subtitle: "A searchable list of my Audible books.",
+    ratingScale: 5,
     searchPlaceholder: 'Search by title, author, narrator...',
     searchFields: ['name', 'title', 'authors', 'narrators'],
     renderDetails: function(item) {
