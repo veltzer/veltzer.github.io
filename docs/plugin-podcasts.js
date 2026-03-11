@@ -27,7 +27,7 @@ window.mediaPlugins['podcasts'] = {
                     parts.push(ch.location);
                 }
                 if (ch.rating) {
-                    parts.push(ch.rating + '/5');
+                    parts.push(ch.rating + '/10');
                 }
                 html += '<li class="ms-3">- ' + parts.join(' &middot; ') + '</li>';
             });
