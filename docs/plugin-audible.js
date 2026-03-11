@@ -6,14 +6,14 @@ window.mediaPlugins['audible'] = {
     title: 'Audible Library',
     subtitle: "A searchable list of my Audible books.",
     searchPlaceholder: 'Search by title, author, narrator...',
-    searchFields: ['title', 'authors', 'narrators'],
+    searchFields: ['name', 'title', 'authors', 'narrators'],
     renderDetails: function(item) {
         let html = '';
         if (item.authors) {
-            html += '<li class="list-group-item"><strong>Author(s):</strong> ' + item.authors + '</li>';
+            html += '<li class="list-group-item"><strong>Author(s):</strong> ' + window.escapeHtml(item.authors) + '</li>';
         }
         if (item.narrators) {
-            html += '<li class="list-group-item"><strong>Narrator(s):</strong> ' + item.narrators + '</li>';
+            html += '<li class="list-group-item"><strong>Narrator(s):</strong> ' + window.escapeHtml(item.narrators) + '</li>';
         }
         let status = 'Not Started';
         if (item.is_finished) {
@@ -24,7 +24,7 @@ window.mediaPlugins['audible'] = {
         html += '<li class="list-group-item"><strong>Status:</strong> ' + status + '</li>';
          var date = this.formatDate(item.date_added);
         if (date) {
-             html += '<li class="list-group-item"><strong>Date Added:</strong> ' + date + '</li>';
+             html += '<li class="list-group-item"><strong>Date Added:</strong> ' + window.escapeHtml(date) + '</li>';
         }
         return html;
     },

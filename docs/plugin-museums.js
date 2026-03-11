@@ -5,6 +5,7 @@ window.mediaPlugins['museums'] = {
     navTitle: 'Museums',
     title: 'Visited Museums',
     subtitle: "A list of museums and exhibitions I've visited over the years.",
+    ratingScale: 10,
     searchPlaceholder: 'Search by name, city, review...',
     searchFields: (window.mediaFeatureFlags && window.mediaFeatureFlags.showPeople)
         ? ['name', 'city', 'review', 'with']
@@ -13,19 +14,19 @@ window.mediaPlugins['museums'] = {
         let html = '';
         const date = item.date_utcz ? this.formatDate(item.date_utcz) : item.date_dmy;
         if (date) {
-             html += '<li class="list-group-item"><strong>Date:</strong> ' + date + '</li>';
+             html += '<li class="list-group-item"><strong>Date:</strong> ' + window.escapeHtml(date) + '</li>';
         }
         if (item.city) {
-            html += '<li class="list-group-item"><strong>City:</strong> ' + item.city + '</li>';
+            html += '<li class="list-group-item"><strong>City:</strong> ' + window.escapeHtml(item.city) + '</li>';
         }
         if (window.mediaFeatureFlags && window.mediaFeatureFlags.showPeople && item.with && item.with.length > 0) {
-            html += '<li class="list-group-item"><strong>With:</strong> ' + item.with.join(', ') + '</li>';
+            html += '<li class="list-group-item"><strong>With:</strong> ' + window.escapeHtml(item.with.join(', ')) + '</li>';
         }
          if (item.remark) {
-            html += '<li class="list-group-item"><strong>Remark:</strong> ' + item.remark + '</li>';
+            html += '<li class="list-group-item"><strong>Remark:</strong> ' + window.escapeHtml(item.remark) + '</li>';
         }
         if (item.url) {
-            html += '<li class="list-group-item"><a href="' + item.url + '" target="_blank">Visit Website</a></li>';
+            html += '<li class="list-group-item"><a href="' + window.escapeHtml(item.url) + '" target="_blank">Visit Website</a></li>';
         }
         return html;
     },
@@ -35,7 +36,7 @@ window.mediaPlugins['museums'] = {
         
         const getYear = (item) => {
             if (item.date_utcz) return item.date_utcz.substring(0, 4);
-            if (item.date_dmy) return item.date_dmy.substring(6, 10);
+            if (item.date_dmy) { var parts = item.date_dmy.split('-'); return parts.length === 3 ? parts[2] : null; }
             return null;
         };
 

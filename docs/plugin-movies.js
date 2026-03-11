@@ -5,22 +5,23 @@ window.mediaPlugins['features'] = {
     navTitle: 'Movies',
     title: 'Watched Movies',
     subtitle: "A searchable list of movies I've watched.",
+    ratingScale: 10,
     searchPlaceholder: 'Search by title, review, location...',
     searchFields: ['name', 'review', 'location'],
     renderDetails: function(item) {
         let html = '';
         const date = this.formatDate(item.date_utcz);
         if (date) {
-             html += '<li class="list-group-item"><strong>Date Watched:</strong> ' + date + '</li>';
+             html += '<li class="list-group-item"><strong>Date Watched:</strong> ' + window.escapeHtml(date) + '</li>';
         }
         if (item.location) {
-            html += '<li class="list-group-item"><strong>Location:</strong> ' + item.location + '</li>';
+            html += '<li class="list-group-item"><strong>Location:</strong> ' + window.escapeHtml(item.location) + '</li>';
         }
         if (window.mediaFeatureFlags && window.mediaFeatureFlags.showPeople && item.with && item.with.length > 0) {
-            html += '<li class="list-group-item"><strong>With:</strong> ' + item.with.join(', ') + '</li>';
+            html += '<li class="list-group-item"><strong>With:</strong> ' + window.escapeHtml(item.with.join(', ')) + '</li>';
         }
         if (item.imdb_id) {
-            html += '<li class="list-group-item"><a href="https://www.imdb.com/title/tt' + item.imdb_id + '/" target="_blank">View on IMDb</a></li>';
+            html += '<li class="list-group-item"><a href="https://www.imdb.com/title/tt' + window.escapeHtml(item.imdb_id) + '/" target="_blank">View on IMDb</a></li>';
         }
         return html;
     },

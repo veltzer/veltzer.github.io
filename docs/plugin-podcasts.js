@@ -10,21 +10,21 @@ window.mediaPlugins['podcasts'] = {
     renderDetails: function(item) {
         var html = '';
         if (item.url) {
-            html += '<li class="list-group-item"><a href="' + item.url + '" target="_blank">Visit Podcast</a></li>';
+            html += '<li class="list-group-item"><a href="' + window.escapeHtml(item.url) + '" target="_blank">Visit Podcast</a></li>';
         }
         if (item.chapters && item.chapters.length > 0) {
             html += '<li class="list-group-item"><strong>Chapters Listened:</strong> ' + item.chapters.length + '</li>';
             html += '<li class="list-group-item"><strong>Chapters:</strong><ul class="list-unstyled mb-0 mt-1">';
             item.chapters.forEach(function(ch) {
-                var parts = ['<strong>' + ch.name + '</strong>'];
+                var parts = ['<strong>' + window.escapeHtml(ch.name) + '</strong>'];
                 if (ch.date_utcz) {
-                    parts.push(ch.date_utcz.substring(0, 10));
+                    parts.push(window.escapeHtml(ch.date_utcz.substring(0, 10)));
                 }
                 if (ch.device) {
-                    parts.push(ch.device);
+                    parts.push(window.escapeHtml(ch.device));
                 }
                 if (ch.location) {
-                    parts.push(ch.location);
+                    parts.push(window.escapeHtml(ch.location));
                 }
                 if (ch.rating) {
                     parts.push(ch.rating + '/10');
