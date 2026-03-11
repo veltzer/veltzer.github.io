@@ -6,7 +6,9 @@ window.mediaPlugins['museums'] = {
     title: 'Visited Museums',
     subtitle: "A list of museums and exhibitions I've visited over the years.",
     searchPlaceholder: 'Search by name, city, review...',
-    searchFields: ['name', 'city', 'review', 'with'],
+    searchFields: (window.mediaFeatureFlags && window.mediaFeatureFlags.showPeople)
+        ? ['name', 'city', 'review', 'with']
+        : ['name', 'city', 'review'],
     renderDetails: function(item) {
         let html = '';
         const date = item.date_utcz ? this.formatDate(item.date_utcz) : item.date_dmy;
@@ -16,7 +18,7 @@ window.mediaPlugins['museums'] = {
         if (item.city) {
             html += '<li class="list-group-item"><strong>City:</strong> ' + item.city + '</li>';
         }
-        if (item.with && item.with.length > 0) {
+        if (window.mediaFeatureFlags && window.mediaFeatureFlags.showPeople && item.with && item.with.length > 0) {
             html += '<li class="list-group-item"><strong>With:</strong> ' + item.with.join(', ') + '</li>';
         }
          if (item.remark) {
