@@ -5,22 +5,23 @@ window.mediaPlugins['features'] = {
     navTitle: 'Movies',
     title: 'Watched Movies',
     subtitle: "A searchable list of movies I've watched.",
+    ratingScale: 10,
     searchPlaceholder: 'Search by title, review, location...',
     searchFields: ['name', 'review', 'location'],
     renderDetails: function(item) {
         let html = '';
         const date = this.formatDate(item.date_utcz);
         if (date) {
-             html += '<li class="list-group-item"><strong>Date Watched:</strong> ' + date + '</li>';
+             html += '<li class="list-group-item"><strong>Date Watched:</strong> ' + window.escapeHtml(date) + '</li>';
         }
         if (item.location) {
-            html += '<li class="list-group-item"><strong>Location:</strong> ' + item.location + '</li>';
+            html += '<li class="list-group-item"><strong>Location:</strong> ' + window.escapeHtml(item.location) + '</li>';
         }
-        if (item.with && item.with.length > 0) {
-            html += '<li class="list-group-item"><strong>With:</strong> ' + item.with.join(', ') + '</li>';
+        if (window.mediaFeatureFlags && window.mediaFeatureFlags.showPeople && item.with && item.with.length > 0) {
+            html += '<li class="list-group-item"><strong>With:</strong> ' + window.escapeHtml(item.with.join(', ')) + '</li>';
         }
         if (item.imdb_id) {
-            html += '<li class="list-group-item"><a href="https://www.imdb.com/title/tt' + item.imdb_id + '/" target="_blank">View on IMDb</a></li>';
+            html += '<li class="list-group-item"><a href="https://www.imdb.com/title/tt' + window.escapeHtml(item.imdb_id) + '/" target="_blank">View on IMDb</a></li>';
         }
         return html;
     },
@@ -32,7 +33,7 @@ window.mediaPlugins['features'] = {
             if (item.device) {
                 deviceCounts[item.device] = (deviceCounts[item.device] || 0) + 1;
             }
-            if (item.with && item.with.length > 0) {
+            if (window.mediaFeatureFlags && window.mediaFeatureFlags.showPeople && item.with && item.with.length > 0) {
                 withCount++;
             }
             const date = this.formatDate(item.date_utcz);
@@ -44,7 +45,9 @@ window.mediaPlugins['features'] = {
 
         let statsHtml = '<div class="row g-4 mb-4">';
         statsHtml += '<div class="col-md-6"><div class="card stat-card h-100"><div class="card-body"><span class="stat-value">' + items.length + '</span><span class="stat-label">Total Movies</span></div></div></div>';
-        statsHtml += '<div class="col-md-6"><div class="card stat-card h-100"><div class="card-body"><span class="stat-value">' + withCount + '</span><span class="stat-label">Movies Watched with Others</span></div></div></div>';
+        if (window.mediaFeatureFlags && window.mediaFeatureFlags.showPeople) {
+            statsHtml += '<div class="col-md-6"><div class="card stat-card h-100"><div class="card-body"><span class="stat-value">' + withCount + '</span><span class="stat-label">Movies Watched with Others</span></div></div></div>';
+        }
         statsHtml += '</div>';
 
         const maxDeviceCount = Math.max.apply(null, Object.values(deviceCounts).length > 0 ? Object.values(deviceCounts) : [0]);

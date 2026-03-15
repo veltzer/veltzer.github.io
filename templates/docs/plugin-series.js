@@ -5,20 +5,21 @@ window.mediaPlugins['videos'] = {
     navTitle: 'Video Series',
     title: 'Watched TV Series',
     subtitle: "A searchable list of TV series I've watched.",
+    ratingScale: 10,
     searchPlaceholder: 'Search by name, review, location...',
     searchFields: ['name', 'review', 'location'],
     renderDetails: function(item) {
         var seasons = item.seasons_seen ? item.seasons_seen.join(', ') : 'N/A';
-        var html = '<li class="list-group-item"><strong>Seasons Seen:</strong> ' + seasons + '</li>';
+        var html = '<li class="list-group-item"><strong>Seasons Seen:</strong> ' + window.escapeHtml(seasons) + '</li>';
         var date = this.formatDate(item.date_utcz);
         if (date) {
-             html += '<li class="list-group-item"><strong>Date Watched:</strong> ' + date + '</li>';
+             html += '<li class="list-group-item"><strong>Date Watched:</strong> ' + window.escapeHtml(date) + '</li>';
         }
         if (item.location) {
-            html += '<li class="list-group-item"><strong>Location:</strong> ' + item.location + '</li>';
+            html += '<li class="list-group-item"><strong>Location:</strong> ' + window.escapeHtml(item.location) + '</li>';
         }
         if (item.imdb_id) {
-            html += '<li class="list-group-item"><a href="https://www.imdb.com/title/tt' + item.imdb_id + '/" target="_blank">View on IMDb</a></li>';
+            html += '<li class="list-group-item"><a href="https://www.imdb.com/title/tt' + window.escapeHtml(item.imdb_id) + '/" target="_blank">View on IMDb</a></li>';
         }
         return html;
     },

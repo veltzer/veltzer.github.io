@@ -8,7 +8,7 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/favicon.svg">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
     <style>
@@ -63,7 +63,14 @@
         <p>Page Visits: <span id="visitor-count">Loading...</span></p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // --- Feature Flags ---
+        window.mediaFeatureFlags = {
+            showPeople: false,  // Set to true to show "With:" people info
+        };
+    </script>
 
     <script src="plugin-museums.js"></script>
     <script src="plugin-movies.js"></script>
@@ -86,10 +93,15 @@
             let allItems = []; // To store the fetched data
             let activeConfig = {}; // To store the config of the current view
             
-            // --- Helper Function ---
+            // --- Helper Functions ---
+            function escapeHtml(str) {
+                if (str == null) return '';
+                return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+            }
+            window.escapeHtml = escapeHtml;
+
             function formatDate(dateString) {
                 if (!dateString) return null;
-                // Extracts just the<x_bin_660>-MM-DD part from the UTC string
                 return dateString.substring(0, 10);
             }
             
@@ -139,6 +151,7 @@
                 
                 generateNav(dataType, showStatsOnly);
 
+                searchInput.value = '';
                 pageTitle.textContent = activeConfig.title;
                 pageSubtitle.textContent = showStatsOnly ? 'Statistics Overview' : activeConfig.subtitle;
                 searchInput.placeholder = activeConfig.searchPlaceholder;
@@ -196,6 +209,7 @@
                     return;
                 }
 
+                statusMessage.textContent = '';
                 itemList.forEach(item => {
                     const col = document.createElement('div');
                     col.className = 'col-md-6 col-lg-4';
@@ -205,11 +219,11 @@
                     col.innerHTML =
                         '<div class="card h-100">' +
                             '<div class="card-body d-flex flex-column">' +
-                                '<h5 class="card-title fs-4 fw-bold">' + (item.name || 'No Title') + '</h5>' +
-                                '<p class="card-text mb-4">' + (item.review || item.subtitle || 'No description.') + '</p>' +
+                                '<h5 class="card-title fs-4 fw-bold">' + escapeHtml(item.name || 'No Title') + '</h5>' +
+                                '<p class="card-text mb-4">' + escapeHtml(item.review || item.subtitle || 'No description.') + '</p>' +
                                 '<ul class="list-group list-group-flush mt-auto">' +
-                                    '<li class="list-group-item"><strong>Rating:</strong> <span class="badge bg-primary rounded-pill fs-6">' + (item.rating || '?') + ' / 10</span></li>' +
-                                    '<li class="list-group-item"><strong>Device:</strong> ' + (item.device || 'N/A') + '</li>' +
+                                    '<li class="list-group-item"><strong>Rating:</strong> <span class="badge bg-primary rounded-pill fs-6">' + escapeHtml(item.rating || '?') + ' / ' + (activeConfig.ratingScale || 5) + '</span></li>' +
+                                    '<li class="list-group-item"><strong>Device:</strong> ' + escapeHtml(item.device || 'N/A') + '</li>' +
                                     specificDetails +
                                 '</ul>' +
                             '</div>' +

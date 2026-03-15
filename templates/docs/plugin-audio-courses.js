@@ -5,20 +5,21 @@ window.mediaPlugins['audio'] = {
     navTitle: 'Audio Courses',
     title: 'Listened to Audio Courses',
     subtitle: "A searchable list of audio courses I've listened to.",
+    ratingScale: 10,
     searchPlaceholder: 'Search by name, review, lecturer...',
     searchFields: ['name', 'review', 'lecturers', 'location'],
     renderDetails: function(item) {
         var lecturers = item.lecturers ? item.lecturers.join(', ') : 'N/A';
-        var html = '<li class="list-group-item"><strong>Lecturer(s):</strong> ' + lecturers + '</li>';
+        var html = '<li class="list-group-item"><strong>Lecturer(s):</strong> ' + window.escapeHtml(lecturers) + '</li>';
         var date = this.formatDate(item.date_utcz || item.date_ended_utcz || item.date_started_utcz);
          if (date) {
-             html += '<li class="list-group-item"><strong>Date:</strong> ' + date + '</li>';
+             html += '<li class="list-group-item"><strong>Date:</strong> ' + window.escapeHtml(date) + '</li>';
         }
         if (item.location) {
-            html += '<li class="list-group-item"><strong>Location:</strong> ' + item.location + '</li>';
+            html += '<li class="list-group-item"><strong>Location:</strong> ' + window.escapeHtml(item.location) + '</li>';
         }
         if (item.progress) {
-            html += '<li class="list-group-item"><strong>Progress:</strong> ' + item.progress + '</li>';
+            html += '<li class="list-group-item"><strong>Progress:</strong> ' + window.escapeHtml(item.progress) + '</li>';
         }
         return html;
     },
