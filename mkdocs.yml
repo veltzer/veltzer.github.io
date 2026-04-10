@@ -1,0 +1,39 @@
+---
+site_name: "Mark Veltzer's personal site"
+site_url: "https://veltzer.github.io"
+site_description: "Mark Veltzer's personal website — blog, media tracker, calendar, and chess viewer"
+copyright: "Copyright &copy; 2026 Mark Veltzer"
+extra_css:
+  - "custom.css"
+theme:
+  name: "material"
+extra:
+  social:
+    - icon: fontawesome/solid/square-rss
+      link: https://veltzer.github.io/feed_rss_created.xml
+      name: RSS Feed
+docs_dir: "blog"
+site_dir: "_site"
+plugins:
+  - search:
+  - blog:
+      blog_dir: .
+  - tags:
+  - glightbox:
+  - rss:
+      match_path: "posts/.*"
+      date_from_meta:
+        as_creation: date
+      categories:
+        - tags
+markdown_extensions:
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+nav:
+  - 'Home': 'index.md'
+  - 'About Me': 'about.md'
+  - 'Tags': 'tags.md'
+  - 'Media': 'media.md'
+  - 'Calendar': 'calendar.md'

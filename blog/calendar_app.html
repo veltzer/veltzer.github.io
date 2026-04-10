@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+    <title>Calendar — Mark Veltzer</title>
+    <meta name="description" content="Mark Veltzer's public Google Calendar with interactive monthly, weekly, and daily views.">
+    <meta property="og:title" content="Calendar — Mark Veltzer">
+    <meta property="og:description" content="Mark Veltzer's public Google Calendar with interactive monthly, weekly, and daily views.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://veltzer.github.io/calendar.html">
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="shared.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.js" integrity="sha384-cdgKlW4XCZfQ8yQFLScLHBujFrHf3sMYBPBjRimt2H/ut44fe4t/PUk3luazptar" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/google-calendar@6.1.20/index.global.min.js" integrity="sha384-rIPPQ/9RkgMsV+B8X0s5dZLu2CKA38gLcRt62d9QkwznKY5C4Qagxmt8CEQHg/V9" crossorigin="anonymous"></script>
+</head>
+<body class="page-body">
+    <div class="page-container max-w-6xl">
+        <h1 class="page-title text-blue-600">My Public Calendar</h1>
+        <div id="calendar-error" class="hidden error-box"></div>
+        <div id="calendar" class="max-w-full mx-auto"></div>
+    </div>
+
+    <script src="keys.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            // Configuration
+            const TIMEZONE = 'Asia/Jerusalem'; // Your timezone
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                },
+                locale: 'en',
+                timeZone: TIMEZONE,
+                height: 'auto',
+
+                // Google Calendar configuration
+                googleCalendarApiKey: API_KEY,
+                events: {
+                    googleCalendarId: CALENDAR_ID,
+                    className: 'gcal-event' // Optional CSS class for styling
+                },
+
+                // Event handling
+                eventClick: function(info) {
+                    // Prevent default browser navigation
+                    info.jsEvent.preventDefault();
+
+                    // Open event details in a new tab
+                    if (info.event.url) {
+                        window.open(info.event.url, '_blank', 'noopener,noreferrer');
+                    }
+                },
+
+                // Styling
+                eventColor: '#1a73e8',
+                eventTextColor: '#ffffff',
+
+                // Loading indicator
+                loading: function(bool) {
+                    if (bool) {
+                        calendarEl.style.opacity = '0.5';
+                    } else {
+                        calendarEl.style.opacity = '1';
+                    }
+                },
+
+                // Error handling
+                eventSourceFailure: function() {
+                    var errorEl = document.getElementById('calendar-error');
+                    errorEl.textContent = 'Failed to load calendar events. Please check your Calendar ID and API key.';
+                    errorEl.classList.remove('hidden');
+                }
+            });
+
+            calendar.render();
+
+            // Refresh every 5 minutes, but only when tab is visible
+            var refreshInterval = setInterval(function() {
+                calendar.refetchEvents();
+            }, 5 * 60 * 1000);
+
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    clearInterval(refreshInterval);
+                    refreshInterval = null;
+                } else {
+                    calendar.refetchEvents();
+                    refreshInterval = setInterval(function() {
+                        calendar.refetchEvents();
+                    }, 5 * 60 * 1000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

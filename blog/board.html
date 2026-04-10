@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    <title>Chessboard — Mark Veltzer</title>
+    <meta name="description" content="Interactive chessboard display on Mark Veltzer's website.">
+    <meta property="og:title" content="Chessboard — Mark Veltzer">
+    <meta property="og:description" content="Interactive chessboard display on Mark Veltzer's website.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://veltzer.github.io/board.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- cm-chessboard library CSS from unpkg -->
+    <link rel="stylesheet" href="https://unpkg.com/cm-chessboard@8.6.0/dist/cm-chessboard.css" integrity="sha384-2vc+Us/Wpr2QYC1lPQr7juY0O2R+SmMEN4xMH9VI8QcRk1O9rE04dr4cmPBo5bnI" crossorigin="anonymous"/>
+
+    <!-- cm-chessboard library JavaScript Bundle from unpkg -->
+    <script src="https://unpkg.com/cm-chessboard@8.6.0/dist/cm-chessboard.js" integrity="sha384-7yTLNbUt3LWPwEX/NEo3R8/46+UbHG2Xf0MD8nEjizC2XFc/jw4SAQDlcms6Sb4e" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-800 m-0">
+
+    <div id="board-container" class="w-[80vw] max-w-[600px] max-[480px]:w-[95vw]"></div>
+
+    <script>
+        // Use window.onload to ensure the library script is fully loaded before we try to use it.
+        window.onload = function() {
+            // Configuration for the chessboard
+            const config = {
+                position: "start", // The starting position of the pieces
+                sprite: {
+                    url: "https://unpkg.com/cm-chessboard@8.6.0/assets/images/chessboard-sprite.svg",
+                    size: 40,
+                    cache: true
+                }
+            };
+
+            // Create a new chessboard instance in the 'board-container' div
+            new Chessboard(document.getElementById('board-container'), config);
+        };
+    </script>
+
+</body>
+</html>

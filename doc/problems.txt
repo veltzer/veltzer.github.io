@@ -1,0 +1,7 @@
+rewirte /scripts/manage_api_key.sh in python
+
+make that script not hardcode any details about this project.
+
+maybe use a better tool than mkdocs?
+
+Find a way to count number of visitors on each page of the blog/site and display them.

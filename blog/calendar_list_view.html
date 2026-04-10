@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+    <title>Calendar Events — Mark Veltzer</title>
+    <meta name="description" content="Upcoming events from Mark Veltzer's Google Calendar in list format.">
+    <meta property="og:title" content="Calendar Events — Mark Veltzer">
+    <meta property="og:description" content="Upcoming events from Mark Veltzer's Google Calendar in list format.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://veltzer.github.io/calendar_list_view.html">
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body class="page-body">
+    <div class="page-container max-w-3xl">
+        <h1 class="page-title text-blue-600">Upcoming Events</h1>
+        <div id="loading" class="text-center py-10 text-gray-500">Loading calendar events...</div>
+        <div id="error" class="hidden error-box"></div>
+        <div id="events"></div>
+    </div>
+
+    <script src="keys.js"></script>
+    <script>
+        // Configuration
+        const MAX_RESULTS = 20; // Number of events to show
+
+        // Create element with text content (safe from XSS)
+        function createElement(tag, className, textContent) {
+            const element = document.createElement(tag);
+            if (className) element.className = className;
+            if (textContent) element.textContent = textContent;
+            return element;
+        }
+
+        // Format date/time
+        function formatDateTime(dateTime) {
+            const date = new Date(dateTime);
+            const options = {
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            return date.toLocaleString('en-US', options);
+        }
+
+        function formatDate(dateTime) {
+            const date = new Date(dateTime);
+            const options = {
+                weekday: 'long',
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric'
+            };
+            return date.toLocaleString('en-US', options);
+        }
+
+        // Group events by date
+        function groupEventsByDate(events) {
+            const grouped = {};
+            events.forEach(event => {
+                const date = event.start.dateTime || event.start.date;
+                const dateKey = new Date(date).toDateString();
+                if (!grouped[dateKey]) {
+                    grouped[dateKey] = [];
+                }
+                grouped[dateKey].push(event);
+            });
+            return grouped;
+        }
+
+        // Create event element
+        function createEventElement(event) {
+            const eventDiv = createElement('div', 'event-card border-l-4 border-blue-600 py-4 px-5 mb-4 bg-gray-50 rounded-r-md');
+
+            // Title
+            const titleDiv = createElement('div', 'font-semibold text-lg mb-1 text-blue-600', event.summary || 'Untitled Event');
+            eventDiv.appendChild(titleDiv);
+
+            // Time
+            const timeDiv = createElement('div', 'text-gray-500 text-sm mb-1');
+            if (event.start.dateTime) {
+                let timeText = formatDateTime(event.start.dateTime);
+                if (event.end.dateTime) {
+                    const endTime = new Date(event.end.dateTime).toLocaleTimeString('en-US', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    timeText += ' - ' + endTime;
+                }
+                timeDiv.textContent = timeText;
+            } else {
+                const allDaySpan = createElement('span', 'bg-blue-500 text-white px-2 py-0.5 rounded text-xs inline-block', 'All Day');
+                timeDiv.appendChild(allDaySpan);
+            }
+            eventDiv.appendChild(timeDiv);
+
+            // Location
+            if (event.location) {
+                const locationDiv = createElement('div', 'text-gray-600 text-sm mt-1', 'Location: ' + event.location);
+                eventDiv.appendChild(locationDiv);
+            }
+
+            // Description
+            if (event.description) {
+                const descDiv = createElement('div', 'text-gray-600 text-sm mt-2 whitespace-pre-wrap', event.description);
+                eventDiv.appendChild(descDiv);
+            }
+
+            return eventDiv;
+        }
+
+        // Fetch events from Google Calendar
+        async function fetchEvents() {
+            const now = new Date().toISOString();
+            const url = 'https://www.googleapis.com/calendar/v3/calendars/' + CALENDAR_ID + '/events?key=' + API_KEY + '&timeMin=' + now + '&maxResults=' + MAX_RESULTS + '&singleEvents=true&orderBy=startTime';
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('HTTP error! status: ' + response.status);
+                }
+                const data = await response.json();
+                return data.items || [];
+            } catch (error) {
+                throw error;
+            }
+        }
+
+        // Display events
+        function displayEvents(events) {
+            const container = document.getElementById('events');
+            // Clear existing content
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+
+            if (events.length === 0) {
+                const noEventsP = createElement('p', 'text-center text-gray-500', 'No upcoming events found.');
+                container.appendChild(noEventsP);
+                return;
+            }
+
+            const groupedEvents = groupEventsByDate(events);
+
+            Object.keys(groupedEvents).forEach(dateKey => {
+                // Add date header
+                const dateHeader = createElement('div', 'font-semibold text-gray-500 mt-8 mb-4 pb-2 border-b-2 border-gray-200', formatDate(dateKey));
+                container.appendChild(dateHeader);
+
+                // Add events for this date
+                groupedEvents[dateKey].forEach(event => {
+                    const eventElement = createEventElement(event);
+                    container.appendChild(eventElement);
+                });
+            });
+        }
+
+        // Display error
+        function displayError(message) {
+            const errorEl = document.getElementById('error');
+            // Clear existing content
+            while (errorEl.firstChild) {
+                errorEl.removeChild(errorEl.firstChild);
+            }
+
+            const errorTitle = createElement('strong', null, 'Error loading calendar:');
+            errorEl.appendChild(errorTitle);
+            errorEl.appendChild(document.createElement('br'));
+            errorEl.appendChild(document.createTextNode(message));
+            errorEl.appendChild(document.createElement('br'));
+            errorEl.appendChild(document.createElement('br'));
+            errorEl.appendChild(document.createTextNode('Please check that:'));
+
+            const errorList = createElement('ul', 'mt-2 pl-5 list-disc');
+            const checks = [
+                'Your calendar is set to public',
+                'The keys.js file is loaded and contains valid credentials',
+                'The Google Calendar API is enabled for your API key'
+            ];
+
+            checks.forEach(check => {
+                const li = createElement('li', null, check);
+                errorList.appendChild(li);
+            });
+
+            errorEl.appendChild(errorList);
+            errorEl.classList.remove('hidden');
+        }
+
+        // Initialize
+        async function init() {
+            const loadingEl = document.getElementById('loading');
+            const errorEl = document.getElementById('error');
+
+            try {
+                const events = await fetchEvents();
+                loadingEl.style.display = 'none';
+                errorEl.classList.add('hidden');
+                displayEvents(events);
+            } catch (error) {
+                loadingEl.style.display = 'none';
+                displayError(error.message);
+            }
+        }
+
+        // Start when page loads
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+
+        // Refresh every 5 minutes, but only when tab is visible
+        var refreshInterval = setInterval(init, 5 * 60 * 1000);
+
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                clearInterval(refreshInterval);
+                refreshInterval = null;
+            } else {
+                init();
+                refreshInterval = setInterval(init, 5 * 60 * 1000);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+    <title>Chess Viewer — Mark Veltzer</title>
+    <meta name="description" content="Interactive chess game viewer — step through the famous Opera Game (1858) by Paul Morphy.">
+    <meta property="og:title" content="Chess Viewer — Mark Veltzer">
+    <meta property="og:description" content="Interactive chess game viewer — step through the famous Opera Game (1858) by Paul Morphy.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://veltzer.github.io/chess.html">
+    
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- cm-chessboard library (CSS from unpkg) -->
+    <link rel="stylesheet" href="https://unpkg.com/cm-chessboard@8.6.0/dist/cm-chessboard.css" integrity="sha384-2vc+Us/Wpr2QYC1lPQr7juY0O2R+SmMEN4xMH9VI8QcRk1O9rE04dr4cmPBo5bnI" crossorigin="anonymous"/>
+
+    <!-- chess.js for game logic -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" integrity="sha384-aH7F59TKSh8OEAivbclch9UUnWn/Uy8AQlYYKzpVaQkAp8W6IF2VocW/knEeRwT0" crossorigin="anonymous"></script>
+
+    <!-- cm-chessboard library (JavaScript Bundle from unpkg) -->
+    <script src="https://unpkg.com/cm-chessboard@8.6.0/dist/cm-chessboard.js" integrity="sha384-7yTLNbUt3LWPwEX/NEo3R8/46+UbHG2Xf0MD8nEjizC2XFc/jw4SAQDlcms6Sb4e" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body class="bg-gray-800 text-white flex items-center justify-center min-h-screen">
+
+    <div class="text-center p-4">
+        <h1 class="text-3xl font-bold mb-4">Opera Game (1858)</h1>
+        <p class="mb-4 text-gray-400">Paul Morphy vs. Duke Karl / Count Isouard</p>
+        
+        <!-- The chessboard will be rendered here -->
+        <div id="gameBoard" class="w-full max-w-lg mx-auto mb-4"></div>
+        
+        <!-- Navigation controls -->
+        <div class="space-x-4">
+            <button id="btnPrev" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg" aria-label="Go to previous move">Previous</button>
+            <button id="btnNext" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg" aria-label="Go to next move">Next</button>
+        </div>
+        
+        <!-- Display the current move -->
+        <div id="status" class="mt-4 text-lg font-mono"></div>
+    </div>
+
+    <script>
+        // Use window.onload to ensure all resources, including external scripts,
+        // are fully loaded before the code runs. This prevents race conditions.
+        window.onload = function() {
+            // --- Global State Variables ---
+            let board = null;
+            const game = new Chess();
+            let moveHistory = [];
+            let currentMove = 0;
+
+            // --- Hardcoded PGN for the Opera Game ---
+            const pgn = `
+                [Event "A Night at the Opera"]
+                [Site "Paris, France"]
+                [Date "1858.11.02"]
+                [Result "1-0"]
+                [White "Paul Morphy"]
+                [Black "Duke Karl / Count Isouard"]
+                1.e4 e5 2.Nf3 d6 3.d4 Bg4 4.dxe5 Bxf3 5.Qxf3 dxe5 6.Bc4 Nf6 7.Qb3 Qe7
+                8.Nc3 c6 9.Bg5 b5 10.Nxb5 cxb5 11.Bxb5+ Nbd7 12.O-O-O Rd8
+                13.Rxd7 Rxd7 14.Rd1 Qe6 15.Bxd7+ Nxd7 16.Qb8+ Nxb8 17.Rd8# 1-0
+            `;
+
+            // --- DOM Element References ---
+            const statusEl = document.getElementById('status');
+            const btnPrev = document.getElementById('btnPrev');
+            const btnNext = document.getElementById('btnNext');
+
+            // --- Function to update the board and UI ---
+            function updateStatus() {
+                const move = moveHistory[currentMove - 1] || { san: 'Start' };
+                statusEl.textContent = 'Move ' + currentMove + ': ' + move.san;
+                
+                // Set board to the current position
+                const tempGame = new Chess();
+                moveHistory.slice(0, currentMove).forEach(m => tempGame.move(m.san));
+                
+                // Use the setPosition method with a FEN string
+                board.setPosition(tempGame.fen(), true);
+
+                // Update button states
+                btnPrev.disabled = currentMove === 0;
+                btnNext.disabled = currentMove === moveHistory.length;
+            }
+
+            // --- Initialize the Game ---
+            game.load_pgn(pgn);
+            moveHistory = game.history({ verbose: true });
+
+            // --- Initialize the Board ---
+            const boardConfig = {
+                position: "start",
+                // The sprite uses SVG for sharp, scalable pieces
+                sprite: {
+                    url: "https://unpkg.com/cm-chessboard@8.6.0/assets/images/chessboard-sprite.svg",
+                    size: 40,
+                    cache: true
+                }
+            };
+            // Use the global Chessboard object from the new library
+            board = new Chessboard(document.getElementById('gameBoard'), boardConfig);
+
+            // --- Event Listeners ---
+            btnPrev.addEventListener('click', () => {
+                if (currentMove > 0) {
+                    currentMove--;
+                    updateStatus();
+                }
+            });
+
+            btnNext.addEventListener('click', () => {
+                if (currentMove < moveHistory.length) {
+                    currentMove++;
+                    updateStatus();
+                }
+            });
+
+            // --- Initial Render ---
+            updateStatus();
+        };
+    </script>
+
+</body>
+</html>

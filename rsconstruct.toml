@@ -1,0 +1,33 @@
+[dependencies]
+pip = [
+  "mkdocs-material",
+  "mkdocs-glightbox",
+  "mkdocs-rss-plugin",
+]
+
+[processor.eslint]
+src_dirs = ["blog"]
+src_files = [".eslintrc.js"]
+args = ["-c", "config/eslint.config.js"]
+
+[processor.tidy]
+src_dirs = ["blog"]
+
+[processor.tera]
+dep_inputs = [
+    "config/project.lua",
+    "config/personal.lua",
+]
+
+[processor.explicit]
+command = "scripts/build_docs.sh"
+inputs = [
+    "mkdocs.yml",
+]
+input_globs = [
+    "blog/**/*",
+]
+# technically its the entire docs folder
+outputs = [
+    "_site/index.html",
+]

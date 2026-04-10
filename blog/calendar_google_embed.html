@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+    <title>Calendar (Embedded) — Mark Veltzer</title>
+    <meta name="description" content="Mark Veltzer's public Google Calendar embedded view.">
+    <meta property="og:title" content="Calendar (Embedded) — Mark Veltzer">
+    <meta property="og:description" content="Mark Veltzer's public Google Calendar embedded view.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://veltzer.github.io/calendar_google_embed.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="shared.css">
+</head>
+<body class="page-body">
+    <div class="page-container max-w-6xl">
+        <h1 class="page-title text-gray-800">My Public Calendar</h1>
+        <div class="calendar-wrapper">
+            <iframe id="calendar-iframe"
+                    style="border-width:0; overflow:hidden"
+                    width="800"
+                    height="600">
+            </iframe>
+        </div>
+    </div>
+
+    <script src="keys.js"></script>
+    <script>
+        var iframe = document.getElementById('calendar-iframe');
+        iframe.src = 'https://calendar.google.com/calendar/embed?src='
+            + encodeURIComponent(CALENDAR_ID)
+            + '&ctz=Asia%2FJerusalem&mode=WEEK&showTitle=0&showNav=1&showDate=1'
+            + '&showPrint=0&showTabs=1&showCalendars=0&showTz=1&height=600'
+            + '&wkst=1&bgcolor=%23ffffff&color=%234285F4';
+    </script>
+</body>
+</html>
