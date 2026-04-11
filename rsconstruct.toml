@@ -27,7 +27,4 @@ inputs = [
 input_globs = [
     "blog/**/*",
 ]
-# technically its the entire docs folder
-outputs = [
-    "_site/index.html",
-]
+output_dirs = [ "_site" ]
