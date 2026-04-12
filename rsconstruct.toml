@@ -28,3 +28,6 @@ input_globs = [
     "blog/**/*",
 ]
 output_dirs = [ "_site" ]
+
+[processor.shellcheck]
+src_dirs = ["scripts"]
