@@ -43,6 +43,17 @@ DEFAULT_PORT = 8000
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
+def read_site_dir():
+    # Parse `site_dir:` out of mkdocs.yml without pulling in PyYAML.
+    config = REPO_ROOT / "mkdocs.yml"
+    for line in config.read_text().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("site_dir:"):
+            value = stripped.split(":", 1)[1].strip()
+            return (REPO_ROOT / value.strip("\"'")).resolve()
+    return (REPO_ROOT / "_site").resolve()
+
+
 def build_docs():
     subprocess.run([str(REPO_ROOT / "scripts" / "build_docs.sh")], check=True)
 
@@ -132,9 +143,9 @@ def main():
     if not args.no_build:
         build_docs()
 
-    docs_dir = REPO_ROOT / "docs"
+    docs_dir = read_site_dir()
     if not docs_dir.is_dir():
-        print(f"docs/ not found at {docs_dir}", file=sys.stderr)
+        print(f"site directory not found at {docs_dir}", file=sys.stderr)
         return 1
 
     url = f"http://127.0.0.1:{args.port}/"
