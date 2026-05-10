@@ -1,52 +1,46 @@
 # CLAUDE.md - Project Guide
 
 ## Project Overview
-Mark Veltzer's personal website hosted on GitHub Pages (veltzer.github.io). Combines a technical blog, media consumption tracker, chess game viewer, and calendar integration.
+Mark Veltzer's personal website hosted on GitHub Pages at veltzer.org (CNAME). Combines a blog, media consumption tracker, chess game viewer, and calendar integration.
 
 ## Tech Stack
-- **Frontend**: HTML5, CSS3, JavaScript (ES9+), Tailwind CSS
-- **Build**: Python 3 (pydmt, pymakehelper), MkDocs 1.6.1 (Material theme), Vite (JS bundling), npm
-- **Linting/Testing**: pylint, pytest, mypy, ruff (Python); jshint (JavaScript); jsonschema (JSON)
-- **Data**: YAML files for media content, PGN for chess games, Markdown for blog posts
+- **Frontend**: HTML5, CSS3, JavaScript (ES9+)
+- **Build**: rsconstruct (single binary, configured via `.rsconstruct/` and `config/*.lua`), MkDocs 1.6+ (Material theme) with the blog/tags/rss/glightbox plugins, npm
+- **Linting**: jshint (JavaScript via `.jshintrc`), htmllint (`.htmllintrc`), yamllint (`.yamllint.yaml`), aspell (`.aspell.en.pws`, `.spellcheck-words`)
+- **Data**: YAML for media content, PGN for chess games, Markdown for blog posts
 
 ## Directory Structure
-- `blog/` - Blog source (Markdown posts)
-- `config/` - Python config (project.py, personal.py, shared.py, version.py, calendar.py)
-- `docs/` - Generated site output (do not edit manually — rebuilt by `scripts/build_docs.sh`)
-- `docs/data/` - YAML data files (podcasts, audible, museums, etc.)
-- `scripts/` - Build and utility scripts
-- `templates/` - Mako templates for pydmt
-- `pkg/` - npm package definitions
-- `out/` - Build output stamps
-- `doc/` - Documentation and TODOs
+- `blog/` - MkDocs `docs_dir`. Source for the entire site (Markdown posts, app HTML, media plugins, images)
+- `blog/posts/YYYY/MM/*.md` - Blog posts. Front matter requires `date:` (ISO) and optional `tags:`
+- `_site/` - Generated MkDocs output (gitignored, do not edit)
+- `config/` - rsconstruct config: `project.lua`, `personal.lua`, plus `eslint.config.js`
+- `scripts/` - Utility scripts (`build_docs.sh`, image fetchers, data importers, `serve.py` for local preview)
+- `.rsconstruct/` - rsconstruct cache/state (gitignored content; the dir itself is checked in)
+- `.github/workflows/build.yml` - CI: installs rsconstruct, runs `rsconstruct build`, uploads pages artifact, deploys
+- `doc/` - Project notes / TODOs
+- `mkdocs.yml` - MkDocs config (`site_dir: "_site"`, blog plugin paginates the home into `page/N`)
 
 ## Build Commands
-- `make` — Run all enabled checks
-- `make clean` — Remove `out/` directory
-- `make clean_hard` — Git clean (removes all untracked files)
-- `scripts/build_docs.sh` — Full site build: MkDocs build → pydmt build → copy YAML data and PGN files from `../data/`
-- `scripts/vite.sh` — Bundle npm packages with Vite
-
-## Key Makefile Parameters
-- `DO_MKDBG` — Enable debug output
-- `DO_ALLDEP` — Enable all dependencies
-- `DO_JS_CHECK` — Enable JavaScript checks (jshint)
-- `DO_JS_PACKAGE` — Enable JavaScript packaging
+- `rsconstruct build --verbose -j0` — Full build (this is what CI runs)
+- `rsconstruct status` — Show build status
+- `scripts/build_docs.sh` — Convenience wrapper for the docs build
+- `scripts/serve.py` — Local preview server
 
 ## Coding Conventions
-- Python: snake_case, type hints, checked by pylint/mypy/ruff
-- JavaScript: camelCase, ES9+, checked by jshint (`.jshintrc`)
+- JavaScript: camelCase, ES9+, jshint-clean
 - Media plugins follow a consistent interface: `file`, `navTitle`, `title`, `subtitle`, `searchPlaceholder`, `searchFields`, `renderDetails`, `renderStats`
 
 ## Git Conventions
-- Branch: `master` (main branch)
+- Branch: `master` (main)
 - Commits are often auto-generated with no message
 - GPG signing enabled
 - Pull strategy: rebase
 
 ## Important Notes
-- `docs/` is a generated directory — changes go in `blog/`, `templates/`, or source files, then rebuild
-- YAML data for the media tracker lives in a separate `../data/` repository and is copied in during build
-- Google Calendar API key is hardcoded in `config/calendar.py` (known security TODO)
-- Site uses `.nojekyll` to bypass Jekyll processing on GitHub Pages
-- Version is tracked in `config/version.py` (currently 0.1.19)
+- `_site/` is the generated output — never edit it directly. Edit `blog/` (or templates/config) and rebuild.
+- The blog plugin paginates: most recent posts appear on `index.html`; older ones on `page/2/`, `page/3/`, etc. A "missing" post is usually just on a later page — check `_site/page/*/index.html` and the archive before assuming a build failure.
+- **Never date a blog post in the future.** The `date:` front-matter value must be today or earlier. The mkdocs blog plugin publishes future-dated posts immediately rather than holding them, which pushes genuinely-recent posts off page 1 and makes them look "missing."
+- YAML data for the media tracker lives in a separate `../data/` repository and is copied in during build.
+- Google Calendar API key is hardcoded in calendar code (known security TODO).
+- Site uses `.nojekyll` to bypass Jekyll processing on GitHub Pages.
+- Custom domain is `veltzer.org` (see `CNAME`); the canonical mkdocs `site_url` is still `veltzer.github.io`.

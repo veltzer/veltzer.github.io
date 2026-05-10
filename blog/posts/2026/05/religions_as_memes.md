@@ -1,5 +1,5 @@
 ---
-date: 2026-05-07
+date: 2026-04-07
 tags:
   - religion
 ---
