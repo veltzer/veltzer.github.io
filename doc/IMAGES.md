@@ -27,8 +27,9 @@ All media cover images are stored in `blog/images/` and copied to
 
 ## Uniform Display
 
-All card images use `height: 200px; object-fit: cover` (in `media.css`)
-to maintain consistent card heights regardless of original image dimensions.
+Card images are sized with `object-fit: cover` (card styles live in
+`blog/shared.css`) to maintain consistent card heights regardless of
+original image dimensions.
 
 ## Caches
 

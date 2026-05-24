@@ -18,7 +18,7 @@
 
 ## Media Page
 
-- Extracted inline CSS to `media.css`
+- Extracted inline CSS to an external stylesheet (now `blog/shared.css`)
 - Lazy-load plugin scripts via `mediaPluginFiles` registry
 - Sort preferences saved per data type in localStorage
 - Created plugin development guide at `doc/PLUGIN_GUIDE.md`
@@ -62,7 +62,7 @@
 - Audible covers downloaded from `cover_url` in YAML
 - Audio course images from Great Courses CDN, Audible, or DuckDuckGo picker
 - Museum and podcast images via DuckDuckGo picker with tkinter GUI
-- Uniform card image height via `object-fit: cover` in `media.css`
+- Uniform card image height via `object-fit: cover` (now in `blog/shared.css`)
 - Image check script (`check_images.py`) runs before build
 - Reproducible gzip output (`-n` flag) in `copy_data.sh`
 

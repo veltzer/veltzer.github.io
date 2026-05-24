@@ -30,6 +30,13 @@ Mark Veltzer's personal website hosted on GitHub Pages at veltzer.org (CNAME). C
 - JavaScript: camelCase, ES9+, jshint-clean
 - Media plugins follow a consistent interface: `file`, `navTitle`, `title`, `subtitle`, `searchPlaceholder`, `searchFields`, `renderDetails`, `renderStats`
 
+## Style Sheets
+- All CSS lives in external files under `blog/` alongside the other static files — no separate `css/`/`assets/` directory.
+- `blog/custom.css` — MkDocs theme overrides only. It is wired into the site via `extra_css` in `mkdocs.yml`; do not add it to individual pages.
+- `blog/shared.css` — common UI styles (navigation, cards, stats) for the standalone app pages (`media_app.html`, `chess.html`, `calendar_app.html`, `board.html`, etc.). These pages link it directly, not through MkDocs.
+- Prefer external stylesheets over inline `<style>` blocks or `style=` attributes.
+- Do not add a CSS minification step — the MkDocs Material theme already minifies its own bundles, and the small custom files are left as-is by design (see `doc/DECISIONS.md`).
+
 ## Git Conventions
 - Branch: `master` (main)
 - Commits are often auto-generated with no message
