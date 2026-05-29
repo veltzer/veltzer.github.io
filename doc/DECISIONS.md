@@ -19,10 +19,41 @@ locally would add 1-2GB to the git repo and slow every build. The current
 approach is correct and intentional.
 
 ## Google Calendar API key is intentionally public
-The API key is restricted by HTTP referrer (`veltzer.github.io/*`) and
-limited to the Calendar API only. Google designed browser API keys to be
-public — the restrictions prevent misuse. The key is stored in `pass`
-and injected at build time via `keys.js.mako` template.
+The API key is restricted by HTTP referrer (`veltzer.github.io/*`, and the
+custom domain `veltzer.org/*`) and limited to the Calendar API only. Google
+designed browser API keys to be public — the restrictions prevent misuse.
+The key is stored in `pass` and injected at build time via `keys.js.mako`
+template.
+
+### Why not hide the key behind an edge proxy (Cloudflare Worker etc.)?
+The question was raised of moving the key server-side — e.g. a Cloudflare
+Worker (sometimes mis-remembered as a "CloudFront worker"; CloudFront is
+AWS's CDN, the edge-function product you'd want there is Lambda@Edge) that
+holds the key as a secret and proxies Calendar API requests so clients
+never see it. We decided **not** to do this. Reasoning:
+
+- **The key is already restricted**, so a copied key is useless to anyone:
+  Google rejects requests whose `Referer` is not one of our domains, and
+  the key can only touch the Calendar API (read-only access to *public*
+  calendars). It is not billing-bound. There is nothing to abuse.
+- **A proxy would hide the string but protect nothing extra.** It only
+  changes a cosmetic fact ("the key is readable in page source"), while
+  adding an always-on dependency that can break the calendar if it goes
+  down or is misconfigured.
+- **`CALENDAR_ID` is public regardless.** The iframe embed in
+  `calendar_google_embed.html` needs it client-side, and a public
+  calendar's ID is inherently exposed. A proxy cannot hide that.
+- **Not all consumers can even be proxied cleanly.** Of the three pages:
+  `calendar_list_view.html` does a direct `fetch` (proxyable);
+  `calendar_app.html` uses FullCalendar's `googleCalendarApiKey` option
+  which wants to talk to Google directly (would need rewiring to an
+  `events: function(){...}` callback); `calendar_google_embed.html` uses
+  no key at all.
+
+If the key were ever changed to a billing-bound or write-capable
+credential, this decision should be revisited — a proxy would then be
+warranted. As long as it stays a referrer-restricted, read-only Calendar
+browser key, the visible-in-source key is the correct, simplest design.
 
 ## MkDocs owns `docs/` — manual files go in `blog/`
 All static files (HTML, JS, CSS, images, data) live in `blog/` alongside
