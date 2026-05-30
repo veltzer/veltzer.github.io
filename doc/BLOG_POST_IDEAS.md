@@ -61,6 +61,7 @@ impressive one. Move items to "Done" (with the post slug) as they ship.
 ## Done
 
 Recently shipped, in this spirit:
+- The Engineers Pay for Everyone's Fantasies — `engineers_pay_for_everyones_fantasies.md`
 - The Two Kinds of Believers and the Hypocrisy of the Sophisticated — `two_kinds_of_believers.md`
 - Kant's Categorical Imperative Is a Misreading of Game Theory — `kant_misread_game_theory.md`
 - The Imagination of Science Dwarfs the Imagination of Fiction — `imagination_of_science_vs_fiction.md`
