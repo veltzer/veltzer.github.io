@@ -14,7 +14,7 @@ Why not `mkdocs serve`?
       trailing-slashes slightly differently than a plain static server.
 
 For QA we want the closest local approximation to GitHub Pages:
-  1. Run the full build (`scripts/build_docs.sh`) to produce `docs/`
+  1. Run the full build (`scripts/build_docs.py`) to produce `_site/`
      exactly as it will be deployed.
   2. Serve `docs/` with a dumb static server.
 
@@ -55,7 +55,7 @@ def read_site_dir():
 
 
 def build_docs():
-    subprocess.run([str(REPO_ROOT / "scripts" / "build_docs.sh")], check=True)
+    subprocess.run([str(REPO_ROOT / "scripts" / "build_docs.py")], check=True)
 
 
 def start_server(port, docs_dir):
@@ -133,7 +133,7 @@ def main():
     )
     parser.add_argument(
         "--no-build", action="store_true",
-        help="skip running scripts/build_docs.sh before serving",
+        help="skip running scripts/build_docs.py before serving",
     )
     args = parser.parse_args()
 

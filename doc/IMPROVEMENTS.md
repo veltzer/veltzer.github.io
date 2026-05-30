@@ -101,8 +101,8 @@
 
 - ~~**mkdocs-rss-plugin is not idempotent (non-deterministic builds).** — DONE.~~
   The plugin delegates timestamp generation to MkDocs' `get_build_datetime()`, which
-  honours `SOURCE_DATE_EPOCH`. `scripts/build_docs.sh` exports
-  `SOURCE_DATE_EPOCH=$(git log -1 --format=%ct)` before calling `mkdocs build`, so
+  honours `SOURCE_DATE_EPOCH`. `scripts/build_docs.py` sets
+  `SOURCE_DATE_EPOCH` from `git log -1 --format=%ct` before calling `mkdocs build`, so
   `<pubDate>` / `<lastBuildDate>` are pinned to the last git commit time and the feed
   is byte-for-byte stable across rebuilds as long as no new commits are made.
 

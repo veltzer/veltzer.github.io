@@ -2,11 +2,12 @@
 
 ## Build Scripts
 
-### `scripts/build_docs.sh`
-Full site build. Runs image check then `mkdocs build`. MkDocs reads
-from `blog/` and writes to `docs/`.
+### `scripts/build_docs.py`
+Full site build: sets `SOURCE_DATE_EPOCH` from the latest git commit (for
+reproducible RSS timestamps) and `PYTHONHASHSEED=0`, then runs `mkdocs build`.
+MkDocs reads from `blog/` and writes to `_site/`.
 
-### `scripts/copy_data.sh`
+### `scripts/copy_data.py`
 Copies YAML data and PGN files from `../data/` repo into `blog/data/`,
 converts YouTube CSV to YAML, and gzips everything. Uses `gzip -n` for
 reproducible output. Validates source files exist before copying.
@@ -62,16 +63,19 @@ and OMDB poster lookup with fallback.
 ### `scripts/check_images.py`
 Verifies every media item has a corresponding image in `blog/images/`.
 Checks movies, series, audible, audio courses, museums, and podcasts.
-Skips YouTube (uses external CDN thumbnails). Run automatically by
-`build_docs.sh` before `mkdocs build`.
+Skips YouTube (uses external CDN thumbnails). (Image check is currently
+commented out in `build_docs.py`; run manually as needed.)
 
 ## API Key Management
 
-### `scripts/manage_api_key.sh`
-Manages the Google Calendar API key. Commands: `show`, `restrict`,
-`create`, `delete`, `rotate`. Reads/writes key via `pass` at
-`cloud/gcp/calendar`. The `rotate` command creates a new key, waits
-for rebuild/deploy, then deletes the old one.
+### `scripts/manage_api_key.py`
+Manages a Google API key. Commands: `show`, `restrict`, `create`,
+`delete`, `rotate`. Reads/writes the key via `pass`. The `rotate` command
+creates a new key, waits for rebuild/deploy, then deletes the old one.
+Project-specific values are no longer hardcoded — they default to the
+calendar key (`--project-id veltzer-calendar-id`, `--pass-path
+cloud/gcp/calendar`, `--referrer veltzer.github.io/*`, etc.) and can be
+overridden via flags or the matching `API_KEY_*` environment variables.
 
 ## Scripts in `../data/` repo
 

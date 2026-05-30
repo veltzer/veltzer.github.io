@@ -14,7 +14,7 @@ Mark Veltzer's personal website hosted on GitHub Pages at veltzer.org (CNAME). C
 - `blog/posts/YYYY/MM/*.md` - Blog posts. Front matter requires `date:` (ISO) and optional `tags:`
 - `_site/` - Generated MkDocs output (gitignored, do not edit)
 - `config/` - rsconstruct config: `project.lua`, `personal.lua`, plus `eslint.config.js`
-- `scripts/` - Utility scripts (`build_docs.sh`, image fetchers, data importers, `serve.py` for local preview)
+- `scripts/` - Utility scripts (`build_docs.py`, image fetchers, data importers, `serve.py` for local preview)
 - `.rsconstruct/` - rsconstruct cache/state (gitignored content; the dir itself is checked in)
 - `.github/workflows/build.yml` - CI: installs rsconstruct, runs `rsconstruct build`, uploads pages artifact, deploys
 - `doc/` - Project notes / TODOs
@@ -23,7 +23,7 @@ Mark Veltzer's personal website hosted on GitHub Pages at veltzer.org (CNAME). C
 ## Build Commands
 - `rsconstruct build --verbose -j0` — Full build (this is what CI runs)
 - `rsconstruct status` — Show build status
-- `scripts/build_docs.sh` — Convenience wrapper for the docs build
+- `scripts/build_docs.py` — Convenience wrapper for the docs build
 - `scripts/serve.py` — Local preview server
 
 ## Coding Conventions

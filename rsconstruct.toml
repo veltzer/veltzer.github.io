@@ -20,7 +20,7 @@ dep_inputs = [
 ]
 
 [processor.explicit]
-command = "scripts/build_docs.sh"
+command = "scripts/build_docs.py"
 inputs = [
     "mkdocs.yml",
 ]

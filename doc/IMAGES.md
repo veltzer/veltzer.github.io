@@ -20,10 +20,10 @@ All media cover images are stored in `blog/images/` and copied to
 ## Adding Images for New Entries
 
 1. Add the entry to the YAML in `../data/`
-2. Run `scripts/copy_data.sh` to update `blog/data/`
+2. Run `scripts/copy_data.py` to update `blog/data/`
 3. Run the appropriate fetch script (see `doc/SCRIPTS.md`)
 4. Run `scripts/check_images.py` to verify all images are present
-5. Run `scripts/build_docs.sh` to build the site
+5. Run `scripts/build_docs.py` to build the site
 
 ## Uniform Display
 
@@ -74,7 +74,7 @@ increases clone size and slows operations. Several alternatives exist:
 ### Separate Data Repository (current pattern for YAML/PGN)
 
 - Keep images in a dedicated repo or storage location outside this repo.
-- Copy them in at build time via `scripts/build_docs.sh`, similar to how
+- Copy them in at build time via `scripts/build_docs.py`, similar to how
   `../data/` YAML files are handled today.
 - Keeps this repo lightweight while preserving the current build workflow.
 
