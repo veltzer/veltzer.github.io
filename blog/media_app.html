@@ -107,8 +107,10 @@
 
         // --- Derive sortFields/filters from unified fields registry ---
         // Each field entry: {field, label, type ('string'|'number'), value?, sortable?, filterable?,
-        //   filterType ('select'|'boolean'|'year'|'range'|'custom'), ranges?, extractValues?, match?}
+        //   filterType ('select'|'boolean'|'year'|'range'|'custom'), ranges?, extractValues?, match?,
+        //   defaultValue?}
         // Defaults: sortable=true, filterable=true, filterType='select'
+        // defaultValue preselects that option instead of 'All' on load.
         function deriveFieldsConfig(plugin) {
             if (!plugin.fields) return;
             if (!plugin.sortFields) {
@@ -129,6 +131,7 @@
                         if (f.ranges) ff.ranges = f.ranges;
                         if (f.extractValues) ff.extractValues = f.extractValues;
                         if (f.match) ff.match = f.match;
+                        if (f.defaultValue) ff.defaultValue = f.defaultValue;
                         return ff;
                     });
             }
@@ -292,6 +295,15 @@
                         opt.textContent = val;
                         select.appendChild(opt);
                     });
+
+                    // Preselect a default option (and seed activeFilters so the very
+                    // first render is filtered too, not just subsequent changes).
+                    if (filter.defaultValue && values.indexOf(filter.defaultValue) !== -1) {
+                        select.value = filter.defaultValue;
+                        activeFilters[filter.field] = {
+                            value: filter.defaultValue, type: filter.type, valueFn: filter.value
+                        };
+                    }
 
                     select.addEventListener('change', function() {
                         if (select.value) {
@@ -595,7 +607,7 @@
                     }
                     const data = jsyaml.load(yamlText);
                     // Rename 'title' to 'name' for consistency if it exists
-                    allItems = (data.items || []).filter(item => item.status !== 'missing').map(item => {
+                    allItems = (data.items || []).map(item => {
                         if (item.title && typeof item.name === 'undefined') {
                             item.name = item.title;
                         }

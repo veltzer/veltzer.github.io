@@ -57,7 +57,16 @@ def main():
             if not item.get("title"):
                 continue
             if item["title"] == "METADATA_NOT_FOUND":
+                # No metadata was fetched for this video, so the row carries
+                # nothing but the id. Keep it and rebuild the watch URL so the
+                # viewer can still link out and show a thumbnail.
+                video_id = row.get("video_id", "")
+                if not video_id:
+                    continue
                 item["status"] = "missing"
+                item["title"] = "Metadata unavailable"
+                item["video_id"] = video_id
+                item["webpage_url"] = f"https://www.youtube.com/watch?v={video_id}"
             items.append(item)
 
     data = {"items": items}

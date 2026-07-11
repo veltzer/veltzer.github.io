@@ -30,7 +30,13 @@ window.mediaPlugins['youtube'] = {
                 {label: '1M+', min: 1000000, max: null}
             ]
         },
-        {field: 'categories', label: 'Category', type: 'string', filterType: 'select'}
+        {field: 'categories', label: 'Category', type: 'string', filterType: 'select'},
+        // Videos whose metadata could not be fetched are hidden unless asked for:
+        // there are thousands of them and they all render the same placeholder card.
+        {field: 'status', label: 'Metadata', type: 'string', sortable: false,
+            filterType: 'select', defaultValue: 'Available',
+            value: function(item) { return item.status === 'missing' ? 'Unavailable' : 'Available'; }
+        }
     ],
     defaultSort: {field: 'title', order: 'asc'},
     toggleFields: [
@@ -42,13 +48,19 @@ window.mediaPlugins['youtube'] = {
         {key: 'link', label: 'YouTube Link', default: true}
     ],
     renderImage: function(item) {
-        if (!item.webpage_url) return '';
-        const match = item.webpage_url.match(/[?&]v=([^&]+)/);
-        if (!match) return '';
-        return 'https://i.ytimg.com/vi/' + encodeURIComponent(match[1]) + '/mqdefault.jpg';
+        let videoId = item.video_id;
+        if (!videoId && item.webpage_url) {
+            const match = item.webpage_url.match(/[?&]v=([^&]+)/);
+            if (match) videoId = match[1];
+        }
+        if (!videoId) return '';
+        return 'https://i.ytimg.com/vi/' + encodeURIComponent(videoId) + '/mqdefault.jpg';
     },
     renderDetails: function(item) {
         let html = '';
+        if (item.status === 'missing') {
+            html += '<li class="py-2 text-gray-500"><em>Metadata unavailable &mdash; the video is deleted, private, or region-blocked.</em></li>';
+        }
         if (item.channel) {
             html += '<li class="py-2" data-toggle="channel"><strong>Channel:</strong> ' + window.escapeHtml(item.channel) + '</li>';
         }
@@ -78,8 +90,12 @@ window.mediaPlugins['youtube'] = {
         const categoryCounts = {};
         const yearCounts = {};
         let totalDuration = 0;
+        let missingCount = 0;
 
         items.forEach(function(item) {
+            if (item.status === 'missing') {
+                missingCount++;
+            }
             if (item.channel) {
                 channelCounts[item.channel] = (channelCounts[item.channel] || 0) + 1;
             }
@@ -98,10 +114,11 @@ window.mediaPlugins['youtube'] = {
 
         const totalHours = Math.round(totalDuration / 3600);
 
-        let html = '<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">';
+        let html = '<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">';
         html += '<div>' + renderStatCard(items.length, 'Total Videos') + '</div>';
         html += '<div>' + renderStatCard(Object.keys(channelCounts).length, 'Unique Channels') + '</div>';
         html += '<div>' + renderStatCard(totalHours.toLocaleString() + 'h', 'Total Watch Time') + '</div>';
+        html += '<div>' + renderStatCard(missingCount, 'Metadata Unavailable') + '</div>';
         html += '</div>';
         html += renderBarChart('Categories', categoryCounts, {unit: 'videos', sort: 'desc'});
         html += renderBarChart('Top 20 Channels', channelCounts, {unit: 'videos', sort: 'desc', limit: 20});
