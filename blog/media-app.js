@@ -77,7 +77,18 @@
         }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
+    // This script is loaded at the end of <body>, so DOMContentLoaded may have
+    // already fired by the time we get here (a cached/inline-fast load). In that
+    // case addEventListener would never fire and the app would never boot.
+    function onReady(fn) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', fn);
+        } else {
+            fn();
+        }
+    }
+
+    onReady(() => {
         const itemsContainer = document.getElementById('items-container');
         const searchContainer = document.getElementById('search-container');
         const searchInput = document.getElementById('search-input');
@@ -179,7 +190,7 @@
             const fields = activeConfig.sortFields || [];
             const defaultSort = activeConfig.defaultSort || {field: 'name', order: 'asc'};
             const urlParams = new URLSearchParams(window.location.search);
-            const dataType = urlParams.get('data') || Object.keys(dataSources)[0];
+            const dataType = urlParams.get('data') || Object.keys(getDataSources())[0];
             const savedPref = loadSortPref(dataType);
             sortFieldSelect.innerHTML = '';
             fields.forEach(function(sf) {
@@ -388,7 +399,7 @@
             togglesContainer.style.display = 'flex';
 
             var urlParams = new URLSearchParams(window.location.search);
-            var dataType = urlParams.get('data') || Object.keys(dataSources)[0];
+            var dataType = urlParams.get('data') || Object.keys(getDataSources())[0];
             var saved = loadTogglePref(dataType);
 
             fields.forEach(function(tf) {
@@ -429,12 +440,21 @@
         });
 
         // --- Master Configuration Object (populated by plugins) ---
-        const dataSources = window.mediaPlugins || {};
+        // Read through to window.mediaPlugins on every access rather than
+        // snapshotting it: each plugin script begins with
+        //   window.mediaPlugins = window.mediaPlugins || {};
+        // so a plugin that lands before this line would leave us holding a
+        // stale, empty object -- loadData() would then bail on its
+        // !activeConfig guard and the nav (including the statistics button)
+        // would never render.
+        function getDataSources() {
+            return window.mediaPlugins || {};
+        }
 
         // --- Dynamically Generate Navigation ---
         function generateNav(activeDataType, showStatsOnly) {
             mainNav.innerHTML = ''; // Clear existing nav
-            for (const [key, config] of Object.entries(dataSources)) {
+            for (const [key, config] of Object.entries(getDataSources())) {
                 const navLink = document.createElement('a');
                 navLink.href = '?data=' + key;
                 navLink.textContent = config.navTitle;
@@ -490,9 +510,9 @@
         // --- Fetch and Parse YAML Data ---
         async function loadData() {
             const urlParams = new URLSearchParams(window.location.search);
-            const dataType = urlParams.get('data') || Object.keys(dataSources)[0];
+            const dataType = urlParams.get('data') || Object.keys(getDataSources())[0];
             const showStatsOnly = urlParams.get('stats') === 'true';
-            activeConfig = dataSources[dataType];
+            activeConfig = getDataSources()[dataType];
             if (activeConfig) deriveFieldsConfig(activeConfig);
 
             if (!activeConfig) {
@@ -690,7 +710,7 @@
         // --- Handle Sort Changes ---
         function getCurrentDataType() {
             const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('data') || Object.keys(dataSources)[0];
+            return urlParams.get('data') || Object.keys(getDataSources())[0];
         }
 
         sortFieldSelect.addEventListener('change', function() {
