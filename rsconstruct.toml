@@ -14,6 +14,7 @@ args = ["-c", "config/eslint.config.js"]
 src_dirs = ["blog"]
 
 [processor.tera]
+src_dirs = ["tera.templates"]
 dep_inputs = [
     "config/project.lua",
     "config/personal.lua",
