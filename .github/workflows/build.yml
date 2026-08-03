@@ -31,8 +31,8 @@ jobs:
         GH_TOKEN: ${{ github.token }}
     - name: install
       run: |
-        rsconstruct tools install-deps --yes
-        rsconstruct tools install --yes
+        rsconstruct tools install-deps
+        rsconstruct tools install
     - name: build
       run: rsconstruct build --verbose -j0
     - name: status
