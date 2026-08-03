@@ -25,7 +25,19 @@ Plantinga then adds the part that matters to him: if God designed our faculties 
 
 That is the argument. It is more interesting than the version you meet on the internet, and it fails anyway.
 
-## Where It Goes Wrong: The Cost of Being Wrong
+## The Hidden Assumption: Truth or Survival, Pick One
+
+Before getting to the substance, notice the shape of the thing. The argument only works if reliability is all-or-nothing — if a brain is either a truth-detector or a survival device, and cannot be partly one and partly the other. Show that selection optimizes for fitness rather than truth, and the whole apparatus is condemned in a single stroke; every belief it produces falls together.
+
+That is a false dichotomy, and it is the load-bearing error. There is no reason a cognitive system must be uniform in its accuracy. The live possibilities are not two but many: a brain that tracks truth reliably in some domains and not in others; one that tracks it well under some conditions and badly under others; one whose accuracy varies with how quickly and how expensively being wrong is punished; one that is excellent at estimating the trajectory of a thrown rock and hopeless at estimating the trustworthiness of a stranger who shares its accent. Mixtures, gradients, and combinations — all of them are consistent with everything Plantinga establishes, and none of them yields a global defeater.
+
+And a mixture is exactly what we should expect, because selection is not a single pressure applied uniformly to a general-purpose truth organ. It is a large number of separate pressures acting on a large number of separate subsystems, each with its own history, its own cost structure, and its own error tolerance. Where accuracy is cheap and error is fatal, you get accuracy. Where accuracy is expensive and error is survivable — or where error is actively rewarded — you get something else. A patchwork is the predicted outcome, not an awkward concession.
+
+This matters because a global defeater and a local one lead to opposite conclusions. If the argument shows that every belief is equally suspect, then nothing can be sorted from anything and the position is indeed self-defeating — but it takes the apologist's beliefs down with it, since he is reasoning with the same equipment. If instead it shows that reliability varies by domain in ways we can identify, then it is not a defeater at all. It is a map: a way of knowing which of your beliefs to distrust, and how much, and why. The apologist needs the first reading. He is only entitled to the second. And the second is a research programme, not a refutation.
+
+So the honest question is not *is the brain reliable?* but *where is it reliable, where is it not, and what predicts the difference?* That question has answers. They come in two parts.
+
+## Where the Correlation Holds: The Cost of Being Wrong
 
 The Paul-and-the-tiger example is doing something dishonest, and it is worth being precise about what.
 
@@ -91,6 +103,6 @@ The naturalist, by contrast, has an explanation of why the faculties fail, a pre
 
 The apologist is right that evolved brains are not built for truth. He is right that we cannot simply trust our own reasoning. He is right that where fitness and accuracy diverge, our brains follow fitness.
 
-What he has not noticed is that he has described his own beliefs with considerable precision, and that the people he is arguing against worked all of this out some time ago and built an institution to compensate for it. The denial of evolution is itself a fine illustration: a belief held against overwhelming evidence, in tight correlation with group membership, defended with a fervor that tracks identity rather than data. It is the argument's own thesis, demonstrated live.
+What he needed, and never had, was the extra premise that fitness and accuracy diverge *everywhere* — that a brain shaped by selection must be uniformly unreliable rather than reliable in some places and not others. Without that premise there is no global defeater, only a patchwork to be surveyed. And what he has not noticed is that he has described his own beliefs with considerable precision, and that the people he is arguing against worked all of this out some time ago and built an institution to compensate for it. The denial of evolution is itself a fine illustration: a belief held against overwhelming evidence, in tight correlation with group membership, defended with a fervor that tracks identity rather than data. It is the argument's own thesis, demonstrated live.
 
 We do not claim our brains are reliable. We claim we have found a way to make progress despite their not being reliable. The name of that way is science, and its record is the only reason anyone is in a position to have this conversation at all.
