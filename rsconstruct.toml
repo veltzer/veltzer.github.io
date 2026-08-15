@@ -3,6 +3,13 @@ pip = [
   "mkdocs-material",
   "mkdocs-glightbox",
   "mkdocs-rss-plugin",
+  # Needed by the mypy/pytest processors below. CI installs only what is listed
+  # here -- it does not read requirements.txt -- so without these mypy reports
+  # missing stubs for yaml and a missing PIL, and the tests cannot import yaml.
+  "types-PyYAML",
+  "PyYAML",
+  "Pillow",
+  "pytest",
 ]
 
 [processor.eslint]
