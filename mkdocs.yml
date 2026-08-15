@@ -15,6 +15,22 @@ extra:
 docs_dir: "blog"
 site_dir: "_site"
 plugins:
+  # i18n must come first: it reconfigures the Material theme (lang,
+  # extra.alternate) and rewrites the file set that later plugins consume.
+  - i18n:
+      reconfigure_material: true
+      reconfigure_search: true
+      # Posts with no .he.md counterpart fall back to their English text rather
+      # than 404ing, so /he/ is usable while translation is incomplete.
+      fallback_to_default: true
+      languages:
+        - locale: en
+          name: English
+          build: true
+          default: true
+        - locale: he
+          name: עברית
+          build: true
   - search:
   - blog:
       blog_dir: .

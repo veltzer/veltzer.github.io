@@ -3,3 +3,47 @@
   display: none;
 }
 
+
+/*
+ * Hebrew (RTL) support.
+ *
+ * The i18n plugin builds /he/ with <html lang="he">, and Material sets
+ * dir="rtl" on <body> from its per-language direction. These rules cover the
+ * cases direction alone does not: content that stays LTR inside an RTL page.
+ *
+ * Scoped to [lang="he"] so the 78 English pages are untouched.
+ */
+[lang="he"] .md-typeset {
+  text-align: right;
+}
+
+/* Code, output and identifiers are LTR even in Hebrew prose: reversing them
+   would corrupt the meaning. */
+[lang="he"] .md-typeset code,
+[lang="he"] .md-typeset pre,
+[lang="he"] .md-typeset kbd,
+[lang="he"] .md-typeset samp {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: isolate;
+}
+
+/* Lists and blockquotes need their markers and rules moved to the right. */
+[lang="he"] .md-typeset ul,
+[lang="he"] .md-typeset ol {
+  margin-right: 1.25em;
+  margin-left: 0;
+}
+
+[lang="he"] .md-typeset blockquote {
+  border-left: none;
+  border-right: 0.2rem solid var(--md-default-fg-color--lighter);
+  padding-left: 0;
+  padding-right: 0.6rem;
+}
+
+/* Tables: headers and cells follow the text direction. */
+[lang="he"] .md-typeset table:not([class]) th,
+[lang="he"] .md-typeset table:not([class]) td {
+  text-align: right;
+}
