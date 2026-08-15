@@ -8,6 +8,8 @@ tags:
 
 # The Euthyphro Dilemma: Why Morality Cannot Come From God
 
+*Also available in Hebrew: [דילמת אותיפרון](../08/euthyphro_dilemma_he.md).*
+
 Religious people often claim that without God, there is no real morality — that good and evil require a divine lawgiver. This claim sounds intuitive but collapses under a 2,400-year-old question Plato put in the mouth of Socrates: *Is something good because God commands it, or does God command it because it is good?*
 
 This is the Euthyphro Dilemma. Both horns are fatal to the idea that morality requires God.
