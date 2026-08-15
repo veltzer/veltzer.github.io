@@ -156,7 +156,13 @@
 - ~~**`calendar_google_embed.html` iframe had no `title`.** — DONE.~~
   An unlabeled `<iframe>` is a WCAG failure — screen readers announce it with no name.
   Every other iframe in the project (`slides.md`, `syllabi.md`, `animations.md`) already
-  had one. Added `title="My public Google Calendar"` plus `loading="lazy"` to match those.
+  had one. Added `title="My public Google Calendar"`.
+
+  Note: `loading="lazy"` was NOT added, even though those three iframes use it. The
+  `tidy` in CI (older than a local 5.8.0) rejects `loading` as a proprietary attribute
+  and fails the build. Those three live in `.md` files, which `tidy` never processes —
+  only `.html` files do — so they get away with it. If `loading="lazy"` is wanted here,
+  the fix is a newer `tidy` in CI, not an exception in the workflow.
 
 ## Testing
 
