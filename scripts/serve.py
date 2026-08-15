@@ -36,6 +36,7 @@ import sys
 import tempfile
 import threading
 import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -80,8 +81,8 @@ def wait_for_server(url, timeout=10.0):
     deadline = time.time() + timeout
     while time.time() < deadline:
         try:
-            urllib.request.urlopen(url, timeout=0.5)
-            return True
+            with urllib.request.urlopen(url, timeout=0.5):
+                return True
         except (urllib.error.URLError, OSError):
             # The server is still coming up: connection refused, reset, timeout,
             # or a partial response all mean "not ready yet", so keep polling.

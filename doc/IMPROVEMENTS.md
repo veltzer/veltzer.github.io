@@ -228,9 +228,18 @@
 
 ## Testing
 
-- **Add unit tests for data import scripts.**
-  `csv_to_yaml.py` and `import_audible.py` transform data with zero test coverage.
-  A bug silently corrupts the media database. Add pytest tests for these at minimum.
+- ~~**Add unit tests for data import scripts.** — DONE.~~
+  Added `tests/` with 27 pytest cases covering `csv_to_yaml.py` and `import_audible.py`:
+  the YYYYMMDD -> ISO date rewrite, int/float coercion and what happens when it fails,
+  the `METADATA_NOT_FOUND` path, field filtering, and the `QuotedStr` asin handling that
+  keeps leading zeros surviving a YAML round trip. `tests/conftest.py` puts `scripts/` on
+  `sys.path` since those are standalone executables, not an installed package.
+
+  Wired into the build as `[processor.pytest]`, with `dep_inputs` naming the two scripts
+  so edits to them re-run the suite. Verified the tests actually catch regressions by
+  mutation testing: flipping the date format to DD-MM-YYYY failed
+  `test_converts_yyyymmdd_to_iso`, and dropping the `QuotedStr` wrapper failed both asin
+  tests. Both scripts were restored afterwards.
 
 ## Infrastructure
 
@@ -251,12 +260,25 @@
   uses a hardcoded inline PGN instead. This is intentional: the game collection is staged
   for a planned chess viewer that will display it. Leave it in place.
 
-- **Python linters are configured but never run.**
-  `.pylintrc` and `.mypy.ini` exist and cover the 16 scripts in `scripts/`, but
-  `rsconstruct.toml` declares no processor for either, so CI never enforces them.
-  Current state if run manually: mypy is clean; pylint is clean except 4 minor warnings
-  in `scripts/serve.py` (a dev-only script) — `unnecessary-lambda-assignment`,
-  `broad-exception-caught`, and two `consider-using-with`. Cheap to add and to keep green.
+- ~~**Python linters are configured but never run.** — DONE.~~
+  Added `[processor.pylint]` and `[processor.mypy]` over `scripts/`, so CI now enforces
+  what the config files always specified. Note mypy's `dep_auto` defaults to `mypy.ini`
+  while this project uses `.mypy.ini`, so the config is passed explicitly via `args` and
+  declared in `dep_inputs`.
+
+  Turning the checks on surfaced 4 real pylint findings in `scripts/serve.py`, all fixed
+  rather than suppressed wholesale: a lambda assigned to a variable became a `def`; a bare
+  `except Exception` while polling for server startup became
+  `except (urllib.error.URLError, OSError)` — which also exposed that `urllib.error` was
+  never imported, a latent `NameError` on that path; and `urlopen` in `wait_for_server`
+  now uses `with`, closing a response that was previously leaked on every poll. The two
+  remaining `consider-using-with` hits are false positives (the server and the browser
+  process are both meant to outlive their function and are cleaned up in `main`), so those
+  carry targeted `# pylint: disable` comments explaining why.
+
+  `.pylintrc` also gained the `init-hook` it had as a commented placeholder, so `tests/`
+  can be linted without false import errors. Verified `serve.py` still works end to end:
+  starts, serves a real page, and shuts down cleanly.
 
 - ~~**Dead `src_files` entry in `rsconstruct.toml`.** — DONE.~~
   `[processor.eslint]` listed `src_files = [".eslintrc.js"]`, a file that does not exist

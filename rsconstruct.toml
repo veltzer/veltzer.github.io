@@ -45,6 +45,16 @@ src_dirs = ["scripts"]
 args = ["--config-file=.mypy.ini"]
 dep_inputs = [".mypy.ini"]
 
+# Tests for the data import scripts. They transform ~29,000 records, so a silent
+# regression there corrupts the media database without failing the build.
+# dep_inputs lists the scripts under test so edits to them re-run the suite.
+[processor.pytest]
+src_dirs = ["tests"]
+dep_inputs = [
+    "scripts/csv_to_yaml.py",
+    "scripts/import_audible.py",
+]
+
 [analyzer.markdown]
 
 [analyzer.tera]
