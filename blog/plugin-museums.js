@@ -2,7 +2,7 @@
 window.mediaPlugins = window.mediaPlugins || {};
 
 window.mediaPlugins['museums'] = {
-    file: 'data/museums.yaml.gz',
+    file: 'data/museums.json.gz',
     navTitle: 'Museums',
     title: 'Visited Museums',
     subtitle: "A list of museums and exhibitions I've visited over the years.",

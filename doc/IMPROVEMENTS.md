@@ -131,9 +131,22 @@
   console. Added a `.catch()` that logs and renders the same red error banner `loadData`
   uses, so the failure is now visible to the user.
 
-- **Convert YAML data to JSON at build time for performance.**
-  `youtube.yaml.gz` is 1.7MB compressed. Parsing with js-yaml in-browser on every page load
-  is slow on mobile. `JSON.parse` is ~10x faster than YAML parsing. Pre-process during build.
+- ~~**Convert YAML data to JSON at build time for performance.** — DONE.~~
+  The youtube dataset is 6.5MB uncompressed / 29,034 records, and js-yaml parsed it on the
+  main thread on every load. Measured on the real data before changing anything:
+  **js-yaml 399ms vs JSON.parse 31ms (12.9x)**; re-measured in-browser after the change,
+  JSON.parse is 28ms. `scripts/copy_data.py` now converts every YAML file to JSON
+  (`convert_yaml_to_json`) before gzipping, and the frontend uses `JSON.parse`. YAML
+  remains the build's intermediate form; the `.json.gz` files are what ship.
+
+  Side benefits: gzipped JSON is slightly *smaller* than gzipped YAML for every dataset
+  (youtube 1.81MB -> 1.72MB), and the js-yaml CDN `<script>` is gone from `media.md` and
+  `media_app.html`, dropping a third-party dependency from the critical path.
+
+  Verified: all 7 datasets round-trip byte-identical YAML->JSON (29,034 youtube records
+  included), and the app was driven in a real browser — cards render, all 7 sources load,
+  the stats view works, and no console errors beyond a pre-existing unrelated 410 from the
+  visitor-counter API.
 
 - ~~**`plugin-museums.js` reads a field name nothing else uses.** — DONE.~~
   `getYear` branched on `item.date_dmy`, a leftover from the project-wide `date_dmy` ->

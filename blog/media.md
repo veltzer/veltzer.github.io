@@ -12,7 +12,6 @@ tailwind.config = {
     corePlugins: { preflight: false }
 };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js" integrity="sha384-+pxiN6T7yvpryuJmE1gM9PX7yQit15auDb+ZwwvJOd/4be2Cie5/IuVXgQb/S9du" crossorigin="anonymous"></script>
 
 <style>
 #media-root {

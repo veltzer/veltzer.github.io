@@ -2,7 +2,7 @@
 window.mediaPlugins = window.mediaPlugins || {};
 
 window.mediaPlugins['features'] = {
-    file: 'data/video_features.yaml.gz',
+    file: 'data/video_features.json.gz',
     navTitle: 'Movies',
     title: 'Watched Movies',
     subtitle: "A searchable list of movies I've watched.",

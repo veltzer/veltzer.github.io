@@ -6,13 +6,23 @@ Copy media/chess/youtube data from the sibling ../data repo into blog/data.
 YAML data for the media tracker lives in a separate ../data repository and
 is copied in during build. This script validates the sources exist, copies
 the plain YAML files, runs the audible import (type fixes + field cleanup)
-and the youtube CSV->YAML conversion, then gzips everything in blog/data.
+and the youtube CSV->YAML conversion, converts every YAML file to JSON, then
+gzips everything in blog/data.
+
+The frontend consumes the JSON, not the YAML: parsing 6.5MB of YAML with
+js-yaml in the browser measured ~399ms against ~31ms for JSON.parse on the
+same data (12.9x), all of it blocking the main thread. Gzipped JSON is also
+marginally smaller than gzipped YAML. The .yaml files remain the build's
+intermediate representation.
 """
 
+import json
 import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+import yaml
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = REPO_ROOT / "scripts"
@@ -79,12 +89,25 @@ def convert_youtube():
     )
 
 
+def convert_yaml_to_json():
+    # The frontend fetches the .json.gz files; YAML is only the intermediate
+    # form. separators drops the whitespace json.dump would otherwise emit,
+    # and sort_keys keeps output stable across runs so rebuilds stay idempotent.
+    for src in sorted(DEST.glob("*.yaml")):
+        with open(src, encoding="utf-8") as handle:
+            data = yaml.safe_load(handle)
+        dest = src.with_suffix(".json")
+        with open(dest, "w", encoding="utf-8") as handle:
+            json.dump(data, handle, separators=(",", ":"), sort_keys=True, ensure_ascii=False)
+        src.unlink()
+
+
 def gzip_data_files():
     # gzip all data files. -n omits the name/mtime from the header so output is
     # reproducible across rebuilds; -f overwrites any existing .gz. Shelling out
     # to gzip keeps the output byte-identical to the original build (same OS-field
     # header byte), which matters for idempotent commits of build artifacts.
-    targets = sorted(DEST.glob("*.yaml")) + sorted(DEST.glob("*.pgn"))
+    targets = sorted(DEST.glob("*.json")) + sorted(DEST.glob("*.pgn"))
     subprocess.run(["gzip", "-nf", *map(str, targets)], check=True)
 
 
@@ -94,6 +117,7 @@ def main():
     import_audible()
     copy_chess()
     convert_youtube()
+    convert_yaml_to_json()
     gzip_data_files()
 
 

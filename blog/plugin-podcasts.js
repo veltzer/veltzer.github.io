@@ -25,7 +25,7 @@ window.mediaPlugins = window.mediaPlugins || {};
     }
 
 window.mediaPlugins['podcasts'] = {
-    file: 'data/podcasts.yaml.gz',
+    file: 'data/podcasts.json.gz',
     navTitle: 'Podcasts',
     title: 'Listened Podcasts',
     subtitle: "A searchable list of podcasts I've listened to.",

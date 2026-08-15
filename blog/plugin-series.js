@@ -2,7 +2,7 @@
 window.mediaPlugins = window.mediaPlugins || {};
 
 window.mediaPlugins['videos'] = {
-    file: 'data/video_series.yaml.gz',
+    file: 'data/video_series.json.gz',
     navTitle: 'Video Series',
     title: 'Watched TV Series',
     subtitle: "A searchable list of TV series I've watched.",

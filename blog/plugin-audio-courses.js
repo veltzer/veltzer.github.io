@@ -7,7 +7,7 @@ window.mediaPlugins = window.mediaPlugins || {};
     }
 
 window.mediaPlugins['audio'] = {
-    file: 'data/audio_courses.yaml.gz',
+    file: 'data/audio_courses.json.gz',
     navTitle: 'Audio Courses',
     title: 'Listened to Audio Courses',
     subtitle: "A searchable list of audio courses I've listened to.",

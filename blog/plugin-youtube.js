@@ -2,7 +2,7 @@
 window.mediaPlugins = window.mediaPlugins || {};
 
 window.mediaPlugins['youtube'] = {
-    file: 'data/youtube.yaml.gz',
+    file: 'data/youtube.json.gz',
     navTitle: 'YouTube',
     title: 'Watched YouTube Videos',
     subtitle: "A searchable list of YouTube videos I've watched.",

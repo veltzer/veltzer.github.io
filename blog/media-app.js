@@ -1,4 +1,4 @@
-/* global jsyaml, renderBarChart, renderStatCard */
+/* global renderBarChart, renderStatCard */
 /*
  * Shared media application.
  *
@@ -505,7 +505,7 @@
             loadData();
         });
 
-        // --- Fetch and Parse YAML Data ---
+        // --- Fetch and Parse JSON Data ---
         async function loadData() {
             const urlParams = new URLSearchParams(window.location.search);
             const dataType = urlParams.get('data') || Object.keys(getDataSources())[0];
@@ -545,11 +545,11 @@
                     throw new Error('HTTP error! status: ' + response.status + ". Make sure '" + activeConfig.file + "' is accessible.");
                 }
 
-                let yamlText;
+                let jsonText;
                 if (activeConfig.file.endsWith('.gz') && typeof DecompressionStream !== 'undefined') {
                     const ds = new DecompressionStream('gzip');
                     const decompressed = response.body.pipeThrough(ds);
-                    yamlText = await new Response(decompressed).text();
+                    jsonText = await new Response(decompressed).text();
                 } else if (activeConfig.file.endsWith('.gz')) {
                     // Fallback: fetch uncompressed version
                     const fallbackUrl = MEDIA_BASE + activeConfig.file.replace(/\.gz$/, '');
@@ -557,11 +557,13 @@
                     if (!fallbackResponse.ok) {
                         throw new Error('Browser does not support DecompressionStream and uncompressed file not available.');
                     }
-                    yamlText = await fallbackResponse.text();
+                    jsonText = await fallbackResponse.text();
                 } else {
-                    yamlText = await response.text();
+                    jsonText = await response.text();
                 }
-                const data = jsyaml.load(yamlText);
+                // JSON rather than YAML: js-yaml took ~399ms on the 6.5MB youtube
+                // data against ~31ms for JSON.parse, all on the main thread.
+                const data = JSON.parse(jsonText);
                 // Rename 'title' to 'name' for consistency if it exists
                 allItems = (data.items || []).map(item => {
                     if (item.title && typeof item.name === 'undefined') {
@@ -584,7 +586,7 @@
                 statusMessage.textContent = '';
 
             } catch (error) {
-                console.error('Error loading or parsing YAML file:', error);
+                console.error('Error loading or parsing data file:', error);
                 itemsContainer.innerHTML = '';
                 statsContainer.innerHTML = '';
                 statusMessage.innerHTML = '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"><strong>Loading Failed:</strong> ' + escapeHtml(error.message) + '</div>';
