@@ -727,28 +727,48 @@
         });
 
         // --- Visitor Counter ---
-        function updateVisitorCount() {
-            const namespace = window.location.hostname || 'local-file-viewer';
-            const key = 'main-viewer-counter';
-            const apiUrl = 'https://api.counterapi.dev/v1/' + namespace + '/' + key + '/up';
+        // Disabled: this used counterapi.dev v1, which the service retired. It now
+        // returns 410 {"deprecated":true,...} for every request, so the counter showed
+        // "N/A" to every visitor and logged an error on every page load.
+        //
+        // v2 (https://docs.counterapi.dev/api/endpoints/v2/) needs an account: a
+        // workspace plus an API key sent as "Authorization: Bearer ...". A bearer token
+        // in client-side JS on a public static site is readable by anyone, so it would
+        // need to be a token that is safe to expose, the way the Calendar browser key is
+        // (see doc/DECISIONS.md).
+        //
+        // To re-enable, set COUNTER_ENDPOINT to a URL that returns JSON, and
+        // COUNTER_COUNT_FIELD to the field holding the number. Until then the counter
+        // line hides itself rather than displaying a permanent "N/A".
+        //
+        // doc/ANALYTICS.md lists alternatives (GoatCounter et al.) if the goal is
+        // site-wide analytics rather than a visible per-page count.
+        const COUNTER_ENDPOINT = null;
+        const COUNTER_COUNT_FIELD = 'count';
 
-            fetch(apiUrl)
+        function updateVisitorCount() {
+            const countElement = document.getElementById('visitor-count');
+            if (!countElement) return;
+
+            if (!COUNTER_ENDPOINT) {
+                // Hide the whole "Page Visits: ..." line, not just the number.
+                const line = countElement.closest('p') || countElement;
+                line.style.display = 'none';
+                return;
+            }
+
+            fetch(COUNTER_ENDPOINT)
             .then(function(response) {
                 if (!response.ok) throw new Error('Counter API error: ' + response.status);
                 return response.json();
             })
             .then(function(data) {
-                const countElement = document.getElementById('visitor-count');
-                if (countElement) {
-                    countElement.textContent = data.count;
-                }
+                countElement.textContent = data[COUNTER_COUNT_FIELD];
             })
             .catch(function(error) {
                 console.error('Error fetching visitor count:', error);
-                const countElement = document.getElementById('visitor-count');
-                if (countElement) {
-                    countElement.textContent = 'N/A';
-                }
+                const line = countElement.closest('p') || countElement;
+                line.style.display = 'none';
             });
         }
 

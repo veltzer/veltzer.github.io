@@ -192,6 +192,33 @@
   only `.html` files do — so they get away with it. If `loading="lazy"` is wanted here,
   the fix is a newer `tidy` in CI, not an exception in the workflow.
 
+## Visitor Counter
+
+- ~~**Visitor counter was permanently broken (counterapi.dev v1 retired).** — PARTIALLY DONE.~~
+  `media-app.js` called `https://api.counterapi.dev/v1/...`, which the service has
+  retired. It returns `410 {"deprecated":true,"message":"...migrate to v2"}` for every
+  request, so both media pages showed visitors a permanent `Page Visits: N/A` and logged
+  an error on every page load.
+
+  Fixed the user-visible half: the counter now hides its whole line instead of displaying
+  a broken "N/A", and no longer errors on load (verified in a browser — zero console
+  errors). The fetch/render wiring is intact behind two constants, `COUNTER_ENDPOINT`
+  (currently `null`) and `COUNTER_COUNT_FIELD`.
+
+  **Still needs a decision — this is why it is not fully DONE.** Restoring an actual count
+  requires an account nobody can create on your behalf:
+  - **counterapi.dev v2** — needs a workspace plus an API key sent as
+    `Authorization: Bearer ...`. On a public static site that token is readable by anyone,
+    so it has to be one that is safe to expose (like the Calendar browser key, see
+    `doc/DECISIONS.md`). Set `COUNTER_ENDPOINT` once the workspace exists.
+  - **A different counter service** with a no-auth endpoint — drop its URL into
+    `COUNTER_ENDPOINT` and the field name into `COUNTER_COUNT_FIELD`. Nothing else changes.
+  - **Site-wide analytics instead of a visible per-page number** — see `doc/ANALYTICS.md`,
+    which already recommends GoatCounter. This would not restore the on-page counter.
+  - **Drop the feature** — remove the `<p>Page Visits: ...</p>` line from `media.md` and
+    `media_app.html` and the `updateVisitorCount` function. Note `doc/problems.txt` lists
+    counting and displaying visitors as a goal, so this contradicts a stated want.
+
 ## Testing
 
 - **Add unit tests for data import scripts.**
