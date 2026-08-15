@@ -10,6 +10,10 @@ pip = [
   "PyYAML",
   "Pillow",
   "pytest",
+  # fetch_audiocourse_images.py parses og:image with BeautifulSoup; types-* gives
+  # mypy the stubs. Both are in requirements.txt, which CI does not read.
+  "beautifulsoup4",
+  "types-beautifulsoup4",
   # Pinned to match requirements.txt. Unpinned, CI resolves a newer pylint that
   # rejects .pylintrc's suggestion-mode option, so the build fails on a config
   # the local (pinned) pylint accepts.
