@@ -198,10 +198,23 @@
   Dead code — the `catch` only rethrew unchanged. Removed the wrapper; the `!response.ok`
   check and the caller's own error handling are unaffected.
 
-- **Add null guards in media plugins.**
-  Several plugins assume fields like `item.rating` or `item.date_utcz` always exist.
-  Missing fields cause rendering failures or `NaN` in stats.
-  Add defensive checks in `renderDetails` and `renderStats`.
+- **NOT A PROBLEM: absent `rating` on audio courses is meaningful, not missing data.**
+  This item warned that plugins assume `item.rating` always exists and would produce
+  `NaN` in stats. Investigated: neither half holds.
+
+  The 11 of 52 audio courses without a `rating` are **exactly** the 11 that have a
+  `progress` field (4/24, 3/36, 9/24, ...) — i.e. the ones not yet finished. All 41 rated
+  courses have no `progress` field. The correlation is perfect across all 52. Ratings are
+  assigned on completion, so an absent rating means "not yet rated", not lost data.
+
+  The frontend already handles it: `media-app.js` renders `item.rating || '?'`, so an
+  unfinished course shows "? / 10". And no plugin computes an average anywhere — no
+  `toFixed`, no `reduce`, no division by `items.length` — so the `NaN` this item warns
+  about cannot occur. Worth revisiting only if averages are ever added, at which point
+  unrated items must be excluded from the denominator rather than counted as zero.
+
+  Same for `date_utcz`: the museums plugin's two date shapes are handled by the
+  `museumDate()` helper (see the museum date entry above).
 
 - ~~**Standardize date format in museum data.** — DONE (fixed in the plugin, not the data).~~
   Filed as a code-simplification cleanup, but it was really two user-visible bugs. The 23
