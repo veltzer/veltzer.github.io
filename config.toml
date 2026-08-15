@@ -1,0 +1,52 @@
+base_url = "https://veltzer.org"
+title = "Mark Veltzer's personal site"
+description = "Mark Veltzer's personal website — blog, media tracker, calendar, and chess viewer"
+author = "Mark Veltzer"
+
+default_language = "en"
+compile_sass = true
+build_search_index = true
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+
+taxonomies = [
+    { name = "tags", feed = true, paginate_by = 20 },
+]
+
+# Hebrew. Posts opt in by filename: foo.he.md alongside foo.md. Zola serves
+# them under /he/ and exposes page.translations, which templates/page.html
+# turns into a language switcher -- no hand-maintained cross-links.
+[languages.he]
+title = "האתר האישי של מארק ולצר"
+generate_feeds = true
+build_search_index = false  # the default index is tuned for latin scripts
+taxonomies = [
+    { name = "tags", feed = true, paginate_by = 20 },
+]
+
+[markdown]
+smart_punctuation = false
+render_emoji = true
+
+# Fenced code blocks in the older sysadmin posts rely on highlighting.
+# Zola 0.23 moved this under its own table; `highlight_code` is gone.
+# Zola 0.23 switched to the `giallo` highlighter; the old syntect theme names
+# (base16-*, "Solarized (light)") no longer resolve. Dual themes so code blocks
+# follow the reader's colour scheme, matching the CSS.
+[markdown.highlighting]
+style = "inline"
+light_theme = "github-light"
+dark_theme = "github-dark"
+
+[extra]
+rss_url = "https://veltzer.org/atom.xml"
+nav = [
+    { name = "Blog", url = "/blog/" },
+    { name = "About", url = "/about/" },
+    { name = "Tags", url = "/tags/" },
+    { name = "Media", url = "/media/" },
+    { name = "Calendar", url = "/calendar/" },
+    { name = "Slides", url = "/slides/" },
+    { name = "Syllabi", url = "/syllabi/" },
+    { name = "Animations", url = "/animations/" },
+]
