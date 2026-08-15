@@ -5,9 +5,8 @@ fields that used to be strings, and empty optional fields that used to be
 emitted -- plus the asin quoting that keeps leading zeros from being eaten.
 """
 
-import yaml
-
 import import_audible
+import yaml
 
 
 class TestNumericConversion:

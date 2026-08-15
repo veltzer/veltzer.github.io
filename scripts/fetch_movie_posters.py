@@ -8,6 +8,7 @@ Requires pass entries: keys/themoviedb.org.read, keys/omdbapi.com.key
 """
 
 import argparse
+
 from poster_utils import fetch_posters
 
 YAML_PATH = "blog/data/video_features.yaml.gz"

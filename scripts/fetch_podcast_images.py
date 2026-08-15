@@ -15,7 +15,6 @@ import argparse
 import os
 
 import yaml
-
 from image_picker import pick_image
 
 IMAGE_DIR = "blog/images"

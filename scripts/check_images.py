@@ -35,7 +35,7 @@ def parse_yaml_entries(path, compressed=False):
     with opener(path, "rt", encoding="utf-8") as f:
         for line in f:
             s = line.strip()
-            if s.startswith("- name:") or s.startswith("- asin:") or s.startswith("- title:"):
+            if s.startswith(("- name:", "- asin:", "- title:")):
                 if current:
                     entries.append(current)
                 current = {}

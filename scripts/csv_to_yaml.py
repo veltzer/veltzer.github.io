@@ -8,7 +8,6 @@ import sys
 
 import yaml
 
-
 FIELDS = [
     "title",
     "channel",

@@ -25,9 +25,8 @@ def download(url, dest):
     """Download a URL to a file."""
     req = urllib.request.Request(url)
     req.add_header("User-Agent", "Mozilla/5.0")
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        with open(dest, "wb") as f:
-            f.write(resp.read())
+    with urllib.request.urlopen(req, timeout=15) as resp, open(dest, "wb") as f:
+        f.write(resp.read())
 
 
 def load_entries():
