@@ -15,22 +15,13 @@ extra:
 docs_dir: "blog"
 site_dir: "_site"
 plugins:
-  # i18n must come first: it reconfigures the Material theme (lang,
-  # extra.alternate) and rewrites the file set that later plugins consume.
-  - i18n:
-      reconfigure_material: true
-      reconfigure_search: true
-      # Posts with no .he.md counterpart fall back to their English text rather
-      # than 404ing, so /he/ is usable while translation is incomplete.
-      fallback_to_default: true
-      languages:
-        - locale: en
-          name: English
-          build: true
-          default: true
-        - locale: he
-          name: עברית
-          build: true
+  # NOTE: do not add mkdocs-static-i18n here. It is incompatible with the blog
+  # plugin below: blog generates its post, archive and pagination pages
+  # virtually at build time, and i18n cannot handle them -- it logs 34
+  # "Unhandled file case" warnings and the build emits ZERO post pages, silently
+  # dropping all 80 posts while still exiting 0. Verified with i18n placed both
+  # before and after blog; same result either way. Upstream issue:
+  # https://github.com/squidfunk/mkdocs-material/issues/4863
   - search:
   - blog:
       blog_dir: .
