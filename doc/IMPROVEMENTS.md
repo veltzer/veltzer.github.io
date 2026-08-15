@@ -62,11 +62,11 @@
   `mkdocs.yml` (social link) and `blog/index.md` line 5. Note `CLAUDE.md` currently
   documents the split as intentional; that note should be updated too.
 
-- **`blog/sitemap.xml` is dead weight.**
-  A hand-written 9-URL sitemap, 2 of whose URLs (`/media.html`, `/calendar.html`) do not
-  exist in the build. It is NOT breaking anything — MkDocs overwrites it and the live
-  site correctly serves the generated 105-URL sitemap — but it is misleading to keep a
-  stale hand-maintained copy that silently has no effect. Delete it.
+- ~~**`blog/sitemap.xml` is dead weight.** — DONE.~~
+  Was a hand-written 9-URL sitemap, 2 of whose URLs (`/media.html`, `/calendar.html`)
+  did not exist in the build. It never broke anything — MkDocs overwrites it — but it was
+  a stale hand-maintained copy with no effect. Deleted; the generated 105-URL sitemap is
+  unaffected (verified post-deletion).
 
 ## Security
 
@@ -102,46 +102,45 @@
 
 ## JavaScript
 
-- **Two media plugins are registered under keys they never use.**
-  `media-app.js` lines 21 and 26 register `'audio_courses'` and `'series'`, but the
-  plugin files register themselves under different names:
-  `plugin-audio-courses.js:9` -> `window.mediaPlugins['audio']`, and
-  `plugin-series.js:4` -> `window.mediaPlugins['videos']`. The other five keys match.
-  Two consequences: the already-loaded guard at `media-app.js:32` can never fire for
-  these two (so a repeat call would append duplicate `<script>` tags), and the URL
-  contract is split — `?data=audio` / `?data=videos` work while `?data=audio_courses` /
-  `?data=series` hit the "Invalid data type in URL" error banner.
+- ~~**Two media plugins are registered under keys they never use.** — DONE.~~
+  `media-app.js` registered `'audio_courses'` and `'series'` while the plugins register
+  themselves as `'audio'` and `'videos'`. Renamed the two registry keys to match the
+  plugins, since `getDataSources()` returns `window.mediaPlugins` — the plugin-side names
+  are what drive live `?data=...` URLs, so changing those instead would have broken
+  existing links. All seven keys now match (verified programmatically). Added a comment
+  above the registry recording the constraint.
 
-- **`loadAllPlugins().then(loadData)` has no `.catch()`.**
-  `media-app.js:756`. `loadAllPlugins` uses `Promise.all`, so a single plugin failing to
-  load rejects the whole chain and `loadData` never runs — the user gets a permanently
-  blank page with only an uncaught-rejection in the console. The careful error banner
-  inside `loadData` is unreachable in exactly the failure mode it was written for.
+- ~~**`loadAllPlugins().then(loadData)` has no `.catch()`.** — DONE.~~
+  `loadAllPlugins` uses `Promise.all`, so one failing plugin rejected the whole chain,
+  `loadData` never ran, and the page stayed blank with only an uncaught rejection in the
+  console. Added a `.catch()` that logs and renders the same red error banner `loadData`
+  uses, so the failure is now visible to the user.
 
 - **Convert YAML data to JSON at build time for performance.**
   `youtube.yaml.gz` is 1.7MB compressed. Parsing with js-yaml in-browser on every page load
   is slow on mobile. `JSON.parse` is ~10x faster than YAML parsing. Pre-process during build.
 
-- **`plugin-museums.js` reads a field name nothing else uses.**
-  Line 63 `getYear` branches on `item.date_dmy`, a name that appears nowhere else in the
-  codebase; line 41 `renderDetails` in the same file uses `item.date_ymd`. At most one is
-  right, so either the year bucketing in stats or the detail-line date silently drops
-  records. Note `date_dmy` was renamed to `date_ymd` project-wide in an earlier cleanup
-  (see the Medium Severity item above) — this looks like a missed occurrence.
+- ~~**`plugin-museums.js` reads a field name nothing else uses.** — DONE.~~
+  `getYear` branched on `item.date_dmy`, a leftover from the project-wide `date_dmy` ->
+  `date_ymd` rename recorded under Medium Severity above. The data has 14 `date_ymd`
+  records and zero `date_dmy`. Two bugs in one line: the field name, and the year index —
+  `date_ymd` is `YYYY-MM-DD`, so the year is `parts[0]`, not the `parts[2]` the old
+  `date_dmy` code used. Fixed both. The museums year chart counted 9 of 23 visits before;
+  it now counts all 23 (verified against the real data).
 
-- **Dead `formatDate` in `media-app.js`.**
-  Lines 128-131 define a private `formatDate` that is never called — the plugins each use
-  `mediaFormatDate` from `media-utils.js` instead. It also lacks that function's
-  `String()` coercion, so it would throw on a numeric `upload_date` if anyone wired it up.
+- ~~**Dead `formatDate` in `media-app.js`.** — DONE.~~
+  A private `formatDate` that was never called — the plugins all use `mediaFormatDate`
+  from `media-utils.js` instead. Removed.
 
-- **`calendar_list_view.html` double-fires `init()`.**
-  `init()` runs at load (lines 216-220) and a 5-minute `setInterval(init, ...)` is armed
-  at line 223; the `visibilitychange` handler (lines 225-233) then calls `init()` *and*
-  re-arms another interval on each return to visibility. Each `init()` is a live call
-  against the quota-limited Calendar API key.
+- ~~**`calendar_list_view.html` double-fires `init()`.** — DONE.~~
+  The `visibilitychange` handler called `init()` on every return to visibility, on top of
+  the interval already running — so briefly switching tabs fired an extra quota-limited
+  Calendar API call. Now tracks `lastFetch` and only refetches on return if a full
+  `REFRESH_MS` has actually elapsed.
 
-- **`calendar_list_view.html:126-135` has a `catch` that only rethrows.**
-  Dead code — remove the try/catch or make it do something.
+- ~~**`calendar_list_view.html:126-135` has a `catch` that only rethrows.** — DONE.~~
+  Dead code — the `catch` only rethrew unchanged. Removed the wrapper; the `!response.ok`
+  check and the caller's own error handling are unaffected.
 
 - **Add null guards in media plugins.**
   Several plugins assume fields like `item.rating` or `item.date_utcz` always exist.
@@ -151,6 +150,13 @@
 - **Standardize date format in museum data.**
   Museums plugin has `date_utcz` / `date_ymd` fallback logic.
   Standardize on one format in the YAML data to simplify the code.
+
+## Accessibility
+
+- ~~**`calendar_google_embed.html` iframe had no `title`.** — DONE.~~
+  An unlabeled `<iframe>` is a WCAG failure — screen readers announce it with no name.
+  Every other iframe in the project (`slides.md`, `syllabi.md`, `animations.md`) already
+  had one. Added `title="My public Google Calendar"` plus `loading="lazy"` to match those.
 
 ## Testing
 
@@ -184,11 +190,15 @@
   in `scripts/serve.py` (a dev-only script) — `unnecessary-lambda-assignment`,
   `broad-exception-caught`, and two `consider-using-with`. Cheap to add and to keep green.
 
-- **Dead entries in `rsconstruct.toml`.**
-  `[processor.shellcheck]` has `src_dirs = ["scripts"]`, but `scripts/` contains zero
-  `.sh` files, so it checks nothing (status table confirms: 0 files).
-  `[processor.eslint]` lists `src_files = [".eslintrc.js"]`, a file that does not exist
-  in the repo. Neither is harmful; both are misleading.
+- ~~**Dead `src_files` entry in `rsconstruct.toml`.** — DONE.~~
+  `[processor.eslint]` listed `src_files = [".eslintrc.js"]`, a file that does not exist
+  in the repo. Removed the line; eslint still checks all 10 JS files via `src_dirs`
+  (verified in the build output).
+
+- **NOT A PROBLEM: `[processor.shellcheck]` currently checks zero files.**
+  `src_dirs = ["scripts"]` but `scripts/` holds only `.py` files, so the status table
+  shows 0. Deliberately left in place — it is a check waiting for its inputs, and
+  removing it would silently drop shellcheck coverage the moment a `.sh` file is added.
 
 - **`blog/data/` is stale relative to the source repo.**
   The copies were last refreshed 2026-07-11; the upstream `../data` repo has commits
@@ -209,11 +219,11 @@
   - `exodus_history_vs_myth.md` and `archaeology_of_the_conquest.md` both argue for
     indigenous emergence in Canaan.
 
-- **Dangling forward reference with the wrong tense.**
-  `geography_of_belief.md` line 31 contains a full `## The Outsider Test` section that
-  re-argues all of `outsider_test_for_faith.md`, and line 35 says "(We'll cover this
-  point in more depth in a separate post.)" — but that post published 2026-04-12, three
-  weeks *before* this one (2026-05-03). Fix the tense and add a link.
+- ~~**Dangling forward reference with the wrong tense.** — DONE.~~
+  `geography_of_belief.md` said "(We'll cover this point in more depth in a separate
+  post.)" about a post that had already published three weeks earlier. Changed to past
+  tense and linked to `../04/outsider_test_for_faith.md`. The underlying content overlap
+  between the two posts is still open — see the redundancy item above.
 
 - **The 3-tag convention was abandoned.**
   Every pre-2026 post and every 2026/03 post has exactly 3 tags. 33 of the 2026 religion
@@ -229,9 +239,9 @@
   10 posts share 2026-04-04, 7 share 2026-04-06, 3 share 2026-05-30. The blog plugin
   orders by date, so ties fall back to filename order rather than intended reading order.
 
-- **Minor: inconsistent capitalization between a post and its own sequel.**
-  `wordpress-and-unix-security.md` uses "Wordpress" in its H1; the part 2 post uses the
-  correct "WordPress".
+- ~~**Minor: inconsistent capitalization between a post and its own sequel.** — DONE.~~
+  `wordpress-and-unix-security.md` used "Wordpress" in its H1 while its own part 2 used
+  the correct "WordPress". Fixed the part 1 heading.
 
 - **Minor: the two Hebrew posts have RTL titles but no `lang`/`dir` metadata.**
   `hebrew_security_policy.md` and `hebrew_tyson_survival.md`. Also note `hebrew` is a

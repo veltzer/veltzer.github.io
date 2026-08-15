@@ -62,7 +62,7 @@ window.mediaPlugins['museums'] = {
 
         const getYear = (item) => {
             if (item.date_utcz) return item.date_utcz.substring(0, 4);
-            if (item.date_dmy) { const parts = item.date_dmy.split('-'); return parts.length === 3 ? parts[2] : null; }
+            if (item.date_ymd) { const parts = item.date_ymd.split('-'); return parts.length === 3 ? parts[0] : null; }
             return null;
         };
 

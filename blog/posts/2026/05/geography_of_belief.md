@@ -32,7 +32,7 @@ Instead, religious affiliation looks exactly like a *cultural inheritance* — l
 
 Apply to your own religion the test you already apply to others. You probably think Mormonism's golden plates are a fabrication, that Scientology's Xenu story is absurd, that Greek polytheism was made up. You think these things despite the existence of believers, scriptures, communities, and personal testimony of religious experience for each. You apply, correctly, a high standard of evidence and find them wanting.
 
-Now apply that same standard to whichever tradition you were born into. Would you, encountering it fresh as an adult from a different culture, find its claims any more credible than the ones you reject? The honest answer, for most people, is no. (We'll cover this point in more depth in a separate post.)
+Now apply that same standard to whichever tradition you were born into. Would you, encountering it fresh as an adult from a different culture, find its claims any more credible than the ones you reject? The honest answer, for most people, is no. (I covered this point in more depth in [a separate post](../04/outsider_test_for_faith.md).)
 
 ## What the Geography Tells Us
 

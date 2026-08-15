@@ -17,13 +17,16 @@
 
     // --- Plugin Registry ---
     // Maps plugin key to its script file. Scripts are loaded on demand.
+    // Keys MUST match the key each plugin registers itself under in
+    // window.mediaPlugins — getDataSources() returns that object, so those keys
+    // are what drive the ?data=... URLs and the load-once guard in loadPlugin.
     window.mediaPluginFiles = {
-        'audio_courses': MEDIA_BASE + 'plugin-audio-courses.js',
+        'audio': MEDIA_BASE + 'plugin-audio-courses.js',
         'audible': MEDIA_BASE + 'plugin-audible.js',
         'features': MEDIA_BASE + 'plugin-movies.js',
         'museums': MEDIA_BASE + 'plugin-museums.js',
         'podcasts': MEDIA_BASE + 'plugin-podcasts.js',
-        'series': MEDIA_BASE + 'plugin-series.js',
+        'videos': MEDIA_BASE + 'plugin-series.js',
         'youtube': MEDIA_BASE + 'plugin-youtube.js'
     };
     window.mediaPlugins = window.mediaPlugins || {};
@@ -124,11 +127,6 @@
             return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
         }
         window.escapeHtml = escapeHtml;
-
-        function formatDate(dateString) {
-            if (!dateString) return null;
-            return dateString.substring(0, 10);
-        }
 
         // --- Sort Functions ---
         function sortItems(items) {
@@ -753,7 +751,13 @@
         }
 
         // --- Initial Load ---
-        loadAllPlugins().then(loadData);
+        loadAllPlugins().then(loadData).catch(function(error) {
+            // Without this, a single failing plugin script rejects the Promise.all
+            // in loadAllPlugins, loadData never runs, and the page stays blank with
+            // nothing but an uncaught rejection in the console.
+            console.error('Error loading media plugins:', error);
+            statusMessage.innerHTML = '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"><strong>Loading Failed:</strong> ' + escapeHtml(error.message) + '</div>';
+        });
         updateVisitorCount();
     });
 }());

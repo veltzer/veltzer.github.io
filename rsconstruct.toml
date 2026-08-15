@@ -7,7 +7,6 @@ pip = [
 
 [processor.eslint]
 src_dirs = ["blog"]
-src_files = [".eslintrc.js"]
 args = ["-c", "config/eslint.config.js"]
 
 [processor.tidy]

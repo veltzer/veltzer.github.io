@@ -6,7 +6,7 @@ tags:
 date: 2010-06-26
 ---
 
-# Wordpress and UNIX security
+# WordPress and UNIX security
 
 Here is what I found the hard way. Sometime you want Wordpress to install plugins, themes and all and do not want to pass through an ssh or ftp connection in order to achieve this. Maybe you have your own machine and do not want to run or configure an ssh or ftp server (which is my situation). In that case you can choose to either install plugins and themes by hand (just unzip them to $WORDPRESS/wp-content/[plugins|themes]) or you can give wordpress permissions so it can do it for you. The disadvantage of giving Wordpress permissions is ofcourse security since any one hacking into your server could have write access to the wordpress files themselves. In order to avoid this you can keep all your wordpress files owned as root.root (maximum security) and only change permissions for the duration of the installation of the plugin or theme.
 

@@ -123,16 +123,12 @@
             const now = new Date().toISOString();
             const url = 'https://www.googleapis.com/calendar/v3/calendars/' + CALENDAR_ID + '/events?key=' + API_KEY + '&timeMin=' + now + '&maxResults=' + MAX_RESULTS + '&singleEvents=true&orderBy=startTime';
 
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error('HTTP error! status: ' + response.status);
-                }
-                const data = await response.json();
-                return data.items || [];
-            } catch (error) {
-                throw error;
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('HTTP error! status: ' + response.status);
             }
+            const data = await response.json();
+            return data.items || [];
         }
 
         // Display events
@@ -219,16 +215,29 @@
             init();
         }
 
-        // Refresh every 5 minutes, but only when tab is visible
-        var refreshInterval = setInterval(init, 5 * 60 * 1000);
+        // Refresh every 5 minutes, but only when tab is visible.
+        // lastFetch gates the on-return refresh so that briefly switching away and
+        // back does not fire an extra quota-limited Calendar API call on top of the
+        // interval that is already running.
+        var REFRESH_MS = 5 * 60 * 1000;
+        var lastFetch = Date.now();
+
+        function refresh() {
+            lastFetch = Date.now();
+            init();
+        }
+
+        var refreshInterval = setInterval(refresh, REFRESH_MS);
 
         document.addEventListener('visibilitychange', function() {
             if (document.hidden) {
                 clearInterval(refreshInterval);
                 refreshInterval = null;
             } else {
-                init();
-                refreshInterval = setInterval(init, 5 * 60 * 1000);
+                if (Date.now() - lastFetch >= REFRESH_MS) {
+                    refresh();
+                }
+                refreshInterval = setInterval(refresh, REFRESH_MS);
             }
         });
     </script>
