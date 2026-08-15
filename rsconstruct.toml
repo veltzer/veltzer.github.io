@@ -10,7 +10,15 @@ pip = [
   "PyYAML",
   "Pillow",
   "pytest",
+  # Pinned to match requirements.txt. Unpinned, CI resolves a newer pylint that
+  # rejects .pylintrc's suggestion-mode option, so the build fails on a config
+  # the local (pinned) pylint accepts.
+  "pylint==3.3.8",
 ]
+# image_picker.py and fetch_audiocourse_images.py import tkinter, which is a
+# system package rather than a pip one. Without it pylint reports import-error
+# for both on CI, where the runner image has no python3-tk.
+system = ["python3-tk"]
 
 [processor.eslint]
 src_dirs = ["blog"]
