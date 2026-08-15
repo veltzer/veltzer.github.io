@@ -175,9 +175,32 @@
   Missing fields cause rendering failures or `NaN` in stats.
   Add defensive checks in `renderDetails` and `renderStats`.
 
-- **Standardize date format in museum data.**
-  Museums plugin has `date_utcz` / `date_ymd` fallback logic.
-  Standardize on one format in the YAML data to simplify the code.
+- ~~**Standardize date format in museum data.** — DONE (fixed in the plugin, not the data).~~
+  Filed as a code-simplification cleanup, but it was really two user-visible bugs. The 23
+  museums split cleanly: 9 carry a full `date_utcz` timestamp, 14 carry a date-only
+  `date_ymd`, none carry both. `plugin-museums.js` registered the "Date Visited" field on
+  `date_utcz` alone, so for those 14 items:
+  - **The year filter hid three years entirely.** The dropdown was built only from
+    `date_utcz`, offering 2017/2016/2011/2006/1998 — 1999, 2008 and 2010 were absent, so
+    8 of the 23 museums (all of 2010) could not be filtered to at all. Those years *did*
+    appear in the stats chart, so the two views of the same data disagreed.
+  - **Sorting by Date Visited was broken.** The sort key was `undefined` for 14 of 23
+    items, producing visibly unordered output (2010, 2010, 2016, 2008, 2010, ...).
+
+  `renderDetails` already had its own fallback, which is why the date shown on each card
+  looked right and masked both bugs.
+
+  Fixed in the plugin rather than by migrating the data: a single `museumDate(item)`
+  helper returns `date_utcz || date_ymd`, and it now backs the detail line, the stats year
+  buckets, and the field's `value` function — which `deriveFieldsConfig` copies into both
+  the sort and filter configs, so one accessor fixes both paths. Both formats lead with
+  `YYYY-MM-DD`, so a string compare sorts correctly. This keeps the time-of-day
+  information that normalizing everything to `date_ymd` would have discarded.
+
+  Verified in a browser: the year filter now offers all 8 years, filtering on the
+  previously-unreachable 1999/2008/2010 returns 3/2/8 correctly-dated museums, sorting by
+  Date Visited is monotonic across all 23 cards, the stats chart still totals 23, and
+  there are no console errors.
 
 ## Accessibility
 

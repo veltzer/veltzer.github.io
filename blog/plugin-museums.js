@@ -1,6 +1,13 @@
 /* global renderBarChart, renderStatCard, mediaFormatDate */
 window.mediaPlugins = window.mediaPlugins || {};
 
+// Museum dates come in two shapes: date_utcz is a full ISO timestamp, date_ymd
+// is date-only. Both start YYYY-MM-DD, so one accessor serves the detail line,
+// the stats year buckets, and the filter/sort value function alike.
+function museumDate(item) {
+    return item.date_utcz || item.date_ymd || '';
+}
+
 window.mediaPlugins['museums'] = {
     file: 'data/museums.json.gz',
     navTitle: 'Museums',
@@ -13,7 +20,16 @@ window.mediaPlugins['museums'] = {
         {field: 'name', label: 'Name', type: 'string', filterable: false},
         {field: 'rating', label: 'Rating', type: 'number', filterType: 'select'},
         {field: 'city', label: 'City', type: 'string', filterType: 'select'},
-        {field: 'date_utcz', label: 'Date Visited', type: 'string', filterType: 'year'},
+        // Dates arrive in two shapes: 9 items carry a full date_utcz timestamp
+        // ("2017-05-27T14:33:21Z") and 14 carry a date-only date_ymd
+        // ("1999-09-14"). Reading date_utcz alone left those 14 out of the year
+        // filter (1999, 2008 and 2010 were missing from the dropdown entirely)
+        // and gave them no sort key, so sorting by Date Visited came out
+        // unordered. Both leading formats are ISO, so a string compare on
+        // whichever field exists sorts correctly and yields the right year.
+        {field: 'date_utcz', label: 'Date Visited', type: 'string', filterType: 'year',
+            value: museumDate
+        },
         {field: 'has_review', label: 'Has Review', type: 'string', sortable: false,
             filterType: 'boolean', value: function(item) { return item.review && item.review.trim() !== ''; }
         },
@@ -38,7 +54,7 @@ window.mediaPlugins['museums'] = {
     },
     renderDetails: function(item) {
         let html = '';
-        const date = item.date_utcz ? this.formatDate(item.date_utcz) : item.date_ymd;
+        const date = this.formatDate(museumDate(item));
         if (date) {
             html += '<li class="py-2" data-toggle="date"><strong>Date:</strong> ' + window.escapeHtml(date) + '</li>';
         }
@@ -61,9 +77,8 @@ window.mediaPlugins['museums'] = {
         const yearCounts = {};
 
         const getYear = (item) => {
-            if (item.date_utcz) return item.date_utcz.substring(0, 4);
-            if (item.date_ymd) { const parts = item.date_ymd.split('-'); return parts.length === 3 ? parts[0] : null; }
-            return null;
+            const raw = museumDate(item);
+            return /^\d{4}/.test(raw) ? raw.substring(0, 4) : null;
         };
 
         items.forEach(function(item) {
