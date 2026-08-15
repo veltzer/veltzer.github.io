@@ -15,10 +15,14 @@ pip = [
   # the local (pinned) pylint accepts.
   "pylint==3.3.8",
 ]
-# image_picker.py and fetch_audiocourse_images.py import tkinter, which is a
-# system package rather than a pip one. Without it pylint reports import-error
-# for both on CI, where the runner image has no python3-tk.
-system = ["python3-tk"]
+# No system = ["python3-tk"] here: it does not help. CI uses actions/setup-python,
+# which supplies its own interpreter that cannot see the distro's python3-tk, so
+# the package installs (rsconstruct even reports it satisfied) while `import
+# tkinter` still fails. tkinter and PIL are listed in .pylintrc ignored-modules
+# instead, alongside cv2 -- the same treatment the project already gives modules
+# that are not resolvable in every environment. image_picker.py and
+# fetch_audiocourse_images.py are interactive desktop tools that cannot run
+# headless on CI anyway; only their static analysis matters there.
 
 [processor.eslint]
 src_dirs = ["blog"]
