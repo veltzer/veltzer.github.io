@@ -81,9 +81,13 @@
 
 ## Security
 
-- **Restrict Google Calendar API key.**
-  `blog/keys.js` ships the API key to every visitor on the public site.
-  Restrict the key in the Google Cloud Console with an HTTP referrer restriction to `veltzer.github.io/*`.
+- ~~**Restrict Google Calendar API key.** — DONE (already in place).~~
+  `blog/keys.js` ships the API key to every visitor, which is by design for a browser
+  key (see `doc/DECISIONS.md`). The referrer restriction this item asked for is already
+  configured. Verified empirically against the live key: a request with no referrer, and
+  one from an unrelated domain, both return
+  `403 PERMISSION_DENIED "Requests from referer ... are blocked"`, while
+  `https://veltzer.org/` and `https://veltzer.github.io/` both succeed. Nothing to do.
 
 ## Python Code Quality
 
@@ -217,10 +221,12 @@
   shows 0. Deliberately left in place — it is a check waiting for its inputs, and
   removing it would silently drop shellcheck coverage the moment a `.sh` file is added.
 
-- **`blog/data/` is stale relative to the source repo.**
-  The copies were last refreshed 2026-07-11; the upstream `../data` repo has commits
-  through 2026-08-03. The five plain YAML files diff byte-identical, so any actual drift
-  is in the chess PGN / YouTube CSV sources. Worth a `copy_data.py` run to confirm.
+- ~~**`blog/data/` is stale relative to the source repo.** — NOT AN ISSUE.~~
+  Retracted. This was inferred from `../data` having commits through 2026-08-03 while the
+  copies date to 2026-07-11, but the inference was wrong: the actual source files are
+  OLDER than the copies (`all.list.csv` 2026-07-11 10:36, `games.pgn` 2025-09-20), and
+  the five plain YAML files diff byte-identical. The later commits in `../data` touched
+  files this site does not consume. `blog/data/` is current.
 
 ## Blog Content
 
