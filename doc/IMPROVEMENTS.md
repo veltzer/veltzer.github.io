@@ -215,6 +215,13 @@
     `COUNTER_ENDPOINT` and the field name into `COUNTER_COUNT_FIELD`. Nothing else changes.
   - **Site-wide analytics instead of a visible per-page number** — see `doc/ANALYTICS.md`,
     which already recommends GoatCounter. This would not restore the on-page counter.
+    Note Google cannot restore it either: GA4 can *record* visits client-side, but *reading*
+    the count back needs the GA4 Data API behind an OAuth/service-account credential that is
+    not safe to publish. Details and tested results are in the "Visible On-Page Visitor
+    Counter" section of `doc/ANALYTICS.md`.
+  - **A badge `<img>`** — the only no-signup option verified working from veltzer.org
+    (`dwyl/hits`, `visitor-badge.laobi.icu`). Not a `fetch()`, so it sidesteps the CORS wall
+    that rules out most free JSON counters; the tradeoff is a fixed-style image.
   - **Drop the feature** — remove the `<p>Page Visits: ...</p>` line from `media.md` and
     `media_app.html` and the `updateVisitorCount` function. Note `doc/problems.txt` lists
     counting and displaying visitors as a goal, so this contradicts a stated want.
