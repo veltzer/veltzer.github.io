@@ -46,21 +46,32 @@
 
 ## SEO / Domain
 
-- **Canonical URLs point at a domain that redirects away.** (highest impact)
-  `mkdocs.yml` sets `site_url: "https://veltzer.github.io"`, but `CNAME` serves the site
-  at `veltzer.org`. Verified live: `veltzer.org` emits
-  `<link rel="canonical" href="https://veltzer.github.io/">` on every page, while
-  `veltzer.github.io` returns `301 -> https://veltzer.org/`. So every page declares its
-  canonical to be a URL that immediately bounces back, which splits ranking off the real
-  domain. The same single `site_url` line also drives:
-  - all 105 `<loc>` entries in the generated `sitemap.xml`;
-  - every `<guid isPermaLink="true">` and item `<link>` in `feed_rss_created.xml` (if the
-    domain is ever changed, GUIDs churn and every post re-appears as new in readers);
-  - `blog/robots.txt` line 4, a cross-host `Sitemap:` reference that crawlers ignore.
+- ~~**Canonical URLs point at a domain that redirects away.** — DONE.~~
+  `mkdocs.yml` had `site_url: "https://veltzer.github.io"` while `CNAME` serves the site
+  at `veltzer.org`, so every page declared its canonical to be a URL that immediately
+  301s back — splitting ranking off the real domain. Set `site_url` to
+  `https://veltzer.org`, which fixed the canonical tags, all 105 sitemap `<loc>` entries,
+  and the RSS channel/`<guid>`/item links in one change. Also updated the hardcoded RSS
+  links (`mkdocs.yml` social, `blog/index.md`), the `Sitemap:` line in `blog/robots.txt`,
+  and the `og:url` in all 7 standalone HTML pages. Verified: zero `veltzer.github.io`
+  references remain anywhere in the built site, and the sitemap still has 105 URLs.
 
-  Fix is one line (`site_url: "https://veltzer.org"`) plus the hardcoded RSS links in
-  `mkdocs.yml` (social link) and `blog/index.md` line 5. Note `CLAUDE.md` currently
-  documents the split as intentional; that note should be updated too.
+  Two `og:url` values were also pointing at paths that do not exist — `media_app.html`
+  claimed `/media.html` and `calendar_app.html` claimed `/calendar.html`. The build
+  produces `media/` and `calendar/` directories, not those `.html` files. Both now point
+  at themselves.
+
+  **`veltzer.github.io` still works and is unaffected by this change.** The redirect is
+  enforced by GitHub Pages infrastructure from the repo's Pages `cname` setting
+  (confirmed via the API: `cname: veltzer.org`, `https_enforced: true`), not by anything
+  in the built output — note `_site/` contains no `CNAME` file at all and never has.
+  `site_url` only controls URL strings inside the generated HTML/XML. Verified after the
+  change: `https://veltzer.github.io/<any-path>` still returns 301 preserving the path,
+  and following it lands on a 200 at `veltzer.org`.
+
+  Note for anyone re-treading this: search engines need to re-crawl to move ranking
+  signals onto `veltzer.org`, and RSS readers keyed on the old `<guid>` values may show
+  existing posts once more as new. That one-time churn is the cost of the correction.
 
 - ~~**`blog/sitemap.xml` is dead weight.** — DONE.~~
   Was a hand-written 9-URL sitemap, 2 of whose URLs (`/media.html`, `/calendar.html`)

@@ -1,6 +1,6 @@
 ---
 site_name: "Mark Veltzer's personal site"
-site_url: "https://veltzer.github.io"
+site_url: "https://veltzer.org"
 site_description: "Mark Veltzer's personal website — blog, media tracker, calendar, and chess viewer"
 copyright: "Copyright &copy; 2026 Mark Veltzer"
 extra_css:
@@ -10,7 +10,7 @@ theme:
 extra:
   social:
     - icon: fontawesome/solid/square-rss
-      link: https://veltzer.github.io/feed_rss_created.xml
+      link: https://veltzer.org/feed_rss_created.xml
       name: RSS Feed
 docs_dir: "blog"
 site_dir: "_site"

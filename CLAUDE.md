@@ -50,4 +50,4 @@ Mark Veltzer's personal website hosted on GitHub Pages at veltzer.org (CNAME). C
 - YAML data for the media tracker lives in a separate `../data/` repository and is copied in during build.
 - Google Calendar API key is hardcoded in calendar code (known security TODO).
 - Site uses `.nojekyll` to bypass Jekyll processing on GitHub Pages.
-- Custom domain is `veltzer.org` (see `CNAME`); the canonical mkdocs `site_url` is still `veltzer.github.io`.
+- Custom domain is `veltzer.org` (see `CNAME`), and `site_url` in `mkdocs.yml` matches it. `veltzer.github.io` 301-redirects there. Keep every public URL (canonical tags, sitemap, RSS links, `og:url`, `robots.txt`) on `veltzer.org` — pointing them at the redirecting domain splits SEO ranking off the real site.
