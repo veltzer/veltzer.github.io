@@ -1,8 +1,8 @@
 [dependencies]
 pip = [
-  "mkdocs-material",
-  "mkdocs-glightbox",
-  "mkdocs-rss-plugin",
+  # No mkdocs packages: the site is built by zola, a single static binary
+  # installed in the workflow. What remains is only what the linters and tests
+  # need.
   # Needed by the mypy/pytest processors below. CI installs only what is listed
   # here -- it does not read requirements.txt -- so without these mypy reports
   # missing stubs for yaml and a missing PIL, and the tests cannot import yaml.
@@ -42,13 +42,19 @@ dep_inputs = [
     "config/personal.lua",
 ]
 
+# Zola build. scripts/build_site.py regenerates content/blog from blog/posts
+# first, so editing a post in the MkDocs tree still reaches the built site.
 [processor.explicit]
-command = "scripts/build_docs.py"
+command = "scripts/build_site.py"
 inputs = [
-    "mkdocs.yml",
+    "config.toml",
 ]
 input_globs = [
-    "blog/**/*",
+    "blog/posts/**/*",
+    "content/**/*",
+    "templates/**/*",
+    "sass/**/*",
+    "static/**/*",
 ]
 output_dirs = [ "_site" ]
 

@@ -400,6 +400,24 @@
   translation (no site-wide selector), or replacing/bypassing the `blog` plugin so post
   pages are real files — a much larger change to how the site is built.
 
+## Chess Viewer
+
+- **The chess viewer is broken in production (dead CDN).**
+  `chess.html` loads `https://unpkg.com/cm-chessboard@8.6.0/dist/cm-chessboard.js`,
+  which now returns **404 Not Found**. The page therefore throws
+  `ReferenceError: Chessboard is not defined` and renders no board at all — only the
+  game caption. Confirmed on the live site at `https://veltzer.org/chess.html`, so this
+  predates the Zola migration and is not caused by it.
+
+  Fixes, in rough order of robustness: vendor the library into `static/` so an upstream
+  removal cannot break the page again; pin a version that still exists on unpkg; or
+  switch to a different board library. Vendoring is the only option that makes the page
+  independent of a third party's retention policy.
+
+  Related: `doc/IMPROVEMENTS.md` already notes `blog/data/games.pgn.gz` is staged for a
+  planned chess viewer. Whatever replaces the CDN should probably read that file rather
+  than the hardcoded inline PGN currently in `chess.html`.
+
 ## Blog Content
 
 - **NOT A PROBLEM: overlap between posts.**
