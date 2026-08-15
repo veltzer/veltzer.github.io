@@ -4,6 +4,7 @@ tags:
   - game-theory
   - hebrew
 date: 2010-07-21
+lang: he
 ---
 
 # חוץ וביטחון: יותר ביצים משכל?

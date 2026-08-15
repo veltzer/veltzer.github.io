@@ -7,6 +7,9 @@ extra_css:
   - "custom.css"
 theme:
   name: "material"
+  # overrides/main.html adds per-post lang/dir so Hebrew posts render RTL
+  # without flipping the whole (mostly English) site. See doc/IMPROVEMENTS.md.
+  custom_dir: "overrides"
 extra:
   social:
     - icon: fontawesome/solid/square-rss

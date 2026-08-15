@@ -297,6 +297,37 @@
   the five plain YAML files diff byte-identical. The later commits in `../data` touched
   files this site does not consume. `blog/data/` is current.
 
+## Internationalization
+
+- **NOT A PROBLEM / DO NOT RETRY: `mkdocs-static-i18n` cannot be used on this site.**
+  Recorded because the failure is silent and expensive to rediscover. The plugin is the
+  standard way to get a Material language selector, `/he/` URLs and same-page switching,
+  and it was tried here on 2026-08-15 for a Hebrew translation of the blog.
+
+  It is incompatible with the `blog` plugin. `blog` generates its post, archive and
+  pagination pages *virtually* at build time; `mkdocs-static-i18n` rewrites the file set
+  before pages are built and cannot handle them. Result: 34 `Unhandled file case`
+  warnings and **zero post pages** — all 80 posts silently vanish.
+
+  The dangerous part is that **the build still exits 0**. CI goes green, `rsconstruct`
+  reports success, and the deployed site simply has no blog. It was caught only because
+  the output was checked directly.
+
+  Not a config or ordering mistake — verified with `i18n` placed both before and after
+  `blog`, identical failure both ways. Upstream issue:
+  https://github.com/squidfunk/mkdocs-material/issues/4863 . The `mkdocs-static-i18n`
+  project is documented as frozen (core MkDocs upstream unmaintained), so a fix is not
+  expected. A comment in `mkdocs.yml` says the same thing at the point of temptation.
+
+  Note the build cache will happily restore the broken output: `rsconstruct clean all` is
+  needed before rebuilding, or the empty blog keeps coming back and looks like the revert
+  failed.
+
+  If bilingual content is wanted, the options that work today are: Hebrew posts as their
+  own posts with per-post RTL and explicit cross-links between an original and its
+  translation (no site-wide selector), or replacing/bypassing the `blog` plugin so post
+  pages are real files — a much larger change to how the site is built.
+
 ## Blog Content
 
 - **NOT A PROBLEM: overlap between posts.**
@@ -327,6 +358,25 @@
   `wordpress-and-unix-security.md` used "Wordpress" in its H1 while its own part 2 used
   the correct "WordPress". Fixed the part 1 heading.
 
-- **Minor: the two Hebrew posts have RTL titles but no `lang`/`dir` metadata.**
-  `hebrew_security_policy.md` and `hebrew_tyson_survival.md`. Also note `hebrew` is a
-  language tag sitting in an otherwise topical tag vocabulary.
+- ~~**Minor: the two Hebrew posts have RTL titles but no `lang`/`dir` metadata.** — DONE.~~
+  Both posts rendered inside `<html lang="en">` with no `dir` anywhere, so Hebrew text was
+  laid out left-to-right: punctuation on the wrong side and mixed Hebrew/English lines in
+  the wrong order. Added `lang: he` to the front matter of both, plus
+  `overrides/partials/content.html`, which wraps a post's rendered body in
+  `<div lang="he" dir="rtl">` when the front matter asks for it. RTL rules in
+  `blog/custom.css` are scoped to `[lang="he"]`, so the other 78 posts are untouched and
+  site chrome stays LTR.
+
+  Two things worth knowing if this is ever revisited:
+  - The override targets `partials/content.html`, NOT `main.html`. Blog posts render via
+    `blog-post.html`, which defines its own `content` block, so a `main.html` override is
+    silently ignored -- it builds fine and does nothing. Forking `blog-post.html` would
+    work but means re-syncing 138 lines on every theme upgrade; the partial is 12 lines.
+  - `{% extends "blog-post.html" %}` from a same-named override recurses infinitely
+    (`RecursionError`), so extending the theme's own template by name is not an option.
+
+  Verified in a browser: Hebrew prose computes `direction: rtl` / `text-align: right`
+  while the header and `<body>` stay `ltr`; an English post has no wrapper and computes
+  `ltr`. Post count (80) and sitemap (105 URLs) unchanged.
+
+  Still open: `hebrew` remains a language tag in an otherwise topical tag vocabulary.
