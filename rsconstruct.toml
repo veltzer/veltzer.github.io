@@ -32,6 +32,19 @@ output_dirs = [ "_site" ]
 [processor.shellcheck]
 src_dirs = ["scripts"]
 
+# .pylintrc and .mypy.ini already existed but nothing ran them. Both pass clean,
+# so wiring them in keeps that true rather than letting it rot.
+[processor.pylint]
+src_dirs = ["scripts"]
+args = ["--rcfile=.pylintrc"]
+
+# dep_auto defaults to "mypy.ini"; this project's file is ".mypy.ini", so the
+# config has to be passed explicitly and declared as a dependency by hand.
+[processor.mypy]
+src_dirs = ["scripts"]
+args = ["--config-file=.mypy.ini"]
+dep_inputs = [".mypy.ini"]
+
 [analyzer.markdown]
 
 [analyzer.tera]

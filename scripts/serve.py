@@ -59,13 +59,17 @@ def build_docs():
 
 
 def start_server(port, docs_dir):
-    handler = lambda *a, **kw: http.server.SimpleHTTPRequestHandler(
-        *a, directory=str(docs_dir), **kw
-    )
+    def handler(*args, **kwargs):
+        return http.server.SimpleHTTPRequestHandler(
+            *args, directory=str(docs_dir), **kwargs
+        )
 
     class ReusableTCPServer(socketserver.TCPServer):
         allow_reuse_address = True
 
+    # Not a `with`: the server outlives this function by design and is closed in
+    # main()'s finally block (httpd.shutdown() / httpd.server_close()).
+    # pylint: disable=consider-using-with
     httpd = ReusableTCPServer(("127.0.0.1", port), handler)
     thread = threading.Thread(target=httpd.serve_forever, daemon=True)
     thread.start()
@@ -78,7 +82,9 @@ def wait_for_server(url, timeout=10.0):
         try:
             urllib.request.urlopen(url, timeout=0.5)
             return True
-        except Exception:
+        except (urllib.error.URLError, OSError):
+            # The server is still coming up: connection refused, reset, timeout,
+            # or a partial response all mean "not ready yet", so keep polling.
             time.sleep(0.2)
     return False
 
@@ -110,6 +116,9 @@ def launch_browser(url, anonymous):
     else:
         args = [path, url]
 
+    # Not a `with`: the browser is meant to outlive this function; main() decides
+    # whether to wait on it and cleans up the temp profile afterwards.
+    # pylint: disable=consider-using-with
     proc = subprocess.Popen(args)
     return proc, profile_dir
 
