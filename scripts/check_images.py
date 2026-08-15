@@ -20,47 +20,47 @@ Usage:
 """
 
 import gzip
+import logging
 import os
 import sys
+from pathlib import Path
 
-IMAGE_DIR = "blog/images"
-DATA_DIR = "../data/yaml"
+import yaml
+
+# Resolved from this file rather than the cwd, so the script works from
+# anywhere instead of only from the repo root.
+REPO_ROOT = Path(__file__).resolve().parent.parent
+IMAGE_DIR = REPO_ROOT / "blog" / "images"
+DATA_DIR = REPO_ROOT.parent / "data" / "yaml"
+
+logger = logging.getLogger(__name__)
 
 
 def parse_yaml_entries(path, compressed=False):
-    """Parse top-level entries from a YAML file. Returns list of dicts."""
-    entries = []
-    current: dict[str, str] | None = None
+    """Load the item list from a YAML file. Returns a list of dicts.
+
+    Uses yaml.safe_load rather than scanning lines: the previous hand-rolled
+    parser split on the first ":" and would mangle multi-line values, quoted
+    strings containing colons, and comments.
+    """
     opener = gzip.open if compressed else open
-    with opener(path, "rt", encoding="utf-8") as f:
-        for line in f:
-            s = line.strip()
-            if s.startswith(("- name:", "- asin:", "- title:")):
-                if current:
-                    entries.append(current)
-                current = {}
-            if current is not None and ":" in s:
-                key = s.lstrip("- ").split(":", 1)[0].strip()
-                val = s.split(":", 1)[1].strip().strip("'\"")
-                # Handle cover_url which has ":" in the value
-                if key == "cover_url":
-                    idx = line.find("cover_url:")
-                    val = line[idx + len("cover_url:"):].strip().strip("'\"")
-                current[key] = val
-    if current:
-        entries.append(current)
-    return entries
+    with opener(path, "rt", encoding="utf-8") as handle:
+        data = yaml.safe_load(handle)
+    if not data:
+        return []
+    items = data.get("items", data) if isinstance(data, dict) else data
+    return [item for item in items if isinstance(item, dict)]
 
 
 def check_movies():
     """Check movie images."""
-    entries = parse_yaml_entries(os.path.join(DATA_DIR, "video_features.yaml"))
+    entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "video_features.yaml"))
     errors = 0
     for entry in entries:
         imdb_id = entry.get("imdb_id")
         if not imdb_id:
             continue
-        path = os.path.join(IMAGE_DIR, f"movie-{imdb_id}.jpg")
+        path = os.path.join(str(IMAGE_DIR), f"movie-{imdb_id}.jpg")
         if not os.path.exists(path):
             print(f"  MISSING: {path} ({entry.get('name', '?')})")
             errors += 1
@@ -69,13 +69,13 @@ def check_movies():
 
 def check_series():
     """Check series images."""
-    entries = parse_yaml_entries(os.path.join(DATA_DIR, "video_series.yaml"))
+    entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "video_series.yaml"))
     errors = 0
     for entry in entries:
         imdb_id = entry.get("imdb_id")
         if not imdb_id:
             continue
-        path = os.path.join(IMAGE_DIR, f"series-{imdb_id}.jpg")
+        path = os.path.join(str(IMAGE_DIR), f"series-{imdb_id}.jpg")
         if not os.path.exists(path):
             print(f"  MISSING: {path} ({entry.get('name', '?')})")
             errors += 1
@@ -84,13 +84,13 @@ def check_series():
 
 def check_audible():
     """Check audible images."""
-    entries = parse_yaml_entries(os.path.join(DATA_DIR, "audible.yaml"))
+    entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "audible.yaml"))
     errors = 0
     for entry in entries:
         asin = entry.get("asin")
         if not asin:
             continue
-        path = os.path.join(IMAGE_DIR, f"audible-{asin}.jpg")
+        path = os.path.join(str(IMAGE_DIR), f"audible-{asin}.jpg")
         if not os.path.exists(path):
             print(f"  MISSING: {path} ({entry.get('title', '?')})")
             errors += 1
@@ -99,7 +99,7 @@ def check_audible():
 
 def check_audio_courses():
     """Check audio course images."""
-    entries = parse_yaml_entries(os.path.join(DATA_DIR, "audio_courses.yaml"))
+    entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "audio_courses.yaml"))
     errors = 0
     for entry in entries:
         gc_id = entry.get("great_courses_id")
@@ -107,11 +107,11 @@ def check_audio_courses():
         internal_id = entry.get("internal_id")
         name = entry.get("name", "?")
         if gc_id:
-            path = os.path.join(IMAGE_DIR, f"audiocourse-gc-{gc_id}.jpg")
+            path = os.path.join(str(IMAGE_DIR), f"audiocourse-gc-{gc_id}.jpg")
         elif asin:
-            path = os.path.join(IMAGE_DIR, f"audiocourse-audible-{asin}.jpg")
+            path = os.path.join(str(IMAGE_DIR), f"audiocourse-audible-{asin}.jpg")
         elif internal_id:
-            path = os.path.join(IMAGE_DIR, f"audiocourse-internal-{internal_id}.jpg")
+            path = os.path.join(str(IMAGE_DIR), f"audiocourse-internal-{internal_id}.jpg")
         else:
             print(f"  NO ID: {name}")
             errors += 1
@@ -124,7 +124,7 @@ def check_audio_courses():
 
 def check_museums():
     """Check museum images."""
-    entries = parse_yaml_entries(os.path.join(DATA_DIR, "museums.yaml"))
+    entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "museums.yaml"))
     errors = 0
     for entry in entries:
         internal_id = entry.get("internal_id")
@@ -132,7 +132,7 @@ def check_museums():
             print(f"  NO ID: {entry.get('name', '?')}")
             errors += 1
             continue
-        path = os.path.join(IMAGE_DIR, f"museum-{internal_id}.jpg")
+        path = os.path.join(str(IMAGE_DIR), f"museum-{internal_id}.jpg")
         if not os.path.exists(path):
             print(f"  MISSING: {path} ({entry.get('name', '?')})")
             errors += 1
@@ -141,13 +141,13 @@ def check_museums():
 
 def check_podcasts():
     """Check podcast images."""
-    entries = parse_yaml_entries(os.path.join(DATA_DIR, "podcasts.yaml"))
+    entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "podcasts.yaml"))
     # Only entries with internal_id are top-level podcasts (not chapters)
     podcast_entries = [e for e in entries if "internal_id" in e]
     errors = 0
     for entry in podcast_entries:
         internal_id = entry["internal_id"]
-        path = os.path.join(IMAGE_DIR, f"podcast-{internal_id}.jpg")
+        path = os.path.join(str(IMAGE_DIR), f"podcast-{internal_id}.jpg")
         if not os.path.exists(path):
             print(f"  MISSING: {path} ({entry.get('name', '?')})")
             errors += 1

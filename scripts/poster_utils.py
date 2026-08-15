@@ -11,6 +11,8 @@ import time
 import urllib.error
 import urllib.request
 
+import yaml
+
 TMDB_FIND_URL = "https://api.themoviedb.org/3/find/tt{imdb_id}?external_source=imdb_id"
 TMDB_IMAGE_URL = "https://image.tmdb.org/t/p/w300{poster_path}"
 OMDB_URL = "http://www.omdbapi.com/?i=tt{imdb_id}&apikey={api_key}"
@@ -28,16 +30,30 @@ def get_pass_entry(entry):
         sys.exit(1)
 
 
-def load_imdb_ids(yaml_path):
-    """Extract imdb_id values from a gzipped YAML file."""
+def load_imdb_ids(data_path):
+    """Extract imdb_id values from a gzipped JSON or YAML data file.
+
+    Parsed rather than line-scanned: the previous version matched a literal
+    "imdb_id:" prefix, which only worked for YAML and broke silently when the
+    build switched to shipping .json.gz. Both formats are handled here so the
+    poster scripts keep working across that change.
+    """
+    with gzip.open(data_path, "rt", encoding="utf-8") as handle:
+        text = handle.read()
+    if str(data_path).endswith(".json.gz"):
+        data = json.loads(text)
+    else:
+        data = yaml.safe_load(text)
+    if not data:
+        return []
+    items = data.get("items", data) if isinstance(data, dict) else data
     ids = []
-    with gzip.open(yaml_path, "rt") as f:
-        for line in f:
-            line = line.strip()
-            if line.startswith("imdb_id:"):
-                value = line.split(":", 1)[1].strip().strip("'\"")
-                if value:
-                    ids.append(value)
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        value = item.get("imdb_id")
+        if value:
+            ids.append(str(value))
     return ids
 
 

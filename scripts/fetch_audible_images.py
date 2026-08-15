@@ -16,9 +16,14 @@ import os
 import time
 import urllib.error
 import urllib.request
+from pathlib import Path
 
-IMAGE_DIR = "blog/images"
-YAML_PATH = "../data/yaml/audible.yaml"
+# Resolved from this file rather than the cwd, so the script works from anywhere
+# instead of only from the repo root.
+REPO_ROOT = Path(__file__).resolve().parent.parent
+
+IMAGE_DIR = str(REPO_ROOT / "blog" / "images")
+YAML_PATH = str(REPO_ROOT.parent / "data" / "yaml" / "audible.yaml")
 
 
 def download(url, dest):

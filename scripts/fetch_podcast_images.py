@@ -13,12 +13,17 @@ Usage:
 
 import argparse
 import os
+from pathlib import Path
 
 import yaml
 from image_picker import pick_image
 
-IMAGE_DIR = "blog/images"
-YAML_PATH = "../data/yaml/podcasts.yaml"
+# Resolved from this file rather than the cwd, so the script works from anywhere
+# instead of only from the repo root.
+REPO_ROOT = Path(__file__).resolve().parent.parent
+
+IMAGE_DIR = str(REPO_ROOT / "blog" / "images")
+YAML_PATH = str(REPO_ROOT.parent / "data" / "yaml" / "podcasts.yaml")
 
 
 def load_entries():

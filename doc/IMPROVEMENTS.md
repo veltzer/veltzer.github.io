@@ -96,29 +96,52 @@
 
 ## Python Code Quality
 
-- **Deduplicate image picker GUI in `fetch_audiocourse_images.py`.**
-  This script (387 lines) reimplements the tkinter image browser that already exists in `image_picker.py`.
-  Refactor to reuse `image_picker.pick_image()`.
+- ~~**Deduplicate image picker GUI in `fetch_audiocourse_images.py`.** — DONE.~~
+  Five duplicated functions removed (`_build_browser_ui`, `show_image_browser`,
+  `download_candidates`, `get_cache_dir_for`, `fetch_image_urls`); `handle_image_search`
+  now calls `image_picker.pick_image()`. The file went from 393 to ~200 lines. The copy
+  was also strictly worse than the shared version: it lacked the window-close and SIGINT
+  handlers, so quitting the picker left it hanging.
 
-- **Replace fragile YAML parsing in `check_images.py`.**
-  Uses a line-by-line state machine instead of `yaml.safe_load()` / gzip.
-  Will break on multi-line values, comments, or quoting changes. Use proper YAML parsing.
+- ~~**Replace fragile YAML parsing in `check_images.py`.** — DONE.~~
+  Now uses `yaml.safe_load`. Output is byte-identical to the previous version on the real
+  data (diffed against a captured baseline). The same hand-rolled pattern in
+  `fetch_audiocourse_images.load_entries` was replaced too, and there it was **actively
+  losing data**: it returned 51 of 52 courses, silently dropping *"Foundations of Western
+  Civilization II: A History of the Modern Western World"* because the colon in the title
+  broke the split. `poster_utils.load_imdb_ids` was likewise line-scanning for `imdb_id:`.
 
-- **Use BeautifulSoup instead of regex for HTML scraping.**
-  `fetch_audiocourse_images.py` extracts `og:image` via regex.
-  Use BeautifulSoup for resilience against page layout changes.
+- ~~**Use BeautifulSoup instead of regex for HTML scraping.** — DONE.~~
+  The regex required exactly one space and `property` before `content`. Verified against
+  the new parser: reversed attribute order, single-quoted attributes and extra attributes
+  all returned `None` under the regex and parse correctly now; identical on the canonical
+  case and still `None` when the tag is absent.
 
-- **Standardize logging across scripts.**
-  Scripts mix `print()`, `print(..., file=sys.stderr)`, and silent failures.
-  Add `logging.basicConfig()` at the top of each script for consistent output.
+- ~~**Standardize logging across scripts.** — PARTIALLY DONE.~~
+  `fetch_audiocourse_images.py` converted to `logging` with a bare `%(message)s` format
+  (it is an interactive tool read by a person, so level/timestamp prefixes would be
+  noise). `check_images.py` already used logging. The remaining `print`-based scripts
+  (`manage_api_key.py`, `poster_utils.py`, `image_picker.py`, `serve.py`, and the small
+  `copy_data.py` / `csv_to_yaml.py` / `import_audible.py` summaries) were left alone —
+  they are all short interactive tools where `print` is fine, and churning them would be
+  change for its own sake.
 
-- **Use script-relative paths instead of hardcoded relative paths.**
-  Scripts use paths like `../data/yaml/` or `blog/data/`, only working from specific directories.
-  Use `pathlib.Path(__file__).parent` to compute paths relative to the script location.
+- ~~**Use script-relative paths instead of hardcoded relative paths.** — DONE.~~
+  `check_images.py`, `fetch_audiocourse_images.py` and the five `fetch_*` scripts now
+  derive their paths from `Path(__file__).resolve().parent.parent`. Verified
+  `check_images.py` produces identical output when run from `/tmp`, which the old version
+  could not do at all.
 
-- **Split `fetch_audiocourse_images.py` into smaller pieces.**
-  Handles three different image sources (Great Courses CDN, Audible scraping, DuckDuckGo search)
-  in one 387-line file. Split into a strategy pattern or separate functions per source.
+  This also caught a live breakage: `fetch_movie_posters.py` and `fetch_series_posters.py`
+  still pointed at `blog/data/*.yaml.gz`, which stopped existing when the build switched
+  to shipping `.json.gz`. Both now point at the JSON, and `poster_utils.load_imdb_ids`
+  handles either format — confirmed extracting 65 and 70 IMDB ids from the real files.
+
+- ~~**Split `fetch_audiocourse_images.py` into smaller pieces.** — DONE (by deletion).~~
+  The file is now ~200 lines rather than 387, because the DuckDuckGo search and picker
+  half moved to `image_picker.py` where it already existed. What remains is one function
+  per source (`fetch_gc_image`, `fetch_audible_image`, `handle_image_search`), which was
+  the point of the proposed split — no strategy pattern needed at this size.
 
 ## JavaScript
 
