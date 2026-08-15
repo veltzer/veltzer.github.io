@@ -314,9 +314,17 @@
   `<pubDate>` / `<lastBuildDate>` are pinned to the last git commit time and the feed
   is byte-for-byte stable across rebuilds as long as no new commits are made.
 
-- **Use a persistent cache directory for image picker.**
-  `image_picker.py` caches downloaded images to `/tmp` (lost on reboot).
-  Use `~/.cache/veltzer-site/` or a project-local `.cache/` directory instead.
+- ~~**Use a persistent cache directory for image picker.** — DONE.~~
+  `SEARCH_CACHE_DIR` moved from `/tmp/image_picker_cache` to
+  `$XDG_CACHE_HOME/veltzer-site/image-picker`, falling back to `~/.cache` when the
+  variable is unset. Downloaded search candidates now survive a reboot, so re-running a
+  fetch script does not re-download images it already has.
+
+  Chose the XDG path over the repo-local `.cache/`: that directory belongs to the build
+  tooling, and these are user-level downloads rather than build artefacts.
+  `download_candidates` already calls `os.makedirs(..., exist_ok=True)`, which creates the
+  parents, so no extra setup was needed. Verified the directory is created, the cache-hit
+  path returns the cached files, and `XDG_CACHE_HOME` is honoured when set.
 
 - **NOT A PROBLEM: `blog/data/games.pgn.gz` is unreferenced by design.**
   Noting this so it does not get re-flagged by future audits. The file is 2.4 MB, is
