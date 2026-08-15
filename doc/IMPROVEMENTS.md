@@ -36,10 +36,15 @@
 - ~~**Audible: `series_title` / `series_sequence` are 95% empty.** — DONE.~~
   `import_audible.py` now omits these when empty.
 
-- **Cross-file naming inconsistency.**
-  Some files use `name` (podcasts, museums, video_features, video_series, audio_courses),
-  others use `title` (audible, youtube). Some use `url`, others `webpage_url` or `cover_url`.
-  Consider unifying to `title` everywhere for the primary name field.
+- **NOT A PROBLEM: cross-file naming inconsistency (`name` vs `title`).**
+  Some datasets use `name` (podcasts, museums, video_features, video_series,
+  audio_courses), others use `title` (audible, youtube). The frontend already handles it:
+  `media-app.js` copies `title` onto `name` at load time when `name` is absent, so
+  everything downstream sees one field. Verified across all seven datasets — 29,346 items,
+  every one resolves to a label, no gaps.
+
+  Not worth a coordinated data + plugin migration for a difference nothing can observe.
+  The `url` / `webpage_url` / `cover_url` variation is likewise handled per-plugin.
 
 - ~~**YouTube: `upload_date` uses `YYYYMMDD` format.** — DONE.~~
   `csv_to_yaml.py` now converts to `YYYY-MM-DD` and the frontend `formatDate` was simplified.
