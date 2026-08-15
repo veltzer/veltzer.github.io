@@ -3,7 +3,7 @@ tags:
   - probability
   - statistics
   - bayes
-date: 2026-04-04
+date: 2026-03-26
 ---
 
 # Why Known Liars Making a Claim Actually Reduces Its Probability: A Bayesian Explanation

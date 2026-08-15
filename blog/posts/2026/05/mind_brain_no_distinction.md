@@ -2,6 +2,8 @@
 date: 2026-05-07
 tags:
   - religion
+  - science
+  - neuroscience
 ---
 
 # The Mind Is the Brain, and Pretending Otherwise Is a Special Pleading

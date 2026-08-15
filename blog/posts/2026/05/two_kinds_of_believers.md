@@ -2,6 +2,7 @@
 date: 2026-05-30
 tags:
   - religion
+  - philosophy
 ---
 
 # The Two Kinds of Believers and the Hypocrisy of the Sophisticated

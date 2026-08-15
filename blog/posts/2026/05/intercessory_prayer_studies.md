@@ -2,6 +2,8 @@
 date: 2026-05-01
 tags:
   - religion
+  - science
+  - statistics
 ---
 
 # What the Prayer Studies Actually Found

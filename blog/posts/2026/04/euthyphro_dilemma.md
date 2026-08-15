@@ -2,6 +2,8 @@
 date: 2026-04-28
 tags:
   - religion
+  - philosophy
+  - ethics
 ---
 
 # The Euthyphro Dilemma: Why Morality Cannot Come From God

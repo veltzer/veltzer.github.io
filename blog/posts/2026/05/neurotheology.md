@@ -2,6 +2,8 @@
 date: 2026-05-02
 tags:
   - religion
+  - science
+  - neuroscience
 ---
 
 # Neurotheology: When God Is a Brain State

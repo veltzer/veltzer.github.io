@@ -2,6 +2,7 @@
 date: 2026-04-29
 tags:
   - religion
+  - philosophy
 ---
 
 # Omniscience vs. Free Will: The Contradiction at the Heart of Theism

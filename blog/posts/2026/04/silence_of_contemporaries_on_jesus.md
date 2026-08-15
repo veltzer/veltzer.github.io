@@ -1,7 +1,9 @@
 ---
-date: 2026-04-04
+date: 2026-04-19
 tags:
   - religion
+  - history
+  - bible
 ---
 
 # The Silence of Contemporaries on Jesus

@@ -2,6 +2,7 @@
 date: 2026-04-26
 tags:
   - religion
+  - philosophy
 ---
 
 # The Equivocation of "God": One Word, Many Gods

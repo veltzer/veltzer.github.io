@@ -391,7 +391,19 @@
   tense and linked to `../04/outsider_test_for_faith.md`. The underlying content overlap
   between the two posts is still open — see the redundancy item above.
 
-- **The 3-tag convention was abandoned.**
+- ~~**The 3-tag convention was abandoned.** — DONE.~~
+  All 33 single-tag posts (the entire 2026/04-05 religion sequence) now carry `religion`
+  plus 1-2 topical tags, restoring the convention every pre-2026 post follows. Grouped as:
+  history/textual criticism (`history`, `bible`, `archaeology`), philosophy of religion
+  (`philosophy`, `ethics`), epistemology (`epistemology`, `science`), science/evidence
+  (`science`, `neuroscience`, `statistics`) and culture (`culture`). Eight of the ten tags
+  already existed in the vocabulary; only `ethics` and `neuroscience` are new. Proposed to
+  and approved by the author before applying — the taxonomy is an editorial call.
+
+  `atheism` was deliberately left on its single post rather than spread across the ~40
+  posts arguing that position; that is a larger statement about self-labelling.
+
+  ~~Original entry:~~
   Every pre-2026 post and every 2026/03 post has exactly 3 tags. 33 of the 2026 religion
   posts have exactly one (`religion`), which makes the tag index near-useless for half
   the corpus. Related: 32 of the 64 distinct tags are used exactly once, so half the tag
@@ -401,7 +413,20 @@
   bucket next to `game-theory`; `bayes` / `probability` / `statistics` are three tags for
   one topic area.
 
-- **Same-day date collisions make ordering arbitrary.**
+- ~~**Same-day date collisions make ordering arbitrary.** — DONE for the 2026 clusters.~~
+  16 posts re-dated: the 10 sharing 2026-04-04 spread across 2026-03-26..2026-04-05 plus
+  04-19, the 6 sharing 2026-04-06 across 04-06 and 04-20..04-24, and 2 of the 3 sharing
+  2026-05-30 to 05-28/05-29. Free windows were checked first so no new collisions were
+  introduced. Four posts whose dates moved into March were `git mv`d into `2026/03/` to
+  keep the directory matching the front matter.
+
+  The author accepted the known cost: these are published URLs derived from `date:`, so
+  the moved posts get new URLs and may re-surface in RSS readers.
+
+  Four pre-2026 collisions remain (2 on 2010-06-11, 2 on 2010-06-19, 3 on 2010-07-21, 2
+  on 2025-09-01). Left alone — they are small, old, and not worth the URL churn.
+
+  ~~Original entry:~~
   10 posts share 2026-04-04, 7 share 2026-04-06, 3 share 2026-05-30. The blog plugin
   orders by date, so ties fall back to filename order rather than intended reading order.
 

@@ -2,6 +2,8 @@
 date: 2026-04-15
 tags:
   - religion
+  - ethics
+  - culture
 ---
 
 # The Ethical Problem with Religious Childhood Indoctrination

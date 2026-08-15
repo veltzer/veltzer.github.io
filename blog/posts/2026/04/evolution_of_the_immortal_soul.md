@@ -1,7 +1,9 @@
 ---
-date: 2026-04-04
+date: 2026-04-03
 tags:
   - religion
+  - history
+  - bible
 ---
 
 # The Evolution of the Immortal Soul

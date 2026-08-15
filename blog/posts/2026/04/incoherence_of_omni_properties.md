@@ -2,6 +2,7 @@
 date: 2026-04-30
 tags:
   - religion
+  - philosophy
 ---
 
 # The Incoherence of the Omni-Properties

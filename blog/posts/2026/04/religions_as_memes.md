@@ -2,6 +2,8 @@
 date: 2026-04-07
 tags:
   - religion
+  - culture
+  - science
 ---
 
 # Religions Behave Like Memes, Not Revelations

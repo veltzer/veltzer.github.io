@@ -2,6 +2,8 @@
 date: 2026-04-11
 tags:
   - religion
+  - epistemology
+  - science
 ---
 
 # Unfalsifiability Is Not a Strength

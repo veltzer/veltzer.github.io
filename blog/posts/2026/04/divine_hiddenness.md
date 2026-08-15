@@ -2,6 +2,7 @@
 date: 2026-04-27
 tags:
   - religion
+  - philosophy
 ---
 
 # Divine Hiddenness: The Argument from Reasonable Non-Belief

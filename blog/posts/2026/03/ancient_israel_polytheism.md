@@ -1,7 +1,9 @@
 ---
-date: 2026-04-04
+date: 2026-03-31
 tags:
   - religion
+  - history
+  - bible
 ---
 
 # From Many to One: The Polytheistic Roots of Ancient Israel

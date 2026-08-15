@@ -2,6 +2,8 @@
 date: 2026-05-05
 tags:
   - religion
+  - bible
+  - ethics
 ---
 
 # Moral Progress Happens Against Scripture, Not Because of It

@@ -2,6 +2,7 @@
 date: 2026-04-16
 tags:
   - religion
+  - philosophy
 ---
 
 # The Cosmological Argument Does Not Get You to God

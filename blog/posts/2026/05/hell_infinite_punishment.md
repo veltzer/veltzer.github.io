@@ -2,6 +2,8 @@
 date: 2026-05-04
 tags:
   - religion
+  - philosophy
+  - ethics
 ---
 
 # Hell: Infinite Punishment for Finite Crimes

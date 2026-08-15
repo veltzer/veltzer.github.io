@@ -2,6 +2,7 @@
 date: 2026-04-17
 tags:
   - religion
+  - epistemology
 ---
 
 # The Burden of Proof Is on the Claimant

@@ -2,6 +2,7 @@
 date: 2026-04-09
 tags:
   - religion
+  - epistemology
 ---
 
 # Why Did Revelation Stop?

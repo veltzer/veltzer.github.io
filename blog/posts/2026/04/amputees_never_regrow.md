@@ -2,6 +2,8 @@
 date: 2026-04-14
 tags:
   - religion
+  - science
+  - epistemology
 ---
 
 # Why Won't God Heal Amputees?

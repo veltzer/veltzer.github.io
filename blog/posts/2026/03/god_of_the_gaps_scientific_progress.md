@@ -1,7 +1,9 @@
 ---
-date: 2026-04-04
+date: 2026-03-30
 tags:
   - religion
+  - epistemology
+  - science
 ---
 
 # The "God of the Gaps" and Scientific Progress

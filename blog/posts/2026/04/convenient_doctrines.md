@@ -2,6 +2,7 @@
 date: 2026-04-08
 tags:
   - religion
+  - epistemology
 ---
 
 # The Suspicious Convenience of Religious Doctrine

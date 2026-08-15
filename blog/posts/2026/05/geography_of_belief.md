@@ -2,6 +2,8 @@
 date: 2026-05-03
 tags:
   - religion
+  - culture
+  - statistics
 ---
 
 # The Geography of Belief: Why Your Religion Is Almost Always Your Parents'

@@ -2,6 +2,8 @@
 date: 2026-04-13
 tags:
   - religion
+  - philosophy
+  - ethics
 ---
 
 # What Divine Command Theory Actually Implies

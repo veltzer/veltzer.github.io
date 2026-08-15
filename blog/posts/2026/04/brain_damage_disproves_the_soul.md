@@ -2,6 +2,8 @@
 date: 2026-04-18
 tags:
   - religion
+  - science
+  - neuroscience
 ---
 
 # What Brain Damage Tells Us About the Soul

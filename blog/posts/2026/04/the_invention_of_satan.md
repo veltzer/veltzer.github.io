@@ -2,6 +2,8 @@
 date: 2026-04-04
 tags:
   - religion
+  - history
+  - bible
 ---
 
 # The Invention of Satan

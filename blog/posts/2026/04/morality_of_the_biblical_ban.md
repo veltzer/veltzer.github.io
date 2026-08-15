@@ -1,7 +1,9 @@
 ---
-date: 2026-04-04
+date: 2026-04-05
 tags:
   - religion
+  - bible
+  - ethics
 ---
 
 # The Morality of the "Ban"

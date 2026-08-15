@@ -3,7 +3,7 @@ tags:
   - probability
   - statistics
   - epistemology
-date: 2026-04-04
+date: 2026-03-27
 ---
 
 # Not Knowing the Probability Is Not the Same as 50/50

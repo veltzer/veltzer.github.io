@@ -1,7 +1,9 @@
 ---
-date: 2026-04-04
+date: 2026-04-01
 tags:
   - religion
+  - history
+  - archaeology
 ---
 
 # The Exodus: Foundation Myth or Historical Fact?

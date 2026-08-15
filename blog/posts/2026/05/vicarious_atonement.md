@@ -2,6 +2,8 @@
 date: 2026-05-06
 tags:
   - religion
+  - philosophy
+  - ethics
 ---
 
 # Vicarious Atonement: Punishing the Innocent to Forgive the Guilty

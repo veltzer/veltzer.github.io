@@ -2,6 +2,7 @@
 date: 2026-04-12
 tags:
   - religion
+  - epistemology
 ---
 
 # The Outsider Test for Faith

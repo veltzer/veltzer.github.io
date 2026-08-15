@@ -2,6 +2,8 @@
 date: 2026-04-10
 tags:
   - religion
+  - epistemology
+  - philosophy
 ---
 
 # Faith Is Not a Virtue. It Is an Anti-Epistemology.
