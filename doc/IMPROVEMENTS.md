@@ -224,17 +224,9 @@
 
 ## Blog Content
 
-- **Redundant posts in the 2026/04-05 religion cluster.**
-  - `euthyphro_dilemma.md` and `divine_command_theory_problems.md` run substantially the
-    same argument, including the same rebuttal to the same "God's nature *is* goodness"
-    dodge. Consider merging, or making the second explicitly a follow-on that links the
-    first rather than restating it.
-  - `brain_damage_disproves_the_soul.md`, `mind_brain_no_distinction.md`, and
-    `neurotheology.md` overlap heavily on the mind-is-the-brain thesis.
-  - `ancient_israel_polytheism.md` and `evolution_of_yahweh.md` both cover Yahweh's
-    emergence from the Canaanite pantheon and the Asherah inscriptions.
-  - `exodus_history_vs_myth.md` and `archaeology_of_the_conquest.md` both argue for
-    indigenous emergence in Canaan.
+- **NOT A PROBLEM: overlap between posts.**
+  Posts on related themes revisiting shared ground is by design — each post stands on its
+  own. Do not raise this as an issue.
 
 - ~~**Dangling forward reference with the wrong tense.** — DONE.~~
   `geography_of_belief.md` said "(We'll cover this point in more depth in a separate
