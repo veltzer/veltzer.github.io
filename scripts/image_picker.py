@@ -15,7 +15,14 @@ import urllib.request
 
 from PIL import Image, ImageTk
 
-SEARCH_CACHE_DIR = "/tmp/image_picker_cache"
+# Persistent rather than /tmp: downloaded search results survive a reboot, so
+# re-running a fetch script does not re-download candidates it already has.
+# Honours XDG_CACHE_HOME when set, falling back to the ~/.cache default.
+SEARCH_CACHE_DIR = os.path.join(
+    os.environ.get("XDG_CACHE_HOME") or os.path.expanduser("~/.cache"),
+    "veltzer-site",
+    "image-picker",
+)
 
 
 def download(url, dest):
