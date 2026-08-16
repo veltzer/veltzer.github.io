@@ -402,7 +402,7 @@
 
 ## Chess Viewer
 
-- **The chess viewer is broken in production (dead CDN).**
+- ~~**The chess viewer is broken in production (dead CDN).** — DONE.~~
   `chess.html` loads `https://unpkg.com/cm-chessboard@8.6.0/dist/cm-chessboard.js`,
   which now returns **404 Not Found**. The page therefore throws
   `ReferenceError: Chessboard is not defined` and renders no board at all — only the
@@ -417,6 +417,27 @@
   Related: `doc/IMPROVEMENTS.md` already notes `blog/data/games.pgn.gz` is staged for a
   planned chess viewer. Whatever replaces the CDN should probably read that file rather
   than the hardcoded inline PGN currently in `chess.html`.
+
+  Fixed by vendoring both libraries into `static/vendor/` -- the page now loads nothing
+  from a CDN except Tailwind, so an upstream removal cannot break it again. Three separate
+  faults had to be fixed, only the first of which was the dead CDN:
+
+  1. `unpkg` had removed `cm-chessboard@8.6.0` entirely (404), so `Chessboard` was never
+     defined. Vendored 8.13.0.
+  2. 8.x is **ESM-only** with relative imports, so the old `<script src>` could never work
+     regardless of version. The page now uses `<script type="module">` and imports
+     `{Chessboard, FEN}`. The config API also changed: `sprite: {url, size}` became
+     `assetsUrl` plus `style.pieces.file`, and `position: "start"` must now be `FEN.start`
+     (the shorthand throws inside `Position.setFen`).
+  3. **The PGN never parsed, independently of any of the above.** chess.js requires a blank
+     line between the header block and the movetext, and will not accept header lines that
+     start with whitespace -- the literal in `chess.html` is indented to match the
+     surrounding code. `load_pgn()` simply returned `false` and the viewer showed an empty
+     board with the Next button disabled. Both are now handled, and a failed parse shows
+     "Could not load the game." instead of failing silently.
+
+  Verified in a browser: 32 pieces render, stepping forward walks e4, e5, Nf3, d6 ... to
+  "Move 33: Rd8#" (the checkmate ending the Opera Game), Prev walks back, no console errors.
 
 ## Blog Content
 

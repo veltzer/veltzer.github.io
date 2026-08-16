@@ -20,14 +20,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- cm-chessboard library (CSS from unpkg) -->
-    <link rel="stylesheet" href="https://unpkg.com/cm-chessboard@8.6.0/dist/cm-chessboard.css" integrity="sha384-2vc+Us/Wpr2QYC1lPQr7juY0O2R+SmMEN4xMH9VI8QcRk1O9rE04dr4cmPBo5bnI" crossorigin="anonymous"/>
-
-    <!-- chess.js for game logic -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" integrity="sha384-aH7F59TKSh8OEAivbclch9UUnWn/Uy8AQlYYKzpVaQkAp8W6IF2VocW/knEeRwT0" crossorigin="anonymous"></script>
-
-    <!-- cm-chessboard library (JavaScript Bundle from unpkg) -->
-    <script src="https://unpkg.com/cm-chessboard@8.6.0/dist/cm-chessboard.js" integrity="sha384-7yTLNbUt3LWPwEX/NEo3R8/46+UbHG2Xf0MD8nEjizC2XFc/jw4SAQDlcms6Sb4e" crossorigin="anonymous"></script>
+    <!-- cm-chessboard and chess.js are vendored under vendor/ rather than loaded
+         from a CDN: unpkg removed cm-chessboard@8.6.0, which left this page
+         throwing "Chessboard is not defined" and rendering no board at all.
+         Vendoring makes the page independent of a third party's retention. -->
+    <link rel="stylesheet" href="vendor/cm-chessboard/assets/chessboard.css"/>
+    <script src="vendor/chess.min.js"></script>
 
     <link rel="stylesheet" href="shared.css">
 </head>
@@ -50,10 +48,12 @@
         <div id="status" class="mt-4 text-lg font-mono"></div>
     </div>
 
-    <script>
-        // Use window.onload to ensure all resources, including external scripts,
-        // are fully loaded before the code runs. This prevents race conditions.
-        window.onload = function() {
+    <script type="module">
+        // cm-chessboard 8.x is ESM-only with relative imports, so this has to be
+        // a module. Modules are deferred, so DOM is ready without window.onload.
+        import {Chessboard, FEN} from "./vendor/cm-chessboard/src/Chessboard.js";
+
+        (function() {
             // --- Global State Variables ---
             let board = null;
             const game = new Chess();
@@ -61,6 +61,9 @@
             let currentMove = 0;
 
             // --- Hardcoded PGN for the Opera Game ---
+            // The blank line between the header block and the movetext is required
+            // by the PGN spec, and chess.js enforces it: without it load_pgn()
+            // returns false and the viewer silently shows an empty game.
             const pgn = `
                 [Event "A Night at the Opera"]
                 [Site "Paris, France"]
@@ -68,6 +71,7 @@
                 [Result "1-0"]
                 [White "Paul Morphy"]
                 [Black "Duke Karl / Count Isouard"]
+
                 1.e4 e5 2.Nf3 d6 3.d4 Bg4 4.dxe5 Bxf3 5.Qxf3 dxe5 6.Bc4 Nf6 7.Qb3 Qe7
                 8.Nc3 c6 9.Bg5 b5 10.Nxb5 cxb5 11.Bxb5+ Nbd7 12.O-O-O Rd8
                 13.Rxd7 Rxd7 14.Rd1 Qe6 15.Bxd7+ Nxd7 16.Qb8+ Nxb8 17.Rd8# 1-0
@@ -96,20 +100,28 @@
             }
 
             // --- Initialize the Game ---
-            game.load_pgn(pgn);
+            // The template literal above is indented to match the surrounding
+            // code, and chess.js will not parse header lines that start with
+            // whitespace -- load_pgn() just returns false and the viewer shows an
+            // empty game. Strip the indentation before handing it over.
+            const cleanPgn = pgn.split('\n').map(function(line) {
+                return line.trim();
+            }).join('\n').trim();
+            if (!game.load_pgn(cleanPgn)) {
+                statusEl.textContent = 'Could not load the game.';
+                return;
+            }
             moveHistory = game.history({ verbose: true });
 
             // --- Initialize the Board ---
+            // 8.x replaced the old `sprite: {url, size}` option with assetsUrl plus
+            // a pieces file relative to it.
             const boardConfig = {
-                position: "start",
-                // The sprite uses SVG for sharp, scalable pieces
-                sprite: {
-                    url: "https://unpkg.com/cm-chessboard@8.6.0/assets/images/chessboard-sprite.svg",
-                    size: 40,
-                    cache: true
-                }
+                // 8.x wants a FEN string here; the old "start" shorthand is gone.
+                position: FEN.start,
+                assetsUrl: "./vendor/cm-chessboard/assets/",
+                style: {pieces: {file: "pieces/standard.svg"}}
             };
-            // Use the global Chessboard object from the new library
             board = new Chessboard(document.getElementById('gameBoard'), boardConfig);
 
             // --- Event Listeners ---
@@ -129,7 +141,7 @@
 
             // --- Initial Render ---
             updateStatus();
-        };
+        }());
     </script>
 
 </body>
