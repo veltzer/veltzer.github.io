@@ -40,6 +40,12 @@ dark_theme = "github-dark"
 
 [extra]
 rss_url = "https://veltzer.org/atom.xml"
+# Drives the site-level language switcher in base.html. Adding a language here
+# plus a [languages.xx] block above is all a new language needs.
+languages = [
+    { code = "en", name = "English" },
+    { code = "he", name = "עברית" },
+]
 nav = [
     { name = "Blog", url = "/blog/" },
     { name = "About", url = "/about/" },

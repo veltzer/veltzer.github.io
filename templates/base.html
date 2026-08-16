@@ -21,6 +21,38 @@
     <a href="{{ item.url }}">{{ item.name }}</a>
     {%- endfor %}
   </nav>
+
+  {#- Site-level language switcher, present on every page.
+
+      Where the current page has a translation (page.translations, set on blog
+      posts) we link straight to it so the reader stays where they are. Sections
+      and taxonomy pages have no translations list, so there we fall back to the
+      other language's home page -- better than hiding the switcher and leaving
+      /he/ unreachable from the English site.
+
+      Driven by config.extra.languages, so adding a sixth language is a config
+      line rather than a template change. -#}
+  <nav class="site-lang" aria-label="Site language">
+    {%- set here = lang | default(value=config.default_language) %}
+    {%- for entry in config.extra.languages %}
+      {#- set_global must not be shadowed by a plain `set` of the same name in
+          this scope, or the write lands on a different variable and the href
+          comes out empty. Seed it once per iteration with set_global too. -#}
+      {%- set_global target = get_url(path="/", lang=entry.code) %}
+      {%- if page and page.translations %}
+        {%- for translation in page.translations %}
+          {%- if translation.lang | default(value=config.default_language) == entry.code %}
+            {%- set_global target = translation.permalink %}
+          {%- endif %}
+        {%- endfor %}
+      {%- endif %}
+      {%- if entry.code == here %}
+    <span class="lang current" aria-current="true">{{ entry.name }}</span>
+      {%- else %}
+    <a class="lang" href="{{ target }}" hreflang="{{ entry.code }}">{{ entry.name }}</a>
+      {%- endif %}
+    {%- endfor %}
+  </nav>
 </header>
 
 <main class="site-main">
