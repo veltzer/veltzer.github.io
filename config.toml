@@ -45,6 +45,17 @@ languages = [
     { code = "en", name = "English" },
     { code = "he", name = "עברית" },
 ]
+# Drives the theme <select> in the header. Names come from shared-themes'
+# themes.yaml; azure is the default and is applied by :root, so a reader who
+# never touches the switcher gets it without any JS running.
+themes = [
+    { code = "azure", name = "Azure" },
+    { code = "paper", name = "Paper" },
+    { code = "midnight", name = "Midnight" },
+    { code = "nord", name = "Nord" },
+    { code = "solarized", name = "Solarized" },
+    { code = "rosepine", name = "Rosé Pine" },
+]
 nav = [
     { name = "Blog", url = "/blog/" },
     { name = "About", url = "/about/" },

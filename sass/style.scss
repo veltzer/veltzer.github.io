@@ -55,9 +55,40 @@ a:hover { text-decoration: underline; }
 }
 .site-nav a:hover { color: var(--accent); }
 
-// Site-level language switcher, pushed to the far end of the header so it
-// reads as chrome rather than another nav item.
-.site-lang { display: flex; gap: 0.4rem; margin-inline-start: auto; }
+// Header controls (language + theme selects), pushed to the far end of the
+// header so they read as chrome rather than another nav item.
+.site-controls {
+  display: flex;
+  gap: 0.4rem;
+  margin-inline-start: auto;
+  align-items: center;
+}
+
+.site-select {
+  background: var(--bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 0.2rem 0.4rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+.site-select:hover { border-color: var(--accent); }
+.site-select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+// Labels the selects for screen readers without showing them.
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
 
 .site-main { max-width: 42rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
 

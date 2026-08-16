@@ -23,37 +23,45 @@
     {%- endfor %}
   </nav>
 
-  {#- Site-level language switcher, present on every page.
+  {#- Header controls: language and theme, both as <select> elements.
 
-      Where the current page has a translation (page.translations, set on blog
-      posts) we link straight to it so the reader stays where they are. Sections
-      and taxonomy pages have no translations list, so there we fall back to the
-      other language's home page -- better than hiding the switcher and leaving
-      /he/ unreachable from the English site.
+      Language: where the current page has a translation (page.translations, set
+      on blog posts) the option points straight at it so the reader stays where
+      they are. Sections and taxonomy pages have no translations list, so there
+      it falls back to the other language's home page -- better than hiding the
+      switcher and leaving /he/ unreachable from the English site. Navigation is
+      a plain location change on `change`, so it still works without JS in the
+      sense that the options carry real URLs.
 
-      Driven by config.extra.languages, so adding a sixth language is a config
-      line rather than a template change. -#}
-  <nav class="site-lang" aria-label="Site language">
-    {%- set here = lang | default(value=config.default_language) %}
-    {%- for entry in config.extra.languages %}
-      {#- set_global must not be shadowed by a plain `set` of the same name in
-          this scope, or the write lands on a different variable and the href
-          comes out empty. Seed it once per iteration with set_global too. -#}
-      {%- set_global target = get_url(path="/", lang=entry.code) %}
-      {%- if page and page.translations %}
-        {%- for translation in page.translations %}
-          {%- if translation.lang | default(value=config.default_language) == entry.code %}
-            {%- set_global target = translation.permalink %}
-          {%- endif %}
-        {%- endfor %}
-      {%- endif %}
-      {%- if entry.code == here %}
-    <span class="lang current" aria-current="true">{{ entry.name }}</span>
-      {%- else %}
-    <a class="lang" href="{{ target }}" hreflang="{{ entry.code }}">{{ entry.name }}</a>
-      {%- endif %}
-    {%- endfor %}
-  </nav>
+      Both lists come from config.extra, so adding a language or theme is a
+      config line rather than a template change. -#}
+  <div class="site-controls">
+    <label class="visually-hidden" for="lang-select">Language</label>
+    <select id="lang-select" class="site-select">
+      {%- set here = lang | default(value=config.default_language) %}
+      {%- for entry in config.extra.languages %}
+        {#- set_global must not be shadowed by a plain `set` of the same name in
+            this scope, or the write lands on a different variable and the value
+            comes out empty. Seed it once per iteration with set_global too. -#}
+        {%- set_global target = get_url(path="/", lang=entry.code) %}
+        {%- if page and page.translations %}
+          {%- for translation in page.translations %}
+            {%- if translation.lang | default(value=config.default_language) == entry.code %}
+              {%- set_global target = translation.permalink %}
+            {%- endif %}
+          {%- endfor %}
+        {%- endif %}
+      <option value="{{ target }}"{% if entry.code == here %} selected{% endif %}>{{ entry.name }}</option>
+      {%- endfor %}
+    </select>
+
+    <label class="visually-hidden" for="theme-select">Theme</label>
+    <select id="theme-select" class="site-select">
+      {%- for entry in config.extra.themes %}
+      <option value="{{ entry.code }}">{{ entry.name }}</option>
+      {%- endfor %}
+    </select>
+  </div>
 </header>
 
 {# main_class is a block so a template can opt out of the narrow reading
@@ -61,6 +69,19 @@
 <main class="{% block main_class %}site-main{% endblock %}">
 {% block content %}{% endblock %}
 </main>
+
+<script src="{{ get_url(path='shared-themes/theme-switcher.js') }}"></script>
+<script>
+  // Theme: the shared helper wires #theme-select to data-theme on <html> and
+  // persists the choice under a localStorage key shared with the teaching-*
+  // sites, so a reader's theme follows them across them.
+  initThemeSwitcher();
+
+  // Language: each option carries the URL of this page in that language.
+  document.getElementById('lang-select').addEventListener('change', function (event) {
+    window.location.href = event.target.value;
+  });
+</script>
 
 <footer class="site-footer">
   <p>&copy; 2026 {{ config.author }} &middot;
