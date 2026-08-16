@@ -3,7 +3,7 @@ title = "הנזק ארוך הטווח שגרמה Windows לתעשיית ההיי
 date = 2026-03-28
 
 [taxonomies]
-tags = ["windows", "linux", "opinion"]
+tags = ["windows", "linux", "דעה"]
 +++
 
 ## הפרודקשן רץ על Linux. גם הפיתוח היה צריך

@@ -3,7 +3,7 @@ title = "איך לשדרג אובונטו בלי כלי השדרוג שלהם"
 date = 2025-09-04
 
 [taxonomies]
-tags = ["ubuntu", "linux", "sysadmin"]
+tags = ["ubuntu", "linux", "ניהול-מערכות"]
 +++
 
 ## בעיית השדרוג

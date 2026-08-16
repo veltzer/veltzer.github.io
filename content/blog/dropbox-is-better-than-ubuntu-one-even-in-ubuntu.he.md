@@ -3,7 +3,7 @@ title = "דרופבוקס טוב יותר מ־Ubuntu One אפילו באובונ
 date = 2010-06-19
 
 [taxonomies]
-tags = ["linux", "cloud-storage", "ubuntu"]
+tags = ["linux", "אחסון-בענן", "ubuntu"]
 +++
 
 אני משתמש בשירותי דרופבוקס ו־Ubuntu One גם במחשב השולחני וגם בנייד, ולדעתי דרופבוקס עדיף בהרבה.

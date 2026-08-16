@@ -3,7 +3,7 @@ title = "יצירת תאריכי MySQL מתוך פרל"
 date = 2011-04-24
 
 [taxonomies]
-tags = ["perl", "mysql", "programming"]
+tags = ["perl", "mysql", "תכנות"]
 +++
 
 יצא לכם לכתוב סקריפט פרל מזדמן ורציתם להכניס את התאריך והשעה הנוכחיים למסד נתונים של MySQL?

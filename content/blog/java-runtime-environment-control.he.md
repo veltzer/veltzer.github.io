@@ -3,7 +3,7 @@ title = "שליטה בסביבת זמן הריצה של ג'אווה"
 date = 2011-06-09
 
 [taxonomies]
-tags = ["java", "programming", "linux"]
+tags = ["java", "תכנות", "linux"]
 +++
 
 יש ארבע דרכים לשלוט בסביבת הריצה של ג'אווה:

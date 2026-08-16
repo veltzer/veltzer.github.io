@@ -3,7 +3,7 @@ title = "מעבר מגוגל־כרום לפיירפוקס בלינוקס"
 date = 2025-09-01
 
 [taxonomies]
-tags = ["browser", "linux", "privacy"]
+tags = ["דפדפן", "linux", "פרטיות"]
 +++
 
 ## הבעיות של גוגל־כרום

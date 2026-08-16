@@ -3,7 +3,7 @@ title = "io_uring בלינוקס מול קלט/פלט בחלונות: השווא
 date = 2026-03-29
 
 [taxonomies]
-tags = ["linux", "windows", "performance"]
+tags = ["linux", "windows", "ביצועים"]
 +++
 
 ## מצב הקלט/פלט האסינכרוני

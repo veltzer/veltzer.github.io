@@ -3,7 +3,7 @@ title = "מדוע טענה של שקרנים ידועים דווקא מקטינ�
 date = 2026-03-26
 
 [taxonomies]
-tags = ["probability", "statistics", "bayes"]
+tags = ["הסתברות", "סטטיסטיקה", "bayes"]
 +++
 
 ## האינטואיציה

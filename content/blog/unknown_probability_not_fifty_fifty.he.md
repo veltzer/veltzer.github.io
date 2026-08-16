@@ -3,7 +3,7 @@ title = "לא לדעת את ההסתברות אינו אותו הדבר כמו �
 date = 2026-03-27
 
 [taxonomies]
-tags = ["probability", "statistics", "epistemology"]
+tags = ["הסתברות", "סטטיסטיקה", "אפיסטמולוגיה"]
 +++
 
 ## הטעות הנפוצה

@@ -3,7 +3,7 @@ title = "MkDocs עם GitHub Pages: מבנה קבצים שעובד"
 date = 2026-03-21
 
 [taxonomies]
-tags = ["mkdocs", "github-pages", "documentation"]
+tags = ["mkdocs", "github-pages", "תיעוד"]
 +++
 
 אם אתם משתמשים ב־MkDocs כדי לבנות אתר המתארח ב־GitHub Pages, ויש לכם גם קבצים סטטיים

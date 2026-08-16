@@ -51,6 +51,16 @@ nav_slides = "מצגות"
 nav_syllabi = "סילבוסים"
 nav_animations = "אנימציות"
 
+# Taxonomy slugs keep their UTF-8 characters instead of being transliterated.
+# Zola's default slugify turns a Hebrew tag into unreadable latin -- archaeology
+# in Hebrew becomes "rky-vlvgyh" -- which is neither readable nor searchable.
+# "safe" only strips characters that are illegal in a path, so /he/tags/ gets
+# real Hebrew URLs. This affects taxonomies ONLY: `paths` and `anchors` stay on
+# the default so the 80 existing post URLs, which come from ASCII filenames, do
+# not move.
+[slugify]
+taxonomies = "safe"
+
 [markdown]
 smart_punctuation = false
 render_emoji = true
