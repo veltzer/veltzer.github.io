@@ -255,6 +255,27 @@ th { background: var(--bg-surface); }
 .chess-btn:disabled { opacity: 0.45; cursor: default; }
 .chess-btn--game { background: var(--bg-surface); }
 
+.chess-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.chess-search,
+.chess-select {
+  background: var(--bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 0.35rem 0.5rem;
+  font: inherit;
+  font-size: 0.9rem;
+}
+.chess-search { min-width: 16rem; }
+.chess-select { max-width: 26rem; }
+
 .chess-status {
   margin-top: 1rem;
   font-family: var(--font-mono);

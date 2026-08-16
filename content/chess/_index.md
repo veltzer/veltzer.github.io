@@ -6,8 +6,16 @@ template = "chess.html"
 <script src="/vendor/chess.min.js"></script>
 
 <div class="chess-viewer">
-  <p id="gamePlayers" class="chess-players">&nbsp;</p>
+  <p id="gamePlayers" class="chess-players">Loading games…</p>
   <p id="gameCounter" class="chess-counter">&nbsp;</p>
+
+  <div class="chess-picker">
+    <label class="visually-hidden" for="gameSearch">Search games</label>
+    <input type="search" id="gameSearch" class="chess-search"
+           placeholder="Search by player, event or year…" autocomplete="off">
+    <label class="visually-hidden" for="gameSelect">Game</label>
+    <select id="gameSelect" class="chess-select"></select>
+  </div>
 
   <div id="gameBoard" class="chess-board"></div>
 
@@ -25,171 +33,194 @@ template = "chess.html"
 </div>
 
 <script type="module">
-    // cm-chessboard 8.x is ESM-only with relative imports, so this has to be
-    // a module. Modules are deferred, so DOM is ready without window.onload.
-    import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
+// cm-chessboard 8.x is ESM-only with relative imports, so this has to be a
+// module. Modules are deferred, so the DOM is ready without window.onload.
+import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
 
-    (function() {
-        // --- The games ---
-        // Each entry is a PGN string. chess.js is strict about two things that
-        // are easy to get wrong here: the header block and the movetext must be
-        // separated by a blank line, and header lines must not start with
-        // whitespace. Both are handled by cleanPgn() below, so these literals
-        // can stay indented to match the surrounding code.
-        const PGNS = [`
-            [Event "A Night at the Opera"]
-            [Site "Paris, France"]
-            [Date "1858.11.02"]
-            [Result "1-0"]
-            [White "Paul Morphy"]
-            [Black "Duke Karl / Count Isouard"]
+(function () {
+    const DATA_URL = "/data/games.pgn.gz";
+    // The archive is ~16,000 games / 8.8MB uncompressed. Parsing every one with
+    // chess.js up front would take far too long, so the file is split into game
+    // texts and only the headers are read eagerly; the moves of a game are
+    // parsed the first time it is opened.
+    const MAX_OPTIONS = 300;   // how many games to put in the <select> at once
 
-            1.e4 e5 2.Nf3 d6 3.d4 Bg4 4.dxe5 Bxf3 5.Qxf3 dxe5 6.Bc4 Nf6 7.Qb3 Qe7
-            8.Nc3 c6 9.Bg5 b5 10.Nxb5 cxb5 11.Bxb5+ Nbd7 12.O-O-O Rd8
-            13.Rxd7 Rxd7 14.Rd1 Qe6 15.Bxd7+ Nxd7 16.Qb8+ Nxb8 17.Rd8# 1-0
-        `, `
-            [Event "The Immortal Game"]
-            [Site "London, England"]
-            [Date "1851.06.21"]
-            [Result "1-0"]
-            [White "Adolf Anderssen"]
-            [Black "Lionel Kieseritzky"]
+    const titleEl = document.getElementById('gameTitle');
+    const playersEl = document.getElementById('gamePlayers');
+    const counterEl = document.getElementById('gameCounter');
+    const statusEl = document.getElementById('status');
+    const searchEl = document.getElementById('gameSearch');
+    const selectEl = document.getElementById('gameSelect');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+    const btnPrevGame = document.getElementById('btnPrevGame');
+    const btnNextGame = document.getElementById('btnNextGame');
 
-            1.e4 e5 2.f4 exf4 3.Bc4 Qh4+ 4.Kf1 b5 5.Bxb5 Nf6 6.Nf3 Qh6 7.d3 Nh5
-            8.Nh4 Qg5 9.Nf5 c6 10.g4 Nf6 11.Rg1 cxb5 12.h4 Qg6 13.h5 Qg5 14.Qf3 Ng8
-            15.Bxf4 Qf6 16.Nc3 Bc5 17.Nd5 Qxb2 18.Bd6 Bxg1 19.e5 Qxa1+ 20.Ke2 Na6
-            21.Nxg7+ Kd8 22.Qf6+ Nxf6 23.Be7# 1-0
-        `];
+    let board = null;
+    let games = [];        // {white, black, event, date, year, text, moves|null}
+    let filtered = [];     // indices into games
+    let currentGame = 0;   // index into filtered
+    let currentMove = 0;
 
-        // --- DOM references ---
-        const statusEl = document.getElementById('status');
-        const titleEl = document.getElementById('gameTitle');
-        const playersEl = document.getElementById('gamePlayers');
-        const counterEl = document.getElementById('gameCounter');
-        const btnPrev = document.getElementById('btnPrev');
-        const btnNext = document.getElementById('btnNext');
-        const btnPrevGame = document.getElementById('btnPrevGame');
-        const btnNextGame = document.getElementById('btnNextGame');
+    function headerValue(text, key) {
+        const match = text.match(new RegExp('\\[' + key + ' "([^"]*)"'));
+        return match ? match[1] : '';
+    }
 
-        // --- State ---
-        let board = null;
-        let games = [];        // [{event, white, black, moves}]
-        let currentGame = 0;
-        let currentMove = 0;
-
-        function cleanPgn(pgn) {
-            return pgn.split('\n').map(function(line) {
-                return line.trim();
-            }).join('\n').trim();
-        }
-
-        // Parse every PGN up front so a bad one is caught before rendering.
-        function loadGames() {
-            const loaded = [];
-            for (let i = 0; i < PGNS.length; i++) {
-                const chess = new Chess();
-                if (!chess.load_pgn(cleanPgn(PGNS[i]))) {
-                    return null;
-                }
-                const headers = chess.header();
-                loaded.push({
-                    event: headers.Event || 'Game ' + (i + 1),
-                    white: headers.White || 'White',
-                    black: headers.Black || 'Black',
-                    date: headers.Date || '',
-                    moves: chess.history({verbose: true})
-                });
-            }
-            return loaded;
-        }
-
-        function render() {
-            const game = games[currentGame];
-            const move = game.moves[currentMove - 1];
-
-            const year = game.date ? game.date.slice(0, 4) : '';
-            titleEl.textContent = game.event + (year ? ' (' + year + ')' : '');
-            playersEl.textContent = game.white + ' vs. ' + game.black;
-            counterEl.textContent = 'Game ' + (currentGame + 1) + ' of ' + games.length;
-            statusEl.textContent = 'Move ' + currentMove + ': ' +
-                (move ? move.san : 'Start');
-
-            // Replay from the start rather than tracking incremental state --
-            // the games are short and this cannot drift out of sync.
-            const position = new Chess();
-            game.moves.slice(0, currentMove).forEach(function(m) {
-                position.move(m.san);
+    function splitGames(pgn) {
+        // A game starts at an [Event line that follows a blank line (or the very
+        // start of the file). Splitting on that keeps each game's headers and
+        // movetext together.
+        const chunks = pgn.split(/\n\s*\n(?=\[Event )/);
+        const out = [];
+        for (const chunk of chunks) {
+            const text = chunk.trim();
+            if (!text.startsWith('[Event ')) continue;
+            const date = headerValue(text, 'Date');
+            out.push({
+                white: headerValue(text, 'White') || 'White',
+                black: headerValue(text, 'Black') || 'Black',
+                event: headerValue(text, 'Event') || 'Game',
+                result: headerValue(text, 'Result'),
+                date: date,
+                year: (date.match(/^(\d{4})/) || [])[1] || '',
+                text: text,
+                moves: null
             });
-            board.setPosition(position.fen(), true);
-
-            btnPrev.disabled = currentMove === 0;
-            btnNext.disabled = currentMove === game.moves.length;
-            btnPrevGame.disabled = currentGame === 0;
-            btnNextGame.disabled = currentGame === games.length - 1;
         }
+        return out;
+    }
 
-        function selectGame(index) {
-            currentGame = index;
-            currentMove = 0;   // always open a game at its starting position
-            render();
+    function label(game, index) {
+        const year = game.year ? ' (' + game.year + ')' : '';
+        return (index + 1) + '. ' + game.white + ' vs ' + game.black + year;
+    }
+
+    function movesOf(game) {
+        if (game.moves) return game.moves;
+        const chess = new Chess();
+        // chess.js will not accept header lines that start with whitespace, and
+        // needs a blank line between the headers and the movetext.
+        const clean = game.text.split('\n').map(function (line) {
+            return line.trim();
+        }).join('\n');
+        game.moves = chess.load_pgn(clean) ? chess.history({verbose: true}) : [];
+        return game.moves;
+    }
+
+    function renderOptions() {
+        const shown = filtered.slice(0, MAX_OPTIONS);
+        selectEl.innerHTML = shown.map(function (gameIndex, position) {
+            return '<option value="' + position + '">' +
+                   label(games[gameIndex], gameIndex) + '</option>';
+        }).join('');
+        const hidden = filtered.length - shown.length;
+        counterEl.textContent = filtered.length.toLocaleString() + ' games' +
+            (hidden > 0 ? ' (showing the first ' + MAX_OPTIONS.toLocaleString() + ')' : '');
+    }
+
+    function render() {
+        const game = games[filtered[currentGame]];
+        if (!game) return;
+        const moves = movesOf(game);
+        const move = moves[currentMove - 1];
+
+        titleEl.textContent = game.event + (game.year ? ' (' + game.year + ')' : '');
+        playersEl.textContent = game.white + ' vs. ' + game.black +
+            (game.result ? '  ' + game.result : '');
+        selectEl.value = String(currentGame);
+
+        statusEl.textContent = moves.length
+            ? 'Move ' + currentMove + ': ' + (move ? move.san : 'Start')
+            : 'This game has no readable moves.';
+
+        // Replay from the start rather than tracking incremental state: it
+        // cannot drift out of sync with the move index.
+        const position = new Chess();
+        moves.slice(0, currentMove).forEach(function (m) { position.move(m.san); });
+        board.setPosition(position.fen(), true);
+
+        btnPrev.disabled = currentMove === 0;
+        btnNext.disabled = currentMove >= moves.length;
+        btnPrevGame.disabled = currentGame === 0;
+        btnNextGame.disabled = currentGame >= Math.min(filtered.length, MAX_OPTIONS) - 1;
+    }
+
+    function selectGame(index) {
+        currentGame = index;
+        currentMove = 0;      // always open a game at its starting position
+        render();
+    }
+
+    function applyFilter(query) {
+        const needle = query.trim().toLowerCase();
+        filtered = [];
+        for (let i = 0; i < games.length; i++) {
+            if (!needle) { filtered.push(i); continue; }
+            const g = games[i];
+            if ((g.white + ' ' + g.black + ' ' + g.event + ' ' + g.date)
+                .toLowerCase().includes(needle)) {
+                filtered.push(i);
+            }
         }
+        renderOptions();
+        if (filtered.length) selectGame(0);
+        else statusEl.textContent = 'No games match that search.';
+    }
 
-        // --- Init ---
-        games = loadGames();
-        if (!games || games.length === 0) {
-            statusEl.textContent = 'Could not load the games.';
+    async function load() {
+        const response = await fetch(DATA_URL);
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        // The file is served as .gz; DecompressionStream avoids shipping a
+        // gunzip implementation.
+        const stream = response.body.pipeThrough(new DecompressionStream('gzip'));
+        return await new Response(stream).text();
+    }
+
+    board = new Chessboard(document.getElementById('gameBoard'), {
+        position: FEN.start,
+        assetsUrl: "/vendor/cm-chessboard/assets/",
+        style: {pieces: {file: "pieces/standard.svg"}}
+    });
+
+    load().then(function (pgn) {
+        games = splitGames(pgn);
+        if (!games.length) {
+            playersEl.textContent = 'No games found in the archive.';
             return;
         }
+        applyFilter('');
+    }).catch(function (error) {
+        console.error('Could not load games:', error);
+        playersEl.textContent = 'Could not load the game archive.';
+    });
 
-        // 8.x replaced the old `sprite: {url, size}` option with assetsUrl plus
-        // a pieces file relative to it, and `position: "start"` must be FEN.start.
-        board = new Chessboard(document.getElementById('gameBoard'), {
-            position: FEN.start,
-            assetsUrl: "/vendor/cm-chessboard/assets/",
-            style: {pieces: {file: "pieces/standard.svg"}}
-        });
+    searchEl.addEventListener('input', function () { applyFilter(searchEl.value); });
+    selectEl.addEventListener('change', function () { selectGame(Number(selectEl.value)); });
 
-        btnPrev.addEventListener('click', function() {
-            if (currentMove > 0) {
-                currentMove--;
-                render();
-            }
-        });
+    btnPrev.addEventListener('click', function () {
+        if (currentMove > 0) { currentMove--; render(); }
+    });
+    btnNext.addEventListener('click', function () {
+        if (currentMove < movesOf(games[filtered[currentGame]]).length) { currentMove++; render(); }
+    });
+    btnPrevGame.addEventListener('click', function () {
+        if (currentGame > 0) selectGame(currentGame - 1);
+    });
+    btnNextGame.addEventListener('click', function () {
+        if (currentGame < Math.min(filtered.length, MAX_OPTIONS) - 1) selectGame(currentGame + 1);
+    });
 
-        btnNext.addEventListener('click', function() {
-            if (currentMove < games[currentGame].moves.length) {
-                currentMove++;
-                render();
-            }
-        });
-
-        btnPrevGame.addEventListener('click', function() {
-            if (currentGame > 0) {
-                selectGame(currentGame - 1);
-            }
-        });
-
-        btnNextGame.addEventListener('click', function() {
-            if (currentGame < games.length - 1) {
-                selectGame(currentGame + 1);
-            }
-        });
-
-        // Arrow keys: left/right step moves, up/down step games.
-        document.addEventListener('keydown', function(event) {
-            const actions = {
-                ArrowLeft: btnPrev,
-                ArrowRight: btnNext,
-                ArrowUp: btnPrevGame,
-                ArrowDown: btnNextGame
-            };
-            const button = actions[event.key];
-            if (button && !button.disabled) {
-                event.preventDefault();
-                button.click();
-            }
-        });
-
-        render();
-    }());
+    // Arrow keys: left/right step moves, up/down step games. Ignored while the
+    // search box has focus so typing still works.
+    document.addEventListener('keydown', function (event) {
+        if (document.activeElement === searchEl) return;
+        const actions = {
+            ArrowLeft: btnPrev, ArrowRight: btnNext,
+            ArrowUp: btnPrevGame, ArrowDown: btnNextGame
+        };
+        const button = actions[event.key];
+        if (button && !button.disabled) { event.preventDefault(); button.click(); }
+    });
+}());
 </script>
