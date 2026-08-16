@@ -26,7 +26,9 @@
   <a class="site-title" href="{{ lang_root }}">{{ config.title }}</a>
   <nav class="site-nav">
     {%- for item in config.extra.nav %}
-    <a href="{{ lang_root }}{{ item.path }}">{{ item.name }}</a>
+    {#- Apps are single-language and live at the site root, so they take no
+        language prefix; the blog and its pages do. -#}
+    <a href="{% if item.app %}/{% else %}{{ lang_root }}{% endif %}{{ item.path }}">{{ trans(key=item.key, lang=lang | default(value=config.default_language)) }}</a>
     {%- endfor %}
   </nav>
 

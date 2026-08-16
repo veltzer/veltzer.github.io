@@ -12,6 +12,20 @@ taxonomies = [
     { name = "tags", feed = true, paginate_by = 20 },
 ]
 
+# Nav labels, keyed so base.html can render them in the reading language.
+# Zola's trans() looks these up per language; the English table below is the
+# fallback for any key a language has not translated.
+[translations]
+nav_blog = "Blog"
+nav_about = "About"
+nav_tags = "Tags"
+nav_media = "Media"
+nav_calendar = "Calendar"
+nav_chess = "Chess"
+nav_slides = "Slides"
+nav_syllabi = "Syllabi"
+nav_animations = "Animations"
+
 # Hebrew. Posts opt in by filename: foo.he.md alongside foo.md. Zola serves
 # them under /he/ and exposes page.translations, which templates/page.html
 # turns into a language switcher -- no hand-maintained cross-links.
@@ -22,6 +36,20 @@ build_search_index = false  # the default index is tuned for latin scripts
 taxonomies = [
     { name = "tags", feed = true, paginate_by = 20 },
 ]
+
+# The apps (media/chess/...) exist only in English, but their nav labels are
+# still worth translating: the reader on /he/ sees a Hebrew menu even though
+# the app itself opens in English.
+[languages.he.translations]
+nav_blog = "בלוג"
+nav_about = "אודות"
+nav_tags = "תגיות"
+nav_media = "מדיה"
+nav_calendar = "יומן"
+nav_chess = "שחמט"
+nav_slides = "מצגות"
+nav_syllabi = "סילבוסים"
+nav_animations = "אנימציות"
 
 [markdown]
 smart_punctuation = false
@@ -56,18 +84,17 @@ themes = [
     { code = "solarized", name = "Solarized" },
     { code = "rosepine", name = "Rosé Pine" },
 ]
-# `path` is relative to the language root: the template prefixes it with /en/
-# or /he/. Absolute URLs would break, since English now lives under /en/.
+# `path` is relative to the language root, and the template prefixes it with
+# /en/ or /he/. Entries marked `app = true` are single-language applications
+# rather than writing, so they live at the site root and take no prefix.
 nav = [
-    { name = "Blog", path = "blog/" },
-    { name = "About", path = "about/" },
-    { name = "Tags", path = "tags/" },
-    { name = "Media", path = "media/" },
-    { name = "Calendar", path = "calendar/" },
-    # chess.html is a standalone app page under static/, not a content/ section,
-    # so it needs an explicit entry -- it was unreachable by navigation until now.
-    { name = "Chess", path = "chess/" },
-    { name = "Slides", path = "slides/" },
-    { name = "Syllabi", path = "syllabi/" },
-    { name = "Animations", path = "animations/" },
+    { key = "nav_blog", path = "blog/" },
+    { key = "nav_about", path = "about/" },
+    { key = "nav_tags", path = "tags/" },
+    { key = "nav_media", path = "media/", app = true },
+    { key = "nav_calendar", path = "calendar/", app = true },
+    { key = "nav_chess", path = "chess/", app = true },
+    { key = "nav_slides", path = "slides/", app = true },
+    { key = "nav_syllabi", path = "syllabi/", app = true },
+    { key = "nav_animations", path = "animations/", app = true },
 ]

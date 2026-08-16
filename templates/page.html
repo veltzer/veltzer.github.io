@@ -30,7 +30,16 @@
       {%- if translation.permalink == page.permalink %}
       <span class="lang current" aria-current="page">{{ code }}</span>
       {%- else %}
-      <a class="lang" href="{{ translation.permalink }}" hreflang="{{ code }}">{{ code }}</a>
+      {#- Same correction as base.html's site-level switcher: zola builds the
+          English permalink as though English owned the site root, but
+          scripts/build_site.py moves that tree to /en/. Without this the "en"
+          link on a Hebrew post points at a URL that 404s. -#}
+      {%- if code == config.default_language %}
+      {%- set target = translation.permalink | replace(from=config.base_url ~ "/", to=config.base_url ~ "/" ~ code ~ "/") %}
+      {%- else %}
+      {%- set target = translation.permalink %}
+      {%- endif %}
+      <a class="lang" href="{{ target }}" hreflang="{{ code }}">{{ code }}</a>
       {%- endif %}
       {%- endfor %}
     </nav>

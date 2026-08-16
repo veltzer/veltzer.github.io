@@ -133,6 +133,15 @@ SHARED_ROOT = {
     "favicon.svg", "robots.txt", "sitemap.xml", "404.html", ".nojekyll",
 }
 
+# Sections that are applications rather than writing. They exist in one language
+# only -- there is no media.he.md or slides.he.md -- so prefixing them with /en/
+# would claim a translation that does not exist and make the URL longer for no
+# reason. They stay at the site root; only the blog and the pages around it move
+# under /en/, because those are the ones Hebrew actually has versions of.
+APP_SECTIONS = {
+    "media", "calendar", "chess", "slides", "syllabi", "animations",
+}
+
 
 def base_url():
     """The base_url from config.toml, so sitemap rewriting matches the build."""
@@ -159,7 +168,7 @@ def relocate_english(root):
     english = root / "en"
     english.mkdir(exist_ok=True)
     for entry in list(root.iterdir()):
-        if entry.name in SHARED_ROOT:
+        if entry.name in SHARED_ROOT or entry.name in APP_SECTIONS:
             continue
         # index.html is the English home page and has to move with the rest of
         # the English site -- without this it stays at the root and is then
@@ -174,6 +183,59 @@ def relocate_english(root):
         if entry.is_file() and entry.suffix in {".xml", ".json", ".js", ".css", ".txt"}:
             continue
         shutil.move(str(entry), str(english / entry.name))
+
+
+def fix_english_links(root, site_url):
+    """Rewrite absolute English permalinks to their /en/ location.
+
+    Zola builds every permalink assuming the default language owns the site
+    root, so an English page links to https://veltzer.org/blog/ -- a URL that
+    404s once relocate_english() has moved that tree to /en/blog/. There are
+    thousands of these across the post, tag and pagination pages.
+
+    Doing it here rather than with a `replace` filter in each template is
+    deliberate: the templates emit permalinks from half a dozen places
+    (post lists, prev/next, tag terms, feeds, search index), and every one of
+    them would have to remember the same rewrite. Rewriting the built output
+    catches them all, including the ones Zola generates itself.
+
+    Only the English tree is touched. Hebrew permalinks already carry /he/,
+    and the app sections plus shared assets genuinely do live at the root.
+    """
+    prefix = site_url.rstrip("/") + "/"
+    keep = SHARED_ROOT | APP_SECTIONS
+    targets = []
+    for path in (root / "en").rglob("*"):
+        if path.is_file() and path.suffix in {".html", ".xml", ".js", ".json"}:
+            targets.append(path)
+    # The English feed and search index are written to the root, not under en/.
+    for name in ("atom.xml", "search_index.en.js"):
+        candidate = root / name
+        if candidate.is_file():
+            targets.append(candidate)
+
+    for path in targets:
+        text = path.read_text(encoding="utf-8")
+        out = []
+        index = 0
+        while True:
+            found = text.find(prefix, index)
+            if found == -1:
+                out.append(text[index:])
+                break
+            out.append(text[index:found])
+            rest = text[found + len(prefix):]
+            first = rest.split("/", 1)[0].split('"', 1)[0].split("'", 1)[0]
+            # Already-correct URLs and things that really are at the root.
+            if first in keep or first.endswith((".css", ".js", ".xml", ".svg",
+                                                ".txt", ".html", ".json")):
+                out.append(prefix)
+            else:
+                out.append(prefix + "en/")
+            index = found + len(prefix)
+        rewritten = "".join(out)
+        if rewritten != text:
+            path.write_text(rewritten, encoding="utf-8")
 
 
 def fix_sitemap(root, site_url):
@@ -194,7 +256,9 @@ def fix_sitemap(root, site_url):
         if stripped.startswith("<loc>") and prefix in stripped:
             path = stripped[len("<loc>"):-len("</loc>")][len(prefix):]
             # Hebrew pages and shared assets already have the right URL.
-            if path and not path.startswith(("he/", "en/")) and not path.endswith(".html"):
+            first = path.split("/", 1)[0]
+            if (path and not path.startswith(("he/", "en/"))
+                    and first not in APP_SECTIONS and not path.endswith(".html")):
                 line = line.replace(prefix + path, prefix + "en/" + path)
             elif not path:
                 line = line.replace(prefix, prefix + "en/")
@@ -224,6 +288,7 @@ def main():
         sync_theme()
         build(zola)
         relocate_english(OUTPUT_DIR)
+        fix_english_links(OUTPUT_DIR, base_url())
         fix_sitemap(OUTPUT_DIR, base_url())
         write_root_index(OUTPUT_DIR)
     except subprocess.CalledProcessError as error:
