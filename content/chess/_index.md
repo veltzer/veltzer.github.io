@@ -9,6 +9,8 @@ template = "chess.html"
   <p id="gamePlayers" class="chess-players">Loading games…</p>
   <p id="gameCounter" class="chess-counter">&nbsp;</p>
 
+  <div id="chessStats" class="chess-stats"></div>
+
   <div class="chess-picker">
     <label class="visually-hidden" for="gameSearch">Search games</label>
     <input type="search" id="gameSearch" class="chess-search"
@@ -44,11 +46,15 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
     // texts and only the headers are read eagerly; the moves of a game are
     // parsed the first time it is opened.
     const MAX_OPTIONS = 300;   // how many games to put in the <select> at once
+    // Whose games these are. Results are recorded as 1-0 / 0-1, so a win/loss
+    // record is only meaningful once you know which colour was played.
+    const ME = 'veltzer';
 
     const titleEl = document.getElementById('gameTitle');
     const playersEl = document.getElementById('gamePlayers');
     const counterEl = document.getElementById('gameCounter');
     const statusEl = document.getElementById('status');
+    const statsEl = document.getElementById('chessStats');
     const searchEl = document.getElementById('gameSearch');
     const selectEl = document.getElementById('gameSelect');
     const btnPrev = document.getElementById('btnPrev');
@@ -82,6 +88,9 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
                 black: headerValue(text, 'Black') || 'Black',
                 event: headerValue(text, 'Event') || 'Game',
                 result: headerValue(text, 'Result'),
+                // Lower-cased once here so the win/loss tally does not have to
+                // case-fold 16,000 names on every render.
+                whiteIsMe: (headerValue(text, 'White') || '').toLowerCase() === ME,
                 date: date,
                 year: (date.match(/^(\d{4})/) || [])[1] || '',
                 text: text,
@@ -89,6 +98,40 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
             });
         }
         return out;
+    }
+
+    function renderStats(list) {
+        let wins = 0, losses = 0, draws = 0, unfinished = 0, asWhite = 0;
+        let earliest = '', latest = '';
+        const opponents = new Set();
+        for (const game of list) {
+            if (game.whiteIsMe) { asWhite++; opponents.add(game.black); }
+            else { opponents.add(game.white); }
+            if (game.result === '1/2-1/2') draws++;
+            else if (game.result === '1-0') { if (game.whiteIsMe) wins++; else losses++; }
+            else if (game.result === '0-1') { if (game.whiteIsMe) losses++; else wins++; }
+            else unfinished++;
+            if (game.year) {
+                if (!earliest || game.year < earliest) earliest = game.year;
+                if (!latest || game.year > latest) latest = game.year;
+            }
+        }
+        const decided = wins + losses + draws;
+        const score = decided ? Math.round(((wins + draws / 2) / decided) * 100) : 0;
+        const cells = [
+            ['Games', list.length.toLocaleString()],
+            ['Won', wins.toLocaleString()],
+            ['Lost', losses.toLocaleString()],
+            ['Drawn', draws.toLocaleString()],
+            ['Score', score + '%'],
+            ['As white', asWhite.toLocaleString()],
+            ['Opponents', opponents.size.toLocaleString()],
+            ['Years', earliest && latest ? (earliest === latest ? earliest : earliest + '\u2013' + latest) : '\u2013']
+        ];
+        statsEl.innerHTML = cells.map(function (cell) {
+            return '<div class="chess-stat"><span class="chess-stat-value">' + cell[1] +
+                   '</span><span class="chess-stat-label">' + cell[0] + '</span></div>';
+        }).join('');
     }
 
     function label(game, index) {
@@ -101,8 +144,16 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
         const chess = new Chess();
         // chess.js will not accept header lines that start with whitespace, and
         // needs a blank line between the headers and the movetext.
+        // Two things chess.js will not accept: header lines that start with
+        // whitespace, and PGN "escape" lines beginning with % -- which 3,150 of
+        // these games carry (the ICS server wrote %eboard:clock and
+        // %eboard:clue records between the headers and the movetext). They are
+        // legal PGN but load_pgn() simply returns false, which showed as "this
+        // game has no readable moves" on nearly a fifth of the archive.
         const clean = game.text.split('\n').map(function (line) {
             return line.trim();
+        }).filter(function (line) {
+            return !line.startsWith('%');
         }).join('\n');
         game.moves = chess.load_pgn(clean) ? chess.history({verbose: true}) : [];
         return game.moves;
@@ -163,6 +214,8 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
                 filtered.push(i);
             }
         }
+        // Stats describe the current filter, so searching narrows them too.
+        renderStats(filtered.map(function (i) { return games[i]; }));
         renderOptions();
         if (filtered.length) selectGame(0);
         else statusEl.textContent = 'No games match that search.';
