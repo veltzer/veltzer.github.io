@@ -1,9 +1,8 @@
 +++
 title = "Chess Viewer"
-template = "embed.html"
+template = "chess.html"
 +++
 
-<link rel="stylesheet" href="/vendor/cm-chessboard/assets/chessboard.css"/>
 <script src="/vendor/chess.min.js"></script>
 
 <div class="chess-viewer">

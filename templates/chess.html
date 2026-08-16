@@ -1,0 +1,14 @@
+{# The chess viewer. Same wide container as the other application pages, but it
+   needs cm-chessboard's stylesheet loaded in <head> ahead of ours -- the
+   library's square fills are hardcoded hex at the same specificity as our
+   theme overrides, so whichever loads last wins. #}
+{% extends "base.html" %}
+{% block title %}{{ section.title }} &middot; {{ config.title }}{% endblock %}
+{% block main_class %}embed-main{% endblock %}
+{% block vendor_css %}
+<link rel="stylesheet" href="{{ get_url(path='vendor/cm-chessboard/assets/chessboard.css') }}">
+{% endblock %}
+{% block content %}
+<h1 class="embed-title" id="gameTitle">{{ section.title }}</h1>
+{{ section.content | safe }}
+{% endblock %}

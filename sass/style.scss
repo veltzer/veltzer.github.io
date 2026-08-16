@@ -261,3 +261,31 @@ th { background: var(--bg-surface); }
   font-size: 1.05rem;
   color: var(--text-secondary);
 }
+
+// Chessboard squares. cm-chessboard ships hardcoded hex fills (#ecdab9 /
+// #c5a076), so the board stayed wood-coloured whatever theme was selected.
+//
+// The squares are derived from --accent rather than from the surface tokens.
+// Surface tokens track the theme but sit too close together: in the dark themes
+// a bg-surface/bg-hover pairing left the black pieces almost invisible against
+// the dark squares. colour-mix against white and black instead gives a tinted
+// light square and a properly darker one, so the board keeps chess-grade
+// contrast in every theme while still taking its hue from the site.
+.cm-chessboard.default .board .square.white {
+  fill: color-mix(in srgb, var(--accent) 12%, white);
+}
+.cm-chessboard.default .board .square.black {
+  fill: color-mix(in srgb, var(--accent) 45%, #6b6b6b);
+}
+
+// Coordinates sit on the squares, which are always light-ish now, so they take
+// a fixed dark tone rather than a theme text colour.
+.cm-chessboard.default .coordinates .coordinate.white,
+.cm-chessboard.default .coordinates .coordinate.black {
+  fill: rgba(0, 0, 0, 0.45);
+}
+
+.cm-chessboard {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
