@@ -24,6 +24,11 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_DIR = REPO_ROOT / "_site"
+IMPORTER = REPO_ROOT / "scripts" / "import_teaching.py"
+SIBLINGS_PRESENT = all(
+    (REPO_ROOT.parent / name / "_site" / "index.html").is_file()
+    for name in ("teaching-slides", "teaching-syllabi", "teaching-animations")
+)
 THEME_SRC = REPO_ROOT / "shared" / "shared-themes"
 THEME_DEST = REPO_ROOT / "static" / "shared-themes"
 # Files taken from the shared-themes submodule. themes.css carries the palette;
@@ -44,6 +49,17 @@ def find_zola():
         return found
     die("zola not found on PATH. Install it from https://www.getzola.org/")
     return None
+
+
+def import_teaching():
+    """Regenerate the teaching-* pages from the sibling repos' built output.
+
+    Skipped when the siblings are absent (CI, a fresh clone) -- the committed
+    content/ pages are used as-is rather than failing the build.
+    """
+    if not SIBLINGS_PRESENT:
+        return
+    subprocess.run([sys.executable, str(IMPORTER)], check=True, cwd=REPO_ROOT)
 
 
 def sync_theme():
@@ -78,6 +94,7 @@ def build(zola):
 def main():
     zola = find_zola()
     try:
+        import_teaching()
         sync_theme()
         build(zola)
     except subprocess.CalledProcessError as error:

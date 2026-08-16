@@ -1,0 +1,13 @@
+{# A page whose body is an imported application (the teaching-* browsers).
+
+   Like embed.html it uses the wide container, but there is no iframe: the
+   application's markup, styles and scripts are part of this page, imported by
+   scripts/import_teaching.py. So there is one document, one scrollbar, and the
+   site header and theme apply to it directly. #}
+{% extends "base.html" %}
+{% block title %}{{ section.title }} &middot; {{ config.title }}{% endblock %}
+{% block main_class %}embed-main{% endblock %}
+{% block content %}
+<h1 class="embed-title">{{ section.title }}</h1>
+{{ section.content | safe }}
+{% endblock %}

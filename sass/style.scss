@@ -214,41 +214,10 @@ th { background: var(--bg-surface); }
   margin-bottom: 1rem;
 }
 
-// The frame fills the space the header, heading and footer leave, so the page
-// itself never scrolls -- only the embedded document does. A fixed 85vh left
-// the page ~158px too tall, which produced an outer scrollbar sitting next to
-// the iframe's own: two nested scrollbars for one document.
-//
-// flex on the page column is what makes this exact rather than a guess: the
-// header and footer keep their natural height and the frame takes the rest,
-// so it stays correct whatever the heading wraps to.
-.embed-frame {
-  display: block;
-  width: 100%;
-  flex: 1 1 auto;
-  min-height: 20rem;
-  border: 0;
-  border-radius: var(--radius);
-}
-
-// Applied to <html> on the embed pages so the page column can flex.
-html:has(.embed-frame),
-html:has(.embed-frame) body {
-  height: 100%;
-}
-
-html:has(.embed-frame) body {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;   // the embedded document scrolls, not the page
-}
-
-html:has(.embed-frame) .embed-main {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;      // lets the frame shrink instead of overflowing
-}
+// The application pages (media, slides, syllabi, animations) import their
+// markup directly rather than framing it, so there is one document and one
+// scrollbar. .embed-main just widens the container past the reading column.
+.app-root { width: 100%; }
 
 // Chess viewer. Every colour is a theme token, so the board page follows the
 // site theme like any other page -- it used to be a standalone file under
