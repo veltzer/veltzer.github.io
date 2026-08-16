@@ -7,10 +7,10 @@ Zola reads config.toml plus content/, templates/, sass/ and static/, and
 writes to _site/ (kept as the output dir so the Pages workflow and the
 .gitignore entries do not have to change).
 
-The blog posts under content/blog/ are generated from blog/posts/ by
-scripts/mkdocs_to_zola.py, which is run first so an edit to a MkDocs-format
-post still reaches the built site. That indirection is temporary: once the
-MkDocs tree is retired, posts will be authored directly in content/.
+Posts are authored directly in content/blog/. The old blog/posts/ tree and
+scripts/mkdocs_to_zola.py were the one-time migration path and have been
+retired: the converter rebuilt content/blog from scratch on every run, which
+silently destroyed anything added there by hand -- translations included.
 
 Zola is a single static binary with no runtime dependencies, so unlike the
 MkDocs build there is nothing to pip install and no plugin versions to pin.
@@ -24,7 +24,6 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_DIR = REPO_ROOT / "_site"
-CONVERTER = REPO_ROOT / "scripts" / "mkdocs_to_zola.py"
 THEME_SRC = REPO_ROOT / "shared" / "shared-themes"
 THEME_DEST = REPO_ROOT / "static" / "shared-themes"
 # Files taken from the shared-themes submodule. themes.css carries the palette;
@@ -66,11 +65,6 @@ def sync_theme():
         shutil.copy2(source, THEME_DEST / name)
 
 
-def convert_posts():
-    """Regenerate content/blog from the MkDocs-format posts."""
-    subprocess.run([sys.executable, str(CONVERTER)], check=True, cwd=REPO_ROOT)
-
-
 def build(zola):
     # Zola wipes and recreates the output directory itself.
     subprocess.run(
@@ -85,7 +79,6 @@ def main():
     zola = find_zola()
     try:
         sync_theme()
-        convert_posts()
         build(zola)
     except subprocess.CalledProcessError as error:
         sys.exit(error.returncode)
