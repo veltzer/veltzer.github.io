@@ -3,20 +3,20 @@
 """
 Local QA preview of the site as GitHub Pages will serve it.
 
-Why not `mkdocs serve`?
-  `mkdocs serve` is great for authoring (live rebuild + browser
+Why not `zola serve`?
+  `zola serve` is great for authoring (live rebuild + browser
   auto-reload), but it is NOT faithful to what gets deployed:
-    - It serves from an in-memory build, not the real `docs/` output.
-    - It skips `pydmt` and the `../data/` copy step, so pydmt-generated
-      files (e.g. keys.js) and the media tracker / chess data are
+    - It serves from an in-memory build, not the real `_site/` output.
+    - It skips the theme sync and the `../data/` copy step, so the
+      shared-themes tokens and the media tracker / chess data can be
       missing or stale.
     - It injects a livereload script and can handle routing /
       trailing-slashes slightly differently than a plain static server.
 
 For QA we want the closest local approximation to GitHub Pages:
-  1. Run the full build (`scripts/build_docs.py`) to produce `_site/`
+  1. Run the full build (`scripts/build_site.py`) to produce `_site/`
      exactly as it will be deployed.
-  2. Serve `docs/` with a dumb static server.
+  2. Serve `_site/` with a dumb static server.
 
 By default this script just builds and serves; it does not open a
 browser. Use --preview to launch a browser pointed at the local URL,
@@ -45,18 +45,12 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def read_site_dir():
-    # Parse `site_dir:` out of mkdocs.yml without pulling in PyYAML.
-    config = REPO_ROOT / "mkdocs.yml"
-    for line in config.read_text().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("site_dir:"):
-            value = stripped.split(":", 1)[1].strip()
-            return (REPO_ROOT / value.strip("\"'")).resolve()
+    # zola's output dir, set by scripts/build_site.py.
     return (REPO_ROOT / "_site").resolve()
 
 
-def build_docs():
-    subprocess.run([str(REPO_ROOT / "scripts" / "build_docs.py")], check=True)
+def build_site():
+    subprocess.run([str(REPO_ROOT / "scripts" / "build_site.py")], check=True)
 
 
 def start_server(port, docs_dir):
@@ -126,7 +120,7 @@ def launch_browser(url, anonymous):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Build the site and serve docs/ locally.",
+        description="Build the site and serve _site/ locally.",
     )
     parser.add_argument(
         "--port", type=int, default=DEFAULT_PORT,
@@ -143,7 +137,7 @@ def main():
     )
     parser.add_argument(
         "--no-build", action="store_true",
-        help="skip running scripts/build_docs.py before serving",
+        help="skip running scripts/build_site.py before serving",
     )
     args = parser.parse_args()
 
@@ -151,7 +145,7 @@ def main():
         args.preview = True
 
     if not args.no_build:
-        build_docs()
+        build_site()
 
     docs_dir = read_site_dir()
     if not docs_dir.is_dir():
