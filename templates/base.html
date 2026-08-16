@@ -56,7 +56,9 @@
   </nav>
 </header>
 
-<main class="site-main">
+{# main_class is a block so a template can opt out of the narrow reading
+   column -- the embed pages use a wide one. #}
+<main class="{% block main_class %}site-main{% endblock %}">
 {% block content %}{% endblock %}
 </main>
 

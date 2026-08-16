@@ -1,0 +1,16 @@
+{# Full-width page whose entire body is one embedded application.
+
+   Used by the slides / syllabi / animations sections, which host a separate
+   document in an iframe. They need a wide container and a tall frame rather
+   than the 42rem reading column the prose templates use, so they get their own
+   template instead of the shared section.html plus CSS overrides. #}
+{% extends "base.html" %}
+{% block title %}{{ section.title }} &middot; {{ config.title }}{% endblock %}
+{% block main_class %}embed-main{% endblock %}
+{% block content %}
+{# The media page renders its own heading from JS, so it opts out. #}
+{%- if not section.extra.hide_title %}
+<h1 class="embed-title">{{ section.title }}</h1>
+{%- endif %}
+{{ section.content | safe }}
+{% endblock %}
