@@ -8,6 +8,13 @@ tags = ["perl", "linux", "command-line"]
 
 In the course of running various grep(1) combination to find various defects in source files I ran into inherent grep(1) difficulties. It seems that the regular expression syntax in grep(1) is very limited and so it's better to use perl to solve these issues as it's regular expression support is fantastic. A small script can solve all your grepping needs. So here it is. Please comment with fixes and I'll incorporate them if you want to add features.
 
+*(Note: this post was imported from an old WordPress blog, and the import ate the
+`<` characters in the script — taking the loop condition, the `open` and the
+`while` line with them. The listing below is reconstructed. Note the `while` line
+uses `my $line` rather than the `my($line)` style used elsewhere here: the
+parenthesised form puts the readline in list context, which reads only the first
+line of each file.)*
+
 ```perl
 #!/usr/bin/perl -w
 
@@ -21,7 +28,13 @@ my($pattern)=$ARGV[0];
 my($debug)=0;
 my($print_filename)=1;
 
-for(my($i)=1;$i) {
+for(my($i)=1;$i<@ARGV;$i++) {
+        my($filename)=$ARGV[$i];
+        if($debug) {
+                print "doing file [$filename]\n";
+        }
+        open(FILE,"<",$filename) || die("unable to open file [$filename]: $!");
+        while(my $line=<FILE>) {
                 if($line=~$pattern) {
                         if($print_filename) {
                                 print $filename.": ";
