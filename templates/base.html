@@ -54,7 +54,16 @@
         {%- if page and page.translations %}
           {%- for translation in page.translations %}
             {%- if translation.lang | default(value=config.default_language) == entry.code %}
-              {%- set_global target = translation.permalink %}
+              {#- zola builds permalinks assuming the default language owns the
+                  site root, so an English permalink comes out as
+                  {base_url}/blog/x/ -- a URL that no longer exists now that the
+                  English pages live under /en/. Insert the prefix here; the
+                  Hebrew permalinks already carry /he/ and are left alone. -#}
+              {%- if entry.code == config.default_language %}
+                {%- set_global target = translation.permalink | replace(from=config.base_url ~ "/", to=config.base_url ~ "/" ~ entry.code ~ "/") %}
+              {%- else %}
+                {%- set_global target = translation.permalink %}
+              {%- endif %}
             {%- endif %}
           {%- endfor %}
         {%- endif %}
