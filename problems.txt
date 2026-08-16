@@ -1,0 +1,5 @@
+language switcher should be a combo box not two buttons.
+theme switcher should be at the top bar.
+where is the chess viewer?
+applications (slides, syllabi, animations) only show cut page and do not scroll down.
+media shows it's code and not the actual application.
