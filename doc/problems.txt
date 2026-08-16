@@ -1,3 +1,51 @@
-maybe use a better tool than mkdocs?
+DONE: maybe use a better tool than mkdocs?
 
-Find a way to count number of visitors on each page of the blog/site and display them.
+    Migrated to zola (single Rust binary, pinned to v0.23.3 in the workflow).
+
+    This was not cosmetic. MkDocs' blog plugin generates its post, archive and
+    pagination pages virtually, and every i18n plugin works by rewriting the
+    file set before pages exist -- so the two are mutually incompatible. The
+    build exited 0 while emitting ZERO post pages. That is what blocked the
+    Hebrew translation, and it is why the migration happened.
+
+    Zola gave us: per-language URLs (/he/...), per-language feeds and tag
+    pages, and a language switcher generated from page.translations rather than
+    hand-maintained cross-links. Adding a sixth language costs one file per
+    post and no template change.
+
+    See the "Internationalization" entry in doc/IMPROVEMENTS.md for the full
+    write-up, including why mkdocs-static-i18n must not be retried.
+
+
+PARTLY DONE: Find a way to count number of visitors on each page of the
+blog/site and display them.
+
+    Live on the media pages via counterapi v2 -- "Page Visits: N" in the
+    footer, backed by workspace `veltzer-org`, counter `veltzerorg`.
+
+    Two things worth knowing:
+
+    1. The workspace is PUBLIC, deliberately, and there is no token in the
+       shipped JavaScript. This is not laziness -- it is the only thing that
+       works. An Authorization header makes the request non-simple, so the
+       browser sends a CORS preflight first, and counterapi's preflight only
+       allows Origin/Content-Length/Content-Type. Authenticated calls fail from
+       a browser with "Failed to fetch" EVEN WITH A VALID TOKEN, while working
+       fine from curl, which sends no preflight. Do not "fix" this by adding
+       auth back.
+
+    2. The API is eventually consistent and its reported total is unreliable.
+       The /up response echoes a stale up_count, so the displayed number comes
+       from a follow-up read. During testing the value read 7, then 8, then 7
+       again, with updated_at frozen at the creation timestamp. Treat it as a
+       rough signal, not an exact count.
+
+    STILL OPEN -- the "each page" half. What exists is a single site-wide
+    counter incremented by the media pages, not a per-page count across the 80
+    blog posts. Per-page counting needs one counter per URL, and the counterapi
+    free tier caps at 5 public counters, so it is not reachable on this plan.
+
+    Options if per-page counting matters: pay for a higher counterapi tier, or
+    use site-wide analytics instead (doc/ANALYTICS.md recommends GoatCounter --
+    free, no cookie banner, per-page figures in a dashboard, but no number
+    displayed on the page itself).
