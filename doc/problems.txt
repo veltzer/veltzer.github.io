@@ -1,3 +1,22 @@
+DONE: rewrite /scripts/manage_api_key.sh in python
+
+    It is scripts/manage_api_key.py. (These two items were dropped from this
+    file in commit 10dbc46 without being recorded as done -- restored here so
+    the record is complete.)
+
+
+DONE: make that script not hardcode any details about this project.
+
+    Every project-specific value is now a flag with an environment-variable
+    fallback: --project-id / API_KEY_PROJECT_ID, --pass-path, --referrer,
+    --api-service, --display-name. The calendar values remain as defaults so
+    the common case still works with no arguments.
+
+    Fixed while checking this: the --referrer default still read
+    `veltzer.github.io/*`, the domain that 301-redirects to veltzer.org. Now
+    `veltzer.org/*`.
+
+
 DONE: maybe use a better tool than mkdocs?
 
     Migrated to zola (single Rust binary, pinned to v0.23.3 in the workflow).

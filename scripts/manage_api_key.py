@@ -17,7 +17,7 @@ Subcommands:
 Configuration (flag / env var / default):
   --project-id   API_KEY_PROJECT_ID    veltzer-calendar-id
   --pass-path    API_KEY_PASS_PATH     cloud/gcp/calendar
-  --referrer     API_KEY_REFERRER      veltzer.github.io/*
+  --referrer     API_KEY_REFERRER      veltzer.org/*
   --api-service  API_KEY_API_SERVICE   calendar-json.googleapis.com
   --display-name API_KEY_DISPLAY_NAME  calendar-api-key
 """
@@ -31,7 +31,7 @@ import sys
 DEFAULTS = {
     "project_id": "veltzer-calendar-id",
     "pass_path": "cloud/gcp/calendar",
-    "referrer": "veltzer.github.io/*",
+    "referrer": "veltzer.org/*",
     "api_service": "calendar-json.googleapis.com",
     "display_name": "calendar-api-key",
 }
