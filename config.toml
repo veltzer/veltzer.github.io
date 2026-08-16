@@ -1,6 +1,5 @@
 base_url = "https://veltzer.org"
 title = "Mark Veltzer's personal site"
-description = "Mark Veltzer's personal website — blog, media tracker, calendar, and chess viewer"
 author = "Mark Veltzer"
 
 default_language = "en"

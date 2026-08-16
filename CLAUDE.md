@@ -5,7 +5,7 @@ Mark Veltzer's personal website hosted on GitHub Pages at veltzer.org (CNAME). C
 
 ## Tech Stack
 - **Frontend**: HTML5, CSS3, JavaScript (ES9+)
-- **Build**: rsconstruct (single binary, configured via `.rsconstruct/` and `config/*.lua`), MkDocs 1.6+ (Material theme) with the blog/tags/rss/glightbox plugins, npm
+- **Build**: rsconstruct (single binary, configured via `.rsconstruct/` and `config/*.lua`), zola (static site generator, pinned — see Build Commands), MkDocs 1.6+ (Material theme) with the blog/tags/rss/glightbox plugins, npm
 - **Linting**: jshint (JavaScript via `.jshintrc`), htmllint (`.htmllintrc`), yamllint (`.yamllint.yaml`), aspell (`.aspell.en.pws`, `.spellcheck-words`)
 - **Data**: YAML for media content, PGN for chess games, Markdown for blog posts
 
@@ -25,6 +25,26 @@ Mark Veltzer's personal website hosted on GitHub Pages at veltzer.org (CNAME). C
 - `rsconstruct status` — Show build status
 - `scripts/build_docs.py` — Convenience wrapper for the docs build
 - `scripts/serve.py` — Local preview server
+
+### Prerequisite: zola
+`scripts/build_site.py` shells out to the [zola](https://www.getzola.org/) static
+site generator. It is **not** installed by `rsconstruct tools install`, so a fresh
+clone fails the build with `ERROR: zola not found on PATH`. Install it by hand:
+
+```bash
+ZOLA_VERSION=v0.23.3
+gh release download "$ZOLA_VERSION" --repo getzola/zola \
+  --pattern '*x86_64-unknown-linux-gnu.tar.gz' --output /tmp/zola.tar.gz
+tar xzf /tmp/zola.tar.gz -C ~/.local/bin zola
+chmod +x ~/.local/bin/zola
+zola --version   # expect: zola 0.23.3
+```
+
+Keep the version in step with `ZOLA_VERSION` in `.github/workflows/build.yml`.
+The pin is deliberate: 0.23 renamed config keys (`highlight_code` →
+`[markdown.highlighting]`) and swapped the highlighter, so an unpinned upgrade
+can fail the build on `config.toml` alone. Distro packages and `cargo install
+zola` track other versions — prefer the pinned release tarball.
 
 ## Coding Conventions
 - JavaScript: camelCase, ES9+, jshint-clean
