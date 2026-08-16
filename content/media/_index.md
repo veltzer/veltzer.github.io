@@ -130,9 +130,12 @@ showPeople: false,
 };
 </script>
 
-<script src="../keys.js"></script>
-<script src="../media-utils.js"></script>
+<script src="/keys.js"></script>
+<script src="/media-utils.js"></script>
 <script>
-window.mediaBasePath = '../';
+// Absolute, not '../': the plugins and data live at the site root, and a
+// relative path only reached them while English was served there. From
+// /en/media/ it would resolve to /en/.
+window.mediaBasePath = '/';
 </script>
-<script src="../media-app.js"></script>
+<script src="/media-app.js"></script>
