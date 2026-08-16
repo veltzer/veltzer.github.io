@@ -67,7 +67,6 @@ nav = [
     # chess.html is a standalone app page under static/, not a content/ section,
     # so it needs an explicit entry -- it was unreachable by navigation until now.
     { name = "Chess", path = "chess/" },
-    { name = "Board", path = "board/" },
     { name = "Slides", path = "slides/" },
     { name = "Syllabi", path = "syllabi/" },
     { name = "Animations", path = "animations/" },
