@@ -161,8 +161,14 @@ def relocate_english(root):
     for entry in list(root.iterdir()):
         if entry.name in SHARED_ROOT:
             continue
-        # Standalone .html files at the root are redirects or legacy app pages;
-        # leave them where they are so old links keep working.
+        # index.html is the English home page and has to move with the rest of
+        # the English site -- without this it stays at the root and is then
+        # overwritten by the language chooser, leaving /en/ with no index.
+        if entry.name == "index.html":
+            shutil.move(str(entry), str(english / entry.name))
+            continue
+        # Other standalone .html files at the root are redirects or legacy app
+        # pages; leave them where they are so old links keep working.
         if entry.is_file() and entry.suffix == ".html":
             continue
         if entry.is_file() and entry.suffix in {".xml", ".json", ".js", ".css", ".txt"}:
