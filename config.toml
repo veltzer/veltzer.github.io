@@ -121,7 +121,6 @@ themes = [
 # rather than writing, so they live at the site root and take no prefix.
 nav = [
     { key = "nav_blog", path = "blog/" },
-    { key = "nav_about", path = "about/" },
     { key = "nav_tags", path = "tags/" },
     { key = "nav_media", path = "media/", app = true },
     { key = "nav_calendar", path = "calendar/", app = true },
@@ -129,4 +128,8 @@ nav = [
     { key = "nav_slides", path = "slides/", app = true },
     { key = "nav_syllabi", path = "syllabi/", app = true },
     { key = "nav_animations", path = "animations/", app = true },
+    # About sits last by convention: it is a low-traffic identity page that
+    # readers seek out deliberately, so it closes the bar rather than
+    # separating Blog from Tags, which are two views of the same content.
+    { key = "nav_about", path = "about/" },
 ]
