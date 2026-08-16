@@ -10,7 +10,7 @@
 {% block content %}
 {# The media page renders its own heading from JS, so it opts out. #}
 {%- if not section.extra.hide_title %}
-<h1 class="embed-title">{{ section.title }}</h1>
+<h1 class="embed-title" id="gameTitle">{{ section.title }}</h1>
 {%- endif %}
 {{ section.content | safe }}
 {% endblock %}

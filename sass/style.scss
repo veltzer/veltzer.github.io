@@ -221,3 +221,46 @@ th { background: var(--bg-surface); }
   border: 0;
   border-radius: var(--radius);
 }
+
+// Chess viewer. Every colour is a theme token, so the board page follows the
+// site theme like any other page -- it used to be a standalone file under
+// static/ with hardcoded dark Tailwind classes and no site header.
+.chess-viewer { text-align: center; }
+
+.chess-players { color: var(--text-secondary); margin: 0 0 0.25rem; }
+.chess-counter { color: var(--text-muted); font-size: 0.85rem; margin: 0 0 1.5rem; }
+
+.chess-board {
+  width: 100%;
+  max-width: 32rem;
+  margin: 0 auto 1.5rem;
+}
+
+.chess-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.chess-btn {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+}
+.chess-btn:hover:not(:disabled) { background: var(--bg-hover); border-color: var(--accent); }
+.chess-btn:disabled { opacity: 0.45; cursor: default; }
+.chess-btn--game { background: var(--bg-surface); }
+
+.chess-status {
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+}
