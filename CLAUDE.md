@@ -79,11 +79,20 @@ tags = ["religion", "philosophy", "ethics"]
 +++
 ```
 
-- **Translations**: add `content/blog/<same-base-name>.he.md`. Copy `date` and `tags`
-  verbatim from the English file — they are shared keys, and a mismatch splits the pair.
-  Translate only the `title` value. Do not add a `lang` key; zola infers it from the
-  filename. The language switcher renders itself from `page.translations`, so never
-  hand-write cross-links between a post and its translation.
+- **Translations**: add `content/blog/<same-base-name>.he.md`. Copy `date` verbatim
+  from the English file — it is a shared key, and a mismatch splits the pair.
+  Translate the `title` value and the `tags` (see below). Do not add a `lang` key;
+  zola infers it from the filename. The language switcher renders itself from
+  `page.translations`, so never hand-write cross-links between a post and its
+  translation.
+- **Post slugs are shared between languages, deliberately.** `/en/blog/foo/` and
+  `/he/blog/foo/` use the same English slug, because zola derives it from the
+  filename and the filename is what pairs the two files. Do not "fix" this by
+  renaming the Hebrew file or adding a `slug =` key — see
+  `doc/DECISIONS.md` for why. Tag slugs *are* translated; posts are the exception.
+- **Tags are translated, and are NOT a shared key.** A Hebrew post carries Hebrew
+  tags (`דת`, not `religion`), so `/en/tags/` and `/he/tags/` are disjoint term
+  sets. This is safe precisely because the pairing is by filename, not by tag.
 - Links between posts use zola's `@/` syntax, resolved against the content root:
   `[text](@/blog/other_post.md)`.
 - All 80 posts currently exist in both English and Hebrew.

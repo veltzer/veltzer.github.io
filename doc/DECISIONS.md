@@ -114,6 +114,59 @@ users who expand it, and the button shows the active filter count so
 users know when filters are applied. The sort controls remain always
 visible since they are small and frequently used.
 
+## Post slugs are shared between languages; tag slugs are not
+
+`/en/blog/bayes-theorem-liars/` and `/he/blog/bayes-theorem-liars/` serve the
+same post in two languages under the *same* English slug. Tags, by contrast,
+are fully translated: `/en/tags/religion/` and `/he/tags/דת/`.
+
+That asymmetry is deliberate.
+
+### Why posts keep a shared slug
+
+Zola derives a post's URL from its filename, and **the filename is also what
+pairs a post with its translation**: `foo.md` and `foo.he.md` are one post in
+two languages precisely because they share a base name. `page.translations` --
+which renders the language switcher on all 160 pages -- is built from that
+pairing.
+
+Giving Hebrew posts Hebrew URLs therefore means one of:
+
+- renaming the Hebrew files, which severs the pairing and kills the language
+  switcher on all 80 posts; or
+- adding an explicit `slug = "..."` to each Hebrew post's front matter, which
+  preserves the pairing but adds 80 hand-maintained keys that must not drift.
+
+Neither buys much. Three further points settled it:
+
+1. The English URLs are already published. Changing them creates 80 dead URLs
+   unless redirects are left behind for each.
+2. Post slugs are long multi-word phrases. Percent-encoded Hebrew turns
+   `/he/blog/bayes-theorem-liars/` into a ~200-character URL that is unpleasant
+   to share, type or paste into a terminal.
+3. An ASCII post slug stays greppable and stable regardless of the reading
+   language -- a property worth keeping for URLs that get linked to.
+
+### Why tags are different
+
+Tags are short, reader-facing, and browsed as a list. `/he/tags/` is a page a
+Hebrew reader actually reads down, so English words there were plainly wrong in
+a way an opaque post URL is not. Tags are also *not* a shared key -- nothing
+pairs on them -- so translating them costs nothing structurally.
+
+This needs `[slugify] taxonomies = "safe"` in `config.toml`, scoped to
+taxonomies only. Zola's default slugify transliterates rather than strips, so
+ארכיאולוגיה would otherwise become `rky-vlvgyh`: unreadable in either language.
+`paths` and `anchors` stay on the default so post URLs do not move.
+
+### Consequence to be aware of
+
+Because tags are no longer copied verbatim between a post and its translation,
+nothing checks that the two tag sets stay conceptually in step. A Hebrew post
+tagged with an English word will not error -- it will quietly create a new
+English term under `/he/tags/`. The five technology tags that legitimately stay
+in latin (gpg, ssh, mysql, mkdocs, github-pages) make that easy to miss.
+
 ## No custom JS/HTML minification
 Investigated adding minification (terser, html-minifier) for custom plugin
 JS files (`plugin-*.js`, `media-utils.js`) and HTML files. Decided against
