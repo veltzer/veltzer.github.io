@@ -8,6 +8,7 @@
 <meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="stylesheet" href="{{ get_url(path='shared-themes/themes.css') }}">
 <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
 <link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path='atom.xml') }}">
 {%- block extra_head %}{% endblock %}

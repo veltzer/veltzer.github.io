@@ -12,6 +12,9 @@ jobs:
       name: github-pages
     steps:
     - uses: actions/checkout@v6
+      with:
+        # shared-themes provides the design tokens; the build fails without it.
+        submodules: recursive
     - uses: actions/setup-python@v6
       with:
         cache: pip

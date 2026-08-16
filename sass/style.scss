@@ -1,129 +1,160 @@
-// Typography-first layout. The site is long-form argumentative prose, so the
-// reading column and vertical rhythm matter more than chrome.
+// Site styles, built on the shared design tokens.
+//
+// The palette, radii, fonts and shadows come from shared/shared-themes (a git
+// submodule, also used by teaching-slides / teaching-syllabi / teaching-
+// animations). Nothing here hardcodes a colour: every value is a var(--token)
+// from themes.css, so switching data-theme on <html> restyles the whole site
+// and the sibling sites stay visually consistent.
+//
+// Azure applies by default via :root, so no attribute is needed for the
+// standard look -- it matches the indigo palette the MkDocs site used.
 
-:root {
-  --fg: #1a1a1a;
-  --fg-muted: #5a5a5a;
-  --bg: #ffffff;
-  --accent: #2563eb;
-  --rule: #e5e5e5;
-  --code-bg: #f5f5f5;
-  --measure: 42rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --fg: #e8e8e8;
-    --fg-muted: #a0a0a0;
-    --bg: #16181c;
-    --accent: #7aa7ff;
-    --rule: #2c2f36;
-    --code-bg: #22252b;
-  }
-}
+// themes.css is copied to static/shared-themes/ by scripts/build_site.py and
+// linked from base.html, rather than @import-ed here: dart-sass leaves a plain
+// @import of a .css file as a runtime import, and the relative path would then
+// resolve against /style.css and 404.
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
   background: var(--bg);
-  color: var(--fg);
-  font: 1.05rem/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Heebo, sans-serif;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.7;
 }
 
 a { color: var(--accent); }
 a:hover { text-decoration: underline; }
 
+// ─── Chrome ───
+
 .site-header {
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-surface);
   padding: 1rem 1.25rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1.25rem;
   align-items: baseline;
 }
-.site-title { font-weight: 700; text-decoration: none; color: var(--fg); }
+
+.site-title {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
 .site-nav { display: flex; flex-wrap: wrap; gap: 1rem; }
+.site-nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.92rem;
+  transition: color var(--transition);
+}
+.site-nav a:hover { color: var(--accent); }
 
 // Site-level language switcher, pushed to the far end of the header so it
 // reads as chrome rather than another nav item.
 .site-lang { display: flex; gap: 0.4rem; margin-inline-start: auto; }
-.site-nav a { color: var(--fg-muted); text-decoration: none; font-size: 0.92rem; }
-.site-nav a:hover { color: var(--accent); }
 
-.site-main { max-width: var(--measure); margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+.site-main { max-width: 42rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
 
 .site-footer {
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--border);
+  background: var(--bg-surface);
   padding: 1.5rem 1.25rem;
-  color: var(--fg-muted);
+  color: var(--text-secondary);
   font-size: 0.9rem;
   text-align: center;
 }
+
+// ─── Content ───
 
 h1 { font-size: 1.9rem; line-height: 1.25; margin: 0 0 0.5rem; }
 h2 { font-size: 1.35rem; margin: 2.2rem 0 0.6rem; }
 h3 { font-size: 1.1rem; margin: 1.8rem 0 0.5rem; }
 
-.post-meta { color: var(--fg-muted); font-size: 0.9rem; margin: 0 0 1.5rem; }
-.post-header { border-bottom: 1px solid var(--rule); padding-bottom: 1rem; margin-bottom: 1.5rem; }
+.post-meta { color: var(--text-secondary); font-size: 0.9rem; margin: 0 0 1.5rem; }
+.post-header {
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
 
 .tag {
   display: inline-block;
-  background: var(--code-bg);
-  color: var(--fg-muted);
-  border-radius: 999px;
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  border-radius: var(--radius-pill);
   padding: 0.1rem 0.6rem;
   margin: 0 0.15rem;
   font-size: 0.8rem;
   text-decoration: none;
+  transition: background var(--transition), color var(--transition);
 }
-.tag:hover { color: var(--accent); }
+.tag:hover { background: var(--bg-hover); color: var(--accent); }
 
-// Language switcher. Rendered from page.translations, so it appears only on
-// posts that actually have a translation.
+// Language switchers -- both the per-post one and the site-level one.
 .lang-switcher { display: flex; gap: 0.4rem; margin-top: 0.75rem; }
 .lang {
   text-transform: uppercase;
   font-size: 0.75rem;
   letter-spacing: 0.04em;
   padding: 0.15rem 0.5rem;
-  border: 1px solid var(--rule);
-  border-radius: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
   text-decoration: none;
+  color: var(--text-secondary);
+  transition: background var(--transition), color var(--transition);
 }
-.lang.current { background: var(--accent); color: #fff; border-color: var(--accent); }
+.lang:hover { background: var(--bg-hover); color: var(--accent); }
+.lang.current { background: var(--accent); color: var(--bg); border-color: var(--accent); }
 
 .post-list { list-style: none; padding: 0; }
-.post-list li { padding: 0.6rem 0; border-bottom: 1px solid var(--rule); }
+.post-list li { padding: 0.6rem 0; border-bottom: 1px solid var(--border-subtle); }
 .post-link { font-weight: 600; text-decoration: none; }
-.post-list time { color: var(--fg-muted); font-size: 0.85rem; margin-inline-start: 0.5rem; }
+.post-list time { color: var(--text-muted); font-size: 0.85rem; margin-inline-start: 0.5rem; }
 
-.post-body img { max-width: 100%; height: auto; }
+.post-body img { max-width: 100%; height: auto; border-radius: var(--radius-sm); }
 .post-body blockquote {
   margin-inline: 0;
   padding-inline-start: 1rem;
-  border-inline-start: 3px solid var(--rule);
-  color: var(--fg-muted);
+  border-inline-start: 3px solid var(--border);
+  color: var(--text-secondary);
 }
 
-pre, code { background: var(--code-bg); border-radius: 4px; }
+pre, code {
+  background: var(--bg-surface);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+}
 code { padding: 0.1rem 0.3rem; font-size: 0.9em; }
-pre { padding: 0.9rem 1rem; overflow-x: auto; }
-pre code { background: none; padding: 0; }
+pre { padding: 0.9rem 1rem; overflow-x: auto; border: 1px solid var(--border-subtle); }
+pre code { background: none; padding: 0; border: 0; }
 
 table { border-collapse: collapse; width: 100%; }
-th, td { border: 1px solid var(--rule); padding: 0.4rem 0.6rem; text-align: start; }
+th, td { border: 1px solid var(--border); padding: 0.4rem 0.6rem; text-align: start; }
+th { background: var(--bg-surface); }
 
-.post-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; font-size: 0.9rem; }
+.post-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+}
 .pagination { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; }
 .tag-cloud { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.tag-cloud .count { color: var(--fg-muted); font-size: 0.8rem; }
+.tag-cloud .count { color: var(--text-muted); font-size: 0.8rem; }
 
-// Hebrew (RTL). The <html dir="rtl"> from base.html handles direction; these
-// cover what direction alone does not -- content that must stay LTR inside RTL
-// prose. Logical properties (margin-inline, text-align: start) mean most of the
-// layout above already flips correctly.
+// ─── Hebrew (RTL) ───
+// <html dir="rtl"> from base.html handles direction; these cover what direction
+// alone does not -- content that must stay LTR inside RTL prose. The layout
+// above uses logical properties (margin-inline, text-align: start), so it flips
+// on its own.
+
 [lang="he"] .post-body,
 [lang="he"] .post-header { text-align: right; }
 

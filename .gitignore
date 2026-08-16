@@ -168,3 +168,4 @@ project/
 
 # Zola build output
 /public/
+/static/shared-themes/

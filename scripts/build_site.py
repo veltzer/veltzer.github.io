@@ -25,6 +25,12 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_DIR = REPO_ROOT / "_site"
 CONVERTER = REPO_ROOT / "scripts" / "mkdocs_to_zola.py"
+THEME_SRC = REPO_ROOT / "shared" / "shared-themes"
+THEME_DEST = REPO_ROOT / "static" / "shared-themes"
+# Files taken from the shared-themes submodule. themes.css carries the palette;
+# theme-switcher.js is copied so a theme picker can be added without another
+# build change.
+THEME_FILES = ["themes.css", "theme-switcher.js"]
 
 
 def die(message):
@@ -39,6 +45,25 @@ def find_zola():
         return found
     die("zola not found on PATH. Install it from https://www.getzola.org/")
     return None
+
+
+def sync_theme():
+    """Copy the shared-themes files into static/ so Zola serves them.
+
+    Kept as a copy rather than a symlink or a sass @import: dart-sass leaves a
+    plain @import of a .css file as a runtime import, and Zola does not follow
+    symlinks out of the project. Copying on every build means the submodule is
+    the single source of truth -- editing static/shared-themes/ directly would
+    be overwritten, which is the intent.
+    """
+    if not THEME_SRC.is_dir():
+        die(f"{THEME_SRC} missing. Run: git submodule update --init --recursive")
+    THEME_DEST.mkdir(parents=True, exist_ok=True)
+    for name in THEME_FILES:
+        source = THEME_SRC / name
+        if not source.is_file():
+            die(f"{source} missing from the shared-themes submodule")
+        shutil.copy2(source, THEME_DEST / name)
 
 
 def convert_posts():
@@ -59,6 +84,7 @@ def build(zola):
 def main():
     zola = find_zola()
     try:
+        sync_theme()
         convert_posts()
         build(zola)
     except subprocess.CalledProcessError as error:

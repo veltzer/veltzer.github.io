@@ -1,0 +1,3 @@
+[submodule "shared/shared-themes"]
+	path = shared/shared-themes
+	url = git@github.com:veltzer/shared-themes.git
