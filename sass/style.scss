@@ -310,6 +310,35 @@ th { background: var(--bg-surface); }
 }
 .chess-search { min-width: 16rem; }
 .chess-select { max-width: 26rem; }
+// The year picker holds only "All years" plus four-digit years, so it does not
+// need the width the game list does.
+.chess-select--year { max-width: 9rem; }
+
+// "Go to game [ N ] of 15,964" -- the only way to reach a game outside the
+// <select>'s window.
+.chess-jump-label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  align-self: center;
+}
+
+.chess-jump {
+  background: var(--bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 0.35rem 0.5rem;
+  font: inherit;
+  font-size: 0.9rem;
+  width: 7rem;
+}
+.chess-jump:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.chess-jump-range {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  align-self: center;
+}
 
 .chess-status {
   margin-top: 1rem;

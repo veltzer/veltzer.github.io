@@ -15,8 +15,17 @@ template = "chess.html"
     <label class="visually-hidden" for="gameSearch">Search games</label>
     <input type="search" id="gameSearch" class="chess-search"
            placeholder="Search by player, event or year…" autocomplete="off">
+    <label class="visually-hidden" for="yearSelect">Year</label>
+    <select id="yearSelect" class="chess-select chess-select--year"></select>
     <label class="visually-hidden" for="gameSelect">Game</label>
     <select id="gameSelect" class="chess-select"></select>
+  </div>
+
+  <div class="chess-picker">
+    <label class="chess-jump-label" for="gameJump">Go to game</label>
+    <input type="number" id="gameJump" class="chess-jump" min="1" step="1"
+           inputmode="numeric" autocomplete="off">
+    <span id="jumpRange" class="chess-jump-range"></span>
   </div>
 
   <div id="gameBoard" class="chess-board"></div>
@@ -57,6 +66,9 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
     const statsEl = document.getElementById('chessStats');
     const searchEl = document.getElementById('gameSearch');
     const selectEl = document.getElementById('gameSelect');
+    const yearEl = document.getElementById('yearSelect');
+    const jumpEl = document.getElementById('gameJump');
+    const jumpRangeEl = document.getElementById('jumpRange');
     const btnPrev = document.getElementById('btnPrev');
     const btnNext = document.getElementById('btnNext');
     const btnPrevGame = document.getElementById('btnPrevGame');
@@ -67,6 +79,7 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
     let filtered = [];     // indices into games
     let currentGame = 0;   // index into filtered
     let currentMove = 0;
+    let windowStart = 0;   // first entry of the <select>'s window, into filtered
 
     function headerValue(text, key) {
         const match = text.match(new RegExp('\\[' + key + ' "([^"]*)"'));
@@ -159,15 +172,46 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
         return game.moves;
     }
 
+    // The <select> holds a MAX_OPTIONS-sized window of the filtered list rather
+    // than always the first MAX_OPTIONS. Without a window, jumping to game 666
+    // could not work at all: the option simply would not exist in the DOM.
+    // windowStart is the index into `filtered` of the window's first entry.
+    function windowFor(index) {
+        if (filtered.length <= MAX_OPTIONS) return 0;
+        // Centre the window on the target, then clamp to the ends of the list.
+        const half = Math.floor(MAX_OPTIONS / 2);
+        return Math.max(0, Math.min(index - half, filtered.length - MAX_OPTIONS));
+    }
+
     function renderOptions() {
-        const shown = filtered.slice(0, MAX_OPTIONS);
+        const shown = filtered.slice(windowStart, windowStart + MAX_OPTIONS);
         selectEl.innerHTML = shown.map(function (gameIndex, position) {
-            return '<option value="' + position + '">' +
-                   label(games[gameIndex], gameIndex) + '</option>';
+            // The option value is the absolute index into `filtered`, so the
+            // handler does not have to know where the window happens to start.
+            return '<option value="' + (windowStart + position) + '">' +
+                   label(games[gameIndex], windowStart + position) + '</option>';
         }).join('');
         const hidden = filtered.length - shown.length;
         counterEl.textContent = filtered.length.toLocaleString() + ' games' +
-            (hidden > 0 ? ' (showing the first ' + MAX_OPTIONS.toLocaleString() + ')' : '');
+            (hidden > 0
+                ? ' (showing ' + (windowStart + 1).toLocaleString() + '–' +
+                  (windowStart + shown.length).toLocaleString() + ')'
+                : '');
+        jumpEl.max = String(filtered.length);
+        jumpRangeEl.textContent = filtered.length
+            ? 'of ' + filtered.length.toLocaleString()
+            : '';
+    }
+
+    // Years present in the archive, newest first, built once from the parsed
+    // headers rather than hardcoded -- the archive gains games over time.
+    function renderYears() {
+        const years = Array.from(new Set(games.map(function (g) { return g.year; })))
+            .filter(Boolean).sort().reverse();
+        yearEl.innerHTML = '<option value="">All years</option>' +
+            years.map(function (y) {
+                return '<option value="' + y + '">' + y + '</option>';
+            }).join('');
     }
 
     function render() {
@@ -180,6 +224,7 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
         playersEl.textContent = game.white + ' vs. ' + game.black +
             (game.result ? '  ' + game.result : '');
         selectEl.value = String(currentGame);
+        jumpEl.value = String(currentGame + 1);
 
         statusEl.textContent = moves.length
             ? 'Move ' + currentMove + ': ' + (move ? move.san : 'Start')
@@ -194,26 +239,37 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
         btnPrev.disabled = currentMove === 0;
         btnNext.disabled = currentMove >= moves.length;
         btnPrevGame.disabled = currentGame === 0;
-        btnNextGame.disabled = currentGame >= Math.min(filtered.length, MAX_OPTIONS) - 1;
+        btnNextGame.disabled = currentGame >= filtered.length - 1;
     }
 
     function selectGame(index) {
         currentGame = index;
         currentMove = 0;      // always open a game at its starting position
+        // Re-window when the target is outside the options currently in the
+        // DOM, so <select> always has an entry to show as selected.
+        if (index < windowStart || index >= windowStart + MAX_OPTIONS) {
+            windowStart = windowFor(index);
+            renderOptions();
+        }
         render();
     }
 
     function applyFilter(query) {
         const needle = query.trim().toLowerCase();
+        const year = yearEl.value;
         filtered = [];
         for (let i = 0; i < games.length; i++) {
-            if (!needle) { filtered.push(i); continue; }
             const g = games[i];
+            // Year and text are separate axes and both must match, so picking
+            // 2004 and typing an opponent's name narrows to that pairing.
+            if (year && g.year !== year) continue;
+            if (!needle) { filtered.push(i); continue; }
             if ((g.white + ' ' + g.black + ' ' + g.event + ' ' + g.date)
                 .toLowerCase().includes(needle)) {
                 filtered.push(i);
             }
         }
+        windowStart = 0;
         // Stats describe the current filter, so searching narrows them too.
         renderStats(filtered.map(function (i) { return games[i]; }));
         renderOptions();
@@ -242,6 +298,7 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
             playersEl.textContent = 'No games found in the archive.';
             return;
         }
+        renderYears();
         applyFilter('');
     }).catch(function (error) {
         console.error('Could not load games:', error);
@@ -249,7 +306,24 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
     });
 
     searchEl.addEventListener('input', function () { applyFilter(searchEl.value); });
+    yearEl.addEventListener('change', function () { applyFilter(searchEl.value); });
     selectEl.addEventListener('change', function () { selectGame(Number(selectEl.value)); });
+
+    // Jump to an absolute position in the current filter. This is the only way
+    // to reach a game beyond the <select>'s window, so it clamps rather than
+    // rejects: typing 99999 lands on the last game instead of doing nothing.
+    function jumpTo(value) {
+        if (!filtered.length) return;
+        const wanted = parseInt(value, 10);
+        if (isNaN(wanted)) { jumpEl.value = String(currentGame + 1); return; }
+        const clamped = Math.max(1, Math.min(wanted, filtered.length));
+        selectGame(clamped - 1);
+    }
+
+    jumpEl.addEventListener('change', function () { jumpTo(jumpEl.value); });
+    jumpEl.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') { event.preventDefault(); jumpTo(jumpEl.value); }
+    });
 
     btnPrev.addEventListener('click', function () {
         if (currentMove > 0) { currentMove--; render(); }
@@ -261,13 +335,20 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
         if (currentGame > 0) selectGame(currentGame - 1);
     });
     btnNextGame.addEventListener('click', function () {
-        if (currentGame < Math.min(filtered.length, MAX_OPTIONS) - 1) selectGame(currentGame + 1);
+        // Bounded by the whole filtered list, not by MAX_OPTIONS: the <select>
+        // is a sliding window now, so stepping past its end re-windows rather
+        // than running out of games.
+        if (currentGame < filtered.length - 1) selectGame(currentGame + 1);
     });
 
     // Arrow keys: left/right step moves, up/down step games. Ignored while the
     // search box has focus so typing still works.
     document.addEventListener('keydown', function (event) {
-        if (document.activeElement === searchEl) return;
+        // Also ignored in the year and jump controls: up/down are how a number
+        // input and a <select> are meant to be operated, and stealing them
+        // would make both unusable from the keyboard.
+        const active = document.activeElement;
+        if (active === searchEl || active === jumpEl || active === yearEl) return;
         const actions = {
             ArrowLeft: btnPrev, ArrowRight: btnNext,
             ArrowUp: btnPrevGame, ArrowDown: btnNextGame
