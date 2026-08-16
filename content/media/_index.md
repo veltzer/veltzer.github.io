@@ -7,9 +7,58 @@ hide_title = true
 +++
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
+// The media tracker's markup uses Tailwind colour utilities (bg-white,
+// text-gray-500, text-blue-600 and so on), which are fixed colours and so
+// ignored the site theme. Rather than rewrite two dozen classes across the
+// plugins, the palette itself is redefined in terms of the theme tokens: every
+// existing utility then resolves to a var() and follows the theme switcher.
+//
+// The scale is mapped by role, not by lightness -- 50/100/200 are the surface
+// steps, 500+ are text -- so the same class means the same thing in a light or
+// a dark theme instead of inverting.
 tailwind.config = {
 important: '#media-root',
-corePlugins: { preflight: false }
+corePlugins: { preflight: false },
+theme: {
+  extend: {
+    colors: {
+      white: 'var(--bg)',
+      black: 'var(--text-primary)',
+      gray: {
+        50: 'var(--bg-surface)',
+        100: 'var(--bg-surface)',
+        200: 'var(--bg-elevated)',
+        300: 'var(--border)',
+        400: 'var(--text-muted)',
+        500: 'var(--text-secondary)',
+        600: 'var(--text-secondary)',
+        700: 'var(--text-primary)',
+        800: 'var(--text-primary)',
+        900: 'var(--text-primary)'
+      },
+      blue: {
+        50: 'var(--bg-surface)',
+        100: 'var(--bg-elevated)',
+        400: 'var(--accent)',
+        500: 'var(--accent)',
+        600: 'var(--accent)',
+        700: 'var(--accent)',
+        800: 'var(--accent)'
+      },
+      red: {
+        100: 'var(--bg-surface)',
+        400: 'var(--danger, #dc2626)',
+        600: 'var(--danger, #dc2626)',
+        700: 'var(--danger, #dc2626)'
+      },
+      green: {
+        100: 'var(--bg-surface)',
+        600: 'var(--success, #16a34a)',
+        700: 'var(--success, #16a34a)'
+      }
+    }
+  }
+}
 };
 </script>
 
@@ -18,8 +67,20 @@ corePlugins: { preflight: false }
 font-family: Inter, Heebo, sans-serif;
 }
 #media-root .stat-card { text-align: center; }
-#media-root .stat-value { font-size: 1.875rem; font-weight: 700; color: #2563eb; }
-#media-root .stat-label { font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem; }
+#media-root .stat-value { font-size: 1.875rem; font-weight: 700; color: var(--accent); }
+#media-root .stat-label { font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.25rem; }
+
+/* Tailwind's preflight is disabled here (it would restyle the whole site), so
+   form controls keep the browser defaults -- a white input on a dark theme.
+   Give them the theme tokens explicitly. */
+#media-root input,
+#media-root select,
+#media-root textarea {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    border-color: var(--border);
+}
+#media-root input::placeholder { color: var(--text-muted); }
 </style>
 <style id="toggle-styles"></style>
 
