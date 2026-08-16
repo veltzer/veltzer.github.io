@@ -51,6 +51,9 @@ nav = [
     { name = "Tags", url = "/tags/" },
     { name = "Media", url = "/media/" },
     { name = "Calendar", url = "/calendar/" },
+    # chess.html is a standalone app page under static/, not a content/ section,
+    # so it needs an explicit entry -- it was unreachable by navigation until now.
+    { name = "Chess", url = "/chess.html" },
     { name = "Slides", url = "/slides/" },
     { name = "Syllabi", url = "/syllabi/" },
     { name = "Animations", url = "/animations/" },
