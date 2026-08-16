@@ -42,6 +42,26 @@ SITES = [
     ("animations", "teaching-animations", "Teaching Animations"),
 ]
 
+# Top-level directories of each sibling's _site that hold the assets its page
+# links to (PDFs, Word files, syllabus fragments, videos).
+#
+# Only the imported markup and data move into this site -- the assets stay in
+# the sibling repo, which publishes them on its own GitHub Pages site. Those
+# land under veltzer.org/<repo>/ because veltzer.github.io/<repo>/ 301s to the
+# CNAME, so the rewritten links are same-origin: no CORS problem for the
+# syllabi page, which fetch()es its HTML fragments rather than linking them.
+#
+# Without this rewrite the paths stay relative and resolve against
+# veltzer.org/, where nothing serves them -- every download 404s. Copying the
+# ~950MB of PDFs and video into this repo instead would blow past what a Pages
+# build can carry, and CI has no access to the siblings anyway: it builds from
+# a fresh checkout, so import_teaching.py does not even run there.
+ASSET_ROOTS = {
+    "teaching-slides": ["pdfunite", "marp"],
+    "teaching-syllabi": ["courses", "tracks"],
+    "teaching-animations": ["animations"],
+}
+
 FRONT_MATTER = '''+++
 title = "{title}"
 template = "app.html"
@@ -126,6 +146,26 @@ def extract(html, wrapper):
     return scoped, body.strip(), scripts
 
 
+def rewrite_assets(text, repo):
+    """Point relative asset paths at the sibling site that actually serves them.
+
+    Matches only complete double-quoted string values, so a path is rewritten
+    where it is used as a URL ("pdf": "pdfunite/x.pdf") and nowhere else. That
+    matters for the slides page: its `folder` values start with the same
+    "courses/" segment but are grouping keys, compared against each other and
+    split on "/" to build the folder tree -- prefixing those would break the
+    filter rather than fix a link. They are excluded by not being under any of
+    this repo's ASSET_ROOTS.
+    """
+    roots = ASSET_ROOTS.get(repo)
+    if not roots:
+        return text
+    pattern = re.compile(
+        r'"((?:' + "|".join(re.escape(root) for root in roots) + r')/[^"\s]*)"'
+    )
+    return pattern.sub(lambda m: f'"/{repo}/{m.group(1)}"', text)
+
+
 def build_page(html, wrapper):
     parts = extract(html, wrapper)
     if parts is None:
@@ -154,6 +194,7 @@ def main():
         page = build_page(source.read_text(encoding="utf-8"), wrapper)
         if page is None:
             die(f"{source}: no <body> found")
+        page = rewrite_assets(page, repo)
 
         dest = REPO_ROOT / "content" / section / "_index.md"
         text = FRONT_MATTER.format(title=title) + page
