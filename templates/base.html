@@ -19,11 +19,14 @@
 </head>
 <body>
 
+{#- Both languages are prefixed (/en/ and /he/), so every in-site link is built
+    from the current language's root rather than assuming English owns "/". -#}
+{%- set lang_root = "/" ~ (lang | default(value=config.default_language)) ~ "/" %}
 <header class="site-header">
-  <a class="site-title" href="{{ get_url(path='/', lang=page_lang) }}">{{ config.title }}</a>
+  <a class="site-title" href="{{ lang_root }}">{{ config.title }}</a>
   <nav class="site-nav">
     {%- for item in config.extra.nav %}
-    <a href="{{ item.url }}">{{ item.name }}</a>
+    <a href="{{ lang_root }}{{ item.path }}">{{ item.name }}</a>
     {%- endfor %}
   </nav>
 
@@ -47,7 +50,7 @@
         {#- set_global must not be shadowed by a plain `set` of the same name in
             this scope, or the write lands on a different variable and the value
             comes out empty. Seed it once per iteration with set_global too. -#}
-        {%- set_global target = get_url(path="/", lang=entry.code) %}
+        {%- set_global target = "/" ~ entry.code ~ "/" %}
         {%- if page and page.translations %}
           {%- for translation in page.translations %}
             {%- if translation.lang | default(value=config.default_language) == entry.code %}
@@ -55,7 +58,7 @@
             {%- endif %}
           {%- endfor %}
         {%- endif %}
-      <option value="{{ target }}"{% if entry.code == here %} selected{% endif %}>{{ entry.name }}</option>
+      <option value="{{ target }}" hreflang="{{ entry.code }}"{% if entry.code == here %} selected{% endif %}>{{ entry.name }}</option>
       {%- endfor %}
     </select>
 
@@ -83,6 +86,11 @@
 
   // Language: each option carries the URL of this page in that language.
   document.getElementById('lang-select').addEventListener('change', function (event) {
+    // Remember the choice so the root chooser can send this reader straight to
+    // their language next time. Written here rather than inferred from the URL
+    // so it only records a deliberate switch.
+    var option = event.target.selectedOptions[0];
+    try { localStorage.setItem('veltzer-site-lang', option.getAttribute('hreflang')); } catch (e) { /* storage blocked */ }
     window.location.href = event.target.value;
   });
 </script>

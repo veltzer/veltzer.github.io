@@ -56,17 +56,19 @@ themes = [
     { code = "solarized", name = "Solarized" },
     { code = "rosepine", name = "Rosé Pine" },
 ]
+# `path` is relative to the language root: the template prefixes it with /en/
+# or /he/. Absolute URLs would break, since English now lives under /en/.
 nav = [
-    { name = "Blog", url = "/blog/" },
-    { name = "About", url = "/about/" },
-    { name = "Tags", url = "/tags/" },
-    { name = "Media", url = "/media/" },
-    { name = "Calendar", url = "/calendar/" },
+    { name = "Blog", path = "blog/" },
+    { name = "About", path = "about/" },
+    { name = "Tags", path = "tags/" },
+    { name = "Media", path = "media/" },
+    { name = "Calendar", path = "calendar/" },
     # chess.html is a standalone app page under static/, not a content/ section,
     # so it needs an explicit entry -- it was unreachable by navigation until now.
-    { name = "Chess", url = "/chess/" },
-    { name = "Board", url = "/board/" },
-    { name = "Slides", url = "/slides/" },
-    { name = "Syllabi", url = "/syllabi/" },
-    { name = "Animations", url = "/animations/" },
+    { name = "Chess", path = "chess/" },
+    { name = "Board", path = "board/" },
+    { name = "Slides", path = "slides/" },
+    { name = "Syllabi", path = "syllabi/" },
+    { name = "Animations", path = "animations/" },
 ]
