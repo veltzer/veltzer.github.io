@@ -1,4 +1,4 @@
-/* global renderBarChart, renderStatCard */
+/* global renderBarChart, renderStatCard, COUNTER_WORKSPACE, COUNTER_NAME, COUNTER_TOKEN */
 /*
  * Shared media application.
  *
@@ -727,48 +727,61 @@
         });
 
         // --- Visitor Counter ---
-        // Disabled: this used counterapi.dev v1, which the service retired. It now
-        // returns 410 {"deprecated":true,...} for every request, so the counter showed
-        // "N/A" to every visitor and logged an error on every page load.
+        // counterapi v2. The workspace, counter name and bearer token come from
+        // keys.js, which scripts/build_site.py generates from pass(1) -- the token
+        // is never committed. It is an increment-scoped browser credential, the
+        // same category as the Calendar key (see doc/DECISIONS.md).
         //
-        // v2 (https://docs.counterapi.dev/api/endpoints/v2/) needs an account: a
-        // workspace plus an API key sent as "Authorization: Bearer ...". A bearer token
-        // in client-side JS on a public static site is readable by anyone, so it would
-        // need to be a token that is safe to expose, the way the Calendar browser key is
-        // (see doc/DECISIONS.md).
+        // Note the API is eventually consistent: the /up response echoes a stale
+        // up_count, so the displayed number comes from a follow-up read rather
+        // than from the increment response.
         //
-        // To re-enable, set COUNTER_ENDPOINT to a URL that returns JSON, and
-        // COUNTER_COUNT_FIELD to the field holding the number. Until then the counter
-        // line hides itself rather than displaying a permanent "N/A".
-        //
-        // doc/ANALYTICS.md lists alternatives (GoatCounter et al.) if the goal is
-        // site-wide analytics rather than a visible per-page count.
-        const COUNTER_ENDPOINT = null;
-        const COUNTER_COUNT_FIELD = 'count';
+        // If any of the three values is missing -- a fresh clone, or a build with
+        // no pass available -- the whole "Page Visits" line hides itself rather
+        // than showing a broken value.
+        function counterConfigured() {
+            return typeof COUNTER_WORKSPACE !== 'undefined' && COUNTER_WORKSPACE &&
+                   typeof COUNTER_NAME !== 'undefined' && COUNTER_NAME &&
+                   typeof COUNTER_TOKEN !== 'undefined' && COUNTER_TOKEN;
+        }
 
         function updateVisitorCount() {
             const countElement = document.getElementById('visitor-count');
             if (!countElement) return;
 
-            if (!COUNTER_ENDPOINT) {
-                // Hide the whole "Page Visits: ..." line, not just the number.
+            const hideLine = function() {
                 const line = countElement.closest('p') || countElement;
                 line.style.display = 'none';
+            };
+
+            if (!counterConfigured()) {
+                hideLine();
                 return;
             }
 
-            fetch(COUNTER_ENDPOINT)
+            const base = 'https://api.counterapi.dev/v2/' +
+                encodeURIComponent(COUNTER_WORKSPACE) + '/' +
+                encodeURIComponent(COUNTER_NAME);
+            const options = {headers: {Authorization: 'Bearer ' + COUNTER_TOKEN}};
+
+            fetch(base + '/up', options)
+            .then(function(response) {
+                if (!response.ok) throw new Error('Counter API error: ' + response.status);
+                // Read back rather than trusting the /up payload, which lags.
+                return fetch(base, options);
+            })
             .then(function(response) {
                 if (!response.ok) throw new Error('Counter API error: ' + response.status);
                 return response.json();
             })
-            .then(function(data) {
-                countElement.textContent = data[COUNTER_COUNT_FIELD];
+            .then(function(payload) {
+                const count = payload && payload.data && payload.data.up_count;
+                if (typeof count !== 'number') throw new Error('No up_count in response');
+                countElement.textContent = count.toLocaleString();
             })
             .catch(function(error) {
                 console.error('Error fetching visitor count:', error);
-                const line = countElement.closest('p') || countElement;
-                line.style.display = 'none';
+                hideLine();
             });
         }
 

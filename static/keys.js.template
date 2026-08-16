@@ -1,0 +1,8 @@
+/* eslint-disable no-unused-vars */
+/* Template for static/keys.js, which scripts/build_site.py generates.
+   The real file is gitignored because it carries the counterapi token from
+   pass(1). The calendar values are public by design (see doc/DECISIONS.md);
+   the counter token is injected at build time and left empty when pass is
+   unavailable, which makes the frontend hide the counter rather than error. */
+const CALENDAR_ID = '97b63de95b4ea731190ad7402b7135df847ff39f7a36d348f9f8bcbcbae1edac@group.calendar.google.com';
+const API_KEY = 'AIzaSyCLaOLHQ-Bo7kTC7hqGck735SGGSPfShnA';
