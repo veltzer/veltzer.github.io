@@ -28,7 +28,7 @@
     {%- for item in config.extra.nav %}
     {#- Apps are single-language and live at the site root, so they take no
         language prefix; the blog and its pages do. -#}
-    <a href="{% if item.app %}/{% else %}{{ lang_root }}{% endif %}{{ item.path }}">{{ trans(key=item.key, lang=lang | default(value=config.default_language)) }}</a>
+    <a href="{% if item.app %}/{% else %}{{ lang_root }}{% endif %}{{ item.path }}">{{ trans(key=item.key, lang=page_lang) }}</a>
     {%- endfor %}
   </nav>
 
@@ -45,7 +45,7 @@
       Both lists come from config.extra, so adding a language or theme is a
       config line rather than a template change. -#}
   <div class="site-controls">
-    <label class="visually-hidden" for="lang-select">Language</label>
+    <label class="visually-hidden" for="lang-select">{{ trans(key="label_language", lang=page_lang) }}</label>
     <select id="lang-select" class="site-select">
       {%- set here = lang | default(value=config.default_language) %}
       {%- for entry in config.extra.languages %}
@@ -73,7 +73,7 @@
       {%- endfor %}
     </select>
 
-    <label class="visually-hidden" for="theme-select">Theme</label>
+    <label class="visually-hidden" for="theme-select">{{ trans(key="label_theme", lang=page_lang) }}</label>
     <select id="theme-select" class="site-select">
       {%- for entry in config.extra.themes %}
       <option value="{{ entry.code }}">{{ entry.name }}</option>

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% block title %}Tags &middot; {{ config.title }}{% endblock %}
+{% block title %}{{ trans(key="tags_title", lang=page_lang) }} &middot; {{ config.title }}{% endblock %}
 {% block content %}
-<h1>Tags</h1>
+<h1>{{ trans(key="tags_title", lang=page_lang) }}</h1>
 <ul class="tag-cloud">
   {%- for term in terms %}
   <li><a class="tag" href="{{ term.permalink }}">{{ term.name }}</a> <span class="count">{{ term.pages | length }}</span></li>

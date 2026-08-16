@@ -26,6 +26,18 @@ nav_slides = "Slides"
 nav_syllabi = "Syllabi"
 nav_animations = "Animations"
 
+# UI chrome outside the nav: taxonomy headings, pagination, the home page and
+# the accessible labels on the two header selects.
+tags_title = "Tags"
+tagged_with = "Tagged"
+latest_posts = "Latest posts"
+all_posts = "All posts"
+newer = "Newer"
+older = "Older"
+label_language = "Language"
+label_theme = "Theme"
+label_translations = "Translations"
+
 # Hebrew. Posts opt in by filename: foo.he.md alongside foo.md. Zola serves
 # them under /he/ and exposes page.translations, which templates/page.html
 # turns into a language switcher -- no hand-maintained cross-links.
@@ -50,6 +62,16 @@ nav_chess = "שחמט"
 nav_slides = "מצגות"
 nav_syllabi = "סילבוסים"
 nav_animations = "אנימציות"
+
+tags_title = "תגיות"
+tagged_with = "מתויג"
+latest_posts = "הפוסטים האחרונים"
+all_posts = "כל הפוסטים"
+newer = "חדשים יותר"
+older = "ישנים יותר"
+label_language = "שפה"
+label_theme = "ערכת נושא"
+label_translations = "תרגומים"
 
 # Taxonomy slugs keep their UTF-8 characters instead of being transliterated.
 # Zola's default slugify turns a Hebrew tag into unreadable latin -- archaeology

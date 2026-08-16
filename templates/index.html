@@ -3,7 +3,7 @@
 <h1>{{ config.title }}</h1>
 <p>{{ config.description }}</p>
 {%- set blog = get_section(path="blog/_index.md", lang=lang) %}
-<h2>Latest posts</h2>
+<h2>{{ trans(key="latest_posts", lang=page_lang) }}</h2>
 <ul class="post-list">
   {%- for post in blog.pages %}
   {%- if loop.index > 10 %}{% break %}{% endif %}
@@ -11,5 +11,5 @@
       <time datetime="{{ post.date }}">{{ post.date | date(format="%-d %b %Y") }}</time></li>
   {%- endfor %}
 </ul>
-<p><a href="{{ get_url(path='@/blog/_index.md') }}">All posts &rarr;</a></p>
+<p><a href="{{ get_url(path='@/blog/_index.md') }}">{{ trans(key="all_posts", lang=page_lang) }} &rarr;</a></p>
 {% endblock %}

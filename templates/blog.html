@@ -20,9 +20,9 @@
 
 {%- if paginator %}
 <nav class="pagination">
-  {%- if paginator.previous %}<a href="{{ paginator.previous }}">&larr; Newer</a>{% endif %}
+  {%- if paginator.previous %}<a href="{{ paginator.previous }}">&larr; {{ trans(key="newer", lang=page_lang) }}</a>{% endif %}
   <span>{{ paginator.current_index }} / {{ paginator.number_pagers }}</span>
-  {%- if paginator.next %}<a href="{{ paginator.next }}">Older &rarr;</a>{% endif %}
+  {%- if paginator.next %}<a href="{{ paginator.next }}">{{ trans(key="older", lang=page_lang) }} &rarr;</a>{% endif %}
 </nav>
 {%- endif %}
 {% endblock %}

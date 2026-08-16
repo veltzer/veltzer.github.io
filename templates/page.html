@@ -24,7 +24,7 @@
         hand-maintained cross-links between posts. Hidden when a post has no
         translation, which is most of them. -#}
     {%- if page.translations | length > 1 %}
-    <nav class="lang-switcher" aria-label="Translations">
+    <nav class="lang-switcher" aria-label="{{ trans(key='label_translations', lang=page_lang) }}">
       {%- for translation in page.translations %}
       {%- set code = translation.lang | default(value=config.default_language) %}
       {%- if translation.permalink == page.permalink %}
