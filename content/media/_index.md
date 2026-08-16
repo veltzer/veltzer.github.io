@@ -67,6 +67,7 @@ tailwind.config = {
     };
 </script>
 
+<script src="../keys.js"></script>
 <script src="../media-utils.js"></script>
 <script>
     window.mediaBasePath = '../';

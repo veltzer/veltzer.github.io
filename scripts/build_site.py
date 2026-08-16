@@ -46,48 +46,6 @@ def find_zola():
     return None
 
 
-# The counterapi token is a public, increment-scoped browser credential -- the
-# same category as the Calendar browser key (see doc/DECISIONS.md). It still
-# lives in pass rather than in git, and is injected into static/keys.js at build
-# time so the repo never carries it.
-COUNTER_PASS_PATH = "keys/counterapi"
-COUNTER_WORKSPACE = "veltzer-org"
-COUNTER_NAME = "veltzerorg"
-KEYS_JS = REPO_ROOT / "static" / "keys.js"
-KEYS_TEMPLATE = REPO_ROOT / "static" / "keys.js.template"
-
-
-def pass_entry(path):
-    """Read a secret out of pass(1). Returns None when unavailable."""
-    try:
-        result = subprocess.run(
-            ["pass", path], check=True, capture_output=True, text=True)
-    except (subprocess.CalledProcessError, FileNotFoundError):
-        return None
-    return result.stdout.splitlines()[0].strip() or None
-
-
-def sync_keys():
-    """Inject the counterapi token into static/keys.js.
-
-    Without pass available (CI, a fresh clone) the token line is written empty,
-    which makes media-app.js skip the counter and hide the line rather than
-    error. The calendar lines already in keys.js are left untouched.
-    """
-    if not KEYS_TEMPLATE.is_file():
-        die(f"{KEYS_TEMPLATE} missing")
-    token = pass_entry(COUNTER_PASS_PATH) or ""
-    # Always regenerate from the template: keys.js is gitignored, so a fresh
-    # clone has no copy of it at all.
-    lines = KEYS_TEMPLATE.read_text().splitlines()
-    lines += [
-        f"const COUNTER_WORKSPACE = '{COUNTER_WORKSPACE}';",
-        f"const COUNTER_NAME = '{COUNTER_NAME}';",
-        f"const COUNTER_TOKEN = '{token}';",
-    ]
-    KEYS_JS.write_text("\n".join(lines) + "\n")
-
-
 def sync_theme():
     """Copy the shared-themes files into static/ so Zola serves them.
 
@@ -121,7 +79,6 @@ def main():
     zola = find_zola()
     try:
         sync_theme()
-        sync_keys()
         build(zola)
     except subprocess.CalledProcessError as error:
         sys.exit(error.returncode)

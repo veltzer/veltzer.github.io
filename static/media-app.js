@@ -1,4 +1,4 @@
-/* global renderBarChart, renderStatCard, COUNTER_WORKSPACE, COUNTER_NAME, COUNTER_TOKEN */
+/* global renderBarChart, renderStatCard */
 /*
  * Shared media application.
  *
@@ -727,23 +727,20 @@
         });
 
         // --- Visitor Counter ---
-        // counterapi v2. The workspace, counter name and bearer token come from
-        // keys.js, which scripts/build_site.py generates from pass(1) -- the token
-        // is never committed. It is an increment-scoped browser credential, the
-        // same category as the Calendar key (see doc/DECISIONS.md).
+        // counterapi v2 against a PUBLIC workspace, so no Authorization header
+        // and therefore no credentials in this file at all.
         //
-        // Note the API is eventually consistent: the /up response echoes a stale
-        // up_count, so the displayed number comes from a follow-up read rather
-        // than from the increment response.
+        // That is deliberate rather than lax: an Authorization header makes the
+        // request non-simple, so the browser sends a CORS preflight first, and
+        // counterapi's preflight only allows Origin/Content-Length/Content-Type.
+        // Any authenticated call from a browser fails with "Failed to fetch"
+        // even with a valid token -- it works from curl only because curl sends
+        // no preflight. A public workspace sidesteps that entirely.
         //
-        // If any of the three values is missing -- a fresh clone, or a build with
-        // no pass available -- the whole "Page Visits" line hides itself rather
-        // than showing a broken value.
-        function counterConfigured() {
-            return typeof COUNTER_WORKSPACE !== 'undefined' && COUNTER_WORKSPACE &&
-                   typeof COUNTER_NAME !== 'undefined' && COUNTER_NAME &&
-                   typeof COUNTER_TOKEN !== 'undefined' && COUNTER_TOKEN;
-        }
+        // The API is also eventually consistent: the /up response echoes a stale
+        // up_count, so the number shown comes from a follow-up read.
+        const COUNTER_WORKSPACE = 'veltzer-org';
+        const COUNTER_NAME = 'veltzerorg';
 
         function updateVisitorCount() {
             const countElement = document.getElementById('visitor-count');
@@ -754,21 +751,14 @@
                 line.style.display = 'none';
             };
 
-            if (!counterConfigured()) {
-                hideLine();
-                return;
-            }
-
             const base = 'https://api.counterapi.dev/v2/' +
                 encodeURIComponent(COUNTER_WORKSPACE) + '/' +
                 encodeURIComponent(COUNTER_NAME);
-            const options = {headers: {Authorization: 'Bearer ' + COUNTER_TOKEN}};
 
-            fetch(base + '/up', options)
+            fetch(base + '/up')
             .then(function(response) {
                 if (!response.ok) throw new Error('Counter API error: ' + response.status);
-                // Read back rather than trusting the /up payload, which lags.
-                return fetch(base, options);
+                return fetch(base);
             })
             .then(function(response) {
                 if (!response.ok) throw new Error('Counter API error: ' + response.status);
