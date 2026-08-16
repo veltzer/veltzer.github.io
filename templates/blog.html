@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ section.title }} &middot; {{ config.title }}{% endblock %}
+{% block content %}
+<h1>{{ section.title }}</h1>
+
+{%- set posts = paginator.pages | default(value=section.pages) %}
+<ul class="post-list">
+  {%- for post in posts %}
+  <li>
+    <a class="post-link" href="{{ post.permalink }}">{{ post.title }}</a>
+    <time datetime="{{ post.date }}">{{ post.date | date(format="%-d %b %Y") }}</time>
+    {%- if post.taxonomies.tags %}
+    <span class="post-tags">
+      {%- for tag in post.taxonomies.tags %}<a class="tag" href="{{ get_taxonomy_url(kind='tags', name=tag, lang=lang) }}">{{ tag }}</a>{% endfor %}
+    </span>
+    {%- endif %}
+  </li>
+  {%- endfor %}
+</ul>
+
+{%- if paginator %}
+<nav class="pagination">
+  {%- if paginator.previous %}<a href="{{ paginator.previous }}">&larr; Newer</a>{% endif %}
+  <span>{{ paginator.current_index }} / {{ paginator.number_pagers }}</span>
+  {%- if paginator.next %}<a href="{{ paginator.next }}">Older &rarr;</a>{% endif %}
+</nav>
+{%- endif %}
+{% endblock %}

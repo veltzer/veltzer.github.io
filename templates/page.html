@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} &middot; {{ config.title }}{% endblock %}
+{% block description %}{{ page.description | default(value=page.content | striptags | truncate(length=160)) }}{% endblock %}
+
+{% block content %}
+<article class="post">
+
+  <header class="post-header">
+    <h1>{{ page.title }}</h1>
+    <p class="post-meta">
+      <time datetime="{{ page.date }}">{{ page.date | date(format="%-d %B %Y") }}</time>
+      {%- if page.taxonomies.tags %}
+      <span class="post-tags">
+        {%- for tag in page.taxonomies.tags %}
+        <a class="tag" href="{{ get_taxonomy_url(kind='tags', name=tag, lang=lang) }}">{{ tag }}</a>
+        {%- endfor %}
+      </span>
+      {%- endif %}
+    </p>
+
+    {#- The language switcher. Generated from page.translations, so adding a
+        sixth language means adding a sixth file -- no template change and no
+        hand-maintained cross-links between posts. Hidden when a post has no
+        translation, which is most of them. -#}
+    {%- if page.translations | length > 1 %}
+    <nav class="lang-switcher" aria-label="Translations">
+      {%- for translation in page.translations %}
+      {%- set code = translation.lang | default(value=config.default_language) %}
+      {%- if translation.permalink == page.permalink %}
+      <span class="lang current" aria-current="page">{{ code }}</span>
+      {%- else %}
+      <a class="lang" href="{{ translation.permalink }}" hreflang="{{ code }}">{{ code }}</a>
+      {%- endif %}
+      {%- endfor %}
+    </nav>
+    {%- endif %}
+  </header>
+
+  <div class="post-body">
+    {{ page.content | safe }}
+  </div>
+
+  <nav class="post-nav">
+    {%- if page.lower %}<a class="prev" href="{{ page.lower.permalink }}">&larr; {{ page.lower.title }}</a>{% endif %}
+    {%- if page.higher %}<a class="next" href="{{ page.higher.permalink }}">{{ page.higher.title }} &rarr;</a>{% endif %}
+  </nav>
+
+</article>
+{% endblock %}

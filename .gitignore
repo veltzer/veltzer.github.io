@@ -165,3 +165,6 @@ project/
 
 # rsconstruct
 /.rsconstruct/
+
+# Zola build output
+/public/

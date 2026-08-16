@@ -1,0 +1,36 @@
+{%- set page_lang = lang | default(value="en") -%}
+<!DOCTYPE html>
+<html lang="{{ page_lang }}"{% if page_lang == "he" %} dir="rtl"{% endif %}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ config.title }}{% endblock %}</title>
+<meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="stylesheet" href="{{ get_url(path='style.css') }}">
+<link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path='atom.xml') }}">
+{%- block extra_head %}{% endblock %}
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-title" href="{{ get_url(path='/', lang=page_lang) }}">{{ config.title }}</a>
+  <nav class="site-nav">
+    {%- for item in config.extra.nav %}
+    <a href="{{ item.url }}">{{ item.name }}</a>
+    {%- endfor %}
+  </nav>
+</header>
+
+<main class="site-main">
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <p>&copy; 2026 {{ config.author }} &middot;
+     <a href="{{ get_url(path='atom.xml') }}">RSS</a></p>
+</footer>
+
+</body>
+</html>

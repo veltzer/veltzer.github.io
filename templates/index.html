@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ config.title }}</h1>
+<p>{{ config.description }}</p>
+{%- set blog = get_section(path="blog/_index.md", lang=lang) %}
+<h2>Latest posts</h2>
+<ul class="post-list">
+  {%- for post in blog.pages %}
+  {%- if loop.index > 10 %}{% break %}{% endif %}
+  <li><a class="post-link" href="{{ post.permalink }}">{{ post.title }}</a>
+      <time datetime="{{ post.date }}">{{ post.date | date(format="%-d %b %Y") }}</time></li>
+  {%- endfor %}
+</ul>
+<p><a href="{{ get_url(path='@/blog/_index.md') }}">All posts &rarr;</a></p>
+{% endblock %}

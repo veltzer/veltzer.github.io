@@ -1,0 +1,51 @@
+/* Hide the site name in the navigation sidebar */
+.md-nav__title {
+  display: none;
+}
+
+
+/*
+ * Hebrew (RTL) support.
+ *
+ * A post opts in with `lang: he` in its front matter; overrides/main.html wraps
+ * the post body in <div lang="he" dir="rtl">. These rules then style that
+ * subtree, including the cases direction alone does not handle -- content that
+ * must stay LTR inside RTL prose.
+ *
+ * Scoped to [lang="he"] so the 78 English pages are untouched. Site chrome and
+ * navigation stay LTR by design.
+ */
+[lang="he"] {
+  text-align: right;
+}
+
+/* Code, output and identifiers are LTR even in Hebrew prose: reversing them
+   would corrupt the meaning. */
+[lang="he"] code,
+[lang="he"] pre,
+[lang="he"] kbd,
+[lang="he"] samp {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: isolate;
+}
+
+/* Lists and blockquotes need their markers and rules moved to the right. */
+[lang="he"] ul,
+[lang="he"] ol {
+  margin-right: 1.25em;
+  margin-left: 0;
+}
+
+[lang="he"] blockquote {
+  border-left: none;
+  border-right: 0.2rem solid var(--md-default-fg-color--lighter);
+  padding-left: 0;
+  padding-right: 0.6rem;
+}
+
+/* Tables: headers and cells follow the text direction. */
+[lang="he"] table:not([class]) th,
+[lang="he"] table:not([class]) td {
+  text-align: right;
+}
