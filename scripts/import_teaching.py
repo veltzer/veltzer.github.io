@@ -77,31 +77,31 @@ def die(message):
 
 def extract(html, wrapper):
     """Pull the style, body markup and scripts out of a standalone document."""
-    styles = re.findall(r"<style>(.*?)</style>", html, re.S)
-    body = re.search(r"<body[^>]*>(.*?)</body>", html, re.S)
+    styles = re.findall(r"<style>(.*?)</style>", html, re.DOTALL)
+    body = re.search(r"<body[^>]*>(.*?)</body>", html, re.DOTALL)
     if not body:
         return None
     body = body.group(1)
 
     # The embedded header duplicates this site's own.
-    body = re.sub(r"<header\b.*?</header>", "", body, flags=re.S)
+    body = re.sub(r"<header\b.*?</header>", "", body, flags=re.DOTALL)
     # So does its theme picker. It also carries id="theme-select", the same id
     # our own header control uses, so leaving it in means initThemeSwitcher()
     # can bind to the wrong element. Both sites write the same
     # `veltzer-site-theme` key, so dropping this one loses nothing.
     body = re.sub(r"<md-outlined-select[^>]*id=\"theme-select\".*?</md-outlined-select>",
-                  "", body, flags=re.S)
-    body = re.sub(r'<select[^>]*id="theme-select".*?</select>', "", body, flags=re.S)
+                  "", body, flags=re.DOTALL)
+    body = re.sub(r'<select[^>]*id="theme-select".*?</select>', "", body, flags=re.DOTALL)
 
     # Scripts from <head> too, not just <body>: these sites load Material Web
     # Components with a module import in the head, and without it the custom
     # elements never upgrade and render as raw inline text.
-    head = re.search(r"<head[^>]*>(.*?)</head>", html, re.S)
+    head = re.search(r"<head[^>]*>(.*?)</head>", html, re.DOTALL)
     head_scripts = re.findall(r"<script\b([^>]*)>(.*?)</script>",
-                              head.group(1) if head else "", re.S)
-    body_scripts = re.findall(r"<script\b([^>]*)>(.*?)</script>", body, re.S)
+                              head.group(1) if head else "", re.DOTALL)
+    body_scripts = re.findall(r"<script\b([^>]*)>(.*?)</script>", body, re.DOTALL)
     scripts = head_scripts + body_scripts
-    body = re.sub(r"<script\b[^>]*>.*?</script>", "", body, flags=re.S)
+    body = re.sub(r"<script\b[^>]*>.*?</script>", "", body, flags=re.DOTALL)
 
     # Scope the imported CSS so it cannot style the rest of the site. Rules that
     # target the document itself become rules on the wrapper.
@@ -109,7 +109,7 @@ def extract(html, wrapper):
     for sheet in styles:
         # Strip comments first: a /* ... */ containing a brace would otherwise
         # be split as if it were a rule and end up with a selector glued on.
-        sheet = re.sub(r"/\*.*?\*/", "", sheet, flags=re.S)
+        sheet = re.sub(r"/\*.*?\*/", "", sheet, flags=re.DOTALL)
         out = []
         for rule in re.split(r"(?<=\})", sheet):
             if not rule.strip():

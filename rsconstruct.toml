@@ -24,7 +24,10 @@ pip = [
   # -- which is the point of running it.
   "ruff",
 ]
-npm = ["postcss-scss"]
+# No npm list here. rsconstruct's npm installs are global ("npm install -g"),
+# and a global postcss-scss is invisible to node_modules/.bin/stylelint, which
+# resolves customSyntax against the project tree. Both are devDependencies in
+# package.json and the workflow installs them with "npm ci" instead.
 # No system = ["python3-tk"] here: it does not help. CI uses actions/setup-python,
 # which supplies its own interpreter that cannot see the distro's python3-tk, so
 # the package installs (rsconstruct even reports it satisfied) while `import
