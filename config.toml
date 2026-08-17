@@ -169,8 +169,14 @@ themes = [
     { code = "rosepine", name = "Rosé Pine" },
 ]
 # `path` is relative to the language root, and the template prefixes it with
-# /en/ or /he/. Entries marked `app = true` are single-language applications
-# rather than writing, so they live at the site root and take no prefix.
+# /en/ or /he/.
+#
+# `app = true` is vestigial and no longer read by any template. It marked the
+# application sections back when they existed only in English and served
+# unprefixed from the site root; they now have Hebrew versions (stubs that reuse
+# the English body, see templates/app_body.html) and are prefixed like every
+# other entry. Kept only because it still describes which entries are
+# applications rather than writing.
 nav = [
     { key = "nav_blog", path = "blog/" },
     { key = "nav_tags", path = "tags/" },

@@ -35,9 +35,14 @@
   <a class="site-title" href="{{ lang_root }}">{{ config.title }}</a>
   <nav class="site-nav">
     {%- for item in config.extra.nav %}
-    {#- Apps are single-language and live at the site root, so they take no
-        language prefix; the blog and its pages do. -#}
-    <a href="{% if item.app %}/{% else %}{{ lang_root }}{% endif %}{{ item.path }}">{{ trans(key=item.key, lang=page_lang) }}</a>
+    {#- Every entry takes the language prefix, apps included. The apps used to
+        be unprefixed because they existed only in English, which meant a Hebrew
+        reader who opened one lost their language: the nav, the switcher and the
+        way back all flipped to English. They now have Hebrew sections too --
+        stubs that reuse the English body, see app_body.html -- so /he/chess/ is
+        a real page and there is no reason to send readers out of their
+        language. `app = true` in config.extra.nav is now unused. -#}
+    <a href="{{ lang_root }}{{ item.path }}">{{ trans(key=item.key, lang=page_lang) }}</a>
     {%- endfor %}
   </nav>
 

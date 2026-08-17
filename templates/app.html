@@ -9,5 +9,5 @@
 {% block main_class %}embed-main{% endblock %}
 {% block content %}
 <h1 class="embed-title">{{ section.title }}</h1>
-{{ section.content | safe }}
+{% include "app_body.html" %}
 {% endblock %}

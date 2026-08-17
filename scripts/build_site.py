@@ -133,14 +133,19 @@ SHARED_ROOT = {
     "favicon.svg", "robots.txt", "sitemap.xml", "404.html", ".nojekyll",
 }
 
-# Sections that are applications rather than writing. They exist in one language
-# only -- there is no media.he.md or slides.he.md -- so prefixing them with /en/
-# would claim a translation that does not exist and make the URL longer for no
-# reason. They stay at the site root; only the blog and the pages around it move
-# under /en/, because those are the ones Hebrew actually has versions of.
-APP_SECTIONS = {
-    "media", "calendar", "chess", "slides", "syllabi", "animations",
-}
+# Sections that stay at the site root instead of moving under /en/.
+#
+# Empty, and deliberately kept rather than deleted. The app sections (media,
+# calendar, chess, slides, syllabi, animations) used to be listed here because
+# they existed only in English, so prefixing them would have claimed a
+# translation that did not exist. They now have Hebrew sections -- stubs that
+# reuse the English body, see templates/app_body.html -- so /en/chess/ and
+# /he/chess/ are both real and the apps are prefixed like everything else. That
+# is what stops a Hebrew reader losing their language when they open an app.
+#
+# The name is still referenced by fix_english_links() and the sitemap rewrite
+# below, which is why the set survives its own contents.
+APP_SECTIONS: set[str] = set()
 
 
 def base_url():

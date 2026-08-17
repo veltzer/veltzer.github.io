@@ -10,5 +10,5 @@
 {% endblock %}
 {% block content %}
 <h1 class="embed-title" id="gameTitle">{{ section.title }}</h1>
-{{ section.content | safe }}
+{% include "app_body.html" %}
 {% endblock %}
