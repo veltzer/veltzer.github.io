@@ -19,20 +19,42 @@ out="${out_dir}/.aspell.en.rws"
 
 mkdir -p "${out_dir}"
 
-# aspell warns and skips on characters its en_US charset cannot represent (see
-# scripts/spellcheck_en.sh, which filters the same words out of the results).
-# Those warnings are expected, so they are dropped here to keep builds quiet.
+# `aspell create master` needs the language data file, which ships in the
+# aspell-<lang> package rather than with aspell itself. Without it the command
+# fails with a bare non-zero exit, which is how this first broke CI: aspell and
+# aspell-he installed, aspell-en did not, and nothing said so. Check explicitly
+# and name the fix.
+if [ ! -f /usr/lib/aspell/en.dat ]; then
+	echo "error: /usr/lib/aspell/en.dat is missing -- install the aspell-en package" >&2
+	exit 1
+fi
+
+# LC_ALL=C: a UTF-8 locale makes sort -u collate distinct strings as equal and
+# silently drop entries.
 #
-# LC_ALL=C for the same reason as the Hebrew list: a UTF-8 locale makes sort -u
-# collate distinct strings as equal and silently drop entries.
 # Build to a temp file and rename into place. The checkers build the dictionary
 # themselves when it is missing (rsconstruct does not order generators before
 # checkers), so under -j0 a reader can otherwise open a half-written file and
 # fail with "is not in the proper format". rename(2) is atomic within a
 # filesystem, so a reader sees either the old file or the complete new one.
 tmp="${out}.$$"
-LC_ALL=C sort -u "${src}" |
-	aspell --lang=en --encoding=utf-8 create master "${tmp}" 2>/dev/null
+trap 'rm -f "${tmp}"' EXIT
+
+# stderr goes to a file rather than /dev/null so a real error survives. aspell
+# warns and skips on characters its en_US charset cannot represent, which is
+# expected (scripts/spellcheck_en.sh filters the same words out of the results);
+# anything else is printed. Discarding all of stderr here is what left the first
+# CI failure with a bare non-zero exit and no message.
+err="${tmp}.err"
+if ! LC_ALL=C sort -u "${src}" |
+	aspell --lang=en --encoding=utf-8 create master "${tmp}" 2>"${err}"; then
+	cat "${err}" >&2
+	rm -f "${err}"
+	exit 1
+fi
+grep -vE 'Warning: The string .* is invalid\. The Unicode code point' "${err}" >&2 || true
+rm -f "${err}"
+
 mv -f "${tmp}" "${out}"
 
 echo "built ${out} ($(LC_ALL=C sort -u "${src}" | wc -l) words)"

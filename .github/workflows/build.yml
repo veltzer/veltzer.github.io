@@ -53,6 +53,22 @@ jobs:
     # "cache: npm" primes the download cache but never runs an install.
     - name: install npm packages
       run: npm ci
+    # The aspell dictionaries, installed here rather than left to
+    # `rsconstruct tools install-deps`. That command checks whether each system
+    # package is already present before asking apt, and the check misfires on
+    # packages that ship no binary of their own: it reported "aspell-en" as
+    # satisfied on a runner that had neither aspell nor aspell-en, so apt was
+    # never asked for it. `aspell create master` then failed with a bare
+    # non-zero exit, because the language data (/usr/lib/aspell/en.dat) lives in
+    # aspell-en. Hebrew survived only because aspell-he does get installed and
+    # drags aspell in as a dependency.
+    #
+    # apt-get update first: the runner image ships stale package lists, and the
+    # only update in this job happens later, inside install-deps.
+    - name: install aspell dictionaries
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y aspell aspell-en aspell-he
     - name: install
       run: |
         rsconstruct tools install-deps
