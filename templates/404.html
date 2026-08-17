@@ -1,0 +1,35 @@
+{#- The 404 page GitHub Pages serves for any unmatched URL.
+
+    Without this template zola emits a bare 68-byte document: no stylesheet, no
+    nav, no way back. That is a dead end on a site where URLs have moved -- the
+    app sections went from /chess/ to /en/chess/ and the posts from /blog/ to
+    /en/blog/, so old links and bookmarks land here.
+
+    It is a single static page for the whole site, so it cannot know the
+    reader's language: GitHub Pages serves the same file under /en/ and /he/
+    alike. Both languages are therefore shown, English first, rather than
+    guessing wrong half the time.
+
+    It extends base.html for the header, theme and styling, which is the whole
+    point -- a reader who lands here gets the nav and can leave. -#}
+{% extends "base.html" %}
+
+{% block title %}404 &middot; {{ config.title }}{% endblock %}
+{% block description %}The requested page was not found.{% endblock %}
+
+{% block content %}
+<article class="post">
+<h1>404 &mdash; Not found</h1>
+
+<p>That page does not exist. It may have moved: the blog and the applications
+are now under a language prefix, so <code>/blog/…</code> is <code>/en/blog/…</code>
+and <code>/chess/</code> is <code>/en/chess/</code>.</p>
+
+<p lang="he" dir="rtl">הדף המבוקש לא נמצא. ייתכן שהכתובת השתנתה.</p>
+
+<ul>
+  <li><a href="/en/">English home</a> &middot; <a href="/en/blog/">Blog</a> &middot; <a href="/en/tags/">Tags</a></li>
+  <li><a href="/he/">דף הבית בעברית</a> &middot; <a href="/he/blog/">בלוג</a> &middot; <a href="/he/tags/">תגיות</a></li>
+</ul>
+</article>
+{% endblock %}
