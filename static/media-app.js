@@ -615,7 +615,10 @@
 
                 const specificDetails = activeConfig.renderDetails(item);
 
-                const rawImgUrl = activeConfig.renderImage ? activeConfig.renderImage(item) : '';
+                // allItems is passed as a second argument so a plugin can
+                // resolve an item against the whole set -- museums use it to
+                // map repeat visits onto the one image kept for that museum.
+                const rawImgUrl = activeConfig.renderImage ? activeConfig.renderImage(item, allItems) : '';
                 const imgUrl = rawImgUrl && !/^https?:\/\//.test(rawImgUrl) ? MEDIA_BASE + rawImgUrl : rawImgUrl;
                 const imgHtml = imgUrl ? '<img src="' + escapeHtml(imgUrl) + '" class="media-card-image w-full h-48 object-cover" alt="' + escapeHtml(item.name || '') + '" loading="lazy">' : '';
 

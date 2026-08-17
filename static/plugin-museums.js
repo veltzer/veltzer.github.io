@@ -8,6 +8,31 @@ function museumDate(item) {
     return item.date_utcz || item.date_ymd || '';
 }
 
+// The data records one entry per visit, so the same museum appears several
+// times with different internal_ids (the Met is 2 and 6, the Louvre 15 and 17).
+// Every visit to a museum shows the same photo, so only the lowest-numbered
+// visit has an image file on disk; repeat visits resolve to it here rather than
+// duplicating the image once per visit.
+// Populated lazily from the full item list the first time an image is rendered:
+// there is no load hook in media-app.js to build it up front, and renderImage is
+// only ever called after the data is in memory.
+const museumImageIds = new Map();
+
+function canonicalMuseumImageId(item, allItems) {
+    if (!item.name) return item.internal_id;
+    if (museumImageIds.size === 0 && Array.isArray(allItems)) {
+        allItems.forEach(function(other) {
+            if (!other.name || !other.internal_id) return;
+            const seen = museumImageIds.get(other.name);
+            if (seen === undefined || other.internal_id < seen) {
+                museumImageIds.set(other.name, other.internal_id);
+            }
+        });
+    }
+    const canonical = museumImageIds.get(item.name);
+    return canonical === undefined ? item.internal_id : canonical;
+}
+
 window.mediaPlugins['museums'] = {
     file: 'data/museums.json.gz',
     navTitle: 'Museums',
@@ -48,9 +73,10 @@ window.mediaPlugins['museums'] = {
         {key: 'remark', label: 'Remark', default: true},
         {key: 'website', label: 'Website Link', default: true}
     ],
-    renderImage: function(item) {
+    renderImage: function(item, allItems) {
         if (!item.internal_id) return '';
-        return 'images/museum-' + encodeURIComponent(item.internal_id) + '.jpg';
+        const imageId = canonicalMuseumImageId(item, allItems);
+        return 'images/museum-' + encodeURIComponent(imageId) + '.jpg';
     },
     renderDetails: function(item) {
         let html = '';

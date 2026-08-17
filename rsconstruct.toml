@@ -50,6 +50,13 @@ args = ["-c", "config/eslint.config.js"]
 [processor.tidy]
 src_dirs = ["static"]
 
+# Complements tidy rather than duplicating it: tidy checks markup well-formedness
+# (unclosed tags, nesting), htmlhint checks semantics tidy ignores -- duplicate
+# id attributes, <img> without alt, unsafe target="_blank". Same scope and same
+# reason for excluding templates/.
+[processor.htmlhint]
+src_dirs = ["static"]
+
 # Zola build. Posts live in content/ -- the blog/posts -> content/blog converter
 # was retired because it wiped content/blog on every run.
 [processor.explicit]
@@ -147,3 +154,16 @@ dep_inputs = [".stylelintrc.json"]
 src_dirs = ["doc"]
 src_files = ["README.md", "CLAUDE.md"]
 dep_inputs = [".rumdl.toml"]
+
+# src_files, not src_dirs: a dir sweep pulls in package-lock.json (generated,
+# 300KB) and the submodule's own .stylelintrc.json. .htmllintrc is deliberately
+# absent -- it is JSONC, with "// npm modules to load" comments, so a strict
+# JSON parser rejects it by design.
+[processor.ijsonlint]
+src_files = ["package.json", ".stylelintrc.json"]
+src_exclude_dirs = ["shared", "node_modules", "_site"]
+src_exclude_files = ["package-lock.json"]
+
+[processor.duplicate_files]
+src_dirs = ["static/images"]
+src_extensions = [".jpg", ".jpeg", ".png", ".gif", ".webp"]

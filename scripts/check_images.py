@@ -2,17 +2,17 @@
 
 """
 Check that every media item that should have a local image actually has one
-in blog/images/.
+in static/images/.
 
 Checks:
-- Movies: blog/images/movie-{imdb_id}.jpg
-- Series: blog/images/series-{imdb_id}.jpg
-- Audible: blog/images/audible-{asin}.jpg
-- Audio Courses: blog/images/audiocourse-gc-{gc_id}.jpg
+- Movies: static/images/movie-{imdb_id}.jpg
+- Series: static/images/series-{imdb_id}.jpg
+- Audible: static/images/audible-{asin}.jpg
+- Audio Courses: static/images/audiocourse-gc-{gc_id}.jpg
                  or audiocourse-audible-{asin}.jpg
                  or audiocourse-internal-{internal_id}.jpg
-- Museums: blog/images/museum-{internal_id}.jpg
-- Podcasts: blog/images/podcast-{internal_id}.jpg
+- Museums: static/images/museum-{internal_id}.jpg
+- Podcasts: static/images/podcast-{internal_id}.jpg
 - YouTube: skipped (uses external thumbnails)
 
 Usage:
@@ -30,7 +30,9 @@ import yaml
 # Resolved from this file rather than the cwd, so the script works from
 # anywhere instead of only from the repo root.
 REPO_ROOT = Path(__file__).resolve().parent.parent
-IMAGE_DIR = REPO_ROOT / "blog" / "images"
+# static/images, not blog/images: the zola migration moved the image tree and
+# this path was never updated, so the check reported all 312 images missing.
+IMAGE_DIR = REPO_ROOT / "static" / "images"
 DATA_DIR = REPO_ROOT.parent / "data" / "yaml"
 
 logger = logging.getLogger(__name__)
@@ -123,14 +125,31 @@ def check_audio_courses():
 
 
 def check_museums():
-    """Check museum images."""
+    """Check museum images.
+
+    One entry per visit, so a museum visited twice has two entries. Only the
+    lowest-numbered visit owns an image file -- repeat visits render that same
+    image via canonicalMuseumImageId() in plugin-museums.js -- so only the
+    first visit to each museum is checked here.
+    """
     entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "museums.yaml"))
     errors = 0
+    owns_image = {}
+    for entry in entries:
+        name = entry.get("name")
+        internal_id = entry.get("internal_id")
+        if not name or not internal_id:
+            continue
+        if name not in owns_image or internal_id < owns_image[name]:
+            owns_image[name] = internal_id
+    expected = set(owns_image.values())
     for entry in entries:
         internal_id = entry.get("internal_id")
         if not internal_id:
             print(f"  NO ID: {entry.get('name', '?')}")
             errors += 1
+            continue
+        if internal_id not in expected:
             continue
         path = os.path.join(str(IMAGE_DIR), f"museum-{internal_id}.jpg")
         if not os.path.exists(path):
