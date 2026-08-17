@@ -13,9 +13,11 @@ If the accounts of the New Testament are historically accurate, Jesus of Nazaret
 During the purported life and immediate aftermath of Jesus, several highly literate and observant historians were active in the region. Their silence is one of the most significant challenges to the traditional historical narrative.
 
 ### Philo of Alexandria (c. 20 BCE – 50 CE)
+
 Philo was the most important Jewish philosopher of his time. He lived in Alexandria but frequently visited Jerusalem and had close family ties to the Judean aristocracy. He wrote extensively on Jewish history, law, and contemporary events, including the actions of Pontius Pilate. Yet, in all his tens of thousands of words, he never mentions a wonder-working rabbi named Jesus or the movement he supposedly started.
 
 ### Seneca the Younger (c. 4 BCE – 65 CE)
+
 A Roman Stoic philosopher and statesman, Seneca wrote on a wide range of topics, including ethics, natural phenomena, and religion. He was deeply interested in new religious movements and "superstitions." Despite living during the height of the early Christian expansion, he makes no mention of the Christians or their founder.
 
 ## The Problem of Josephus

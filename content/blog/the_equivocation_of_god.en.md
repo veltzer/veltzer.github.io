@@ -12,10 +12,10 @@ When religious people, philosophers, and theologians use the word "God," they ar
 
 Consider just a few of the very different things the word "God" can mean:
 
-*   **The Philosophers' God:** A "first mover," "ground of being," or "necessary cause." This entity is impersonal, often timeless, and may not be a mind at all. It does not love, judge, or speak. It is closer to a logical placeholder than to anyone you could pray to.
-*   **The Deists' God:** A creator who set the universe in motion and then walked away. No miracles, no revelation, no scripture, no afterlife judgment. The clockmaker who left the room.
-*   **The God of the Old Testament:** A specific tribal deity named Yahweh with a personality, preferences, and a temper. He has favorites, fights other gods, demands sacrifices, commands genocides, and walks in gardens.
-*   **The "Personal God" of Modern Believers:** A loving father who hears every prayer, knows every thought, and has a plan for each individual life. Often described as omniscient, omnipotent, and perfectly good.
+* **The Philosophers' God:** A "first mover," "ground of being," or "necessary cause." This entity is impersonal, often timeless, and may not be a mind at all. It does not love, judge, or speak. It is closer to a logical placeholder than to anyone you could pray to.
+* **The Deists' God:** A creator who set the universe in motion and then walked away. No miracles, no revelation, no scripture, no afterlife judgment. The clockmaker who left the room.
+* **The God of the Old Testament:** A specific tribal deity named Yahweh with a personality, preferences, and a temper. He has favorites, fights other gods, demands sacrifices, commands genocides, and walks in gardens.
+* **The "Personal God" of Modern Believers:** A loving father who hears every prayer, knows every thought, and has a plan for each individual life. Often described as omniscient, omnipotent, and perfectly good.
 
 These are not subtle theological variations on a single theme. They are mutually incompatible claims. The first mover does not need to be a person; the personal God of believers explicitly *is* a person. A deist God by definition does not intervene; the biblical God intervenes constantly. A perfectly good, omniscient God cannot also be the Yahweh who orders the slaughter of children in 1 Samuel 15.
 
@@ -43,10 +43,10 @@ If this confusion were merely an intellectual error, it would have been cleaned 
 
 The remedy is not complicated. It is just inconvenient. Whenever someone uses the word "God," the right next question is: *which one?*
 
-*   Do you mean an impersonal first cause, or a person with a will?
-*   If a person, does that person intervene in the world, or not?
-*   If they intervene, have they revealed themselves through a specific text? Which one? Why that one?
-*   Do you accept the parts of that text that are morally monstrous, or do you not?
+* Do you mean an impersonal first cause, or a person with a will?
+* If a person, does that person intervene in the world, or not?
+* If they intervene, have they revealed themselves through a specific text? Which one? Why that one?
+* Do you accept the parts of that text that are morally monstrous, or do you not?
 
 Most religious arguments do not survive this line of questioning, because the arguments depend on never settling which God is being discussed. The fog is the point.
 

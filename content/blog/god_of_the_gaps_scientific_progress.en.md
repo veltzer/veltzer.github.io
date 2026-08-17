@@ -12,9 +12,9 @@ Throughout human history, "God" has been the name we give to the things we do no
 
 There was a time when almost every aspect of the natural world was attributed to direct divine intervention.
 
-*   **Meteorology:** Lightning was the bolt of Zeus or the anger of Yahweh. We now understand it as an electrostatic discharge caused by the movement of ice and water in clouds.
-*   **Medicine:** Plagues and mental illnesses were seen as divine punishments or demonic possessions. Today, we have germ theory, genetics, and neurology. We don't pray away a staph infection; we use antibiotics.
-*   **Cosmology:** The sun was a chariot driven across the sky. We now understand planetary orbits, stellar fusion, and the vastness of the expanding universe.
+* **Meteorology:** Lightning was the bolt of Zeus or the anger of Yahweh. We now understand it as an electrostatic discharge caused by the movement of ice and water in clouds.
+* **Medicine:** Plagues and mental illnesses were seen as divine punishments or demonic possessions. Today, we have germ theory, genetics, and neurology. We don't pray away a staph infection; we use antibiotics.
+* **Cosmology:** The sun was a chariot driven across the sky. We now understand planetary orbits, stellar fusion, and the vastness of the expanding universe.
 
 ## The Ultimate Gap: Origins
 

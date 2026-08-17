@@ -48,7 +48,7 @@ tags = ["הסתברות", "סטטיסטיקה", "בייס"]
 
 תחילה נחשב את P(L אומר C):
 
-```
+```text
 P(L says C) = P(L says C | C is true) * P(C) + P(L says C | C is false) * P(not C)
             = 0.2 * 0.5 + 0.8 * 0.5
             = 0.1 + 0.4
@@ -57,7 +57,7 @@ P(L says C) = P(L says C | C is true) * P(C) + P(L says C | C is false) * P(not 
 
 כעת נפעיל את משפט בייס:
 
-```
+```text
 P(C is true | L says C) = P(L says C | C is true) * P(C) / P(L says C)
                          = 0.2 * 0.5 / 0.5
                          = 0.2

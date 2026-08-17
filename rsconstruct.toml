@@ -170,3 +170,71 @@ src_exclude_files = ["package-lock.json"]
 [processor.duplicate_files]
 src_dirs = ["static/images"]
 src_extensions = [".jpg", ".jpeg", ".png", ".gif", ".webp"]
+
+# favicon.svg is hand-written and linked from every page, so a malformed one
+# breaks the tab icon site-wide and silently. vendor/ is excluded: the
+# cm-chessboard piece sets are third-party. The generated sitemap.xml and
+# atom.xml are not covered -- they are build output, not sources.
+[processor.xmllint]
+src_dirs = ["static"]
+src_exclude_dirs = ["vendor"]
+
+# Spellchecking runs on aspell, NOT zspell -- deliberately, and not for taste.
+#
+# zspell cannot load he_IL at all on a 30GB machine. The Hebrew hunspell
+# dictionary is 469,509 stems against 3,335 PFX rules (English: 79,013 stems,
+# 14 PFX rules -- 6x the stems, 238x the prefix rules). zspell expands that
+# affix table eagerly at load rather than applying prefixes at lookup, so the
+# cross product is on the order of 1e9 strings. It reached 18GB resident and
+# kept climbing. Narrowing the file set and forcing max_jobs = 1 did not help,
+# because a single instance is the entire cost -- this is not a parallelism bug.
+# English alone would have been fine on zspell; both languages use aspell so
+# there is one mechanism to understand rather than two.
+#
+# aspell streams the whole corpus in ~17MB peak, well under a second.
+#
+# Each language is a generator (compile the allowlist) plus a checker (run it).
+# Both stages are wrapped in scripts rather than invoked directly here, because
+# every aspell path option resolves relative names against /usr/lib/aspell
+# instead of the working directory. The paths have to be absolute, and an
+# absolute path in this file would not survive another machine or CI.
+#
+# .aspell.he.txt (774 words) and .aspell.en.txt (977) are the committed
+# allowlists: transliterated proper nouns, scholarly and technical terms, and
+# tokenization fragments. Both are compiled to binary .rws files under out/
+# (gitignored) because neither can be passed to aspell as a --personal
+# wordlist -- Hebrew plus any non-ASCII entry there is a hard segfault, and for
+# English aspell reads that file as Latin-1 whatever --encoding says. See the
+# scripts for the full set of traps.
+[processor.generator.aspell_he_dict]
+command = "scripts/build_he_dict.sh"
+src_files = [".aspell.he.txt"]
+output_dir = "out/aspell"
+output_extension = "rws"
+
+[processor.script.spellcheck_he]
+command = "scripts/spellcheck_he.sh"
+src_dirs = ["content/blog"]
+src_extensions = [".he.md"]
+dep_auto = [".aspell.he.txt"]
+
+[processor.generator.aspell_en_dict]
+command = "scripts/build_en_dict.sh"
+src_files = [".aspell.en.txt"]
+output_dir = "out/aspell"
+output_extension = "rws"
+
+# Both languages now carry an explicit suffix, so each checker selects exactly
+# its own files. Before the .en.md rename this processor had to take every .md
+# and drop the Hebrew ones in the script, which made `rsconstruct status`
+# report 162 files for a check that only covered 81.
+#
+# content/blog only, not content/: the standalone app pages (chess, media,
+# calendar, ...) are markdown wrappers around <script> blocks, so a spellchecker
+# sees addEventListener and btnNextGame rather than prose. .rumdl.toml skips
+# them for the same reason.
+[processor.script.spellcheck_en]
+command = "scripts/spellcheck_en.sh"
+src_dirs = ["content/blog"]
+src_extensions = [".en.md"]
+dep_auto = [".aspell.en.txt"]

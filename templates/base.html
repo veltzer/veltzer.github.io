@@ -21,7 +21,10 @@
 
 {#- Both languages are prefixed (/en/ and /he/), so every in-site link is built
     from the current language's root rather than assuming English owns "/". -#}
-{%- set lang_root = "/" ~ (lang | default(value=config.default_language)) ~ "/" %}
+{#- Falls back to "en", NOT config.default_language: the default is the empty
+    "cs" (see config.toml), so defaulting to it would point every unprefixed
+    link at a language with no pages. -#}
+{%- set lang_root = "/" ~ page_lang ~ "/" %}
 <header class="site-header">
   <a class="site-title" href="{{ lang_root }}">{{ config.title }}</a>
   <nav class="site-nav">

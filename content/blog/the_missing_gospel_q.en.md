@@ -15,6 +15,7 @@ The "Synoptic Problem" — how to explain the striking similarities and differen
 "Synoptic" means "seen together." Matthew, Mark, and Luke are called the Synoptic Gospels because they can be laid side by side and compared — they share narrative sequence, content, and often exact wording in a way that John does not.
 
 The scale of the overlap is remarkable:
+
 - Approximately **90% of Mark's content** appears in Matthew.
 - Approximately **50% of Mark's content** appears in Luke.
 - Matthew and Luke share roughly **235 verses** that do not appear in Mark at all.
@@ -31,6 +32,7 @@ The dominant solution in modern scholarship is the **Two-Source Hypothesis**, fi
 2. **Matthew and Luke also share a second source** — the material they have in common that is not in Mark. This hypothetical document is called **Q** (from the German *Quelle*, meaning "source").
 
 The evidence for Markan priority is strong:
+
 - Mark is shorter and less polished than Matthew and Luke. It is more likely that Matthew and Luke expanded and refined Mark than that Mark condensed and roughened Matthew.
 - Mark contains readings that seem theologically awkward — e.g., Jesus being "unable" to perform miracles in Nazareth due to unbelief (Mark 6:5), or people questioning whether Jesus had "gone out of his mind" (Mark 3:21) — that Matthew and Luke quietly soften or omit. Authors tend to remove theological difficulties, not introduce them.
 - The "minor agreements" of Matthew and Luke against Mark are explicable by Q and their independent editing; the reverse hypothesis creates far more problems.

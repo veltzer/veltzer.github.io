@@ -2,9 +2,28 @@ base_url = "https://veltzer.org"
 title = "Mark Veltzer's personal site"
 author = "Mark Veltzer"
 
-default_language = "en"
+# The default language is "cs", and there is deliberately not one word of Czech
+# on this site.
+#
+# Zola identifies the default language by the ABSENCE of a filename marker:
+# foo.md is the default language and foo.he.md is a translation. There is no way
+# to write foo.en.md while "en" is the default -- zola parses the ".en" as part
+# of the slug and silently builds /blog/foo-en/ instead, with the translation
+# pairing severed and exit code 0. Declaring [languages.en] does not help; with
+# a title it is a hard error ("specified twice"), and bare it changes nothing.
+#
+# Pointing default_language at a language that has no content sidesteps that:
+# every real language is then a non-default one, so every file carries an
+# explicit suffix and English stops being a special case. The cost is the
+# [translations] table below and the /index.html redirect, both of which exist
+# only to service a language nobody reads.
+#
+# build_search_index is off here for the same reason: zola only ships stemmers
+# for a fixed list of languages and errors out on an unsupported one. The real
+# languages set it in their own blocks.
+default_language = "cs"
 compile_sass = true
-build_search_index = true
+build_search_index = false
 generate_feeds = true
 feed_filenames = ["atom.xml"]
 
@@ -12,9 +31,12 @@ taxonomies = [
     { name = "tags", feed = true, paginate_by = 20 },
 ]
 
-# Nav labels, keyed so base.html can render them in the reading language.
-# Zola's trans() looks these up per language; the English table below is the
-# fallback for any key a language has not translated.
+# Nav labels for the default language -- which is the empty "cs" (see the top of
+# this file). trans() falls back here for any key a real language has not
+# translated, and zola errors out if a key it needs is missing entirely, so this
+# table has to exist and has to be complete. The values are English because a
+# fallback that renders is better than one that does not; nothing should ever
+# actually reach them.
 [translations]
 nav_blog = "Blog"
 nav_about = "About"
@@ -38,7 +60,37 @@ label_language = "Language"
 label_theme = "Theme"
 label_translations = "Translations"
 
-# Hebrew. Posts opt in by filename: foo.he.md alongside foo.md. Zola serves
+# English. Posts are foo.en.md; see the default_language note at the top for why
+# the suffix is explicit rather than English being the unmarked default.
+[languages.en]
+title = "Mark Veltzer's personal site"
+generate_feeds = true
+build_search_index = true
+taxonomies = [
+    { name = "tags", feed = true, paginate_by = 20 },
+]
+
+[languages.en.translations]
+nav_blog = "Blog"
+nav_about = "About"
+nav_tags = "Tags"
+nav_media = "Media"
+nav_calendar = "Calendar"
+nav_chess = "Chess"
+nav_slides = "Slides"
+nav_syllabi = "Syllabi"
+nav_animations = "Animations"
+tags_title = "Tags"
+tagged_with = "Tagged"
+latest_posts = "Latest posts"
+all_posts = "All posts"
+newer = "Newer"
+older = "Older"
+label_language = "Language"
+label_theme = "Theme"
+label_translations = "Translations"
+
+# Hebrew. Posts opt in by filename: foo.he.md alongside foo.en.md. Zola serves
 # them under /he/ and exposes page.translations, which templates/page.html
 # turns into a language switcher -- no hand-maintained cross-links.
 [languages.he]

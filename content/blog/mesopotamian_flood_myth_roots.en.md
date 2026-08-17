@@ -12,18 +12,18 @@ The story of Noah and the Great Flood is one of the most recognizable narratives
 
 Centuries before the Book of Genesis was compiled, the civilizations of Sumer, Akkad, and Babylon were already telling the story of a great deluge.
 
-*   **The Atrahasis Epic (c. 18th century BCE):** This Akkadian epic explains that the gods decided to wipe out humanity because their "noise" was keeping the gods from sleeping. The god Enki, however, warns the hero Atrahasis to build a boat.
-*   **The Epic of Gilgamesh (Tablet XI, c. 12th century BCE):** In the most famous version, the hero Gilgamesh meets Utnapishtim, the "Mesopotamian Noah," who tells the story of how he survived the flood and was granted immortality.
+* **The Atrahasis Epic (c. 18th century BCE):** This Akkadian epic explains that the gods decided to wipe out humanity because their "noise" was keeping the gods from sleeping. The god Enki, however, warns the hero Atrahasis to build a boat.
+* **The Epic of Gilgamesh (Tablet XI, c. 12th century BCE):** In the most famous version, the hero Gilgamesh meets Utnapishtim, the "Mesopotamian Noah," who tells the story of how he survived the flood and was granted immortality.
 
 ## Striking Similarities
 
 The parallels between the Genesis account and the *Epic of Gilgamesh* are too precise to be coincidental.
 
-1.  **The Divine Warning:** In both stories, a deity warns a chosen individual of a coming flood and instructs him to build a massive vessel.
-2.  **The Boat's Contents:** Both heroes are told to bring their families, "the seed of all living creatures," and craftsmen onto the boat.
-3.  **The Seven Days:** In both accounts, the storm lasts for a specific period (though the exact number varies), after which the boat comes to rest on a mountain (Mount Nimush in Gilgamesh, Mount Ararat in Genesis).
-4.  **The Birds:** To check if the water has receded, both heroes release birds. Utnapishtim sends a dove, a swallow, and a raven; Noah sends a raven and a dove.
-5.  **The Sacrifice:** Upon exiting the boat, both heroes offer a sacrifice. In Gilgamesh, the hungry gods "gathered like flies" over the smoke, while in Genesis, "the Lord smelled the soothing aroma."
+1. **The Divine Warning:** In both stories, a deity warns a chosen individual of a coming flood and instructs him to build a massive vessel.
+2. **The Boat's Contents:** Both heroes are told to bring their families, "the seed of all living creatures," and craftsmen onto the boat.
+3. **The Seven Days:** In both accounts, the storm lasts for a specific period (though the exact number varies), after which the boat comes to rest on a mountain (Mount Nimush in Gilgamesh, Mount Ararat in Genesis).
+4. **The Birds:** To check if the water has receded, both heroes release birds. Utnapishtim sends a dove, a swallow, and a raven; Noah sends a raven and a dove.
+5. **The Sacrifice:** Upon exiting the boat, both heroes offer a sacrifice. In Gilgamesh, the hungry gods "gathered like flies" over the smoke, while in Genesis, "the Lord smelled the soothing aroma."
 
 ## Theological Evolution
 

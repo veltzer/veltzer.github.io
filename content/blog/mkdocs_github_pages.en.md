@@ -30,7 +30,7 @@ site_dir: "docs"
 
 My layout:
 
-```
+```text
 blog/               # MkDocs source (docs_dir)
   index.md          # Blog home page
   about.md

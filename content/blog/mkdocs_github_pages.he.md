@@ -27,7 +27,7 @@ site_dir: "docs"
 
 המבנה שלי:
 
-```
+```text
 blog/               # MkDocs source (docs_dir)
   index.md          # Blog home page
   about.md

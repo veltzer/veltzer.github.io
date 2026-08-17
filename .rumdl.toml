@@ -48,4 +48,25 @@ disable = [
     # in the fatar post resolves to /images/... exactly as intended. Verified
     # against the built HTML -- the images render. All 34 hits are this pattern.
     "MD057",
+    # Spaces inside code spans. Fires on exactly two files -- the debian post
+    # and its Hebrew translation -- where the WordPress import mangled the
+    # backtick nesting (`dpkg --purge `dpkg --list | ...``). "Fixing" the space
+    # rewrites published output without repairing the actual breakage, which is
+    # the whole line. See the WordPress note in CLAUDE.md; the posts need
+    # reconstruction by hand, not a formatter.
+    "MD038",
+    # Trailing punctuation in headings. "Production Runs on Linux. Development
+    # Should Have Too." is two sentences, so the final period is deliberate --
+    # the rule stripped it and changed published prose. Punctuation in a heading
+    # is the author's call, not a lint's.
+    "MD026",
+    # "Use fenced code blocks". The five hits are all WordPress-import damage:
+    # in java-runtime-environment-control.md the indented block is a mangled
+    # *list* (its last item lost the indent entirely), not code. Fencing it
+    # would cement the corruption as if it were intentional. These posts need
+    # reconstruction by hand -- see the WordPress note in CLAUDE.md.
+    "MD046",
+    # "Link text should be descriptive". One hit, on a post whose link text is
+    # a bare URL by design. Not worth rewriting published prose over.
+    "MD059",
 ]

@@ -8,7 +8,6 @@ tags = ["streaming", "linux", "ux"]
 
 I've had some issues with the Netflix service recently.
 
-
 Here is my grievance list:
 
 * The UI is too intrusive, starts preview of videos/shows when you are just browsing. Cannot turn this behaviour off.

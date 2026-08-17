@@ -2,7 +2,10 @@
 {% block content %}
 <h1>{{ config.title }}</h1>
 <p>{{ config.description }}</p>
-{%- set blog = get_section(path="blog/_index.md", lang=lang) %}
+{#- Every language is suffixed now (see default_language in config.toml), so
+    there is no bare blog/_index.md to fall back on: the path has to name the
+    language explicitly rather than relying on the lang= argument alone. -#}
+{%- set blog = get_section(path="blog/_index." ~ page_lang ~ ".md", lang=page_lang) %}
 <h2>{{ trans(key="latest_posts", lang=page_lang) }}</h2>
 <ul class="post-list">
   {%- for post in blog.pages %}
@@ -11,5 +14,7 @@
       <time datetime="{{ post.date }}">{{ post.date | date(format="%-d %b %Y") }}</time></li>
   {%- endfor %}
 </ul>
-<p><a href="{{ get_url(path='@/blog/_index.md') }}">{{ trans(key="all_posts", lang=page_lang) }} &rarr;</a></p>
+{#- get_url appends the language suffix itself, so this path stays bare and
+    takes lang= -- unlike get_section above, which wants the real filename. -#}
+<p><a href="{{ get_url(path='@/blog/_index.md', lang=page_lang) }}">{{ trans(key="all_posts", lang=page_lang) }} &rarr;</a></p>
 {% endblock %}

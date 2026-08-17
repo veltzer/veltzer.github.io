@@ -1,4 +1,4 @@
 +++
-title = "Home"
-template = "index.html"
+title = "Mark Veltzer's personal site"
+template = "redirect_root.html"
 +++
