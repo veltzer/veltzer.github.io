@@ -10,6 +10,18 @@
 - If the content is personal data, add a short note on what is public vs private to build trust.
 - Add more structure and discoverability to make it easier to use and contribute to.
 
+### Asset weight
+
+- **`static/images/` is 21 MB across 325 JPEGs, with no WebP alternatives.** Average 66 KB
+  per file. WebP would typically cut that substantially at equivalent quality.
+
+  Not render-blocking — `media-app.js` already sets `loading="lazy"`, so this is bandwidth
+  and cache pressure rather than a load-time regression. It is also not a quick win: the
+  media plugins reference image paths by extension in several places, so it needs either a
+  `<picture>` fallback or a conversion that keeps the `.jpg` names, plus a decision about
+  whether to convert in the fetch scripts or as a build step. Sized as a project, not a
+  one-liner.
+
 ## Overall Stats Page
 
 - Create an overall stats page across all topics: total listening time, average rating by lecturer, most-used device, etc.
@@ -368,6 +380,30 @@
   OLDER than the copies (`all.list.csv` 2026-07-11 10:36, `games.pgn` 2025-09-20), and
   the five plain YAML files diff byte-identical. The later commits in `../data` touched
   files this site does not consume. `blog/data/` is current.
+
+- **`relocate_english()` and `fix_english_links()` in `build_site.py` are now dead code.**
+  Roughly 120 lines of post-processing that existed to fake the `/en/` URL prefix, from
+  when English was the default language and zola served it at the site root with no way
+  to prefix it. `default_language` is now the empty `"cs"` (see the note at the top of
+  `config.toml`), so zola emits `/en/` and `/he/` itself and there is nothing left at the
+  root to relocate.
+
+  Verified inert rather than harmful: permalinks in the built output are correct, with no
+  `/en/en/` doubling, and `relocate_english()` finds no English tree outside `en/`. Left
+  in place deliberately as a safety net if the config is ever reverted, and its docstring
+  updated to say so — but it is dead, and deleting it is a real cleanup that should be
+  done on purpose rather than as a side effect of another task. `APP_SECTIONS` is already
+  an empty set kept only because `fix_english_links()` and the sitemap rewrite still
+  reference the name.
+
+- **No link checker for the profile URLs.** `../data/yaml/profiles.yaml` holds roughly 30
+  external profile links, rendered into `content/about/` here and into `README.md` in the
+  `../veltzer` repository. They are exactly the kind of URL that dies quietly — a service
+  shuts down, a username changes — and nothing would notice.
+
+  Now that they live in structured YAML rather than hand-written markdown, checking them
+  is a short script: load the YAML, request each `url`, report non-2xx. Worth running on
+  demand rather than in CI, since a third-party outage should not fail a site build.
 
 ## Internationalization
 
