@@ -1,14 +1,60 @@
 # Suggested Improvements
 
+Struck-through entries are done; the note under each records what was actually
+changed and how it was verified. Four items are open:
+
+1. A public/private note on the media page *(Media Collection UX)*
+2. WebP conversion for `static/images/` *(Media Collection UX -> Asset weight)*
+3. An aggregated cross-topic stats view *(Overall Stats Page)*
+4. A link checker for the profile URLs *(Infrastructure)*
+
+Everything else in this file is a record rather than a task. Keep it that way:
+when an item is finished, strike it through and say what was done, rather than
+deleting it -- several entries here exist specifically to stop a fixed thing
+being re-reported, or to record that something is deliberately not a problem.
+
 ## Media Collection UX
 
-- Add a clear title/subtitle explaining what the media collection contains.
-- Show thumbnails or cards instead of only a plain list.
-- Include richer metadata like type, date, tags, and file size.
-- Add search plus filters for category/date to make browsing easier.
-- Improve loading/error state for the visits counter to feel more polished.
-- If the content is personal data, add a short note on what is public vs private to build trust.
-- Add more structure and discoverability to make it easier to use and contribute to.
+These were written against an earlier version of the media app and most had
+already shipped without being marked. Audited against `static/media-app.js`, the
+seven `static/plugin-*.js` files and the built page.
+
+- ~~**Add a clear title/subtitle explaining what the media collection contains.** — DONE.~~
+  Every plugin sets `title` and `subtitle`: "Audible Library", "Watched Movies",
+  "Visited Museums", "Watched TV Series", "Listened Podcasts", "Listened to Audio
+  Courses", "Watched YouTube Videos".
+
+- ~~**Show thumbnails or cards instead of only a plain list.** — DONE.~~
+  `media-app.js` renders a card per item — `media-card-image`, rounded, shadowed,
+  bordered — with the image lazy-loaded and an `alt` from the item name.
+
+- ~~**Include richer metadata like type, date, tags, and file size.** — DONE.~~
+  All seven plugins implement `renderDetails`, and each declares 8–11 fields in its
+  `fields` registry.
+
+- ~~**Add search plus filters for category/date to make browsing easier.** — DONE.~~
+  Search box plus per-topic filters. The filters are *derived* rather than
+  hand-declared: `deriveFieldsConfig` in `media-app.js` builds them from each plugin's
+  `fields` registry, where `filterable` defaults to true, and supports
+  select/boolean/year/range/custom types. Each topic exposes 7–10 filter dropdowns —
+  every plugin marks exactly one field `filterable: false` (the title, which the search
+  box already covers).
+
+- ~~**Improve loading/error state for the visits counter.** — DONE.~~
+  `media_app.html` ships the placeholder `Page Visits: Loading...`, and
+  `updateVisitorCount` hides the whole line on any failure rather than leaving a broken
+  or zero value on screen. See the Visitor Counter section for why the API's number is
+  only a rough signal.
+
+- **If the content is personal data, add a short note on what is public vs private.**
+  Still open. The media page has no descriptive intro at all — it opens straight into the
+  topic nav and the item grid. A sentence saying what the collection is and that
+  everything shown is deliberately public would cost little.
+
+- **NOT ACTIONABLE AS WRITTEN: "add more structure and discoverability".**
+  Kept only so it is not re-added. Too vague to implement or to call done: the app
+  already has per-topic navigation, search, filters, sorting and stats. A concrete
+  successor item should name the specific thing a reader cannot currently find.
 
 ### Asset weight
 
@@ -24,8 +70,23 @@
 
 ## Overall Stats Page
 
-- Create an overall stats page across all topics: total listening time, average rating by lecturer, most-used device, etc.
-- Currently there is a statistics page per topic but not an aggregated one.
+- **Create an aggregated stats view across all seven topics.** Still open — the only
+  outstanding *feature* here, alongside the WebP conversion, which is infrastructure.
+
+  What exists: each of the seven plugins implements `renderStats`, so every topic has its
+  own statistics panel (museums by city and year, and so on). There is no view that
+  combines them.
+
+  What makes this non-trivial is that the datasets do not share a schema. `media-app.js`
+  already normalises `title` onto `name` at load, but ratings, dates and durations differ
+  per topic — some have `rating` on different scales, some have no duration at all — so an
+  aggregate needs an explicit decision about which fields are genuinely comparable rather
+  than a generic roll-up. The original note suggested total listening time, average rating
+  by lecturer and most-used device; only the first two look computable across more than
+  one dataset.
+
+  Worth scoping as: pick the three or four cross-topic numbers that are actually
+  well-defined, then build the panel, rather than starting from the UI.
 
 ## YAML Data Structural Issues
 
