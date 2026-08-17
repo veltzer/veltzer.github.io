@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
 {% block title %}{{ page.title }} &middot; {{ config.title }}{% endblock %}
-{% block description %}{{ page.description | default(value=page.content | striptags | truncate(length=160)) }}{% endblock %}
+{#- `if page.description` rather than the `default` filter: zola sets
+    description to the empty string when the front matter omits it, and `default`
+    only substitutes for a *missing* value, never an empty one. With the filter
+    every post shipped <meta name="description" content="">, so search results
+    and social cards had nothing to quote. -#}
+{% block description %}{% if page.description %}{{ page.description }}{% else %}{{ page.content | striptags | truncate(length=160) }}{% endif %}{% endblock %}
 
 {% block content %}
 <article class="post">

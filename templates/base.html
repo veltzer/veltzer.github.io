@@ -12,6 +12,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}{{ config.title }}{% endblock %}</title>
 <meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
+
+{#- Canonical, alternates and Open Graph.
+
+    current_url is absolute and already carries the language prefix. Sections
+    and taxonomy pages have it too, so this covers every page rather than only
+    posts.
+
+    The canonical must stay on veltzer.org: veltzer.github.io 301s here, and
+    pointing canonicals at the redirecting host splits ranking off the real
+    site. config.base_url is veltzer.org, and current_url is built from it.
+
+    og:* is what Slack, WhatsApp, Mastodon and the rest read. Without them a
+    shared link renders as a bare URL with no title or summary. -#}
+{%- if current_url %}
+<link rel="canonical" href="{{ current_url }}">
+<meta property="og:url" content="{{ current_url }}">
+{%- endif %}
+{%- if page and page.translations %}
+{%- for translation in page.translations %}
+<link rel="alternate" hreflang="{{ translation.lang }}" href="{{ translation.permalink }}">
+{%- endfor %}
+{%- endif %}
+<meta property="og:type" content="{% if page %}article{% else %}website{% endif %}">
+<meta property="og:site_name" content="{{ config.title }}">
+<meta property="og:locale" content="{% if page_lang == 'he' %}he_IL{% else %}en_US{% endif %}">
+<meta property="og:title" content="{% block og_title %}{% if page %}{{ page.title }}{% elif section %}{{ section.title }}{% else %}{{ config.title }}{% endif %}{% endblock %}">
+{#- The description block cannot be called twice in Tera, so compute the same
+    fallback here rather than duplicating the block. -#}
+{%- if page and page.description %}{% set og_desc = page.description %}
+{%- elif page %}{% set og_desc = page.content | striptags | truncate(length=160) %}
+{%- elif section and section.description %}{% set og_desc = section.description %}
+{%- else %}{% set og_desc = config.description %}{% endif %}
+<meta property="og:description" content="{{ og_desc }}">
+<meta name="twitter:card" content="summary">
+{%- if page and page.date %}
+<meta property="article:published_time" content="{{ page.date }}">
+{%- endif %}
+
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/favicon.svg">
 <link rel="stylesheet" href="{{ get_url(path='shared-themes/themes.css') }}">
