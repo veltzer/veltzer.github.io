@@ -26,6 +26,15 @@ jobs:
       with:
         python-version: '3.12'
         cache: pip
+        # There is no requirements.txt or pyproject.toml here -- the pip list
+        # lives in rsconstruct.toml's [dependencies] -- and without this the
+        # cache step hard-fails looking for one. rsconstruct.toml is also the
+        # correct cache key: it changes exactly when the dependencies do.
+        #
+        # This only surfaced once python-version was pinned. Before that the
+        # cache silently did nothing, because there was no resolved version to
+        # key it on.
+        cache-dependency-path: rsconstruct.toml
     - uses: actions/setup-node@v6
       with:
         cache: npm
