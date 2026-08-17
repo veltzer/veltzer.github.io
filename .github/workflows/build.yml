@@ -15,8 +15,16 @@ jobs:
       with:
         # shared-themes provides the design tokens; the build fails without it.
         submodules: recursive
+    # python-version is pinned rather than left to whatever the runner image
+    # ships. Unpinned, setup-python warns and falls back to the Python already
+    # on PATH -- which also leaves its pip cache empty, since there is no
+    # resolved version to key the cache on. 3.12 is what ubuntu-24.04 provided
+    # and what this project has been passing CI on; bump it deliberately, not by
+    # runner-image drift. (.pylintrc targets 3.10, so the code itself is not
+    # tied to 3.12.)
     - uses: actions/setup-python@v6
       with:
+        python-version: '3.12'
         cache: pip
     - uses: actions/setup-node@v6
       with:
@@ -77,5 +85,8 @@ jobs:
       run: rsconstruct build --verbose -j0
     - name: status
       run: rsconstruct status
-    - uses: actions/upload-pages-artifact@v3
+    # v5, not v3: v3 pulls in actions/upload-artifact@v4, which targets the
+    # deprecated Node 20 and is being force-run on Node 24. v5 uses
+    # upload-artifact@v7 and drops the deprecation warning.
+    - uses: actions/upload-pages-artifact@v5
     - uses: actions/deploy-pages@v5
