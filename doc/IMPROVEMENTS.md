@@ -381,20 +381,24 @@
   the five plain YAML files diff byte-identical. The later commits in `../data` touched
   files this site does not consume. `blog/data/` is current.
 
-- **`relocate_english()` and `fix_english_links()` in `build_site.py` are now dead code.**
-  Roughly 120 lines of post-processing that existed to fake the `/en/` URL prefix, from
-  when English was the default language and zola served it at the site root with no way
-  to prefix it. `default_language` is now the empty `"cs"` (see the note at the top of
-  `config.toml`), so zola emits `/en/` and `/he/` itself and there is nothing left at the
-  root to relocate.
+- ~~**Dead post-processing code in `build_site.py`.** — PARTLY DONE, and the original
+  claim was wrong.~~
+  `fix_english_links()` was genuinely dead and has been deleted: measured by diffing a
+  build with it removed, it changed zero files. Its job was rewriting root-relative
+  English permalinks to `/en/`, which zola now emits correctly by itself.
 
-  Verified inert rather than harmful: permalinks in the built output are correct, with no
-  `/en/en/` doubling, and `relocate_english()` finds no English tree outside `en/`. Left
-  in place deliberately as a safety net if the config is ever reverted, and its docstring
-  updated to say so — but it is dead, and deleting it is a real cleanup that should be
-  done on purpose rather than as a side effect of another task. `APP_SECTIONS` is already
-  an empty set kept only because `fix_english_links()` and the sitemap rewrite still
-  reference the name.
+  `relocate_english()` is NOT dead and has been kept. The earlier note here claimed both
+  were inert; that was not measured properly. Removing it leaves the six application
+  sections (media, calendar, chess, slides, syllabi, animations) at the site root and
+  absent from `/en/` — they are default-language files, so zola writes them to the root,
+  and this function is what moves them. Its docstring said "this is now a no-op" and has
+  been corrected.
+
+  `fix_sitemap()` is likewise still load-bearing: the raw zola sitemap has 7 entries
+  lacking a language prefix (the six app sections plus `tags/`), which it rewrites to 0.
+
+  Lesson worth keeping: "verified inert" here had meant reading the code and spot-checking
+  the output, not diffing a build with the step removed. Only the second is verification.
 
 - **No link checker for the profile URLs.** `../data/yaml/profiles.yaml` holds roughly 30
   external profile links, rendered into `content/about/` here and into `README.md` in the
