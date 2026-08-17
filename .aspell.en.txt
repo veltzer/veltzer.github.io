@@ -65,9 +65,13 @@ Flavius
 Frontotemporal
 GSSAPIAuthentication
 GUIs
+Galle
 Garstang
 Garstang's
+Gazzaniga
+Gazzaniga's
 Gezer
+Ghazali
 Giordano
 Goodacre
 Goshen
@@ -100,6 +104,7 @@ Irenaeus
 Israelites
 Jamnia
 Jethro
+Johansson
 Judahite
 Judean
 Kadima
@@ -141,12 +146,14 @@ Nephesh
 Netanyahu
 Neurotheology
 Nimush
+Nisbett
 Noam
 Noam's
 Noth
 Olmert
 Omni
 Omnibenevolence
+Optimizers
 Origen
 Ostara
 Ostern
@@ -156,6 +163,7 @@ Pascua
 Paskha
 Pasqua
 PasswordAuthentication
+Penzias
 Peres
 Persinger's
 Pesach
@@ -178,6 +186,7 @@ Ramachandran
 Ramesses
 Ratione
 ReadFile
+Retrodiction
 RocksDB
 SPDK
 SQE
@@ -210,14 +219,17 @@ Thursdayism
 Tokio
 UMDF
 URIs
+Uncheckable
 Unfalsifiability
 Unfalsifiable
 Uriyahu
 UsePAM
 Utnapishtim
+Verrier
 Vitalism
 WPA
 Wernicke's
+Winkler
 Winsock
 Wykstra
 Xenu
@@ -237,6 +249,7 @@ activefilters
 activetoggles
 adat
 addeventlistener
+al
 alertable
 algos
 alienness
@@ -244,6 +257,7 @@ alldep
 allitems
 amd
 annihilationism
+anthropocentrism
 antialiased
 api
 apis
@@ -289,6 +303,7 @@ btnnextpage
 btnprevpage
 cacheability
 calendarel
+callosum
 camelcase
 cb
 cdgklw
@@ -374,6 +389,7 @@ derivefieldsconfig
 desc
 dev
 didn
+diminishment
 dimm
 dir
 disconfirming
@@ -399,11 +415,13 @@ eb
 ecc
 ef
 efd
+eka
 el
 electrochemistry
 electronification
 elohim
 else's
+endosymbiotic
 epicycle
 epigraphic
 epistemically
@@ -420,6 +438,7 @@ eventcolor
 eventsourcefailure
 eventtextcolor
 evidential
+evidentially
 evidentiary
 evolutionarily
 evolutions
@@ -473,6 +492,7 @@ gcal
 gcp
 gcs
 generatenav
+geocentrism
 getcurrentdatatype
 getelementbyid
 getfiltereditems
@@ -678,6 +698,7 @@ pageitems
 pagesubtitle
 pagetitle
 paginationcontainer
+palatability
 params
 parseint
 passwordauthentication
@@ -879,6 +900,7 @@ totalitems
 totalpages
 translatey
 transmissibility
+trinitarian
 txt
 typeof
 ubiqitous
@@ -886,6 +908,7 @@ ubuntu
 ui
 ul
 uncaused
+uncheckable
 underconfident
 unfalsifiability
 unfalsifiable
@@ -894,6 +917,7 @@ universalizability
 universalization
 unix
 unlink
+unrefuted
 unrepresentatively
 unshift
 untestable
