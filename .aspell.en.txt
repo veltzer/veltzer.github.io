@@ -20,8 +20,10 @@ Aurelian
 Axelrod's
 BCE
 Bahá'í
+Bateson's
 Bel
 Bibi
+Bolyai
 Broca's
 Budish
 CLIs
@@ -44,6 +46,7 @@ DMT
 DPDK
 Davidic
 De
+Dennett
 Deutero
 Deuteronomistic
 Deuteronomists
@@ -79,6 +82,7 @@ Gottwald
 Goulder
 Greco
 Griesbach
+Gödel
 HFT
 Hadad
 Hammadi
@@ -87,6 +91,7 @@ Healings
 Hebron
 Henotheism
 Herem
+Heritability
 Hermas
 Hiddenness
 Higgs
@@ -117,6 +122,8 @@ Kuntillet
 Lachish
 Leibnizian
 Lem's
+Libet
+Libet's
 Loftus
 Mainyu
 Manu
@@ -127,10 +134,12 @@ Markan
 Megiddo
 Memetic
 Mendenhall
+Mengele
 Meridor
 Midian
 Midianite
 Midianites
+Millerites
 MkDocs
 Mofaz
 Moshik
@@ -167,12 +176,14 @@ Penzias
 Peres
 Persinger's
 Pesach
+Phenylketonuria
 Philo
 Phineas
 Phlogiston
 Physicalism
 Plantinga
 Plantinga's
+Polygenic
 Pontius
 PowerShell
 Psilocybin
@@ -202,6 +213,7 @@ Shia
 Shimon
 Silberman
 Sinope
+Soon's
 StdioLogic
 StudioLogic
 Substitutionary
@@ -257,11 +269,13 @@ alldep
 allitems
 amd
 annihilationism
+anterograde
 anthropocentrism
 antialiased
 api
 apis
 apiurl
+apologetics
 apophatic
 appendchild
 applyfilters
@@ -338,6 +352,7 @@ collation
 colocation
 colorindex
 compatibilism
+compatibilist
 config
 configs
 confusable
@@ -480,6 +495,7 @@ fontawesome
 foreach
 formatdate
 formatter
+fractionates
 frontend
 fstab
 fsync
@@ -526,6 +542,7 @@ heatless
 hebrew
 heebo
 henotheism
+heritability
 heterogenous
 hiddenness
 hippocampi
@@ -718,6 +735,7 @@ pithos
 pname
 png
 popstate
+popularisers
 posix
 powershell
 pre
@@ -768,6 +786,7 @@ recurse
 recv
 redescribed
 refetchevents
+reframed
 refreshinterval
 religionists
 remount
@@ -780,6 +799,7 @@ renderstatcard
 renderstats
 repo
 repos
+reputational
 ret
 revisable
 rgba
@@ -917,6 +937,10 @@ universalizability
 universalization
 unix
 unlink
+unmanaged
+unprovability
+unreachably
+unrebutted
 unrefuted
 unrepresentatively
 unshift
