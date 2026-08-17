@@ -5,22 +5,20 @@ Render the profile links from ../data/yaml/profiles.yaml into both places that
 show them, so the two cannot drift apart.
 
 Targets:
-  ../veltzer/README.md               the GitHub profile page
   content/about/_index.en.md         this site's About page
   content/about/_index.he.md         its Hebrew translation
 
-Direction matters. ../veltzer is the GitHub profile repository, which GitHub
-renders straight from that repo's default branch -- it cannot be a build
-artifact of this site, so it is a target here rather than the source, and the
-source is a third file both sides read.
+The same profiles.yaml also drives README.md in the ../veltzer repository, the
+GitHub profile page. That repo builds its own copy with its own rsconstruct
+setup -- this script does not write there. Each repository owns its artifact,
+and the shared YAML is the only thing that crosses between them.
 
-Only the link list is generated. Everything outside the marker comments in each
-target is left exactly as it was, so the hand-written prose on the About page
-and the badges and view counter on the GitHub profile survive regeneration.
+Only the link list is generated. Everything outside the marker comments is left
+exactly as it was, so the hand-written prose above them survives regeneration.
 
-Run it by hand after editing profiles.yaml, then commit both repos. Like
-copy_data.py this is deliberately not part of the build: the sibling data repo
-is not checked out in CI, and the generated content is committed.
+Run it by hand after editing profiles.yaml. Like copy_data.py this is
+deliberately not part of the build: the sibling data repo is not checked out in
+CI, and the generated content is committed.
 """
 
 import sys
@@ -30,10 +28,8 @@ import yaml
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DATA_REPO = REPO_ROOT.parent / "data"
-PROFILE_REPO = REPO_ROOT.parent / "veltzer"
 
 SOURCE = DATA_REPO / "yaml" / "profiles.yaml"
-README = PROFILE_REPO / "README.md"
 ABOUT_EN = REPO_ROOT / "content" / "about" / "_index.en.md"
 ABOUT_HE = REPO_ROOT / "content" / "about" / "_index.he.md"
 
@@ -59,20 +55,17 @@ def load_profiles():
     return groups
 
 
-def render(groups, lang, include_github_only):
-    """Render the link list as markdown.
+def render(groups, lang):
+    """Render the link list as markdown for one language.
 
-    include_github_only keeps the entries flagged github_only, which belong on
-    the GitHub profile but not on the site -- the keybr accounts are five mail
-    addresses that earn a reader nothing.
+    Entries flagged github_only are dropped: they belong on the GitHub profile
+    but not here. The keybr accounts are five mail addresses that earn a reader
+    of this site nothing.
     """
     title_key = f"title_{lang}"
     lines = []
     for group in groups:
-        items = [
-            item for item in group["items"]
-            if include_github_only or not item.get("github_only")
-        ]
+        items = [i for i in group["items"] if not i.get("github_only")]
         if not items:
             continue
         lines.append("")
@@ -80,9 +73,6 @@ def render(groups, lang, include_github_only):
         lines.append("")
         for item in items:
             lines.append(f"* [{item['name']}]({item['url']})")
-            if include_github_only:
-                for child in item.get("children", []):
-                    lines.append(f"    * [{child['name']}]({child['url']})")
     lines.append("")
     return "\n".join(lines)
 
@@ -117,9 +107,8 @@ def splice(path, body):
 
 def main():
     groups = load_profiles()
-    splice(README, render(groups, "en", include_github_only=True))
-    splice(ABOUT_EN, render(groups, "en", include_github_only=False))
-    splice(ABOUT_HE, render(groups, "he", include_github_only=False))
+    splice(ABOUT_EN, render(groups, "en"))
+    splice(ABOUT_HE, render(groups, "he"))
 
 
 if __name__ == "__main__":
