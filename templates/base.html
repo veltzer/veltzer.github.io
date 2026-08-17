@@ -56,7 +56,13 @@
   <div class="site-controls">
     <label class="visually-hidden" for="lang-select">{{ trans(key="label_language", lang=page_lang) }}</label>
     <select id="lang-select" class="site-select">
-      {%- set here = lang | default(value=config.default_language) %}
+      {#- page_lang, not `lang | default(config.default_language)`: the default
+          is the phantom "cs", so on the app pages -- which zola files under it
+          -- `here` matched neither "en" nor "he" and no option was marked
+          selected. The <select> then showed its first option, English, whatever
+          language the reader had arrived from. page_lang already maps cs to en
+          at the top of this file. -#}
+      {%- set here = page_lang %}
       {%- for entry in config.extra.languages %}
         {#- set_global must not be shadowed by a plain `set` of the same name in
             this scope, or the write lands on a different variable and the value
