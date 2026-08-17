@@ -30,22 +30,27 @@
         translation, which is most of them. -#}
     {%- if page.translations | length > 1 %}
     <nav class="lang-switcher" aria-label="{{ trans(key='label_translations', lang=page_lang) }}">
+      {#- Ordered by config.extra.languages rather than by iterating
+          page.translations directly: zola's translations list comes out in a
+          different order on different runs, which made the build
+          non-reproducible. See the longer note in base.html.
+
+          The permalink is used as-is. There was a rewrite here that inserted
+          /en/ for the default language, from when English was the default and
+          zola served it at the site root. It was unreachable -- guarded on
+          code == config.default_language, which is the phantom "cs" and never
+          matches a real language -- and both languages carry their own prefix
+          now anyway. -#}
+      {%- for entry in config.extra.languages %}
       {%- for translation in page.translations %}
-      {%- set code = translation.lang | default(value=config.default_language) %}
+      {%- if translation.lang == entry.code %}
       {%- if translation.permalink == page.permalink %}
-      <span class="lang current" aria-current="page">{{ code }}</span>
+      <span class="lang current" aria-current="page">{{ entry.code }}</span>
       {%- else %}
-      {#- Same correction as base.html's site-level switcher: zola builds the
-          English permalink as though English owned the site root, but
-          scripts/build_site.py moves that tree to /en/. Without this the "en"
-          link on a Hebrew post points at a URL that 404s. -#}
-      {%- if code == config.default_language %}
-      {%- set target = translation.permalink | replace(from=config.base_url ~ "/", to=config.base_url ~ "/" ~ code ~ "/") %}
-      {%- else %}
-      {%- set target = translation.permalink %}
+      <a class="lang" href="{{ translation.permalink }}" hreflang="{{ entry.code }}">{{ entry.code }}</a>
       {%- endif %}
-      <a class="lang" href="{{ target }}" hreflang="{{ code }}">{{ code }}</a>
       {%- endif %}
+      {%- endfor %}
       {%- endfor %}
     </nav>
     {%- endif %}

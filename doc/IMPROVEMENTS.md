@@ -400,6 +400,29 @@
   Lesson worth keeping: "verified inert" here had meant reading the code and spot-checking
   the output, not diffing a build with the step removed. Only the second is verification.
 
+- ~~**The build was not byte-reproducible.** — DONE.~~
+  Two builds of identical input differed in ~100 files, which meant a build change could
+  not be validated by diffing output — the reason the `fix_english_links()` deletion had
+  to be checked by content comparison instead.
+
+  Cause: zola's `page.translations` comes out in a different order on different runs.
+  Three consecutive builds emitted the two `hreflang` alternates as "he en", "he en",
+  then "en he". Two templates iterated that list directly — the alternates block in
+  `base.html` and the in-article language switcher in `page.html`.
+
+  Fix: loop `config.extra.languages`, a fixed list in `config.toml`, and look each
+  language up in `page.translations`. The site-level switcher in `base.html` had always
+  worked this way. Verified: three consecutive zola builds now differ in 0 files, and the
+  full `build_site.py` pipeline is reproducible too, so its post-processing adds no
+  variance of its own. `copy_data.py` already used `gzip -n`, so the data artefacts were
+  never a source.
+
+  `tests/test_template_determinism.py` guards against regression. It checks the template
+  source rather than running two builds, since a build needs zola on PATH and takes
+  seconds. The check is per-loop rather than per-file: `base.html` contains an unrelated
+  `config.extra.languages` loop, so a file-level assertion passed even with the bug
+  reintroduced — confirmed by reintroducing it.
+
 - **No link checker for the profile URLs.** `../data/yaml/profiles.yaml` holds roughly 30
   external profile links, rendered into `content/about/` here and into `README.md` in the
   `../veltzer` repository. They are exactly the kind of URL that dies quietly — a service

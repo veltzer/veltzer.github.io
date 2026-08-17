@@ -29,9 +29,20 @@
 <link rel="canonical" href="{{ current_url }}">
 <meta property="og:url" content="{{ current_url }}">
 {%- endif %}
+{#- Driven by config.extra.languages, not by iterating page.translations
+    directly. zola's translations list comes out in a different order on
+    different runs -- verified: three consecutive builds of identical input
+    emitted "he en", "he en", then "en he" -- which makes the build
+    non-reproducible for no benefit. Looping a fixed config list and looking
+    each language up gives a stable order. The site-level switcher below has
+    always done it this way. -#}
 {%- if page and page.translations %}
+{%- for entry in config.extra.languages %}
 {%- for translation in page.translations %}
-<link rel="alternate" hreflang="{{ translation.lang }}" href="{{ translation.permalink }}">
+{%- if translation.lang == entry.code %}
+<link rel="alternate" hreflang="{{ entry.code }}" href="{{ translation.permalink }}">
+{%- endif %}
+{%- endfor %}
 {%- endfor %}
 {%- endif %}
 <meta property="og:type" content="{% if page %}article{% else %}website{% endif %}">
