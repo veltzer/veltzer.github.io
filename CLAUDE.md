@@ -138,6 +138,16 @@ tags = ["religion", "philosophy", "ethics"]
   in by `scripts/copy_data.py`, which also converts it to the `.json.gz` the frontend
   loads. **The frontend reads JSON, not YAML** — js-yaml took ~399ms on the 6.5MB youtube
   dataset against ~31ms for `JSON.parse`.
+- **The profile links on the About page are generated — do not hand-edit them.** They
+  live in `../data/yaml/profiles.yaml` and are rendered by `scripts/gen_profiles.py`
+  into three files: `content/about/_index.en.md`, `content/about/_index.he.md`, and
+  `../veltzer/README.md` (the GitHub profile page). Only the region between the
+  `<!-- BEGIN generated profiles -->` markers is replaced, so the hand-written prose
+  above it and the GitHub badges below it survive. Edit the YAML, run the script,
+  commit both repos. Like `copy_data.py` it is a manual step, not part of the build:
+  CI has no `../data` checkout, and the generated content is committed.
+  Entries flagged `github_only: true` (the keybr accounts, which are five mail
+  addresses) render only on the GitHub profile, not on the site.
 - Custom domain is `veltzer.org` (see `CNAME`); `base_url` in `config.toml` matches it,
   and `veltzer.github.io` 301-redirects there. Keep every public URL (canonical tags,
   sitemap, RSS, `og:url`, `robots.txt`) on `veltzer.org` — pointing them at the
