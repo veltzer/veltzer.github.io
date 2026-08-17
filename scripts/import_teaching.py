@@ -196,10 +196,11 @@ def main():
             die(f"{source}: no <body> found")
         page = rewrite_assets(page, repo)
 
-        # _index.en.md, not _index.md: default_language is the empty "cs" (see
-        # config.toml), so every real page carries an explicit language suffix
-        # and a bare _index.md would be filed under a language with no content.
-        dest = REPO_ROOT / "content" / section / "_index.en.md"
+        # _index.md, NOT _index.en.md. These are app sections: they serve from
+        # the site root with no language prefix (see APP_SECTIONS in
+        # build_site.py), and the root is the default language. Giving them a
+        # .en.md suffix files them under /en/ and leaves /slides/ a 404.
+        dest = REPO_ROOT / "content" / section / "_index.md"
         text = FRONT_MATTER.format(title=title) + page
         if args.check:
             print(f"would write {dest} ({len(text):,} bytes)")

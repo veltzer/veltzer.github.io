@@ -1,4 +1,10 @@
+{#- "cs" is the phantom default language (see config.toml): it has no content of
+    its own, and the pages zola files under it are the app sections, which are
+    English and serve unprefixed from the site root. Map it to "en" here, once,
+    so every nav link, lang_root and <html lang> downstream is English rather
+    than pointing at /cs/, which does not exist. -#}
 {%- set page_lang = lang | default(value="en") -%}
+{%- if page_lang == "cs" %}{% set page_lang = "en" %}{% endif -%}
 <!DOCTYPE html>
 <html lang="{{ page_lang }}"{% if page_lang == "he" %} dir="rtl"{% endif %}>
 <head>

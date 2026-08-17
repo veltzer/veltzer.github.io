@@ -4,7 +4,7 @@
 # this project's content in a way that would make the check pure noise.
 
 [global]
-# The six _index.en.md files excluded here are app shells: markdown wrappers around
+# The six _index.md files excluded here are app shells: markdown wrappers around
 # large <script>/<style> blocks (the chess viewer, media tracker, calendar,
 # slides, syllabi, animations). rumdl treats that embedded JS as prose -- `rumdl
 # fmt` on content/chess/_index.md collapsed the double space inside the string
@@ -14,12 +14,12 @@ exclude = [
     "_site",
     "node_modules",
     "shared",
-    "content/animations/_index.en.md",
-    "content/calendar/_index.en.md",
-    "content/chess/_index.en.md",
-    "content/media/_index.en.md",
-    "content/slides/_index.en.md",
-    "content/syllabi/_index.en.md",
+    "content/animations/_index.md",
+    "content/calendar/_index.md",
+    "content/chess/_index.md",
+    "content/media/_index.md",
+    "content/slides/_index.md",
+    "content/syllabi/_index.md",
 ]
 disable = [
     # Inline HTML. The nav pages are deliberately HTML-in-markdown: the
