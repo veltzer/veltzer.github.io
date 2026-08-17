@@ -10,6 +10,7 @@ Context: this project uses MkDocs with the Material theme.
 **What it is:** Python-based static site generator, originally for documentation, with blog support via the Material theme's blog plugin.
 
 ### Advantages
+
 - Python ecosystem — fits naturally into a Python-based build pipeline (pydmt, pymakehelper)
 - Material for MkDocs theme is polished and feature-rich out of the box
 - Simple config (`mkdocs.yml`) — minimal boilerplate
@@ -20,6 +21,7 @@ Context: this project uses MkDocs with the Material theme.
 - Active development and large community
 
 ### Disadvantages
+
 - Blog support is secondary — MkDocs was designed for documentation, not blogging
 - Material for MkDocs blog plugin is relatively new and less mature than dedicated blog engines
 - MkDocs 2.0 will break all plugins and theme overrides (see DECISIONS.md)
@@ -34,6 +36,7 @@ Context: this project uses MkDocs with the Material theme.
 **What it is:** Ruby-based static site generator. The default engine for GitHub Pages with native integration.
 
 ### Advantages
+
 - Native GitHub Pages support — push and it builds automatically, no CI needed
 - Mature blog engine — built for blogging from day one
 - Huge theme ecosystem
@@ -43,6 +46,7 @@ Context: this project uses MkDocs with the Material theme.
 - Incremental builds available
 
 ### Disadvantages
+
 - Ruby dependency — managing Ruby/Bundler environments is painful
 - Slow builds on large sites
 - Liquid templating is limited compared to Jinja2 or Go templates
@@ -56,6 +60,7 @@ Context: this project uses MkDocs with the Material theme.
 **What it is:** Go-based static site generator. Known for speed.
 
 ### Advantages
+
 - Extremely fast builds (milliseconds for hundreds of pages)
 - Single binary — no runtime dependencies
 - Powerful templating (Go templates)
@@ -65,6 +70,7 @@ Context: this project uses MkDocs with the Material theme.
 - Asset pipeline built in (SCSS, JS bundling, image processing)
 
 ### Disadvantages
+
 - Go template syntax is unintuitive and hard to debug
 - Steeper learning curve than MkDocs or Jekyll
 - No plugin system — extensibility is limited to templates and shortcodes
@@ -78,6 +84,7 @@ Context: this project uses MkDocs with the Material theme.
 **What it is:** Python-based static site generator designed for blogging.
 
 ### Advantages
+
 - Python-native — same ecosystem as this project's build tools
 - Built for blogging — first-class support for posts, categories, tags, feeds
 - Jinja2 templating (same as MkDocs)
@@ -86,6 +93,7 @@ Context: this project uses MkDocs with the Material theme.
 - Simple and lightweight
 
 ### Disadvantages
+
 - Smaller community than Jekyll or Hugo
 - Fewer themes available, most look dated
 - Less active development in recent years
@@ -99,6 +107,7 @@ Context: this project uses MkDocs with the Material theme.
 **What it is:** JavaScript-based static site generator. Flexible and minimal.
 
 ### Advantages
+
 - Very flexible — supports multiple template languages (Nunjucks, Liquid, Handlebars, etc.)
 - Fast builds
 - No opinion on project structure — highly customizable
@@ -107,6 +116,7 @@ Context: this project uses MkDocs with the Material theme.
 - Active development, growing community
 
 ### Disadvantages
+
 - Requires Node.js — adds a runtime dependency (though this project already uses npm)
 - No built-in theme — you build everything from scratch
 - Less structured than MkDocs — more decisions to make upfront
@@ -120,6 +130,7 @@ Context: this project uses MkDocs with the Material theme.
 **What it is:** React-based frameworks that can export static sites.
 
 ### Advantages
+
 - Full React component model — powerful for interactive content
 - Rich plugin ecosystem (Gatsby)
 - GraphQL data layer (Gatsby) for pulling from multiple sources
@@ -127,6 +138,7 @@ Context: this project uses MkDocs with the Material theme.
 - Modern JavaScript tooling
 
 ### Disadvantages
+
 - Massively over-engineered for a blog
 - Heavy build times and large dependency trees
 - Requires React knowledge
@@ -142,6 +154,7 @@ Context: this project uses MkDocs with the Material theme.
 **What it is:** Rust-based static site generator. Single binary, fast.
 
 ### Advantages
+
 - Single binary, no dependencies
 - Very fast builds
 - Built-in Sass compilation, syntax highlighting, search
@@ -150,6 +163,7 @@ Context: this project uses MkDocs with the Material theme.
 - Tera templating (similar to Jinja2)
 
 ### Disadvantages
+
 - Smaller community and fewer themes
 - No plugin system
 - No Python integration
@@ -161,6 +175,7 @@ Context: this project uses MkDocs with the Material theme.
 ## Why MkDocs for This Project
 
 MkDocs was chosen because:
+
 1. **Python ecosystem alignment** — the build pipeline already uses Python (pydmt, pymakehelper, pylint, mypy, ruff)
 2. **Material theme quality** — polished, responsive, feature-rich without custom CSS/JS work
 3. **Simplicity** — minimal config, Markdown content, directory-based navigation

@@ -1,0 +1,51 @@
+# Markdown lint config.
+#
+# The disabled rules below are not style preferences -- each one misfires on
+# this project's content in a way that would make the check pure noise.
+
+[global]
+# The six _index.md files excluded here are app shells: markdown wrappers around
+# large <script>/<style> blocks (the chess viewer, media tracker, calendar,
+# slides, syllabi, animations). rumdl treats that embedded JS as prose -- `rumdl
+# fmt` on content/chess/_index.md collapsed the double space inside the string
+# literal `' ' + game.result`, silently changing what the chess viewer renders.
+# Markdown rules cannot say anything useful about a JS block, so these are out.
+exclude = [
+    "_site",
+    "node_modules",
+    "shared",
+    "content/animations/_index.md",
+    "content/calendar/_index.md",
+    "content/chess/_index.md",
+    "content/media/_index.md",
+    "content/slides/_index.md",
+    "content/syllabi/_index.md",
+]
+disable = [
+    # Inline HTML. The nav pages are deliberately HTML-in-markdown: the
+    # calendar, chess and media pages are app shells that mount JS widgets,
+    # so <div>/<script> is the point, not an accident. 2368 hits, all intended.
+    "MD033",
+    # Line length. Posts are prose with long unwrapped paragraphs, and the
+    # Hebrew translations cannot be hard-wrapped the way English can without
+    # breaking bidi text. 2146 hits.
+    "MD013",
+    # "No space after # in heading". Fires on CSS selectors (#app-animations)
+    # inside <style> blocks on the app pages -- the parser reads them as ATX
+    # headings. False positive, not a heading.
+    "MD018",
+    # Bare URLs. Old imported posts cite URLs inline as plain text; wrapping
+    # them in angle brackets would rewrite historical content to no benefit.
+    "MD034",
+    # First line should be a top-level heading. Zola pages carry TOML front
+    # matter and get their title from it, so an H1 would duplicate it.
+    "MD041",
+    # "Dollar signs before commands without output". Shell examples in the
+    # older sysadmin posts legitimately show the prompt.
+    "MD014",
+    # Broken relative links. rumdl resolves them against the source file, but
+    # zola serves posts from /<lang>/blog/<slug>/, so the "../../../images/..."
+    # in the fatar post resolves to /images/... exactly as intended. Verified
+    # against the built HTML -- the images render. All 34 hits are this pattern.
+    "MD057",
+]

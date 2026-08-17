@@ -3,22 +3,28 @@ pip = [
   # No mkdocs packages: the site is built by zola, a single static binary
   # installed in the workflow. What remains is only what the linters and tests
   # need.
-  # Needed by the mypy/pytest processors below. CI installs only what is listed
-  # here -- it does not read requirements.txt -- so without these mypy reports
-  # missing stubs for yaml and a missing PIL, and the tests cannot import yaml.
+  # Needed by the mypy/pytest processors below. This list is the only source of
+  # Python dependencies -- there is no requirements.txt -- so without these mypy
+  # reports missing stubs for yaml and a missing PIL, and the tests cannot
+  # import yaml.
   "types-PyYAML",
   "PyYAML",
   "Pillow",
   "pytest",
   # fetch_audiocourse_images.py parses og:image with BeautifulSoup; types-* gives
-  # mypy the stubs. Both are in requirements.txt, which CI does not read.
+  # mypy the stubs.
   "beautifulsoup4",
   "types-beautifulsoup4",
-  # Pinned to match requirements.txt. Unpinned, CI resolves a newer pylint that
-  # rejects .pylintrc's suggestion-mode option, so the build fails on a config
-  # the local (pinned) pylint accepts.
+  # Pin is load-bearing. Unpinned, CI resolves a newer pylint that rejects
+  # .pylintrc's suggestion-mode option, so the build fails on a config that
+  # 3.3.8 accepts. Bump this only together with .pylintrc.
   "pylint==3.3.8",
+  # Unpinned deliberately: there is no ruff.toml to fall out of step with, so a
+  # newer ruff can only fail by adding a lint that scripts/ then has to satisfy
+  # -- which is the point of running it.
+  "ruff",
 ]
+npm = ["postcss-scss"]
 # No system = ["python3-tk"] here: it does not help. CI uses actions/setup-python,
 # which supplies its own interpreter that cannot see the distro's python3-tk, so
 # the package installs (rsconstruct even reports it satisfied) while `import
@@ -28,19 +34,21 @@ pip = [
 # fetch_audiocourse_images.py are interactive desktop tools that cannot run
 # headless on CI anyway; only their static analysis matters there.
 
+# static/ holds the hand-written JS: the media app and its per-type plugins.
+# (Was "blog", the MkDocs-era source dir -- it no longer exists, so eslint
+# silently checked nothing.) vendor/ is excluded: cm-chessboard and chess.min.js
+# are third-party and not ours to lint.
 [processor.eslint]
-src_dirs = ["blog"]
+src_dirs = ["static"]
+src_exclude_dirs = ["vendor"]
 args = ["-c", "config/eslint.config.js"]
 
+# Only static/ -- the standalone app pages, which are real standalone HTML.
+# templates/ is deliberately NOT checked: those are Tera, and tidy parses
+# "{% if %}" as malformed markup ('attribute "{%" lacks value'), so pointing it
+# there produces noise about the template language rather than about the HTML.
 [processor.tidy]
-src_dirs = ["blog"]
-
-[processor.tera]
-src_dirs = ["tera.templates"]
-dep_inputs = [
-    "config/project.lua",
-    "config/personal.lua",
-]
+src_dirs = ["static"]
 
 # Zola build. Posts live in content/ -- the blog/posts -> content/blog converter
 # was retired because it wiped content/blog on every run.
@@ -57,14 +65,19 @@ input_globs = [
 ]
 output_dirs = [ "_site" ]
 
-[processor.shellcheck]
-src_dirs = ["scripts"]
-
 # .pylintrc and .mypy.ini already existed but nothing ran them. Both pass clean,
 # so wiring them in keeps that true rather than letting it rot.
 [processor.pylint]
 src_dirs = ["scripts"]
 args = ["--rcfile=.pylintrc"]
+
+# Ruff runs on defaults -- no ruff.toml. scripts/ is already clean under them,
+# and shared-themes wires ruff the same bare way, so the two repos stay
+# consistent. Ruff overlaps pylint but is not a replacement: pylint's .pylintrc
+# here carries the ignored-modules list (tkinter, PIL, cv2) that keeps the
+# desktop-only tools analysable, so both stay.
+[processor.ruff]
+src_dirs = ["scripts"]
 
 # dep_auto defaults to "mypy.ini"; this project's file is ".mypy.ini", so the
 # config has to be passed explicitly and declared as a dependency by hand.
@@ -86,3 +99,51 @@ dep_inputs = [
 [analyzer.markdown]
 
 [analyzer.tera]
+
+# .yamllint.yaml already existed but nothing ran it -- same rot as .pylintrc and
+# .mypy.ini before they were wired. Both workflow files pass under it as-is.
+[processor.yamllint]
+src_dirs = [".github"]
+dep_inputs = [".yamllint.yaml"]
+
+# src_files rather than src_dirs: a dir-based match walks into
+# shared/shared-themes/, whose rsconstruct.toml belongs to the submodule and is
+# checked by its own build.
+[processor.taplo]
+src_files = ["config.toml", "rsconstruct.toml"]
+
+# Catches mojibake and stray encodings. Cheap, needs no config, and this repo is
+# bilingual -- the Hebrew content makes an encoding regression a real risk.
+# vendor/ excluded: third-party, not ours to police.
+[processor.encoding]
+src_dirs = ["scripts", "static", "templates", "sass"]
+src_exclude_dirs = ["vendor"]
+
+# Correctness rules only (see .stylelintrc.json) -- no formatting opinions, since
+# nothing has ever enforced a style here and inventing one would mean rewriting
+# all three sheets. stylelint and postcss-scss are devDependencies rather than
+# global installs: a globally-installed stylelint resolves customSyntax against
+# its own tree and cannot find postcss-scss.
+# command points at node_modules/.bin: the global stylelint resolves
+# customSyntax relative to its own install tree and cannot see postcss-scss
+# here, so it must be the locally installed one.
+[processor.stylelint]
+command = "node_modules/.bin/stylelint"
+src_dirs = ["sass", "static"]
+src_exclude_dirs = ["vendor"]
+dep_inputs = [".stylelintrc.json"]
+
+# doc/ and the root .md files only -- deliberately NOT content/.
+#
+# content/ is published, and markdown linting it is unsafe here: `rumdl fmt`
+# rewrote a code span in the debian post (<code>dpkg --purge </code> lost its
+# trailing space) and collapsed whitespace inside a JS string literal on the
+# chess page, both of which change what the site renders. Verified by diffing
+# the built HTML before and after. The posts also carry deliberate WordPress-era
+# damage (see CLAUDE.md) that a formatter would happily "fix".
+#
+# doc/, README.md and CLAUDE.md are not published, so linting them is free.
+[processor.rumdl]
+src_dirs = ["doc"]
+src_files = ["README.md", "CLAUDE.md"]
+dep_inputs = [".rumdl.toml"]

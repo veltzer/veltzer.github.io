@@ -1,11 +1,13 @@
 # CLAUDE.md - Project Guide
 
 ## Project Overview
+
 Mark Veltzer's personal website hosted on GitHub Pages at veltzer.org (CNAME). Combines a
 bilingual blog (English + Hebrew), media consumption tracker, chess game viewer, and
 calendar integration.
 
 ## Tech Stack
+
 - **Site generator**: [zola](https://www.getzola.org/) — single Rust binary, pinned to
   v0.23.3. Templates are [Tera](https://keats.github.io/tera/) (Jinja2-like).
 - **Build orchestration**: rsconstruct (single binary, configured via `rsconstruct.toml`
@@ -19,6 +21,7 @@ The site used to be built with MkDocs. It is not any more — see *Migration not
 which records the traps that outlived the migration.
 
 ## Directory Structure
+
 - `config.toml` — zola config: `base_url`, taxonomies, the `[languages.he]` block, and
   `[extra.nav]` / `[extra.languages]` which drive the nav and language switcher
 - `content/` — all page and post source
@@ -39,12 +42,14 @@ which records the traps that outlived the migration.
 - `doc/` — project notes, decisions and the improvements backlog
 
 ## Build Commands
+
 - `rsconstruct build --verbose -j0` — full build (this is what CI runs)
 - `rsconstruct status` — show build status
 - `scripts/build_site.py` — the zola build on its own
 - `scripts/serve.py` — build, then serve `_site/` locally the way Pages will
 
 ### Prerequisite: zola
+
 `scripts/build_site.py` shells out to zola, which is **not** installed by
 `rsconstruct tools install`, so a fresh clone fails with
 `ERROR: zola not found on PATH`. Install it by hand:
@@ -64,6 +69,7 @@ swapped the highlighter, so an unpinned upgrade can fail the build on `config.to
 Distro packages and `cargo install zola` track other versions — prefer the pinned tarball.
 
 ## Blog Posts
+
 - One file per post in `content/blog/`, flat. The filename becomes the URL slug:
   `euthyphro_dilemma.md` → `/blog/euthyphro-dilemma/`. **Zola slugifies the filename, not
   the title** — worth remembering when hunting for a built page.
@@ -98,12 +104,14 @@ tags = ["religion", "philosophy", "ethics"]
 - All 80 posts currently exist in both English and Hebrew.
 
 ## Coding Conventions
+
 - JavaScript: camelCase, ES9+, eslint-clean
 - Media plugins follow a consistent interface: `file`, `navTitle`, `title`, `subtitle`,
   `searchPlaceholder`, `searchFields`, `renderDetails`, `renderStats`
 - Python: pylint- and mypy-clean; both run in CI over `scripts/`
 
 ## Style Sheets
+
 - `sass/style.scss` is the site stylesheet, compiled by zola to `/style.css`.
 - **Colours, radii, fonts and shadows come from `shared/shared-themes`** (the submodule).
   Nothing in `style.scss` hardcodes a colour — every value is a `var(--token)`. Setting
@@ -116,12 +124,14 @@ tags = ["religion", "philosophy", "ethics"]
 - Prefer external stylesheets over inline `<style>` blocks or `style=` attributes.
 
 ## Git Conventions
+
 - Branch: `master` (main)
 - Commits are often auto-generated with no message
 - GPG signing enabled
 - Pull strategy: rebase
 
 ## Important Notes
+
 - `_site/` is generated — never edit it. Edit `content/`, `templates/`, `sass/` or
   `static/` and rebuild.
 - YAML data for the media tracker lives in a separate `../data/` repository and is copied
@@ -138,6 +148,7 @@ tags = ["religion", "philosophy", "ethics"]
 - CI checks out submodules recursively; without that the build fails on missing tokens.
 
 ## Migration notes (traps that outlived MkDocs)
+
 - **Do not add `mkdocs-static-i18n` or any MkDocs i18n plugin.** They are incompatible
   with the `blog` plugin, and the failure is silent: the build exits 0 while emitting
   *zero* post pages. This is why the site moved to zola. Full write-up in

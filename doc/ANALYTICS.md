@@ -3,23 +3,29 @@
 Since this site is a static site hosted on GitHub Pages, there is no server-side analytics. We must use client-side (JavaScript) tracking or third-party integrations.
 
 ## 1. GoatCounter (Recommended)
+
 A privacy-first, lightweight, and open-source analytics service. It is free for personal/non-commercial use.
-*   **Pros:** No cookies required (no GDPR banner needed), extremely fast, privacy-focused.
-*   **Setup:**
-    1.  Create an account at [GoatCounter](https://www.goatcounter.com/).
-    2.  Add your tracking code to `mkdocs.yml` under `extra_javascript` or via a theme override.
-*   **Theme Integration:**
+
+* **Pros:** No cookies required (no GDPR banner needed), extremely fast, privacy-focused.
+* **Setup:**
+    1. Create an account at [GoatCounter](https://www.goatcounter.com/).
+    2. Add your tracking code to `mkdocs.yml` under `extra_javascript` or via a theme override.
+* **Theme Integration:**
+
     ```yaml
     extra_javascript:
       - https://gc.zgo.at/count.js
     ```
 
 ## 2. Google Analytics 4 (GA4)
+
 The industry standard for detailed traffic analysis.
-*   **Pros:** Most powerful features, built-in support in the MkDocs Material theme.
-*   **Cons:** Privacy-heavy, requires cookie consent in many jurisdictions.
-*   **Setup:**
-    Add your measurement ID to `mkdocs.yml`:
+
+* **Pros:** Most powerful features, built-in support in the MkDocs Material theme.
+* **Cons:** Privacy-heavy, requires cookie consent in many jurisdictions.
+* **Setup:**
+  Add your measurement ID to `mkdocs.yml`:
+
     ```yaml
     extra:
       analytics:
@@ -28,15 +34,19 @@ The industry standard for detailed traffic analysis.
     ```
 
 ## 3. Cloudflare Web Analytics
+
 A privacy-focused alternative that doesn't require a Cloudflare proxy (it works via a JS snippet).
-*   **Pros:** Free, no cookies, simple dashboard.
-*   **Setup:**
-    1.  Add the script provided by Cloudflare to `extra_javascript` in `mkdocs.yml`.
+
+* **Pros:** Free, no cookies, simple dashboard.
+* **Setup:**
+    1. Add the script provided by Cloudflare to `extra_javascript` in `mkdocs.yml`.
 
 ## 4. GitHub Insights (Basic)
+
 GitHub provides a "Traffic" tab in the repository settings.
-*   **Location:** `Insights -> Traffic`
-*   **Limitations:** Only shows the last 14 days of data and only the top 10 most visited pages.
+
+* **Location:** `Insights -> Traffic`
+* **Limitations:** Only shows the last 14 days of data and only the top 10 most visited pages.
 
 ## Comparison Summary
 
@@ -49,7 +59,7 @@ GitHub provides a "Traffic" tab in the repository settings.
 
 ---
 
-# Visible On-Page Visitor Counter
+## Visible On-Page Visitor Counter
 
 **This is a different problem from the analytics options above, and the distinction is the
 whole point.** Everything above is a *dashboard*: it records visits and shows them to you,
@@ -78,26 +88,26 @@ so `fetch()` fails even though the same URL works fine as an image.
 
 Notes on the two that nearly worked:
 
-*   **dwyl/hits** was the most promising: free, no signup, real JSON, and verified to
-    increment correctly (three requests returned 1, 2, 3). It is unusable via `fetch()`
-    purely because of the missing CORS headers. It *does* work as an `<img>` badge
-    (verified, 80x20).
-*   **counterapi.dev v2** is the only JSON option that survives CORS — a browser request
-    returned a readable `404 {"code":"404","message":"Workspace not found"}` rather than a
-    network error, which proves the CORS headers are present. It needs a workspace plus an
-    API key sent as `Authorization: Bearer ...`. On a public static site that token is
-    readable by anyone viewing source, so it is only acceptable if it can be scoped to
-    increment-only — the same reasoning that makes the Calendar browser key safe to publish
-    (see `doc/DECISIONS.md`). Confirm their token scoping before relying on it.
+* **dwyl/hits** was the most promising: free, no signup, real JSON, and verified to
+  increment correctly (three requests returned 1, 2, 3). It is unusable via `fetch()`
+  purely because of the missing CORS headers. It *does* work as an `<img>` badge
+  (verified, 80x20).
+* **counterapi.dev v2** is the only JSON option that survives CORS — a browser request
+  returned a readable `404 {"code":"404","message":"Workspace not found"}` rather than a
+  network error, which proves the CORS headers are present. It needs a workspace plus an
+  API key sent as `Authorization: Bearer ...`. On a public static site that token is
+  readable by anyone viewing source, so it is only acceptable if it can be scoped to
+  increment-only — the same reasoning that makes the Calendar browser key safe to publish
+  (see `doc/DECISIONS.md`). Confirm their token scoping before relying on it.
 
 ## Why Google cannot do this
 
 GA4 is free and the MkDocs Material theme supports it natively (section 2 above), but it
 splits into two halves:
 
-*   **Writing** a visit — public, client-side, trivial. That is the `gtag` snippet.
-*   **Reading** the count back — requires the **GA4 Data API**, which needs OAuth 2.0 or a
-    service-account key.
+* **Writing** a visit — public, client-side, trivial. That is the `gtag` snippet.
+* **Reading** the count back — requires the **GA4 Data API**, which needs OAuth 2.0 or a
+  service-account key.
 
 That credential is a genuine secret. Unlike the referrer-restricted, read-only Calendar
 browser key, a GA service-account key grants access to your analytics data and cannot be
@@ -113,13 +123,13 @@ for the Calendar key.
 
 The two goals are separable, and it is worth deciding which one is actually wanted:
 
-*   **To know the traffic** — GoatCounter (or GA4). Three lines of config, covers all 80
-    blog posts and the app pages, not just the two media pages the old counter touched.
-    GoatCounter is preferable here specifically because it sets no cookies and therefore
-    needs no GDPR consent banner.
-*   **To show a number on the page** — a badge `<img>` is the only no-signup option that
-    works today. The cost is a fixed-style image rather than a number that can be styled to
-    match the page.
+* **To know the traffic** — GoatCounter (or GA4). Three lines of config, covers all 80
+  blog posts and the app pages, not just the two media pages the old counter touched.
+  GoatCounter is preferable here specifically because it sets no cookies and therefore
+  needs no GDPR consent banner.
+* **To show a number on the page** — a badge `<img>` is the only no-signup option that
+  works today. The cost is a fixed-style image rather than a number that can be styled to
+  match the page.
 
 These are not exclusive; GoatCounter for real analytics plus a badge for the visible count
 is a coherent combination.

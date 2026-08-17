@@ -8,6 +8,7 @@ impressive one. Move items to "Done" (with the post slug) as they ship.
 ## Proposed
 
 ### Science indicts / fiction consoles
+
 - **Introspection is a press secretary, not a president.** No privileged
   access to your own mind — you confabulate reasons after the fact
   (split-brain, choice blindness, Nisbett & Wilson). The "inner self that
@@ -24,6 +25,7 @@ impressive one. Move items to "Done" (with the post slug) as they ship.
   Companion to the Kant/game-theory post. *(science, game-theory)*
 
 ### Constrained imagination beats free imagination
+
 - **Mathematics is more imaginative than any mythology.** Non-Euclidean
   geometry, infinities of different sizes (Cantor), Gödel — ideas no
   storyteller could invent, forced on us by rigor, not freedom.
@@ -34,6 +36,7 @@ impressive one. Move items to "Done" (with the post slug) as they ship.
   properties. Religion has no equivalent. *(science, philosophy)*
 
 ### Religion
+
 - **Why theology produces no discoveries.** In 2,000 years, has any
   theological "method" ever found out a single new true thing about the
   world? Contrast with the discovery rate of one decade of science.
@@ -44,6 +47,7 @@ impressive one. Move items to "Done" (with the post slug) as they ship.
   evidence. *(religion)*
 
 ### New angles (same temperament, fresh territory)
+
 - **The anthropocentric conceit.** Every pre-scientific worldview puts
   humans at the center — of the cosmos, of creation, of moral concern.
   Every scientific advance has been a *demotion* (Copernicus → Darwin →
@@ -61,6 +65,7 @@ impressive one. Move items to "Done" (with the post slug) as they ship.
 ## Done
 
 Recently shipped, in this spirit:
+
 - The Engineers Pay for Everyone's Fantasies — `engineers_pay_for_everyones_fantasies.md`
 - The Two Kinds of Believers and the Hypocrisy of the Sophisticated — `two_kinds_of_believers.md`
 - Kant's Categorical Imperative Is a Misreading of Game Theory — `kant_misread_game_theory.md`
@@ -68,6 +73,7 @@ Recently shipped, in this spirit:
 
 Earlier anti-religious / secular-humanist posts (from the former
 `doc/ATHEIST_CONTENT.md`):
+
 - The Polytheistic Roots of Ancient Israel
 - The Exodus: Foundation Myth or Historical Fact?
 - The Mesopotamian Roots of the Flood Myth
