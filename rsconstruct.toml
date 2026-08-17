@@ -1,4 +1,8 @@
 [dependencies]
+# aspell plus the two dictionaries the spellcheck processors need. The runners
+# ship aspell itself but no dictionaries, and aspell fails with "No word lists
+# can be found for the language" rather than skipping quietly.
+system = ["aspell", "aspell-en", "aspell-he", "libxml2-utils"]
 pip = [
   # No mkdocs packages: the site is built by zola, a single static binary
   # installed in the workflow. What remains is only what the linters and tests

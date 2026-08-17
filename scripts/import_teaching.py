@@ -196,7 +196,10 @@ def main():
             die(f"{source}: no <body> found")
         page = rewrite_assets(page, repo)
 
-        dest = REPO_ROOT / "content" / section / "_index.md"
+        # _index.en.md, not _index.md: default_language is the empty "cs" (see
+        # config.toml), so every real page carries an explicit language suffix
+        # and a bare _index.md would be filed under a language with no content.
+        dest = REPO_ROOT / "content" / section / "_index.en.md"
         text = FRONT_MATTER.format(title=title) + page
         if args.check:
             print(f"would write {dest} ({len(text):,} bytes)")

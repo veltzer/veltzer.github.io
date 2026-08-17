@@ -154,9 +154,12 @@ def base_url():
 def relocate_english(root):
     """Move the English pages under /en/ so both languages are prefixed.
 
-    Zola always serves its default language at the site root and offers no way
-    to prefix it -- verified: making another language the default just hands the
-    root to that one instead. So the move happens after the build.
+    This is now a no-op and is kept as a safety net. It dates from when English
+    was the default language and zola served it at the site root with no way to
+    prefix it. default_language is now the empty "cs" (see config.toml), so zola
+    emits /en/ and /he/ itself and there is nothing left at the root to move.
+    The loop below is harmless in that state -- it finds no English tree outside
+    en/ -- but it will still do the right thing if the config ever goes back.
 
     The result is symmetrical: /en/blog/x/ and /he/blog/x/ both serve real
     pages, and neither language is privileged by the URL layout. The root then
