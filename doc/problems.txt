@@ -1,8 +1,14 @@
+All four items below were re-checked on 2026-08-18. The three DONE ones are
+still done -- the details are confirmed inline. The fourth is still partly open.
+
+
 DONE: rewrite /scripts/manage_api_key.sh in python
 
     It is scripts/manage_api_key.py. (These two items were dropped from this
     file in commit 10dbc46 without being recorded as done -- restored here so
     the record is complete.)
+
+    Confirmed: the .py exists and no .sh remains.
 
 
 DONE: make that script not hardcode any details about this project.
@@ -15,6 +21,9 @@ DONE: make that script not hardcode any details about this project.
     Fixed while checking this: the --referrer default still read
     `veltzer.github.io/*`, the domain that 301-redirects to veltzer.org. Now
     `veltzer.org/*`.
+
+    Confirmed: all five flags are present, and the referrer default is
+    veltzer.org/*.
 
 
 DONE: maybe use a better tool than mkdocs?
@@ -34,6 +43,9 @@ DONE: maybe use a better tool than mkdocs?
 
     See the "Internationalization" entry in doc/IMPROVEMENTS.md for the full
     write-up, including why mkdocs-static-i18n must not be retried.
+
+    Confirmed: no mkdocs.yml in the repo, and the workflow installs zola pinned
+    to v0.23.3.
 
 
 PARTLY DONE: Find a way to count number of visitors on each page of the
@@ -60,7 +72,7 @@ blog/site and display them.
        rough signal, not an exact count.
 
     STILL OPEN -- the "each page" half. What exists is a single site-wide
-    counter incremented by the media pages, not a per-page count across the 80
+    counter incremented by the media pages, not a per-page count across the 91
     blog posts. Per-page counting needs one counter per URL, and the counterapi
     free tier caps at 5 public counters, so it is not reachable on this plan.
 
@@ -68,3 +80,21 @@ blog/site and display them.
     use site-wide analytics instead (doc/ANALYTICS.md recommends GoatCounter --
     free, no cookie banner, per-page figures in a dashboard, but no number
     displayed on the page itself).
+
+    Re-checked 2026-08-18. Everything above still holds:
+
+      - The counter is live. GET https://api.counterapi.dev/v2/veltzer-org/
+        veltzerorg returns up_count 21, and confirms the warning in point 2 --
+        updated_at is still frozen at the 2026-08-16 creation timestamp while
+        the count itself has moved.
+      - It renders on both media pages: /en/media/ and the standalone
+        /media_app.html, verified against the live site. The app sections moved
+        from /chess/ to /en/chess/ during the .en.md migration, which did not
+        disturb this.
+      - doc/ANALYTICS.md still recommends GoatCounter, so that cross-reference
+        is good.
+      - The post count was stale and is corrected above: 80 -> 91.
+
+    Not re-verified: the "5 public counters" free-tier cap. The workspace
+    listing endpoint 404s, so it cannot be checked from outside without logging
+    in. Left as written rather than restated as fact.
