@@ -44,6 +44,7 @@ Various profiles of mine
 
 * [ratatype](https://www.ratatype.com/u4784203)
 * [nitrotype](https://www.nitrotype.com/racer/veltzer)
+* [monkeytype](https://monkeytype.com/profile/veltzer)
 * [keybr](https://www.keybr.com)
   * [keybr mark.veltzer+keybr@gmail.com](https://www.keybr.com/profile/t1z6z7j)
   * [keybr mark.veltzer@gmail.com](https://www.keybr.com/profile/01l958g)
