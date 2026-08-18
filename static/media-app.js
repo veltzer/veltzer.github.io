@@ -2,12 +2,16 @@
 /*
  * Shared media application.
  *
- * Loaded by BOTH entry points:
- *   - blog/media_app.html  (served at /media_app.html, base path './')
- *   - blog/media.md        (served at /media/,          base path '../')
+ * One entry point now: content/media/_index.md, served at /en/media/ and
+ * /he/media/. It sets window.mediaBasePath BEFORE loading this script.
  *
- * Each page sets window.mediaBasePath BEFORE loading this script. Do not fork
- * this file: divergent copies are exactly how the stats count silently drifted.
+ * There used to be a second -- a standalone static/media_app.html carrying its
+ * own copy of the page. It was replaced with a redirect on 2026-08-18: bypassing
+ * templates/base.html meant it silently missed whatever the templates added, and
+ * the analytics snippet was the case that surfaced it.
+ *
+ * Do not fork this file: divergent copies are exactly how the stats count
+ * silently drifted before.
  */
 (function () {
     'use strict';

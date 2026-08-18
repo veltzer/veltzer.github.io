@@ -168,10 +168,26 @@ returning-visitor tracking, at which point GoatCounter is the simpler choice.
 Everything rendered through `base.html` is tracked: blog posts in both languages, the
 section and tag pages, the app sections under `/en/` and `/he/`, and `404.html`.
 
-Four standalone files in `static/` are **not** tracked — `media_app.html`,
-`calendar_app.html`, `chess.html` and `full_index.html`. They bypass the templates
-entirely, and they are legacy duplicates of the templated app pages: all four are live but
-effectively unlinked, reachable only from old bookmarks. Copying the snippet into each was
-rejected as four more places for the measurement ID to drift out of sync. If their traffic
-turns out to matter, the better fix is to make them redirect to their `/en/` equivalents,
-the way `chess.html` already does.
+Four standalone files in `static/` are not tracked, and no longer need to be: they were
+replaced with redirects on 2026-08-18, which was the fix suggested here rather than
+copying the snippet into each and giving the measurement ID four more places to drift.
+
+  | file | now redirects to |
+  | --- | --- |
+  | `media_app.html` | `/en/media/` |
+  | `calendar_app.html` | `/en/calendar/` |
+  | `chess.html` | `/en/chess/` (already did) |
+  | `full_index.html` | `/` |
+
+A visitor following an old bookmark lands on the templated page and is counted there. The
+redirect stubs themselves carry `noindex, follow` so they do not compete in search.
+
+`full_index.html` is the one that does not map onto a content page: it was a
+hand-maintained index of the standalone pages, and it had rotted — it listed
+`calendar.html` and `media.html`, both of which 404. It is not being rebuilt because the
+site nav and `/sitemap.xml` already enumerate everything and are generated.
+
+Still untracked, and still standalone: `calendar_google_embed.html` and
+`calendar_list_view.html`. They were only ever linked from `full_index.html`, so they are
+now fully orphaned — live URLs that nothing points at. Worth deciding separately whether
+they are wanted at all.
