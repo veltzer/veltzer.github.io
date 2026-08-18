@@ -1,12 +1,11 @@
 # Suggested Improvements
 
 Struck-through entries are done; the note under each records what was actually
-changed and how it was verified. Four items are open:
+changed and how it was verified. Three items are open:
 
 1. A public/private note on the media page *(Media Collection UX)*
 2. WebP conversion for `static/images/` *(Media Collection UX -> Asset weight)*
 3. An aggregated cross-topic stats view *(Overall Stats Page)*
-4. A link checker for the profile URLs *(Infrastructure)*
 
 Everything else in this file is a record rather than a task. Keep it that way:
 when an item is finished, strike it through and say what was done, rather than
@@ -484,14 +483,22 @@ seven `static/plugin-*.js` files and the built page.
   `config.extra.languages` loop, so a file-level assertion passed even with the bug
   reintroduced — confirmed by reintroducing it.
 
-- **No link checker for the profile URLs.** `../data/yaml/profiles.yaml` holds roughly 30
-  external profile links, rendered into `content/about/` here and into `README.md` in the
-  `../veltzer` repository. They are exactly the kind of URL that dies quietly — a service
-  shuts down, a username changes — and nothing would notice.
+- ~~**No link checker for the profile URLs.** — DONE.~~
+  `scripts/check_profile_links.py` requests all 30 URLs from
+  `../data/yaml/profiles.yaml` and reports what no longer resolves. Not wired into the
+  build: a third-party outage must not fail a site build, and nothing else in the build
+  needs the network. Exits 1 on a real breakage so it can gate a release script.
 
-  Now that they live in structured YAML rather than hand-written markdown, checking them
-  is a short script: load the YAML, request each `url`, report non-2xx. Worth running on
-  demand rather than in CI, since a third-party outage should not fail a site build.
+  The design problem was not fetching the URLs, it was avoiding a report full of false
+  positives. Several of these hosts answer an automated client with 403 while serving the
+  page fine in a browser — udemy did that on one run here and not the next — so results
+  are split into ok / blocked / broken, with 401/403/405/429/999 counted as blocked.
+  The checker also sends a browser User-Agent and retries with GET when HEAD fails, since
+  a number of hosts do not implement HEAD properly.
+
+  Verified against a deliberately broken list: a 404 URL and an unresolvable host were
+  both reported as BROKEN with exit 1, while udemy's 403 was correctly reported as
+  blocked. Current state: 30 ok, 0 broken.
 
 ## Internationalization
 

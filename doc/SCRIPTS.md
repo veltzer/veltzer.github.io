@@ -77,6 +77,29 @@ Checks movies, series, audible, audio courses, museums, and podcasts.
 Skips YouTube (uses external CDN thumbnails). (Image check is currently
 commented out in `build_docs.py`; run manually as needed.)
 
+### `scripts/check_profile_links.py`
+
+Requests every profile URL in `../data/yaml/profiles.yaml` — the ~30 links
+rendered into `content/about/` and into `README.md` in the `../veltzer`
+repository — and reports anything that no longer resolves. Run on demand:
+
+```bash
+scripts/check_profile_links.py            # problems only
+scripts/check_profile_links.py --verbose  # list the working links too
+```
+
+Deliberately not part of `rsconstruct build`: a third-party outage must not fail
+a site build, and nothing else in the build needs the network. Exits 1 if
+anything is broken, so it can still gate a release script.
+
+Results are split three ways, and the middle one is the point. Several of these
+hosts answer an automated client with 403 while serving the page fine in a
+browser — udemy did exactly that on one run here and not the next. Those are
+reported as **blocked** rather than **broken**, so the report stays worth
+reading; without that split it would be mostly false positives. The checker
+sends a browser User-Agent and retries with GET when HEAD fails, since a number
+of hosts do not implement HEAD properly.
+
 ## API Key Management
 
 ### `scripts/manage_api_key.py`
