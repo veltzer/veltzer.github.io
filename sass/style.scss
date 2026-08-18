@@ -143,6 +143,67 @@ h3 { font-size: 1.1rem; margin: 1.8rem 0 0.5rem; }
 .lang:hover { background: var(--bg-hover); color: var(--accent); }
 .lang.current { background: var(--accent); color: var(--bg); border-color: var(--accent); }
 
+// Blog index: post list plus the archive-stats sidebar. Wider than
+// .site-main's reading column because it carries two columns; the post column
+// is still capped at the reading measure so the prose width does not change.
+.blog-main { max-width: 58rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+
+.blog-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 42rem) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: start;
+}
+
+// Single column below the breakpoint, with the stats after the posts. Source
+// order already puts the list first, so nothing has to be reordered here --
+// the sidebar simply falls underneath.
+@media (max-width: 52rem) {
+  .blog-layout { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+}
+
+.archive-stats {
+  position: sticky;
+  top: 1.5rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  padding: 1rem 1.1rem 1.2rem;
+  font-size: 0.9rem;
+}
+
+.archive-stats h2 { margin: 0 0 0.6rem; font-size: 1rem; }
+.archive-total { margin: 0 0 1rem; line-height: 1.45; }
+.archive-total strong { font-size: 1.5rem; }
+.archive-langs { color: var(--text-muted); font-size: 0.85rem; }
+
+// Borderless: the surrounding card already frames it, and the site-wide
+// bordered table style is far too heavy at this size.
+.archive-years { font-variant-numeric: tabular-nums; }
+.archive-years caption {
+  text-align: start;
+  color: var(--text-secondary);
+  padding-bottom: 0.3rem;
+}
+.archive-years th,
+.archive-years td {
+  border: 0;
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.3rem 0;
+  font-weight: 400;
+}
+.archive-years thead th {
+  background: none;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.archive-years tbody th { color: var(--text-secondary); }
+.archive-years td { text-align: end; }
+.archive-years tbody tr:last-child th,
+.archive-years tbody tr:last-child td { border-bottom: 0; }
+
 .post-list { list-style: none; padding: 0; }
 .post-list li { padding: 0.6rem 0; border-bottom: 1px solid var(--border-subtle); }
 .post-link { font-weight: 600; text-decoration: none; }

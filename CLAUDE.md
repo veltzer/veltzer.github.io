@@ -36,7 +36,8 @@ which records the traps that outlived the migration.
   and `vendor/` (locally vendored JS libraries)
 - `shared/shared-themes/` — git submodule providing the design tokens. **Run
   `git submodule update --init --recursive` on a fresh clone or the build fails.**
-- `scripts/` — `build_site.py` (the build), image fetchers, data importers, `serve.py`
+- `scripts/` — `build_site.py` (the build), `gen_stats.py` (archive stats),
+  image fetchers, data importers, `serve.py`
 - `tests/` — pytest suite for the data import scripts
 - `_site/` — generated output (gitignored, never edit)
 - `doc/` — project notes, decisions and the improvements backlog
@@ -101,7 +102,10 @@ tags = ["religion", "philosophy", "ethics"]
   sets. This is safe precisely because the pairing is by filename, not by tag.
 - Links between posts use zola's `@/` syntax, resolved against the content root:
   `[text](@/blog/other_post.md)`.
-- All 80 posts currently exist in both English and Hebrew.
+- Every post exists in both English and Hebrew, and the build enforces it:
+  `scripts/gen_stats.py` fails if any `.en.md` lacks its `.he.md` (or the
+  reverse). An unpaired post would otherwise lose its language switcher
+  silently, since `page.translations` just comes up empty.
 
 ## Coding Conventions
 
@@ -138,6 +142,15 @@ tags = ["religion", "philosophy", "ethics"]
   in by `scripts/copy_data.py`, which also converts it to the `.json.gz` the frontend
   loads. **The frontend reads JSON, not YAML** — js-yaml took ~399ms on the 6.5MB youtube
   dataset against ~31ms for `JSON.parse`.
+- **The `[extra.stats]` block in `content/blog/_index.{en,he}.md` is generated — do
+  not hand-edit it.** `scripts/gen_stats.py` rewrites everything below the
+  `# BEGIN generated stats` marker on every build; the hand-written section keys
+  above it are preserved. It runs from `build_site.py` before zola, so the
+  numbers are always current, and the output is committed so `zola serve` and
+  any build that skips the step still show the right figures. `templates/blog.html`
+  renders it as the archive sidebar. Computing this in Tera was the alternative
+  and was rejected: Tera has no `group_by` over a derived key, so per-year counts
+  would mean looping the section once per year.
 - **The profile links on the About page are generated — do not hand-edit them.** They
   live in `../data/yaml/profiles.yaml` and are rendered by `scripts/gen_profiles.py`
   into `content/about/_index.en.md` and `content/about/_index.he.md`. Only the region

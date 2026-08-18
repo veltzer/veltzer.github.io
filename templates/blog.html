@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 {% block title %}{{ section.title }} &middot; {{ config.title }}{% endblock %}
+{# Wider than the 42rem reading column: the stats sit beside the post list
+   rather than above it, and two columns need the room. The sidebar drops
+   below the list under the breakpoint in style.scss, at which point the
+   extra width costs nothing because the column is capped there anyway. #}
+{% block main_class %}blog-main{% endblock %}
 {% block content %}
 <h1>{{ section.title }}</h1>
 
+<div class="blog-layout">
+<div class="blog-posts">
 {%- set posts = paginator.pages | default(value=section.pages) %}
 <ul class="post-list">
   {%- for post in posts %}
@@ -25,4 +32,38 @@
   {%- if paginator.next %}<a href="{{ paginator.next }}">{{ trans(key="older", lang=page_lang) }} &rarr;</a>{% endif %}
 </nav>
 {%- endif %}
+</div>
+
+{#- Archive stats. The numbers come from [extra.stats] in the section front
+    matter, written by scripts/gen_stats.py at build time -- see that script for
+    why they are not computed in Tera. Guarded on `stats` so the page still
+    renders if the generator has not run yet. -#}
+{%- set stats = section.extra.stats %}
+{%- if stats %}
+<aside class="archive-stats" aria-labelledby="archive-stats-heading">
+  <h2 id="archive-stats-heading">{{ trans(key="stats_title", lang=page_lang) }}</h2>
+  <p class="archive-total">
+    <strong>{{ stats.total }}</strong>&nbsp;{{ trans(key="stats_posts", lang=page_lang) }}<br>
+    <span class="archive-langs">{{ trans(key="stats_in_languages", lang=page_lang) }}</span>
+  </p>
+  <table class="archive-years">
+    <caption>{{ trans(key="stats_by_year", lang=page_lang) }}</caption>
+    <thead>
+      <tr>
+        <th scope="col">{{ trans(key="stats_year", lang=page_lang) }}</th>
+        <th scope="col">{{ trans(key="stats_count", lang=page_lang) }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%- for row in stats.years %}
+      <tr>
+        <th scope="row">{{ row.year }}</th>
+        <td>{{ row.total }}</td>
+      </tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</aside>
+{%- endif %}
+</div>
 {% endblock %}

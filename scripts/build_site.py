@@ -25,6 +25,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_DIR = REPO_ROOT / "_site"
 IMPORTER = REPO_ROOT / "scripts" / "import_teaching.py"
+STATS_GENERATOR = REPO_ROOT / "scripts" / "gen_stats.py"
 SIBLINGS_PRESENT = all(
     (REPO_ROOT.parent / name / "_site" / "index.html").is_file()
     for name in ("teaching-slides", "teaching-syllabi", "teaching-animations")
@@ -60,6 +61,18 @@ def import_teaching():
     if not SIBLINGS_PRESENT:
         return
     subprocess.run([sys.executable, str(IMPORTER)], check=True, cwd=REPO_ROOT)
+
+
+def gen_stats():
+    """Recompute the blog statistics written into content/blog/_index.*.md.
+
+    Unconditional, unlike import_teaching: it reads only content/blog, which is
+    always present, so there is no sibling repo to be missing. It also verifies
+    that every post is paired across languages and fails the build if not --
+    an unpaired post silently loses its language switcher and nothing else
+    notices.
+    """
+    subprocess.run([sys.executable, str(STATS_GENERATOR)], check=True, cwd=REPO_ROOT)
 
 
 def sync_theme():
@@ -244,6 +257,7 @@ def main():
     zola = find_zola()
     try:
         import_teaching()
+        gen_stats()
         sync_theme()
         build(zola)
         relocate_english(OUTPUT_DIR)

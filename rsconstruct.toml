@@ -71,6 +71,11 @@ src_dirs = ["static"]
 command = "scripts/build_site.py"
 inputs = [
     "config.toml",
+    # build_site.py runs this to recompute the archive stats into
+    # content/blog/_index.*.md before zola reads them. Listed so editing the
+    # generator rebuilds the site rather than leaving stale numbers behind the
+    # cache.
+    "scripts/gen_stats.py",
 ]
 input_globs = [
     "content/**/*",
