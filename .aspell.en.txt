@@ -52,6 +52,8 @@ Deuteronomistic
 Deuteronomists
 Docker's
 DropBox
+Duverger
+Duverger's
 ETF
 ETW
 Edom
@@ -65,6 +67,7 @@ Finkelstein
 Fiori
 Flavianum
 Flavius
+Friedrich
 Frontotemporal
 GSSAPIAuthentication
 GUIs
@@ -80,6 +83,7 @@ Goodacre
 Goshen
 Gottwald
 Goulder
+Gratian
 Greco
 Griesbach
 Gödel
@@ -107,6 +111,7 @@ Invicti
 Invictus
 Irenaeus
 Israelites
+Ius
 Jamnia
 Jethro
 Johansson
@@ -149,6 +154,7 @@ NGINX
 NVMe
 Naama
 NameBPM
+Nassim
 Natalis
 Nebo
 Nephesh
@@ -186,6 +192,7 @@ Plantinga's
 Polygenic
 Pontius
 PowerShell
+Prescientific
 Psilocybin
 PubkeyAuthentication
 Pâques
@@ -219,6 +226,7 @@ StudioLogic
 Substitutionary
 Sumer
 Syscall
+Taleb
 Tanakh
 Tay
 Teman
@@ -402,6 +410,7 @@ delegitimized
 deliverances
 derivefieldsconfig
 desc
+deus
 dev
 didn
 diminishment
@@ -409,6 +418,7 @@ dimm
 dir
 disconfirming
 discoverability
+discoverable
 disinhibition
 distro
 distros
@@ -546,6 +556,7 @@ heritability
 heterogenous
 hiddenness
 hippocampi
+historicism
 homeschooled
 hominem
 hotlinking
@@ -568,6 +579,7 @@ infomation
 initialview
 innerhtml
 innodb
+interiority
 interpretatio
 io
 iphone
@@ -577,6 +589,7 @@ isnan
 ison
 itemlist
 itemscontainer
+ius
 iuvxgqb
 javac
 javascript
@@ -610,6 +623,7 @@ latin
 lcd
 ldconfig
 ldd
+lex
 lf
 lfs
 li
@@ -629,6 +643,7 @@ localtime
 lookups
 luazptar
 macOS
+machina
 macos
 mainnav
 makefile
@@ -678,6 +693,7 @@ namespace
 namespaces
 nan
 natively
+naturalis
 nav
 navlink
 navtitle
@@ -743,6 +759,7 @@ preconnect
 predation
 preflight
 premodern
+prescientific
 prestissimo
 prev
 preventdefault
@@ -938,6 +955,7 @@ universalization
 unix
 unlink
 unmanaged
+unpersuadable
 unprovability
 unreachably
 unrebutted
@@ -975,6 +993,7 @@ valuemax
 valuemin
 valuenow
 valueset
+vanishingly
 veltzer
 veltzer's
 ventromedial
