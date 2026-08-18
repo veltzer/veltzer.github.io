@@ -136,3 +136,42 @@ is a coherent combination.
 
 See the "Visitor Counter" entry in `doc/IMPROVEMENTS.md` for the current state of the
 disabled counter and the `COUNTER_ENDPOINT` hook left in `media-app.js`.
+
+## Decision: GA4, wired in 2026-08-18
+
+GA4 was chosen over the GoatCounter recommendation above. The `gtag` snippet lives in
+`templates/base.html`, guarded on `config.extra.google_analytics_id`; setting that key to a
+`G-XXXXXXXXXX` measurement ID turns it on and leaving it empty turns it off, so local
+builds, forks and CI send nothing.
+
+Nothing in the analysis above is retracted — GoatCounter is still the privacy-preferable
+option, and the "Why Google cannot do this" section still applies: GA4 reports traffic into
+the Google UI, it does **not** give an on-page number, because reading counts back needs a
+credential that cannot be exposed client-side. That half of the problem is unchanged.
+
+### Consent
+
+**GA4 sets cookies and this site ships no consent banner.** That is a deliberate choice,
+not an oversight, and it is the one real cost of picking GA4 here. Under GDPR/ePrivacy,
+analytics cookies need prior consent from EU/UK visitors, and this site has Hebrew and
+English readers who plausibly include both.
+
+Recorded so it is a known, revisitable position rather than a silent one. If a banner is
+wanted later, the hook is the same guarded block in `base.html`, and the approach is
+Google Consent Mode v2 — load `gtag` with `analytics_storage` denied by default and
+upgrade on acceptance. The cookieless middle option (Consent Mode denied permanently) also
+exists: no banner needed, still gives pageviews, referrers and countries, but loses
+returning-visitor tracking, at which point GoatCounter is the simpler choice.
+
+### Coverage
+
+Everything rendered through `base.html` is tracked: blog posts in both languages, the
+section and tag pages, the app sections under `/en/` and `/he/`, and `404.html`.
+
+Four standalone files in `static/` are **not** tracked — `media_app.html`,
+`calendar_app.html`, `chess.html` and `full_index.html`. They bypass the templates
+entirely, and they are legacy duplicates of the templated app pages: all four are live but
+effectively unlinked, reachable only from old bookmarks. Copying the snippet into each was
+rejected as four more places for the measurement ID to drift out of sync. If their traffic
+turns out to matter, the better fix is to make them redirect to their `/en/` equivalents,
+the way `chess.html` already does.

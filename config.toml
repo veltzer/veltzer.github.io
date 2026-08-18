@@ -151,6 +151,17 @@ dark_theme = "github-dark"
 
 [extra]
 rss_url = "https://veltzer.org/atom.xml"
+
+# Google Analytics 4 measurement ID. Empty disables analytics entirely -- the
+# gtag snippet in base.html is wrapped in a check, so a local build or a fork
+# sends nothing to Google unless this is filled in.
+#
+# GA4 sets cookies, and this site ships NO consent banner. That is a deliberate
+# choice, recorded in doc/ANALYTICS.md under "Consent", not an oversight: it is
+# the known exposure for EU/UK visitors. If a banner is ever wanted, the hook is
+# the same block in base.html and the approach is Consent Mode v2 with analytics
+# storage denied until acceptance.
+google_analytics_id = ""
 # Drives the site-level language switcher in base.html. Adding a language here
 # plus a [languages.xx] block above is all a new language needs.
 languages = [

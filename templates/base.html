@@ -71,6 +71,30 @@
 <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
 <link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path='atom.xml') }}">
 {%- block extra_head %}{% endblock %}
+
+{#- Google Analytics 4.
+
+    Guarded on the ID being set, so a local build, a fork or a CI run with an
+    empty config.extra.google_analytics_id sends nothing to Google. Only a real
+    deploy with the ID filled in reports traffic.
+
+    Loaded async and last in <head>: gtag is not needed for rendering, and a
+    third-party script that blocks first paint is a worse trade than slightly
+    later attribution.
+
+    NOTE: this sets cookies and there is no consent banner. That is a recorded
+    decision -- see doc/ANALYTICS.md under "Consent" -- and it is the known
+    exposure for EU/UK visitors, not an oversight. The hook for adding one later
+    is this block. -#}
+{%- if config.extra.google_analytics_id %}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ config.extra.google_analytics_id }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ config.extra.google_analytics_id }}');
+</script>
+{%- endif %}
 </head>
 <body>
 
