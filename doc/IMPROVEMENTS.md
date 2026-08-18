@@ -1,11 +1,12 @@
 # Suggested Improvements
 
 Struck-through entries are done; the note under each records what was actually
-changed and how it was verified. Three items are open:
+changed and how it was verified. Four items are open:
 
 1. A public/private note on the media page *(Media Collection UX)*
 2. WebP conversion for `static/images/` *(Media Collection UX -> Asset weight)*
 3. An aggregated cross-topic stats view *(Overall Stats Page)*
+4. Rewrite `doc/javascript_toolkits.md`, whose inventory is stale *(Infrastructure)*
 
 Everything else in this file is a record rather than a task. Keep it that way:
 when an item is finished, strike it through and say what was done, rather than
@@ -482,6 +483,14 @@ seven `static/plugin-*.js` files and the built page.
   seconds. The check is per-loop rather than per-file: `base.html` contains an unrelated
   `config.extra.languages` loop, so a file-level assertion passed even with the bug
   reintroduced — confirmed by reintroducing it.
+
+- **`doc/javascript_toolkits.md` predates the zola migration and its inventory is
+  wrong.** Five of the seven standalone pages it tabulates no longer exist, the paths are
+  all `blog/`-prefixed from the MkDocs layout, and it lists "MkDocs Material theme" as the
+  styling for blog posts. Flagged with a banner at the top of the file rather than left to
+  mislead, but the file itself needs rewriting against the current `static/` and
+  `templates/`. The Tailwind and library notes in it are still broadly accurate — it is
+  the file list that rotted.
 
 - ~~**No link checker for the profile URLs.** — DONE.~~
   `scripts/check_profile_links.py` requests all 30 URLs from

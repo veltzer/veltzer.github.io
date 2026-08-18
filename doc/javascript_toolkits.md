@@ -1,5 +1,14 @@
 # JavaScript Toolkits
 
+> **STALE — predates the zola migration. Read for the library choices, not for
+> the file list.** Five of the seven standalone pages it tabulates no longer
+> exist (`media.html`, `board.html`, `calendar.html`, and, deleted 2026-08-18,
+> `calendar_list_view.html` and `calendar_google_embed.html`), the `blog/` paths
+> throughout are from the MkDocs layout, and the "MkDocs Material theme" row
+> describes a generator this site no longer uses. The Tailwind and library notes
+> below are still broadly accurate; the inventory is not. Rewriting it is its own
+> task, tracked in `doc/IMPROVEMENTS.md`.
+
 ## CSS Framework: Tailwind CSS
 
 The site uses **Tailwind CSS** (via CDN JIT mode) as its sole CSS framework for all

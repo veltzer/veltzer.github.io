@@ -1,11 +1,25 @@
 # Design Decisions and Known Issues
 
-## Calendar pages are kept separate intentionally
+## Calendar: the comparison is over, FullCalendar won
 
-The three calendar pages (`calendar_full.html`, `calendar_list_view.html`,
-`calendar_google_embed.html`) exist to evaluate which approach is best.
-Only `calendar_full.html` is linked in navigation. The others remain on
-disk for comparison but are not user-facing.
+Three standalone calendar pages once existed side by side to evaluate which
+approach was best: `calendar_full.html` (FullCalendar), `calendar_list_view.html`
+(a raw Google Calendar API fetch rendered as a list) and
+`calendar_google_embed.html` (Google's own iframe embed). Only the first was ever
+linked; the other two stayed on disk for comparison.
+
+That evaluation has concluded. The FullCalendar approach is now the real page at
+`content/calendar/_index.md`, served at `/en/calendar/` and `/he/calendar/` with
+month, week and day views, and `calendar_full.html` is gone -- superseded by it.
+
+The two losing alternatives were deleted on 2026-08-18. They had become
+unreachable when `full_index.html`, the only thing that linked them, was replaced
+with a redirect, and keeping two unlinked implementations of a question already
+answered was not worth the maintenance: both still carried live code against
+`keys.js` and the Calendar API. Their history is in git if the comparison ever
+needs revisiting.
+
+`static/calendar_app.html` remains, as a redirect to `/en/calendar/`.
 
 ## No `<noscript>` fallback needed
 

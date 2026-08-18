@@ -187,7 +187,7 @@ hand-maintained index of the standalone pages, and it had rotted — it listed
 `calendar.html` and `media.html`, both of which 404. It is not being rebuilt because the
 site nav and `/sitemap.xml` already enumerate everything and are generated.
 
-Still untracked, and still standalone: `calendar_google_embed.html` and
-`calendar_list_view.html`. They were only ever linked from `full_index.html`, so they are
-now fully orphaned — live URLs that nothing points at. Worth deciding separately whether
-they are wanted at all.
+That leaves nothing untracked. `calendar_google_embed.html` and
+`calendar_list_view.html` were the last two standalone pages outside the templates; they
+were deleted on 2026-08-18 as losing alternatives from a calendar comparison that has long
+since concluded in FullCalendar's favour. See `doc/DECISIONS.md`.
