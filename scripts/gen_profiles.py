@@ -58,14 +58,13 @@ def load_profiles():
 def render(groups, lang):
     """Render the link list as markdown for one language.
 
-    Entries flagged github_only are dropped: they belong on the GitHub profile
-    but not here. The keybr accounts are five mail addresses that earn a reader
-    of this site nothing.
+    Every entry is rendered, children included, so this page and the GitHub
+    profile README show the same links from the same source.
     """
     title_key = f"title_{lang}"
     lines = []
     for group in groups:
-        items = [i for i in group["items"] if not i.get("github_only")]
+        items = group["items"]
         if not items:
             continue
         lines.append("")
@@ -73,6 +72,10 @@ def render(groups, lang):
         lines.append("")
         for item in items:
             lines.append(f"* [{item['name']}]({item['url']})")
+            for child in item.get("children", []):
+                # Two spaces, matching gen_readme.py: MD007 wants indent depth
+                # 1 at two spaces, and this content is linted as markdown.
+                lines.append(f"  * [{child['name']}]({child['url']})")
     lines.append("")
     return "\n".join(lines)
 

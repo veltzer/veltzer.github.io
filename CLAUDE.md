@@ -161,8 +161,8 @@ tags = ["religion", "philosophy", "ethics"]
 - The same `profiles.yaml` also drives `README.md` in the **`../veltzer`** repository
   (the GitHub profile page), which has its own rsconstruct build — `rsconstruct build`
   there regenerates it from `README.md.in` plus the YAML. Neither repo writes into the
-  other; the YAML is the only thing that crosses. Entries flagged `github_only: true`
-  (the keybr accounts, five mail addresses) render on the profile but not on the site.
+  other; the YAML is the only thing that crosses. Both pages render every entry,
+  children included, so the site's About page and the profile README stay identical.
 - Custom domain is `veltzer.org` (see `CNAME`); `base_url` in `config.toml` matches it,
   and `veltzer.github.io` 301-redirects there. Keep every public URL (canonical tags,
   sitemap, RSS, `og:url`, `robots.txt`) on `veltzer.org` — pointing them at the
