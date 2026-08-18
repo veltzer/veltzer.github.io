@@ -7,6 +7,10 @@ My name is Mark Veltzer and I will write more soon.
 
 <!-- BEGIN generated profiles -- edit ../data/yaml/profiles.yaml -->
 
+In order to contact me use [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/veltzer/mark.veltzer)
+
+Various profiles of mine
+
 ### Development sites
 
 * [github.com](https://github.com/veltzer)
@@ -51,5 +55,11 @@ My name is Mark Veltzer and I will write more soon.
 
 * [goodreads](https://www.goodreads.com/user/show/34371877-mark-veltzer)
 * [imdb](https://www.imdb.com/user/ur0872999)
+
+It seems like I'm one of the leading github commiters from Israel -> [top GitHub users in Israel](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/israel.md)
+
+[![GitHub stats](https://github-readme-stats.vercel.app/api?username=veltzer)](https://github.com/anuraghazra/github-readme-stats)
+
+### ![Profile view counter](https://komarev.com/ghpvc/?username=veltzer)
 
 <!-- END generated profiles -->

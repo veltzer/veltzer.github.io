@@ -49,26 +49,38 @@ def load_profiles():
     if not SOURCE.is_file():
         die(f"Missing source file {SOURCE}. Clone the data repo first.")
     data = yaml.safe_load(SOURCE.read_text(encoding="utf-8"))
-    groups = data.get("groups")
-    if not groups:
+    if not data.get("groups"):
         die(f"{SOURCE} has no 'groups' key")
-    return groups
+    return data
 
 
-def render(groups, lang):
-    """Render the link list as markdown for one language.
+def render(data, lang):
+    """Render the whole shared block as markdown for one language.
 
-    Every entry is rendered, children included, so this page and the GitHub
-    profile README show the same links from the same source.
+    Contact line, intro, the link list, then the trailing extras -- the same
+    order the GitHub profile README uses, from the same source, so the two
+    pages show the same thing. Everything here is translated: the site serves
+    /he/about/ as a real Hebrew page, not an English one under a Hebrew title.
     """
-    title_key = f"title_{lang}"
     lines = []
-    for group in groups:
+
+    contact = data.get("contact")
+    if contact:
+        badge = f"![{contact['badge_alt']}]({contact['badge_url']})"
+        lines.append("")
+        lines.append(f"{contact[f'text_{lang}']} [{badge}]({contact['url']})")
+
+    intro = data.get("intro")
+    if intro:
+        lines.append("")
+        lines.append(intro[f"text_{lang}"])
+
+    for group in data["groups"]:
         items = group["items"]
         if not items:
             continue
         lines.append("")
-        lines.append(f"### {group[title_key]}")
+        lines.append(f"### {group[f'title_{lang}']}")
         lines.append("")
         for item in items:
             lines.append(f"* [{item['name']}]({item['url']})")
@@ -76,8 +88,24 @@ def render(groups, lang):
                 # Two spaces, matching gen_readme.py: MD007 wants indent depth
                 # 1 at two spaces, and this content is linted as markdown.
                 lines.append(f"  * [{child['name']}]({child['url']})")
+
+    for extra in data.get("extras", []):
+        lines.append("")
+        lines.append(render_extra(extra, lang))
+
     lines.append("")
     return "\n".join(lines)
+
+
+def render_extra(extra, lang):
+    """Render one trailing extra: a sentence with a link, or a linked badge."""
+    if "badge_url" in extra:
+        badge = f"![{extra['badge_alt']}]({extra['badge_url']})"
+        # The view counter is a bare badge with no link to wrap it.
+        body = f"[{badge}]({extra['url']})" if "url" in extra else badge
+        return f"### {body}" if extra.get("heading") else body
+    link = f"[{extra[f'link_text_{lang}']}]({extra['url']})"
+    return f"{extra[f'text_{lang}']} {link}"
 
 
 def splice(path, body):
@@ -109,9 +137,9 @@ def splice(path, body):
 
 
 def main():
-    groups = load_profiles()
-    splice(ABOUT_EN, render(groups, "en"))
-    splice(ABOUT_HE, render(groups, "he"))
+    data = load_profiles()
+    splice(ABOUT_EN, render(data, "en"))
+    splice(ABOUT_HE, render(data, "he"))
 
 
 if __name__ == "__main__":

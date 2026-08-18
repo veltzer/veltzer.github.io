@@ -7,6 +7,10 @@ template = "section.html"
 
 <!-- BEGIN generated profiles -- edit ../data/yaml/profiles.yaml -->
 
+ליצירת קשר השתמשו ב [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/veltzer/mark.veltzer)
+
+פרופילים שונים שלי
+
 ### אתרי פיתוח
 
 * [github.com](https://github.com/veltzer)
@@ -51,5 +55,11 @@ template = "section.html"
 
 * [goodreads](https://www.goodreads.com/user/show/34371877-mark-veltzer)
 * [imdb](https://www.imdb.com/user/ur0872999)
+
+נראה שאני אחד מהמתכנתים המובילים בגיטהאב מישראל -> [משתמשי הגיטהאב המובילים בישראל](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/israel.md)
+
+[![GitHub stats](https://github-readme-stats.vercel.app/api?username=veltzer)](https://github.com/anuraghazra/github-readme-stats)
+
+### ![Profile view counter](https://komarev.com/ghpvc/?username=veltzer)
 
 <!-- END generated profiles -->

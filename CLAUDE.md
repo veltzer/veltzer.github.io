@@ -151,18 +151,26 @@ tags = ["religion", "philosophy", "ethics"]
   renders it as the archive sidebar. Computing this in Tera was the alternative
   and was rejected: Tera has no `group_by` over a derived key, so per-year counts
   would mean looping the section once per year.
-- **The profile links on the About page are generated — do not hand-edit them.** They
-  live in `../data/yaml/profiles.yaml` and are rendered by `scripts/gen_profiles.py`
-  into `content/about/_index.en.md` and `content/about/_index.he.md`. Only the region
-  between the `<!-- BEGIN generated profiles -->` markers is replaced, so the
-  hand-written prose above it survives. Edit the YAML, run the script, commit both
+- **The profile block on the About page is generated — do not hand-edit it.** It
+  lives in `../data/yaml/profiles.yaml` and is rendered by `scripts/gen_profiles.py`
+  into `content/about/_index.en.md` and `content/about/_index.he.md`. The YAML holds
+  the whole shared block, not just links: `contact` (the gitter line), `intro`,
+  `groups` (the links), and `extras` (the top-committers line, the GitHub stats
+  badge, the view counter). Every one carries `_en` and `_he` text so `/he/about/`
+  is a real Hebrew page. Only the region between the
+  `<!-- BEGIN generated profiles -->` markers is replaced, so the hand-written prose
+  above it survives. Edit the YAML, run the script, commit both
   repos. Like `copy_data.py` it is a manual step, not part of the build: CI has no
   `../data` checkout, and the generated content is committed.
 - The same `profiles.yaml` also drives `README.md` in the **`../veltzer`** repository
   (the GitHub profile page), which has its own rsconstruct build — `rsconstruct build`
   there regenerates it from `README.md.in` plus the YAML. Neither repo writes into the
-  other; the YAML is the only thing that crosses. Both pages render every entry,
-  children included, so the site's About page and the profile README stay identical.
+  other; the YAML is the only thing that crosses. Both pages render the same block
+  in the same order, so the site's About page and the profile README stay identical.
+  Only two things are page-local: this site's `title`/lead-in front matter, and the
+  README's own `### Mark Veltzer's Github profile` heading plus its `main profile`
+  self-link (`MAIN_PROFILE_URL` in that repo's `gen_readme.py`) — the site does not
+  link to itself. Anything meant to appear on both belongs in the YAML.
 - Custom domain is `veltzer.org` (see `CNAME`); `base_url` in `config.toml` matches it,
   and `veltzer.github.io` 301-redirects there. Keep every public URL (canonical tags,
   sitemap, RSS, `og:url`, `robots.txt`) on `veltzer.org` — pointing them at the
