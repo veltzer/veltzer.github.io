@@ -5,6 +5,23 @@ permissions:
   pages: write
   id-token: write
 
+# Cancel a run as soon as a newer one starts, rather than letting both queue.
+#
+# GitHub Pages serialises deployments, so without this a second push while the
+# first is still building leaves the older run parked waiting for the Pages
+# environment -- one was observed sitting in_progress for over an hour before
+# being cancelled by hand. The older build is worthless the moment a newer
+# commit exists, so cancelling it is strictly better than waiting for it.
+#
+# `group: pages` rather than the workflow+ref form used in the python repos:
+# what actually queues is the Pages deployment, not the workflow, and this
+# matches the rs* repos that deploy the same way (rscalendar, rsconstruct,
+# rstype and the rest). Only master ever deploys here, so keying on the branch
+# would buy nothing.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-24.04
