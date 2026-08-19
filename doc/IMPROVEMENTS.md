@@ -1,11 +1,9 @@
 # Suggested Improvements
 
 Struck-through entries are done; the note under each records what was actually
-changed and how it was verified. One item is open:
+changed and how it was verified. **Nothing is open.**
 
-1. An aggregated cross-topic stats view *(Overall Stats Page)*
-
-Everything else in this file is a record rather than a task. Keep it that way:
+Everything in this file is a record rather than a task. Keep it that way:
 when an item is finished, strike it through and say what was done, rather than
 deleting it -- several entries here exist specifically to stop a fixed thing
 being re-reported, or to record that something is deliberately not a problem.
@@ -101,23 +99,25 @@ seven `static/plugin-*.js` files and the built page.
 
 ## Overall Stats Page
 
-- **Create an aggregated stats view across all seven topics.** Still open — the only
-  outstanding *feature* here.
+- ~~**Create an aggregated stats view across all seven topics.** — DECLINED
+  2026-08-19. Not wanted.~~
 
-  What exists: each of the seven plugins implements `renderStats`, so every topic has its
-  own statistics panel (museums by city and year, and so on). There is no view that
-  combines them.
+  Recorded rather than deleted so it is not re-proposed. Each of the seven plugins
+  implements its own `renderStats`, and that is enough: museums by city and year,
+  Audible by genre and narrator, and so on.
 
-  What makes this non-trivial is that the datasets do not share a schema. `media-app.js`
-  already normalises `title` onto `name` at load, but ratings, dates and durations differ
-  per topic — some have `rating` on different scales, some have no duration at all — so an
-  aggregate needs an explicit decision about which fields are genuinely comparable rather
-  than a generic roll-up. The original note suggested total listening time, average rating
-  by lecturer and most-used device; only the first two look computable across more than
-  one dataset.
+  The reason it stayed open so long is worth keeping, because it is what any future
+  attempt would run into. The datasets do not share a schema. Checking the field
+  registries: `rating` is absent from YouTube, a date exists everywhere but under five
+  different names (`date_utcz`, `date_added`, `upload_date`, `first_listened`,
+  `last_listened`), and duration exists in three incomparable forms
+  (`runtime_length_min`, `duration`, `chapter_count`) with museums having none at all.
 
-  Worth scoping as: pick the three or four cross-topic numbers that are actually
-  well-defined, then build the panel, rather than starting from the UI.
+  So a roll-up would be quietly wrong rather than merely partial: an average rating
+  across "everything" would silently omit YouTube, and total time consumed cannot be
+  computed at all. Of the three numbers the original note proposed — total listening
+  time, average rating by lecturer, most-used device — only average rating survives,
+  and only across five of the seven topics.
 
 ## YAML Data Structural Issues
 
