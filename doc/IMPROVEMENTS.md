@@ -1,10 +1,9 @@
 # Suggested Improvements
 
 Struck-through entries are done; the note under each records what was actually
-changed and how it was verified. Two items are open:
+changed and how it was verified. One item is open:
 
-1. A public/private note on the media page *(Media Collection UX)*
-2. An aggregated cross-topic stats view *(Overall Stats Page)*
+1. An aggregated cross-topic stats view *(Overall Stats Page)*
 
 Everything else in this file is a record rather than a task. Keep it that way:
 when an item is finished, strike it through and say what was done, rather than
@@ -41,10 +40,15 @@ seven `static/plugin-*.js` files and the built page.
 - ~~**Improve loading/error state for the visits counter.** — MOOT.~~
   The counter was removed entirely on 2026-08-19; see the Visitor Counter section.
 
-- **If the content is personal data, add a short note on what is public vs private.**
-  Still open. The media page has no descriptive intro at all — it opens straight into the
-  topic nav and the item grid. A sentence saying what the collection is and that
-  everything shown is deliberately public would cost little.
+- ~~**If the content is personal data, add a short note on what is public vs private.**
+  — DECLINED 2026-08-19.~~ Not wanted. The page is reached from this site's own nav,
+  under my own name; a reader does not need to be told that what is on it is public.
+  Kept here so it is not re-suggested.
+
+  One observation from looking at it, which is a *separate* item if anyone wants it:
+  the media page renders no server-side text at all — everything is drawn by
+  `media-app.js` after load — so search engines and social previews get an empty page.
+  That is an SEO question, not a privacy one, and declining the note does not settle it.
 
 - **NOT ACTIONABLE AS WRITTEN: "add more structure and discoverability".**
   Kept only so it is not re-added. Too vague to implement or to call done: the app
