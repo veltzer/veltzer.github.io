@@ -1,11 +1,10 @@
 # Suggested Improvements
 
 Struck-through entries are done; the note under each records what was actually
-changed and how it was verified. Three items are open:
+changed and how it was verified. Two items are open:
 
 1. A public/private note on the media page *(Media Collection UX)*
 2. An aggregated cross-topic stats view *(Overall Stats Page)*
-3. Rewrite `doc/javascript_toolkits.md`, whose inventory is stale *(Infrastructure)*
 
 Everything else in this file is a record rather than a task. Keep it that way:
 when an item is finished, strike it through and say what was done, rather than
@@ -479,13 +478,21 @@ seven `static/plugin-*.js` files and the built page.
   `config.extra.languages` loop, so a file-level assertion passed even with the bug
   reintroduced — confirmed by reintroducing it.
 
-- **`doc/javascript_toolkits.md` predates the zola migration and its inventory is
-  wrong.** Five of the seven standalone pages it tabulates no longer exist, the paths are
-  all `blog/`-prefixed from the MkDocs layout, and it lists "MkDocs Material theme" as the
-  styling for blog posts. Flagged with a banner at the top of the file rather than left to
-  mislead, but the file itself needs rewriting against the current `static/` and
-  `templates/`. The Tailwind and library notes in it are still broadly accurate — it is
-  the file list that rotted.
+- ~~**`doc/javascript_toolkits.md` predates the zola migration and its inventory is
+  wrong.** — DONE 2026-08-19.~~ Rewritten against the working tree, and the stale-banner
+  removed with it.
+
+  More was wrong than the file list. Its central claim — Tailwind as "the sole CSS
+  framework for all custom standalone pages" — is now false: **only `content/media/`
+  loads Tailwind.** Three sections (slides, syllabi, animations) use Material Web 2,
+  which the old file never mentioned at all. chess.js and cm-chessboard are **vendored
+  under `static/vendor/`**, not CDN as claimed. js-yaml is gone (dropped for
+  performance — ~399 ms to parse the 6.5 MB YouTube file). `static/chess.html` is now
+  only a redirect stub. And "SRI hashes where available" held for exactly one dependency,
+  FullCalendar.
+
+  The rewrite also records that `search_index.en.js` is generated at 4.1 MB and nothing
+  loads it, which is a live decision rather than documentation.
 
 - ~~**No link checker for the profile URLs.** — DONE.~~
   `scripts/check_profile_links.py` requests all 30 URLs from
