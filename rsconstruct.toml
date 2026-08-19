@@ -1,23 +1,13 @@
 [dependencies]
-# libxml2-utils provides xmllint. The aspell packages are NOT listed here: the
-# presence check in `tools install-deps` misfires on packages that ship no
-# binary and silently skipped aspell-en, so .github/workflows/build.yml installs
-# the dictionaries with apt directly.
+# libxml2-utils provides xmllint; the aspell packages provide the spellcheck
+# processors' binary and language data (/usr/lib/aspell/*.dat).
 #
-# Retested 2026-08-19 by listing all three here and deleting the workflow step
-# (run 32261194301). It still fails, and the log shows exactly why:
-#
-#   Already installed (skipping):
-#     [system] aspell
-#     [system] aspell-en        <- false; the runner had neither
-#   [apt] libxml2-utils, aspell-he
-#
-# aspell then arrived only as a dependency of aspell-he, so English alone
-# broke: "/usr/lib/aspell/en.dat is missing". The cause is in rsconstruct --
-# dpkg-query exits 0 for a package it merely knows about ("unknown ok
-# not-installed") and the presence check reads only that exit code. Until that
-# is fixed upstream, this list cannot hold the aspell packages.
-system = ["libxml2-utils"]
+# The aspell packages need rsconstruct >= 0.9.56. Older install-deps read only
+# dpkg-query's exit code, which is 0 for a package dpkg merely knows about
+# ("unknown ok not-installed"), so aspell-en was reported satisfied on a runner
+# that did not have it and apt was never asked (run 32261194301). 0.9.56
+# checks the status field itself.
+system = ["libxml2-utils", "aspell", "aspell-en", "aspell-he"]
 pip = [
   # No mkdocs packages: the site is built by zola, a single static binary
   # installed in the workflow. What remains is only what the linters and tests
