@@ -22,13 +22,11 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
-
 from pathlib import Path
 
 import image_picker
 import yaml
 from bs4 import BeautifulSoup
-
 from image_standard import normalise
 
 # Resolved from this file rather than the cwd, so the script works from

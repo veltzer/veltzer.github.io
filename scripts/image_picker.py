@@ -8,15 +8,13 @@ import json
 import os
 import re
 import shutil
-
 import tkinter as tk
 import urllib.error
 import urllib.parse
 import urllib.request
 
-from PIL import Image, ImageTk
-
 from image_standard import normalise
+from PIL import Image, ImageTk
 
 # Persistent rather than /tmp: downloaded search results survive a reboot, so
 # re-running a fetch script does not re-download candidates it already has.

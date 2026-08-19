@@ -12,7 +12,6 @@ import urllib.error
 import urllib.request
 
 import yaml
-
 from image_standard import normalise
 
 TMDB_FIND_URL = "https://api.themoviedb.org/3/find/tt{imdb_id}?external_source=imdb_id"
