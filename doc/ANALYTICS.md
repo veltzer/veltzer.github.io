@@ -128,8 +128,8 @@ for the Calendar key.
 
 The two goals are separable, and it is worth deciding which one is actually wanted:
 
-* **To know the traffic** — GoatCounter (or GA4). Three lines of config, covers all 80
-  blog posts and the app pages, not just the two media pages the old counter touched.
+* **To know the traffic** — GoatCounter (or GA4). Three lines of config, covers every
+  blog post and the app pages, not just the two media pages the old counter touched.
   GoatCounter is preferable here specifically because it sets no cookies and therefore
   needs no GDPR consent banner.
 * **To show a number on the page** — a badge `<img>` is the only no-signup option that

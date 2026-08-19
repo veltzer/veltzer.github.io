@@ -90,11 +90,11 @@ Free tier, all without an inactivity pause:
 - KV: 1 GB, 100k reads/day, but only **1,000 writes/day**
 - R2 (object storage): 10 GB-month, 1M class-A ops/month
 
-For per-page counters, D1 is the right primitive, not KV: at ~80 posts the
-1,000 writes/day KV ceiling is a real constraint, while D1's 100k writes/day is
-not. A Worker owns the credentials server-side and sets its own CORS headers,
-which structurally avoids the problem that made counterapi unusable -- the
-browser never sends an `Authorization` header at all.
+For per-page counters, D1 is the right primitive, not KV: at ~165 posts per
+language the 1,000 writes/day KV ceiling is a real constraint, while D1's
+100k writes/day is not. A Worker owns the credentials server-side and sets its
+own CORS headers, which structurally avoids the problem that made counterapi
+unusable -- the browser never sends an `Authorization` header at all.
 
 A Worker would also have reached the "each page" half of the old counter goal,
 which counterapi's 5-counter free tier blocked. That goal has since been

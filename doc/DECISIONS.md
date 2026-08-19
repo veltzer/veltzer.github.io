@@ -155,20 +155,21 @@ That asymmetry is deliberate.
 Zola derives a post's URL from its filename, and **the filename is also what
 pairs a post with its translation**: `foo.md` and `foo.he.md` are one post in
 two languages precisely because they share a base name. `page.translations` --
-which renders the language switcher on all 160 pages -- is built from that
-pairing.
+which renders the language switcher on all 326 post pages (163 per language) --
+is built from that pairing.
 
 Giving Hebrew posts Hebrew URLs therefore means one of:
 
 - renaming the Hebrew files, which severs the pairing and kills the language
-  switcher on all 80 posts; or
+  switcher on every post; or
 - adding an explicit `slug = "..."` to each Hebrew post's front matter, which
-  preserves the pairing but adds 80 hand-maintained keys that must not drift.
+  preserves the pairing but adds one hand-maintained key per post that must not
+  drift.
 
 Neither buys much. Three further points settled it:
 
-1. The English URLs are already published. Changing them creates 80 dead URLs
-   unless redirects are left behind for each.
+1. The English URLs are already published. Changing them creates a dead URL
+   per post unless redirects are left behind for each.
 2. Post slugs are long multi-word phrases. Percent-encoded Hebrew turns
    `/he/blog/bayes-theorem-liars/` into a ~200-character URL that is unpleasant
    to share, type or paste into a terminal.
