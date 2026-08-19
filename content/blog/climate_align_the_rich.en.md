@@ -3,7 +3,7 @@ title = "A Pre-Commitment to Expropriate the Rich If the Climate Breaks"
 date = 2025-06-18
 
 [taxonomies]
-tags = ["politics", "economics", "ethics"]
+tags = ["politics", "economics", "ethics", "direct-democracy"]
 +++
 
 Most climate proposals aim at emissions. This one aims at something upstream: the fact that the people with the most influence over emissions are the people least exposed to the consequences.

@@ -3,7 +3,7 @@ title = "Representative Government Forces Every Debate to the Wrong Altitude"
 date = 2015-11-08
 
 [taxonomies]
-tags = ["politics", "opinion"]
+tags = ["politics", "opinion", "direct-democracy"]
 +++
 
 Here is a complaint about representative democracy that has nothing to do with corruption, money, or the quality of the people we elect. It would apply just as forcefully to a system staffed entirely by honest and intelligent public servants. The problem is structural: **we elect people rather than decide questions, and we do it every few years.** Everything else follows from that.

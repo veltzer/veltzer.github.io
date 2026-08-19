@@ -3,7 +3,7 @@ title = "The Structural Advantages of Being a Known Political Liar"
 date = 2014-03-22
 
 [taxonomies]
-tags = ["politics", "opinion"]
+tags = ["politics", "opinion", "direct-democracy"]
 +++
 
 I have written before about why a known liar making a claim should *lower* your confidence in it. That is the epistemics. This post is about something else: why, given how our political system is built, being widely known as a liar is an *advantage* to a politician rather than a cost.

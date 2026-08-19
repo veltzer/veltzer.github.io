@@ -3,7 +3,7 @@ title = "Freedom as a Conserved Quantity"
 date = 2020-07-19
 
 [taxonomies]
-tags = ["politics", "ethics", "philosophy"]
+tags = ["politics", "ethics", "philosophy", "direct-democracy"]
 +++
 
 People have always wanted freedom, and the word covers several different things — economic freedom, political freedom, personal latitude. These are usually discussed as though they were separate goods that a society might supply in any combination. They are not separate, and the link between them cannot be severed.

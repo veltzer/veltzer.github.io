@@ -3,7 +3,7 @@ title = "Buchanan, Olson, and the Economic Case for Direct Democracy"
 date = 2013-04-14
 
 [taxonomies]
-tags = ["politics", "economics", "opinion"]
+tags = ["politics", "economics", "opinion", "direct-democracy"]
 +++
 
 Two economists working on public choice give us, between them, a fairly complete diagnosis of why representative government produces the outcomes it does. Neither set out to argue for direct democracy. Both arguments point there anyway.

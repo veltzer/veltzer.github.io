@@ -3,7 +3,7 @@ title = "Why Truth-Finding Rejects Democracy but Politics Requires It"
 date = 2024-09-03
 
 [taxonomies]
-tags = ["epistemology", "politics", "science"]
+tags = ["epistemology", "politics", "science", "direct-democracy"]
 +++
 
 Steven Weinberg records a complaint that sociologists of science make against physicists: that scientists fight for their preferred theories rather than negotiating a settlement, and that this is somehow improper.

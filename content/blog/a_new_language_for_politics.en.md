@@ -3,7 +3,7 @@ title = "Political Problems May Need a Language We Have Not Built Yet"
 date = 2011-09-14
 
 [taxonomies]
-tags = ["politics", "epistemology", "philosophy"]
+tags = ["politics", "epistemology", "philosophy", "direct-democracy"]
 +++
 
 Here is a question I have not seen asked seriously: **why do we assume political problems must be discussed in the language ordinary people already use?**

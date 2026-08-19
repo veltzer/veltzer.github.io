@@ -3,7 +3,7 @@ title = "Design the Process, Don't Write the Law"
 date = 2012-06-11
 
 [taxonomies]
-tags = ["politics", "opinion"]
+tags = ["politics", "opinion", "direct-democracy"]
 +++
 
 There is a permanent tension in political design between writing a law and building a process that produces laws. Almost all of our attention goes to the first. I think it belongs on the second, and the reason is that laws have a property we consistently underrate: they are static, and the world is not.

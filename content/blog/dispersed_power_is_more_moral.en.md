@@ -3,7 +3,7 @@ title = "Dispersed Power Is More Moral"
 date = 2024-02-13
 
 [taxonomies]
-tags = ["politics", "ethics", "opinion"]
+tags = ["politics", "ethics", "opinion", "direct-democracy"]
 +++
 
 "Morality" is a word we stretch across too many contexts, so let me make a narrow claim and defend only that: **direct democracy would produce more moral outcomes than representative government — not because its participants are better people, but because of the shape of the system.**

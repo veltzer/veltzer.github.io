@@ -3,7 +3,7 @@ title = "The Attribution Error Is What Keeps the Political System Unquestioned"
 date = 2022-09-11
 
 [taxonomies]
-tags = ["politics", "psychology", "epistemology"]
+tags = ["politics", "psychology", "epistemology", "direct-democracy"]
 +++
 
 Social psychology has a name for one of our most reliable mistakes. The *fundamental attribution error* is our tendency to explain what people do by what they are like, rather than by the situation they are standing in. Its close relative, *personality attribution*, is the specific form: we reach for someone's character, knowledge, traits, or temperament, and almost never for the circumstances constraining them.

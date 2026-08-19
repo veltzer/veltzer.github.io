@@ -3,7 +3,7 @@ title = "Biology Proves Hierarchy Is Optional"
 date = 2023-05-26
 
 [taxonomies]
-tags = ["politics", "science", "opinion"]
+tags = ["politics", "science", "opinion", "direct-democracy"]
 +++
 
 When you argue that human societies could be organised with less hierarchy, the reply is usually some version of: *hierarchy is how coordination works at scale.* Above a certain number of participants, someone has to be in charge, or nothing gets decided and nothing gets built. Every human society has had hierarchies; that near-universality is treated as evidence of necessity.

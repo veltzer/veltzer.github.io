@@ -3,7 +3,7 @@ title = "Representative Democracy Cannot Bind Its Future Self"
 date = 2026-01-22
 
 [taxonomies]
-tags = ["politics", "history", "opinion"]
+tags = ["politics", "history", "opinion", "direct-democracy"]
 +++
 
 In a debate I watched some time ago, the streamer Destiny made a point in passing that I have not been able to stop thinking about: the United States has broken its agreements with Iran several times, and this teaches other states that American commitments are unreliable.

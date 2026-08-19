@@ -3,7 +3,7 @@ title = "The System Asks What Wins, Never What Is Right"
 date = 2016-05-30
 
 [taxonomies]
-tags = ["politics", "opinion", "ethics"]
+tags = ["politics", "opinion", "ethics", "direct-democracy"]
 +++
 
 I was watching a political panel when a pundit was asked whether any position was too far left. She answered immediately and fluently — by naming the positions that would cost a candidate the election.

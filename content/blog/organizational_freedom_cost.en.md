@@ -3,7 +3,7 @@ title = "The Higher You Climb, the Less Free You Are"
 date = 2018-02-25
 
 [taxonomies]
-tags = ["politics", "opinion", "ethics"]
+tags = ["politics", "opinion", "ethics", "direct-democracy"]
 +++
 
 We have an intuition about organisations that runs roughly like this: power accumulates upward, so the people at the top are the free ones and the people at the bottom are constrained. Rank buys latitude.

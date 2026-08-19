@@ -3,7 +3,7 @@ title = "The Business Cycle Has a Political Factor Economists Leave Out"
 date = 2019-01-17
 
 [taxonomies]
-tags = ["economics", "politics", "finance"]
+tags = ["economics", "politics", "finance", "direct-democracy"]
 +++
 
 Explanations of the business cycle are numerous and mutually incompatible. Productivity fluctuations, monetary policy errors, credit expansion, technological shocks, animal spirits, changing markets — each school has its mechanism, and the data are compatible with several of them at once.

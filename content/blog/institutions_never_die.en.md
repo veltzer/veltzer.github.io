@@ -3,7 +3,7 @@ title = "Institutions Almost Never Die, and That Fact Is Evidence"
 date = 2021-03-04
 
 [taxonomies]
-tags = ["politics", "history", "opinion"]
+tags = ["politics", "history", "opinion", "direct-democracy"]
 +++
 
 Here is an observation that is easy to make and hard to absorb: **institutions almost never cease to exist.**

@@ -3,7 +3,7 @@ title = "The Two-Party System Corrupts Institutions, Not Just Voters"
 date = 2017-08-09
 
 [taxonomies]
-tags = ["politics", "epistemology", "opinion"]
+tags = ["politics", "epistemology", "opinion", "direct-democracy"]
 +++
 
 That a left/right binary distorts individual thinking is a familiar complaint. People adopt a side, then adopt its full package of positions, then defend positions they never examined because their side holds them. This is well documented and widely lamented.

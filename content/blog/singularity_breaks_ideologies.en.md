@@ -3,7 +3,7 @@ title = "The Singularity Breaks Ideologies"
 date = 2025-11-07
 
 [taxonomies]
-tags = ["politics", "science", "opinion"]
+tags = ["politics", "science", "opinion", "direct-democracy"]
 +++
 
 An ideology is a fixed bundle of positions that travel together. Knowing where someone stands on taxation lets you predict, with reasonable accuracy, where they stand on immigration, on defence, on drug policy — questions that have no logical connection to taxation whatsoever.
