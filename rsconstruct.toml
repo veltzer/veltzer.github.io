@@ -29,10 +29,15 @@ pip = [
   # -- which is the point of running it.
   "ruff",
 ]
-# No npm list here. rsconstruct's npm installs are global ("npm install -g"),
-# and a global postcss-scss is invisible to node_modules/.bin/stylelint, which
-# resolves customSyntax against the project tree. Both are devDependencies in
-# package.json and the workflow installs them with "npm ci" instead.
+# stylelint needs postcss-scss to parse .scss (customSyntax in
+# .stylelintrc.json). Both are listed here so `tools install-deps` installs
+# them, which puts them in the same global tree -- and that is exactly what
+# makes the resolution work: stylelint resolves customSyntax relative to its
+# own install tree, so a global stylelint finds a global postcss-scss as a
+# sibling. Verified by removing node_modules entirely and building: stylelint
+# processed all three stylesheets and still caught an injected
+# color-no-invalid-hex.
+npm = ["stylelint", "postcss-scss"]
 # No system = ["python3-tk"] here: it does not help. CI uses actions/setup-python,
 # which supplies its own interpreter that cannot see the distro's python3-tk, so
 # the package installs (rsconstruct even reports it satisfied) while `import
@@ -141,14 +146,16 @@ src_exclude_dirs = ["vendor"]
 
 # Correctness rules only (see .stylelintrc.json) -- no formatting opinions, since
 # nothing has ever enforced a style here and inventing one would mean rewriting
-# all three sheets. stylelint and postcss-scss are devDependencies rather than
-# global installs: a globally-installed stylelint resolves customSyntax against
-# its own tree and cannot find postcss-scss.
-# command points at node_modules/.bin: the global stylelint resolves
-# customSyntax relative to its own install tree and cannot see postcss-scss
-# here, so it must be the locally installed one.
+# all three sheets.
+#
+# command is the plain global binary, not node_modules/.bin/stylelint. Both
+# stylelint and postcss-scss come from [dependencies] npm above, so they land
+# in the same global tree and customSyntax resolves. This used to point into
+# node_modules on the belief that a global stylelint could not find
+# postcss-scss; that is only true when postcss-scss is NOT also installed
+# globally. With both listed, no node_modules is needed at all.
 [processor.stylelint]
-command = "node_modules/.bin/stylelint"
+command = "stylelint"
 src_dirs = ["sass", "static"]
 src_exclude_dirs = ["vendor"]
 dep_inputs = [".stylelintrc.json"]

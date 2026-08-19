@@ -52,9 +52,14 @@ jobs:
         # cache silently did nothing, because there was no resolved version to
         # key it on.
         cache-dependency-path: rsconstruct.toml
+    # node itself, for the eslint/htmlhint/stylelint processors. rsconstruct
+    # installs those three with "npm install -g" from [dependencies] npm, so
+    # there is no project-local install and nothing here runs "npm ci".
+    #
+    # No "cache: npm": that caches ~/.npm keyed on a lockfile for a project
+    # install this job no longer performs, so it would only ever save an empty
+    # cache and warn about the missing lockfile.
     - uses: actions/setup-node@v6
-      with:
-        cache: npm
     - uses: actions/cache@v5
       with:
         path: .rsconstruct
@@ -79,14 +84,6 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
         ZOLA_VERSION: v0.23.3
-    # rsconstruct installs global npm tools (eslint, htmlhint), but stylelint is
-    # a devDependency here rather than a global: a globally-installed stylelint
-    # resolves customSyntax against its own tree and cannot find postcss-scss,
-    # so rsconstruct.toml invokes node_modules/.bin/stylelint. That path only
-    # exists once the project's own packages are installed -- setup-node's
-    # "cache: npm" primes the download cache but never runs an install.
-    - name: install npm packages
-      run: npm ci
     # The aspell dictionaries, installed here rather than left to
     # `rsconstruct tools install-deps`. That command checks whether each system
     # package is already present before asking apt, and the check misfires on
