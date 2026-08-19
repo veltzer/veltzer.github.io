@@ -84,47 +84,6 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
         ZOLA_VERSION: v0.23.3
-    # The aspell dictionaries, installed here rather than left to
-    # `rsconstruct tools install-deps`. That command checks whether each system
-    # package is already present before asking apt, and the check misfires on
-    # packages that ship no binary of their own: it reported "aspell-en" as
-    # satisfied on a runner that had neither aspell nor aspell-en, so apt was
-    # never asked for it. `aspell create master` then failed with a bare
-    # non-zero exit, because the language data (/usr/lib/aspell/en.dat) lives in
-    # aspell-en. Hebrew survived only because aspell-he does get installed and
-    # drags aspell in as a dependency.
-    #
-    # apt-get update first: the runner image ships stale package lists, and the
-    # only update in this job happens later, inside install-deps.
-    #
-    # The timeouts and retries are what make this step reliable. The runner's
-    # /etc/apt/apt-mirrors.txt lists azure.archive.ubuntu.com first, and that
-    # host goes unreachable intermittently -- on 2026-08-19 a run 15 minutes
-    # after a green one got nothing but "Ign:" from it. apt's own defaults turn
-    # that into a hang rather than an error: Acquire::Retries is 0, so there is
-    # no second attempt, and the http timeout is 120s per connection, which the
-    # mirrorlist then multiplies across every suite and component. One run sat
-    # for over half an hour before being cancelled by hand; another blew a
-    # 5-minute step timeout with 4.5 of those minutes spent silent.
-    #
-    # Timeout=15 caps how long a dead mirror can hold each connection, and
-    # Retries=3 lets apt fall through to archive.ubuntu.com, which stayed
-    # healthy throughout. timeout-minutes stays as the outer backstop for
-    # anything these do not cover.
-    #
-    # This does not weaken the check: aspell is still required and the build
-    # still fails without it. It only stops a flaky mirror from being reported
-    # as a broken build.
-    - name: install aspell dictionaries
-      timeout-minutes: 5
-      env:
-        APT_OPTS: >-
-          -o Acquire::Retries=3
-          -o Acquire::http::Timeout=15
-          -o Acquire::https::Timeout=15
-      run: |
-        sudo apt-get $APT_OPTS update
-        sudo apt-get $APT_OPTS install -y aspell aspell-en aspell-he
     - name: install
       run: |
         rsconstruct tools install-deps

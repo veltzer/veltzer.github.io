@@ -1,9 +1,15 @@
 [dependencies]
-# libxml2-utils provides xmllint. The aspell packages are NOT listed here: the
-# presence check in `tools install-deps` misfires on packages that ship no
-# binary and silently skipped aspell-en, so .github/workflows/build.yml installs
-# the dictionaries with apt directly.
-system = ["libxml2-utils"]
+# libxml2-utils provides xmllint; the aspell packages provide the spellcheck
+# processors' binary and their language data (/usr/lib/aspell/*.dat).
+#
+# These were previously installed by an apt step in the workflow, on the
+# grounds that `tools install-deps` had reported aspell-en as satisfied on a
+# runner that did not have it -- dpkg-query exits 0 for a package it merely
+# knows about, and the presence check reads only that exit code. Whether a
+# fresh GitHub runner actually puts aspell-en in that state was never
+# established, so this is the test: if the skip is real, the spellcheck
+# processors fail here on missing language data.
+system = ["libxml2-utils", "aspell", "aspell-en", "aspell-he"]
 pip = [
   # No mkdocs packages: the site is built by zola, a single static binary
   # installed in the workflow. What remains is only what the linters and tests
