@@ -120,7 +120,6 @@ class="w-full px-5 py-3 text-lg border border-gray-300 rounded-full focus:outlin
 </div>
 
 <footer class="text-center text-gray-500 mt-12 py-4 border-t border-gray-200">
-<p>Page Visits: <span id="visitor-count">Loading...</span></p>
 </footer>
 </div>
 

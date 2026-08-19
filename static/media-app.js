@@ -733,55 +733,6 @@
             applyFilterSortRender();
         });
 
-        // --- Visitor Counter ---
-        // counterapi v2 against a PUBLIC workspace, so no Authorization header
-        // and therefore no credentials in this file at all.
-        //
-        // That is deliberate rather than lax: an Authorization header makes the
-        // request non-simple, so the browser sends a CORS preflight first, and
-        // counterapi's preflight only allows Origin/Content-Length/Content-Type.
-        // Any authenticated call from a browser fails with "Failed to fetch"
-        // even with a valid token -- it works from curl only because curl sends
-        // no preflight. A public workspace sidesteps that entirely.
-        //
-        // The API is also eventually consistent: the /up response echoes a stale
-        // up_count, so the number shown comes from a follow-up read.
-        const COUNTER_WORKSPACE = 'veltzer-org';
-        const COUNTER_NAME = 'veltzerorg';
-
-        function updateVisitorCount() {
-            const countElement = document.getElementById('visitor-count');
-            if (!countElement) return;
-
-            const hideLine = function() {
-                const line = countElement.closest('p') || countElement;
-                line.style.display = 'none';
-            };
-
-            const base = 'https://api.counterapi.dev/v2/' +
-                encodeURIComponent(COUNTER_WORKSPACE) + '/' +
-                encodeURIComponent(COUNTER_NAME);
-
-            fetch(base + '/up')
-            .then(function(response) {
-                if (!response.ok) throw new Error('Counter API error: ' + response.status);
-                return fetch(base);
-            })
-            .then(function(response) {
-                if (!response.ok) throw new Error('Counter API error: ' + response.status);
-                return response.json();
-            })
-            .then(function(payload) {
-                const count = payload && payload.data && payload.data.up_count;
-                if (typeof count !== 'number') throw new Error('No up_count in response');
-                countElement.textContent = count.toLocaleString();
-            })
-            .catch(function(error) {
-                console.error('Error fetching visitor count:', error);
-                hideLine();
-            });
-        }
-
         // --- Initial Load ---
         loadAllPlugins().then(loadData).catch(function(error) {
             // Without this, a single failing plugin script rejects the Promise.all
@@ -790,6 +741,5 @@
             console.error('Error loading media plugins:', error);
             statusMessage.innerHTML = '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"><strong>Loading Failed:</strong> ' + escapeHtml(error.message) + '</div>';
         });
-        updateVisitorCount();
     });
 }());

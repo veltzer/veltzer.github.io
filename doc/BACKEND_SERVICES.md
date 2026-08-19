@@ -3,9 +3,10 @@
 Notes on adding dynamic features -- forums, storage, counters, uploads -- to a
 site that is otherwise static files on GitHub Pages.
 
-Written because counterapi turned out to be cumbersome: see the "Visible
-On-Page Visitor Counter" section of `doc/ANALYTICS.md` and the counter entry in
-`doc/problems.txt` for what went wrong there. The short version is that its
+Written because counterapi turned out to be cumbersome. That counter has since
+been removed from the site altogether (see the DROPPED entry in
+`doc/problems.txt`), so what follows is about dynamic features in general
+rather than about restoring it. The short version is that its
 CORS preflight rejects the `Authorization` header, so authenticated calls fail
 from a browser even with a valid token, which forced a public workspace; and
 the free tier caps at 5 public counters, which put per-page counting out of
@@ -95,8 +96,10 @@ not. A Worker owns the credentials server-side and sets its own CORS headers,
 which structurally avoids the problem that made counterapi unusable -- the
 browser never sends an `Authorization` header at all.
 
-This also finally reaches the "each page" half of the counter goal recorded in
-`doc/problems.txt`, which the counterapi free tier's 5-counter limit blocked.
+A Worker would also have reached the "each page" half of the old counter goal,
+which counterapi's 5-counter free tier blocked. That goal has since been
+dropped rather than solved -- noted here only so the capability is not
+mistaken for an outstanding task.
 
 ## Alternatives worth knowing
 

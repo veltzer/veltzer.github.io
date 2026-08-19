@@ -48,53 +48,31 @@ DONE: maybe use a better tool than mkdocs?
     to v0.23.3.
 
 
-PARTLY DONE: Find a way to count number of visitors on each page of the
+DROPPED: Find a way to count number of visitors on each page of the
 blog/site and display them.
 
-    Live on the media pages via counterapi v2 -- "Page Visits: N" in the
-    footer, backed by workspace `veltzer-org`, counter `veltzerorg`.
+    Removed entirely on 2026-08-19, code and all. This is not "still open" and
+    should not be re-attempted without a new reason.
 
-    Two things worth knowing:
+    What was there: a single site-wide counterapi v2 counter, incremented by
+    the media pages and rendered as "Page Visits: N". It is gone --
+    updateVisitorCount(), the COUNTER_* constants and the markup in
+    content/media/_index.md were all deleted.
 
-    1. The workspace is PUBLIC, deliberately, and there is no token in the
-       shipped JavaScript. This is not laziness -- it is the only thing that
-       works. An Authorization header makes the request non-simple, so the
-       browser sends a CORS preflight first, and counterapi's preflight only
-       allows Origin/Content-Length/Content-Type. Authenticated calls fail from
-       a browser with "Failed to fetch" EVEN WITH A VALID TOKEN, while working
-       fine from curl, which sends no preflight. Do not "fix" this by adding
-       auth back.
+    Why dropped rather than finished:
 
-    2. The API is eventually consistent and its reported total is unreliable.
-       The /up response echoes a stale up_count, so the displayed number comes
-       from a follow-up read. During testing the value read 7, then 8, then 7
-       again, with updated_at frozen at the creation timestamp. Treat it as a
-       rough signal, not an exact count.
+      - The per-page half was never reachable. It needs one counter per URL,
+        and counterapi's free tier caps at 5.
+      - The number it did show was not trustworthy. The API is eventually
+        consistent and its own updated_at stayed frozen at the counter's
+        creation timestamp while the count moved; during testing it read 7,
+        then 8, then 7 again.
+      - A visible on-page count is a different thing from analytics, and the
+        analytics need is already answered: doc/ANALYTICS.md recommends
+        GoatCounter, which gives per-page figures in a dashboard without a
+        cookie banner. Nothing on the page has to display a number for that
+        to work.
 
-    STILL OPEN -- the "each page" half. What exists is a single site-wide
-    counter incremented by the media pages, not a per-page count across the 91
-    blog posts. Per-page counting needs one counter per URL, and the counterapi
-    free tier caps at 5 public counters, so it is not reachable on this plan.
-
-    Options if per-page counting matters: pay for a higher counterapi tier, or
-    use site-wide analytics instead (doc/ANALYTICS.md recommends GoatCounter --
-    free, no cookie banner, per-page figures in a dashboard, but no number
-    displayed on the page itself).
-
-    Re-checked 2026-08-18. Everything above still holds:
-
-      - The counter is live. GET https://api.counterapi.dev/v2/veltzer-org/
-        veltzerorg returns up_count 21, and confirms the warning in point 2 --
-        updated_at is still frozen at the 2026-08-16 creation timestamp while
-        the count itself has moved.
-      - It renders on both media pages: /en/media/ and the standalone
-        /media_app.html, verified against the live site. The app sections moved
-        from /chess/ to /en/chess/ during the .en.md migration, which did not
-        disturb this.
-      - doc/ANALYTICS.md still recommends GoatCounter, so that cross-reference
-        is good.
-      - The post count was stale and is corrected above: 80 -> 91.
-
-    Not re-verified: the "5 public counters" free-tier cap. The workspace
-    listing endpoint 404s, so it cannot be checked from outside without logging
-    in. Left as written rather than restated as fact.
+    If a visible counter is ever wanted again, doc/ANALYTICS.md still records
+    which services can and cannot do it from a static site, and why most fail
+    the CORS preflight.

@@ -39,11 +39,8 @@ seven `static/plugin-*.js` files and the built page.
   every plugin marks exactly one field `filterable: false` (the title, which the search
   box already covers).
 
-- ~~**Improve loading/error state for the visits counter.** — DONE.~~
-  `media_app.html` ships the placeholder `Page Visits: Loading...`, and
-  `updateVisitorCount` hides the whole line on any failure rather than leaving a broken
-  or zero value on screen. See the Visitor Counter section for why the API's number is
-  only a rough signal.
+- ~~**Improve loading/error state for the visits counter.** — MOOT.~~
+  The counter was removed entirely on 2026-08-19; see the Visitor Counter section.
 
 - **If the content is personal data, add a short note on what is public vs private.**
   Still open. The media page has no descriptive intro at all — it opens straight into the
@@ -345,37 +342,21 @@ seven `static/plugin-*.js` files and the built page.
 
 ## Visitor Counter
 
-- ~~**Visitor counter was permanently broken (counterapi.dev v1 retired).** — PARTIALLY DONE.~~
-  `media-app.js` called `https://api.counterapi.dev/v1/...`, which the service has
-  retired. It returns `410 {"deprecated":true,"message":"...migrate to v2"}` for every
-  request, so both media pages showed visitors a permanent `Page Visits: N/A` and logged
-  an error on every page load.
+- ~~**Visitor counter (counterapi).** — REMOVED 2026-08-19. Not a task.~~
 
-  Fixed the user-visible half: the counter now hides its whole line instead of displaying
-  a broken "N/A", and no longer errors on load (verified in a browser — zero console
-  errors). The fetch/render wiring is intact behind two constants, `COUNTER_ENDPOINT`
-  (currently `null`) and `COUNTER_COUNT_FIELD`.
+  The counter is gone: `updateVisitorCount()`, the `COUNTER_*` constants and the
+  `Page Visits:` markup in `content/media/_index.md` were all deleted. Nothing on the
+  site counts or displays visits any more.
 
-  **Still needs a decision — this is why it is not fully DONE.** Restoring an actual count
-  requires an account nobody can create on your behalf:
-  - **counterapi.dev v2** — needs a workspace plus an API key sent as
-    `Authorization: Bearer ...`. On a public static site that token is readable by anyone,
-    so it has to be one that is safe to expose (like the Calendar browser key, see
-    `doc/DECISIONS.md`). Set `COUNTER_ENDPOINT` once the workspace exists.
-  - **A different counter service** with a no-auth endpoint — drop its URL into
-    `COUNTER_ENDPOINT` and the field name into `COUNTER_COUNT_FIELD`. Nothing else changes.
-  - **Site-wide analytics instead of a visible per-page number** — see `doc/ANALYTICS.md`,
-    which already recommends GoatCounter. This would not restore the on-page counter.
-    Note Google cannot restore it either: GA4 can *record* visits client-side, but *reading*
-    the count back needs the GA4 Data API behind an OAuth/service-account credential that is
-    not safe to publish. Details and tested results are in the "Visible On-Page Visitor
-    Counter" section of `doc/ANALYTICS.md`.
-  - **A badge `<img>`** — the only no-signup option verified working from veltzer.org
-    (`dwyl/hits`, `visitor-badge.laobi.icu`). Not a `fetch()`, so it sidesteps the CORS wall
-    that rules out most free JSON counters; the tradeoff is a fixed-style image.
-  - **Drop the feature** — remove the `<p>Page Visits: ...</p>` line from `media.md` and
-    `media_app.html` and the `updateVisitorCount` function. Note `doc/problems.txt` lists
-    counting and displaying visitors as a goal, so this contradicts a stated want.
+  It was dropped rather than finished because the per-page half was never reachable on
+  counterapi's free tier (5 counters), and because the number it did show could not be
+  trusted -- the API is eventually consistent, and during testing the count read 7, then
+  8, then 7 again with `updated_at` frozen at the creation timestamp.
+
+  Analytics is a separate need and is already answered: `doc/ANALYTICS.md` recommends
+  GoatCounter, which gives per-page figures in a dashboard with no cookie banner and
+  nothing rendered into the page. See the DROPPED entry in `doc/problems.txt` for the
+  full reasoning. **Do not re-open without a new reason.**
 
 ## Testing
 

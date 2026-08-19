@@ -59,12 +59,17 @@ GitHub provides a "Traffic" tab in the repository settings.
 
 ---
 
-## Visible On-Page Visitor Counter
+## Visible On-Page Visitor Counter (historical)
 
-**This is a different problem from the analytics options above, and the distinction is the
+**The site no longer has one.** The counter was removed on 2026-08-19 -- see the DROPPED
+entry in `doc/problems.txt`. This section is kept because the findings below were tested
+against real services from the real origin, and that research should not have to be
+redone if the question ever comes back.
+
+**It is a different problem from the analytics options above, and the distinction is the
 whole point.** Everything above is a *dashboard*: it records visits and shows them to you,
-the owner. The `Page Visits:` line in `media.md` / `media_app.html` needs the opposite —
-a number fetched back *into the page* and shown to the visitor.
+the owner. A `Page Visits:` line in a page needs the opposite — a number fetched back
+*into the page* and shown to the visitor.
 
 No analytics product does the second thing. Findings below were tested on 2026-08-15 from
 the real `https://veltzer.org` origin in a browser, not read off documentation.
