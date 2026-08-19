@@ -13,6 +13,8 @@ import urllib.request
 
 import yaml
 
+from image_standard import normalise
+
 TMDB_FIND_URL = "https://api.themoviedb.org/3/find/tt{imdb_id}?external_source=imdb_id"
 TMDB_IMAGE_URL = "https://image.tmdb.org/t/p/w300{poster_path}"
 OMDB_URL = "http://www.omdbapi.com/?i=tt{imdb_id}&apikey={api_key}"
@@ -97,8 +99,11 @@ def fetch_poster_omdb(imdb_id, api_key):
 
 
 def download_image(url, dest):
-    """Download an image from a URL."""
+    """Download an image from a URL, shrunk to the site standard."""
     urllib.request.urlretrieve(url, dest)
+    # TMDB serves posters far larger than the card needs.
+    # See scripts/image_standard.py.
+    normalise(dest)
 
 
 def fetch_posters(yaml_path, image_dir, prefix, tmdb_result_key, force=False):

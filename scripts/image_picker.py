@@ -8,12 +8,15 @@ import json
 import os
 import re
 import shutil
+
 import tkinter as tk
 import urllib.error
 import urllib.parse
 import urllib.request
 
 from PIL import Image, ImageTk
+
+from image_standard import normalise
 
 # Persistent rather than /tmp: downloaded search results survive a reboot, so
 # re-running a fetch script does not re-download candidates it already has.
@@ -215,5 +218,8 @@ def pick_image(title, info_lines, search_query, cache_key, dest_path):
         print("  No image selected.")
         return "skip"
     shutil.copy2(selected, dest_path)
+    # Search results are whatever size the source served -- normalise before
+    # the file lands in the repo. See scripts/image_standard.py.
+    normalise(dest_path)
     print(f"  Saved: {dest_path}")
     return "found"

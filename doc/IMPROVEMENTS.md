@@ -1,12 +1,11 @@
 # Suggested Improvements
 
 Struck-through entries are done; the note under each records what was actually
-changed and how it was verified. Four items are open:
+changed and how it was verified. Three items are open:
 
 1. A public/private note on the media page *(Media Collection UX)*
-2. WebP conversion for `static/images/` *(Media Collection UX -> Asset weight)*
-3. An aggregated cross-topic stats view *(Overall Stats Page)*
-4. Rewrite `doc/javascript_toolkits.md`, whose inventory is stale *(Infrastructure)*
+2. An aggregated cross-topic stats view *(Overall Stats Page)*
+3. Rewrite `doc/javascript_toolkits.md`, whose inventory is stale *(Infrastructure)*
 
 Everything else in this file is a record rather than a task. Keep it that way:
 when an item is finished, strike it through and say what was done, rather than
@@ -58,20 +57,35 @@ seven `static/plugin-*.js` files and the built page.
 
 ### Asset weight
 
-- **`static/images/` is 21 MB across 325 JPEGs, with no WebP alternatives.** Average 66 KB
-  per file. WebP would typically cut that substantially at equivalent quality.
+- ~~**`static/images/` is 21 MB across 325 JPEGs, with no WebP alternatives.** — CLOSED,
+  and the underlying weight problem fixed a different way.~~
 
-  Not render-blocking — `media-app.js` already sets `loading="lazy"`, so this is bandwidth
-  and cache pressure rather than a load-time regression. It is also not a quick win: the
-  media plugins reference image paths by extension in several places, so it needs either a
-  `<picture>` fallback or a conversion that keeps the `.jpg` names, plus a decision about
-  whether to convert in the fetch scripts or as a build step. Sized as a project, not a
-  one-liner.
+  **WebP was measured and declined.** Converting 25 of the actual files at quality 82
+  saved **28%**, not the "substantially" this entry assumed. Against that: `<picture>`
+  fallbacks across five plugins that build paths by string concatenation with `.jpg`
+  hardcoded (or `.jpg` filenames containing WebP data, which is a trap for whoever
+  touches it next); a permanent conversion step in every fetch script; ~16 MB added to
+  git history on top of the 22 MB already there; and `plugin-youtube.js` cannot benefit
+  at all, since it serves from `i.ytimg.com`. Not worth it for a directory that is
+  lazy-loaded and never fetched in bulk. **Do not re-open without new numbers.**
+
+  **What was actually wrong was dimensions, not format.** Cards render at
+  `w-full h-48 object-cover` — 192 CSS pixels tall — and the directory contained images
+  up to 3264x2448 (a 2.4 MB phone photo of a museum). Resizing to `800x384>`, which is
+  2x the rendered card, took **22 MB to 11 MB across 243 files** with no code changes at
+  all: same filenames, same extension, same `<img>` tags.
+
+  The standard now lives in `scripts/image_standard.py` and is enforced on save by all
+  three fetch paths (`image_picker.pick_image`, `fetch_audiocourse_images.download`,
+  `poster_utils.download_image`), so nothing oversized can arrive again.
+  `scripts/normalise_images.py` is the one-off pass for anything added by hand or by a
+  contributor without ImageMagick. `-strip` is part of the standard for privacy as much
+  as weight: museum images come from phone photos whose EXIF can carry GPS.
 
 ## Overall Stats Page
 
 - **Create an aggregated stats view across all seven topics.** Still open — the only
-  outstanding *feature* here, alongside the WebP conversion, which is infrastructure.
+  outstanding *feature* here.
 
   What exists: each of the seven plugins implements `renderStats`, so every topic has its
   own statistics panel (museums by city and year, and so on). There is no view that
