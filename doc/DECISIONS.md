@@ -155,7 +155,7 @@ That asymmetry is deliberate.
 Zola derives a post's URL from its filename, and **the filename is also what
 pairs a post with its translation**: `foo.md` and `foo.he.md` are one post in
 two languages precisely because they share a base name. `page.translations` --
-which renders the language switcher on all 326 post pages (163 per language) --
+which renders the language switcher on all 330 post pages (165 per language) --
 is built from that pairing.
 
 Giving Hebrew posts Hebrew URLs therefore means one of:

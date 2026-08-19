@@ -38,7 +38,7 @@ stat tiles are utility-class layouts that would have to be rewritten to move
 off it, and the CDN's JIT mode ships only the classes the page actually uses.
 
 The rest of the site does not need it, and adding it to `base.html` would put a
-render-blocking CDN request on all ~690 built pages to serve a handful of
+render-blocking CDN request on all ~630 built pages to serve a handful of
 classes.
 
 ### The site stylesheet
