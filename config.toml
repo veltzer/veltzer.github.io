@@ -74,7 +74,16 @@ built_dirty = "with uncommitted changes"
 [languages.en]
 title = "Mark Veltzer's personal site"
 generate_feeds = true
-build_search_index = true
+# Off, not because zola cannot index English -- it can, unlike Hebrew -- but
+# because nothing on the site ever loaded the result. It generated
+# search_index.en.js at 4.1 MB plus elasticlunr.min.js on every build, deployed
+# both, and no page script-tagged either. The only search here is the media
+# app's, which filters its own JSON client-side and does not use this at all.
+#
+# Flip to true and add a UI if blog search is ever wanted; the index is the
+# easy half. Both languages are now false, which at least makes them
+# consistent.
+build_search_index = false
 taxonomies = [
     { name = "tags", feed = true, paginate_by = 20 },
 ]
