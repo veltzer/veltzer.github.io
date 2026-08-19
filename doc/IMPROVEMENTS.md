@@ -82,6 +82,23 @@ seven `static/plugin-*.js` files and the built page.
   contributor without ImageMagick. `-strip` is part of the standard for privacy as much
   as weight: museum images come from phone photos whose EXIF can carry GPS.
 
+## Naming
+
+- ~~**Rename `templates/` to `zola.templates/` to say what the templates are.** —
+  NOT POSSIBLE. Tested 2026-08-19.~~
+
+  Zola hardcodes the directory name. Renaming it and running a build gives
+  `ERROR Either a 'templates/' folder or a theme is required`. There is no config
+  key and no CLI flag for it -- the only alternative Zola offers is packaging the
+  templates as a *theme*, which puts them at `themes/<name>/templates/`: still
+  `templates/`, just nested one level deeper, and a considerably larger change for
+  no gain in clarity.
+
+  The ambiguity is real -- `templates/` sits beside `content/`, `sass/` and
+  `static/` with nothing saying which generator consumes it -- but the fix has to
+  be documentation rather than a rename. `CLAUDE.md` already labels it
+  "Tera templates", and `doc/javascript_toolkits.md` records what each one is for.
+
 ## Overall Stats Page
 
 - **Create an aggregated stats view across all seven topics.** Still open — the only

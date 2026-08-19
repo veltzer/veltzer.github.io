@@ -99,7 +99,17 @@ jobs:
     #
     # apt-get update first: the runner image ships stale package lists, and the
     # only update in this job happens later, inside install-deps.
+    # timeout-minutes because apt does not fail fast. When a Debian mirror is
+    # unreachable it retries and waits rather than erroring, so this step has
+    # been observed sitting in_progress for over half an hour -- occupying a
+    # runner and telling nobody anything -- where the whole job normally takes
+    # about a minute. Three runs had to be cancelled by hand on 2026-08-19.
+    #
+    # This does not weaken the check: aspell is still required and the build
+    # still fails without it. It only converts a silent hang into a visible
+    # failure that can be re-run.
     - name: install aspell dictionaries
+      timeout-minutes: 5
       run: |
         sudo apt-get update
         sudo apt-get install -y aspell aspell-en aspell-he
