@@ -3,7 +3,7 @@ title = "Finding thread info on Solaris"
 date = 2010-06-11
 
 [taxonomies]
-tags = ["solaris", "perl", "sysadmin"]
+tags = ["sysadmin", "perl"]
 +++
 
 As part of a crusade to find bugs in a C++ program running on a Solaris system I needed to find out information about all the threads belonging to a certain process.

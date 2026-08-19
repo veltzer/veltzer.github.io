@@ -3,7 +3,7 @@ title = "Problems with Netflix web and Netflix webos clients"
 date = 2025-09-01
 
 [taxonomies]
-tags = ["streaming", "linux", "ux"]
+tags = ["ux", "linux"]
 +++
 
 I've had some issues with the Netflix service recently.

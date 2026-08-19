@@ -3,7 +3,7 @@ title = "Converting videos to xvid on Linux"
 date = 2010-06-11
 
 [taxonomies]
-tags = ["linux", "video", "multimedia"]
+tags = ["linux", "video"]
 +++
 
 I wanted to convert some video files on my Linux system to the xvid codec so that I could see them on my PS3. The solution I found was using the mencoder package.

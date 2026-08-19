@@ -3,7 +3,7 @@ title = "Why Known Liars Making a Claim Actually Reduces Its Probability: A Baye
 date = 2026-03-26
 
 [taxonomies]
-tags = ["probability", "statistics", "bayes"]
+tags = ["probability", "statistics"]
 +++
 
 ## The Intuition

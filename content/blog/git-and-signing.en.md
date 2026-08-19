@@ -3,7 +3,7 @@ title = "Git and signing"
 date = 2010-07-03
 
 [taxonomies]
-tags = ["git", "gpg", "security"]
+tags = ["git", "security"]
 +++
 
 I'm now using git heavily for configuration management and wanted to sign my objects. There were no complete guides out there that I found so here is the list of instructions that I finally arrived at:

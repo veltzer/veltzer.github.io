@@ -3,7 +3,7 @@ title = "Move from Google-Chrome to Firefox on Linux"
 date = 2025-09-01
 
 [taxonomies]
-tags = ["browser", "linux", "privacy"]
+tags = ["browser", "linux", "security"]
 +++
 
 ## The problems of Google-Chrome

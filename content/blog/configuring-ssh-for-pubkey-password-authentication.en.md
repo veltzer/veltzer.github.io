@@ -3,7 +3,7 @@ title = "Configuring ssh server for pubkey + password authentication"
 date = 2010-09-06
 
 [taxonomies]
-tags = ["ssh", "security", "linux"]
+tags = ["security", "linux"]
 +++
 
 In a struggle to secure my home computer I did battle with the ssh server once again to configure it "just the way I want it" (tm). I prefer pubkey + password since this ensures that if I lose the laptop/phone/whatever then the lucky finder will not find his/her way into my home computer.

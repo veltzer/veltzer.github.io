@@ -3,7 +3,7 @@ title = "Purging unneeded packages on a debian system"
 date = 2010-06-24
 
 [taxonomies]
-tags = ["linux", "debian", "package-management"]
+tags = ["linux", "debian"]
 +++
 
 If you want to remove all packages which are in the "rc" state (means that the package was already removed but only it's configuration remained) you can use the following command as administrator:

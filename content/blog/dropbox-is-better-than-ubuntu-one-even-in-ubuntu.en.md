@@ -3,7 +3,7 @@ title = "Dropbox is better than Ubuntu one even in Ubuntu"
 date = 2010-06-19
 
 [taxonomies]
-tags = ["linux", "cloud-storage", "ubuntu"]
+tags = ["linux", "self-hosting", "ubuntu"]
 +++
 
 I'm using both DropBox and Ubuntu one services in my desktop and laptop machines and I find dropbox much superior. Here are the reasons why:

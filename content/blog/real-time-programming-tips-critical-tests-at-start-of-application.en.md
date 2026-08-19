@@ -3,7 +3,7 @@ title = "Real time programming tips: running critical tests at application start
 date = 2010-09-04
 
 [taxonomies]
-tags = ["embedded", "real-time", "programming"]
+tags = ["embedded", "programming"]
 +++
 
 There is much accumulated wisdom in the embedded systems programming field as to how to correctly write a real time application. Examples of this wisdom could be found in the methodology of breaking up the application to a startup phase and a run phase, avoiding exiting the application, avoiding dynamic memory allocation and deallocation at runtime and more. There is also much accumulated wisdom in the programming field in general where a very important principle is ones control of ones software, as opposed to the other way around, and the notion of finding bugs and problems early whether that be in code writing, QA, deployment or beginning of execution.

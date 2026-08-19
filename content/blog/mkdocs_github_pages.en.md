@@ -3,7 +3,7 @@ title = "MkDocs with GitHub Pages: File Layout That Works"
 date = 2026-03-21
 
 [taxonomies]
-tags = ["mkdocs", "github-pages", "documentation"]
+tags = ["documentation"]
 +++
 
 If you use MkDocs to build a site hosted on GitHub Pages, and you also
