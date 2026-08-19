@@ -42,19 +42,7 @@ pip = [
 # processed all three stylesheets and still caught an injected
 # color-no-invalid-hex.
 npm = ["stylelint", "postcss-scss"]
-# No system = ["python3-tk"] here: it does not help. CI uses actions/setup-python,
-# which supplies its own interpreter that cannot see the distro's python3-tk, so
-# the package installs (rsconstruct even reports it satisfied) while `import
-# tkinter` still fails. tkinter and PIL are listed in .pylintrc ignored-modules
-# instead, alongside cv2 -- the same treatment the project already gives modules
-# that are not resolvable in every environment. image_picker.py and
-# fetch_audiocourse_images.py are interactive desktop tools that cannot run
-# headless on CI anyway; only their static analysis matters there.
 
-# static/ holds the hand-written JS: the media app and its per-type plugins.
-# (Was "blog", the MkDocs-era source dir -- it no longer exists, so eslint
-# silently checked nothing.) vendor/ is excluded: cm-chessboard and chess.min.js
-# are third-party and not ours to lint.
 [processor.eslint]
 src_dirs = ["static"]
 src_exclude_dirs = ["vendor"]
