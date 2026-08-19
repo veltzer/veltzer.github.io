@@ -88,6 +88,12 @@ src_dirs = ["static"]
 # was retired because it wiped content/blog on every run.
 [processor.explicit]
 command = "scripts/build_site.py"
+# command is a wrapper: build_site.py shells out to zola. Naming zola here is
+# what makes `rsconstruct tools install` fetch it -- without this the project
+# never tells rsconstruct it needs zola at all, and the build fails inside the
+# script with "zola not found on PATH". The pinned v0.23.3 recipe lives in
+# rsconstruct's tool registry, so the workflow no longer installs it by hand.
+required_tools = ["zola"]
 inputs = [
     "config.toml",
     # build_site.py runs this to recompute the archive stats into

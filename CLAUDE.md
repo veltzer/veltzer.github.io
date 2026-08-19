@@ -64,10 +64,12 @@ chmod +x ~/.local/bin/zola
 zola --version   # expect: zola 0.23.3
 ```
 
-Keep the version in step with `ZOLA_VERSION` in `.github/workflows/build.yml`. The pin is
-deliberate: 0.23 renamed config keys (`highlight_code` → `[markdown.highlighting]`) and
-swapped the highlighter, so an unpinned upgrade can fail the build on `config.toml` alone.
-Distro packages and `cargo install zola` track other versions — prefer the pinned tarball.
+Keep the version in step with rsconstruct's tool registry, which is what CI installs from:
+`rsconstruct tools list-configured` prints the pinned URL. The pin is deliberate: 0.23
+renamed config keys (`highlight_code` → `[markdown.highlighting]`) and swapped the
+highlighter, so an unpinned upgrade can fail the build on `config.toml` alone. Distro
+packages and `cargo install zola` track other versions — prefer the pinned tarball.
+(`cargo install zola` in particular fetches an unrelated yanked crate, not the real zola.)
 
 ## Blog Posts
 
