@@ -49,6 +49,16 @@ which records the traps that outlived the migration.
 - `scripts/build_site.py` — the zola build on its own
 - `scripts/serve.py` — build, then serve `_site/` locally the way Pages will
 
+**Never run `zola build` by hand — always go through the build system.**
+Bare `zola build` writes to `public/` (zola's hardcoded default; an
+`output_dir` key in config.toml is silently ignored) and skips
+`build_site.py`'s post-processing (`relocate_english()`, `fix_sitemap()`).
+The result is a second output tree that looks authoritative but is neither
+the real build nor post-processed — stale copies of it have produced wrong
+page counts and false "missing post" reports. The real output is `_site/`,
+and only after a build; cross-check any number you derive from it against
+what the build itself reports (zola prints "Creating N pages").
+
 ### Prerequisite: zola
 
 `scripts/build_site.py` shells out to zola, which is **not** installed by
@@ -70,6 +80,26 @@ renamed config keys (`highlight_code` → `[markdown.highlighting]`) and swapped
 highlighter, so an unpinned upgrade can fail the build on `config.toml` alone. Distro
 packages and `cargo install zola` track other versions — prefer the pinned tarball.
 (`cargo install zola` in particular fetches an unrelated yanked crate, not the real zola.)
+
+## CI and the Workflow File
+
+- **`.github/workflows/build.yml` is deliberately minimal and maintained by
+  hand — do not edit it.** It only knows how to ask rsconstruct: checkout,
+  caches, download rsconstruct, `tools install-deps` + `tools install`,
+  build, status, deploy. Every tool and package the build needs is declared
+  in `rsconstruct.toml` instead — system packages under `[dependencies]`
+  (apt/pip/npm), and tools a wrapper script shells out to via
+  `required_tools` on the processor (that is how zola is installed; its
+  pinned recipe lives in rsconstruct's tool registry). If something cannot
+  be expressed there, the fix belongs in rsconstruct, not in the workflow.
+- **Do not add infrastructure workarounds (apt retries, timeouts) to the
+  workflow or to rsconstruct.** GitHub's runners occasionally sit behind a
+  degraded Ubuntu mirror (observed 2026-08-19: ~60 KB/s — slow but
+  progressing, so timeouts kill healthy runs and retries do nothing; a
+  5-minute step timeout killed a healthy release build the same day). When
+  a run is slow or stuck: cancel it (this finalizes its logs, which show
+  what it was doing) and re-run — a fresh runner usually lands on a healthy
+  mirror path.
 
 ## Blog Posts
 
