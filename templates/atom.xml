@@ -1,0 +1,44 @@
+{#- Custom feed template: caps entries at FEED_LIMIT.
+
+     Zola's built-in atom.xml emits every page in the section, with the full
+     rendered body in <content>. At 165 posts that is a 1 MB file, and there are
+     144 of them once every tag gets a feed -- 10.9 MB of build output that a
+     subscriber re-downloads on every poll, growing with each post published.
+
+     Capping at 20 is what feed readers expect: a feed is a "what's new" window,
+     not an archive. Anyone wanting the whole thing has /en/blog/.
+
+     Everything else here reproduces zola 0.23.3's built-in output exactly, so
+     existing subscribers see no change beyond the shorter list. If zola's
+     default changes in a future version, this file will not follow it
+     automatically -- that is the cost of overriding it. -#}
+{%- set FEED_LIMIT = 20 -%}
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"{% if lang %} xml:lang="{{ lang }}"{% endif %}>
+    {#- Zola exposes no feed_title; term is set only for taxonomy feeds. -#}
+    <title>{{ config.title }}{% if term %} - {{ term.name }}{% endif %}</title>
+    <link rel="self" type="application/atom+xml" href="{{ feed_url | safe }}"/>
+    <link rel="alternate" type="text/html" href="{{ config.base_url | safe }}"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    {#- last_updated is undefined for a feed whose pages carry no date, so fall
+        back to the newest entry and then to nothing rather than failing the build. -#}
+    <updated>{% if last_updated %}{{ last_updated | date(format="%Y-%m-%dT%H:%M:%S%:z") }}{% elif pages | length > 0 %}{{ pages[0].date | date(format="%Y-%m-%dT%H:%M:%S%:z") }}{% endif %}</updated>
+    <id>{{ feed_url | safe }}</id>
+    {%- for page in pages %}{% if loop.index0 >= FEED_LIMIT %}{% break %}{% endif %}
+    <entry{% if page.lang %} xml:lang="{{ page.lang }}"{% endif %}>
+        <title>{{ page.title }}</title>
+        <published>{{ page.date | date(format="%Y-%m-%dT%H:%M:%S%:z") }}</published>
+        <updated>{% if page.updated %}{{ page.updated | date(format="%Y-%m-%dT%H:%M:%S%:z") }}{% else %}{{ page.date | date(format="%Y-%m-%dT%H:%M:%S%:z") }}{% endif %}</updated>
+        <author>
+          <name>{% if page.authors and page.authors | length > 0 %}{{ page.authors | first }}{% else %}{{ config.author }}{% endif %}</name>
+        </author>
+        <link rel="alternate" type="text/html" href="{{ page.permalink | safe }}"/>
+        <id>{{ page.permalink | safe }}</id>
+        {%- if page.summary %}
+        <summary type="html">{{ page.summary }}</summary>
+        {%- else %}
+        <content type="html" xml:base="{{ page.permalink | safe }}">{{ page.content }}</content>
+        {%- endif %}
+    </entry>
+    {%- endfor %}
+</feed>
