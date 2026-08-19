@@ -435,3 +435,17 @@ th { background: var(--bg-surface); }
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
 }
+
+// Build provenance on the About page. Matches the style the slides app already
+// uses for the same information, so the two look like one convention rather
+// than two.
+.build-info {
+  font-size: 0.85em;
+  opacity: 0.7;
+
+  code {
+    background: transparent;
+    padding: 0;
+    font-size: 0.95em;
+  }
+}

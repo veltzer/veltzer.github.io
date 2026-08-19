@@ -36,6 +36,11 @@ THEME_DEST = REPO_ROOT / "static" / "shared-themes"
 # theme-switcher.js is copied so a theme picker can be added without another
 # build change.
 THEME_FILES = ["themes.css", "theme-switcher.js"]
+# Build provenance, written fresh on every build and read by templates through
+# Zola's load_data(). Not committed: the commit that produces a build cannot be
+# known before that commit exists, so a checked-in hash always names the
+# previous one. static/ is where Zola looks for load_data() paths.
+BUILD_INFO = REPO_ROOT / "static" / "build_info.toml"
 
 
 def die(message):
@@ -73,6 +78,53 @@ def gen_stats():
     notices.
     """
     subprocess.run([sys.executable, str(STATS_GENERATOR)], check=True, cwd=REPO_ROOT)
+
+
+def write_build_info():
+    """Record the commit this build came from, for the About page to display.
+
+    Deliberately not committed, and deliberately not produced by gen_stats.py
+    alongside the archive counts: a hash written into content before committing
+    can only ever name the previous commit. Reading it from git at build time is
+    the only way the number on the page matches the build that produced it.
+
+    A missing or dirty git tree is not an error. A reader cloning this repo and
+    running `zola serve` still gets a site; the About page simply omits the
+    provenance line, which is what the template's `if` guards.
+    """
+    def git(*args):
+        try:
+            result = subprocess.run(
+                ["git", *args], check=True, cwd=REPO_ROOT,
+                capture_output=True, text=True,
+            )
+        except (subprocess.CalledProcessError, FileNotFoundError):
+            return ""
+        return result.stdout.strip()
+
+    commit = git("rev-parse", "HEAD")
+    if not commit:
+        # No git available, or not a repository. Leave whatever is there --
+        # or nothing -- and let the template fall back to omitting the line.
+        BUILD_INFO.parent.mkdir(parents=True, exist_ok=True)
+        BUILD_INFO.write_text("", encoding="utf-8")
+        return
+    short = git("rev-parse", "--short", "HEAD")
+    # Committer date in ISO-8601, so the page can show when the source was
+    # committed rather than when the build machine happened to run.
+    date = git("log", "-1", "--format=%cs")
+    # A dirty tree means the deployed bytes do not match the named commit.
+    # Saying so is more useful than quietly naming a commit that is not what
+    # was built.
+    dirty = "true" if git("status", "--porcelain") else "false"
+    BUILD_INFO.parent.mkdir(parents=True, exist_ok=True)
+    BUILD_INFO.write_text(
+        f'commit = "{commit}"\n'
+        f'short = "{short}"\n'
+        f'date = "{date}"\n'
+        f"dirty = {dirty}\n",
+        encoding="utf-8",
+    )
 
 
 def sync_theme():
@@ -258,6 +310,7 @@ def main():
     try:
         import_teaching()
         gen_stats()
+        write_build_info()
         sync_theme()
         build(zola)
         relocate_english(OUTPUT_DIR)

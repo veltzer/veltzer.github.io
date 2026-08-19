@@ -169,3 +169,6 @@ project/
 # Zola build output
 /public/
 /static/shared-themes/
+# Build provenance, regenerated on every build by scripts/build_site.py. Not
+# committed: a hash written before committing can only name the previous commit.
+/static/build_info.toml

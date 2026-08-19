@@ -3,4 +3,20 @@
 {% block content %}
 <h1>{{ section.title }}</h1>
 {{ section.content | safe }}
+{# Build provenance, About page only. static/build_info.toml is written by
+   scripts/build_site.py on every build and is not committed -- see the comment
+   there for why a checked-in hash would always name the wrong commit. The
+   try/if guards a build where the file is absent or git was unavailable, which
+   is the normal case for someone running `zola serve` on a fresh clone. #}
+{% if "/about/" in section.path %}
+{% set_global build = load_data(path="static/build_info.toml", required=false) %}
+{% if build and build.short %}
+<hr>
+<p class="build-info">
+  {{ trans(key="built_from_commit", lang=page_lang) }}
+  <a href="https://github.com/veltzer/veltzer.github.io/commit/{{ build.commit }}"><code>{{ build.short }}</code></a>
+  {{ trans(key="built_on_date", lang=page_lang) }} {{ build.date }}{% if build.dirty %} ({{ trans(key="built_dirty", lang=page_lang) }}){% endif %}
+</p>
+{% endif %}
+{% endif %}
 {% endblock %}
