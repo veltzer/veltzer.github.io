@@ -3,7 +3,7 @@
 """
 Fetch cover images for Audible books using the cover_url from the YAML.
 
-Images saved as blog/images/audible-{asin}.jpg
+Images saved as static/images/audible-{asin}.jpg
 
 Incremental: skips books that already have an image.
 
@@ -22,7 +22,7 @@ from pathlib import Path
 # instead of only from the repo root.
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
-IMAGE_DIR = str(REPO_ROOT / "blog" / "images")
+IMAGE_DIR = str(REPO_ROOT / "static" / "images")
 YAML_PATH = str(REPO_ROOT.parent / "data" / "yaml" / "audible.yaml")
 
 

@@ -32,7 +32,7 @@ from image_standard import normalise
 # Resolved from this file rather than the cwd, so the script works from
 # anywhere instead of only from the repo root.
 REPO_ROOT = Path(__file__).resolve().parent.parent
-IMAGE_DIR = str(REPO_ROOT / "blog" / "images")
+IMAGE_DIR = str(REPO_ROOT / "static" / "images")
 
 logger = logging.getLogger(__name__)
 GC_IMAGE_URL = "https://secureimages.teach12.com/tgc/images/m2/wondrium/courses/{cid}/{cid}.jpg"

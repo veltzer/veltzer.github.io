@@ -2,7 +2,7 @@
 """
 Fetch TV series poster images from TMDB (with OMDB fallback) by IMDB ID.
 
-Downloads to blog/images/series-{imdb_id}.jpg. Skips existing unless --force.
+Downloads to static/images/series-{imdb_id}.jpg. Skips existing unless --force.
 
 Requires pass entries: keys/themoviedb.org.read, keys/omdbapi.com.key
 """
@@ -16,8 +16,8 @@ from poster_utils import fetch_posters
 # instead of only from the repo root.
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
-DATA_PATH = str(REPO_ROOT / "blog" / "data" / "video_series.json.gz")
-IMAGE_DIR = str(REPO_ROOT / "blog" / "images")
+DATA_PATH = str(REPO_ROOT / "static" / "data" / "video_series.json.gz")
+IMAGE_DIR = str(REPO_ROOT / "static" / "images")
 
 parser = argparse.ArgumentParser(description="Fetch TV series posters from TMDB/OMDB")
 parser.add_argument("--force", action="store_true", help="Re-download existing images")

@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
 """
-Copy media/chess/youtube data from the sibling ../data repo into blog/data.
+Copy media/chess/youtube data from the sibling ../data repo into static/data.
 
 YAML data for the media tracker lives in a separate ../data repository and
 is copied in during build. This script validates the sources exist, copies
 the plain YAML files, runs the audible import (type fixes + field cleanup)
 and the youtube CSV->YAML conversion, converts every YAML file to JSON, then
-gzips everything in blog/data.
+gzips everything in static/data.
 
 The frontend consumes the JSON, not the YAML: parsing 6.5MB of YAML with
 js-yaml in the browser measured ~399ms against ~31ms for JSON.parse on the
@@ -27,7 +27,7 @@ import yaml
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = REPO_ROOT / "scripts"
 DATA_REPO = REPO_ROOT.parent / "data"
-DEST = REPO_ROOT / "blog" / "data"
+DEST = REPO_ROOT / "static" / "data"
 
 # Plain YAML files copied verbatim from ../data/yaml.
 PLAIN_YAML = [
