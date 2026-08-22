@@ -99,3 +99,9 @@ command = "scripts/spellcheck_en.sh"
 src_dirs = ["content/blog"]
 src_extensions = [".en.md"]
 dep_auto = [".aspell.en.txt"]
+
+[pages]
+dir = "_site"
+
+[build]
+parallel = 0
