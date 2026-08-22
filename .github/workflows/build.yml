@@ -15,12 +15,6 @@ jobs:
     - uses: actions/checkout@v6
       with:
         submodules: recursive
-    - uses: actions/setup-python@v6
-      with:
-        python-version: '3.12'
-        cache: pip
-        cache-dependency-path: rsconstruct.toml
-    - uses: actions/setup-node@v6
     - uses: actions/cache@v5
       with:
         path: .rsconstruct
