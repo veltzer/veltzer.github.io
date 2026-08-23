@@ -14,6 +14,11 @@ Copies YAML data and PGN files from `../data/` repo into `blog/data/`,
 converts YouTube CSV to YAML, and gzips everything. Uses `gzip -n` for
 reproducible output. Validates source files exist before copying.
 
+The two chess archives (`games.pgn.gz`, `chesscom.pgn.gz`) arrive gzipped
+and are decompressed and concatenated into a single `games.pgn`, which the
+common gzip step then compresses like every other data file. The chess
+viewer fetches that one merged file.
+
 ## Image Fetch Scripts
 
 All image scripts are incremental — they skip images that already exist.

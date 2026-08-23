@@ -5,9 +5,9 @@ Copy media/chess/youtube data from the sibling ../data repo into static/data.
 
 YAML data for the media tracker lives in a separate ../data repository and
 is copied in during build. This script validates the sources exist, copies
-the plain YAML files, runs the audible import (type fixes + field cleanup)
-and the youtube CSV->YAML conversion, converts every YAML file to JSON, then
-gzips everything in static/data.
+the plain YAML files, merges the gzipped chess archives, runs the audible
+import (type fixes + field cleanup) and the youtube CSV->YAML conversion,
+converts every YAML file to JSON, then gzips everything in static/data.
 
 The frontend consumes the JSON, not the YAML: parsing 6.5MB of YAML with
 js-yaml in the browser measured ~399ms against ~31ms for JSON.parse on the
@@ -16,6 +16,7 @@ marginally smaller than gzipped YAML. The .yaml files remain the build's
 intermediate representation.
 """
 
+import gzip
 import json
 import shutil
 import subprocess
@@ -41,7 +42,12 @@ PLAIN_YAML = [
 # Files that need a source check but are processed rather than copied directly.
 PROCESSED_YAML = ["audible.yaml"]
 
-CHESS_PGN = DATA_REPO / "raw" / "topics" / "games" / "chess" / "games.pgn"
+CHESS_DIR = DATA_REPO / "raw" / "topics" / "games" / "chess"
+# Both archives are stored gzipped in the data repo. They are concatenated into
+# the single games.pgn.gz the chess viewer fetches: the viewer splits on the
+# [Event header of each game, so a plain concatenation with a blank line between
+# the two is a valid PGN stream.
+CHESS_PGN_GZ = [CHESS_DIR / "games.pgn.gz", CHESS_DIR / "chesscom.pgn.gz"]
 YOUTUBE_CSV = DATA_REPO / "raw" / "topics" / "video" / "youtube" / "all.list.csv"
 
 
@@ -57,8 +63,9 @@ def validate_sources():
     for name in PLAIN_YAML + PROCESSED_YAML:
         if not (yaml_dir / name).is_file():
             die(f"Missing source file {yaml_dir / name}")
-    if not CHESS_PGN.is_file():
-        die(f"Missing source file {CHESS_PGN}")
+    for path in CHESS_PGN_GZ:
+        if not path.is_file():
+            die(f"Missing source file {path}")
     if not YOUTUBE_CSV.is_file():
         die(f"Missing source file {YOUTUBE_CSV}")
 
@@ -78,7 +85,15 @@ def import_audible():
 
 
 def copy_chess():
-    shutil.copyfile(CHESS_PGN, DEST / "games.pgn")
+    # The sources are already gzipped, so they are decompressed here and the
+    # merged result is re-gzipped by gzip_data_files() along with everything
+    # else -- that keeps a single, reproducible gzip step for the whole tree.
+    with open(DEST / "games.pgn", "wb") as out:
+        for index, path in enumerate(CHESS_PGN_GZ):
+            if index:
+                out.write(b"\n\n")
+            with gzip.open(path, "rb") as handle:
+                shutil.copyfileobj(handle, out)
 
 
 def convert_youtube():

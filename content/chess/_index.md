@@ -50,14 +50,18 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
 
 (function () {
     const DATA_URL = "/data/games.pgn.gz";
-    // The archive is ~16,000 games / 8.8MB uncompressed. Parsing every one with
-    // chess.js up front would take far too long, so the file is split into game
-    // texts and only the headers are read eagerly; the moves of a game are
-    // parsed the first time it is opened.
+    // The archive is ~61,600 games / ~100MB uncompressed -- the old ICS/GNU
+    // Chess games plus the chess.com export, merged into one file by
+    // scripts/copy_data.py. Parsing every one with chess.js up front would take
+    // far too long, so the file is split into game texts and only the headers
+    // are read eagerly; the moves of a game are parsed the first time it is
+    // opened.
     const MAX_OPTIONS = 300;   // how many games to put in the <select> at once
     // Whose games these are. Results are recorded as 1-0 / 0-1, so a win/loss
-    // record is only meaningful once you know which colour was played.
-    const ME = 'veltzer';
+    // record is only meaningful once you know which colour was played. The
+    // archives disagree on the name -- the ICS games say "veltzer", chess.com
+    // says "mark_veltzer" -- so every alias has to count as me.
+    const ME = new Set(['veltzer', 'mark_veltzer']);
 
     const titleEl = document.getElementById('gameTitle');
     const playersEl = document.getElementById('gamePlayers');
@@ -87,10 +91,12 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
     }
 
     function splitGames(pgn) {
-        // A game starts at an [Event line that follows a blank line (or the very
-        // start of the file). Splitting on that keeps each game's headers and
-        // movetext together.
-        const chunks = pgn.split(/\n\s*\n(?=\[Event )/);
+        // A game starts at an [Event line at the beginning of a line. Splitting
+        // there keeps each game's headers and movetext together. Do not require
+        // a preceding blank line: a handful of games in the archive follow the
+        // previous game's result with no separator at all, and requiring one
+        // silently swallows them into their predecessor.
+        const chunks = pgn.split(/\n(?=\[Event )/);
         const out = [];
         for (const chunk of chunks) {
             const text = chunk.trim();
@@ -103,7 +109,7 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
                 result: headerValue(text, 'Result'),
                 // Lower-cased once here so the win/loss tally does not have to
                 // case-fold 16,000 names on every render.
-                whiteIsMe: (headerValue(text, 'White') || '').toLowerCase() === ME,
+                whiteIsMe: ME.has((headerValue(text, 'White') || '').toLowerCase()),
                 date: date,
                 year: (date.match(/^(\d{4})/) || [])[1] || '',
                 text: text,
