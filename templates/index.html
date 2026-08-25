@@ -1,7 +1,21 @@
 {% extends "base.html" %}
+{#- The home page is the strongest candidate for the query "Mark Veltzer", so
+    its <title> leads with the name and what he does rather than the generic
+    site title. base.html's default would emit "Mark Veltzer's personal site",
+    which buries the name in a possessive and says nothing about the subject. -#}
+{% block title %}{{ trans(key="home_title", lang=page_lang) }}{% endblock %}
+{#- Without this og:title falls back to section.title, which is the literal
+    word "Home" -- the front matter title of content/_index.en.md, never meant
+    to be user-facing. A shared link should carry the same name the <title>
+    does. -#}
+{% block og_title %}{{ trans(key="home_title", lang=page_lang) }}{% endblock %}
 {% block content %}
-<h1>{{ config.title }}</h1>
-<p>{{ config.description }}</p>
+<h1>{{ trans(key="home_title", lang=page_lang) }}</h1>
+{#- Real prose, not config.description. The page was previously an <h1> and a
+    bare list of post links, which gives a crawler almost no text to judge the
+    page by; a first-person paragraph naming the subject is what makes it read
+    as an identity page. -#}
+<p class="home-intro">{{ trans(key="home_intro", lang=page_lang) }}</p>
 {#- Every language is suffixed now (see default_language in config.toml), so
     there is no bare blog/_index.md to fall back on: the path has to name the
     language explicitly rather than relying on the lang= argument alone. -#}

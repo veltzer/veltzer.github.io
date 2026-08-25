@@ -194,6 +194,14 @@ tags = ["religion", "philosophy", "ethics"]
   above it survives. Edit the YAML, run the script, commit both
   repos. Like `copy_data.py` it is a manual step, not part of the build: CI has no
   `../data` checkout, and the generated content is committed.
+- **`static/identity.toml` is generated — do not hand-edit it.** `gen_profiles.py`
+  writes it from the same `profiles.yaml`, and `templates/base.html` reads it with
+  `load_data()` into the `Person` JSON-LD as schema.org `sameAs`. It lives in
+  `static/` and is committed because CI has no `../data` checkout, so the template
+  must read something inside this repo. Only the identity groups contribute
+  (`SAMEAS_GROUPS` in the script): `sameAs` asserts "another page for this same
+  person", so the "learning sites I use that have no profiles" group is excluded
+  by design — claiming audible.com would be a false identity claim.
 - The same `profiles.yaml` also drives `README.md` in the **`../veltzer`** repository
   (the GitHub profile page), which has its own rsconstruct build — `rsconstruct build`
   there regenerates it from `README.md.in` plus the YAML. Neither repo writes into the

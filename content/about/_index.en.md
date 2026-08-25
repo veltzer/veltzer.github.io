@@ -1,9 +1,23 @@
 +++
-title = "About"
+title = "About Mark Veltzer"
+description = "Mark Veltzer is a software engineer from Israel working in Linux, C, C++, Python and Rust, who teaches and writes about programming, mathematics and philosophy."
 template = "section.html"
 +++
 
-My name is Mark Veltzer and I will write more soon.
+My name is Mark Veltzer and I am a software engineer from Israel.
+
+I work mostly in and around Linux -- C, C++, Python, Rust and the systems layer
+underneath them -- and I have spent a good part of my career teaching those
+subjects as well as writing them. Much of the teaching material I use is
+published on this site under [Syllabi](/en/syllabi/) and [Slides](/en/slides/).
+
+Outside work I read and listen a great deal, play chess, and keep a public
+record of both: the [Media](/en/media/) section tracks the books, talks, courses
+and films I go through, and [Chess](/en/chess/) holds my games with a viewer to
+play them out. The [blog](/en/blog/) is where the longer writing lands, in
+English and in Hebrew, on programming, mathematics, religion and philosophy.
+
+The profile links below are the other places I exist online.
 
 <!-- BEGIN generated profiles -- edit ../data/yaml/profiles.yaml -->
 

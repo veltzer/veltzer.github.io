@@ -262,12 +262,63 @@ def relocate_english(root):
         shutil.move(str(entry), str(english / entry.name))
 
 
+def drop_duplicate_urls(lines):
+    """Drop <url> blocks whose <loc> was already emitted.
+
+    Zola lists the taxonomy list page twice -- once as a default-language page
+    at /tags/, which the rewrite above turns into /en/tags/, and once as the
+    real English /en/tags/. The two collide only after rewriting, so this has to
+    run on the rewritten lines rather than being avoided earlier.
+
+    A duplicate <loc> is not an error to a crawler, which dedupes by URL anyway,
+    but a sitemap that lists the same page twice misreports the site's size and
+    invites the question every time someone counts the entries.
+
+    Blocks are matched structurally: <url> ... </url>, keyed on the <loc> inside.
+    Anything outside a <url> block (the XML declaration, <urlset>) is passed
+    through untouched.
+    """
+    seen = set()
+    out = []
+    block = None
+    for line in lines:
+        stripped = line.strip()
+        if stripped == "<url>":
+            block = [line]
+            continue
+        if block is not None:
+            block.append(line)
+            if stripped == "</url>":
+                loc = next(
+                    (b.strip() for b in block if b.strip().startswith("<loc>")), None
+                )
+                if loc is None or loc not in seen:
+                    if loc is not None:
+                        seen.add(loc)
+                    out.extend(block)
+                block = None
+            continue
+        out.append(line)
+    if block is not None:
+        # Unterminated <url> block: keep it rather than silently dropping URLs.
+        out.extend(block)
+    return out
+
+
 def fix_sitemap(root, site_url):
     """Point the sitemap at the relocated English URLs.
 
     Zola writes the sitemap before relocate_english() runs, so every English
     entry still claims the site root -- URLs that now 404. Rewrite them to
     their /en/ equivalents and add the root itself.
+
+    The root needs adding explicitly because the rewrite consumes it: zola emits
+    one bare <loc> for the site root, and the `elif not path` branch below turns
+    that entry INTO the /en/ one rather than leaving it behind. Both belong in
+    the sitemap -- "/" is the URL people link to and type, and it serves the
+    language chooser (write_root_index), so it is a real 200 rather than a
+    redirect. Leaving it out means the most-linked URL on the site is the one
+    URL the sitemap never mentions.
     """
     sitemap = root / "sitemap.xml"
     if not sitemap.is_file():
@@ -287,6 +338,23 @@ def fix_sitemap(root, site_url):
             elif not path:
                 line = line.replace(prefix, prefix + "en/")
         out.append(line)
+
+    out = drop_duplicate_urls(out)
+
+    # Append the root. Done after the loop rather than by tweaking the rewrite
+    # branch, so the /en/ entry keeps zola's own position and metadata and this
+    # is a pure addition. Guarded so a future zola that emits the root itself
+    # does not end up listing it twice.
+    root_loc = f"<loc>{prefix}</loc>"
+    if not any(line.strip() == root_loc for line in out):
+        closing = "</urlset>"
+        for index, line in enumerate(out):
+            if line.strip() == closing:
+                out[index:index] = ["    <url>", f"        {root_loc}", "    </url>"]
+                break
+        else:
+            die("sitemap.xml has no </urlset> -- cannot add the root entry")
+
     sitemap.write_text("\n".join(out) + "\n", encoding="utf-8")
 
 

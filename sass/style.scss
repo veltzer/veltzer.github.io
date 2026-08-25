@@ -204,6 +204,14 @@ h3 { font-size: 1.1rem; margin: 1.8rem 0 0.5rem; }
 .archive-years tbody tr:last-child th,
 .archive-years tbody tr:last-child td { border-bottom: 0; }
 
+// The home page lead paragraph, above the latest-posts list. Slightly larger
+// and muted so it reads as an introduction rather than as body copy.
+.home-intro {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
 .post-list { list-style: none; padding: 0; }
 .post-list li { padding: 0.6rem 0; border-bottom: 1px solid var(--border-subtle); }
 .post-link { font-weight: 600; text-decoration: none; }

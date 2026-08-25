@@ -1,5 +1,15 @@
 {% extends "base.html" %}
-{% block title %}{{ section.title }} &middot; {{ config.title }}{% endblock %}
+{#- A section that names the subject in its own title stands alone -- "About
+    Mark Veltzer &middot; Mark Veltzer's personal site" says the name twice and
+    pushes the useful half past where a search result truncates. Sections whose
+    title is a bare label ("Blog", "Media") still get the site name appended,
+    because on their own they identify nothing. -#}
+{% block title %}{% if "Veltzer" in section.title or "ולצר" in section.title %}{{ section.title }}{% else %}{{ section.title }} &middot; {{ config.title }}{% endif %}{% endblock %}
+{#- Sections may set `description` in their front matter; base.html's default
+    falls back to config.description, which is the whole-site blurb and wrong
+    for a specific page. og:description already prefers section.description --
+    this makes the plain meta description agree with it. -#}
+{% block description %}{% if section.description %}{{ section.description }}{% else %}{{ config.description }}{% endif %}{% endblock %}
 {% block content %}
 <h1>{{ section.title }}</h1>
 {{ section.content | safe }}
