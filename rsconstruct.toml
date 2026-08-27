@@ -1,15 +1,5 @@
 [dependencies]
 system = ["libxml2-utils", "aspell", "aspell-en", "aspell-he"]
-pip = [
-  "types-PyYAML",
-  "PyYAML",
-  "Pillow",
-  "pytest",
-  "beautifulsoup4",
-  "types-beautifulsoup4",
-  "pylint==3.3.8",
-  "ruff",
-]
 npm = ["stylelint", "postcss-scss"]
 
 [processor.eslint]
