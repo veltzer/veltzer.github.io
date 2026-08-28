@@ -31,8 +31,6 @@ args = ["--rcfile=.pylintrc"]
 src_dirs = ["scripts"]
 [processor.mypy]
 src_dirs = ["scripts"]
-args = ["--config-file=.mypy.ini"]
-dep_inputs = [".mypy.ini"]
 [processor.pytest]
 src_dirs = ["tests"]
 dep_inputs = [
