@@ -534,6 +534,7 @@
             if (showStatsOnly) {
                 searchContainer.style.display = 'none';
                 itemsContainer.style.display = 'none';
+                paginationContainer.style.cssText = 'display:none!important';
                 statsContainer.style.display = 'block';
             } else {
                 searchContainer.style.display = 'block';
