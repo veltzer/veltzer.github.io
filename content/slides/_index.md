@@ -927,7 +927,7 @@ template = "app.html"
 
 <hr>
 <p>Mark Veltzer <a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a> <a href="https://github.com/veltzer">@veltzer</a></p>
-<p class="build-info">Built from <code>3afbe1e3f8f0</code> on 2026-08-27 12:37 UTC &middot; local build</p>
+<p class="build-info">Built from <code>669c6bb665e7</code> on 2026-08-29 18:08 UTC &middot; local build</p>
 </div>
 </div>
 

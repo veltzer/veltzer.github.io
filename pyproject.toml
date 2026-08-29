@@ -17,6 +17,15 @@ dependencies = [
     "ruff",
 ]
 
+[dependency-groups]
+dev = [
+    "mypy",
+    "pylint",
+    "pytest",
+    "ruff",
+    "yamllint",
+]
+
 [tool.uv]
 # Demo/teaching repo: not an installable package.
 package = false
