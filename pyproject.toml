@@ -13,7 +13,7 @@ dependencies = [
     "pytest",
     "beautifulsoup4",
     "types-beautifulsoup4",
-    "pylint==3.3.8",
+    "pylint",
     "ruff",
 ]
 
