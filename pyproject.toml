@@ -1,18 +1,14 @@
-# Generated to let `uv sync` install this repo's Python dependencies.
-# The authoritative dependency list is [dependencies].pip in
-# rsconstruct.toml; keep the two in sync when editing.
+# Lets `uv sync` install this repo's Python dependencies.
 
 [project]
 name = "veltzer.github.io"
 version = "0.0.0"
 requires-python = ">=3.14"
 dependencies = [
-    "types-PyYAML",
     "PyYAML",
     "Pillow",
     "pytest",
     "beautifulsoup4",
-    "types-beautifulsoup4",
     "pylint",
     "ruff",
 ]
@@ -23,6 +19,8 @@ dev = [
     "pylint",
     "pytest",
     "ruff",
+    "types-beautifulsoup4",
+    "types-PyYAML",
     "yamllint",
 ]
 

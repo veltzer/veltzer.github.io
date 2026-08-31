@@ -518,8 +518,6 @@ dependencies = [
     { name = "pytest" },
     { name = "pyyaml" },
     { name = "ruff" },
-    { name = "types-beautifulsoup4" },
-    { name = "types-pyyaml" },
 ]
 
 [package.dev-dependencies]
@@ -528,6 +526,8 @@ dev = [
     { name = "pylint" },
     { name = "pytest" },
     { name = "ruff" },
+    { name = "types-beautifulsoup4" },
+    { name = "types-pyyaml" },
     { name = "yamllint" },
 ]
 
@@ -539,8 +539,6 @@ requires-dist = [
     { name = "pytest" },
     { name = "pyyaml" },
     { name = "ruff" },
-    { name = "types-beautifulsoup4" },
-    { name = "types-pyyaml" },
 ]
 
 [package.metadata.requires-dev]
@@ -549,6 +547,8 @@ dev = [
     { name = "pylint" },
     { name = "pytest" },
     { name = "ruff" },
+    { name = "types-beautifulsoup4" },
+    { name = "types-pyyaml" },
     { name = "yamllint" },
 ]
 
