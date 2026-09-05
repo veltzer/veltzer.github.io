@@ -24,6 +24,11 @@
     // Keys MUST match the key each plugin registers itself under in
     // window.mediaPlugins — getDataSources() returns that object, so those keys
     // are what drive the ?data=... URLs and the load-once guard in loadPlugin.
+    //
+    // The order here is the order of the nav tabs, and the first entry is the
+    // view shown when the URL names none. Nothing may derive either from
+    // window.mediaPlugins: the scripts load in parallel and register in whatever
+    // order they finish, so the tabs used to reshuffle between page loads.
     window.mediaPluginFiles = {
         'audio': MEDIA_BASE + 'plugin-audio-courses.js',
         'audible': MEDIA_BASE + 'plugin-audible.js',
@@ -51,6 +56,12 @@
 
     function loadAllPlugins() {
         return Promise.all(Object.keys(window.mediaPluginFiles).map(loadPlugin));
+    }
+
+    // Plugin keys in registry order -- the one order every nav, default view
+    // and preference key agrees on.
+    function pluginKeys() {
+        return Object.keys(window.mediaPluginFiles);
     }
 
     // --- Derive sortFields/filters from unified fields registry ---
@@ -193,7 +204,7 @@
             const fields = activeConfig.sortFields || [];
             const defaultSort = activeConfig.defaultSort || {field: 'name', order: 'asc'};
             const urlParams = new URLSearchParams(window.location.search);
-            const dataType = urlParams.get('data') || Object.keys(getDataSources())[0];
+            const dataType = urlParams.get('data') || pluginKeys()[0];
             const savedPref = loadSortPref(dataType);
             sortFieldSelect.innerHTML = '';
             fields.forEach(function(sf) {
@@ -402,7 +413,7 @@
             togglesContainer.style.display = 'flex';
 
             var urlParams = new URLSearchParams(window.location.search);
-            var dataType = urlParams.get('data') || Object.keys(getDataSources())[0];
+            var dataType = urlParams.get('data') || pluginKeys()[0];
             var saved = loadTogglePref(dataType);
 
             fields.forEach(function(tf) {
@@ -457,7 +468,9 @@
         // --- Dynamically Generate Navigation ---
         function generateNav(activeDataType, showStatsOnly) {
             mainNav.innerHTML = ''; // Clear existing nav
-            for (const [key, config] of Object.entries(getDataSources())) {
+            for (const key of pluginKeys()) {
+                const config = getDataSources()[key];
+                if (!config) continue;
                 const navLink = document.createElement('a');
                 navLink.href = '?data=' + key;
                 navLink.textContent = config.navTitle;
@@ -513,7 +526,7 @@
         // --- Fetch and Parse JSON Data ---
         async function loadData() {
             const urlParams = new URLSearchParams(window.location.search);
-            const dataType = urlParams.get('data') || Object.keys(getDataSources())[0];
+            const dataType = urlParams.get('data') || pluginKeys()[0];
             const showStatsOnly = urlParams.get('stats') === 'true';
             activeConfig = getDataSources()[dataType];
             if (activeConfig) deriveFieldsConfig(activeConfig);
@@ -719,7 +732,7 @@
         // --- Handle Sort Changes ---
         function getCurrentDataType() {
             const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('data') || Object.keys(getDataSources())[0];
+            return urlParams.get('data') || pluginKeys()[0];
         }
 
         sortFieldSelect.addEventListener('change', function() {

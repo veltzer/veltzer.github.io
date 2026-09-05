@@ -57,7 +57,10 @@ API key is needed. goodreads pages are fetched through `/en/book/show/<id>`
 (the plain url answers scripts with an empty WAF challenge).
 Output: `static/images/book-{cover}.jpg`, where `{cover}` is the key
 `scripts/import_books.py` puts on each item (`simania-<id>`, else
-`goodreads-<id>`).
+`goodreads-<id>`). A book whose page has no cover (listed in
+`import_books.NO_COVER`) gets no key and the card shows
+`static/images/book-no-cover.jpg`, a hand-made placeholder drawn at the
+card's 800x384 geometry so `object-cover` crops nothing that matters.
 
 ### `scripts/import_books.py`
 

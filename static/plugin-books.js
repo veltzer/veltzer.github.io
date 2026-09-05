@@ -73,7 +73,10 @@ window.mediaPlugins['books'] = {
         {key: 'link', label: 'Link', default: true}
     ],
     renderImage: function(item) {
-        if (!item.cover) return '';
+        // No cover key means neither goodreads nor simania has an image for
+        // the book (import_books.NO_COVER); show the placeholder rather than
+        // an empty card top or a broken image.
+        if (!item.cover) return 'images/book-no-cover.jpg';
         return 'images/book-' + encodeURIComponent(item.cover) + '.jpg';
     },
     renderDetails: function(item) {
