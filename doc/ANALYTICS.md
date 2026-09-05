@@ -1,5 +1,11 @@
 # Analytics Options for the Blog
 
+**Current state:** GA4 is wired and switched on -- see "Decision: GA4, wired in
+2026-08-18" at the end. The option survey below predates the move from MkDocs
+to zola, so its `mkdocs.yml` setup snippets no longer apply; on this site the
+analytics hook is `extra.google_analytics_id` in `config.toml` and the guarded
+`gtag` block in `templates/base.html`.
+
 Since this site is a static site hosted on GitHub Pages, there is no server-side analytics. We must use client-side (JavaScript) tracking or third-party integrations.
 
 ## 1. GoatCounter (Recommended)
@@ -21,7 +27,7 @@ A privacy-first, lightweight, and open-source analytics service. It is free for 
 
 The industry standard for detailed traffic analysis.
 
-* **Pros:** Most powerful features, built-in support in the MkDocs Material theme.
+* **Pros:** Most powerful features, widely supported.
 * **Cons:** Privacy-heavy, requires cookie consent in many jurisdictions.
 * **Setup:**
   Add your measurement ID to `mkdocs.yml`:
@@ -107,8 +113,7 @@ Notes on the two that nearly worked:
 
 ## Why Google cannot do this
 
-GA4 is free and the MkDocs Material theme supports it natively (section 2 above), but it
-splits into two halves:
+GA4 is free and easy to wire in (section 2 above), but it splits into two halves:
 
 * **Writing** a visit — public, client-side, trivial. That is the `gtag` snippet.
 * **Reading** the count back — requires the **GA4 Data API**, which needs OAuth 2.0 or a

@@ -1,7 +1,7 @@
 # Image Management
 
-All media cover images are stored in `blog/images/` and copied to
-`docs/images/` by MkDocs during build.
+All media cover images are stored in `static/images/`, which zola copies
+verbatim to `/images/` in the built site.
 
 ## Naming Conventions
 
@@ -10,6 +10,7 @@ All media cover images are stored in `blog/images/` and copied to
 | Movies | `movie-{imdb_id}.jpg` | TMDB CDN (by IMDB ID) |
 | TV Series | `series-{imdb_id}.jpg` | TMDB CDN (by IMDB ID) |
 | Audible | `audible-{asin}.jpg` | `cover_url` from YAML |
+| Books | `book-{cover}.jpg` (`simania-<id>` or `goodreads-<id>`), `book-no-cover.jpg` placeholder | `og:image` of the goodreads/simania page |
 | Audio Courses (GC) | `audiocourse-gc-{gc_id}.jpg` | Great Courses CDN |
 | Audio Courses (Audible) | `audiocourse-audible-{asin}.jpg` | Audible |
 | Audio Courses (other) | `audiocourse-internal-{id}.jpg` | DuckDuckGo search |
@@ -20,16 +21,16 @@ All media cover images are stored in `blog/images/` and copied to
 ## Adding Images for New Entries
 
 1. Add the entry to the YAML in `../data/`
-2. Run `scripts/copy_data.py` to update `blog/data/`
+2. Run `scripts/copy_data.py` to update `static/data/`
 3. Run the appropriate fetch script (see `doc/SCRIPTS.md`)
 4. Run `scripts/check_images.py` to verify all images are present
-5. Run `scripts/build_docs.py` to build the site
+5. Run `rsconstruct build --verbose -j0` to build the site
 
 ## Uniform Display
 
-Card images are sized with `object-fit: cover` (card styles live in
-`blog/shared.css`) to maintain consistent card heights regardless of
-original image dimensions.
+Card images are sized with Tailwind's `object-cover` (the `<img>` markup is
+built in `static/media-app.js`) to maintain consistent card heights
+regardless of original image dimensions.
 
 ## Caches
 
@@ -74,8 +75,8 @@ increases clone size and slows operations. Several alternatives exist:
 ### Separate Data Repository (current pattern for YAML/PGN)
 
 - Keep images in a dedicated repo or storage location outside this repo.
-- Copy them in at build time via `scripts/build_docs.py`, similar to how
-  `../data/` YAML files are handled today.
+- Copy them in via `scripts/copy_data.py`, similar to how `../data/` YAML
+  files are handled today.
 - Keeps this repo lightweight while preserving the current build workflow.
 
 ### GitHub Pages Artifact Deployment

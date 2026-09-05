@@ -10,26 +10,34 @@ data based on a shared interface.
 
 ## File Location
 
-Plugin files go in `blog/` and are named `plugin-<name>.js`.
+Plugin files go in `static/` and are named `plugin-<name>.js`.
 
-After creating a new plugin, register it in `blog/media.html` in the
+After creating a new plugin, register it in `static/media-app.js` in the
 `window.mediaPluginFiles` object:
 
 ```javascript
 window.mediaPluginFiles = {
     // ... existing plugins ...
-    'mykey': 'plugin-myname.js'
+    'mykey': MEDIA_BASE + 'plugin-myname.js'
 };
 ```
 
 The key must match the key used in `window.mediaPlugins['mykey']` inside
-the plugin file.
+the plugin file. It is also the value of the `?data=` URL parameter that
+selects the tab. The first entry in the registry is the tab shown when the
+URL names none; the nav tabs themselves are sorted by `navTitle`, not by
+registry order.
+
+The page that hosts the app is `content/media/_index.md` (served at
+`/en/media/` and `/he/media/`). It sets `window.mediaBasePath` and loads
+`media-utils.js` and `media-app.js`; it does not list the plugins itself.
 
 ## Data Files
 
-Plugin data is a YAML file (optionally gzip-compressed) placed in
-`blog/data/` (copied from the external `../data/` repo during build).
-The YAML structure should be:
+Plugin data is authored as YAML in the external `../data/` repo.
+`scripts/copy_data.py` copies it in, converts it to JSON and gzips it into
+`static/data/<name>.json.gz`; the frontend loads the JSON, never the YAML
+(see `CLAUDE.md` for why). The YAML structure should be:
 
 ```yaml
 items:
@@ -50,12 +58,12 @@ window.mediaPlugins = window.mediaPlugins || {};
 window.mediaPlugins['mykey'] = {
     // --- Required Properties ---
 
-    file: 'data/mydata.yaml.gz',       // Path to YAML data file (relative to blog/)
+    file: 'data/mydata.json.gz',       // Path to JSON data file (relative to the site root)
     navTitle: 'My Items',              // Short label for the navigation tab
     title: 'My Item Collection',       // Page heading when this plugin is active
     subtitle: 'Description here.',     // Subheading text
     searchPlaceholder: 'Search...',    // Placeholder text for the search input
-    searchFields: ['name', 'review'],  // YAML field names to search against
+    searchFields: ['name', 'review'],  // item field names to search against
     defaultSort: {field: 'name', order: 'asc'},  // Initial sort
 
     // --- Unified Fields Registry ---
@@ -184,7 +192,7 @@ window.mediaPlugins['mykey'] = {
 
 ## Built-in Fields
 
-The media page automatically handles these YAML fields if present:
+The media page automatically handles these item fields if present:
 
 - `name` (or `title`, which gets renamed to `name`) - displayed as card title
 - `review` (or `subtitle`) - displayed as card description
@@ -224,11 +232,11 @@ renderStatCard(42, 'Total Items');
 
 | Key | File | Data |
 |-----|------|------|
-| `audio` | `plugin-audio-courses.js` | `data/audio_courses.yaml.gz` |
-| `audible` | `plugin-audible.js` | `data/audible.yaml.gz` |
-| `books` | `plugin-books.js` | `data/books.yaml.gz` (flattened from `books_read.yaml` by `scripts/import_books.py`) |
-| `features` | `plugin-movies.js` | `data/video_features.yaml.gz` |
-| `museums` | `plugin-museums.js` | `data/museums.yaml.gz` |
-| `podcasts` | `plugin-podcasts.js` | `data/podcasts.yaml.gz` |
-| `videos` | `plugin-series.js` | `data/video_series.yaml.gz` |
-| `youtube` | `plugin-youtube.js` | `data/youtube.yaml.gz` |
+| `audio` | `plugin-audio-courses.js` | `data/audio_courses.json.gz` |
+| `audible` | `plugin-audible.js` | `data/audible.json.gz` |
+| `books` | `plugin-books.js` | `data/books.json.gz` (flattened from `books_read.yaml` by `scripts/import_books.py`) |
+| `features` | `plugin-movies.js` | `data/video_features.json.gz` |
+| `museums` | `plugin-museums.js` | `data/museums.json.gz` |
+| `podcasts` | `plugin-podcasts.js` | `data/podcasts.json.gz` |
+| `videos` | `plugin-series.js` | `data/video_series.json.gz` |
+| `youtube` | `plugin-youtube.js` | `data/youtube.json.gz` |

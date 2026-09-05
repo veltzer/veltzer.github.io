@@ -2,17 +2,23 @@
 
 ## Build Scripts
 
-### `scripts/build_docs.py`
+### `scripts/build_site.py`
 
-Full site build: sets `SOURCE_DATE_EPOCH` from the latest git commit (for
-reproducible RSS timestamps) and `PYTHONHASHSEED=0`, then runs `mkdocs build`.
-MkDocs reads from `blog/` and writes to `_site/`.
+The zola build, run by `rsconstruct build` (never invoke `zola build` by
+hand -- see `CLAUDE.md`). Imports the teaching data, regenerates the archive
+stats via `scripts/gen_stats.py`, writes `static/build_info.toml`, syncs the
+theme submodule's tokens into `static/`, then runs `zola build` with
+`PYTHONHASHSEED=0` into `_site/` and post-processes the output (moves the
+English pages under `/en/`, fixes the sitemap, writes the root redirect).
 
 ### `scripts/copy_data.py`
 
-Copies YAML data and PGN files from `../data/` repo into `blog/data/`,
-converts YouTube CSV to YAML, and gzips everything. Uses `gzip -n` for
-reproducible output. Validates source files exist before copying.
+Copies YAML data and PGN files from the `../data/` repo into `static/data/`,
+converts the YouTube CSV to YAML, runs the audible and books imports,
+converts every YAML file to JSON (the frontend reads JSON, not YAML) and
+gzips everything. Uses `gzip -n` for reproducible output. Validates source
+files exist before copying. A manual step, not part of the build: CI has no
+`../data` checkout, and the generated `static/data/` is committed.
 
 The two chess archives (`games.pgn.gz`, `chesscom.pgn.gz`) arrive gzipped
 and are decompressed and concatenated into a single `games.pgn`, which the
@@ -27,13 +33,13 @@ Use `--force` to re-download.
 ### `scripts/fetch_movie_posters.py`
 
 Downloads movie poster images from TMDB (with OMDB fallback) by IMDB ID.
-Output: `blog/images/movie-{imdb_id}.jpg`
+Output: `static/images/movie-{imdb_id}.jpg`
 Requires: `pass` entries `keys/themoviedb.org.read` and `keys/omdbapi.com.key`
 
 ### `scripts/fetch_series_posters.py`
 
 Downloads TV series poster images from TMDB (with OMDB fallback) by IMDB ID.
-Output: `blog/images/series-{imdb_id}.jpg`
+Output: `static/images/series-{imdb_id}.jpg`
 Requires: same as movie posters.
 
 ### `scripts/fetch_audiocourse_images.py`
@@ -41,13 +47,13 @@ Requires: same as movie posters.
 Downloads audio course cover images. Uses Great Courses CDN for courses
 with `great_courses_id`, Audible for those with `audible_asin`, and
 DuckDuckGo image search with tkinter GUI picker for the rest.
-Output: `blog/images/audiocourse-{gc|audible|internal}-{id}.jpg`
+Output: `static/images/audiocourse-{gc|audible|internal}-{id}.jpg`
 
 ### `scripts/fetch_audible_images.py`
 
 Downloads Audible book cover images using the `cover_url` field from
 the YAML. No API keys or authentication needed.
-Output: `blog/images/audible-{asin}.jpg`
+Output: `static/images/audible-{asin}.jpg`
 
 ### `scripts/fetch_book_covers.py`
 
@@ -74,12 +80,12 @@ reading, `readings`, `owned_languages`, `cover`, `url`. Run by
 
 Downloads museum images via DuckDuckGo image search with tkinter GUI picker.
 Searches for `"{name} museum {city}"`.
-Output: `blog/images/museum-{internal_id}.jpg`
+Output: `static/images/museum-{internal_id}.jpg`
 
 ### `scripts/fetch_podcast_images.py`
 
 Downloads podcast images via DuckDuckGo image search with tkinter GUI picker.
-Output: `blog/images/podcast-{internal_id}.jpg`
+Output: `static/images/podcast-{internal_id}.jpg`
 
 ## Shared Modules
 
@@ -98,10 +104,10 @@ and OMDB poster lookup with fallback.
 
 ### `scripts/check_images.py`
 
-Verifies every media item has a corresponding image in `blog/images/`.
-Checks movies, series, audible, audio courses, museums, and podcasts.
-Skips YouTube (uses external CDN thumbnails). (Image check is currently
-commented out in `build_docs.py`; run manually as needed.)
+Verifies every media item has a corresponding image in `static/images/`.
+Checks movies, series, audible, audio courses, museums, podcasts, and books.
+Skips YouTube (uses external CDN thumbnails). Not part of the build; run
+manually as needed.
 
 ### `scripts/check_profile_links.py`
 
@@ -140,28 +146,23 @@ overridden via flags or the matching `API_KEY_*` environment variables.
 
 ## Scripts in `../data/` repo
 
-### `../data/scripts/fetch_great_courses_ids.py`
+### `../data/scripts/great_courses_fetch_ids.py`
 
 Interactive script to look up Great Courses IDs and slugs by searching
 shop.thegreatcourses.com. Shows course info, professor, and cover image
 for confirmation. Incremental with cache in `/tmp/great_courses_cache.json`.
 
-### `../data/scripts/check_great_courses_unique.py`
+### `../data/scripts/great_courses_check_unique.py`
 
 Checks that all `great_courses_id` and `great_courses_slug` values
 in `audio_courses.yaml` are unique.
 
-### `../data/scripts/check_audio_courses_ids.py`
+### `../data/scripts/audio_courses_check_ids.py`
 
 Checks that every audio course has at least one identifier:
 `great_courses_id`, `audible_asin`, or `internal_id`.
 
-### `../data/scripts/check_audio_courses_lecturers.py`
+### `../data/scripts/audio_courses_check_lecturers.py`
 
 Compares lecturer names in YAML against professor names on The Great
 Courses website for courses with a `great_courses_slug`.
-
-### `../data/scripts/apply_slugs.py`
-
-One-time script to apply manually looked-up Great Courses slugs.
-Shows course page info for confirmation before writing.

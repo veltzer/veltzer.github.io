@@ -217,11 +217,12 @@ tags = ["religion", "philosophy", "ethics"]
   redirecting domain splits SEO ranking off the real site.
 - Google Calendar API key is public by design in `static/keys.js` — it is referrer- and
   API-restricted (see `doc/DECISIONS.md`). This is not a leak.
-- **Google Analytics is wired but switched off**: `config.toml`'s
-  `extra.google_analytics_id` is empty, so no `gtag` is emitted. Set it to a
-  `G-XXXXXXXXXX` measurement ID to enable tracking site-wide. The ID is public by
-  design — it identifies the property, it does not grant access to the data. Note GA4
-  sets cookies and there is no consent banner; that trade-off is recorded in
+- **Google Analytics is wired and switched on**: `config.toml`'s
+  `extra.google_analytics_id` holds the `G-XXXXXXXXXX` measurement ID, and
+  `templates/base.html` emits the `gtag` snippet only when it is non-empty, so
+  emptying it disables tracking site-wide. The ID is public by design — it
+  identifies the property, it does not grant access to the data. Note GA4 sets
+  cookies and there is no consent banner; that trade-off is recorded in
   `doc/ANALYTICS.md` under "Consent".
 - Site uses `.nojekyll` to bypass Jekyll processing on GitHub Pages.
 - CI checks out submodules recursively; without that the build fails on missing tokens.
