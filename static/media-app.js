@@ -25,10 +25,13 @@
     // window.mediaPlugins — getDataSources() returns that object, so those keys
     // are what drive the ?data=... URLs and the load-once guard in loadPlugin.
     //
-    // The order here is the order of the nav tabs, and the first entry is the
-    // view shown when the URL names none. Nothing may derive either from
-    // window.mediaPlugins: the scripts load in parallel and register in whatever
-    // order they finish, so the tabs used to reshuffle between page loads.
+    // The first entry is the view shown when the URL names none. The nav tabs
+    // are sorted by their label (see generateNav), not by this order or by
+    // these keys: the keys are URL and preference identifiers and three of
+    // them differ from their label (audio -> Audio Courses, features ->
+    // Movies, videos -> Video Series). Nothing may derive any order from
+    // window.mediaPlugins: the scripts load in parallel and register in
+    // whatever order they finish, so the tabs used to reshuffle between loads.
     window.mediaPluginFiles = {
         'audio': MEDIA_BASE + 'plugin-audio-courses.js',
         'audible': MEDIA_BASE + 'plugin-audible.js',
@@ -58,10 +61,17 @@
         return Promise.all(Object.keys(window.mediaPluginFiles).map(loadPlugin));
     }
 
-    // Plugin keys in registry order -- the one order every nav, default view
-    // and preference key agrees on.
+    // Plugin keys in registry order; the first is the default view.
     function pluginKeys() {
         return Object.keys(window.mediaPluginFiles);
+    }
+
+    // Plugin keys sorted by the label the reader sees on the tab.
+    function pluginKeysByLabel() {
+        const sources = window.mediaPlugins || {};
+        return pluginKeys()
+            .filter(function(key) { return sources[key]; })
+            .sort(function(a, b) { return sources[a].navTitle.localeCompare(sources[b].navTitle); });
     }
 
     // --- Derive sortFields/filters from unified fields registry ---
@@ -468,9 +478,8 @@
         // --- Dynamically Generate Navigation ---
         function generateNav(activeDataType, showStatsOnly) {
             mainNav.innerHTML = ''; // Clear existing nav
-            for (const key of pluginKeys()) {
+            for (const key of pluginKeysByLabel()) {
                 const config = getDataSources()[key];
-                if (!config) continue;
                 const navLink = document.createElement('a');
                 navLink.href = '?data=' + key;
                 navLink.textContent = config.navTitle;
