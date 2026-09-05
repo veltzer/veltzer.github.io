@@ -131,7 +131,9 @@
         let activeConfig = {}; // To store the config of the current view
         let currentPage = 1;
         let currentFilteredItems = [];
-        const PAGE_SIZE = 50;
+        // A multiple of 6 so every page fills its last row at both the 2- and
+        // 3-column widths of the grid (50 left two cards alone on the last row).
+        const PAGE_SIZE = 48;
         const paginationContainer = document.getElementById('pagination-container');
         const sortFieldSelect = document.getElementById('sort-field');
         const sortOrderBtn = document.getElementById('sort-order-btn');
