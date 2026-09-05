@@ -6,7 +6,9 @@ Copy media/chess/youtube data from the sibling ../data repo into static/data.
 YAML data for the media tracker lives in a separate ../data repository and
 is copied in during build. This script validates the sources exist, copies
 the plain YAML files, merges the gzipped chess archives, runs the audible
-import (type fixes + field cleanup) and the youtube CSV->YAML conversion,
+import (type fixes + field cleanup), the books import (nested names, authors
+and readings flattened to one item per book) and the youtube CSV->YAML
+conversion,
 converts every YAML file to JSON, then gzips everything in static/data.
 
 The frontend consumes the JSON, not the YAML: parsing 6.5MB of YAML with
@@ -40,7 +42,7 @@ PLAIN_YAML = [
 ]
 
 # Files that need a source check but are processed rather than copied directly.
-PROCESSED_YAML = ["audible.yaml"]
+PROCESSED_YAML = ["audible.yaml", "books_read.yaml"]
 
 CHESS_DIR = DATA_REPO / "raw" / "topics" / "games" / "chess"
 # Both archives are stored gzipped in the data repo. They are concatenated into
@@ -80,6 +82,15 @@ def import_audible():
     # Import audible with type fixes and field cleanup.
     subprocess.run(
         [str(SCRIPTS / "import_audible.py"), str(DATA_REPO / "yaml" / "audible.yaml"), str(DEST / "audible.yaml")],
+        check=True,
+    )
+
+
+def import_books():
+    # Flatten the nested books_read.yaml (names/authors per language, readings)
+    # into the one-item-per-book shape the media page searches and filters on.
+    subprocess.run(
+        [str(SCRIPTS / "import_books.py"), str(DATA_REPO / "yaml" / "books_read.yaml"), str(DEST / "books.yaml")],
         check=True,
     )
 
@@ -130,6 +141,7 @@ def main():
     validate_sources()
     copy_plain_yaml()
     import_audible()
+    import_books()
     copy_chess()
     convert_youtube()
     convert_yaml_to_json()

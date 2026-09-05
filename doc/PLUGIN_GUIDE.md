@@ -226,6 +226,7 @@ renderStatCard(42, 'Total Items');
 |-----|------|------|
 | `audio` | `plugin-audio-courses.js` | `data/audio_courses.yaml.gz` |
 | `audible` | `plugin-audible.js` | `data/audible.yaml.gz` |
+| `books` | `plugin-books.js` | `data/books.yaml.gz` (flattened from `books_read.yaml` by `scripts/import_books.py`) |
 | `features` | `plugin-movies.js` | `data/video_features.yaml.gz` |
 | `museums` | `plugin-museums.js` | `data/museums.yaml.gz` |
 | `podcasts` | `plugin-podcasts.js` | `data/podcasts.yaml.gz` |

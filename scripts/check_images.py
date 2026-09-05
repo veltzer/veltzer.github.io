@@ -13,6 +13,8 @@ Checks:
                  or audiocourse-internal-{internal_id}.jpg
 - Museums: static/images/museum-{internal_id}.jpg
 - Podcasts: static/images/podcast-{internal_id}.jpg
+- Books: static/images/book-simania-{simania_id}.jpg
+         or book-goodreads-{goodreads_id}.jpg (simania wins when both exist)
 - YouTube: skipped (uses external thumbnails)
 
 Usage:
@@ -26,6 +28,7 @@ import sys
 from pathlib import Path
 
 import yaml
+from import_books import convert_item
 
 # Resolved from this file rather than the cwd, so the script works from
 # anywhere instead of only from the repo root.
@@ -173,6 +176,32 @@ def check_podcasts():
     return len(podcast_entries), errors
 
 
+def check_books():
+    """Check book covers.
+
+    The cover key is derived the same way import_books.py derives it for the
+    site data, so the check and the fetcher (scripts/fetch_book_covers.py)
+    can never disagree about which file a book renders.
+    """
+    entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "books_read.yaml"))
+    errors = 0
+    for entry in entries:
+        flat = convert_item(entry)
+        if not flat.get("goodreads_id") and not flat.get("simania_id"):
+            print(f"  NO ID: {flat.get('name', '?')}")
+            errors += 1
+            continue
+        cover = flat.get("cover")
+        if not cover:
+            # a key listed in import_books.NO_COVER: the site has no image
+            continue
+        path = os.path.join(str(IMAGE_DIR), f"book-{cover}.jpg")
+        if not os.path.exists(path):
+            print(f"  MISSING: {path} ({flat.get('name', '?')})")
+            errors += 1
+    return len(entries), errors
+
+
 def main():
     total_errors = 0
     checks = [
@@ -182,6 +211,7 @@ def main():
         ("Audio Courses", check_audio_courses),
         ("Museums", check_museums),
         ("Podcasts", check_podcasts),
+        ("Books", check_books),
     ]
 
     for label, check_fn in checks:

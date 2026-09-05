@@ -49,6 +49,24 @@ Downloads Audible book cover images using the `cover_url` field from
 the YAML. No API keys or authentication needed.
 Output: `blog/images/audible-{asin}.jpg`
 
+### `scripts/fetch_book_covers.py`
+
+Downloads book covers for `books_read.yaml`. Every book carries a goodreads
+or simania id; both sites publish the cover as the page's `og:image`, so no
+API key is needed. goodreads pages are fetched through `/en/book/show/<id>`
+(the plain url answers scripts with an empty WAF challenge).
+Output: `static/images/book-{cover}.jpg`, where `{cover}` is the key
+`scripts/import_books.py` puts on each item (`simania-<id>`, else
+`goodreads-<id>`).
+
+### `scripts/import_books.py`
+
+Flattens `../data/yaml/books_read.yaml` (names, authors, ownings and
+readings, each a list per language) into one item per book for the media
+page: `name`, `authors`, `rating`/`last_read`/`review` of the latest dated
+reading, `readings`, `owned_languages`, `cover`, `url`. Run by
+`scripts/copy_data.py`.
+
 ### `scripts/fetch_museum_images.py`
 
 Downloads museum images via DuckDuckGo image search with tkinter GUI picker.

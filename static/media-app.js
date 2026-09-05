@@ -27,6 +27,7 @@
     window.mediaPluginFiles = {
         'audio': MEDIA_BASE + 'plugin-audio-courses.js',
         'audible': MEDIA_BASE + 'plugin-audible.js',
+        'books': MEDIA_BASE + 'plugin-books.js',
         'features': MEDIA_BASE + 'plugin-movies.js',
         'museums': MEDIA_BASE + 'plugin-museums.js',
         'podcasts': MEDIA_BASE + 'plugin-podcasts.js',
