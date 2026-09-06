@@ -33,6 +33,10 @@ template = "app.html"
   --warning-dim: rgba(184, 125, 26, 0.12);
   --danger: #c72c34;
   --danger-dim: rgba(199, 44, 52, 0.12);
+  --entity-1: #1976d2;
+  --entity-2: #7b1fa2;
+  --entity-3: #00897b;
+  --entity-4: #c2185b;
   --gradient-start: #303fa1;
   --gradient-end: #526cfe;
   --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.06);
@@ -55,6 +59,10 @@ template = "app.html"
   --warning-dim: rgba(184, 125, 26, 0.12);
   --danger: #c05040;
   --danger-dim: rgba(192, 80, 64, 0.12);
+  --entity-1: #5e6ba8;
+  --entity-2: #7c4a8d;
+  --entity-3: #3d8a7a;
+  --entity-4: #a85a3e;
   --gradient-start: #2c2824;
   --gradient-end: #9b6b3e;
   --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.06);
@@ -77,6 +85,10 @@ template = "app.html"
   --warning-dim: rgba(251, 191, 36, 0.12);
   --danger: #f87171;
   --danger-dim: rgba(248, 113, 113, 0.12);
+  --entity-1: #7dd3fc;
+  --entity-2: #c084fc;
+  --entity-3: #5eead4;
+  --entity-4: #fda4af;
   --gradient-start: #e8eaf0;
   --gradient-end: #6c8cff;
 }
@@ -98,6 +110,10 @@ template = "app.html"
   --warning-dim: rgba(235, 203, 139, 0.15);
   --danger: #bf616a;
   --danger-dim: rgba(191, 97, 106, 0.15);
+  --entity-1: #81a1c1;
+  --entity-2: #b48ead;
+  --entity-3: #8fbcbb;
+  --entity-4: #d08770;
   --gradient-start: #eceff4;
   --gradient-end: #88c0d0;
 }
@@ -119,6 +135,10 @@ template = "app.html"
   --warning-dim: rgba(181, 137, 0, 0.12);
   --danger: #dc322f;
   --danger-dim: rgba(220, 50, 47, 0.12);
+  --entity-1: #2aa198;
+  --entity-2: #6c71c4;
+  --entity-3: #cb4b16;
+  --entity-4: #d33682;
   --gradient-start: #073642;
   --gradient-end: #268bd2;
   --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
@@ -141,6 +161,10 @@ template = "app.html"
   --warning-dim: rgba(246, 193, 119, 0.14);
   --danger: #eb6f92;
   --danger-dim: rgba(235, 111, 146, 0.14);
+  --entity-1: #9ccfd8;
+  --entity-2: #31748f;
+  --entity-3: #ebbcba;
+  --entity-4: #f6c177;
   --gradient-start: #e0def4;
   --gradient-end: #c4a7e7;
 }
@@ -660,8 +684,9 @@ function initThemeSwitcher(options) {
     applyTheme(saved);
 }
 
-// Concatenated ahead of each page's own script, which calls this as a
-// global; the assignment makes that entry point explicit.
+// Loaded via a classic <script src>, so consumers call this as a global
+// (see README). Publish it explicitly rather than relying on top-level
+// declarations leaking onto window.
 window.initThemeSwitcher = initThemeSwitcher;
 
 /* global DATA */
