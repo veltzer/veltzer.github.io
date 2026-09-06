@@ -1,72 +1,23 @@
-# Markdown lint config.
-#
-# The disabled rules below are not style preferences -- each one misfires on
-# this project's content in a way that would make the check pure noise.
+# Markdown lint rules, shared fleet-wide (rsmultigit check-same). Carried
+# over from the pydmt-era .markdownlint.json / .mdl.style.rb configs the
+# repos were maintained against: rules those never addressed stay on.
 
+# MD057 (existing-relative-links) resolves link targets relative to the file
+# that contains them. Marp decks address images from the project root
+# instead (.marprc.mjs sets baseUrl to the repo root), so every such link
+# is reported as broken while resolving correctly at render time. The
+# repos that carry decks verify these targets themselves against the real
+# root -- teaching-slides does it in scripts/check_md.py --images.
+# MD014 (commands-show-output) wants a shell example either to show its
+# output or to drop the "$" prompt. The prompt is deliberate in these
+# repos: it separates the command from its output and marks the shell
+# being used (a Windows example uses ">"), so the rule's fix would
+# rewrite authored teaching material. Kept off fleet-wide.
 [global]
-# The six _index.md files excluded here are app shells: markdown wrappers around
-# large <script>/<style> blocks (the chess viewer, media tracker, calendar,
-# slides, syllabi, animations). rumdl treats that embedded JS as prose -- `rumdl
-# fmt` on content/chess/_index.md collapsed the double space inside the string
-# literal `' ' + game.result`, silently changing what the chess viewer renders.
-# Markdown rules cannot say anything useful about a JS block, so these are out.
-exclude = [
-    "_site",
-    "node_modules",
-    "shared",
-    "content/animations/_index.md",
-    "content/calendar/_index.md",
-    "content/chess/_index.md",
-    "content/media/_index.md",
-    "content/slides/_index.md",
-    "content/syllabi/_index.md",
-]
-disable = [
-    # Inline HTML. The nav pages are deliberately HTML-in-markdown: the
-    # calendar, chess and media pages are app shells that mount JS widgets,
-    # so <div>/<script> is the point, not an accident. 2368 hits, all intended.
-    "MD033",
-    # Line length. Posts are prose with long unwrapped paragraphs, and the
-    # Hebrew translations cannot be hard-wrapped the way English can without
-    # breaking bidi text. 2146 hits.
-    "MD013",
-    # "No space after # in heading". Fires on CSS selectors (#app-animations)
-    # inside <style> blocks on the app pages -- the parser reads them as ATX
-    # headings. False positive, not a heading.
-    "MD018",
-    # Bare URLs. Old imported posts cite URLs inline as plain text; wrapping
-    # them in angle brackets would rewrite historical content to no benefit.
-    "MD034",
-    # First line should be a top-level heading. Zola pages carry TOML front
-    # matter and get their title from it, so an H1 would duplicate it.
-    "MD041",
-    # "Dollar signs before commands without output". Shell examples in the
-    # older sysadmin posts legitimately show the prompt.
-    "MD014",
-    # Broken relative links. rumdl resolves them against the source file, but
-    # zola serves posts from /<lang>/blog/<slug>/, so the "../../../images/..."
-    # in the fatar post resolves to /images/... exactly as intended. Verified
-    # against the built HTML -- the images render. All 34 hits are this pattern.
-    "MD057",
-    # Spaces inside code spans. Fires on exactly two files -- the debian post
-    # and its Hebrew translation -- where the WordPress import mangled the
-    # backtick nesting (`dpkg --purge `dpkg --list | ...``). "Fixing" the space
-    # rewrites published output without repairing the actual breakage, which is
-    # the whole line. See the WordPress note in CLAUDE.md; the posts need
-    # reconstruction by hand, not a formatter.
-    "MD038",
-    # Trailing punctuation in headings. "Production Runs on Linux. Development
-    # Should Have Too." is two sentences, so the final period is deliberate --
-    # the rule stripped it and changed published prose. Punctuation in a heading
-    # is the author's call, not a lint's.
-    "MD026",
-    # "Use fenced code blocks". The five hits are all WordPress-import damage:
-    # in java-runtime-environment-control.md the indented block is a mangled
-    # *list* (its last item lost the indent entirely), not code. Fencing it
-    # would cement the corruption as if it were intentional. These posts need
-    # reconstruction by hand -- see the WordPress note in CLAUDE.md.
-    "MD046",
-    # "Link text should be descriptive". One hit, on a post whose link text is
-    # a bare URL by design. Not worth rewriting published prose over.
-    "MD059",
-]
+disable = ["MD022", "MD024", "MD026", "MD031", "MD032", "MD033", "MD034", "MD057", "MD014"]
+
+[MD007]
+indent = 4
+
+[MD013]
+line_length = 1000
