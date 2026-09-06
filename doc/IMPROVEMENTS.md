@@ -325,12 +325,12 @@ seven `static/plugin-*.js` files and the built page.
   museums split cleanly: 9 carry a full `date_utcz` timestamp, 14 carry a date-only
   `date_ymd`, none carry both. `plugin-museums.js` registered the "Date Visited" field on
   `date_utcz` alone, so for those 14 items:
-  - **The year filter hid three years entirely.** The dropdown was built only from
-    `date_utcz`, offering 2017/2016/2011/2006/1998 — 1999, 2008 and 2010 were absent, so
-    8 of the 23 museums (all of 2010) could not be filtered to at all. Those years *did*
-    appear in the stats chart, so the two views of the same data disagreed.
-  - **Sorting by Date Visited was broken.** The sort key was `undefined` for 14 of 23
-    items, producing visibly unordered output (2010, 2010, 2016, 2008, 2010, ...).
+    - **The year filter hid three years entirely.** The dropdown was built only from
+  `date_utcz`, offering 2017/2016/2011/2006/1998 — 1999, 2008 and 2010 were absent, so
+  8 of the 23 museums (all of 2010) could not be filtered to at all. Those years *did*
+  appear in the stats chart, so the two views of the same data disagreed.
+    - **Sorting by Date Visited was broken.** The sort key was `undefined` for 14 of 23
+  items, producing visibly unordered output (2010, 2010, 2016, 2008, 2010, ...).
 
   `renderDetails` already had its own fallback, which is why the date shown on each card
   looked right and masked both bugs.
@@ -667,12 +667,12 @@ seven `static/plugin-*.js` files and the built page.
   site chrome stays LTR.
 
   Two things worth knowing if this is ever revisited:
-  - The override targets `partials/content.html`, NOT `main.html`. Blog posts render via
-    `blog-post.html`, which defines its own `content` block, so a `main.html` override is
-    silently ignored -- it builds fine and does nothing. Forking `blog-post.html` would
-    work but means re-syncing 138 lines on every theme upgrade; the partial is 12 lines.
-  - `{% extends "blog-post.html" %}` from a same-named override recurses infinitely
-    (`RecursionError`), so extending the theme's own template by name is not an option.
+    - The override targets `partials/content.html`, NOT `main.html`. Blog posts render via
+  `blog-post.html`, which defines its own `content` block, so a `main.html` override is
+  silently ignored -- it builds fine and does nothing. Forking `blog-post.html` would
+  work but means re-syncing 138 lines on every theme upgrade; the partial is 12 lines.
+    - `{% extends "blog-post.html" %}` from a same-named override recurses infinitely
+  (`RecursionError`), so extending the theme's own template by name is not an option.
 
   Verified in a browser: Hebrew prose computes `direction: rtl` / `text-align: right`
   while the header and `<body>` stay `ltr`; an English post has no wrapper and computes

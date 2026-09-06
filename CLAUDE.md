@@ -25,11 +25,11 @@ which records the traps that outlived the migration.
 - `config.toml` — zola config: `base_url`, taxonomies, the `[languages.he]` block, and
   `[extra.nav]` / `[extra.languages]` which drive the nav and language switcher
 - `content/` — all page and post source
-  - `content/blog/*.md` — blog posts, flat (no `YYYY/MM/` nesting). TOML front matter
-    between `+++` lines: `title`, `date`, and a `[taxonomies]` block with `tags`
-  - `content/blog/*.he.md` — Hebrew translations. The `.he` suffix is how zola pairs a
-    post with its translation; nothing else is needed
-  - `content/<page>/_index.md` — the standalone nav pages (about, media, calendar, …)
+    - `content/blog/*.md` — blog posts, flat (no `YYYY/MM/` nesting). TOML front matter
+  between `+++` lines: `title`, `date`, and a `[taxonomies]` block with `tags`
+    - `content/blog/*.he.md` — Hebrew translations. The `.he` suffix is how zola pairs a
+  post with its translation; nothing else is needed
+    - `content/<page>/_index.md` — the standalone nav pages (about, media, calendar, …)
 - `templates/` — Tera templates (`base.html`, `page.html`, `blog.html`, taxonomy pages)
 - `sass/style.scss` — compiled to `/style.css` by zola
 - `static/` — copied verbatim to the site root: app HTML, media plugins, images, data,

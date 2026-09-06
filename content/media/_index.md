@@ -5,6 +5,7 @@ template = "embed.html"
 [extra]
 hide_title = true
 +++
+
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
 // The media tracker's markup uses Tailwind colour utilities (bg-white,

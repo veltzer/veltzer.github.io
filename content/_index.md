@@ -13,4 +13,3 @@ has no pages, so this file exists only to satisfy that. `render = false` keeps
 it from emitting anything: the real page at "/" is the language chooser written
 by scripts/build_site.py after the build.
 -->
-

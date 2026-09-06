@@ -6,7 +6,16 @@ date = 2026-05-31
 tags = ["philosophy", "science", "opinion"]
 +++
 
-There is a small caste of people in any society whose ideas are immediately and mercilessly checked against reality, and a much larger class whose ideas are not. The first group builds the bridges, writes the flight-control software, designs the pressure vessels, sets the doses, lays out the power grid. The second group does almost everything else — pundits, ideologues, gurus, marketers, politicians, motivational speakers, the authors of the books that sell. The first group is tethered to reality on a short leash and punished by physics the moment it strays. The second group floats free, says whatever flatters or sells, and faces no equivalent reckoning. And here is the part worth being angry about: it is the second group, the untethered one, that gets to shape the culture. We have arranged things so that the people forced to respect reality are not the people allowed to influence society, and the people allowed to influence society are not forced to respect reality. This is a strange and unfair division of labor, and almost nobody notices it.
+There is a small caste of people in any society whose ideas are immediately and mercilessly checked against
+reality, and a much larger class whose ideas are not. The first group builds the bridges, writes the
+flight-control software, designs the pressure vessels, sets the doses, lays out the power grid. The second
+group does almost everything else — pundits, ideologues, gurus, marketers, politicians, motivational speakers,
+the authors of the books that sell. The first group is tethered to reality on a short leash and punished by
+physics the moment it strays. The second group floats free, says whatever flatters or sells, and faces no
+equivalent reckoning. And here is the part worth being angry about: it is the second group, the untethered
+one, that gets to shape the culture. We have arranged things so that the people forced to respect reality are
+not the people allowed to influence society, and the people allowed to influence society are not forced to
+respect reality. This is a strange and unfair division of labor, and almost nobody notices it.
 
 ## What It Means to Be Tethered
 
@@ -26,7 +35,16 @@ None of this is checked by physics. The cost of being wrong, where there is any 
 
 The first half is the obvious one: it is unjust that the people who carry the discipline are not the people who get the influence. The engineer who must be right about everything has almost no say over the direction of the society he holds up. The pundit who need not be right about anything steers it. The asymmetry of *consequences* is inverted relative to the asymmetry of *power*. Those who bear reality's punishments do not get reality's microphone.
 
-But the second half is worse, and it is the part that should genuinely alarm you: **being untethered is not merely permitted — it is rewarded.** The two are not independent. An idea that does not have to be true is *free to be optimized for spread*, and the things that make an idea spread — that it flatters the listener, confirms a tribe, offers a villain, promises a rescue, fits on a placard — are systematically different from the things that make an idea true. So the untethered class does not merely escape the discipline the engineers submit to; it actively out-competes the tethered, because it has more design freedom. You can shape a claim to be maximally appealing only if you are not also required to make it correct. Truth is a constraint, and constraints cost you in the popularity contest. The person willing to drop the constraint wins the contest. This is why the loudest, most confident, most shareable voices in a culture are *selected* to be the ones least bound to reality. It is not an accident or a failure of the system. It is what the system optimizes for.
+But the second half is worse, and it is the part that should genuinely alarm you: **being untethered is not
+merely permitted — it is rewarded.** The two are not independent. An idea that does not have to be true is
+*free to be optimized for spread*, and the things that make an idea spread — that it flatters the listener,
+confirms a tribe, offers a villain, promises a rescue, fits on a placard — are systematically different from
+the things that make an idea true. So the untethered class does not merely escape the discipline the engineers
+submit to; it actively out-competes the tethered, because it has more design freedom. You can shape a claim to
+be maximally appealing only if you are not also required to make it correct. Truth is a constraint, and
+constraints cost you in the popularity contest. The person willing to drop the constraint wins the contest.
+This is why the loudest, most confident, most shareable voices in a culture are *selected* to be the ones
+least bound to reality. It is not an accident or a failure of the system. It is what the system optimizes for.
 
 There is a connection here to something I have written about elsewhere: that [unconstrained imagination is the *weaker* kind](@/blog/imagination_of_science_vs_fiction.en.md) — anyone can imagine a dragon, because a dragon cannot be wrong — and that [faith is praised as a virtue precisely in the one domain where evidence is absent](@/blog/faith_as_anti_epistemology.en.md), while in medicine, law, and engineering we correctly treat believing-beyond-the-evidence as a defect. This post is the social version of both. The engineer is the person who is never allowed the dragon. Everyone else is, and we hand them the megaphone.
 
@@ -44,4 +62,13 @@ The fix is not to put engineers in charge; technical competence is not wisdom, a
 
 ## Conclusion
 
-We have the moral accounting backwards. We treat the unconstrained thinker as the impressive one and the constrained thinker as the drudge, when constraint is the entire achievement. The people who hold up the physical world do it by submitting to a reality that punishes every error, and they get plumbing's prestige for it. The people who shape the mental world do it by escaping that same reality, and they get the microphone. Worse, the escape is not tolerated but rewarded, because an idea unbound by truth is free to be optimized for everything *except* truth — and those are the ideas that win. It is not fair that one small class absorbs reality's constraints on everyone's behalf while everyone else is free to think dumb shit and steer the ship by it. But fairness aside, it is *dangerous*, because the part of the culture that is allowed to be wrong is the part we let do the steering. The engineers pay for everyone's fantasies. The bill for the fantasies themselves comes due more slowly, and is handed to all of us.
+We have the moral accounting backwards. We treat the unconstrained thinker as the impressive one and the
+constrained thinker as the drudge, when constraint is the entire achievement. The people who hold up the
+physical world do it by submitting to a reality that punishes every error, and they get plumbing's prestige
+for it. The people who shape the mental world do it by escaping that same reality, and they get the
+microphone. Worse, the escape is not tolerated but rewarded, because an idea unbound by truth is free to be
+optimized for everything *except* truth — and those are the ideas that win. It is not fair that one small
+class absorbs reality's constraints on everyone's behalf while everyone else is free to think dumb shit and
+steer the ship by it. But fairness aside, it is *dangerous*, because the part of the culture that is allowed
+to be wrong is the part we let do the steering. The engineers pay for everyone's fantasies. The bill for the
+fantasies themselves comes due more slowly, and is handed to all of us.

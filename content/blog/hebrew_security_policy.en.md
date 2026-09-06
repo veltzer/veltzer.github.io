@@ -36,9 +36,28 @@ This conclusion supports the position that what matters in government is the com
 
 On the other hand, the shift in the system of government from dictatorship to representative rule (or, as it is today mistakenly — or deliberately — called, democracy) brought about a reduction in the power of the central government. It is hard to dispute the claim that this change of regime was a change for the better, at least for most of the population. From this it would seem that reducing the power of the central government is an advantage. As for the dilemma we set out, this position appears to support the view that courage and the capacity to make decisive choices are not a critical component of a successful system of government, and that intelligence is apparently the more important component.
 
-How are we to reconcile the contradiction between Axelrod's surprising conclusion and the plain fact that representative government looks like a success? The resolution is simple. Tyrannical rule is so bad that it fails our first requirement — "making the right decision" — even though it is strong in its capacity to decide and to execute. Tyrannical rule is problematic to such a degree that the loss involved in reducing its decisiveness in the move to representative government is small compared to the reduction in its power to make very bad decisions. This is the principal reason for the relative successes of representative government. The conclusion, then, is that Axelrod was right, but we are still far from the foreign and security strategy that follows from his findings, because we first had to deal with the catastrophic decision-making of dictators. We do not need a ruler with sophisticated strategies, since the required strategy is simple. But first we must make sure that the central government's decisions are sane.
+How are we to reconcile the contradiction between Axelrod's surprising conclusion and the plain fact that
+representative government looks like a success? The resolution is simple. Tyrannical rule is so bad that it
+fails our first requirement — "making the right decision" — even though it is strong in its capacity to decide
+and to execute. Tyrannical rule is problematic to such a degree that the loss involved in reducing its
+decisiveness in the move to representative government is small compared to the reduction in its power to make
+very bad decisions. This is the principal reason for the relative successes of representative government. The
+conclusion, then, is that Axelrod was right, but we are still far from the foreign and security strategy that
+follows from his findings, because we first had to deal with the catastrophic decision-making of dictators. We
+do not need a ruler with sophisticated strategies, since the required strategy is simple. But first we must
+make sure that the central government's decisions are sane.
 
-Is it worth going further still and reducing the decisiveness of representative government even more? The answer emerging in recent years seems to be no. Representative government appears relatively well suited to small- and medium-scale decisions, but impotent when it comes to fateful ones. It is enough to recall the Israeli government's inability to force a decision in the First Lebanon War through a decision in principle to eliminate Yasser Arafat, and then its inability to withdraw its forces for eighteen years. Did the government here show that it controlled reality, or that reality controlled it? Representative government appears dangerously weak, and so talk of reducing its power is beside the point. In fact, whenever we sense that the people want a strong leader, we find that the reason is a strong leader's ability to make decisions that representative government cannot make. Unfortunately, increasing the power of government is problematic in its own right. The number of people holding power shrinks, and we risk sliding down the slippery slope that leads us back into the bear hug of the dictator.
+Is it worth going further still and reducing the decisiveness of representative government even more? The
+answer emerging in recent years seems to be no. Representative government appears relatively well suited to
+small- and medium-scale decisions, but impotent when it comes to fateful ones. It is enough to recall the
+Israeli government's inability to force a decision in the First Lebanon War through a decision in principle to
+eliminate Yasser Arafat, and then its inability to withdraw its forces for eighteen years. Did the government
+here show that it controlled reality, or that reality controlled it? Representative government appears
+dangerously weak, and so talk of reducing its power is beside the point. In fact, whenever we sense that the
+people want a strong leader, we find that the reason is a strong leader's ability to make decisions that
+representative government cannot make. Unfortunately, increasing the power of government is problematic in its
+own right. The number of people holding power shrinks, and we risk sliding down the slippery slope that leads
+us back into the bear hug of the dictator.
 
 Is there no way out of the maze? Is there no system of government with a dictator's power to implement strategies like Tit For Tat, but without the dictator's tendency to make decisions that are disastrous for the population? Representative government is too impotent to meet these requirements, and dictators who at first appear to be all smiles turn out to be enthusiasts of enriched uranium.
 

@@ -660,6 +660,10 @@ function initThemeSwitcher(options) {
     applyTheme(saved);
 }
 
+// Concatenated ahead of each page's own script, which calls this as a
+// global; the assignment makes that entry point explicit.
+window.initThemeSwitcher = initThemeSwitcher;
+
 /* global DATA */
 const ICON_PDF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><text x="12" y="17" text-anchor="middle" font-size="6" fill="currentColor" stroke="none" font-weight="bold">PDF</text></svg>';
 const ICON_WORD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><text x="12" y="17" text-anchor="middle" font-size="5" fill="currentColor" stroke="none" font-weight="bold">DOC</text></svg>';
@@ -733,7 +737,6 @@ function showSyllabus(path) {
         .then(function(r) { return r.ok ? r.text() : Promise.reject(r.status); })
         .then(function(html) {
             syllabusContent.innerHTML = html;
-            var entry = DATA.find(function(e) { return e.path === path; });
 
             window.scrollTo(0, 0);
         })
@@ -1047,5 +1050,12 @@ sort2DirEl.addEventListener("change", render);
 
     initThemeSwitcher();
 });
+
+// Called from inline onclick handlers in HTML built by this file, so
+// they must be reachable as globals; the assignment makes that explicit.
+window.goBack = goBack;
+window.printSyllabus = printSyllabus;
+window.printCourse = printCourse;
+window.navigateFolder = navigateFolder;
 
 </script>

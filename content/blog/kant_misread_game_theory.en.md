@@ -52,4 +52,13 @@ That is the right reading of the question Kant was fumbling toward. "What if eve
 
 ## Conclusion
 
-The categorical imperative is a beautiful mistake. It senses, correctly, that there is something special about maxims that everyone could adopt — and there is: those maxims describe the cooperative optimum. But it then commits three errors that game theory and evolution expose. It confuses the collective optimum with the rational individual strategy, when the Prisoner's Dilemma shows these diverge. It assumes the relevant states are the uniform ones, when the real equilibrium is a stable mixture in which a defecting minority permanently free-rides on the cooperating majority. And it mistakes our evolved cooperative instincts for the deliverances of pure reason, when they are in fact the very machinery selection built to manage that mixed equilibrium. Morality is not a universal law legible to reason. It is the ongoing, never-finished engineering of incentives in a population that evolution stocked with both cooperators and the cheats who feed on them. Kant asked the right question. He just lived two centuries too early to get the answer right.
+The categorical imperative is a beautiful mistake. It senses, correctly, that there is something special about
+maxims that everyone could adopt — and there is: those maxims describe the cooperative optimum. But it then
+commits three errors that game theory and evolution expose. It confuses the collective optimum with the
+rational individual strategy, when the Prisoner's Dilemma shows these diverge. It assumes the relevant states
+are the uniform ones, when the real equilibrium is a stable mixture in which a defecting minority permanently
+free-rides on the cooperating majority. And it mistakes our evolved cooperative instincts for the deliverances
+of pure reason, when they are in fact the very machinery selection built to manage that mixed equilibrium.
+Morality is not a universal law legible to reason. It is the ongoing, never-finished engineering of incentives
+in a population that evolution stocked with both cooperators and the cheats who feed on them. Kant asked the
+right question. He just lived two centuries too early to get the answer right.

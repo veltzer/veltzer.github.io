@@ -23,7 +23,7 @@ template = "section.html"
 
 פרופילים שונים שלי
 
-### אתרי פיתוח
+## אתרי פיתוח
 
 * [github.com](https://github.com/veltzer)
 * [crates.io](https://crates.io/users/veltzer)
@@ -58,11 +58,11 @@ template = "section.html"
 * [nitrotype](https://www.nitrotype.com/racer/veltzer)
 * [monkeytype](https://monkeytype.com/profile/veltzer)
 * [keybr](https://www.keybr.com)
-  * [keybr mark.veltzer+keybr@gmail.com](https://www.keybr.com/profile/t1z6z7j)
-  * [keybr mark.veltzer@gmail.com](https://www.keybr.com/profile/01l958g)
-  * [keybr veltzer@gnu.org](https://www.keybr.com/profile/m4dnhap)
-  * [keybr mark2776@yahoo.com](https://www.keybr.com/profile/65vu5dy)
-  * [keybr mark.veltzer@protonmail.com](https://www.keybr.com/profile/5508u71)
+    * [keybr mark.veltzer+keybr@gmail.com](https://www.keybr.com/profile/t1z6z7j)
+    * [keybr mark.veltzer@gmail.com](https://www.keybr.com/profile/01l958g)
+    * [keybr veltzer@gnu.org](https://www.keybr.com/profile/m4dnhap)
+    * [keybr mark2776@yahoo.com](https://www.keybr.com/profile/65vu5dy)
+    * [keybr mark.veltzer@protonmail.com](https://www.keybr.com/profile/5508u71)
 
 ### אתרי אוספים עם פרופיל
 

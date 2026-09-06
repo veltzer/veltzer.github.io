@@ -6,7 +6,18 @@ date = 2011-03-29
 tags = ["hardware", "linux", "memory"]
 +++
 
-When you buy a new computer or get one and you are not sure of the quality of memory that it has, or when you buy, upgrade or add new memory you should test it before going on to simply use it. The reason is quite intricate. In most probability the memory with will either work or won't and if the machine works it will be a good indication that the memory works fine. But in a few of the cases your machine may exhibit very strange behavior indeed. Various programs crashing, machine freezes, kernel crashes and the like. In that case, which may happen some time after the upgrade you may fail to connect the symptoms with hardware memory issues and attribute them to other factors like OS upgrades, driver installations or other peripheral failures. This may lead you, as it has led me, on wild goose chases after non issues which will certainly drive you insane or into writing blog posts at 4 AM. So what do I suggest? A simple and short 2 step procedure to be executed when using new memory in order to be sure that your memory is functional and well configured. This can also save you money since from my experience the probability of buying faulty memory is very high (at least 15% from my statistics).
+When you buy a new computer or get one and you are not sure of the quality of memory that it has, or when you
+buy, upgrade or add new memory you should test it before going on to simply use it. The reason is quite
+intricate. In most probability the memory with will either work or won't and if the machine works it will be a
+good indication that the memory works fine. But in a few of the cases your machine may exhibit very strange
+behavior indeed. Various programs crashing, machine freezes, kernel crashes and the like. In that case, which
+may happen some time after the upgrade you may fail to connect the symptoms with hardware memory issues and
+attribute them to other factors like OS upgrades, driver installations or other peripheral failures. This may
+lead you, as it has led me, on wild goose chases after non issues which will certainly drive you insane or
+into writing blog posts at 4 AM. So what do I suggest? A simple and short 2 step procedure to be executed when
+using new memory in order to be sure that your memory is functional and well configured. This can also save
+you money since from my experience the probability of buying faulty memory is very high (at least 15% from my
+statistics).
 
 **First phase is to run the ubiqitous memtest86+.** This is available via the boot menu of most current linux distros. This test runs for some time and long years of using it have led me to a solid statistic according to which if memtest does not find a problem with your memory in the first 30 seconds it will not find any problems in the next 30 hours. But, then again, this is just a statistic, feel free to run this for as long as you wish. If memtest fails return the chips to the manufacturer and get new ones (if you feel that it is the chips fauls - see the note below). If it succeeds then you need to go on to the second phase of configuring the memory properly.
 
@@ -20,7 +31,17 @@ If you want to learn more about memtest and dual core checkout [this](https://we
 
 If you want to know how to compile a Linux kernel learn more at [this](https://web.archive.org/web/20110814201337/http://bobpeers.com/linux/kernel_compiling.php) URL.
 
-**memtester:** There is a package called memtester in Linux which will test memory from user space. In Ubuntu this package is simply called `memtester`. It is developed [here](http://pyropus.ca/software/memtester/). I have tried it out and it is a fine piece of code but does not do multi-threaded testing with CPU affinity. You have to do that on your own at the command line by running two instances of memtester and assigning them to different CPUs via `taskset`. Another problem with memtester is that you need to let it know how much ram to test which is very hard to do since you want to test as much as possible. This means that you need to calculate the size to test which is roughly **total_ram_size-(size_of_os+size_of_all_currently_running_programs)** which is a hard to calculate and if you miscalculate the program may fail since it locks the memory that it gets using mlock, which you need to have permission to perform. It may also throw other programs that you are running at the time into swap (since they are **not** locked into memory).
+**memtester:** There is a package called memtester in Linux which will test memory from user space. In Ubuntu
+this package is simply called `memtester`. It is developed [the memtester home
+page](http://pyropus.ca/software/memtester/). I have tried it out and it is a fine piece of code but does not
+do multi-threaded testing with CPU affinity. You have to do that on your own at the command line by running
+two instances of memtester and assigning them to different CPUs via `taskset`. Another problem with memtester
+is that you need to let it know how much ram to test which is very hard to do since you want to test as much
+as possible. This means that you need to calculate the size to test which is roughly
+**total_ram_size-(size_of_os+size_of_all_currently_running_programs)** which is a hard to calculate and if you
+miscalculate the program may fail since it locks the memory that it gets using mlock, which you need to have
+permission to perform. It may also throw other programs that you are running at the time into swap (since they
+are **not** locked into memory).
 
 The kernel compilation mentioned above is better in my opinion due to the following reasons: it uses all of your CPUs and it also uses every last bit of RAM you have since the kernel is big and during the compilation stage will use up all of your Linux cache which means all of your spare memory.
 

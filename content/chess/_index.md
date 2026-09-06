@@ -228,7 +228,7 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
 
         titleEl.textContent = game.event + (game.year ? ' (' + game.year + ')' : '');
         playersEl.textContent = game.white + ' vs. ' + game.black +
-            (game.result ? '  ' + game.result : '');
+            (game.result ? ' ' + game.result : '');
         selectEl.value = String(currentGame);
         jumpEl.value = String(currentGame + 1);
 
@@ -250,7 +250,7 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
 
     function selectGame(index) {
         currentGame = index;
-        currentMove = 0;      // always open a game at its starting position
+        currentMove = 0; // always open a game at its starting position
         // Re-window when the target is outside the options currently in the
         // DOM, so <select> always has an entry to show as selected.
         if (index < windowStart || index >= windowStart + MAX_OPTIONS) {

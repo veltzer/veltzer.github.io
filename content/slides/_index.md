@@ -927,7 +927,7 @@ template = "app.html"
 
 <hr>
 <p>Mark Veltzer <a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a> <a href="https://github.com/veltzer">@veltzer</a></p>
-<p class="build-info">Built from <code>669c6bb665e7</code> on 2026-08-29 18:08 UTC &middot; local build</p>
+<p class="build-info">Built from <code>302332e406b6</code> on 2026-09-06 01:08 UTC &middot; local build</p>
 </div>
 </div>
 
@@ -1057,6 +1057,8 @@ function navigateFolder(folder) {
     render();
     window.scrollTo(0, 0);
 }
+// Called from inline onclick handlers in generated markup, so it must be a global.
+window.navigateFolder = navigateFolder;
 
 function renderBreadcrumb() {
     if (!currentFolder) {

@@ -8,9 +8,9 @@ tags = ["java", "programming", "linux"]
 
 There are four ways to control Java environment for runtime:
 
-    - _JAVA_OPTIONS environment variable.
-    - Command line when running the java virtual machine.
-    - Java source code. In this case you must make sure to set the option before it is picked up by whatever subsystem it is intended for.
+- _JAVA_OPTIONS environment variable.
+- Command line when running the java virtual machine.
+- Java source code. In this case you must make sure to set the option before it is picked up by whatever subsystem it is intended for.
 - In Java web start you can also use the JNLP file to control the environment passed over to the executing JVM.
 
 Examples of them can be:
