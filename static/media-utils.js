@@ -1,4 +1,3 @@
-/* exported renderBarChart, renderStatCard, mediaFormatDate */
 // Shared utilities for media plugins
 
 const CHART_COLORS = ['#2563eb', '#7c3aed', '#db2777', '#ea580c', '#16a34a', '#dc2626', '#ca8a04'];
@@ -93,3 +92,9 @@ function mediaFormatDate(dateString) {
     if (!dateString) return null;
     return String(dateString).substring(0, 10);
 }
+
+// Published as globals: the media plugins are loaded as classic scripts and
+// call these by name (see the /* global */ header in each plugin-*.js).
+window.renderBarChart = renderBarChart;
+window.renderStatCard = renderStatCard;
+window.mediaFormatDate = mediaFormatDate;

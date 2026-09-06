@@ -1,4 +1,3 @@
-/* global renderBarChart, renderStatCard */
 /*
  * Shared media application.
  *
@@ -429,7 +428,7 @@
             var saved = loadTogglePref(dataType);
 
             fields.forEach(function(tf) {
-                var isOn = saved && saved.hasOwnProperty(tf.key) ? saved[tf.key] : tf.default;
+                var isOn = saved && Object.hasOwn(saved, tf.key) ? saved[tf.key] : tf.default;
                 activeToggles[tf.key] = isOn;
 
                 var label = document.createElement('label');

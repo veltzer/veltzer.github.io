@@ -13,7 +13,7 @@ calendar integration.
 - **Build orchestration**: rsconstruct (single binary, configured via `rsconstruct.toml`
   and `config/*.lua`), npm
 - **Frontend**: HTML5, SCSS, JavaScript (ES9+)
-- **Linting**: eslint (`config/eslint.config.js`), tidy (HTML), pylint (`.pylintrc`),
+- **Linting**: eslint (`.eslint.config.js`), tidy (HTML), pylint (`.pylintrc`),
   mypy (`.mypy.ini`), pytest (`tests/`), shellcheck
 - **Data**: YAML/JSON for media content, PGN for chess games, Markdown for blog posts
 
