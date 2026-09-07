@@ -1,7 +1,8 @@
 # Suggested Improvements
 
 Struck-through entries are done; the note under each records what was actually
-changed and how it was verified. **Nothing is open.**
+changed and how it was verified. **The only open items are in the "Site review,
+2026-09-07" section at the end**; everything above it is closed.
 
 Everything in this file is a record rather than a task. Keep it that way:
 when an item is finished, strike it through and say what was done, rather than
@@ -679,3 +680,80 @@ seven `static/plugin-*.js` files and the built page.
   `ltr`. Post count (80) and sitemap (105 URLs) unchanged.
 
   Still open: `hebrew` remains a language tag in an otherwise topical tag vocabulary.
+
+## Site review, 2026-09-07
+
+Found by walking the live site in a browser (home, blog list, a post, About,
+Training, Media, Chess, in both languages) and grepping the built output. All
+open unless struck through. Ordered roughly by how visible the fault is.
+
+### Bugs
+
+- **Bidi on the Hebrew Training page.** `/he/training/` renders the phone number as
+  "972-50-5665636+" and "C++" as "++C": the Unicode bidi algorithm treats a leading `+`
+  and trailing `++` as neutral punctuation and attaches them to the surrounding RTL run.
+  Wrap such tokens in `<bdi>` (or `<span dir="ltr">`) in the Hebrew source. Same
+  mechanism affects any future Hebrew page that mixes in phone numbers, code names or
+  version strings.
+
+- **Dates on Hebrew pages are in English.** `/he/`, `/he/blog/` and every Hebrew post
+  header print "2 Sep 2026" / "31 August 2026". The four `date(format=...)` calls in
+  `templates/index.html`, `blog.html`, `page.html` and `taxonomy_single.html` take no
+  `locale`; Tera's `date` filter accepts one, so pass `locale="he_IL"` when `page_lang`
+  is `he` (or move the format string into the `[translations]` tables next to the other
+  UI strings, which also lets Hebrew use a different day/month order).
+
+- **Hebrew footer reads "Mark Veltzer · RSS 2026 ©".** Same bidi issue as above:
+  `base.html`'s footer is a single mixed-direction run. Wrap the copyright line in
+  `<span dir="ltr">`, or give the footer its own translated string.
+
+- **Footer year is hardcoded.** `templates/base.html` has a literal `&copy; 2026`. Use
+  `now() | date(format="%Y")` so it never goes stale.
+
+- **Book covers are cropped.** The card image is `w-full h-48 object-cover`, which is
+  right for landscape posters and Great Courses banners but chops the top and bottom off
+  portrait book covers — "Surely You're Joking, Mr. Feynman!" loses its title line. Either
+  `object-contain` on a surface-coloured background for the books plugin only, or a taller
+  box for portrait sources. The `book-no-cover.jpg` placeholder was drawn at 800x384
+  assuming `object-cover`, so it would need redrawing if the geometry changes.
+
+- **The About page's contact line points at Gitter.** `profiles.yaml`'s `contact` entry
+  links `gitter.im/veltzer/mark.veltzer`, which now 301s into Matrix and is effectively
+  dead. `/en/training/` carries a working email and phone; the About page should link
+  there, or the YAML's `contact` should carry the email itself. Remember the same YAML
+  drives the GitHub profile README in `../veltzer`, so the change lands in both places.
+
+- **`/blog/` is a bare 404.** Individual pre-`/en/` post URLs redirect via
+  `LEGACY_REDIRECTS` in `scripts/build_site.py`, but the section roots (`/blog/`,
+  `/tags/`, `/about/`, the app sections) do not. They were real URLs once and are still
+  linked from elsewhere; add them to the map.
+
+### Improvements
+
+- **The chess page downloads the whole 21 MB archive on every visit.** `games.pgn.gz`
+  is fetched, gunzipped and split before anything is usable; on a slow link that is tens
+  of seconds. A progress bar was added on 2026-09-07 (commit `2ad53ba`) so the wait is at
+  least visible, but the real fix is to not need the whole file: have `copy_data.py`
+  emit a small headers-only index (players, event, date, result, offset) and fetch the
+  movetext of a game on demand, or split the archive by year and load the selected year.
+  Stats (61,636 games, win/loss) come from the headers, so the index alone can render
+  the stat tiles.
+
+- **No `og:image` / `twitter:image` anywhere.** Links shared into Slack, WhatsApp, X etc.
+  get a text-only card. One site-wide image (a 1200x630 JPEG under `static/`) emitted from
+  `base.html` is enough; posts could override it later via `[extra]` front matter.
+
+- **The home page does not mention Training.** `home_intro` lists chess, books and
+  courses taught but not the new section. A sentence with a link to `/en/training/` (and
+  the Hebrew equivalent) belongs in the `home_intro` strings in `config.toml`.
+
+- **Literal double hyphen in the home title.** "Mark Veltzer -- Software Engineer,
+  Israel" ships the two hyphens verbatim because `smart_punctuation = false`. Put a real
+  en dash in the `home_title` strings (both languages) and in the About/description
+  strings that use the same idiom.
+
+- **Nav crowding on phones.** Ten items in `.site-nav` with `flex-wrap` and no mobile
+  rule will wrap to three lines on a 360 px screen. Could not be verified from the
+  desktop browser (it would not shrink below ~1450 px); check on a real phone. Options if
+  it is bad: collapse the six app sections under one "Apps" entry, or a hamburger below a
+  breakpoint.
