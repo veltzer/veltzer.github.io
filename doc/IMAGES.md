@@ -13,7 +13,7 @@ verbatim to `/images/` in the built site.
 | Books | `book-{cover}.jpg` (`simania-<id>` or `goodreads-<id>`), `book-no-cover.jpg` placeholder | `og:image` of the goodreads/simania page |
 | Audio Courses (GC) | `audiocourse-gc-{gc_id}.jpg` | Great Courses CDN |
 | Audio Courses (Audible) | `audiocourse-audible-{asin}.jpg` | Audible |
-| Audio Courses (other) | `audiocourse-internal-{id}.jpg` | DuckDuckGo search |
+| Audio Courses (other) | `audiocourse-internal-{id}.jpg`, `audiocourse-no-cover.jpg` placeholder | DuckDuckGo search |
 | Museums | `museum-{internal_id}.jpg` | DuckDuckGo search |
 | Podcasts | `podcast-{internal_id}.jpg` | DuckDuckGo search |
 | YouTube | N/A (external) | `i.ytimg.com` at runtime |

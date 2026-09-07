@@ -170,6 +170,12 @@ window.mediaPlugins['mykey'] = {
         return item.thumbnail_url || '';
     },
 
+    // placeholderImage — optional. When the image renderImage named fails to
+    // load (not fetched yet, wrong id), the card swaps in this one instead of
+    // showing the browser's broken-image icon. renderImage can also return it
+    // directly for an item that has nothing to name an image by.
+    placeholderImage: 'images/thing-no-cover.jpg',
+
     // formatDate — use the shared mediaFormatDate utility
     formatDate: mediaFormatDate
 };

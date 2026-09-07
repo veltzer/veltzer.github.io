@@ -51,6 +51,10 @@ window.mediaPlugins['audio'] = {
         {key: 'progress', label: 'Progress', default: true},
         {key: 'links', label: 'Links', default: true}
     ],
+    // Shown when a course has no id to name an image by, and by media-app.js
+    // when the named file turns out not to exist (a course added to the YAML
+    // before scripts/fetch_audiocourse_images.py has been run for it).
+    placeholderImage: 'images/audiocourse-no-cover.jpg',
     renderImage: function(item) {
         if (item.great_courses_id) {
             return 'images/audiocourse-gc-' + encodeURIComponent(item.great_courses_id) + '.jpg';
@@ -61,7 +65,7 @@ window.mediaPlugins['audio'] = {
         if (item.internal_id) {
             return 'images/audiocourse-internal-' + encodeURIComponent(item.internal_id) + '.jpg';
         }
-        return '';
+        return this.placeholderImage;
     },
     renderDetails: function(item) {
         const lecturers = item.lecturers ? item.lecturers.join(', ') : 'N/A';

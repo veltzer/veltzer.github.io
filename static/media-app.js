@@ -650,6 +650,12 @@
                 const rawImgUrl = activeConfig.renderImage ? activeConfig.renderImage(item, allItems) : '';
                 const imgUrl = rawImgUrl && !/^https?:\/\//.test(rawImgUrl) ? MEDIA_BASE + rawImgUrl : rawImgUrl;
                 const imgHtml = imgUrl ? '<img src="' + escapeHtml(imgUrl) + '" class="media-card-image w-full h-48 object-cover" alt="' + escapeHtml(item.name || '') + '" loading="lazy">' : '';
+                // A plugin may name a placeholder to swap in when the image
+                // it asked for does not exist on the server, so an entry whose
+                // image has not been fetched yet shows that instead of the
+                // broken-image icon. Bound after innerHTML below, since error
+                // events do not bubble.
+                const placeholderUrl = activeConfig.placeholderImage ? MEDIA_BASE + activeConfig.placeholderImage : '';
 
                 col.innerHTML =
                     '<div class="bg-white rounded-lg shadow-sm border border-gray-200 h-full flex flex-col overflow-hidden">' +
@@ -664,6 +670,10 @@
                             '</ul>' +
                         '</div>' +
                     '</div>';
+                const cardImg = col.querySelector('img.media-card-image');
+                if (cardImg && placeholderUrl && imgUrl !== placeholderUrl) {
+                    cardImg.addEventListener('error', function() { cardImg.src = placeholderUrl; }, {once: true});
+                }
                 itemsContainer.appendChild(col);
             });
 
