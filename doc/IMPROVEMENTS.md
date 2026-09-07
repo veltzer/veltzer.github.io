@@ -689,12 +689,14 @@ open unless struck through. Ordered roughly by how visible the fault is.
 
 ### Bugs
 
-- **Bidi on the Hebrew Training page.** `/he/training/` renders the phone number as
-  "972-50-5665636+" and "C++" as "++C": the Unicode bidi algorithm treats a leading `+`
-  and trailing `++` as neutral punctuation and attaches them to the surrounding RTL run.
-  Wrap such tokens in `<bdi>` (or `<span dir="ltr">`) in the Hebrew source. Same
-  mechanism affects any future Hebrew page that mixes in phone numbers, code names or
-  version strings.
+- ~~**Bidi on the Hebrew Training page.** — DONE.~~
+  `/he/training/` rendered the phone number as "972-50-5665636+" and "C++" as "++C":
+  the Unicode bidi algorithm treats a leading `+` and trailing `++` as neutral
+  punctuation and attaches them to the surrounding RTL run. Fixed in
+  `content/training/_index.he.md` by wrapping the phone link in `<bdi dir="ltr">` and
+  `C++` in `<bdi>`; verified in a browser against the built site. Same mechanism will
+  affect any future Hebrew page that mixes in phone numbers, code names or version
+  strings — `<bdi>` is the tool.
 
 - **Dates on Hebrew pages are in English.** `/he/`, `/he/blog/` and every Hebrew post
   header print "2 Sep 2026" / "31 August 2026". The four `date(format=...)` calls in
