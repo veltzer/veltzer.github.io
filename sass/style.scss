@@ -294,6 +294,19 @@ th { background: var(--bg-surface); }
 .chess-viewer { text-align: center; }
 
 .chess-players { color: var(--text-secondary); margin: 0 0 0.25rem; }
+
+// Download progress for the game archive. A native <progress> so the bar is
+// accessible for free; accent-color is what themes it. Hidden once the games
+// are indexed, and the [hidden] rule is needed because display: block would
+// otherwise override the attribute.
+.chess-progress {
+  display: block;
+  width: min(20rem, 100%);
+  height: 0.5rem;
+  margin: 0 auto 0.75rem;
+  accent-color: var(--accent);
+}
+.chess-progress[hidden] { display: none; }
 .chess-counter { color: var(--text-muted); font-size: 0.85rem; margin: 0 0 1.5rem; }
 
 .chess-board {

@@ -7,6 +7,7 @@ template = "chess.html"
 
 <div class="chess-viewer">
   <p id="gamePlayers" class="chess-players">Loading games…</p>
+  <progress id="loadProgress" class="chess-progress" max="1" aria-labelledby="gamePlayers"></progress>
   <p id="gameCounter" class="chess-counter">&nbsp;</p>
 
   <div id="chessStats" class="chess-stats"></div>
@@ -67,6 +68,7 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
     const playersEl = document.getElementById('gamePlayers');
     const counterEl = document.getElementById('gameCounter');
     const statusEl = document.getElementById('status');
+    const progressEl = document.getElementById('loadProgress');
     const statsEl = document.getElementById('chessStats');
     const searchEl = document.getElementById('gameSearch');
     const selectEl = document.getElementById('gameSelect');
@@ -283,12 +285,44 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
         else statusEl.textContent = 'No games match that search.';
     }
 
+    function formatMb(bytes) {
+        return (bytes / 1048576).toFixed(1) + ' MB';
+    }
+
+    // The archive is ~21 MB compressed, which is long enough on a slow link
+    // that "Loading games…" alone looks stuck. Progress is measured on the
+    // compressed bytes as they arrive, before decompression, because that is
+    // what Content-Length describes. Pages serves the file as a plain
+    // application/gzip download (no Content-Encoding), so the count and the
+    // header agree; if a proxy ever re-encodes it and they stop agreeing, the
+    // bar falls back to indeterminate rather than showing a wrong number.
+    function showProgress(received, total) {
+        if (total && received <= total) {
+            progressEl.value = received / total;
+            playersEl.textContent = 'Loading games… ' + formatMb(received) + ' of ' + formatMb(total);
+        } else {
+            progressEl.removeAttribute('value');
+            playersEl.textContent = 'Loading games… ' + formatMb(received);
+        }
+    }
+
     async function load() {
         const response = await fetch(DATA_URL);
         if (!response.ok) throw new Error('HTTP ' + response.status);
+        const total = Number(response.headers.get('Content-Length')) || 0;
+        let received = 0;
+        const counter = new TransformStream({
+            transform: function (chunk, controller) {
+                received += chunk.byteLength;
+                showProgress(received, total);
+                controller.enqueue(chunk);
+            }
+        });
         // The file is served as .gz; DecompressionStream avoids shipping a
         // gunzip implementation.
-        const stream = response.body.pipeThrough(new DecompressionStream('gzip'));
+        const stream = response.body
+            .pipeThrough(counter)
+            .pipeThrough(new DecompressionStream('gzip'));
         return await new Response(stream).text();
     }
 
@@ -299,6 +333,13 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
     });
 
     load().then(function (pgn) {
+        // Splitting ~100 MB of PGN is synchronous and takes a noticeable
+        // moment; yield once so the "Indexing" text actually paints first.
+        progressEl.removeAttribute('value');
+        playersEl.textContent = 'Indexing games…';
+        return new Promise(function (resolve) { setTimeout(resolve, 0); }).then(function () { return pgn; });
+    }).then(function (pgn) {
+        progressEl.hidden = true;
         games = splitGames(pgn);
         if (!games.length) {
             playersEl.textContent = 'No games found in the archive.';
@@ -308,6 +349,7 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
         applyFilter('');
     }).catch(function (error) {
         console.error('Could not load games:', error);
+        progressEl.hidden = true;
         playersEl.textContent = 'Could not load the game archive.';
     });
 
