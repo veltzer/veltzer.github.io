@@ -125,6 +125,13 @@ The 9 "Crawled - currently not indexed" are the same category, smaller.
 This is the obvious next piece of SEO work on this site, and it is genuinely
 open.
 
+One caveat before anyone investigates: this is a **domain** property, so it
+covers every repo publishing to `veltzer.org`, not just this site. The indexed
+count (807) is well above this site's sitemap (517 URLs), and other repos'
+generated docs -- `pyscrapers`, `pytconf` -- appear in the indexed list. So the
+190 are not known to be this site's pages, and the first step is to find out
+whose they are before treating them as a defect here.
+
 ## Deliberately not fixed: Excluded by 'noindex' -- 4 pages
 
 `/rsdedup/print.html`, `/rsdedup/toc.html`, `/rscalendar/print.html`,
@@ -144,6 +151,42 @@ Search Console reports these as a *reason pages are not indexed*, which reads
 like a defect and is not one. Recorded here so the next person to read that
 report does not go fixing them -- and note that the fix would not live in this
 repo anyway, but in the `rsdedup` and `rscalendar` repositories.
+
+**Expect this count to grow, and do not read that as a regression.** All 21
+`rs*` repos publish an mdBook the same way -- byte-identical `docs/book.toml`
+and a byte-identical `docs:` job in `.github/workflows/ci.yml` -- so 42 such
+pages exist on the domain, all carrying the same `noindex`. Only 4 are
+reported because Search Console lists pages it has actually crawled, and it
+had reached these two books by 2026-08-26. As it works through the rest the
+figure drifts toward 42. `rsdedup` and `rscalendar` are not special; they were
+simply crawled first.
+
+## Declined: listing the rs* books in this site's sitemap
+
+The 21 `rs*` mdBooks are in no sitemap at all -- no `rs*` URL appears in this
+site's `sitemap.xml`, none of the books ships its own
+(`/rsdedup/sitemap.xml` is a 404), and nothing on this site links to them.
+Google reaches them only by following each repo's GitHub `homepage` field
+inward, which is why crawl coverage is so uneven.
+
+**Considered and declined for this repo.** The books are not part of this site.
+Zola generates the sitemap from what it built out of `content/`, `templates/`
+and `static/`; the books are built by 21 other repositories' workflows and
+deployed to `veltzer.org/<repo>/` independently. Nothing in this build knows
+those paths exist, so covering them would mean hand-injecting a list of 21 repo
+names into `fix_sitemap()` -- a hand-maintained parallel list that cannot
+verify a repo still exists or which chapters it now has. `doc/IMPROVEMENTS.md`
+records deleting exactly that shape of thing once already (the old
+`blog/sitemap.xml`, stale and listing URLs that no longer existed).
+
+If it is ever worth fixing, it belongs in the `rs*` repos' shared `docs:` job
+or their `book.toml`, not here. Note two constraints there: that workflow is a
+byte-identical fleet invariant, so it changes in all 21 at once or not at all;
+and the job only runs on a release commit, so a change would reach each book's
+site only when that repo next cuts a release.
+
+This site's own sitemap is complete and correct for this site's own pages, and
+that is the scope being maintained here.
 
 ## Current state
 
