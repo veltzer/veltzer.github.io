@@ -21,7 +21,7 @@ The profile links below are the other places I exist online.
 
 <!-- BEGIN generated profiles -- edit ../data/yaml/profiles.yaml -->
 
-In order to contact me use [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/veltzer/mark.veltzer)
+To contact me, write to [mark.veltzer@gmail.com](mailto:mark.veltzer@gmail.com)
 
 Various profiles of mine
 
@@ -33,7 +33,7 @@ Various profiles of mine
 * [metacpan.org](https://metacpan.org/author/VELTZER)
 * [slideshare.net](https://www.slideshare.net/veltzer)
 
-### Learning sites with profiles
+## Learning sites with profiles
 
 * [duolingo](https://www.duolingo.com/profile/mark.veltzer)
 * [udemy](https://www.udemy.com/user/mark-veltzer)
@@ -45,7 +45,7 @@ Various profiles of mine
 * [youtube](https://www.youtube.com/@MarkVeltzer)
 * [ted](https://www.ted.com/profiles/234536)
 
-### Learning sites I use that have no profiles
+## Learning sites I use that have no profiles
 
 * [brilliant](https://brilliant.org)
 * [audible](https://www.audible.com)
@@ -54,7 +54,7 @@ Various profiles of mine
 * [thegreatcoursesplus](https://www.thegreatcoursesplus.com)
 * [kindle](https://read.amazon.com)
 
-### Touch typing
+## Touch typing
 
 * [ratatype](https://www.ratatype.com/u4784203)
 * [nitrotype](https://www.nitrotype.com/racer/veltzer)
@@ -66,7 +66,7 @@ Various profiles of mine
     * [keybr mark2776@yahoo.com](https://www.keybr.com/profile/65vu5dy)
     * [keybr mark.veltzer@protonmail.com](https://www.keybr.com/profile/5508u71)
 
-### Trove sites with profiles
+## Trove sites with profiles
 
 * [goodreads](https://www.goodreads.com/user/show/34371877-mark-veltzer)
 * [imdb](https://www.imdb.com/user/ur0872999)

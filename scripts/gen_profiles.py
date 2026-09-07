@@ -77,9 +77,8 @@ def render(data, lang):
 
     contact = data.get("contact")
     if contact:
-        badge = f"![{contact['badge_alt']}]({contact['badge_url']})"
         lines.append("")
-        lines.append(f"{contact[f'text_{lang}']} [{badge}]({contact['url']})")
+        lines.append(f"{contact[f'text_{lang}']} [{contact['link_text']}]({contact['url']})")
 
     intro = data.get("intro")
     if intro:
@@ -91,14 +90,18 @@ def render(data, lang):
         if not items:
             continue
         lines.append("")
-        lines.append(f"### {group[f'title_{lang}']}")
+        # Level 2: the page's H1 is the front-matter title, so MD001 wants the
+        # first body heading one level down. gen_readme.py in ../veltzer uses
+        # level 3 under its own level-3 page heading.
+        lines.append(f"## {group[f'title_{lang}']}")
         lines.append("")
         for item in items:
             lines.append(f"* [{item['name']}]({item['url']})")
             for child in item.get("children", []):
-                # Two spaces, matching gen_readme.py: MD007 wants indent depth
-                # 1 at two spaces, and this content is linted as markdown.
-                lines.append(f"  * [{child['name']}]({child['url']})")
+                # Four spaces: this content is linted with .rumdl.zola.toml,
+                # whose MD007 indent is 4 (gen_readme.py's README is linted
+                # under that repo's own config, which wants 2).
+                lines.append(f"    * [{child['name']}]({child['url']})")
 
     for extra in data.get("extras", []):
         lines.append("")

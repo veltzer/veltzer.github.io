@@ -19,7 +19,7 @@ template = "section.html"
 
 <!-- BEGIN generated profiles -- edit ../data/yaml/profiles.yaml -->
 
-ליצירת קשר השתמשו ב [![gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/veltzer/mark.veltzer)
+ליצירת קשר כתבו אל [mark.veltzer@gmail.com](mailto:mark.veltzer@gmail.com)
 
 פרופילים שונים שלי
 
@@ -31,7 +31,7 @@ template = "section.html"
 * [metacpan.org](https://metacpan.org/author/VELTZER)
 * [slideshare.net](https://www.slideshare.net/veltzer)
 
-### אתרי לימוד עם פרופיל
+## אתרי לימוד עם פרופיל
 
 * [duolingo](https://www.duolingo.com/profile/mark.veltzer)
 * [udemy](https://www.udemy.com/user/mark-veltzer)
@@ -43,7 +43,7 @@ template = "section.html"
 * [youtube](https://www.youtube.com/@MarkVeltzer)
 * [ted](https://www.ted.com/profiles/234536)
 
-### אתרי לימוד שאני משתמש בהם ללא פרופיל
+## אתרי לימוד שאני משתמש בהם ללא פרופיל
 
 * [brilliant](https://brilliant.org)
 * [audible](https://www.audible.com)
@@ -52,7 +52,7 @@ template = "section.html"
 * [thegreatcoursesplus](https://www.thegreatcoursesplus.com)
 * [kindle](https://read.amazon.com)
 
-### הקלדה עיוורת
+## הקלדה עיוורת
 
 * [ratatype](https://www.ratatype.com/u4784203)
 * [nitrotype](https://www.nitrotype.com/racer/veltzer)
@@ -64,7 +64,7 @@ template = "section.html"
     * [keybr mark2776@yahoo.com](https://www.keybr.com/profile/65vu5dy)
     * [keybr mark.veltzer@protonmail.com](https://www.keybr.com/profile/5508u71)
 
-### אתרי אוספים עם פרופיל
+## אתרי אוספים עם פרופיל
 
 * [goodreads](https://www.goodreads.com/user/show/34371877-mark-veltzer)
 * [imdb](https://www.imdb.com/user/ur0872999)

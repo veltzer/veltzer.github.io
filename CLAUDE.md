@@ -186,7 +186,7 @@ tags = ["religion", "philosophy", "ethics"]
 - **The profile block on the About page is generated — do not hand-edit it.** It
   lives in `../data/yaml/profiles.yaml` and is rendered by `scripts/gen_profiles.py`
   into `content/about/_index.en.md` and `content/about/_index.he.md`. The YAML holds
-  the whole shared block, not just links: `contact` (the gitter line), `intro`,
+  the whole shared block, not just links: `contact` (the email line), `intro`,
   `groups` (the links), and `extras` (the top-committers line, the GitHub stats
   badge, the view counter). Every one carries `_en` and `_he` text so `/he/about/`
   is a real Hebrew page. Only the region between the
