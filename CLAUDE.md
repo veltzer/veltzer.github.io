@@ -230,6 +230,10 @@ tags = ["religion", "philosophy", "ethics"]
   identifies the property, it does not grant access to the data. Note GA4 sets
   cookies and there is no consent banner; that trade-off is recorded in
   `doc/ANALYTICS.md` under "Consent".
+- **Two Tera features do not work in zola 0.23.3.** `{% macro %}` is rejected as
+  "Unknown tag", and the `date` filter's `locale` argument is silently ignored. Shared
+  template logic is an `{% include %}` that reads variables the caller `set`s (see
+  `templates/_date.html`, which is also how Hebrew month names are produced).
 - Site uses `.nojekyll` to bypass Jekyll processing on GitHub Pages.
 - CI checks out submodules recursively; without that the build fails on missing tokens.
 

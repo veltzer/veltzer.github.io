@@ -698,19 +698,22 @@ open unless struck through. Ordered roughly by how visible the fault is.
   affect any future Hebrew page that mixes in phone numbers, code names or version
   strings — `<bdi>` is the tool.
 
-- **Dates on Hebrew pages are in English.** `/he/`, `/he/blog/` and every Hebrew post
-  header print "2 Sep 2026" / "31 August 2026". The four `date(format=...)` calls in
-  `templates/index.html`, `blog.html`, `page.html` and `taxonomy_single.html` take no
-  `locale`; Tera's `date` filter accepts one, so pass `locale="he_IL"` when `page_lang`
-  is `he` (or move the format string into the `[translations]` tables next to the other
-  UI strings, which also lets Hebrew use a different day/month order).
+- ~~**Dates on Hebrew pages are in English.** — DONE.~~
+  `/he/`, `/he/blog/`, the Hebrew tag pages and every Hebrew post header printed
+  "2 Sep 2026" / "31 August 2026". The obvious fix — `date(format=..., locale="he_IL")` —
+  does nothing: zola 0.23.3 accepts the argument and ignores it (fr_FR too, verified in
+  a scratch project), and the next obvious fix, a Tera macro, fails to parse: this zola
+  rejects `{% macro %}` as "Unknown tag". What works is an included snippet,
+  `templates/_date.html`, which reads `d` (and `d_long`) from the caller's context and
+  assembles the Hebrew form "2 בספטמבר 2026" from `%-d`, `%m` and `%Y` plus a month-name
+  array in `config.toml` (`extra.months_he`). English output is byte-identical to before.
 
-- **Hebrew footer reads "Mark Veltzer · RSS 2026 ©".** Same bidi issue as above:
-  `base.html`'s footer is a single mixed-direction run. Wrap the copyright line in
-  `<span dir="ltr">`, or give the footer its own translated string.
+- ~~**Hebrew footer reads "Mark Veltzer · RSS 2026 ©".** — DONE.~~
+  The footer `<p>` in `base.html` now carries `dir="ltr"`: the line is Latin text and
+  symbols only, so it renders as one left-to-right run inside the RTL document.
 
-- **Footer year is hardcoded.** `templates/base.html` has a literal `&copy; 2026`. Use
-  `now() | date(format="%Y")` so it never goes stale.
+- ~~**Footer year is hardcoded.** — DONE.~~
+  `base.html` now emits `now() | date(format="%Y")`.
 
 - ~~**Book covers are cropped.** — DONE.~~
   The card image box is a fixed 2:1 landscape (about 400x192 CSS px) and used

@@ -5,7 +5,7 @@
 <ul class="post-list">
   {%- for post in term.pages %}
   <li><a class="post-link" href="{{ post.permalink }}">{{ post.title }}</a>
-      <time datetime="{{ post.date }}">{{ post.date | date(format="%-d %b %Y") }}</time></li>
+      <time datetime="{{ post.date }}">{% set d = post.date %}{% include "_date.html" %}</time></li>
   {%- endfor %}
 </ul>
 {% endblock %}

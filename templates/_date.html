@@ -1,0 +1,16 @@
+{#- Renders the date in `d` for the current page_lang. Included, not a macro:
+    zola 0.23.3 rejects `{% macro %}` as an unknown tag, and its `date`
+    filter ignores `locale`, so Hebrew is assembled by hand -- "2 בספטמבר
+    2026", the ב prefix being how Hebrew says "on the 2nd of September".
+    Hebrew has no month abbreviations in common use, so both the short and
+    the long form spell the month out.
+    Caller sets `d` (and `d_long`, defaulted to false in base.html):
+      {% set d = post.date %}{% include "_date.html" %} -#}
+{%- if page_lang == "he" -%}
+{%- set m = d | date(format="%m") | int -%}
+{{ d | date(format="%-d") }} ב{{ config.extra.months_he[m - 1] }} {{ d | date(format="%Y") }}
+{%- elif d_long -%}
+{{ d | date(format="%-d %B %Y") }}
+{%- else -%}
+{{ d | date(format="%-d %b %Y") }}
+{%- endif -%}

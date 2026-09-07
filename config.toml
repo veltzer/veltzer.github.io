@@ -206,6 +206,13 @@ dark_theme = "github-dark"
 [extra]
 rss_url = "https://veltzer.org/atom.xml"
 
+# Hebrew month names for templates/_date.html. Zola 0.23.3's `date` filter
+# accepts a `locale` argument and silently ignores it (he_IL and fr_FR both
+# come out in English), and `{% macro %}` is rejected as an unknown tag, so
+# a Hebrew date is assembled by hand from %-d, %m and %Y. Indexed 1..12 via
+# `months_he[m - 1]`.
+months_he = ["ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"]
+
 # Google Analytics 4 measurement ID. Empty disables analytics entirely -- the
 # gtag snippet in base.html is wrapped in a check, so a local build or a fork
 # sends nothing to Google unless this is filled in.

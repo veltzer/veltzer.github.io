@@ -5,6 +5,9 @@
     than pointing at /cs/, which does not exist. -#}
 {%- set page_lang = lang | default(value="en") -%}
 {%- if page_lang == "cs" %}{% set page_lang = "en" %}{% endif -%}
+{#- Default for templates/_date.html: list pages show "2 Sep 2026", a post
+    header overrides this to true for "2 September 2026". -#}
+{%- set d_long = false -%}
 <!DOCTYPE html>
 <html lang="{{ page_lang }}"{% if page_lang == "he" %} dir="rtl"{% endif %}>
 <head>
@@ -237,7 +240,11 @@
 </script>
 
 <footer class="site-footer">
-  <p>&copy; 2026 {{ config.author }} &middot;
+  {#- dir="ltr": the line is Latin text and symbols only, and inside the
+      Hebrew <html dir="rtl"> the bidi algorithm would scatter it into
+      "Mark Veltzer · RSS 2026 ©". The year comes from the build clock so it
+      never goes stale. -#}
+  <p dir="ltr">&copy; {{ now() | date(format="%Y") }} {{ config.author }} &middot;
      <a href="{{ get_url(path='atom.xml') }}">RSS</a></p>
 </footer>
 
