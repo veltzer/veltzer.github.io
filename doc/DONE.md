@@ -102,4 +102,5 @@
 - `doc/PLUGIN_GUIDE.md` — how to create a media plugin
 - `doc/DECISIONS.md` — design decisions and known issues
 - `doc/DONE.md` — completed improvements
+- `doc/SEO.md` — Search Console state: indexing fixes, open validations, what is deliberately noindex
 - Removed stale `doc/TODO.txt`

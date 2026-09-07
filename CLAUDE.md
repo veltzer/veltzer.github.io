@@ -215,6 +215,12 @@ tags = ["religion", "philosophy", "ethics"]
   and `veltzer.github.io` 301-redirects there. Keep every public URL (canonical tags,
   sitemap, RSS, `og:url`, `robots.txt`) on `veltzer.org` — pointing them at the
   redirecting domain splits SEO ranking off the real site.
+- **URLs that ever shipped must keep working.** Two URL schemes have been retired
+  (MkDocs `/YYYY/MM/DD/<slug-from-title>/`, and root-level zola URLs from before
+  English moved to `/en/`), and Google still requests both. `LEGACY_REDIRECTS` in
+  `scripts/build_site.py` maps them; add to it rather than letting a URL 404, and
+  note that zola `aliases` do not work here — see `doc/SEO.md` for why, and for the
+  current Search Console state.
 - Google Calendar API key is public by design in `static/keys.js` — it is referrer- and
   API-restricted (see `doc/DECISIONS.md`). This is not a leak.
 - **Google Analytics is wired and switched on**: `config.toml`'s
