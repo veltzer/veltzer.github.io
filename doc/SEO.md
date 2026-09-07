@@ -128,12 +128,22 @@ open.
 ## Deliberately not fixed: Excluded by 'noindex' -- 4 pages
 
 `/rsdedup/print.html`, `/rsdedup/toc.html`, `/rscalendar/print.html`,
-`/rscalendar/toc.html`. Sphinx-generated print and table-of-contents pages
-carrying an intentional `noindex`. They are correct as they are.
+`/rscalendar/toc.html`. These are **mdBook** output, not built by this repo:
+`rsdedup` and `rscalendar` each keep an mdBook under `docs/` (`docs/book.toml`,
+`build-dir = "book"`) and publish it to a path on this domain. mdBook emits
+`print.html` (the whole book on one printable page) and `toc.html` alongside
+the real chapters, and stamps both with `<meta name="robots" content="noindex">`
+itself. Confirmed by fetching all four URLs.
+
+They are correct as they are. Both are duplicate renderings of chapter content
+that is already indexed at its own URL, so the `noindex` is doing its job --
+removing it would put four duplicates into the index competing with the real
+pages.
 
 Search Console reports these as a *reason pages are not indexed*, which reads
 like a defect and is not one. Recorded here so the next person to read that
-report does not go fixing them.
+report does not go fixing them -- and note that the fix would not live in this
+repo anyway, but in the `rsdedup` and `rscalendar` repositories.
 
 ## Current state
 
