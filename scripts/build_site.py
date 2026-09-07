@@ -146,6 +146,63 @@ def sync_theme():
         shutil.copy2(source, THEME_DEST / name)
 
 
+# Legacy URLs that Google still holds, mapped to the page that serves the same
+# content today. Every one of these was reported as "Not found (404)" in Search
+# Console; each target was verified to return 200 before being listed here.
+#
+# Two generations of URL are represented:
+#
+#   * MkDocs-era permalinks, /YYYY/MM/DD/<slug-from-title>/. The slug came from
+#     the post title, so a later retitling stranded the old URL even though the
+#     post never went anywhere -- which is why divine_command_theory_problems is
+#     reachable here under "what-divine-command-theory-actually-implies".
+#   * Root-level zola URLs from before relocate_english() moved English under
+#     /en/. These differ from the live URL by that one path segment.
+#
+# Redirects rather than resurrected pages: the content exists and is indexed at
+# its current URL, so what the old URL owes a visitor is the way there, and what
+# it owes Google is the 301-equivalent signal that consolidates the two into one
+# ranking rather than leaving a dead end pointing at nothing.
+LEGACY_REDIRECTS = {
+    "2026/03/29/linux-io_uring-vs-windows-io-a-technical-comparison":
+        "/en/blog/linux-io-uring-vs-windows-io/",
+    "2026/04/14/why-wont-god-heal-amputees":
+        "/en/blog/amputees-never-regrow/",
+    "2026/05/06/vicarious-atonement-punishing-the-innocent-to-forgive-the-guilty":
+        "/en/blog/vicarious-atonement/",
+    "2026/05/13/what-divine-command-theory-actually-implies":
+        "/en/blog/divine-command-theory-problems/",
+    "2026/05/18/what-brain-damage-tells-us-about-the-soul":
+        "/en/blog/brain-damage-disproves-the-soul/",
+    "blog/algo-trading-short-timescales":
+        "/en/blog/algo-trading-short-timescales/",
+    "calendar": "/en/calendar/",
+    # Pagination moved under /en/ with the rest of the English site. Page 5 is
+    # the only one Google reported, but the whole run was equally stranded, so
+    # the loop below covers every page the archive currently has.
+    "page/5": "/en/blog/page/5/",
+    # An address from the pre-MkDocs site, still linked from old signatures and
+    # mailing-list archives. The key itself is long gone from this repo; the
+    # about page is where a reader now finds how to reach Mark.
+    "ascx/public_key.asc": "/en/about/",
+}
+
+REDIRECT_PAGE = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="0; url={target}">
+<link rel="canonical" href="{canonical}">
+<meta name="robots" content="noindex, follow">
+<title>Redirecting&hellip;</title>
+</head>
+<body>
+<p>This page has moved to <a href="{target}">{target}</a>.</p>
+</body>
+</html>
+"""
+
+
 ROOT_INDEX = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -262,6 +319,50 @@ def relocate_english(root):
         shutil.move(str(entry), str(english / entry.name))
 
 
+def drop_redirecting_urls(lines):
+    """Drop <url> blocks for paginator page/1/, which is a redirect, not a page.
+
+    Zola gives every paginated section a /page/1/ URL and builds it as a stub
+    that bounces to the paginator root -- /en/tags/atheism/page/1/ redirects to
+    /en/tags/atheism/. The page is real, but that URL is not the one serving it,
+    and zola lists both in the sitemap. With 55 tags per language plus the two
+    blog indexes that is 112 of 629 entries pointing at a redirect.
+
+    Search Console reports this as "Page with redirect" against a sitemap URL,
+    which is a warning aimed squarely at the sitemap: a sitemap is a statement
+    about canonical, indexable URLs, and an entry that redirects contradicts
+    that. The redirect itself is correct and stays -- anyone holding a
+    /page/1/ link still lands in the right place. It just does not belong in
+    the sitemap.
+
+    Only page/1/ is affected. page/2/ upward are real paginated pages and are
+    left alone; a filter broad enough to catch them would drop the archive tail
+    out of the index.
+    """
+    out = []
+    block = None
+    for line in lines:
+        stripped = line.strip()
+        if stripped == "<url>":
+            block = [line]
+            continue
+        if block is not None:
+            block.append(line)
+            if stripped == "</url>":
+                loc = next(
+                    (b.strip() for b in block if b.strip().startswith("<loc>")), None
+                )
+                if loc is None or not loc.endswith("/page/1/</loc>"):
+                    out.extend(block)
+                block = None
+            continue
+        out.append(line)
+    if block is not None:
+        # Unterminated <url> block: keep it rather than silently dropping URLs.
+        out.extend(block)
+    return out
+
+
 def drop_duplicate_urls(lines):
     """Drop <url> blocks whose <loc> was already emitted.
 
@@ -340,6 +441,7 @@ def fix_sitemap(root, site_url):
         out.append(line)
 
     out = drop_duplicate_urls(out)
+    out = drop_redirecting_urls(out)
 
     # Append the root. Done after the loop rather than by tweaking the rewrite
     # branch, so the /en/ entry keeps zola's own position and metadata and this
@@ -356,6 +458,54 @@ def fix_sitemap(root, site_url):
             die("sitemap.xml has no </urlset> -- cannot add the root entry")
 
     sitemap.write_text("\n".join(out) + "\n", encoding="utf-8")
+
+
+def write_legacy_redirects(root, site_url):
+    """Serve the pre-migration URLs that Google still has indexed.
+
+    Has to run AFTER relocate_english(), not as zola `aliases` in the posts'
+    front matter. Zola writes an alias for a default-language page to the site
+    root, and relocate_english() then sweeps every root directory into /en/ --
+    so an alias for /blog/x/ is built, moved, and ends up serving /en/blog/blog/x/
+    while the URL it was written to rescue still 404s. Verified by building with
+    one such alias in place. Writing the files here puts them past that move.
+
+    GitHub Pages serves static files only, so there is no way to emit a real 301;
+    a meta-refresh page with rel=canonical is the standard substitute and is what
+    Google's own documentation recommends for exactly this case. `noindex, follow`
+    keeps the redirect stub itself out of the index while still passing the link
+    on -- without it these pages would be indexed as thin duplicates and the site
+    would trade nine 404s for nine near-empty pages.
+
+    Pagination is expanded from whatever the build actually produced rather than
+    hardcoded: the archive grows, and a list written by hand here would silently
+    stop covering the tail of it.
+    """
+    targets = dict(LEGACY_REDIRECTS)
+
+    # Every /page/N/ that exists under /en/blog/, not just the one Google named.
+    paginated = root / "en" / "blog" / "page"
+    if paginated.is_dir():
+        for entry in paginated.iterdir():
+            if entry.is_dir() and entry.name.isdigit():
+                targets[f"page/{entry.name}"] = f"/en/blog/page/{entry.name}/"
+
+    prefix = site_url.rstrip("/")
+    for source, target in sorted(targets.items()):
+        destination = root / source
+        # The .asc entry is a file path, not a directory URL; everything else
+        # is a directory that needs an index.html inside it.
+        if destination.suffix:
+            destination.parent.mkdir(parents=True, exist_ok=True)
+        else:
+            destination.mkdir(parents=True, exist_ok=True)
+            destination = destination / "index.html"
+        if destination.exists():
+            die(f"legacy redirect {source} would overwrite a real page")
+        destination.write_text(
+            REDIRECT_PAGE.format(target=target, canonical=prefix + target),
+            encoding="utf-8",
+        )
 
 
 def write_root_index(root):
@@ -382,6 +532,7 @@ def main():
         sync_theme()
         build(zola)
         relocate_english(OUTPUT_DIR)
+        write_legacy_redirects(OUTPUT_DIR, base_url())
         fix_sitemap(OUTPUT_DIR, base_url())
         write_root_index(OUTPUT_DIR)
     except subprocess.CalledProcessError as error:

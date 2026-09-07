@@ -9,7 +9,21 @@ hand -- see `CLAUDE.md`). Imports the teaching data, regenerates the archive
 stats via `scripts/gen_stats.py`, writes `static/build_info.toml`, syncs the
 theme submodule's tokens into `static/`, then runs `zola build` with
 `PYTHONHASHSEED=0` into `_site/` and post-processes the output (moves the
-English pages under `/en/`, fixes the sitemap, writes the root redirect).
+English pages under `/en/`, writes the legacy redirects, fixes the sitemap,
+writes the root redirect).
+
+`write_legacy_redirects()` serves the pre-migration URLs Google still has
+indexed -- MkDocs-era `/YYYY/MM/DD/<slug>/` permalinks and the root-level
+zola URLs from before English moved to `/en/`. The map is `LEGACY_REDIRECTS`;
+paginator URLs are expanded from the build output rather than listed. It has
+to run after `relocate_english()`, which is also why these cannot be zola
+`aliases`: an alias is written to the site root and then swept into `/en/`,
+leaving the URL it was meant to rescue still 404ing.
+
+`fix_sitemap()` also drops every `/page/1/` entry (`drop_redirecting_urls()`).
+Zola emits that URL for each paginated section and builds it as a redirect to
+the paginator root, so listing it makes the sitemap advertise 112 redirects.
+The redirect stays for anyone holding such a link; only the sitemap entry goes.
 
 ### `scripts/copy_data.py`
 
