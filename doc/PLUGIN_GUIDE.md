@@ -170,6 +170,12 @@ window.mediaPlugins['mykey'] = {
         return item.thumbnail_url || '';
     },
 
+    // imageFit — optional, 'cover' (default) or 'contain'. The card image box
+    // is a fixed 2:1 landscape; declare 'contain' when the sources are
+    // portrait (book covers, film posters) so they are shown whole over a
+    // blurred backdrop instead of being cropped to the middle third.
+    imageFit: 'contain',
+
     // placeholderImage — optional. When the image renderImage named fails to
     // load (not fetched yet, wrong id), the card swaps in this one instead of
     // showing the browser's broken-image icon. renderImage can also return it

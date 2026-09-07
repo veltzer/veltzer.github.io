@@ -72,6 +72,8 @@ window.mediaPlugins['books'] = {
         {key: 'remark', label: 'Remark', default: true},
         {key: 'link', label: 'Link', default: true}
     ],
+    // Covers/posters are 2:3 portrait; see imageFit in media-app.js.
+    imageFit: 'contain',
     renderImage: function(item) {
         // No cover key means neither goodreads nor simania has an image for
         // the book (import_books.NO_COVER); show the placeholder rather than

@@ -649,7 +649,22 @@
                 // map repeat visits onto the one image kept for that museum.
                 const rawImgUrl = activeConfig.renderImage ? activeConfig.renderImage(item, allItems) : '';
                 const imgUrl = rawImgUrl && !/^https?:\/\//.test(rawImgUrl) ? MEDIA_BASE + rawImgUrl : rawImgUrl;
-                const imgHtml = imgUrl ? '<img src="' + escapeHtml(imgUrl) + '" class="media-card-image w-full h-48 object-cover" alt="' + escapeHtml(item.name || '') + '" loading="lazy">' : '';
+                // The image box is a fixed 2:1 landscape. Landscape sources
+                // (Audible banners, course art, museum photos) fill it with
+                // object-fit: cover. Portrait posters and book covers would
+                // lose two thirds of their height to that crop, so a plugin
+                // whose sources are portrait declares imageFit: 'contain':
+                // the whole image is shown, and the bands either side are a
+                // blurred, enlarged copy of the same image rather than flat
+                // colour. Styles for the three classes live in
+                // content/media/_index.md next to the other #media-root rules.
+                const contain = activeConfig.imageFit === 'contain';
+                const imgHtml = imgUrl
+                    ? '<div class="media-card-image' + (contain ? ' media-card-image--contain' : '') + '">' +
+                        (contain ? '<img class="media-card-backdrop" src="' + escapeHtml(imgUrl) + '" alt="" aria-hidden="true" loading="lazy">' : '') +
+                        '<img class="media-card-img" src="' + escapeHtml(imgUrl) + '" alt="' + escapeHtml(item.name || '') + '" loading="lazy">' +
+                      '</div>'
+                    : '';
                 // A plugin may name a placeholder to swap in when the image
                 // it asked for does not exist on the server, so an entry whose
                 // image has not been fetched yet shows that instead of the
@@ -670,9 +685,11 @@
                             '</ul>' +
                         '</div>' +
                     '</div>';
-                const cardImg = col.querySelector('img.media-card-image');
+                const cardImg = col.querySelector('img.media-card-img');
                 if (cardImg && placeholderUrl && imgUrl !== placeholderUrl) {
-                    cardImg.addEventListener('error', function() { cardImg.src = placeholderUrl; }, {once: true});
+                    cardImg.addEventListener('error', function() {
+                        col.querySelectorAll('.media-card-image img').forEach(function(img) { img.src = placeholderUrl; });
+                    }, {once: true});
                 }
                 itemsContainer.appendChild(col);
             });

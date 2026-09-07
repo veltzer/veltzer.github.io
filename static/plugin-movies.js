@@ -29,6 +29,8 @@ window.mediaPlugins['features'] = {
         {key: 'with', label: 'With', default: false},
         {key: 'imdb', label: 'IMDb Link', default: true}
     ],
+    // Covers/posters are 2:3 portrait; see imageFit in media-app.js.
+    imageFit: 'contain',
     renderImage: function(item) {
         if (!item.imdb_id) return '';
         return 'images/movie-' + encodeURIComponent(item.imdb_id) + '.jpg';

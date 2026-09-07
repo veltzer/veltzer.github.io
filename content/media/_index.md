@@ -82,6 +82,33 @@ font-family: Inter, Heebo, sans-serif;
     border-color: var(--border);
 }
 #media-root input::placeholder { color: var(--text-muted); }
+
+/* Card image box, rendered by media-app.js. A fixed 2:1 landscape box; the
+   image inside covers it unless the plugin asked for contain, in which case
+   the whole image is shown and a blurred, enlarged copy of it fills the bands
+   either side. The backdrop is scaled up so the blur does not fade to
+   transparent at the edges. */
+#media-root .media-card-image {
+    position: relative;
+    height: 12rem;
+    overflow: hidden;
+    background: var(--bg-surface);
+}
+#media-root .media-card-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+#media-root .media-card-img { position: relative; }
+#media-root .media-card-image--contain .media-card-img { object-fit: contain; }
+#media-root .media-card-backdrop {
+    position: absolute;
+    inset: 0;
+    transform: scale(1.2);
+    filter: blur(14px) saturate(0.8);
+    opacity: 0.6;
+}
 </style>
 <style id="toggle-styles"></style>
 

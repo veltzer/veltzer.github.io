@@ -712,12 +712,18 @@ open unless struck through. Ordered roughly by how visible the fault is.
 - **Footer year is hardcoded.** `templates/base.html` has a literal `&copy; 2026`. Use
   `now() | date(format="%Y")` so it never goes stale.
 
-- **Book covers are cropped.** The card image is `w-full h-48 object-cover`, which is
-  right for landscape posters and Great Courses banners but chops the top and bottom off
-  portrait book covers — "Surely You're Joking, Mr. Feynman!" loses its title line. Either
-  `object-contain` on a surface-coloured background for the books plugin only, or a taller
-  box for portrait sources. The `book-no-cover.jpg` placeholder was drawn at 800x384
-  assuming `object-cover`, so it would need redrawing if the geometry changes.
+- ~~**Book covers are cropped.** — DONE.~~
+  The card image box is a fixed 2:1 landscape (about 400x192 CSS px) and used
+  `object-cover` for everything. Book covers, film posters and series posters are all
+  stored at 2:3 portrait (~256x384), so the browser scaled them to the box width and
+  showed only the middle third — "Surely You're Joking, Mr. Feynman!" lost its title
+  line. Fixed with a per-plugin `imageFit` property (documented in
+  `doc/PLUGIN_GUIDE.md`): books, movies and series declare `'contain'`, and
+  `media-app.js` then renders the whole image over a blurred, enlarged copy of itself so
+  the bands either side are not flat colour. Landscape plugins (Audible, audio courses,
+  museums, podcasts) are unchanged. The two placeholders still fit: they were drawn at
+  800x384, which `contain` shows whole in the same box. Verified in a browser on the
+  Books, Movies and Audible tabs.
 
 - **The About page's contact line points at Gitter.** `profiles.yaml`'s `contact` entry
   links `gitter.im/veltzer/mark.veltzer`, which now 301s into Matrix and is effectively
