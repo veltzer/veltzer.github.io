@@ -369,6 +369,7 @@ cdn
 cdns
 ceqhg
 cgroups
+chairness
 challengeresponseauthentication
 charset
 checkable
@@ -786,6 +787,7 @@ onload
 openat
 openjdk
 openssh
+operationalized
 orbitofrontal
 os
 ot
@@ -804,6 +806,7 @@ pastoralists
 pcb
 pdf
 pe
+percepts
 perl
 pgn
 pgrep
@@ -988,6 +991,7 @@ systemd
 tagging
 tagname
 taskset
+testability
 textcontent
 tf
 th
