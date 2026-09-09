@@ -46,7 +46,8 @@ dep_inputs = [
 src_dirs = [".github"]
 dep_inputs = [".yamllint.yaml"]
 [processor.taplo]
-src_files = ["config.toml", "rsconstruct.toml"]
+src_files = ["config.toml", "rsconstruct.toml", ".rumdl.toml", ".rumdl.zola.toml", "pyproject.toml", "static/identity.toml"]
+
 [processor.encoding]
 src_dirs = ["scripts", "static", "templates", "sass"]
 src_exclude_dirs = ["vendor"]
