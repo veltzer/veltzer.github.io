@@ -66,7 +66,9 @@ ETF
 ETW
 Edom
 Ehud
+Eliezer
 Elyon
+Embeddings
 Enki
 Euthyphro
 Evidential
@@ -188,6 +190,7 @@ Noth
 Olmert
 Omni
 Omnibenevolence
+OpenAI
 Optimizers
 Origen
 Ostara
@@ -287,6 +290,7 @@ YHWH
 Yadin
 Yamm
 Yasser
+Yehuda
 Yigael
 Yisra
 abiogenesis
@@ -456,6 +460,7 @@ desc
 deus
 dev
 didn
+dimensionality
 diminishment
 dimm
 dir
@@ -492,6 +497,7 @@ electrochemistry
 electronification
 elohim
 else's
+embeddings
 endosymbiotic
 epicycle
 epicycles
@@ -936,6 +942,7 @@ shouldn
 showpeople
 showstats
 showstatsonly
+signifier
 sl
 sm
 smybpbjrimt
