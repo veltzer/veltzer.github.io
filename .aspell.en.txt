@@ -92,6 +92,7 @@ Gazzaniga's
 Gezer
 Ghazali
 Giordano
+GloVe
 Goodacre
 Goshen
 Gottwald
@@ -166,6 +167,7 @@ Meridor
 Midian
 Midianite
 Midianites
+Mikolov
 Millerites
 MkDocs
 Mofaz
@@ -277,6 +279,7 @@ Unfalsifiable
 Uriyahu
 UsePAM
 Utnapishtim
+Vec
 Verrier
 Viktor
 Vitalism
@@ -284,6 +287,7 @@ WPA
 Wernicke's
 Winkler
 Winsock
+Wittgensteinian
 Wykstra
 Xenu
 YHWH
@@ -293,6 +297,7 @@ Yasser
 Yehuda
 Yigael
 Yisra
+Zellig
 abiogenesis
 acces
 acls
@@ -1056,6 +1061,7 @@ unpersuadable
 unplumbable
 unprovability
 unprovable
+unquantifiable
 unreachably
 unrebutted
 unrefuted
