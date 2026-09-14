@@ -79,6 +79,7 @@ Flavianum
 Flavius
 Frankl
 Frankl's
+Frege
 Fridman
 Friedrich
 Frontotemporal
@@ -171,6 +172,7 @@ Mikolov
 Millerites
 MkDocs
 Mofaz
+Molière's
 Moshik
 Moshik's
 Muratorian
@@ -479,6 +481,7 @@ distros
 dmy
 dockerfile
 domcontentloaded
+dormitive
 dpkg
 dropbox
 dropdown
@@ -1047,6 +1050,7 @@ undiscussed
 unexamined
 unfalsifiability
 unfalsifiable
+unformalisable
 unfree
 unicode
 universalizability
