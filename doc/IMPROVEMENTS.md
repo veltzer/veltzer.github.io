@@ -681,6 +681,17 @@ seven `static/plugin-*.js` files and the built page.
 
   Still open: `hebrew` remains a language tag in an otherwise topical tag vocabulary.
 
+- ~~**Is everything from the old WordPress blog in this repo?** — CLOSED, 2026-09-19.~~
+  Checked against the last WordPress database dump (2019-05-11, the newest backup under
+  `~/insync/backups/db/`): 29 published posts, 2 drafts, 15 pages. 28 of the 29 posts are
+  here, every one with both `.en.md` and `.he.md`, and none is shorter than the dump's text
+  (the grep post's listing was reconstructed; the dump holds the original with its `<`
+  characters intact). Not here: one published post, "Catenating mp3 files correctly under
+  Linux" (2013-01-23, avconv concat script); the two drafts ("Command line dates for
+  Javascript", "Integrating jack and pulseaudio"); and the 15 WordPress pages (About,
+  Music, Computing, Politics, ...). **Decision by the author: none of it is to be
+  integrated.** The backup stays where it is; do not raise this again.
+
 ## Site review, 2026-09-07
 
 Found by walking the live site in a browser (home, blog list, a post, About,
