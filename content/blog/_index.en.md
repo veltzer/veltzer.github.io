@@ -1,5 +1,6 @@
 +++
 title = "Blog"
+description = "Essays by Mark Veltzer on programming, Linux, philosophy, religion, politics and economics, written since 2010 in English and Hebrew."
 sort_by = "date"
 paginate_by = 10
 template = "blog.html"

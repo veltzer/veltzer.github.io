@@ -8,7 +8,9 @@ non-byte-reproducible, which in turn makes it impossible to validate a build
 change by diffing output.
 
 The fix in both places was to loop `config.extra.languages`, which is a fixed
-list in config.toml, and look each language up in page.translations. This test
+list in config.toml, and look each language up in page.translations. base.html
+now merges page.translations and section.translations into one `translations`
+variable and loops that, so the guard covers the alias as well. This test
 asserts that shape rather than re-running zola twice: a build takes seconds and
 needs zola on PATH, while the property that actually matters is visible in the
 template source.
@@ -19,9 +21,10 @@ from pathlib import Path
 
 TEMPLATES = Path(__file__).resolve().parent.parent / "templates"
 
-# `{% for x in page.translations %}` in any spacing/whitespace-control form.
+# `{% for x in page.translations %}`, `... in section.translations` or the
+# merged `... in translations`, in any spacing/whitespace-control form.
 DIRECT_LOOP = re.compile(
-    r"\{%-?\s*for\s+\w+\s+in\s+page\.translations\s*-?%\}"
+    r"\{%-?\s*for\s+\w+\s+in\s+(?:page\.|section\.)?translations\s*-?%\}"
 )
 LANGUAGES_LOOP = re.compile(
     r"\{%-?\s*for\s+\w+\s+in\s+config\.extra\.languages\s*-?%\}"
@@ -33,7 +36,7 @@ def templates_with_translations():
     """Every template that mentions page.translations at all."""
     return [
         path for path in sorted(TEMPLATES.glob("*.html"))
-        if "page.translations" in path.read_text(encoding="utf-8")
+        if "translations" in path.read_text(encoding="utf-8")
     ]
 
 

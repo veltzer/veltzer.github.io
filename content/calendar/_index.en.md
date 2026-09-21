@@ -1,5 +1,6 @@
 +++
 title = "My Public Calendar"
+description = "Mark Veltzer's public Google calendar, with month, week and day views."
 template = "app.html"
 +++
 

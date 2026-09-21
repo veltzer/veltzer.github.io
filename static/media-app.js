@@ -128,6 +128,11 @@
 
         let allItems = []; // To store the fetched data
         let activeConfig = {}; // To store the config of the current view
+        // Bumped on every loadData() call. A load that finishes after a newer
+        // one started must not touch the page: clicking YouTube then Museums
+        // used to render the 29k YouTube items through the museums plugin
+        // when the slower fetch landed second.
+        let loadSequence = 0;
         let currentPage = 1;
         let currentFilteredItems = [];
         // A multiple of 6 so every page fills its last row at both the 2- and
@@ -535,6 +540,8 @@
 
         // --- Fetch and Parse JSON Data ---
         async function loadData() {
+            const thisLoad = ++loadSequence;
+            const isStale = () => thisLoad !== loadSequence;
             const urlParams = new URLSearchParams(window.location.search);
             const dataType = urlParams.get('data') || pluginKeys()[0];
             const showStatsOnly = urlParams.get('stats') === 'true';
@@ -569,6 +576,7 @@
             try {
                 statusMessage.textContent = 'Loading ' + activeConfig.title + '...';
                 const response = await fetch(MEDIA_BASE + activeConfig.file);
+                if (isStale()) return;
 
                 if (!response.ok) {
                     throw new Error('HTTP error! status: ' + response.status + ". Make sure '" + activeConfig.file + "' is accessible.");
@@ -590,6 +598,7 @@
                 } else {
                     jsonText = await response.text();
                 }
+                if (isStale()) return;
                 // JSON rather than YAML: js-yaml took ~399ms on the 6.5MB youtube
                 // data against ~31ms for JSON.parse, all on the main thread.
                 const data = JSON.parse(jsonText);
@@ -615,6 +624,7 @@
                 statusMessage.textContent = '';
 
             } catch (error) {
+                if (isStale()) return;
                 console.error('Error loading or parsing data file:', error);
                 itemsContainer.innerHTML = '';
                 statsContainer.innerHTML = '';

@@ -1,5 +1,6 @@
 +++
 title = "Media Collection"
+description = "What Mark Veltzer has read, watched and listened to: books, audiobooks, audio courses, movies, series, podcasts, museums and YouTube, with ratings and notes."
 template = "embed.html"
 
 [extra]

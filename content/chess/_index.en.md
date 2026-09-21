@@ -1,5 +1,6 @@
 +++
 title = "Chess Viewer"
+description = "Mark Veltzer's chess games from online play, replayable move by move on an interactive board."
 template = "chess.html"
 +++
 

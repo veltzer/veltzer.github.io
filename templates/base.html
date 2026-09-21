@@ -7,6 +7,30 @@
     than pointing at /cs/, which does not exist. -#}
 {%- set page_lang = lang | default(value="en") -%}
 {%- if page_lang == "cs" %}{% set page_lang = "en" %}{% endif -%}
+{#- The translations of whatever is being rendered. Posts carry
+    page.translations; sections (the blog index, the apps, about) carry
+    section.translations, which zola 0.23.3 exposes but this template used to
+    ignore, so every section page's hreflang alternates were missing and its
+    language switch went to the other language's home instead of the sibling
+    section. Taxonomy pages have neither and get an empty list, so they still
+    fall back to the language root. The root section additionally lists the
+    phantom "cs" entry; it never matches a code in config.extra.languages, so
+    the loops below drop it for free. -#}
+{%- if page and page.translations %}{% set translations = page.translations %}
+{%- elif section and section.translations %}{% set translations = section.translations %}
+{%- else %}{% set translations = [] %}{% endif -%}
+{#- One description for <meta name="description"> and og:description, so the
+    two never disagree. Posts: their own description, else the opening text --
+    `if page.description` rather than the `default` filter, because zola sets
+    description to the empty string when the front matter omits it and
+    `default` only fills in a *missing* value; with the filter every post
+    shipped an empty meta description. Sections: the `description` in their
+    front matter, which every nav section sets. Anything else (taxonomies,
+    404) gets the site blurb. -#}
+{%- if page and page.description %}{% set meta_desc = page.description %}
+{%- elif page %}{% set meta_desc = page.content | striptags | truncate(length=160) %}
+{%- elif section and section.description %}{% set meta_desc = section.description %}
+{%- else %}{% set meta_desc = config.description %}{% endif -%}
 {#- Default for templates/_date.html: list pages show "2 Sep 2026", a post
     header overrides this to true for "2 September 2026". -#}
 {%- set d_long = false -%}
@@ -16,7 +40,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}{{ config.title }}{% endblock %}</title>
-<meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
+<meta name="description" content="{% block description %}{{ meta_desc }}{% endblock %}">
 
 {#- Canonical, alternates and Open Graph.
 
@@ -41,11 +65,16 @@
     non-reproducible for no benefit. Looping a fixed config list and looking
     each language up gives a stable order. The site-level switcher below has
     always done it this way. -#}
-{%- if page and page.translations %}
+{%- if translations %}
 {%- for entry in config.extra.languages %}
-{%- for translation in page.translations %}
+{%- for translation in translations %}
 {%- if translation.lang == entry.code %}
 <link rel="alternate" hreflang="{{ entry.code }}" href="{{ translation.permalink }}">
+{%- if entry.code == "en" %}
+{#- x-default names the page to serve a reader whose language matches
+    neither alternate; English is the site's lingua franca. -#}
+<link rel="alternate" hreflang="x-default" href="{{ translation.permalink }}">
+{%- endif %}
 {%- endif %}
 {%- endfor %}
 {%- endfor %}
@@ -53,14 +82,10 @@
 <meta property="og:type" content="{% if page %}article{% else %}website{% endif %}">
 <meta property="og:site_name" content="{{ config.title }}">
 <meta property="og:locale" content="{% if page_lang == 'he' %}he_IL{% else %}en_US{% endif %}">
-<meta property="og:title" content="{% block og_title %}{% if page %}{{ page.title }}{% elif section %}{{ section.title }}{% else %}{{ config.title }}{% endif %}{% endblock %}">
-{#- The description block cannot be called twice in Tera, so compute the same
-    fallback here rather than duplicating the block. -#}
-{%- if page and page.description %}{% set og_desc = page.description %}
-{%- elif page %}{% set og_desc = page.content | striptags | truncate(length=160) %}
-{%- elif section and section.description %}{% set og_desc = section.description %}
-{%- else %}{% set og_desc = config.description %}{% endif %}
-<meta property="og:description" content="{{ og_desc }}">
+{#- `term` is set on a single tag's page, `terms` on the tag list; without
+    those branches every tag page shared the site title as its og:title. -#}
+<meta property="og:title" content="{% block og_title %}{% if page %}{{ page.title }}{% elif section %}{{ section.title }}{% elif term %}{{ term.name }}{% elif terms %}{{ trans(key="tags_title", lang=page_lang) }}{% else %}{{ config.title }}{% endif %}{% endblock %}">
+<meta property="og:description" content="{{ meta_desc }}">
 <meta name="twitter:card" content="summary">
 {%- if page and page.date %}
 <meta property="article:published_time" content="{{ page.date }}">
@@ -112,7 +137,10 @@
     as our overrides, so load order is what decides it. -#}
 {%- block vendor_css %}{% endblock %}
 <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
-<link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path='atom.xml') }}">
+{#- lang= is load-bearing: without it get_url resolves to the root /atom.xml,
+    which is zola's feed for the phantom default language -- valid XML with
+    zero entries. The real feeds are /en/atom.xml and /he/atom.xml. -#}
+<link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path='atom.xml', lang=page_lang) }}">
 {%- block extra_head %}{% endblock %}
 
 {#- Google Analytics 4.
@@ -164,13 +192,12 @@
 
   {#- Header controls: language and theme, both as <select> elements.
 
-      Language: where the current page has a translation (page.translations, set
-      on blog posts) the option points straight at it so the reader stays where
-      they are. Only page.translations is consulted: zola 0.23.3 also exposes
-      section.translations, but nothing below reads it, so on section pages
-      (the blog index, the apps, about) and on taxonomy pages the option falls
-      back to the other language's home page -- better than hiding the
-      switcher and leaving /he/ unreachable from the English site. Navigation is
+      Language: where the current document has a translation -- posts via
+      page.translations, sections via section.translations, merged into
+      `translations` at the top of this file -- the option points straight at
+      it so the reader stays where they are. Taxonomy pages have neither, so
+      there the option falls back to the other language's home page -- better
+      than hiding the switcher and leaving /he/ unreachable. Navigation is
       a plain location change on `change`, so it still works without JS in the
       sense that the options carry real URLs.
 
@@ -191,8 +218,8 @@
             this scope, or the write lands on a different variable and the value
             comes out empty. Seed it once per iteration with set_global too. -#}
         {%- set_global target = "/" ~ entry.code ~ "/" %}
-        {%- if page and page.translations %}
-          {%- for translation in page.translations %}
+        {%- if translations %}
+          {%- for translation in translations %}
             {#- The permalink is used as-is. There used to be a rewrite here
                 that inserted /en/ for the default language, from when English
                 was the default and zola served it at the site root. Both
@@ -249,7 +276,7 @@
       "Mark Veltzer · RSS 2026 ©". The year comes from the build clock so it
       never goes stale. -#}
   <p dir="ltr">&copy; {{ now() | date(format="%Y") }} {{ config.author }} &middot;
-     <a href="{{ get_url(path='atom.xml') }}">RSS</a></p>
+     <a href="{{ get_url(path='atom.xml', lang=page_lang) }}">RSS</a></p>
 </footer>
 
 </body>

@@ -1,5 +1,6 @@
 +++
 title = "Teaching Animations"
+description = "Interactive animations Mark Veltzer uses in teaching: mutexes, race conditions, pipes, fork, Diffie-Hellman, buffer overflows and more."
 template = "app.html"
 +++
 
@@ -207,7 +208,7 @@ template = "app.html"
   body { padding: 20px 16px; }
 
 }
-#app-animations h1 {
+#app-animations h2 {
   font-weight: 700;
   font-size: 2rem;
   letter-spacing: -0.03em;
@@ -266,7 +267,7 @@ template = "app.html"
 
 
 @media (max-width: 700px) {
-  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.5rem; }
 
 }
 #app-animations .header-bar {
@@ -577,70 +578,6 @@ window.__mdReady = Promise.all([
 
 <script>
 const DATA = [{"slug": "bitcoin_ledger", "title": "Bitcoin Ledger", "description": "In this video, we will look at the heart of Bitcoin: its ledger. We will see what it is, who keeps it, and why it cannot easily be cheated.", "scenes": [{"label": "Animation", "path": "/teaching-animations/animations/bitcoin_ledger.mp4"}, {"label": "Summary", "path": "/teaching-animations/animations/bitcoin_ledger_summary.mp4"}]}, {"slug": "buffer_overflow", "title": "Buffer Overflow", "description": "A buffer overflow is what happens when a program writes past the end of an array. On the stack, that overwrites whatever sits next to the array — and what sits next to it can be very valuable.", "scenes": [{"label": "Animation", "path": "/teaching-animations/animations/buffer_overflow.mp4"}, {"label": "Summary", "path": "/teaching-animations/animations/buffer_overflow_summary.mp4"}]}, {"slug": "clock", "title": "Clock", "description": "Once a user program is running on the CPU, how does the operating system ever get control back? The answer is the timer interrupt.", "scenes": [{"label": "Animation", "path": "/teaching-animations/animations/clock.mp4"}, {"label": "Summary", "path": "/teaching-animations/animations/clock_summary.mp4"}]}, {"slug": "diffie_hellman", "title": "Diffie Hellman", "description": "How can two strangers, talking over a wire that anyone can read, agree on a secret key — without ever sending the key itself? The answer is Diffie-Hellman key exchange.", "scenes": [{"label": "Animation", "path": "/teaching-animations/animations/diffie_hellman.mp4"}, {"label": "Summary", "path": "/teaching-animations/animations/diffie_hellman_summary.mp4"}]}, {"slug": "fork", "title": "Fork", "description": "The fork system call creates a new process by duplicating the calling one. Two processes — the parent and the child — leave fork in nearly identical states. Almost. The return value is what tells them apart.", "scenes": [{"label": "Animation", "path": "/teaching-animations/animations/fork.mp4"}, {"label": "Summary", "path": "/teaching-animations/animations/fork_summary.mp4"}]}, {"slug": "mutex", "title": "Mutex", "description": "A mutex — short for mutual exclusion — is the simplest tool for keeping threads from stepping on each other. Only one thread holds the lock at a time. Everyone else waits.", "scenes": [{"label": "Animation", "path": "/teaching-animations/animations/mutex.mp4"}, {"label": "Summary", "path": "/teaching-animations/animations/mutex_summary.mp4"}]}, {"slug": "pipes", "title": "Pipes", "description": "A pipe is a fixed-size buffer inside the kernel with two file descriptors — one for writing, one for reading. The writer pours bytes in one end, the reader takes them out the other.", "scenes": [{"label": "Animation", "path": "/teaching-animations/animations/pipes.mp4"}, {"label": "Summary", "path": "/teaching-animations/animations/pipes_summary.mp4"}]}, {"slug": "race_condition", "title": "Race Condition", "description": "When two threads update the same variable at the same time, the result depends on exactly how their instructions are interleaved. This is called a race condition.", "scenes": [{"label": "Animation", "path": "/teaching-animations/animations/race_condition.mp4"}, {"label": "Summary", "path": "/teaching-animations/animations/race_condition_summary.mp4"}]}, {"slug": "stack_frame", "title": "Stack Frame", "description": "Every time a function is called, the CPU pushes a chunk of bookkeeping onto the stack — locals, the return address, the saved frame pointer. That chunk is the function's stack frame.", "scenes": [{"label": "Animation", "path": "/teaching-animations/animations/stack_frame.mp4"}, {"label": "Summary", "path": "/teaching-animations/animations/stack_frame_summary.mp4"}]}, {"slug": "swapping", "title": "Swapping", "description": "In this video, we will look at how operating systems use swapping to give programs the illusion of having more memory than the machine actually has.", "scenes": [{"label": "Animation", "path": "/teaching-animations/animations/swapping.mp4"}, {"label": "Summary", "path": "/teaching-animations/animations/swapping_summary.mp4"}]}, {"slug": "syscall", "title": "Syscall", "description": "In this video, we will look at how a system call works. We will use the read system call as our running example.", "scenes": [{"label": "Animation", "path": "/teaching-animations/animations/syscall.mp4"}, {"label": "Summary", "path": "/teaching-animations/animations/syscall_summary.mp4"}]}, {"slug": "tcp_handshake", "title": "Tcp Handshake", "description": "Before any data flows over a TCP connection, the two endpoints exchange three small packets to agree on starting sequence numbers and confirm they can both send and receive. This is the three-way handshake.", "scenes": [{"label": "Animation", "path": "/teaching-animations/animations/tcp_handshake.mp4"}, {"label": "Summary", "path": "/teaching-animations/animations/tcp_handshake_summary.mp4"}]}];
-/*
- * shared-themes/theme-switcher.js
- *
- * Wires up a <select id="theme-select"> to the data-theme attribute on
- * <html>, persisting the choice in localStorage under a single shared
- * key. All sibling sites on the same origin (veltzer.org/*) share the
- * theme: pick a theme on one, navigate to another, and the choice
- * follows you.
- *
- * The default theme is "azure" (set in themes.css). Override at runtime
- * with defaultTheme if a specific app wants a different starting theme:
- *   initThemeSwitcher({ defaultTheme: "midnight" });
- */
-const THEME_STORAGE_KEY = "veltzer-site-theme";
-
-function initThemeSwitcher(options) {
-    options = options || {};
-    const defaultTheme = options.defaultTheme || "azure";
-    const sel = document.getElementById("theme-select");
-    if (!sel) return;
-    const saved = localStorage.getItem(THEME_STORAGE_KEY) || defaultTheme;
-    const isMaterial = sel.tagName.toLowerCase() === "md-outlined-select"
-        || sel.tagName.toLowerCase() === "md-filled-select";
-
-    function setSelValue(name) {
-        if (isMaterial) {
-            // For <md-outlined-select> we have to flip the `selected`
-            // attribute on the matching <md-select-option> child, then
-            // poke the host so it reflects the new selection.
-            const opts = sel.querySelectorAll("md-select-option");
-            opts.forEach(function(o) {
-                if (o.value === name) {
-                    o.setAttribute("selected", "");
-                    o.selected = true;
-                } else {
-                    o.removeAttribute("selected");
-                    o.selected = false;
-                }
-            });
-            sel.value = name;
-        } else {
-            sel.value = name;
-        }
-    }
-
-    function applyTheme(name) {
-        document.documentElement.setAttribute("data-theme", name);
-        setSelValue(name);
-        localStorage.setItem(THEME_STORAGE_KEY, name);
-    }
-
-    sel.addEventListener("change", function() {
-        applyTheme(sel.value);
-    });
-
-    // Pick up changes made by sibling tabs/sites on the same origin.
-    window.addEventListener("storage", function(e) {
-        if (e.key === THEME_STORAGE_KEY && e.newValue) {
-            applyTheme(e.newValue);
-        }
-    });
-
-    applyTheme(saved);
-}
 
 const indexView = document.getElementById("index-view");
 const playerView = document.getElementById("player-view");
@@ -750,7 +687,6 @@ window.addEventListener("hashchange", handleHash);
 (window.__mdReady || Promise.resolve()).then(function() {
     render("");
     handleHash();
-    initThemeSwitcher();
 });
 
 </script>

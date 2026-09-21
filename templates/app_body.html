@@ -28,5 +28,10 @@
     get_url, get_section does not add the language suffix itself, and the
     unsuffixed _index.md is reported as "not found". -#}
 {%- set source = get_section(path=section.components | last ~ "/_index.en.md", lang="en") %}
+{#- The body is English inside a page whose <html> is dir="rtl", so without
+    this wrapper every flex row, text-align: start and margin-inline in the
+    app mirrors. Only the chrome around the app is Hebrew. -#}
+<div dir="ltr" lang="en">
 {{- source.content | safe }}
+</div>
 {%- endif %}
