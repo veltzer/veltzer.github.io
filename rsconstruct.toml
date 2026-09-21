@@ -31,8 +31,6 @@ input_globs = [
     "static/**/*",
 ]
 output_dirs = [ "_site" ]
-[processor.pylint]
-src_dirs = ["scripts", "tests"]
 args = ["--rcfile=.pylintrc"]
 [processor.ruff]
 src_dirs = ["scripts", "tests"]
