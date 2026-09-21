@@ -169,13 +169,8 @@ template = "app.html"
   --gradient-start: #e0def4;
   --gradient-end: #c4a7e7;
 }
-
-
-
-
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700&display=swap');
-
-*, *::before, *::after { box-sizing: border-box; }
+#app-syllabi *, #app-syllabi *::before, #app-syllabi *::after { box-sizing: border-box; }
 #app-syllabi {
   font-family: var(--font-sans);
   background: var(--bg);
@@ -202,11 +197,8 @@ template = "app.html"
 #app-syllabi ::-webkit-scrollbar-track { background: var(--bg); }
 #app-syllabi ::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--radius-xs); }
 #app-syllabi ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
-
-
 @media (max-width: 700px) {
-  body { padding: 20px 16px; }
-
+#app-syllabi { padding: 20px 16px; }
 }
 #app-syllabi h2 {
   font-weight: 700;
@@ -264,11 +256,8 @@ template = "app.html"
   padding: 0;
   font-size: 0.95em;
 }
-
-
 @media (max-width: 700px) {
-  h2 { font-size: 1.5rem; }
-
+#app-syllabi h2 { font-size: 1.5rem; }
 }
 #app-syllabi .header-bar {
   display: flex;
@@ -449,15 +438,11 @@ template = "app.html"
 }
 #app-syllabi .autocomplete-item:hover, #app-syllabi .autocomplete-item.active { background: var(--bg-hover); }
 #app-syllabi .autocomplete-item .ac-folder { color: var(--text-muted); font-size: 0.78rem; margin-left: 8px; }
-
-
-
 @media (max-width: 700px) {
-  .header-bar { flex-direction: column; gap: 10px; }
+#app-syllabi .header-bar { flex-direction: column; gap: 10px; }
 #app-syllabi .filters { grid-template-columns: 1fr; padding: 16px; }
 #app-syllabi input[type="text"] { width: 100%; }
 #app-syllabi li { padding: 8px 10px; }
-
 }
 #app-syllabi {
   --md-sys-color-primary: var(--accent);
@@ -517,13 +502,10 @@ template = "app.html"
 #app-syllabi #syllabus-content { max-width: 900px; }
 #app-syllabi #index-view > p:last-child { color: var(--text-muted); font-size: 0.82rem; }
 #app-syllabi #index-view > p:last-child a { color: var(--accent); }
-
-
 @media print {
-  #index-view, #syllabus-toolbar { display: none !important; }
+#app-syllabi #index-view, #app-syllabi #syllabus-toolbar { display: none !important; }
 #app-syllabi #syllabus-view { display: block !important; }
 #app-syllabi #syllabus-content { max-width: none; }
-
 }
 </style>
 

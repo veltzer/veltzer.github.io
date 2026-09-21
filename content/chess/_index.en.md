@@ -161,6 +161,16 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
         return (index + 1) + '. ' + game.white + ' vs ' + game.black + year;
     }
 
+    // The player and event names come from the archive's PGN headers, i.e.
+    // from usernames on the servers the games were played on. Everything else
+    // on this page goes through textContent; the <option> lists are built as
+    // markup strings and so need escaping by hand.
+    function escapeHtml(text) {
+        return String(text)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
     function movesOf(game) {
         if (game.moves) return game.moves;
         const chess = new Chess();
@@ -198,7 +208,7 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
             // The option value is the absolute index into `filtered`, so the
             // handler does not have to know where the window happens to start.
             return '<option value="' + (windowStart + position) + '">' +
-                   label(games[gameIndex], windowStart + position) + '</option>';
+                   escapeHtml(label(games[gameIndex], windowStart + position)) + '</option>';
         }).join('');
         const hidden = filtered.length - shown.length;
         counterEl.textContent = filtered.length.toLocaleString() + ' games' +
@@ -219,7 +229,7 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
             .filter(Boolean).sort().reverse();
         yearEl.innerHTML = '<option value="">All years</option>' +
             years.map(function (y) {
-                return '<option value="' + y + '">' + y + '</option>';
+                return '<option value="' + escapeHtml(y) + '">' + escapeHtml(y) + '</option>';
             }).join('');
     }
 

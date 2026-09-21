@@ -365,7 +365,13 @@
                         return !boolVal;
                     }
                     if (filterConfig.type === 'range' && filterConfig.ranges) {
-                        const numVal = filterConfig.value ? filterConfig.value(item) : Number(item[field]);
+                        const raw = filterConfig.value ? filterConfig.value(item) : item[field];
+                        const numVal = Number(raw);
+                        // An item with no value for this field is in no bucket.
+                        // NaN compares false against both bounds, so without
+                        // this the metadata-less YouTube items matched every
+                        // duration and view-count range at once.
+                        if (raw == null || raw === '' || Number.isNaN(numVal)) return false;
                         const range = filterConfig.ranges.find(function(r) { return r.label === f.value; });
                         if (!range) return true;
                         if (range.min != null && numVal < range.min) return false;

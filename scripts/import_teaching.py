@@ -130,6 +130,111 @@ def strip_theme_switcher(code):
     return re.sub(r"\n{3,}", "\n\n", code)
 
 
+# At-rules whose block holds ordinary rules, which therefore need scoping too.
+# Everything else that starts with "@" (@keyframes, @font-face, @page, @import)
+# is passed through untouched: a keyframe selector like `to` or `50%` is not an
+# element and must not be prefixed.
+CONDITIONAL_AT_RULES = ("@media", "@supports", "@container", "@layer")
+
+
+def _next_delimiter(css, start):
+    """Index of the first `;` or `{` at or after start that is not inside a
+    quoted string or parentheses, or None. `@import url('...;...')` carries
+    semicolons in its URL, so a plain find() would cut the statement there."""
+    quote = None
+    parens = 0
+    for k in range(start, len(css)):
+        ch = css[k]
+        if quote:
+            if ch == quote:
+                quote = None
+        elif ch in "'\"":
+            quote = ch
+        elif ch == "(":
+            parens += 1
+        elif ch == ")":
+            parens = max(parens - 1, 0)
+        elif parens == 0 and ch in ";{":
+            return k
+    return None
+
+
+def split_css(css):
+    """Yield (prelude, body) per top-level block, or (statement, None).
+
+    A block is `prelude { body }` with the braces matched, so nested blocks
+    (a rule inside @media) come back whole and can be recursed into. A
+    statement is a brace-less `@import ...;`. The previous implementation
+    split on every closing brace, which cut a @media block after its first
+    inner rule: that rule was emitted unscoped -- `body { padding: ... }`
+    then restyled the whole site on narrow screens -- and the block's
+    remaining rules were scoped individually with the closing brace glued
+    to whatever came next. It also left whatever followed an @import
+    statement unscoped, because the chunk began with "@".
+    """
+    i = 0
+    while i < len(css):
+        delim = _next_delimiter(css, i)
+        if delim is None:
+            if css[i:].strip():
+                yield css[i:].strip(), None
+            return
+        if css[delim] == ";":
+            statement = css[i:delim + 1].strip()
+            if statement:
+                yield statement, None
+            i = delim + 1
+            continue
+        prelude = css[i:delim].strip()
+        depth = 0
+        end = None
+        for k in range(delim, len(css)):
+            if css[k] == "{":
+                depth += 1
+            elif css[k] == "}":
+                depth -= 1
+                if depth == 0:
+                    end = k
+                    break
+        if end is None:
+            die("unbalanced braces in an imported stylesheet")
+        yield prelude, css[delim + 1:end]
+        i = end + 1
+
+
+def scope_selector(selector, wrapper):
+    """Prefix one selector with the wrapper id."""
+    if selector in (":root", "html", "body"):
+        # Rules on the document itself become rules on the wrapper.
+        return f"#{wrapper}"
+    if selector.startswith("[data-theme="):
+        # data-theme lives on <html>, an ANCESTOR of the wrapper, so this must
+        # stay a descendant combinator in that direction -- scoping it as
+        # `#wrapper [data-theme=...]` would look for the attribute *inside*
+        # the app and never match, leaving the imported page on its default
+        # palette while the rest of the site changed theme.
+        close = selector.index("]") + 1
+        return f"{selector[:close]} #{wrapper} {selector[close:].strip()}".strip()
+    return f"#{wrapper} {selector}"
+
+
+def scope_css(css, wrapper):
+    """Return the stylesheet with every rule confined to #wrapper."""
+    out = []
+    for prelude, body in split_css(css):
+        if body is None:
+            out.append(prelude)
+        elif prelude.startswith(CONDITIONAL_AT_RULES):
+            out.append(f"{prelude} {{\n{scope_css(body, wrapper)}\n}}")
+        elif prelude.startswith("@"):
+            out.append(f"{prelude} {{{body}}}")
+        else:
+            selectors = [scope_selector(s.strip(), wrapper)
+                         for s in prelude.split(",") if s.strip()]
+            out.append(", ".join(selectors) + " {" + body + "}")
+    return "\n".join(out)
+
+
 def extract(html, wrapper):
     """Pull the style, body markup and scripts out of a standalone document."""
     styles = re.findall(r"<style>(.*?)</style>", html, re.DOTALL)
@@ -170,43 +275,12 @@ def extract(html, wrapper):
     scoped = []
     for sheet in styles:
         # Strip comments first: a /* ... */ containing a brace would otherwise
-        # be split as if it were a rule and end up with a selector glued on.
+        # be parsed as a block and end up with a selector glued on.
         sheet = re.sub(r"/\*.*?\*/", "", sheet, flags=re.DOTALL)
         # Follow the h1 -> h2 demotion of the markup. Only stylesheets: the
         # scripts' inline SVG paths contain "h1" as a path command.
         sheet = re.sub(r"\bh1\b", "h2", sheet)
-        out = []
-        for rule in re.split(r"(?<=\})", sheet):
-            if not rule.strip():
-                continue
-            if rule.lstrip().startswith("@"):
-                out.append(rule)          # media/keyframes/font-face: leave alone
-                continue
-            head, sep, tail = rule.partition("{")
-            if not sep:
-                out.append(rule)
-                continue
-            selectors = []
-            for selector in head.split(","):
-                selector = selector.strip()
-                if not selector:
-                    continue
-                if selector in (":root", "html", "body", "html, body"):
-                    selectors.append(f"#{wrapper}")
-                elif selector.startswith("[data-theme="):
-                    # data-theme lives on <html>, an ANCESTOR of the wrapper, so
-                    # this must stay a descendant combinator in that direction --
-                    # scoping it as `#wrapper [data-theme=...]` would look for the
-                    # attribute *inside* the app and never match, leaving the
-                    # imported page on its default palette while the rest of the
-                    # site changed theme.
-                    rest = selector[selector.index("]") + 1:].strip()
-                    attr = selector[: selector.index("]") + 1]
-                    selectors.append(f"{attr} #{wrapper} {rest}".strip())
-                else:
-                    selectors.append(f"#{wrapper} {selector}")
-            out.append(", ".join(selectors) + " {" + tail)
-        scoped.append("\n".join(out))
+        scoped.append(scope_css(sheet, wrapper))
 
     return scoped, body.strip(), scripts
 

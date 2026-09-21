@@ -169,13 +169,8 @@ template = "app.html"
   --gradient-start: #e0def4;
   --gradient-end: #c4a7e7;
 }
-
-
-
-
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700&display=swap');
-
-*, *::before, *::after { box-sizing: border-box; }
+#app-animations *, #app-animations *::before, #app-animations *::after { box-sizing: border-box; }
 #app-animations {
   font-family: var(--font-sans);
   background: var(--bg);
@@ -202,11 +197,8 @@ template = "app.html"
 #app-animations ::-webkit-scrollbar-track { background: var(--bg); }
 #app-animations ::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--radius-xs); }
 #app-animations ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
-
-
 @media (max-width: 700px) {
-  body { padding: 20px 16px; }
-
+#app-animations { padding: 20px 16px; }
 }
 #app-animations h2 {
   font-weight: 700;
@@ -264,11 +256,8 @@ template = "app.html"
   padding: 0;
   font-size: 0.95em;
 }
-
-
 @media (max-width: 700px) {
-  h2 { font-size: 1.5rem; }
-
+#app-animations h2 { font-size: 1.5rem; }
 }
 #app-animations .header-bar {
   display: flex;
@@ -449,15 +438,11 @@ template = "app.html"
 }
 #app-animations .autocomplete-item:hover, #app-animations .autocomplete-item.active { background: var(--bg-hover); }
 #app-animations .autocomplete-item .ac-folder { color: var(--text-muted); font-size: 0.78rem; margin-left: 8px; }
-
-
-
 @media (max-width: 700px) {
-  .header-bar { flex-direction: column; gap: 10px; }
+#app-animations .header-bar { flex-direction: column; gap: 10px; }
 #app-animations .filters { grid-template-columns: 1fr; padding: 16px; }
 #app-animations input[type="text"] { width: 100%; }
 #app-animations li { padding: 8px 10px; }
-
 }
 #app-animations {
   --md-sys-color-primary: var(--accent);

@@ -145,13 +145,8 @@ template = "app.html"
   --gradient-start: #e0def4;
   --gradient-end: #c4a7e7;
 }
-
-
-
-
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700&display=swap');
-
-*, *::before, *::after { box-sizing: border-box; }
+#app-slides *, #app-slides *::before, #app-slides *::after { box-sizing: border-box; }
 #app-slides {
   font-family: var(--font-sans);
   background: var(--bg);
@@ -178,11 +173,8 @@ template = "app.html"
 #app-slides ::-webkit-scrollbar-track { background: var(--bg); }
 #app-slides ::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--radius-xs); }
 #app-slides ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
-
-
 @media (max-width: 700px) {
-  body { padding: 20px 16px; }
-
+#app-slides { padding: 20px 16px; }
 }
 #app-slides h2 {
   font-weight: 700;
@@ -240,11 +232,8 @@ template = "app.html"
   padding: 0;
   font-size: 0.95em;
 }
-
-
 @media (max-width: 700px) {
-  h2 { font-size: 1.5rem; }
-
+#app-slides h2 { font-size: 1.5rem; }
 }
 #app-slides .header-bar {
   display: flex;
@@ -425,15 +414,11 @@ template = "app.html"
 }
 #app-slides .autocomplete-item:hover, #app-slides .autocomplete-item.active { background: var(--bg-hover); }
 #app-slides .autocomplete-item .ac-folder { color: var(--text-muted); font-size: 0.78rem; margin-left: 8px; }
-
-
-
 @media (max-width: 700px) {
-  .header-bar { flex-direction: column; gap: 10px; }
+#app-slides .header-bar { flex-direction: column; gap: 10px; }
 #app-slides .filters { grid-template-columns: 1fr; padding: 16px; }
 #app-slides input[type="text"] { width: 100%; }
 #app-slides li { padding: 8px 10px; }
-
 }
 #app-slides {
   --md-sys-color-primary: var(--accent);

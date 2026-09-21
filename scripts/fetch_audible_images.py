@@ -18,6 +18,8 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
+from image_standard import normalise
+
 # Resolved from this file rather than the cwd, so the script works from anywhere
 # instead of only from the repo root.
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -32,6 +34,8 @@ def download(url, dest):
     req.add_header("User-Agent", "Mozilla/5.0")
     with urllib.request.urlopen(req, timeout=15) as resp, open(dest, "wb") as f:
         f.write(resp.read())
+    # Normalise to the site standard; see scripts/image_standard.py.
+    normalise(dest)
 
 
 def load_entries():

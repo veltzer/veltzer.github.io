@@ -103,15 +103,21 @@ def get_dest_path(entry_type, entry_id):
 
 
 def handle_image_search(name, fields, force):
-    """Search for images and show the shared browser picker."""
+    """Search for images and show the shared browser picker.
+
+    Returns 'downloaded', 'skipped', 'failed' or 'quit' -- the same vocabulary
+    as the GC and Audible paths, so main() can count it. image_picker speaks
+    'found'/'skip'/'quit' and is translated below; before that translation
+    every picked or skipped course landed in the 'failed' column.
+    """
     internal_id = fields.get("internal_id")
     if not internal_id:
         logger.warning("  %s has no internal_id, skipping.", name)
-        return "skip"
+        return "skipped"
 
     dest = get_dest_path("internal", internal_id)
     if os.path.exists(dest) and not force:
-        return "skip"
+        return "skipped"
 
     logger.info("")
     logger.info("  No external ID for: %s (internal_id: %s)", name, internal_id)
@@ -124,13 +130,14 @@ def handle_image_search(name, fields, force):
     # Delegates to image_picker rather than re-implementing the search, cache
     # and tkinter browser. That copy also lacked the shared version's
     # window-close and SIGINT handling, so quitting the picker left it hanging.
-    return image_picker.pick_image(
+    picked = image_picker.pick_image(
         title=f"Pick image for: {name}",
-        info_lines=fields,
+        info_lines=info_lines,
         search_query=name,
         cache_key=name,
         dest_path=dest,
     )
+    return {"found": "downloaded", "skip": "skipped"}.get(picked, picked)
 
 def fetch_gc_image(name, gc_id, force):
     """Download image from Great Courses CDN. Returns 'downloaded', 'skipped', or 'failed'."""

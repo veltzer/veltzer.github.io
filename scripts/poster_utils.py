@@ -70,6 +70,11 @@ def fetch_poster_tmdb(imdb_id, token, result_key="movie_results"):
     except urllib.error.HTTPError as e:
         print(f"  TMDB API error for tt{imdb_id}: {e.code}", file=sys.stderr)
         return None
+    except urllib.error.URLError as e:
+        # DNS, connection reset, timeout: one flaky request should cost one
+        # poster, not the rest of an incremental run.
+        print(f"  TMDB unreachable for tt{imdb_id}: {e.reason}", file=sys.stderr)
+        return None
 
     results = data.get(result_key, [])
     if not results:
@@ -89,6 +94,9 @@ def fetch_poster_omdb(imdb_id, api_key):
             data = json.loads(resp.read())
     except urllib.error.HTTPError as e:
         print(f"  OMDB API error for tt{imdb_id}: {e.code}", file=sys.stderr)
+        return None
+    except urllib.error.URLError as e:
+        print(f"  OMDB unreachable for tt{imdb_id}: {e.reason}", file=sys.stderr)
         return None
 
     poster = data.get("Poster")
