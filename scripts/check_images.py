@@ -164,7 +164,9 @@ def check_museums():
 def check_podcasts():
     """Check podcast images."""
     entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "podcasts.yaml"))
-    # Only entries with internal_id are top-level podcasts (not chapters)
+    # parse_yaml_entries returns the top-level items only; chapters are nested
+    # inside them and never appear here. The filter just skips any item that
+    # has no internal_id and therefore no image to check.
     podcast_entries = [e for e in entries if "internal_id" in e]
     errors = 0
     for entry in podcast_entries:

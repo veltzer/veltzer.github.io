@@ -33,8 +33,8 @@ SIBLINGS_PRESENT = all(
 THEME_SRC = REPO_ROOT / "shared" / "shared-themes"
 THEME_DEST = REPO_ROOT / "static" / "shared-themes"
 # Files taken from the shared-themes submodule. themes.css carries the palette;
-# theme-switcher.js is copied so a theme picker can be added without another
-# build change.
+# theme-switcher.js drives the theme <select> that templates/base.html puts in
+# the header.
 THEME_FILES = ["themes.css", "theme-switcher.js"]
 # Build provenance, written fresh on every build and read by templates through
 # Zola's load_data(). Not committed: the commit that produces a build cannot be
@@ -248,7 +248,9 @@ ROOT_INDEX = """<!DOCTYPE html>
 
 
 # Files that belong to the site as a whole rather than to one language, so they
-# stay at the root when the English pages move under /en/.
+# stay at the root when the English pages move under /en/. search_index.en.js
+# and elasticlunr.min.js are listed for safety only: build_search_index is off
+# for every language in config.toml, so zola does not emit them today.
 SHARED_ROOT = {
     "he", "en", "images", "data", "vendor", "shared-themes", "search_index.en.js",
     "elasticlunr.min.js", "style.css", "custom.css", "shared.css", "keys.js",
@@ -525,6 +527,8 @@ def build(zola):
         [zola, "build", "--output-dir", str(OUTPUT_DIR), "--force"],
         check=True,
         cwd=REPO_ROOT,
+        # MkDocs-era leftover: it pinned Python's hash seed for reproducible
+        # MkDocs output. zola is a Rust binary and ignores it; harmless.
         env={**os.environ, "PYTHONHASHSEED": "0"},
     )
 

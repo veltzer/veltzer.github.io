@@ -7,9 +7,11 @@ Why not `zola serve`?
   `zola serve` is great for authoring (live rebuild + browser
   auto-reload), but it is NOT faithful to what gets deployed:
     - It serves from an in-memory build, not the real `_site/` output.
-    - It skips the theme sync and the `../data/` copy step, so the
-      shared-themes tokens and the media tracker / chess data can be
-      missing or stale.
+    - It skips the theme sync, the teaching import and the stats
+      generation that `build_site.py` runs before zola, so the
+      shared-themes tokens and the imported app pages can be missing
+      or stale. (The `../data/` copy is `copy_data.py`, a manual step
+      that neither path runs.)
     - It injects a livereload script and can handle routing /
       trailing-slashes slightly differently than a plain static server.
 

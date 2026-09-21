@@ -2,8 +2,9 @@
 
 This script processes ~29,000 records with no other coverage, so the cases here
 target the transformations whose silent failure would corrupt the media
-database rather than raise: the YYYYMMDD date rewrite, integer coercion, and
-the METADATA_NOT_FOUND handling that keeps unfetchable videos linkable.
+database rather than raise: the YYYYMMDD date rewrite and integer coercion.
+The METADATA_NOT_FOUND handling that keeps unfetchable videos linkable lives
+inside main() rather than convert_row(), so it is not covered here.
 """
 
 import csv_to_yaml

@@ -5,12 +5,16 @@
 ### `scripts/build_site.py`
 
 The zola build, run by `rsconstruct build` (never invoke `zola build` by
-hand -- see `CLAUDE.md`). Imports the teaching data, regenerates the archive
-stats via `scripts/gen_stats.py`, writes `static/build_info.toml`, syncs the
-theme submodule's tokens into `static/`, then runs `zola build` with
-`PYTHONHASHSEED=0` into `_site/` and post-processes the output (moves the
-English pages under `/en/`, writes the legacy redirects, fixes the sitemap,
-writes the root redirect).
+hand -- see `CLAUDE.md`). Imports the teaching pages via
+`scripts/import_teaching.py` (skipped when the sibling repos are absent, as in
+CI), regenerates the archive stats via `scripts/gen_stats.py`, writes
+`static/build_info.toml`, syncs the theme submodule's tokens into `static/`,
+then runs `zola build` into `_site/` and post-processes the output (sweeps
+anything zola left at the site root under `/en/` -- a safety net now that
+every section is an explicit `_index.en.md`, see `relocate_english()`; writes
+the legacy redirects; fixes the sitemap; writes the root language-chooser
+page). The `PYTHONHASHSEED=0` it still passes to zola is a MkDocs-era
+leftover: zola is a Rust binary and ignores it.
 
 `write_legacy_redirects()` serves the pre-migration URLs Google still has
 indexed -- MkDocs-era `/YYYY/MM/DD/<slug>/` permalinks and the root-level
@@ -24,6 +28,41 @@ leaving the URL it was meant to rescue still 404ing.
 Zola emits that URL for each paginated section and builds it as a redirect to
 the paginator root, so listing it makes the sitemap advertise 112 redirects.
 The redirect stays for anyone holding such a link; only the sitemap entry goes.
+
+### `scripts/import_teaching.py`
+
+Imports the three sibling teaching sites (`../teaching-slides`,
+`../teaching-syllabi`, `../teaching-animations`) into
+`content/{slides,syllabi,animations}/_index.en.md` as native zola pages. Each
+sibling builds a single self-contained `_site/index.html`; the script strips
+the document wrapper, drops the embedded header and theme `<select>` (this
+site's chrome supplies both), scopes the page's CSS under an `#app-<section>`
+wrapper, and writes the result with this site's front matter. Run by
+`scripts/build_site.py` when the sibling `_site/` directories exist, and
+skipped otherwise, so CI (which has no sibling checkouts) builds from the
+committed copies. `--check` reports what would be written without writing.
+The Hebrew `_index.he.md` stubs are hand-written and are not touched.
+
+### `scripts/gen_stats.py`
+
+Computes the blog archive statistics (post counts per year and per language)
+and rewrites the `[extra.stats]` table below the `# BEGIN generated stats`
+marker in `content/blog/_index.en.md` and `_index.he.md`; everything above the
+marker is preserved. Also fails the build if any `.en.md` post lacks its
+`.he.md` translation or vice versa, since an unpaired post would otherwise
+lose its language switcher silently. Part of the build (run from
+`scripts/build_site.py`); the output is committed so `zola serve` shows the
+right numbers.
+
+### `scripts/gen_profiles.py`
+
+Renders `../data/yaml/profiles.yaml` into the region between the
+`<!-- BEGIN generated profiles -->` markers in `content/about/_index.en.md`
+and `_index.he.md` (contact line, intro, link groups and extras, in both
+languages), and writes `static/identity.toml`, the `sameAs` URLs the
+`Person` JSON-LD in `templates/base.html` reads. A manual step, like
+`copy_data.py`: CI has no `../data` checkout, and the output is committed.
+Run it after editing `profiles.yaml` and commit both repos.
 
 ### `scripts/copy_data.py`
 
@@ -82,6 +121,20 @@ Output: `static/images/book-{cover}.jpg`, where `{cover}` is the key
 `static/images/book-no-cover.jpg`, a hand-made placeholder drawn at the
 card's 800x384 geometry so `object-cover` crops nothing that matters.
 
+### `scripts/csv_to_yaml.py`
+
+Converts the YouTube CSV export (`input output` positional arguments) into
+the trimmed YAML the media viewer loads, keeping only title, channel, upload
+date, duration, view count, categories and URL. Rows whose title is
+`METADATA_NOT_FOUND` are kept with `status: missing` and a rebuilt watch URL
+so the viewer can still link out. Run by `scripts/copy_data.py`.
+
+### `scripts/import_audible.py`
+
+Copies `../data/yaml/audible.yaml` into `static/data/` keeping only the
+fields the audible plugin uses, with integer fields coerced and string
+fields force-quoted so the output is stable. Run by `scripts/copy_data.py`.
+
 ### `scripts/import_books.py`
 
 Flattens `../data/yaml/books_read.yaml` (names, authors, ownings and
@@ -106,13 +159,49 @@ Output: `static/images/podcast-{internal_id}.jpg`
 ### `scripts/image_picker.py`
 
 Shared module used by museum, podcast, and audio course image scripts.
-Provides DuckDuckGo image search (with caching in `/tmp/image_picker_cache/`)
-and a tkinter image browser GUI with prev/next/select/skip/quit.
+Provides DuckDuckGo image search (with candidates cached under
+`$XDG_CACHE_HOME/veltzer-site/image-picker/`, defaulting to
+`~/.cache/veltzer-site/image-picker/`, so they survive a reboot) and a
+tkinter image browser GUI with prev/next/select/skip/quit.
 
 ### `scripts/poster_utils.py`
 
 Shared module used by movie and series poster scripts. Provides TMDB
 and OMDB poster lookup with fallback.
+
+### `scripts/image_standard.py`
+
+One place that decides how large an image in `static/images/` may be
+(`800x384>`, JPEG, EXIF stripped) and the `normalise()` function the fetchers
+call on save. The numbers are derived from the card geometry in
+`media-app.js`; the module docstring explains the arithmetic.
+
+### `scripts/normalise_images.py`
+
+Brings every existing image in `static/images/` down to that standard, for
+files that predate `image_standard.py` or were added by hand. Reports what
+would change by default; `--apply` does it. Idempotent: images already within
+the box are skipped.
+
+## Spellcheck Scripts
+
+### `scripts/build_en_dict.sh`, `scripts/build_he_dict.sh`
+
+Compile the allowlists `.aspell.en.txt` and `.aspell.he.txt` into aspell
+dictionaries under `out/aspell/` (gitignored). They are scripts rather than
+plain commands because aspell resolves relative paths against
+`/usr/lib/aspell` and cannot take the allowlist as a `--personal` wordlist
+(Hebrew segfaults, English mojibakes non-Latin-1 entries). Run by
+`rsconstruct build` as generator processors; the comments in the scripts
+record the aspell quirks in detail.
+
+### `scripts/spellcheck_en.sh`, `scripts/spellcheck_he.sh`
+
+Run `aspell list` over the blog posts of one language with the compiled
+allowlist as an extra dictionary, and fail on any misspelled word. Run by
+`rsconstruct build` over `content/blog/*.en.md` and `*.he.md`. Each builds its
+dictionary itself if it is missing, because rsconstruct does not order
+generators before checkers.
 
 ## Validation Scripts
 
@@ -146,6 +235,16 @@ reading; without that split it would be mostly false positives. The checker
 sends a browser User-Agent and retries with GET when HEAD fails, since a number
 of hosts do not implement HEAD properly.
 
+## Local Preview
+
+### `scripts/serve.py`
+
+Runs the full `scripts/build_site.py` build, then serves `_site/` with a plain
+static server, which is the closest local approximation to GitHub Pages
+(`zola serve` builds in memory and skips the post-processing). Options:
+`--port`, `--preview` (open a browser), `--anonymous` (a browser with a fresh
+temp profile, implies `--preview`), `--no-build`.
+
 ## API Key Management
 
 ### `scripts/manage_api_key.py`
@@ -155,7 +254,7 @@ Manages a Google API key. Commands: `show`, `restrict`, `create`,
 creates a new key, waits for rebuild/deploy, then deletes the old one.
 Project-specific values are no longer hardcoded — they default to the
 calendar key (`--project-id veltzer-calendar-id`, `--pass-path
-cloud/gcp/calendar`, `--referrer veltzer.github.io/*`, etc.) and can be
+cloud/gcp/calendar`, `--referrer veltzer.org/*`, etc.) and can be
 overridden via flags or the matching `API_KEY_*` environment variables.
 
 ## Scripts in `../data/` repo

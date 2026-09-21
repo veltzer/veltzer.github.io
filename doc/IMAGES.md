@@ -28,14 +28,18 @@ verbatim to `/images/` in the built site.
 
 ## Uniform Display
 
-Card images are sized with Tailwind's `object-cover` (the `<img>` markup is
-built in `static/media-app.js`) to maintain consistent card heights
-regardless of original image dimensions.
+Card images sit in a fixed 2:1 landscape box (the `<img>` markup is built in
+`static/media-app.js`), so card heights are consistent regardless of the
+source dimensions. Landscape sources are cropped with `object-cover`; the
+books, movies and series plugins declare `imageFit: 'contain'` so their
+portrait covers are shown whole over a blurred backdrop instead (see
+`doc/PLUGIN_GUIDE.md`).
 
 ## Caches
 
 - TMDB/OMDB poster scripts: no cache (fast CDN downloads)
-- DuckDuckGo image picker: cached in `/tmp/image_picker_cache/` per course name
+- DuckDuckGo image picker: cached under `$XDG_CACHE_HOME/veltzer-site/image-picker/`
+  (default `~/.cache/veltzer-site/image-picker/`) per search term
 - Great Courses ID lookup: cached in `/tmp/great_courses_cache.json`
 
 Delete these to force fresh searches.

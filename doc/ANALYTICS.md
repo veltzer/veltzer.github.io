@@ -144,8 +144,8 @@ The two goals are separable, and it is worth deciding which one is actually want
 These are not exclusive; GoatCounter for real analytics plus a badge for the visible count
 is a coherent combination.
 
-See the "Visitor Counter" entry in `doc/IMPROVEMENTS.md` for the current state of the
-disabled counter and the `COUNTER_ENDPOINT` hook left in `media-app.js`.
+See the "Visitor Counter" entry in `doc/IMPROVEMENTS.md`: the counter was removed
+entirely on 2026-08-19, and the `COUNTER_*` hook is gone from `media-app.js`.
 
 ## Decision: GA4, wired in 2026-08-18
 

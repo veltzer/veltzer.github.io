@@ -28,7 +28,9 @@ DONE: make that script not hardcode any details about this project.
 
 DONE: maybe use a better tool than mkdocs?
 
-    Migrated to zola (single Rust binary, pinned to v0.23.3 in the workflow).
+    Migrated to zola (single Rust binary, pinned to v0.23.3 in rsconstruct's
+    tool registry, from which CI installs it; the workflow itself never names
+    zola).
 
     This was not cosmetic. MkDocs' blog plugin generates its post, archive and
     pagination pages virtually, and every i18n plugin works by rewriting the
@@ -44,8 +46,9 @@ DONE: maybe use a better tool than mkdocs?
     See the "Internationalization" entry in doc/IMPROVEMENTS.md for the full
     write-up, including why mkdocs-static-i18n must not be retried.
 
-    Confirmed: no mkdocs.yml in the repo, and the workflow installs zola pinned
-    to v0.23.3.
+    Confirmed: no mkdocs.yml in the repo, and `rsconstruct tools
+    list-configured` shows zola pinned to v0.23.3 (the workflow only runs
+    `rsconstruct tools install`, which is what fetches it).
 
 
 DROPPED: Find a way to count number of visitors on each page of the

@@ -1,9 +1,12 @@
 {# Full-width page whose entire body is one embedded application.
 
-   Used by the slides / syllabi / animations sections, which host a separate
-   document in an iframe. They need a wide container and a tall frame rather
-   than the 42rem reading column the prose templates use, so they get their own
-   template instead of the shared section.html plus CSS overrides. #}
+   Used by the media section alone (the teaching apps and the calendar use
+   app.html, chess has chess.html). It once framed the slides / syllabi /
+   animations sites in an iframe; those are imported into the page now and
+   nothing on the site uses an iframe any more. What remains is the wide
+   container: the media tracker needs it rather than the 42rem reading column
+   the prose templates use, so it gets its own template instead of the shared
+   section.html plus CSS overrides. #}
 {% extends "base.html" %}
 {% block title %}{{ section.title }} &middot; {{ config.title }}{% endblock %}
 {% block main_class %}embed-main{% endblock %}

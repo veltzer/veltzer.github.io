@@ -164,8 +164,10 @@ window.mediaPlugins['mykey'] = {
         {key: 'link', label: 'Link', default: true}
     ],
 
-    // renderImage(item) -> URL string or ''
+    // renderImage(item, allItems) -> URL string or ''
     // If provided, returns an image URL to display at the top of the card.
+    // allItems is the whole loaded dataset, for plugins whose image name
+    // depends on other items (the museums plugin uses it).
     renderImage: function(item) {
         return item.thumbnail_url || '';
     },
@@ -182,7 +184,9 @@ window.mediaPlugins['mykey'] = {
     // directly for an item that has nothing to name an image by.
     placeholderImage: 'images/thing-no-cover.jpg',
 
-    // formatDate — use the shared mediaFormatDate utility
+    // formatDate — a per-plugin convention, not a framework hook: media-app.js
+    // never reads it. Plugins keep it here so renderDetails/renderStats can
+    // call this.formatDate; the shared mediaFormatDate utility is the usual value.
     formatDate: mediaFormatDate
 };
 ```
@@ -201,6 +205,7 @@ window.mediaPlugins['mykey'] = {
 | `ranges` | no | — | Required for `range` filterType. Array of `{label, min, max}` |
 | `extractValues` | no | — | For `custom` filterType: extract array of values from item |
 | `match` | no | — | For `custom` filterType: `(item, selectedValue) -> boolean` |
+| `defaultValue` | no | — | For `select` filters: preselect this option instead of "All" on load, and seed the active filters so the first render is already filtered (the YouTube plugin uses it for its metadata filter) |
 
 ## Built-in Fields
 

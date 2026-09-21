@@ -53,7 +53,9 @@ def load_entries():
                 current_name = s.split(":", 1)[1].strip().strip("'\"")
             elif s.startswith("cover_url:") and current_asin:
                 current_cover = s.split(":", 1)[1].strip().strip("'\"")
-                # cover_url value contains ":" so re-join
+                # Recomputed from the raw line below; split(":", 1) already
+                # keeps the ":" inside the URL, so the two agree and the first
+                # assignment is redundant.
                 idx = line.find("cover_url:")
                 current_cover = line[idx + len("cover_url:"):].strip().strip("'\"")
     if current_asin and current_cover:

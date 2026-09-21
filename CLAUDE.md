@@ -13,8 +13,13 @@ calendar integration.
 - **Build orchestration**: rsconstruct (single binary, configured via `rsconstruct.toml`
   and `config/*.lua`), npm
 - **Frontend**: HTML5, SCSS, JavaScript (ES9+)
-- **Linting**: eslint (`.eslint.config.js`), tidy (HTML), pylint (`.pylintrc`),
-  mypy (`.mypy.ini`), pytest (`tests/`), shellcheck
+- **Linting**: everything is a processor in `rsconstruct.toml` — eslint
+  (`.eslint.config.js`), tidy and htmlhint (HTML), stylelint (`.stylelintrc.json`),
+  pylint (`.pylintrc`), ruff, mypy (`[tool.mypy]` in `pyproject.toml`), pytest
+  (`tests/`), shellcheck, rumdl (`.rumdl.toml` for prose, `.rumdl.zola.toml` for
+  `content/`), taplo, yamllint, actionlint, xmllint, an encoding check, a duplicate-image
+  check, and an aspell spellcheck of the blog in both languages
+  (`scripts/spellcheck_{en,he}.sh` against the word lists in `.aspell.{en,he}.txt`)
 - **Data**: YAML/JSON for media content, PGN for chess games, Markdown for blog posts
 
 The site used to be built with MkDocs. It is not any more — see *Migration notes* below,
@@ -22,29 +27,43 @@ which records the traps that outlived the migration.
 
 ## Directory Structure
 
-- `config.toml` — zola config: `base_url`, taxonomies, the `[languages.he]` block, and
-  `[extra.nav]` / `[extra.languages]` which drive the nav and language switcher
+- `config.toml` — zola config: `base_url`, taxonomies, the `[languages.en]` and
+  `[languages.he]` blocks, and `[extra.nav]` / `[extra.languages]` which drive the nav
+  and language switcher. **`default_language` is `"cs"`, a phantom language with no
+  content.** Zola marks its default language by the *absence* of a filename suffix, and
+  `foo.en.md` cannot exist while English is the default, so the default was pointed at a
+  language nobody writes: every real file then carries an explicit `.en` or `.he` suffix.
+  The long comment at the top of `config.toml` explains it; `content/_index.md`
+  (`render = false`) exists only because zola insists the default language has a root
+  section
 - `content/` — all page and post source
-    - `content/blog/*.md` — blog posts, flat (no `YYYY/MM/` nesting). TOML front matter
-  between `+++` lines: `title`, `date`, and a `[taxonomies]` block with `tags`
-    - `content/blog/*.he.md` — Hebrew translations. The `.he` suffix is how zola pairs a
-  post with its translation; nothing else is needed
+    - `content/blog/*.en.md` — blog posts, flat (no `YYYY/MM/` nesting). TOML front
+  matter between `+++` lines: `title`, `date`, and a `[taxonomies]` block with `tags`.
+  A bare `*.md` would be a page in the phantom default language, not an English one
+    - `content/blog/*.he.md` — Hebrew translations. The shared base name is how zola
+  pairs a post with its translation; nothing else is needed
     - `content/<page>/_index.{en,he}.md` — the standalone nav pages (about, media, calendar, …)
 - `templates/` — Tera templates (`base.html`, `page.html`, `blog.html`, taxonomy pages)
 - `sass/style.scss` — compiled to `/style.css` by zola
-- `static/` — copied verbatim to the site root: app HTML, media plugins, images, data,
-  and `vendor/` (locally vendored JS libraries)
+- `static/` — copied verbatim to the site root: media plugins, images, data, `vendor/`
+  (locally vendored JS libraries), and four `*.html` files that are meta-refresh
+  redirects from retired URLs (the apps themselves live in `content/<app>/`)
 - `shared/shared-themes/` — git submodule providing the design tokens. **Run
   `git submodule update --init --recursive` on a fresh clone or the build fails.**
 - `scripts/` — `build_site.py` (the build), `gen_stats.py` (archive stats),
-  image fetchers, data importers, `serve.py`
-- `tests/` — pytest suite for the data import scripts
+  `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
+  the sibling teaching repos), image fetchers, data importers, `serve.py`, and the
+  `build_*_dict.sh` / `spellcheck_*.sh` pair behind the aspell processors
+- `tests/` — pytest suite for the data import scripts and template determinism
+- `.aspell.{en,he}.txt` — the spellcheck word lists; `out/aspell/` holds the compiled
+  dictionaries (gitignored build output)
 - `_site/` — generated output (gitignored, never edit)
 - `doc/` — project notes, decisions and the improvements backlog
 
 ## Build Commands
 
-- `rsconstruct build --verbose -j0` — full build (this is what CI runs)
+- `rsconstruct build` — full build (this is what CI runs; `--verbose` for detail.
+  Parallelism comes from `[build] parallel = 0` in `rsconstruct.toml`, not a flag)
 - `rsconstruct status` — show build status
 - `scripts/build_site.py` — the zola build on its own
 - `scripts/serve.py` — build, then serve `_site/` locally the way Pages will
@@ -87,8 +106,9 @@ packages and `cargo install zola` track other versions — prefer the pinned tar
   hand — do not edit it.** It only knows how to ask rsconstruct: checkout,
   caches, download rsconstruct, `tools install-deps` + `tools install`,
   build, status, deploy. Every tool and package the build needs is declared
-  in `rsconstruct.toml` instead — system packages under `[dependencies]`
-  (apt/pip/npm), and tools a wrapper script shells out to via
+  in `rsconstruct.toml` instead — apt and npm packages under `[dependencies]`
+  (`system` and `npm`; the Python linters come from rsconstruct's tool
+  registry, not from there), and tools a wrapper script shells out to via
   `required_tools` on the processor (that is how zola is installed; its
   pinned recipe lives in rsconstruct's tool registry). If something cannot
   be expressed there, the fix belongs in rsconstruct, not in the workflow.
@@ -103,9 +123,10 @@ packages and `cargo install zola` track other versions — prefer the pinned tar
 
 ## Blog Posts
 
-- One file per post in `content/blog/`, flat. The filename becomes the URL slug:
-  `euthyphro_dilemma.md` → `/blog/euthyphro-dilemma/`. **Zola slugifies the filename, not
-  the title** — worth remembering when hunting for a built page.
+- One file per post in `content/blog/`, flat, named `<base>.en.md`. The base name
+  becomes the URL slug: `euthyphro_dilemma.en.md` → `/en/blog/euthyphro-dilemma/`.
+  **Zola slugifies the filename, not the title** — worth remembering when hunting for a
+  built page.
 - Front matter is TOML between `+++` lines:
 
 ```toml
@@ -121,7 +142,8 @@ tags = ["religion", "philosophy", "ethics"]
 - **Translations**: add `content/blog/<same-base-name>.he.md`. Copy `date` verbatim
   from the English file — it is a shared key, and a mismatch splits the pair.
   Translate the `title` value and the `tags` (see below). Do not add a `lang` key;
-  zola infers it from the filename. The language switcher renders itself from
+  zola infers it from the suffix (`.en` / `.he`; a file with neither would land in
+  the phantom default language). The language switcher renders itself from
   `page.translations`, so never hand-write cross-links between a post and its
   translation.
 - **Post slugs are shared between languages, deliberately.** `/en/blog/foo/` and
@@ -143,20 +165,27 @@ tags = ["religion", "philosophy", "ethics"]
 
 - JavaScript: camelCase, ES9+, eslint-clean
 - Media plugins follow a consistent interface: `file`, `navTitle`, `title`, `subtitle`,
-  `searchPlaceholder`, `searchFields`, `renderDetails`, `renderStats`
-- Python: pylint- and mypy-clean; both run in CI over `scripts/`
+  `searchPlaceholder`, `searchFields`, `defaultSort`, `fields`, `renderDetails`,
+  `renderStats` and the rest documented in `doc/PLUGIN_GUIDE.md`
+- Python: pylint-, ruff- and mypy-clean; all three run in CI over `scripts/`
 
 ## Style Sheets
 
 - `sass/style.scss` is the site stylesheet, compiled by zola to `/style.css`.
 - **Colours, radii, fonts and shadows come from `shared/shared-themes`** (the submodule).
-  Nothing in `style.scss` hardcodes a colour — every value is a `var(--token)`. Setting
-  `data-theme` on `<html>` switches between the six themes; azure is the default.
+  Nothing in `style.scss` hardcodes a colour — every value is a `var(--token)` — with
+  one commented exception: the chessboard squares mix the accent token against fixed
+  greys, because cm-chessboard's own fills are hardcoded and a pure-token pairing hid the
+  black pieces. Setting `data-theme` on `<html>` switches between the six themes; azure
+  is the default.
 - `themes.css` is *copied* into `static/` by `build_site.py` and linked from `base.html`,
   not `@import`-ed from the SCSS: dart-sass leaves a plain `@import` of a `.css` file as a
   runtime import, and the relative path then resolves against `/style.css` and 404s.
-- `static/shared.css` — common UI styles for the standalone app pages (`media_app.html`,
-  `chess.html`, `calendar_app.html`, `board.html`). These link it directly.
+- `static/shared.css` and `static/custom.css` are **orphaned**: nothing links either.
+  `shared.css` styled the standalone app pages of the MkDocs era, which are now
+  meta-refresh redirects; `custom.css` targets Material-for-MkDocs class names that no
+  longer exist. Both still ship because `SHARED_ROOT` in `build_site.py` leaves them at
+  the site root. Deleting them is pending, not decided.
 - Prefer external stylesheets over inline `<style>` blocks or `style=` attributes.
 
 ## Git Conventions

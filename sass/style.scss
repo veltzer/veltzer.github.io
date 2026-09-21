@@ -2,9 +2,11 @@
 //
 // The palette, radii, fonts and shadows come from shared/shared-themes (a git
 // submodule, also used by teaching-slides / teaching-syllabi / teaching-
-// animations). Nothing here hardcodes a colour: every value is a var(--token)
-// from themes.css, so switching data-theme on <html> restyles the whole site
-// and the sibling sites stay visually consistent.
+// animations). Nothing here hardcodes a colour, with one commented exception
+// (the chess-board squares and coordinates, see the chess section at the end):
+// every other value is a var(--token) from themes.css, so switching data-theme
+// on <html> restyles the whole site and the sibling sites stay visually
+// consistent.
 //
 // Azure applies by default via :root, so no attribute is needed for the
 // standard look -- it matches the indigo palette the MkDocs site used.
@@ -127,7 +129,8 @@ h3 { font-size: 1.1rem; margin: 1.8rem 0 0.5rem; }
 }
 .tag:hover { background: var(--bg-hover); color: var(--accent); }
 
-// Language switchers -- both the per-post one and the site-level one.
+// The per-post language switcher (templates/page.html). The site-level one in
+// the header is a <select class="site-select">, styled further down.
 .lang-switcher { display: flex; gap: 0.4rem; margin-top: 0.75rem; }
 .lang {
   text-transform: uppercase;
@@ -267,12 +270,12 @@ th { background: var(--bg-surface); }
   unicode-bidi: isolate;
 }
 
-// Embedded application pages (media / slides / syllabi / animations).
-// These host a whole application -- an iframe, or the media tracker's own DOM --
-// rather than prose, so they use templates/embed.html, which swaps the narrow
-// reading column for this wide container. The 42rem measure that suits an essay
-// squeezes an application, and a fixed pixel height cut the iframe content off
-// with no way to reach the rest.
+// Application pages (media / calendar / slides / syllabi / animations / chess).
+// These host a whole application rather than prose, so their templates
+// (embed.html, app.html, chess.html) swap the narrow reading column for this
+// wide container. The 42rem measure that suits an essay squeezes an
+// application. The class name dates from when the teaching sites were framed in
+// an iframe; nothing is framed any more, the markup is imported into the page.
 .embed-main {
   max-width: 80rem;
   margin: 0 auto;
@@ -283,9 +286,10 @@ th { background: var(--bg-surface); }
   margin-bottom: 1rem;
 }
 
-// The application pages (media, slides, syllabi, animations) import their
-// markup directly rather than framing it, so there is one document and one
-// scrollbar. .embed-main just widens the container past the reading column.
+// The imported teaching pages (slides, syllabi, animations) wrap their markup
+// in .app-root; media, calendar and chess do not use it. There is one document
+// and one scrollbar. .embed-main just widens the container past the reading
+// column.
 .app-root { width: 100%; }
 
 // Chess viewer. Every colour is a theme token, so the board page follows the
@@ -435,9 +439,12 @@ th { background: var(--bg-surface); }
 // The squares are derived from --accent rather than from the surface tokens.
 // Surface tokens track the theme but sit too close together: in the dark themes
 // a bg-surface/bg-hover pairing left the black pieces almost invisible against
-// the dark squares. colour-mix against white and black instead gives a tinted
-// light square and a properly darker one, so the board keeps chess-grade
-// contrast in every theme while still taking its hue from the site.
+// the dark squares. colour-mix against fixed white and mid-grey (#6b6b6b)
+// instead gives a tinted light square and a properly darker one, so the board
+// keeps chess-grade contrast in every theme while still taking its hue from the
+// site. These, and the coordinate tone below, are the only literal colours in
+// this file -- deliberately, because a theme-relative dark square lost the
+// pieces.
 .cm-chessboard.default .board .square.white {
   fill: color-mix(in srgb, var(--accent) 12%, white);
 }

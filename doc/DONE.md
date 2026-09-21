@@ -1,5 +1,13 @@
 # Completed Improvements
 
+**Historical (MkDocs era).** Everything below was done against the MkDocs site
+and its standalone HTML pages, and the file names are the ones of that time
+(`manage_api_key.sh`, `copy_data.sh`, `build_docs.sh`, `blog/shared.css`,
+`calendar_*.html`, `mkdocs.yml`); most no longer exist. Two entries were later
+reversed: `check_images.py` is no longer run by the build (it is a manual check,
+see `doc/SCRIPTS.md`), and the CDN SRI hashes for cm-chessboard and chess.js
+became moot when both were vendored into `static/vendor/`.
+
 ## Calendar Pages
 
 - Iframe URL in `calendar_google_embed.html` now built dynamically from `keys.js`

@@ -166,8 +166,10 @@
 
       Language: where the current page has a translation (page.translations, set
       on blog posts) the option points straight at it so the reader stays where
-      they are. Sections and taxonomy pages have no translations list, so there
-      it falls back to the other language's home page -- better than hiding the
+      they are. Only page.translations is consulted: zola 0.23.3 also exposes
+      section.translations, but nothing below reads it, so on section pages
+      (the blog index, the apps, about) and on taxonomy pages the option falls
+      back to the other language's home page -- better than hiding the
       switcher and leaving /he/ unreachable from the English site. Navigation is
       a plain location change on `change`, so it still works without JS in the
       sense that the options carry real URLs.

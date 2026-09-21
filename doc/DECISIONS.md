@@ -41,8 +41,9 @@ approach is correct and intentional.
 The API key is restricted by HTTP referrer (`veltzer.github.io/*`, and the
 custom domain `veltzer.org/*`) and limited to the Calendar API only. Google
 designed browser API keys to be public — the restrictions prevent misuse.
-The key is stored in `pass` and injected at build time via `keys.js.mako`
-template.
+The key is stored in `pass` (see `scripts/manage_api_key.py`, which reads and
+rotates it there) and committed verbatim in `static/keys.js`, which the
+calendar page loads directly. There is no build-time injection.
 
 ### Why not hide the key behind an edge proxy (Cloudflare Worker etc.)?
 
@@ -70,12 +71,20 @@ never see it. We decided **not** to do this. Reasoning:
   `events: function(){...}` callback); `calendar_google_embed.html` uses
   no key at all.
 
+  (2026-09-21: of those three pages only the FullCalendar one survives, as
+  `content/calendar/_index.en.md`; the other two were deleted, see the
+  Calendar section above. The argument stands for the remaining consumer.)
+
 If the key were ever changed to a billing-bound or write-capable
 credential, this decision should be revisited — a proxy would then be
 warranted. As long as it stays a referrer-restricted, read-only Calendar
 browser key, the visible-in-source key is the correct, simplest design.
 
 ## MkDocs owns `docs/` — manual files go in `blog/`
+
+**Historical (MkDocs era).** There is no `docs/` or `blog/` directory any more:
+static files live in `static/`, posts in `content/blog/`, and zola writes to
+`_site/`. Kept as a record of the earlier layout.
 
 All static files (HTML, JS, CSS, images, data) live in `blog/` alongside
 the Markdown blog posts. MkDocs copies them through as-is to `docs/` on
@@ -96,6 +105,9 @@ shop.thegreatcourses.com. These use `internal_id` for image naming
 and DuckDuckGo image search for cover images.
 
 ## MkDocs 2.0 will break Material for MkDocs
+
+**Historical (MkDocs era).** The site no longer uses MkDocs, so this warning
+no longer applies; kept as the record of why the upgrade was watched.
 
 The Material for MkDocs team has warned that MkDocs 2.0 will introduce
 backward-incompatible changes: all plugins will stop working, all theme
@@ -153,10 +165,11 @@ That asymmetry is deliberate.
 ### Why posts keep a shared slug
 
 Zola derives a post's URL from its filename, and **the filename is also what
-pairs a post with its translation**: `foo.md` and `foo.he.md` are one post in
-two languages precisely because they share a base name. `page.translations` --
-which renders the language switcher on all 330 post pages (165 per language) --
-is built from that pairing.
+pairs a post with its translation**: `foo.en.md` and `foo.he.md` are one post
+in two languages precisely because they share a base name. `page.translations`
+-- which renders the language switcher on every post page (the current count
+is in `[extra.stats]` of `content/blog/_index.en.md`) -- is built from that
+pairing.
 
 Giving Hebrew posts Hebrew URLs therefore means one of:
 
@@ -193,10 +206,15 @@ taxonomies only. Zola's default slugify transliterates rather than strips, so
 Because tags are no longer copied verbatim between a post and its translation,
 nothing checks that the two tag sets stay conceptually in step. A Hebrew post
 tagged with an English word will not error -- it will quietly create a new
-English term under `/he/tags/`. The five technology tags that legitimately stay
-in latin (gpg, ssh, mysql, mkdocs, github-pages) make that easy to miss.
+English term under `/he/tags/`. The technology tags that legitimately stay in
+latin (today only `mysql`; gpg, ssh, mkdocs and github-pages were translated
+since) make that easy to miss.
 
 ## No custom JS/HTML minification
+
+**Written in the MkDocs era.** The numbers and the theme references below are
+from then; the conclusion still holds, and zola's output is served gzipped by
+GitHub Pages the same way.
 
 Investigated adding minification (terser, html-minifier) for custom plugin
 JS files (`plugin-*.js`, `media-utils.js`) and HTML files. Decided against

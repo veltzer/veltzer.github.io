@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 """
-Render the profile links from ../data/yaml/profiles.yaml into both places that
-show them, so the two cannot drift apart.
+Render the shared profile block from ../data/yaml/profiles.yaml into every
+place on this site that shows it, so the copies cannot drift apart.
 
 Targets:
   content/about/_index.en.md         this site's About page
@@ -14,8 +14,10 @@ GitHub profile page. That repo builds its own copy with its own rsconstruct
 setup -- this script does not write there. Each repository owns its artifact,
 and the shared YAML is the only thing that crosses between them.
 
-Only the link list is generated. Everything outside the marker comments is left
-exactly as it was, so the hand-written prose above them survives regeneration.
+The whole block between the marker comments is generated: the contact line,
+the intro, the link groups and the trailing extras. Everything outside the
+markers is left exactly as it was, so the hand-written prose above them
+survives regeneration.
 
 Run it by hand after editing profiles.yaml. Like copy_data.py this is
 deliberately not part of the build: the sibling data repo is not checked out in

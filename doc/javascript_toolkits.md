@@ -10,12 +10,12 @@ than none, because it gets trusted.
 
 ## The short version
 
-There is no single framework. Four app pages each load what they need, and the
+There is no single framework. The app pages each load what they need, and the
 blog loads nothing at all.
 
 | Page | CSS | JS libraries |
 |------|-----|--------------|
-| `/en/media/` | Tailwind (CDN) | none -- plain JS in `static/media-app.js` + seven plugins |
+| `/en/media/` | Tailwind (CDN) | none -- plain JS in `static/media-app.js` + eight plugins |
 | `/en/chess/` | site stylesheet | chess.js, cm-chessboard -- both **vendored**, not CDN |
 | `/en/calendar/` | site stylesheet | FullCalendar 6.1.20 + its Google Calendar plugin (CDN) |
 | `/en/slides/`, `/en/syllabi/`, `/en/animations/` | site stylesheet | Material Web 2 (CDN) |
@@ -95,10 +95,11 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
   `static/media-app.js` is the comment recording that decision.
 - **Bootstrap** -- removed before the zola migration, in favour of Tailwind on the
   media page.
-- **elasticlunr / `search_index.en.js`** -- zola still generates a 4.1 MB search
-  index for English (`build_search_index = true` in `config.toml`), and **nothing
-  loads it.** The only search on the site is the media app's, which filters its
-  own JSON client-side. Either wire up a search UI or turn the flag off.
+- **elasticlunr / `search_index.en.js`** -- switched off. `build_search_index`
+  is `false` in every language block of `config.toml` (the comment on the flag
+  records why: the 4.1 MB index was generated and deployed on every build and
+  nothing ever loaded it). The only search on the site is the media app's, which
+  filters its own JSON client-side.
 
 ## Media plugin filter system
 
@@ -137,14 +138,17 @@ fields: [
 
 ## Standalone HTML in `static/`
 
-Four files, and only two are real pages:
+Four files, all redirect stubs (meta refresh plus a canonical) since
+2026-08-18, when the standalone apps were replaced by the templated sections.
+They survive because the old URLs were linked from the old nav and may be
+bookmarked:
 
-| File | What it is |
-|------|-----------|
-| `media_app.html` | The media app outside the site chrome |
-| `calendar_app.html` | The calendar outside the site chrome |
-| `chess.html` | **A redirect stub.** The viewer moved to `/en/chess/`; this survives because `/chess.html` was linked from the old nav and may be bookmarked |
-| `full_index.html` | Index linking to the standalone pages |
+| File | Redirects to |
+|------|--------------|
+| `media_app.html` | `/en/media/` |
+| `calendar_app.html` | `/en/calendar/` |
+| `chess.html` | `/en/chess/` |
+| `full_index.html` | `/` |
 
 The app sections are language-prefixed (`/en/chess/`, not `/chess/`) now that
 they have Hebrew versions, which is why the redirect points where it does.

@@ -22,8 +22,9 @@ description = "Mark Veltzer -- software engineer from Israel. Blog on programmin
 # Pointing default_language at a language that has no content sidesteps that:
 # every real language is then a non-default one, so every file carries an
 # explicit suffix and English stops being a special case. The cost is the
-# [translations] table below and the /index.html redirect, both of which exist
-# only to service a language nobody reads.
+# [translations] table below and the root /index.html -- which zola would
+# otherwise leave empty, so scripts/build_site.py writes a language-chooser
+# page there -- both of which exist only to service a language nobody reads.
 #
 # build_search_index is off here for the same reason: zola only ships stemmers
 # for a fixed list of languages and errors out on an unsupported one. The real
@@ -143,9 +144,10 @@ taxonomies = [
     { name = "tags", feed = true, paginate_by = 20 },
 ]
 
-# The apps (media/chess/...) exist only in English, but their nav labels are
-# still worth translating: the reader on /he/ sees a Hebrew menu even though
-# the app itself opens in English.
+# The apps (media/chess/...) have a Hebrew section each, but it is a stub that
+# reuses the English body (see templates/app_body.html), so the app itself is
+# English under /he/ too. The nav labels are still worth translating: the
+# reader on /he/ sees a Hebrew menu around it.
 [languages.he.translations]
 nav_blog = "בלוג"
 nav_about = "אודות"

@@ -107,10 +107,12 @@ def download_image(url, dest):
 
 def fetch_posters(yaml_path, image_dir, prefix, tmdb_result_key, force=False):
     """
-    Main fetch loop. Downloads posters for all IMDB IDs in the YAML file.
+    Main fetch loop. Downloads posters for all IMDB IDs in the data file.
 
     Args:
-        yaml_path: Path to gzipped YAML data file
+        yaml_path: Path to the gzipped data file. The name is historical: the
+            callers now pass the .json.gz that copy_data.py ships, and
+            load_imdb_ids() accepts either format.
         image_dir: Directory to save images
         prefix: Filename prefix (e.g. 'movie' or 'series')
         tmdb_result_key: TMDB result key ('movie_results' or 'tv_results')

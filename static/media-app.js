@@ -1,7 +1,7 @@
 /*
  * Shared media application.
  *
- * One entry point now: content/media/_index.md, served at /en/media/ and
+ * One entry point now: content/media/_index.en.md, served at /en/media/ and
  * /he/media/. It sets window.mediaBasePath BEFORE loading this script.
  *
  * There used to be a second -- a standalone static/media_app.html carrying its
@@ -657,7 +657,7 @@
                 // the whole image is shown, and the bands either side are a
                 // blurred, enlarged copy of the same image rather than flat
                 // colour. Styles for the three classes live in
-                // content/media/_index.md next to the other #media-root rules.
+                // content/media/_index.en.md next to the other #media-root rules.
                 const contain = activeConfig.imageFit === 'contain';
                 const imgHtml = imgUrl
                     ? '<div class="media-card-image' + (contain ? ' media-card-image--contain' : '') + '">' +

@@ -35,7 +35,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SIBLINGS = REPO_ROOT.parent
 
-# (section name, sibling repo, page title, weight in the nav)
+# (section name, sibling repo, page title); nav order comes from config.toml
 SITES = [
     ("slides", "teaching-slides", "Teaching Slides"),
     ("syllabi", "teaching-syllabi", "Teaching Syllabi"),

@@ -26,8 +26,10 @@
 
     {#- The language switcher. Generated from page.translations, so adding a
         sixth language means adding a sixth file -- no template change and no
-        hand-maintained cross-links between posts. Hidden when a post has no
-        translation, which is most of them. -#}
+        hand-maintained cross-links between posts. The guard below hides it
+        when a post has no translation; in practice every post has both
+        languages (scripts/gen_stats.py fails the build otherwise), so it
+        renders on every post. -#}
     {%- if page.translations | length > 1 %}
     <nav class="lang-switcher" aria-label="{{ trans(key='label_translations', lang=page_lang) }}">
       {#- Ordered by config.extra.languages rather than by iterating

@@ -52,6 +52,12 @@ alias is built, moved, and ends up serving `/en/blog/blog/x/` while the URL it
 was meant to rescue still 404s. A build with one such alias in place confirmed
 this. Hence the step runs *after* the move, in the post-processing chain.
 
+Re-checked 2026-09-21, after every post and section became an explicit
+`_index.en.md` / `.en.md` under the phantom `cs` default language: zola still
+writes an English post's alias to the site root (`/2026/01/01/old-slug/`, not
+`/en/...`), and `relocate_english()` still sweeps every root directory into
+`/en/`, so the conclusion is unchanged.
+
 `noindex, follow` matters: without it Google would index the stubs themselves
 as thin duplicates, trading nine 404s for nine near-empty pages.
 

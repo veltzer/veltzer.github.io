@@ -1,8 +1,11 @@
 # Suggested Improvements
 
 Struck-through entries are done; the note under each records what was actually
-changed and how it was verified. **The only open items are in the "Site review,
-2026-09-07" section at the end**; everything above it is closed.
+changed and how it was verified. **The open items are in the "Site review,
+2026-09-07" section at the end**, plus one older one: the `hebrew` language tag
+noted under "Right-to-left rendering" is still open. Everything else above the
+site review is closed. Where a closed verdict was later overtaken by the code, a
+dated correction sits under it rather than a rewrite.
 
 Everything in this file is a record rather than a task. Keep it that way:
 when an item is finished, strike it through and say what was done, rather than
@@ -13,7 +16,8 @@ being re-reported, or to record that something is deliberately not a problem.
 
 These were written against an earlier version of the media app and most had
 already shipped without being marked. Audited against `static/media-app.js`, the
-seven `static/plugin-*.js` files and the built page.
+seven `static/plugin-*.js` files of the time (there are eight now; `plugin-books.js`
+came later) and the built page.
 
 - ~~**Add a clear title/subtitle explaining what the media collection contains.** — DONE.~~
   Every plugin sets `title` and `subtitle`: "Audible Library", "Watched Movies",
@@ -394,6 +398,12 @@ seven `static/plugin-*.js` files and the built page.
   `test_converts_yyyymmdd_to_iso`, and dropping the `QuotedStr` wrapper failed both asin
   tests. Both scripts were restored afterwards.
 
+  Update 2026-09-21: the suite has grown to 47 cases in four files
+  (`test_import_books.py` and `test_template_determinism.py` were added), but
+  `dep_inputs` still names only the original two scripts. Edits to
+  `scripts/import_books.py` or to `templates/*.html` therefore do not re-run the suite on
+  a warm cache. Open; the fix is to extend `dep_inputs` in `rsconstruct.toml`.
+
 ## Infrastructure
 
 - ~~**mkdocs-rss-plugin is not idempotent (non-deterministic builds).** — DONE.~~
@@ -421,11 +431,18 @@ seven `static/plugin-*.js` files and the built page.
   uses a hardcoded inline PGN instead. This is intentional: the game collection is staged
   for a planned chess viewer that will display it. Leave it in place.
 
+  Superseded 2026-09-21: that viewer exists. `content/chess/_index.en.md` fetches
+  `/data/games.pgn.gz` (`DATA_URL`), so the file is referenced now; its size is the open
+  item "The chess page downloads the whole 21 MB archive" in the site review below.
+
 - ~~**Python linters are configured but never run.** — DONE.~~
   Added `[processor.pylint]` and `[processor.mypy]` over `scripts/`, so CI now enforces
   what the config files always specified. Note mypy's `dep_auto` defaults to `mypy.ini`
   while this project uses `.mypy.ini`, so the config is passed explicitly via `args` and
   declared in `dep_inputs`.
+
+  Update 2026-09-21: the mypy configuration has since moved into `[tool.mypy]` in
+  `pyproject.toml`; `.mypy.ini` no longer exists and `[processor.mypy]` takes no `args`.
 
   Turning the checks on surfaced 4 real pylint findings in `scripts/serve.py`, all fixed
   rather than suppressed wholesale: a lambda assigned to a variable became a `def`; a bare
@@ -450,6 +467,9 @@ seven `static/plugin-*.js` files and the built page.
   `src_dirs = ["scripts"]` but `scripts/` holds only `.py` files, so the status table
   shows 0. Deliberately left in place — it is a check waiting for its inputs, and
   removing it would silently drop shellcheck coverage the moment a `.sh` file is added.
+
+  Superseded 2026-09-21: `scripts/` now holds four `.sh` files (the aspell dictionary
+  builders and spellcheck wrappers, see `doc/SCRIPTS.md`), and shellcheck checks them.
 
 - ~~**`blog/data/` is stale relative to the source repo.** — NOT AN ISSUE.~~
   Retracted. This was inferred from `../data` having commits through 2026-08-03 while the
@@ -612,8 +632,8 @@ seven `static/plugin-*.js` files and the built page.
 - ~~**Dangling forward reference with the wrong tense.** — DONE.~~
   `geography_of_belief.md` said "(We'll cover this point in more depth in a separate
   post.)" about a post that had already published three weeks earlier. Changed to past
-  tense and linked to `../04/outsider_test_for_faith.md`. The underlying content overlap
-  between the two posts is still open — see the redundancy item above.
+  tense and linked to `../04/outsider_test_for_faith.md`. The two posts revisit shared
+  ground by design — see the "overlap between posts" entry above.
 
 - ~~**The 3-tag convention was abandoned.** — DONE.~~
   All 33 single-tag posts (the entire 2026/04-05 religion sequence) now carry `religion`
