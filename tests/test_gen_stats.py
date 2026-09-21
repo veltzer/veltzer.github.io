@@ -7,9 +7,8 @@ to an unrelated tag, so the derivation must refuse anything that is not a
 clean bijection.
 """
 
-import pytest
-
 import gen_stats
+import pytest
 
 POST = """+++
 title = "x"

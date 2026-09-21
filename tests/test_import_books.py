@@ -71,7 +71,7 @@ class TestIdsAndCover:
         assert out["goodreads_id"] == "1"
 
     def test_known_no_cover_key_keeps_id_and_url_but_no_cover(self):
-        key = sorted(import_books.NO_COVER)[0]
+        key = min(import_books.NO_COVER)
         book_id = key.split("-", 1)[1]
         out = import_books.convert_item(book(names=[{"language": "hebrew", "name": "X", "simania_id": book_id}]))
         assert out["simania_id"] == book_id

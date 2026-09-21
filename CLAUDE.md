@@ -174,7 +174,7 @@ tags = ["religion", "philosophy", "ethics"]
 - Media plugins follow a consistent interface: `file`, `navTitle`, `title`, `subtitle`,
   `searchPlaceholder`, `searchFields`, `defaultSort`, `fields`, `renderDetails`,
   `renderStats` and the rest documented in `doc/PLUGIN_GUIDE.md`
-- Python: pylint-, ruff- and mypy-clean; all three run in CI over `scripts/`
+- Python: pylint-, ruff- and mypy-clean; all three run in CI over `scripts/` and `tests/`
 
 ## Style Sheets
 

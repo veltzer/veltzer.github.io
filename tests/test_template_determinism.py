@@ -62,7 +62,7 @@ class TestTranslationOrdering:
                 before = text[:match.start()]
                 # The nearest enclosing loop must be over the config list. Count
                 # unclosed `for` blocks by walking backwards from this loop.
-                opens = [m for m in LANGUAGES_LOOP.finditer(before)]
+                opens = list(LANGUAGES_LOOP.finditer(before))
                 if not opens:
                     offenders.append(f"{path.name}:{before.count(chr(10)) + 1}")
                     continue
