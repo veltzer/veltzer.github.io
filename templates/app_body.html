@@ -1,6 +1,6 @@
 {#- The body of an application section.
 
-    The apps exist once, in the default-language file (content/<app>/_index.md).
+    The apps exist once, in the English file (content/<app>/_index.en.md).
     Their per-language variants -- content/<app>/_index.he.md -- carry only a
     translated title, so that a reader who opens an app from /he/ keeps the
     Hebrew nav, language selector and links instead of being dropped into the
@@ -18,13 +18,14 @@
 {%- if section.content %}
 {{- section.content | safe }}
 {%- else %}
-{#- Empty body: this is a translated stub, so render the default-language
-    section's content instead.
+{#- Empty body: this is a translated stub, so render the English section's
+    content instead.
 
-    lang="cs" is required, not decorative: get_section defaults to the current
+    lang="en" is required, not decorative: get_section defaults to the current
     page's language, and asking for this section in Hebrew returns the stub we
-    are already rendering -- an empty body. The apps live in the default
-    language, so the lookup has to name it. -#}
-{%- set source = get_section(path=section.components | last ~ "/_index.md", lang=config.default_language) %}
+    are already rendering -- an empty body. The apps live in English, so the
+    lookup has to name it. The path is the unsuffixed _index.md: that is how
+    zola addresses a section whatever language is asked for. -#}
+{%- set source = get_section(path=section.components | last ~ "/_index.en.md", lang="en") %}
 {{- source.content | safe }}
 {%- endif %}

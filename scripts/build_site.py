@@ -280,17 +280,23 @@ def base_url():
 
 
 def relocate_english(root):
-    """Move the English pages under /en/ so both languages are prefixed.
+    """Move anything zola left at the site root under /en/.
 
-    Still load-bearing, despite default_language now being the empty "cs" (see
-    config.toml). Zola emits the blog and its pages under /en/ and /he/ itself,
-    so there is nothing to do for those -- but the six application sections
-    (media, calendar, chess, slides, syllabi, animations) are default-language
-    files, so zola writes them to the site root. This is what moves them to
-    /en/, and without it /en/chess/ and friends do not exist.
+    Historically this did the heavy lifting: English was the default language,
+    zola wrote it unprefixed, and this step moved every English page under
+    /en/. With default_language now the empty "cs" (see config.toml) and every
+    section an explicit _index.en.md -- the six application sections (media,
+    calendar, chess, slides, syllabi, animations) were the last unsuffixed
+    ones, renamed 2026-09-21 -- zola emits both languages prefixed itself, and
+    a diagnostic zola build shows no section directory at the root at all.
 
-    Verified by diffing a build with this step removed: the six app directories
-    stay at the root and never appear under /en/.
+    What still moves is whatever static/ contributes that is not in SHARED_ROOT
+    and not one of the file types skipped below: today that is identity.toml
+    and build_info.toml, which end up at /en/. Nothing reads them from the
+    output (base.html loads identity.toml from static/ at build time), so the
+    step is a safety net now, not a load-bearing move. Kept so that an
+    unsuffixed file added by mistake surfaces under /en/ rather than as a
+    stray root directory.
 
     The result is symmetrical: /en/blog/x/ and /he/blog/x/ both serve real
     pages, and neither language is privileged by the URL layout. The root then

@@ -196,11 +196,12 @@ def main():
             die(f"{source}: no <body> found")
         page = rewrite_assets(page, repo)
 
-        # _index.md, NOT _index.en.md. These are app sections: they serve from
-        # the site root with no language prefix (see APP_SECTIONS in
-        # build_site.py), and the root is the default language. Giving them a
-        # .en.md suffix files them under /en/ and leaves /slides/ a 404.
-        dest = REPO_ROOT / "content" / section / "_index.md"
+        # _index.en.md, like every other section: the default language is the
+        # phantom "cs" (see config.toml), so the English body carries an
+        # explicit suffix and zola files it under /en/ itself. The Hebrew
+        # _index.he.md stub is hand-written and pulls this body in through
+        # templates/app_body.html, so it is not regenerated here.
+        dest = REPO_ROOT / "content" / section / "_index.en.md"
         text = FRONT_MATTER.format(title=title) + page
         if args.check:
             print(f"would write {dest} ({len(text):,} bytes)")

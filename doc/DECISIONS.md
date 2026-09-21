@@ -9,7 +9,7 @@ approach was best: `calendar_full.html` (FullCalendar), `calendar_list_view.html
 linked; the other two stayed on disk for comparison.
 
 That evaluation has concluded. The FullCalendar approach is now the real page at
-`content/calendar/_index.md`, served at `/en/calendar/` and `/he/calendar/` with
+`content/calendar/_index.en.md`, served at `/en/calendar/` and `/he/calendar/` with
 month, week and day views, and `calendar_full.html` is gone -- superseded by it.
 
 The two losing alternatives were deleted on 2026-08-18. They had become

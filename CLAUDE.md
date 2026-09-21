@@ -29,7 +29,7 @@ which records the traps that outlived the migration.
   between `+++` lines: `title`, `date`, and a `[taxonomies]` block with `tags`
     - `content/blog/*.he.md` — Hebrew translations. The `.he` suffix is how zola pairs a
   post with its translation; nothing else is needed
-    - `content/<page>/_index.md` — the standalone nav pages (about, media, calendar, …)
+    - `content/<page>/_index.{en,he}.md` — the standalone nav pages (about, media, calendar, …)
 - `templates/` — Tera templates (`base.html`, `page.html`, `blog.html`, taxonomy pages)
 - `sass/style.scss` — compiled to `/style.css` by zola
 - `static/` — copied verbatim to the site root: app HTML, media plugins, images, data,

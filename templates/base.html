@@ -1,7 +1,9 @@
-{#- "cs" is the phantom default language (see config.toml): it has no content of
-    its own, and the pages zola files under it are the app sections, which are
-    English and serve unprefixed from the site root. Map it to "en" here, once,
-    so every nav link, lang_root and <html lang> downstream is English rather
+{#- "cs" is the phantom default language (see config.toml): it has no content
+    of its own. Every section, the six app sections included, is now an
+    explicit _index.en.md, so no page body is filed under it -- but zola still
+    renders the site-wide 404.html once, in the default language, and any
+    future unsuffixed file would land there too. Map it to "en" here, once, so
+    every nav link, lang_root and <html lang> downstream is English rather
     than pointing at /cs/, which does not exist. -#}
 {%- set page_lang = lang | default(value="en") -%}
 {%- if page_lang == "cs" %}{% set page_lang = "en" %}{% endif -%}
@@ -176,11 +178,11 @@
     <label class="visually-hidden" for="lang-select">{{ trans(key="label_language", lang=page_lang) }}</label>
     <select id="lang-select" class="site-select">
       {#- page_lang, not `lang | default(config.default_language)`: the default
-          is the phantom "cs", so on the app pages -- which zola files under it
-          -- `here` matched neither "en" nor "he" and no option was marked
-          selected. The <select> then showed its first option, English, whatever
-          language the reader had arrived from. page_lang already maps cs to en
-          at the top of this file. -#}
+          is the phantom "cs", and while the app pages were still filed under it
+          `here` matched neither "en" nor "he", so no option was marked selected
+          and the <select> showed its first option, English, whatever language
+          the reader had arrived from. page_lang already maps cs to en at the
+          top of this file. -#}
       {%- set here = page_lang %}
       {%- for entry in config.extra.languages %}
         {#- set_global must not be shadowed by a plain `set` of the same name in

@@ -28,7 +28,7 @@ selects the tab. The first entry in the registry is the tab shown when the
 URL names none; the nav tabs themselves are sorted by `navTitle`, not by
 registry order.
 
-The page that hosts the app is `content/media/_index.md` (served at
+The page that hosts the app is `content/media/_index.en.md` (served at
 `/en/media/` and `/he/media/`). It sets `window.mediaBasePath` and loads
 `media-utils.js` and `media-app.js`; it does not list the plugins itself.
 

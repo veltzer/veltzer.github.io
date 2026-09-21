@@ -25,7 +25,7 @@ blog loads nothing at all.
 
 ### Tailwind, on one page only
 
-`content/media/_index.md` loads Tailwind from `https://cdn.tailwindcss.com` in
+`content/media/_index.en.md` loads Tailwind from `https://cdn.tailwindcss.com` in
 JIT mode.
 
 **It is the only page that does.** The previous version of this file claimed
