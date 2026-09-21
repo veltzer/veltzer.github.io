@@ -402,7 +402,8 @@ came later) and the built page.
   (`test_import_books.py` and `test_template_determinism.py` were added), but
   `dep_inputs` still names only the original two scripts. Edits to
   `scripts/import_books.py` or to `templates/*.html` therefore do not re-run the suite on
-  a warm cache. Open; the fix is to extend `dep_inputs` in `rsconstruct.toml`.
+  a warm cache. Fixed later the same day: `dep_inputs` now names `import_books.py` and
+  every template (rsconstruct has no glob form for it).
 
 ## Infrastructure
 
@@ -493,6 +494,16 @@ came later) and the built page.
 
   `fix_sitemap()` is likewise still load-bearing: the raw zola sitemap has 7 entries
   lacking a language prefix (the six app sections plus `tags/`), which it rewrites to 0.
+
+  Update 2026-09-21: both are now gone or reduced, and this time it was measured. The six
+  app sections were renamed to `_index.en.md`, after which a raw zola build showed no
+  section directory at the root; `relocate_english()` was then deleted along with
+  `SHARED_ROOT` and `APP_SECTIONS`. The root `tags/` entry came from the top-level
+  `taxonomies` in `config.toml`, which applied to the phantom default language; it was
+  removed together with the top-level `generate_feeds` (which produced an empty
+  `/atom.xml`), so `fix_sitemap()` no longer rewrites or dedupes anything and only drops
+  the paginator redirect stubs and appends the root. `/atom.xml` is now a copy of the
+  English feed (`copy_root_feed()`), because every page advertised that URL until today.
 
   Lesson worth keeping: "verified inert" here had meant reading the code and spot-checking
   the output, not diffing a build with the step removed. Only the second is verification.

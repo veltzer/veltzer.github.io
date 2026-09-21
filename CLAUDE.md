@@ -71,7 +71,7 @@ which records the traps that outlived the migration.
 **Never run `zola build` by hand — always go through the build system.**
 Bare `zola build` writes to `public/` (zola's hardcoded default; an
 `output_dir` key in config.toml is silently ignored) and skips
-`build_site.py`'s post-processing (`relocate_english()`, `fix_sitemap()`).
+`build_site.py`'s post-processing (`write_legacy_redirects()`, `fix_sitemap()`).
 The result is a second output tree that looks authoritative but is neither
 the real build nor post-processed — stale copies of it have produced wrong
 page counts and false "missing post" reports. The real output is `_site/`,
@@ -154,6 +154,13 @@ tags = ["religion", "philosophy", "ethics"]
 - **Tags are translated, and are NOT a shared key.** A Hebrew post carries Hebrew
   tags (`דת`, not `religion`), so `/en/tags/` and `/he/tags/` are disjoint term
   sets. This is safe precisely because the pairing is by filename, not by tag.
+- **Tag lists must be in the same order in both languages.** Position N in the
+  English list is the translation of position N in the Hebrew list. That is how
+  `scripts/gen_stats.py` derives `static/tag_translations.toml` (generated, do not
+  hand-edit; committed like the stats), which `templates/base.html` reads so a tag
+  page's language switcher and hreflang alternates reach the same tag in the other
+  language. A pair whose lists differ in length, or a tag that lines up with two
+  different counterparts, fails the build.
 - Links between posts use zola's `@/` syntax, resolved against the content root:
   `[text](@/blog/other_post.md)`.
 - Every post exists in both English and Hebrew, and the build enforces it:
@@ -181,11 +188,6 @@ tags = ["religion", "philosophy", "ethics"]
 - `themes.css` is *copied* into `static/` by `build_site.py` and linked from `base.html`,
   not `@import`-ed from the SCSS: dart-sass leaves a plain `@import` of a `.css` file as a
   runtime import, and the relative path then resolves against `/style.css` and 404s.
-- `static/shared.css` and `static/custom.css` are **orphaned**: nothing links either.
-  `shared.css` styled the standalone app pages of the MkDocs era, which are now
-  meta-refresh redirects; `custom.css` targets Material-for-MkDocs class names that no
-  longer exist. Both still ship because `SHARED_ROOT` in `build_site.py` leaves them at
-  the site root. Deleting them is pending, not decided.
 - Prefer external stylesheets over inline `<style>` blocks or `style=` attributes.
 
 ## Git Conventions

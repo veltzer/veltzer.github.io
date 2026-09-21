@@ -11,9 +11,6 @@
 {% block title %}{{ section.title }} &middot; {{ config.title }}{% endblock %}
 {% block main_class %}embed-main{% endblock %}
 {% block content %}
-{# The media page renders its own heading from JS, so it opts out. #}
-{%- if not section.extra.hide_title %}
-<h1 class="embed-title" id="gameTitle">{{ section.title }}</h1>
-{%- endif %}
+{# No <h1> here: the media page renders its own heading from JS. #}
 {% include "app_body.html" %}
 {% endblock %}

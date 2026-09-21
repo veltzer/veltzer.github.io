@@ -9,20 +9,21 @@ hand -- see `CLAUDE.md`). Imports the teaching pages via
 `scripts/import_teaching.py` (skipped when the sibling repos are absent, as in
 CI), regenerates the archive stats via `scripts/gen_stats.py`, writes
 `static/build_info.toml`, syncs the theme submodule's tokens into `static/`,
-then runs `zola build` into `_site/` and post-processes the output (sweeps
-anything zola left at the site root under `/en/` -- a safety net now that
-every section is an explicit `_index.en.md`, see `relocate_english()`; writes
-the legacy redirects; fixes the sitemap; writes the root language-chooser
-page). The `PYTHONHASHSEED=0` it still passes to zola is a MkDocs-era
-leftover: zola is a Rust binary and ignores it.
+then runs `zola build` into `_site/` and post-processes the output (copies
+the English feed to `/atom.xml`, the URL every page advertised until
+2026-09-21; writes the legacy redirects; drops the paginator redirect stubs
+from the sitemap and adds the root to it; writes the root language-chooser
+page). `relocate_english()`, which used to sweep unprefixed English output
+under `/en/`, was removed on 2026-09-21: every section is an explicit
+`_index.en.md`, so zola emits both languages prefixed itself.
 
 `write_legacy_redirects()` serves the pre-migration URLs Google still has
 indexed -- MkDocs-era `/YYYY/MM/DD/<slug>/` permalinks and the root-level
 zola URLs from before English moved to `/en/`. The map is `LEGACY_REDIRECTS`;
-paginator URLs are expanded from the build output rather than listed. It has
-to run after `relocate_english()`, which is also why these cannot be zola
-`aliases`: an alias is written to the site root and then swept into `/en/`,
-leaving the URL it was meant to rescue still 404ing.
+paginator URLs are expanded from the build output rather than listed. It is
+kept as a post-processing step rather than zola `aliases` because aliases
+exist only for pages, and half of what it rescues is not one (paginator URLs,
+`/ascx/public_key.asc`, a section); see `doc/SEO.md` for the history.
 
 `fix_sitemap()` also drops every `/page/1/` entry (`drop_redirecting_urls()`).
 Zola emits that URL for each paginated section and builds it as a redirect to
@@ -48,11 +49,16 @@ The Hebrew `_index.he.md` stubs are hand-written and are not touched.
 Computes the blog archive statistics (post counts per year and per language)
 and rewrites the `[extra.stats]` table below the `# BEGIN generated stats`
 marker in `content/blog/_index.en.md` and `_index.he.md`; everything above the
-marker is preserved. Also fails the build if any `.en.md` post lacks its
-`.he.md` translation or vice versa, since an unpaired post would otherwise
-lose its language switcher silently. Part of the build (run from
-`scripts/build_site.py`); the output is committed so `zola serve` shows the
-right numbers.
+marker is preserved. Also writes `static/tag_translations.toml`, one row per
+tag pair, derived by zipping each post's tag list with its translation's
+(the lists must be in the same order); `templates/base.html` reads it so a
+tag page's language switcher and hreflang alternates point at the same tag in
+the other language. Fails the build if any `.en.md` post lacks its `.he.md`
+translation or vice versa (an unpaired post would otherwise lose its language
+switcher silently), if a pair's tag lists differ in length, or if a tag lines
+up with two different counterparts. Part of the build (run from
+`scripts/build_site.py`); both outputs are committed so `zola serve` shows the
+right numbers and links.
 
 ### `scripts/gen_profiles.py`
 

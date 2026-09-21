@@ -15,9 +15,14 @@ src_dirs = ["static"]
 [processor.explicit]
 command = "scripts/build_site.py"
 required_tools = ["zola"]
+# The command itself and the scripts it invokes: rsconstruct hashes the command
+# string, not the file it names, so without these a change to the
+# post-processing in build_site.py would not invalidate a warm cache.
 inputs = [
     "config.toml",
+    "scripts/build_site.py",
     "scripts/gen_stats.py",
+    "scripts/import_teaching.py",
 ]
 input_globs = [
     "content/**/*",
@@ -35,9 +40,28 @@ src_dirs = ["scripts"]
 src_dirs = ["scripts"]
 [processor.pytest]
 src_dirs = ["tests"]
+# Everything the tests import or read, so an edit to any of it re-runs the
+# suite on a warm cache. There is no glob form, hence every template by name;
+# tests/test_template_determinism.py reads all of templates/*.html.
 dep_inputs = [
     "scripts/csv_to_yaml.py",
+    "scripts/gen_stats.py",
     "scripts/import_audible.py",
+    "scripts/import_books.py",
+    "templates/404.html",
+    "templates/_date.html",
+    "templates/app.html",
+    "templates/app_body.html",
+    "templates/atom.xml",
+    "templates/base.html",
+    "templates/blog.html",
+    "templates/chess.html",
+    "templates/embed.html",
+    "templates/index.html",
+    "templates/page.html",
+    "templates/section.html",
+    "templates/taxonomy_list.html",
+    "templates/taxonomy_single.html",
 ]
 [analyzer.markdown]
 
@@ -46,7 +70,7 @@ dep_inputs = [
 src_dirs = [".github"]
 dep_inputs = [".yamllint.yaml"]
 [processor.taplo]
-src_files = ["config.toml", "rsconstruct.toml", ".rumdl.toml", ".rumdl.zola.toml", "pyproject.toml", "static/identity.toml"]
+src_files = ["config.toml", "rsconstruct.toml", ".rumdl.toml", ".rumdl.zola.toml", "pyproject.toml", "static/identity.toml", "static/tag_translations.toml"]
 
 [processor.encoding]
 src_dirs = ["scripts", "static", "templates", "sass"]

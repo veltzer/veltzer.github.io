@@ -21,8 +21,6 @@ Usage:
   scripts/check_images.py
 """
 
-import gzip
-import logging
 import os
 import sys
 from pathlib import Path
@@ -38,18 +36,15 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 IMAGE_DIR = REPO_ROOT / "static" / "images"
 DATA_DIR = REPO_ROOT.parent / "data" / "yaml"
 
-logger = logging.getLogger(__name__)
 
-
-def parse_yaml_entries(path, compressed=False):
+def parse_yaml_entries(path):
     """Load the item list from a YAML file. Returns a list of dicts.
 
     Uses yaml.safe_load rather than scanning lines: the previous hand-rolled
     parser split on the first ":" and would mangle multi-line values, quoted
     strings containing colons, and comments.
     """
-    opener = gzip.open if compressed else open
-    with opener(path, "rt", encoding="utf-8") as handle:
+    with open(path, "rt", encoding="utf-8") as handle:
         data = yaml.safe_load(handle)
     if not data:
         return []

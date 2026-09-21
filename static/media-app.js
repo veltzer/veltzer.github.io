@@ -589,18 +589,16 @@
                 }
 
                 let jsonText;
-                if (activeConfig.file.endsWith('.gz') && typeof DecompressionStream !== 'undefined') {
+                if (activeConfig.file.endsWith('.gz')) {
+                    // Only the .json.gz is shipped (see scripts/copy_data.py), so
+                    // a browser without DecompressionStream has nothing to fall
+                    // back to; say so rather than fetching a file that is not there.
+                    if (typeof DecompressionStream === 'undefined') {
+                        throw new Error('This browser cannot decompress the data file (no DecompressionStream support).');
+                    }
                     const ds = new DecompressionStream('gzip');
                     const decompressed = response.body.pipeThrough(ds);
                     jsonText = await new Response(decompressed).text();
-                } else if (activeConfig.file.endsWith('.gz')) {
-                    // Fallback: fetch uncompressed version
-                    const fallbackUrl = MEDIA_BASE + activeConfig.file.replace(/\.gz$/, '');
-                    const fallbackResponse = await fetch(fallbackUrl);
-                    if (!fallbackResponse.ok) {
-                        throw new Error('Browser does not support DecompressionStream and uncompressed file not available.');
-                    }
-                    jsonText = await fallbackResponse.text();
                 } else {
                     jsonText = await response.text();
                 }

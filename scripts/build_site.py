@@ -16,7 +16,6 @@ Zola is a single static binary with no runtime dependencies, so unlike the
 MkDocs build there is nothing to pip install and no plugin versions to pin.
 """
 
-import os
 import shutil
 import subprocess
 import sys
@@ -156,8 +155,8 @@ def sync_theme():
 #     the post title, so a later retitling stranded the old URL even though the
 #     post never went anywhere -- which is why divine_command_theory_problems is
 #     reachable here under "what-divine-command-theory-actually-implies".
-#   * Root-level zola URLs from before relocate_english() moved English under
-#     /en/. These differ from the live URL by that one path segment.
+#   * Root-level zola URLs from before English moved under /en/ (2026-08).
+#     These differ from the live URL by that one path segment.
 #
 # Redirects rather than resurrected pages: the content exists and is indexed at
 # its current URL, so what the old URL owes a visitor is the way there, and what
@@ -247,84 +246,12 @@ ROOT_INDEX = """<!DOCTYPE html>
 """
 
 
-# Files that belong to the site as a whole rather than to one language, so they
-# stay at the root when the English pages move under /en/. search_index.en.js
-# and elasticlunr.min.js are listed for safety only: build_search_index is off
-# for every language in config.toml, so zola does not emit them today.
-SHARED_ROOT = {
-    "he", "en", "images", "data", "vendor", "shared-themes", "search_index.en.js",
-    "elasticlunr.min.js", "style.css", "custom.css", "shared.css", "keys.js",
-    "favicon.svg", "robots.txt", "sitemap.xml", "404.html", ".nojekyll",
-}
-
-# Sections that stay at the site root instead of moving under /en/.
-#
-# Empty, and deliberately kept rather than deleted. The app sections (media,
-# calendar, chess, slides, syllabi, animations) used to be listed here because
-# they existed only in English, so prefixing them would have claimed a
-# translation that did not exist. They now have Hebrew sections -- stubs that
-# reuse the English body, see templates/app_body.html -- so /en/chess/ and
-# /he/chess/ are both real and the apps are prefixed like everything else. That
-# is what stops a Hebrew reader losing their language when they open an app.
-#
-# The name is still referenced by relocate_english() and fix_sitemap() below,
-# which is why the set survives its own contents. Both treat membership as
-# "leave this at the site root"; with the set empty, nothing is left there.
-APP_SECTIONS: set[str] = set()
-
-
 def base_url():
     """The base_url from config.toml, so sitemap rewriting matches the build."""
     for line in (REPO_ROOT / "config.toml").read_text(encoding="utf-8").splitlines():
         if line.startswith("base_url"):
             return line.split("=", 1)[1].strip().strip('"\'')
     return "https://veltzer.org"
-
-
-def relocate_english(root):
-    """Move anything zola left at the site root under /en/.
-
-    Historically this did the heavy lifting: English was the default language,
-    zola wrote it unprefixed, and this step moved every English page under
-    /en/. With default_language now the empty "cs" (see config.toml) and every
-    section an explicit _index.en.md -- the six application sections (media,
-    calendar, chess, slides, syllabi, animations) were the last unsuffixed
-    ones, renamed 2026-09-21 -- zola emits both languages prefixed itself, and
-    a diagnostic zola build shows no section directory at the root at all.
-
-    What still moves is whatever static/ contributes that is not in SHARED_ROOT
-    and not one of the file types skipped below: today that is identity.toml
-    and build_info.toml, which end up at /en/. Nothing reads them from the
-    output (base.html loads identity.toml from static/ at build time), so the
-    step is a safety net now, not a load-bearing move. Kept so that an
-    unsuffixed file added by mistake surfaces under /en/ rather than as a
-    stray root directory.
-
-    The result is symmetrical: /en/blog/x/ and /he/blog/x/ both serve real
-    pages, and neither language is privileged by the URL layout. The root then
-    gets a small language-choice page (write_root_index below).
-
-    Static assets and the shared JS/CSS stay at the root, because the pages
-    reference them with absolute paths.
-    """
-    english = root / "en"
-    english.mkdir(exist_ok=True)
-    for entry in list(root.iterdir()):
-        if entry.name in SHARED_ROOT or entry.name in APP_SECTIONS:
-            continue
-        # index.html is the English home page and has to move with the rest of
-        # the English site -- without this it stays at the root and is then
-        # overwritten by the language chooser, leaving /en/ with no index.
-        if entry.name == "index.html":
-            shutil.move(str(entry), str(english / entry.name))
-            continue
-        # Other standalone .html files at the root are redirects or legacy app
-        # pages; leave them where they are so old links keep working.
-        if entry.is_file() and entry.suffix == ".html":
-            continue
-        if entry.is_file() and entry.suffix in {".xml", ".json", ".js", ".css", ".txt"}:
-            continue
-        shutil.move(str(entry), str(english / entry.name))
 
 
 def drop_redirecting_urls(lines):
@@ -371,90 +298,31 @@ def drop_redirecting_urls(lines):
     return out
 
 
-def drop_duplicate_urls(lines):
-    """Drop <url> blocks whose <loc> was already emitted.
-
-    Zola lists the taxonomy list page twice -- once as a default-language page
-    at /tags/, which the rewrite above turns into /en/tags/, and once as the
-    real English /en/tags/. The two collide only after rewriting, so this has to
-    run on the rewritten lines rather than being avoided earlier.
-
-    A duplicate <loc> is not an error to a crawler, which dedupes by URL anyway,
-    but a sitemap that lists the same page twice misreports the site's size and
-    invites the question every time someone counts the entries.
-
-    Blocks are matched structurally: <url> ... </url>, keyed on the <loc> inside.
-    Anything outside a <url> block (the XML declaration, <urlset>) is passed
-    through untouched.
-    """
-    seen = set()
-    out = []
-    block = None
-    for line in lines:
-        stripped = line.strip()
-        if stripped == "<url>":
-            block = [line]
-            continue
-        if block is not None:
-            block.append(line)
-            if stripped == "</url>":
-                loc = next(
-                    (b.strip() for b in block if b.strip().startswith("<loc>")), None
-                )
-                if loc is None or loc not in seen:
-                    if loc is not None:
-                        seen.add(loc)
-                    out.extend(block)
-                block = None
-            continue
-        out.append(line)
-    if block is not None:
-        # Unterminated <url> block: keep it rather than silently dropping URLs.
-        out.extend(block)
-    return out
-
-
 def fix_sitemap(root, site_url):
-    """Point the sitemap at the relocated English URLs.
+    """Drop the paginator redirect stubs from the sitemap and add the root.
 
-    Zola writes the sitemap before relocate_english() runs, so every English
-    entry still claims the site root -- URLs that now 404. Rewrite them to
-    their /en/ equivalents and add the root itself.
+    Zola lists every URL it emits, including /page/1/ under each paginated
+    section and tag, which is a stub that bounces to the paginator root
+    (see drop_redirecting_urls). It does not list "/" at all: the root section
+    belongs to the phantom default language and is render = false, so the
+    language chooser that write_root_index() puts there is invisible to zola.
+    "/" is the URL people link to and type and it serves a real 200, so it is
+    appended here.
 
-    The root needs adding explicitly because the rewrite consumes it: zola emits
-    one bare <loc> for the site root, and the `elif not path` branch below turns
-    that entry INTO the /en/ one rather than leaving it behind. Both belong in
-    the sitemap -- "/" is the URL people link to and type, and it serves the
-    language chooser (write_root_index), so it is a real 200 rather than a
-    redirect. Leaving it out means the most-linked URL on the site is the one
-    URL the sitemap never mentions.
+    This used to also rewrite unprefixed English URLs to /en/ and dedupe the
+    result; both went away with relocate_english() on 2026-09-21, once every
+    section carried an explicit language suffix and the top-level taxonomy
+    for the phantom language was dropped from config.toml. Zola now emits
+    only /en/ and /he/ URLs, verified on a raw build.
     """
     sitemap = root / "sitemap.xml"
     if not sitemap.is_file():
         return
-    text = sitemap.read_text(encoding="utf-8")
     prefix = site_url.rstrip("/") + "/"
-    out = []
-    for line in text.splitlines():
-        stripped = line.strip()
-        if stripped.startswith("<loc>") and prefix in stripped:
-            path = stripped[len("<loc>"):-len("</loc>")][len(prefix):]
-            # Hebrew pages and shared assets already have the right URL.
-            first = path.split("/", 1)[0]
-            if (path and not path.startswith(("he/", "en/"))
-                    and first not in APP_SECTIONS and not path.endswith(".html")):
-                line = line.replace(prefix + path, prefix + "en/" + path)
-            elif not path:
-                line = line.replace(prefix, prefix + "en/")
-        out.append(line)
+    out = drop_redirecting_urls(sitemap.read_text(encoding="utf-8").splitlines())
 
-    out = drop_duplicate_urls(out)
-    out = drop_redirecting_urls(out)
-
-    # Append the root. Done after the loop rather than by tweaking the rewrite
-    # branch, so the /en/ entry keeps zola's own position and metadata and this
-    # is a pure addition. Guarded so a future zola that emits the root itself
-    # does not end up listing it twice.
+    # Guarded so a future zola that emits the root itself does not end up
+    # listing it twice.
     root_loc = f"<loc>{prefix}</loc>"
     if not any(line.strip() == root_loc for line in out):
         closing = "</urlset>"
@@ -471,12 +339,14 @@ def fix_sitemap(root, site_url):
 def write_legacy_redirects(root, site_url):
     """Serve the pre-migration URLs that Google still has indexed.
 
-    Has to run AFTER relocate_english(), not as zola `aliases` in the posts'
-    front matter. Zola writes an alias for a default-language page to the site
-    root, and relocate_english() then sweeps every root directory into /en/ --
-    so an alias for /blog/x/ is built, moved, and ends up serving /en/blog/blog/x/
-    while the URL it was written to rescue still 404s. Verified by building with
-    one such alias in place. Writing the files here puts them past that move.
+    Written here rather than as zola `aliases` in the posts' front matter.
+    Until 2026-09-21 an alias could not work at all: zola wrote it to the site
+    root and relocate_english() then swept it into /en/, so it served
+    /en/blog/blog/x/ while the URL it was meant to rescue still 404ed (verified
+    by building with one in place; see doc/SEO.md). That sweep is gone, but
+    this step stays: aliases only exist for pages, and half of what is rescued
+    here is not one -- the paginator URLs expanded below, /ascx/public_key.asc,
+    a section. One mechanism for every legacy URL beats two.
 
     GitHub Pages serves static files only, so there is no way to emit a real 301;
     a meta-refresh page with rel=canonical is the standard substitute and is what
@@ -527,10 +397,21 @@ def build(zola):
         [zola, "build", "--output-dir", str(OUTPUT_DIR), "--force"],
         check=True,
         cwd=REPO_ROOT,
-        # MkDocs-era leftover: it pinned Python's hash seed for reproducible
-        # MkDocs output. zola is a Rust binary and ignores it; harmless.
-        env={**os.environ, "PYTHONHASHSEED": "0"},
     )
+
+
+def copy_root_feed(root):
+    """Serve the English feed at /atom.xml as well as /en/atom.xml.
+
+    Until 2026-09-21 every page advertised /atom.xml as the site feed, and
+    zola generated that file for the phantom default language: valid Atom,
+    zero entries. The pages now advertise the per-language feeds and the
+    phantom one is no longer generated (no top-level generate_feeds in
+    config.toml), but a reader who subscribed to the advertised URL would
+    otherwise get a 404 where they used to get an empty feed. GitHub Pages
+    cannot redirect, so the English feed is copied there instead.
+    """
+    shutil.copyfile(root / "en" / "atom.xml", root / "atom.xml")
 
 
 def main():
@@ -541,7 +422,7 @@ def main():
         write_build_info()
         sync_theme()
         build(zola)
-        relocate_english(OUTPUT_DIR)
+        copy_root_feed(OUTPUT_DIR)
         write_legacy_redirects(OUTPUT_DIR, base_url())
         fix_sitemap(OUTPUT_DIR, base_url())
         write_root_index(OUTPUT_DIR)

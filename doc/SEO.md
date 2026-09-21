@@ -16,8 +16,8 @@ Search Console raised two messages on 2026-09-07, both under Page indexing:
 - *New reasons prevent pages in a sitemap from being indexed on site
   veltzer.org* -- Page with redirect.
 
-Both trace to the same history: the MkDocs-to-zola migration, and
-`relocate_english()` later moving English content under `/en/`. They are
+Both trace to the same history: the MkDocs-to-zola migration, and English
+content later moving under `/en/`. They are
 separate problems with separate fixes, and the second is the more consequential
 of the two.
 
@@ -55,8 +55,13 @@ this. Hence the step runs *after* the move, in the post-processing chain.
 Re-checked 2026-09-21, after every post and section became an explicit
 `_index.en.md` / `.en.md` under the phantom `cs` default language: zola still
 writes an English post's alias to the site root (`/2026/01/01/old-slug/`, not
-`/en/...`), and `relocate_english()` still sweeps every root directory into
-`/en/`, so the conclusion is unchanged.
+`/en/...`). Later the same day `relocate_english()` was removed -- with every
+section suffixed it had nothing left to move -- so an alias would now stay
+where zola writes it and could serve a MkDocs-era post URL. The
+post-processing step is kept anyway: aliases exist only for pages, while the
+paginator URLs, `/ascx/public_key.asc` and the section URLs rescued here are
+not pages, and one mechanism for every legacy URL beats two. Switching the
+post URLs to aliases is possible now but has not been done.
 
 `noindex, follow` matters: without it Google would index the stubs themselves
 as thin duplicates, trading nine 404s for nine near-empty pages.

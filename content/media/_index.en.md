@@ -2,9 +2,6 @@
 title = "Media Collection"
 description = "What Mark Veltzer has read, watched and listened to: books, audiobooks, audio courses, movies, series, podcasts, museums and YouTube, with ratings and notes."
 template = "embed.html"
-
-[extra]
-hide_title = true
 +++
 
 <script src="https://cdn.tailwindcss.com"></script>
@@ -148,8 +145,6 @@ class="w-full px-5 py-3 text-lg border border-gray-300 rounded-full focus:outlin
 
 </div>
 
-<footer class="text-center text-gray-500 mt-12 py-4 border-t border-gray-200">
-</footer>
 </div>
 
 <script>
@@ -158,7 +153,6 @@ showPeople: false,
 };
 </script>
 
-<script src="/keys.js"></script>
 <script src="/media-utils.js"></script>
 <script>
 // Absolute, not '../': the plugins and data live at the site root, and a

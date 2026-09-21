@@ -1,10 +1,4 @@
 {
-  "dependencies": {
-    "ajv-cli": "latest",
-    "ajv-formats": "latest",
-    "chess.js": "latest",
-    "cm-chessboard": "latest"
-  },
   "devDependencies": {
     "postcss-scss": "latest",
     "stylelint": "latest"
