@@ -175,10 +175,29 @@ Verified: cold `rsconstruct clean all` + `rsconstruct build`, 880 built,
 0 failed. All **46** redirect stubs resolve to a page that exists, 0 broken,
 up from 25. Sitemap: 527 URLs, no stubs listed, no `/page/1/`.
 
-**Still to do: request validation again** for `Not found (404)`, `Page with
-redirect` and `Duplicate without user-selected canonical` once this is
-deployed. Validation is a button in Search Console, not something the build
-can trigger.
+Deployed and verified live on 2026-09-22: all 12 reported 404s, all 6
+duplicate-canonical URLs and all 10 section roots return 200.
+
+Validation was then restarted for all three Website-sourced reasons, and each
+reads **Started**:
+
+| Reason | Pages | Validation |
+| --- | --- | --- |
+| Not found (404) | 12 | Started 9/22 |
+| Page with redirect | 16 | Started 9/22 |
+| Duplicate without user-selected canonical | 6 | Started 9/22 |
+
+The `Page with redirect` run is expected to pass without any code change:
+its 16 URLs are 13 `/page/1/` paginator stubs, already dropped from the
+sitemap on 2026-09-07 and still correctly bouncing to the paginator root,
+plus the three host variants (`http://veltzer.org/`, `http://www.veltzer.org/`,
+`https://www.veltzer.org/`), each serving a single 301 to the canonical host.
+It failed on 9/15 only because Google re-checks the URL rather than the
+sitemap entry. Nothing there is broken.
+
+`Alternate page with proper canonical tag` was deliberately **not**
+validated: its one page is `/en/calendar/`, which is correct as it stands
+(see above), so there is no fix to validate.
 
 ## Open: 190 "Discovered - currently not indexed"
 
