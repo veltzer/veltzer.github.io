@@ -199,6 +199,32 @@ sitemap entry. Nothing there is broken.
 validated: its one page is `/en/calendar/`, which is correct as it stands
 (see above), so there is no fix to validate.
 
+### How to check the verdict
+
+Google takes days to a couple of weeks. The verdict is only readable by a
+logged-in human -- there is no API key for this property and the report is
+behind a Google login, so no script and no cloud agent can fetch it.
+
+Open the [Page indexing
+report](https://search.google.com/search-console/index?resource_id=sc-domain%3Aveltzer.org)
+and read the *Validation* column of the "Why pages aren't indexed" table for
+the three rows above.
+
+- **Passed** -- done. Record it here and the round is closed.
+- **Started** -- Google has not finished. Nothing to do; look again later.
+- **Failed** -- click the row, then **SEE DETAILS**. The listed URLs are the
+  ones that still fail, and *those specific URLs are the whole story*. That
+  is exactly how the 9/15 failure was diagnosed: 6 pending + 6 failed, and
+  the 6 failures were URLs the previous fix never covered, not a regression
+  in it. Check each against the live site before changing anything.
+
+What *can* be checked without logging in, and is worth doing first, is that
+the fix is still live: every URL in `LEGACY_REDIRECTS` should return 200, the
+sitemap should hold 527 entries with no `/page/1/`, and the three non-canonical
+host variants should each serve a single 301. A failure there is a real
+regression in this repo and explains a failed validation; everything green
+there means the build is fine and the verdict is purely Google's timing.
+
 ## Open: 190 "Discovered - currently not indexed"
 
 The largest not-indexed bucket by far -- 190 of 218 -- and **untouched by the

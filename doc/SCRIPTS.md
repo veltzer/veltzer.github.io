@@ -30,6 +30,20 @@ Zola emits that URL for each paginated section and builds it as a redirect to
 the paginator root, so listing it makes the sitemap advertise 112 redirects.
 The redirect stays for anyone holding such a link; only the sitemap entry goes.
 
+## check_redirects.py
+
+Asks the deployed site whether the retired URLs still work. It imports
+`LEGACY_REDIRECTS` from `build_site.py` rather than keeping its own list, so
+it cannot drift from what the build generates, and requests each source
+against the live site along with the sitemap and the three non-canonical
+host variants. Exits non-zero on any failure.
+
+Not part of the build -- it talks to the network and tests the deployment,
+not the tree. Run it after a deploy, or when Search Console reports an
+indexing problem, to tell a regression here from Google's own crawl timing.
+It deliberately cannot read a validation verdict: that is behind a Google
+login, and `doc/SEO.md` says where to read it by hand.
+
 ### `scripts/import_teaching.py`
 
 Imports the three sibling teaching sites (`../teaching-slides`,
