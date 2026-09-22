@@ -103,24 +103,82 @@ Both fixes shipped in commit `09467b8`. What was actually checked, in order:
   `sitemap.xml` has 517 entries and zero `/page/1/` URLs, and a 25-URL random
   sample of live sitemap entries returned 200 with zero redirects.
 
-## Open: the two validations
+## The 2026-09-16 round: both validations failed, and why
 
-Both issues were submitted for validation on 2026-09-07 and read
-**Validation: Started** on the Page indexing report:
+Both validations came back **Failed** (started 9/7, failed 9/15), and Search
+Console sent three messages on 2026-09-16:
 
-| Reason | Pages | Validation |
+- *Some fixes failed for Page indexing issues* -- the `Not found (404)`
+  validation.
+- *New reasons prevent pages from being indexed* -- `Duplicate without
+  user-selected canonical` and `Alternate page with proper canonical tag`.
+- *New reasons prevent pages in a sitemap from being indexed* -- `Alternate
+  page with proper canonical tag`.
+
+The failure was **not** a regression in the 2026-09-07 fix. Every URL that
+fix named still returns 200, verified against the live site on 2026-09-22.
+What happened is that the recrawl reached URLs the fix never covered, and
+those are what failed the validation:
+
+| Reported URL | State on 2026-09-22 | Cause |
 | --- | --- | --- |
-| Not found (404) | 9 | Started |
-| Page with redirect | 6 | Started |
+| 6 of the 12 reported 404s | 200 | fixed 9/7, awaiting recrawl |
+| `/2026/04/18/...soul/`, `/2026/04/07/religions...`, `/2026/04/26/the-equivocation...` | 404 | MkDocs permalinks, never mapped |
+| `/2010/07/21/<hebrew title>/` | 404 | the one Hebrew MkDocs permalink |
+| `/blog/two-kinds-of-believers/` | 404 | root-level URL, never mapped |
+| `/jschess/` | 404 | the chess viewer's first home |
 
-Google recrawls the affected URLs and checks them against the deployed fix.
-This takes days to a couple of weeks. The status becomes *Passed* if every URL
-comes back clean, or *Failed* with the specific URLs that still fail.
+A validation checks only the URLs it started with, so three MkDocs permalinks
+and a Hebrew one that were never in `LEGACY_REDIRECTS` were enough to fail
+the whole run.
 
-Nothing to do while it runs. **If it comes back Failed, the failing URLs are
-the thing to look at** -- the redirects and sitemap were verified correct and
-live, so a failure would mean something about Google's crawl rather than the
-build, and the specific URLs would say what.
+### Duplicate without user-selected canonical -- 6 pages
+
+All six were root-level post URLs from before English moved to `/en/`:
+`/blog/engineers-pay-for-everyones-fantasies/` and five siblings. Google held
+both the old root URL and the `/en/` one, neither pointed at the other, so it
+picked its own canonical and dropped the rest as duplicates. The redirect stub
+supplies the missing `rel=canonical`.
+
+### Alternate page with proper canonical tag -- 1 page
+
+`/en/calendar/`, and **this one is correct as it stands**. The page carries
+`rel=canonical` to itself and `hreflang` alternates to `/he/calendar/`, which
+is exactly what a bilingual page should do. Google is reporting that it chose
+the Hebrew page as canonical for a query, which is the mechanism working, not
+a defect. Nothing to fix; recorded so the next reader does not go changing the
+canonical logic.
+
+### `http://www.veltzer.org/` under Page with redirect
+
+Also correct. It serves a single 301 to `https://veltzer.org/`, which is what
+a non-canonical host should do. GitHub Pages handles it; no change here.
+
+### The fix, 2026-09-22
+
+`LEGACY_REDIRECTS` grew from 8 one-off entries to 29, covering the four new
+MkDocs permalinks (three English, one Hebrew), the seven root-level post URLs,
+`/jschess/`, and the nine **section roots** (`/blog/`, `/tags/`, `/about/`,
+`/media/`, `/chess/`, `/slides/`, `/syllabi/`, `/animations/`, `/training/`).
+The section roots were a known open item in `doc/IMPROVEMENTS.md` -- "`/blog/`
+is a bare 404" -- and are fixed here because they are the same defect as the
+post URLs and were about to fail the next validation the same way.
+
+`tests/test_legacy_redirects.py` was added at the same time. The map is now
+large enough that a typo would ship silently and surface as a Search Console
+404 weeks later, so the invariants that hold without a build are checked:
+sources relative and unslashed, targets rooted and language-prefixed, no
+self-redirect, and no stub pointing at another stub (a meta-refresh chain is
+a link Google may decline to follow).
+
+Verified: cold `rsconstruct clean all` + `rsconstruct build`, 880 built,
+0 failed. All **46** redirect stubs resolve to a page that exists, 0 broken,
+up from 25. Sitemap: 527 URLs, no stubs listed, no `/page/1/`.
+
+**Still to do: request validation again** for `Not found (404)`, `Page with
+redirect` and `Duplicate without user-selected canonical` once this is
+deployed. Validation is a button in Search Console, not something the build
+can trigger.
 
 ## Open: 190 "Discovered - currently not indexed"
 
@@ -201,9 +259,21 @@ that is the scope being maintained here.
 
 ## Current state
 
-As of 2026-09-07, after the fix:
+As of 2026-09-22, read off the Page indexing report before the second fix
+was deployed:
 
-- 807 indexed pages, 218 not indexed.
-- Sitemap: 517 URLs, every one a real page.
-- Of the 218 not indexed: 199 are Google's own crawl decisions, 4 are
-  intentionally `noindex`, and 15 are the two issues now under validation.
+- 973 indexed pages, 107 not indexed. Both moved the right way since
+  2026-09-07 (807 indexed, 218 not).
+- Sitemap: 527 URLs, every one a real page, no redirect stubs listed.
+- Of the 107 not indexed: 63 are Google's own crawl decisions (48
+  "Discovered", 15 "Crawled"), 9 are intentionally `noindex` mdBook pages,
+  and 35 are the four Website-sourced reasons -- 16 `Page with redirect`,
+  12 `Not found (404)`, 6 `Duplicate without user-selected canonical`,
+  1 `Alternate page with proper canonical tag`.
+
+Of those 35, the 2026-09-22 fix addresses the genuine ones. Two are correct
+as they stand and need no change: `/en/calendar/` under *Alternate page*, and
+`http://www.veltzer.org/` under *Page with redirect*.
+
+Note the `noindex` count went 4 -> 9, which is the drift toward 42 predicted
+above as Google works through the 21 `rs*` mdBooks. Not a regression.

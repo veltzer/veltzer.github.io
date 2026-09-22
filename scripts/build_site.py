@@ -173,9 +173,59 @@ LEGACY_REDIRECTS = {
         "/en/blog/divine-command-theory-problems/",
     "2026/05/18/what-brain-damage-tells-us-about-the-soul":
         "/en/blog/brain-damage-disproves-the-soul/",
+    # Reported 2026-09-16 as Not found (404). A retitling stranded each of
+    # these the same way the five above were stranded: the MkDocs permalink
+    # carried the old title's slug, and the date in the URL is the publication
+    # date of the time, not the one in the post's current front matter.
+    "2026/04/18/what-brain-damage-tells-us-about-the-soul":
+        "/en/blog/brain-damage-disproves-the-soul/",
+    "2026/04/07/religions-behave-like-memes-not-revelations":
+        "/en/blog/religions-as-memes/",
+    "2026/04/26/the-equivocation-of-god-one-word-many-gods":
+        "/en/blog/the-equivocation-of-god/",
+    # The one Hebrew MkDocs permalink Google still requests. The slug is the
+    # post's Hebrew title, percent-encoded in the wild; the directory is
+    # written with the literal characters and the server matches either.
+    "2010/07/21/חוץ-וביטחון-יותר-ביצים-משכל":
+        "/he/blog/hebrew-security-policy/",
     "blog/algo-trading-short-timescales":
         "/en/blog/algo-trading-short-timescales/",
+    # Root-level post URLs from before English moved to /en/. Reported
+    # 2026-09-16 as "Duplicate without user-selected canonical": Google had
+    # both the old root URL and the /en/ one, neither pointed at the other,
+    # so it picked its own canonical and dropped the rest. The redirect stub
+    # supplies the missing signal.
+    "blog/engineers-pay-for-everyones-fantasies":
+        "/en/blog/engineers-pay-for-everyones-fantasies/",
+    "blog/imagination-of-science-vs-fiction":
+        "/en/blog/imagination-of-science-vs-fiction/",
+    "blog/kant-misread-game-theory":
+        "/en/blog/kant-misread-game-theory/",
+    "blog/moral-progress-against-scripture":
+        "/en/blog/moral-progress-against-scripture/",
+    "blog/the-argument-that-convicts-itself":
+        "/en/blog/the-argument-that-convicts-itself/",
+    "blog/two-kinds-of-believers":
+        "/en/blog/two-kinds-of-believers/",
+    "blog/vicarious-atonement":
+        "/en/blog/vicarious-atonement/",
+    # Section roots. Every one was a real URL before English moved under /en/,
+    # and they are still linked from elsewhere -- doc/IMPROVEMENTS.md recorded
+    # "/blog/ is a bare 404" as an open item. The English section is the
+    # target: these URLs only ever served English.
+    "blog": "/en/blog/",
+    "tags": "/en/tags/",
+    "about": "/en/about/",
+    "media": "/en/media/",
+    "chess": "/en/chess/",
+    "slides": "/en/slides/",
+    "syllabi": "/en/syllabi/",
+    "animations": "/en/animations/",
+    "training": "/en/training/",
     "calendar": "/en/calendar/",
+    # The chess viewer's first home, from before it was a site page at all.
+    # Predates /chess.html, which is its own redirect stub in static/.
+    "jschess": "/en/chess/",
     # Pagination moved under /en/ with the rest of the English site. Page 5 is
     # the only one Google reported, but the whole run was equally stranded, so
     # the loop below covers every page the archive currently has.

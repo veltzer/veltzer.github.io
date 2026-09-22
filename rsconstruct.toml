@@ -42,6 +42,7 @@ src_dirs = ["tests"]
 # suite on a warm cache. There is no glob form, hence every template by name;
 # tests/test_template_determinism.py reads all of templates/*.html.
 dep_inputs = [
+    "scripts/build_site.py",
     "scripts/csv_to_yaml.py",
     "scripts/gen_stats.py",
     "scripts/import_audible.py",
