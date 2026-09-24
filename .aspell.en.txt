@@ -50,6 +50,7 @@ DCT
 DMT
 DPDK
 Davidic
+Dawkins's
 De
 Decohere
 Dennett
@@ -79,6 +80,7 @@ Flavianum
 Flavius
 Frankl
 Frankl's
+François
 Frege
 Fridman
 Friedrich
@@ -464,6 +466,7 @@ delegitimized
 deliverances
 derivefieldsconfig
 desc
+designoid
 deus
 dev
 didn
@@ -946,6 +949,7 @@ setupsortui
 setuptoggles
 sha
 shareability
+shippable
 shouldn
 showpeople
 showstats
