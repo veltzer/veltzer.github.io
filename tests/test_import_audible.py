@@ -1,4 +1,4 @@
-"""Tests for import_audible.py, which cleans audible.yaml from ../data.
+"""Tests for import_audible.py, which cleans data/yaml/audible.yaml.
 
 Focused on the conversions recorded as fixes in doc/IMPROVEMENTS.md -- numeric
 fields that used to be strings, and empty optional fields that used to be

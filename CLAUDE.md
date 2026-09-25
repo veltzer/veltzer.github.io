@@ -15,11 +15,13 @@ calendar integration.
 - **Frontend**: HTML5, SCSS, JavaScript (ES9+)
 - **Linting**: everything is a processor in `rsconstruct.toml` — eslint
   (`.eslint.config.js`), tidy and htmlhint (HTML), stylelint (`.stylelintrc.json`),
-  pylint (`.pylintrc`), ruff, mypy (`[tool.mypy]` in `pyproject.toml`), pytest
-  (`tests/`), shellcheck, rumdl (`.rumdl.toml` for prose, `.rumdl.zola.toml` for
-  `content/`), taplo, yamllint, actionlint, xmllint, an encoding check, a duplicate-image
-  check, and an aspell spellcheck of the blog in both languages
-  (`scripts/spellcheck_{en,he}.sh` against the word lists in `.aspell.{en,he}.txt`)
+  ruff, mypy (`[tool.mypy]` in `pyproject.toml`), pytest (`tests/`), shellcheck,
+  rumdl (`.rumdl.toml` for prose, `.rumdl.zola.toml` for `content/`), taplo, yamllint,
+  actionlint, xmllint, an encoding check, a duplicate-image check, an aspell
+  spellcheck of the blog in both languages (`scripts/spellcheck_{en,he}.sh` against
+  the word lists in `.aspell.{en,he}.txt`), and over `data/yaml/` a schema check
+  (`iyamlschema`), a parse check (`yaml2json`) and pydatacheck's `check_videos` /
+  `check_books` cross-checks against imdb, goodreads and simania
 - **Data**: YAML/JSON for media content, PGN for chess games, Markdown for blog posts
 
 The site used to be built with MkDocs. It is not any more — see *Migration notes* below,
@@ -43,6 +45,15 @@ which records the traps that outlived the migration.
     - `content/blog/*.he.md` — Hebrew translations. The shared base name is how zola
   pairs a post with its translation; nothing else is needed
     - `content/<page>/_index.{en,he}.md` — the standalone nav pages (about, media, calendar, …)
+- `data/yaml/` — the source of truth for the media tracker (podcasts, museums, courses,
+  books, audible, video features and series) and for the profile block
+  (`profiles.yaml`), plus the personal lists that no page renders yet (cv, trips,
+  lectures, organizations, …). Every file names its schema in `$schema`, which the
+  build validates against `veltzer.github.io/web-schemas`. This directory came out of
+  the private `../data` repo in 2026-09; the chess archives and the youtube CSV are
+  still there (see `scripts/copy_data.py`)
+- `shelve/` — the imdb / goodreads / simania lookup caches that pydatacheck's
+  `check_videos` and `check_books` read (committed, so CI never hits the network)
 - `templates/` — Tera templates (`base.html`, `page.html`, `blog.html`, taxonomy pages)
 - `sass/style.scss` — compiled to `/style.css` by zola
 - `static/` — copied verbatim to the site root: media plugins, images, data, `vendor/`
@@ -52,8 +63,11 @@ which records the traps that outlived the migration.
   `git submodule update --init --recursive` on a fresh clone or the build fails.**
 - `scripts/` — `build_site.py` (the build), `gen_stats.py` (archive stats),
   `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
-  the sibling teaching repos), image fetchers, data importers, `serve.py`, and the
-  `build_*_dict.sh` / `spellcheck_*.sh` pair behind the aspell processors
+  the sibling teaching repos), image fetchers, data importers, the `data/yaml/`
+  maintenance scripts (`podcasts_*.py`, `books_fetch_ids.py`, `great_courses_*.py`,
+  `audio_courses_check_*.py`, `youtube_add_names.py` — all run from the repo root),
+  `serve.py`, and the `build_*_dict.sh` / `spellcheck_*.sh` pair behind the aspell
+  processors
 - `tests/` — pytest suite for the data import scripts and template determinism
 - `.aspell.{en,he}.txt` — the spellcheck word lists; `out/aspell/` holds the compiled
   dictionaries (gitignored build output)
@@ -174,7 +188,7 @@ tags = ["religion", "philosophy", "ethics"]
 - Media plugins follow a consistent interface: `file`, `navTitle`, `title`, `subtitle`,
   `searchPlaceholder`, `searchFields`, `defaultSort`, `fields`, `renderDetails`,
   `renderStats` and the rest documented in `doc/PLUGIN_GUIDE.md`
-- Python: pylint-, ruff- and mypy-clean; all three run in CI over `scripts/` and `tests/`
+- Python: ruff- and mypy-clean; both run in CI over `scripts/` and `tests/`
 
 ## Style Sheets
 
@@ -201,10 +215,12 @@ tags = ["religion", "philosophy", "ethics"]
 
 - `_site/` is generated — never edit it. Edit `content/`, `templates/`, `sass/` or
   `static/` and rebuild.
-- YAML data for the media tracker lives in a separate `../data/` repository and is copied
-  in by `scripts/copy_data.py`, which also converts it to the `.json.gz` the frontend
-  loads. **The frontend reads JSON, not YAML** — js-yaml took ~399ms on the 6.5MB youtube
-  dataset against ~31ms for `JSON.parse`.
+- YAML data for the media tracker lives in `data/yaml/` and is turned into the
+  `.json.gz` the frontend loads by `scripts/copy_data.py`, which also pulls the chess
+  archives and the youtube CSV from the sibling `../data/` repository (private, not
+  checked out in CI — which is why `copy_data.py` is still a manual step and
+  `static/data/` is committed). **The frontend reads JSON, not YAML** — js-yaml took
+  ~399ms on the 6.5MB youtube dataset against ~31ms for `JSON.parse`.
 - **The `[extra.stats]` block in `content/blog/_index.{en,he}.md` is generated — do
   not hand-edit it.** `scripts/gen_stats.py` rewrites everything below the
   `# BEGIN generated stats` marker on every build; the hand-written section keys
@@ -215,28 +231,30 @@ tags = ["religion", "philosophy", "ethics"]
   and was rejected: Tera has no `group_by` over a derived key, so per-year counts
   would mean looping the section once per year.
 - **The profile block on the About page is generated — do not hand-edit it.** It
-  lives in `../data/yaml/profiles.yaml` and is rendered by `scripts/gen_profiles.py`
+  lives in `data/yaml/profiles.yaml` and is rendered by `scripts/gen_profiles.py`
   into `content/about/_index.en.md` and `content/about/_index.he.md`. The YAML holds
   the whole shared block, not just links: `contact` (the email line), `intro`,
   `groups` (the links), and `extras` (the top-committers line, the GitHub stats
   badge, the view counter). Every one carries `_en` and `_he` text so `/he/about/`
   is a real Hebrew page. Only the region between the
   `<!-- BEGIN generated profiles -->` markers is replaced, so the hand-written prose
-  above it survives. Edit the YAML, run the script, commit both
-  repos. Like `copy_data.py` it is a manual step, not part of the build: CI has no
-  `../data` checkout, and the generated content is committed.
+  above it survives. Edit the YAML, run the script, commit. It is a manual step,
+  not part of the build, and the generated content is committed; now that the YAML
+  is in this repo it could run from `build_site.py` like `gen_stats.py` does, but
+  that change has not been made.
 - **`static/identity.toml` is generated — do not hand-edit it.** `gen_profiles.py`
   writes it from the same `profiles.yaml`, and `templates/base.html` reads it with
   `load_data()` into the `Person` JSON-LD as schema.org `sameAs`. It lives in
-  `static/` and is committed because CI has no `../data` checkout, so the template
-  must read something inside this repo. Only the identity groups contribute
+  `static/` and is committed for the same reason the About page is: the rendering
+  happens in the script, by hand, not in the build. Only the identity groups contribute
   (`SAMEAS_GROUPS` in the script): `sameAs` asserts "another page for this same
   person", so the "learning sites I use that have no profiles" group is excluded
   by design — claiming audible.com would be a false identity claim.
 - The same `profiles.yaml` also drives `README.md` in the **`../veltzer`** repository
-  (the GitHub profile page), which has its own rsconstruct build — `rsconstruct build`
-  there regenerates it from `README.md.in` plus the YAML. Neither repo writes into the
-  other; the YAML is the only thing that crosses. Both pages render the same block
+  (the GitHub profile page): its `scripts/update_from_data.py` pulls this repo and
+  regenerates the README from `README.md.in` plus the YAML, by hand, since a push
+  there is the publish. Neither repo writes into the other; the YAML is the only
+  thing that crosses. Both pages render the same block
   in the same order, so the site's About page and the profile README stay identical.
   Only two things are page-local: this site's `title`/lead-in front matter, and the
   README's own `### Mark Veltzer's Github profile` heading plus its `main profile`

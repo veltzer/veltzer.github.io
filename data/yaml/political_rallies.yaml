@@ -1,0 +1,18 @@
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/political_rallies.json
+$schema: "https://veltzer.github.io/web-schemas/json/political_rallies.json"
+items:
+  - description: "Rabin murder 21 memorial"
+    location: "Kikar Rabin"
+    date_utcz: "2016-11-06T00:37:22Z"
+    date_timezone: "Asia/Jerusalem"
+    country: "Israel"
+    with: ["Doron Veltzer", "Reut Shaer", "Aviya Veltzer", "Paz Veltzer"]
+    review: "Not very interesting"
+  - description: "Corruption demonstration"
+    location: "Kikar Rabin"
+    date_ymd: "2007-05-04"
+    date_timezone: "Asia/Jerusalem"
+    country: "Israel"
+    with: ["David Alexander"]
+    review: "Not very interesting"

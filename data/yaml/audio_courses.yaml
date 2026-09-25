@@ -1,0 +1,489 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/audio_courses.json
+$schema: "https://veltzer.github.io/web-schemas/json/audio_courses.json"
+items:
+  - name: "Life Lessons from the Great Books"
+    lecturers: ["J Rufus Frears"]
+    date_utcz: "2019-09-21T09:28:55Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    rating: 8
+    review: "Pretty good"
+    great_courses_id: 2180
+    great_courses_slug: "life-lessons-from-the-great-books"
+  - name: "Churchill"
+    lecturers: ["J Rufus Frears"]
+    date_utcz: "2019-09-21T09:28:55Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    rating: 8
+    review: "Pretty good"
+    great_courses_id: 807
+    great_courses_slug: "churchill"
+  - name: "The World Was Never the Same: Events That Changed History"
+    lecturers: ["J Rufus Frears"]
+    date_utcz: "2019-09-21T09:28:55Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    rating: 8
+    review: "Pretty good"
+    great_courses_id: 3890
+    great_courses_slug: "the-world-was-never-the-same-events-that-changed-history"
+  - name: "Famous Greeks"
+    lecturers: ["J Rufus Frears"]
+    date_utcz: "2019-09-21T09:28:55Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    rating: 8
+    review: "Pretty good"
+    great_courses_id: 337
+    great_courses_slug: "famous-greeks"
+  - name: "Famous Romans"
+    lecturers: ["J Rufus Frears"]
+    date_utcz: "2019-09-21T09:28:55Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    rating: 8
+    review: "Pretty good"
+    great_courses_id: 349
+    great_courses_slug: "famous-romans"
+  - name: "A History of Freedom"
+    lecturers: ["J Rufus Frears"]
+    date_utcz: "2019-09-21T09:28:55Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    rating: 8
+    review: "Pretty good"
+    great_courses_id: 480
+    great_courses_slug: "a-history-of-freedom"
+  - name: "The Wisdom of History"
+    lecturers: ["J Rufus Frears"]
+    date_utcz: "2019-09-21T09:28:55Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    rating: 8
+    review: "Pretty good"
+    great_courses_id: 4360
+    great_courses_slug: "the-wisdom-of-history"
+  - name: "Philosophy of Science"
+    lecturers: ["Jeffrey L. Kasser"]
+    date_utcz: "2019-09-21T09:28:55Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    rating: 8
+    review: "Pretty good"
+    great_courses_id: 4100
+    great_courses_slug: "philosophy-of-science"
+  - name: "How to Listen to and Understand Opera"
+    lecturers: ["Robert Greenberg"]
+    date_utcz: "2017-12-11T22:40:24Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    location: "Bus"
+    rating: 8
+    review: "Great course"
+    great_courses_id: 740
+    great_courses_slug: "how-to-listen-to-and-understand-opera"
+  - name: "Peloponnesian War"
+    lecturers: ["Kenneth W. Harl"]
+    date_utcz: "2017-12-11T22:40:24Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    location: "Bus"
+    rating: 6
+    review: "Not that great a course."
+    great_courses_id: 3372
+    great_courses_slug: "the-peloponnesian-war"
+  - name: "Exploring Metaphysics"
+    lecturers: ["David Kyle Johnson"]
+    date_utcz: "2018-01-28T00:02:01Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    location: "Gym"
+    rating: 6
+    review: "Mixes physics with meta physics which I'm not sure is a great idea."
+    great_courses_id: 4182
+    great_courses_slug: "exploring-metaphysics"
+  - name: "The Book of Genesis"
+    lecturers: ["Gary A. Rendsburg"]
+    date_utcz: "2019-10-16T11:42:14Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    location: "Night Walks"
+    rating: 7
+    review: "OK"
+    great_courses_id: 6234
+    great_courses_slug: "the-book-of-genesis"
+  - name: "Greek Legacy: Classical Origins of the Modern World"
+    lecturers: ["Daniel N. Robinson"]
+    date_utcz: "2019-10-16T11:42:14Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    location: "Night Walks"
+    rating: 7
+    review: "OK"
+    great_courses_id: 464
+    great_courses_slug: "greek-legacy-classical-origins-of-the-modern-world"
+  - name: "Introduction to Archeology"
+    lecturers: ["Susan Foster McCarter"]
+    date_utcz: "2019-10-16T11:42:14Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    location: "Night Walks"
+    rating: 7
+    review: "OK"
+    internal_id: 1
+  - name: "Natural Law and Human Nature"
+    lecturers: ["Joseph Koterski"]
+    date_utcz: "2019-10-16T11:42:14Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    location: "Night Walks"
+    rating: 7
+    review: "OK"
+    great_courses_id: 4453
+    great_courses_slug: "natural-law-and-human-nature"
+  - name: "The American Mind"
+    lecturers: ["Allen C. Guelzo"]
+    date_utcz: "2016-07-01T18:21:25Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    location: "Night Walks"
+    rating: 7
+    review: "OK"
+    great_courses_id: 4880
+    great_courses_slug: "the-american-mind"
+  - name: "Great Presidents"
+    lecturers: ["Allan J. Lichtman"]
+    date_utcz: "2016-07-01T18:21:25Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    location: "Night Walks"
+    rating: 7
+    review: "OK"
+    great_courses_id: 8100
+    great_courses_slug: "great-presidents"
+  - name: "Mr. Lincoln: The Life of Abraham Lincoln"
+    lecturers: ["Allen C. Guelzo"]
+    date_utcz: "2016-07-01T18:21:25Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    location: "Night Walks"
+    rating: 7
+    review: "OK"
+    great_courses_id: 8561
+    great_courses_slug: "mr-lincoln-the-life-of-abraham-lincoln"
+  - name: "Renaissance, the Reformation, and the Rise of Nations"
+    lecturers: ["Andrew C. Fix"]
+    date_utcz: "2016-07-01T18:21:25Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    location: "Night Walks"
+    rating: 7
+    review: "OK"
+    great_courses_id: 3940
+    great_courses_slug: "the-renaissance-the-reformation-and-the-rise-of-nations"
+  - name: "Books That Matter: The Art of War"
+    lecturers: ["Andrew R. Wilson"]
+    date_utcz: "2016-07-01T18:21:25Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    location: "Night Walks"
+    rating: 7
+    review: "OK"
+    great_courses_id: 20140
+    great_courses_slug: "books-that-matter-the-art-of-war"
+  - name: "Holiday Music"
+    lecturers: ["Robert Greenberg"]
+    date_utcz: "2016-11-18T08:53:26Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Sansa Clip 2"
+    location: "Car"
+    rating: 8
+    review: "Great lecturer"
+    internal_id: 2
+  - name: "How to Listen to and Understand Great Music"
+    lecturers: ["Robert Greenberg"]
+    date_utcz: "2016-11-18T08:53:26Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Sansa Clip 2"
+    location: "Car"
+    rating: 8
+    review: "Great lecturer"
+    great_courses_id: 700
+    great_courses_slug: "how-to-listen-to-and-understand-great-music-3rd-edition"
+  - name: "Operas of Mozart"
+    lecturers: ["Robert Greenberg"]
+    date_utcz: "2016-11-18T08:53:26Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Sansa Clip 2"
+    location: "Car"
+    rating: 8
+    review: "Great lecturer"
+    great_courses_id: 780
+    great_courses_slug: "the-operas-of-mozart"
+  - name: "String Quartets of Beethoven"
+    lecturers: ["Robert Greenberg"]
+    date_utcz: "2016-11-18T08:53:26Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Sansa Clip 2"
+    location: "Car"
+    rating: 8
+    review: "Great lecturer"
+    audible_asin: "B00DHQL4J0"
+  - name: "The Concerto"
+    lecturers: ["Robert Greenberg"]
+    date_utcz: "2016-11-18T08:53:26Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Sansa Clip 2"
+    location: "Car"
+    rating: 8
+    review: "Great lecturer"
+    great_courses_id: 7270
+    great_courses_slug: "the-concerto"
+  - name: "The Symphony"
+    lecturers: ["Robert Greenberg"]
+    date_utcz: "2016-11-18T08:53:26Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Sansa Clip 2"
+    location: "Car"
+    rating: 8
+    review: "Great lecturer"
+    great_courses_id: 7210
+    great_courses_slug: "the-symphony"
+  - name: "Abraham Liconln: In His Own Words"
+    lecturers: ["David Zarefsky"]
+    date_utcz: "2020-04-17T09:33:08Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    rating: 7
+    review: "Didn't learn a lot and a lot of speculation"
+    great_courses_id: 877
+    great_courses_slug: "abraham-lincoln-in-his-own-words"
+  - name: "Argumentation: The Study of Effective Reasoning"
+    lecturers: ["David Zarefsky"]
+    date_utcz: "2020-04-17T09:35:04Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    rating: 7
+    review: "Nothing I didn't know."
+    great_courses_id: 4294
+    great_courses_slug: "argumentation-the-study-of-effective-reasoning"
+  - name: "Big History: The Big Bang, Life on Earth, and the Rise of Humanity"
+    lecturers: ["David Christian"]
+    date_utcz: "2020-04-17T09:35:54Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    rating: 8
+    review: "Pretty good"
+    great_courses_id: 8050
+    great_courses_slug: "big-history-the-big-bang-life-on-earth-and-the-rise-of-humanity"
+  - name: "Classics of Russian Literature"
+    lecturers: ["Irwin Weil"]
+    date_utcz: "2020-04-17T09:37:21Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    rating: 8
+    review: "I liked the lecturer"
+    great_courses_id: 2830
+    great_courses_slug: "classics-of-russian-literature"
+  - name: "European Thought and Culture in the 19th Century"
+    lecturers: ["Lloyd Kramer"]
+    date_utcz: "2020-04-17T09:38:50Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    rating: 7
+    review: "Just a bunch of topics with no progression or interesting insight."
+    great_courses_id: 4423
+    great_courses_slug: "european-thought-and-culture-in-the-19th-century"
+  - name: "European Thought and Culture in the 20th Century"
+    lecturers: ["Lloyd Kramer"]
+    date_utcz: "2020-04-17T09:38:50Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    rating: 7
+    review: "Just a bunch of topics with no progression or interesting insight."
+    great_courses_id: 4427
+    great_courses_slug: "european-thought-and-culture-in-the-20th-century"
+  - name: "Discovery of Ancient Civilizations"
+    lecturers: ["Brian M. Fagan"]
+    date_utcz: "2020-05-15T05:36:09Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    rating: 7
+    review: "Nice review of early archeology."
+    internal_id: 3
+  - name:
+      "Foundations of Western Civilization II: A History of the Modern Western
+      World"
+    lecturers: ["Robert Bucholz"]
+    date_utcz: "2020-06-28T17:18:24Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    rating: 7
+    review: "Not bad"
+    internal_id: 6
+  - name: "A History of England from the Tudors to the Stuarts"
+    lecturers: ["Robert Bucholz"]
+    date_utcz: "2020-06-28T17:19:24Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    rating: 7
+    review: "Not bad."
+    great_courses_id: 8470
+    great_courses_slug: "a-history-of-england-from-the-tudors-to-the-stuarts"
+  - name: "Human Prehistory and the First Civilizations"
+    lecturers: ["Brian M. Fagan"]
+    date_utcz: "2020-09-27T15:34:47Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    rating: 7
+    review: "Not bad."
+    great_courses_id: 380
+    great_courses_slug: "human-prehistory-and-the-first-civilizations"
+  - name: "Skepticism 101: How to Think like a Scientist"
+    lecturers: ["Michael Shermer"]
+    date_utcz: "2020-12-16T15:29:34Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    rating: 8
+    review: "Good summary of the material."
+    great_courses_id: 9388
+    great_courses_slug: "skepticism-101-how-to-think-like-a-scientist"
+  - name: "Biology: The Science of Life"
+    lecturers: ["Stephen Nowicki"]
+    date_utcz: "2016-05-01T21:33:15Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    rating: 7
+    review: "not very interesting"
+    great_courses_id: 1500
+    great_courses_slug: "biology-the-science-of-life"
+  - name: "Jesus and the Gospels"
+    lecturers: ["Timothy Johnson"]
+    date_utcz: "2016-05-01T21:33:15Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    rating: 7
+    review: "not very interesting"
+    great_courses_id: 6240
+    great_courses_slug: "jesus-and-the-gospels"
+  - name: "US Literary History"
+    lecturers: ["William W. Cook"]
+    date_utcz: "2016-05-01T21:33:15Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S7"
+    rating: 7
+    review: "not very interesting"
+    internal_id: 4
+  - name: "Americas in the Revolutionary Era"
+    lecturers: ["Marshall C. Eakin"]
+    date_started_utcz: "2020-10-01T21:31:01Z"
+    date_ended_utcz: "2021-10-01T21:31:01Z"
+    date_timezone: "UTC"
+    device: "Samsung S10"
+    location: "Night Walks"
+    rating: 7
+    review: "not very interesting"
+    great_courses_id: 8617
+    great_courses_slug: "the-americas-in-the-revolutionary-era"
+  - name: "Change and Motion: Calculus Made Clear, 2nd Edition"
+    lecturers: ["Michael Starbird"]
+    date_started_utcz: "2020-10-01T21:31:01Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    location: "Night Walks"
+    progress: "4/24"
+    great_courses_id: 177
+    great_courses_slug: "change-and-motion-calculus-made-clear-2nd-edition"
+  - name: "Confucius, Buddha, Jesus, and Muhammad"
+    lecturers: ["Mark W. Muesse"]
+    date_started_utcz: "2020-10-01T21:31:01Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    location: "Night Walks"
+    progress: "3/36"
+    great_courses_id: 6380
+    great_courses_slug: "confucius-buddha-jesus-and-muhammad"
+  - name: "Conquest of the Americas"
+    lecturers: ["Marshall C. Eakin"]
+    date_started_utcz: "2020-10-01T21:31:01Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    location: "Night Walks"
+    progress: "9/24"
+    great_courses_id: 888
+    great_courses_slug: "conquest-of-the-americas"
+  - name: "Great World Religions: Hinduism"
+    lecturers: ["Mark W. Muesse"]
+    date_started_utcz: "2020-10-01T21:31:01Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    location: "Night Walks"
+    progress: "2/12"
+    great_courses_id: 6104
+    great_courses_slug: "great-world-religions-hinduism"
+  - name: "Joy of Thinking: The Beauty and Power of Classical Mathematical Ideas"
+    lecturers: ["Michael Starbird", "Edward B. Burger"]
+    date_started_utcz: "2020-10-01T21:31:01Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    location: "Night Walks"
+    progress: "13/24"
+    great_courses_id: 1423
+    great_courses_slug: "the-joy-of-thinking-the-beauty-and-power-of-classical-mathematical-ideas"
+  - name: "Origins of Life"
+    lecturers: ["Robert M. Hazen"]
+    date_started_utcz: "2020-10-01T21:31:01Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    location: "Night Walks"
+    progress: "2/24"
+    great_courses_id: 1515
+    great_courses_slug: "origins-of-life"
+  - name: "Religions of the Axial Age: An Approach to the World's Religions"
+    lecturers: ["Mark W. Muesse"]
+    date_started_utcz: "2020-10-01T21:31:01Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    location: "Night Walks"
+    progress: "8/24"
+    great_courses_id: 6312
+    great_courses_slug: "religions-of-the-axial-age-an-approach-to-the-world-s-religions"
+  - name: "The Bible and Western Culture"
+    lecturers:
+      ["Michael Segrue", "Andrew Ford", "Robert Hollander", "David Thurn"]
+    date_started_utcz: "2020-10-01T21:31:01Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    location: "Night Walks"
+    progress: "12/24"
+    internal_id: 5
+  - name: "Great World Religions: Buddhism"
+    lecturers: ["Malcolm David Eckel"]
+    date_started_utcz: "2020-10-01T21:31:01Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    location: "Night Walks"
+    progress: "1/24"
+    great_courses_id: 6105
+    great_courses_slug: "great-world-religions-buddhism"
+  - name: "The Joy Of Science"
+    lecturers: ["Robert M. Hazen"]
+    date_started_utcz: "2020-10-01T21:31:01Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S10"
+    location: "Night Walks"
+    progress: "14/60"
+    great_courses_id: 1100
+    great_courses_slug: "the-joy-of-science"
+  - name: "Myths, Lies, and Half-Truths of Language Usage"
+    lecturers: ["John McWhorter"]
+    date_started_utcz: "2023-04-02T09:49:52Z"
+    date_timezone: "Asia/Jerusalem"
+    device: "Samsung S21"
+    location: "Night Walks"
+    progress: "4/24"
+    great_courses_id: 2212
+    great_courses_slug: "myths-lies-and-half-truths-of-language-usage"

@@ -1,0 +1,9 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/text_books.json
+$schema: "https://veltzer.github.io/web-schemas/json/text_books.json"
+items:
+  - name: "Dune"
+    authors: ["Frank Herbert"]
+    review: "nice"
+    rating: 8

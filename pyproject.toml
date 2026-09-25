@@ -8,6 +8,11 @@ dependencies = [
     "PyYAML",
     "Pillow",
     "beautifulsoup4",
+    "pydatacheck",
+    # pydatacheck imports pylogconf but does not declare it; remove once it does.
+    "pylogconf",
+    "requests",
+    "ruamel.yaml",
 ]
 
 [dependency-groups]
@@ -17,6 +22,7 @@ dev = [
     "ruff",
     "types-beautifulsoup4",
     "types-PyYAML",
+    "types-requests",
     "yamllint",
 ]
 

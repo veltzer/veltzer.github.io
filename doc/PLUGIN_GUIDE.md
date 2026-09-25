@@ -34,8 +34,8 @@ The page that hosts the app is `content/media/_index.en.md` (served at
 
 ## Data Files
 
-Plugin data is authored as YAML in the external `../data/` repo.
-`scripts/copy_data.py` copies it in, converts it to JSON and gzips it into
+Plugin data is authored as YAML in `data/yaml/`.
+`scripts/copy_data.py` converts it to JSON and gzips it into
 `static/data/<name>.json.gz`; the frontend loads the JSON, never the YAML
 (see `CLAUDE.md` for why). The YAML structure should be:
 

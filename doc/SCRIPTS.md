@@ -76,22 +76,22 @@ right numbers and links.
 
 ### `scripts/gen_profiles.py`
 
-Renders `../data/yaml/profiles.yaml` into the region between the
+Renders `data/yaml/profiles.yaml` into the region between the
 `<!-- BEGIN generated profiles -->` markers in `content/about/_index.en.md`
 and `_index.he.md` (contact line, intro, link groups and extras, in both
 languages), and writes `static/identity.toml`, the `sameAs` URLs the
-`Person` JSON-LD in `templates/base.html` reads. A manual step, like
-`copy_data.py`: CI has no `../data` checkout, and the output is committed.
-Run it after editing `profiles.yaml` and commit both repos.
+`Person` JSON-LD in `templates/base.html` reads. A manual step whose
+output is committed. Run it after editing `profiles.yaml` and commit.
 
 ### `scripts/copy_data.py`
 
-Copies YAML data and PGN files from the `../data/` repo into `static/data/`,
-converts the YouTube CSV to YAML, runs the audible and books imports,
-converts every YAML file to JSON (the frontend reads JSON, not YAML) and
-gzips everything. Uses `gzip -n` for reproducible output. Validates source
-files exist before copying. A manual step, not part of the build: CI has no
-`../data` checkout, and the generated `static/data/` is committed.
+Builds `static/data/` from the media YAML in `data/yaml/` and the chess
+archives and YouTube CSV in the sibling `../data/` repo: converts the
+YouTube CSV to YAML, runs the audible and books imports, converts every
+YAML file to JSON (the frontend reads JSON, not YAML) and gzips everything.
+Uses `gzip -n` for reproducible output. Validates source files exist before
+copying. A manual step, not part of the build: CI has no `../data` checkout
+for the chess and YouTube half, and the generated `static/data/` is committed.
 
 The two chess archives (`games.pgn.gz`, `chesscom.pgn.gz`) arrive gzipped
 and are decompressed and concatenated into a single `games.pgn`, which the
@@ -151,13 +151,13 @@ so the viewer can still link out. Run by `scripts/copy_data.py`.
 
 ### `scripts/import_audible.py`
 
-Copies `../data/yaml/audible.yaml` into `static/data/` keeping only the
+Copies `data/yaml/audible.yaml` into `static/data/` keeping only the
 fields the audible plugin uses, with integer fields coerced and string
 fields force-quoted so the output is stable. Run by `scripts/copy_data.py`.
 
 ### `scripts/import_books.py`
 
-Flattens `../data/yaml/books_read.yaml` (names, authors, ownings and
+Flattens `data/yaml/books_read.yaml` (names, authors, ownings and
 readings, each a list per language) into one item per book for the media
 page: `name`, `authors`, `rating`/`last_read`/`review` of the latest dated
 reading, `readings`, `owned_languages`, `cover`, `url`. Run by
@@ -234,7 +234,7 @@ manually as needed.
 
 ### `scripts/check_profile_links.py`
 
-Requests every profile URL in `../data/yaml/profiles.yaml` — the ~30 links
+Requests every profile URL in `data/yaml/profiles.yaml` — the ~30 links
 rendered into `content/about/` and into `README.md` in the `../veltzer`
 repository — and reports anything that no longer resolves. Run on demand:
 
@@ -277,25 +277,67 @@ calendar key (`--project-id veltzer-calendar-id`, `--pass-path
 cloud/gcp/calendar`, `--referrer veltzer.org/*`, etc.) and can be
 overridden via flags or the matching `API_KEY_*` environment variables.
 
-## Scripts in `../data/` repo
+## Data maintenance scripts
 
-### `../data/scripts/great_courses_fetch_ids.py`
+These edit or check the YAML under `data/yaml/` and use paths relative to
+the repository root, so run them from there. They came across from the
+`../data` repo together with the YAML in 2026-09.
+
+### `scripts/great_courses_fetch_ids.py`
 
 Interactive script to look up Great Courses IDs and slugs by searching
 shop.thegreatcourses.com. Shows course info, professor, and cover image
 for confirmation. Incremental with cache in `/tmp/great_courses_cache.json`.
 
-### `../data/scripts/great_courses_check_unique.py`
+### `scripts/great_courses_check_unique.py`
 
 Checks that all `great_courses_id` and `great_courses_slug` values
 in `audio_courses.yaml` are unique.
 
-### `../data/scripts/audio_courses_check_ids.py`
+### `scripts/audio_courses_check_ids.py`
 
 Checks that every audio course has at least one identifier:
 `great_courses_id`, `audible_asin`, or `internal_id`.
 
-### `../data/scripts/audio_courses_check_lecturers.py`
+### `scripts/audio_courses_check_lecturers.py`
 
 Compares lecturer names in YAML against professor names on The Great
 Courses website for courses with a `great_courses_slug`.
+
+### `scripts/books_fetch_ids.py`
+
+Interactive lookup of goodreads ids for the books in `books_read.yaml` that
+have none yet: searches goodreads by the english title, scores the hits,
+verifies a confirmed hit against the book page and writes the id (and the
+exact page title, which `check_books` insists on). Caches page lookups in
+`shelve/`, the same caches `check_books` reads.
+
+### `scripts/podcasts_add_podcast.py`
+
+Interactive: search the iTunes Search API, pick a result, and append the
+podcast to `podcasts.yaml`.
+
+### `scripts/podcasts_add_chapters.py`
+
+Appends the next N episodes (default 10) of a podcast to its chapters from
+the RSS feed, continuing from where the last run stopped.
+
+### `scripts/podcasts_backfill_rss.py`
+
+Fills in missing `rss_feed` URLs in `podcasts.yaml` by looking each podcast
+up on the iTunes Search API.
+
+### `scripts/podcasts_backfill_rss_data.py`
+
+Backfills RSS metadata (description, pubDate, duration, enclosure, …) into
+existing chapters by matching titles against the feed.
+
+### `scripts/podcasts_fill_chapter_names.py`
+
+Replaces numeric chapter titles with the real episode data from the feed;
+non-numeric titles are left alone.
+
+### `scripts/youtube_add_names.py`
+
+Fetches the title for every item without a `name` in a YouTube YAML file
+(`video_youtube.yaml`) and writes it back in place.

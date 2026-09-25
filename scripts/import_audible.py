@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Import audible.yaml from ../data, keeping only needed fields with correct types."""
+"""Import data/yaml/audible.yaml, keeping only needed fields with correct types."""
 
 import argparse
 import sys

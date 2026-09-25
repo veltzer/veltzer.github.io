@@ -36,7 +36,7 @@ IMAGE_DIR = str(REPO_ROOT / "static" / "images")
 logger = logging.getLogger(__name__)
 GC_IMAGE_URL = "https://secureimages.teach12.com/tgc/images/m2/wondrium/courses/{cid}/{cid}.jpg"
 AUDIBLE_URL = "https://www.audible.com/pd/{asin}"
-YAML_PATH = str(REPO_ROOT.parent / "data" / "yaml" / "audio_courses.yaml")
+YAML_PATH = str(REPO_ROOT / "data" / "yaml" / "audio_courses.yaml")
 
 def download(url, dest):
     """Download a URL to a file."""

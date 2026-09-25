@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
 """
-Fetch cover images for the books in ../data/yaml/books_read.yaml.
+Fetch cover images for the books in data/yaml/books_read.yaml.
 
 Each book carries a goodreads id or a simania id on one of its names (the
-data repo's check_books insists on one). Both sites publish the cover as the
+build's check_books processor insists on one). Both sites publish the cover as the
 page's `og:image`, so no API key is needed: the book page is fetched, the
 meta tag read, and the image downloaded and shrunk to the site standard.
 
@@ -39,7 +39,7 @@ from import_books import convert_item
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 IMAGE_DIR = REPO_ROOT / "static" / "images"
-YAML_PATH = REPO_ROOT.parent / "data" / "yaml" / "books_read.yaml"
+YAML_PATH = REPO_ROOT / "data" / "yaml" / "books_read.yaml"
 PAGE_URLS = {
     "goodreads": "https://www.goodreads.com/en/book/show/{book_id}",
     "simania": "https://simania.co.il/bookdetails.php?item_id={book_id}",

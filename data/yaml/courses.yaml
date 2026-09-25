@@ -1,0 +1,28 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/courses.json
+$schema: "https://veltzer.github.io/web-schemas/json/courses.json"
+# TODO
+# - add certifications
+# - add dates in which I took the courses
+items:
+  - name: "Games without Chance: Combinatorial Game Theory, Thomas Morley, Georgia Tech, via Coursera"
+    provider: "Coursera"
+  - name: "A Brief History of Humankind, Yuval Noah Harrari, Hebrew University of Jerusalem, via Coursera"
+    provider: "Coursera"
+  - name: "Jazz improvisation, Gray Burton, Berklee College of Music, via Coursera"
+    provider: "Coursera"
+  - name: "Sun Microsystems certified instructor for Solaris and Advanced Java, now Oracle"
+    provider: "Sun Microsystems"
+  - name: "MySQL certified instructor, now Oracle"
+    provider: "MySQLAB"
+  - name: "Associate Architect"
+    provider: "AWS"
+  - name: "certified instructor: Architecting"
+    provider: "AWS"
+  - name: "Associate Advanced Architect"
+    provider: "AWS"
+  - name: "certified instructor: Architecting, professional level"
+    provider: "AWS"
+  - name: "Devops on AWS"
+    provider: "AWS"

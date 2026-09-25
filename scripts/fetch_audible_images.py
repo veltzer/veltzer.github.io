@@ -25,7 +25,7 @@ from image_standard import normalise
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 IMAGE_DIR = str(REPO_ROOT / "static" / "images")
-YAML_PATH = str(REPO_ROOT.parent / "data" / "yaml" / "audible.yaml")
+YAML_PATH = str(REPO_ROOT / "data" / "yaml" / "audible.yaml")
 
 
 def download(url, dest):

@@ -31,7 +31,6 @@ input_globs = [
     "static/**/*",
 ]
 output_dirs = [ "_site" ]
-args = ["--rcfile=.pylintrc"]
 [processor.ruff]
 src_dirs = ["scripts", "tests"]
 [processor.mypy]
@@ -65,9 +64,32 @@ dep_inputs = [
 [analyzer.markdown]
 
 [analyzer.tera]
+# ─── data ────────────────────────────────────────────────────────────────────
+# data/yaml is the source of truth for the media tracker and the profile block
+# (it used to live in the private ../data repo). The four checks it had there
+# came with it: lint, schema validation ($schema in each file), a JSON
+# conversion that proves every file parses, and pydatacheck's cross-checks
+# against imdb / goodreads / simania, which read their caches from shelve/.
 [processor.yamllint]
-src_dirs = [".github"]
+src_dirs = [".github", "data/yaml"]
 dep_inputs = [".yamllint.yaml"]
+
+[processor.iyamlschema]
+src_dirs = ["data/yaml"]
+
+[processor.yaml2json]
+src_dirs = ["data/yaml"]
+
+[processor.script.check_videos]
+src_files = ["data/yaml/video_series.yaml", "data/yaml/video_features.yaml"]
+command = "pydatacheck"
+args = ["check_videos"]
+batch = true
+
+[processor.script.check_books]
+src_files = ["data/yaml/books_read.yaml"]
+command = "pydatacheck"
+args = ["check_books"]
 [processor.taplo]
 src_files = ["config.toml", "rsconstruct.toml", ".rumdl.toml", ".rumdl.zola.toml", "pyproject.toml", "static/identity.toml", "static/tag_translations.toml"]
 

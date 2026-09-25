@@ -1,0 +1,19 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/study_sites.json
+$schema: "https://veltzer.github.io/web-schemas/json/study_sites.json"
+items:
+  - url: "http://academicearth.org"
+  - url: "http://freevideolectures.com"
+  - url: "http://freescienceonline.blogspot.com"
+  - url: "http://videolectures.net"
+  - url: "http://www.learnerstv.com"
+  - url: "http://hulk03.princeton.edu:8080/WebMedia/lectures"
+  - url: "http://ocw.mit.edu/courses/audio-video-courses"
+  - url: "http://oyc.yale.edu"
+  - url: "http://www.onlineuniversities.com/blog/2008/11/100-awesome-ivy-league-video-lectures"
+  - url: "http://webcast.berkeley.edu/courses.php"
+  - url: "http://www.ted.com"
+  - url: "http://www.fora.tv"
+  - url: "http://www.lecturefox.com"
+  - url: "http://www.teach12.com"

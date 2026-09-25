@@ -23,7 +23,7 @@ from image_picker import pick_image
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 IMAGE_DIR = str(REPO_ROOT / "static" / "images")
-YAML_PATH = str(REPO_ROOT.parent / "data" / "yaml" / "podcasts.yaml")
+YAML_PATH = str(REPO_ROOT / "data" / "yaml" / "podcasts.yaml")
 
 
 def load_entries():

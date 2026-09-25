@@ -1,0 +1,336 @@
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/podcasts.json
+$schema: "https://veltzer.github.io/web-schemas/json/podcasts.json"
+items:
+  - name: "The rest is history"
+    url: "https://therestishistory.com/club"
+    rss_feed: "https://feeds.megaphone.fm/GLT4787413333"
+    chapters:
+      - title: "Trailer"
+        description:
+          "Hosted by historians Tom Holland and Dominic Sandbrook, The Rest
+          is History dives deep into history's most dramatic moments and fascinating figures
+          - exploring the stories of great empires, epic battl"
+        pubDate: "Wed, 28 Oct 2020 13:00:00 -0000"
+        episode: 1
+        duration: 286
+        episodeType: "trailer"
+        explicit: "no"
+        enclosure_url: "https://pdst.fm/e/traffic.megaphone.fm/GLT4186105386.mp3?updated=1773403834"
+        author: "Goalhanger"
+        guid: "a428c3fa-10c8-4b77-a85a-04c812bf7477"
+        date_utcz: "2026-03-22T13:24:50Z"
+        date_timezone: "Asia/Jerusalem"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - title: "1. Greatness"
+        description:
+          "How did certain people come to be called ‘the Great’? Is the notion
+          of great men and women outmoded? Can anyone today be reckoned ‘great’? Historians
+          Tom Holland and Dominic Sandbrook take a wide rang"
+        pubDate: "Mon, 02 Nov 2020 02:00:00 -0000"
+        episode: 1
+        duration: 1975
+        episodeType: "full"
+        explicit: "yes"
+        enclosure_url: "https://pdst.fm/e/traffic.megaphone.fm/GLT2583338621.mp3?updated=1706623795"
+        image: "https://megaphone.imgix.net/podcasts/3d3ca1aa-2426-11ee-88f1-7b7f03cd061f/image/show-cover.jpg?ixlib=rails-4.3.1&max-w=3000&max-h=3000&fit=crop&auto=format,compress"
+        author: "Goalhanger"
+        guid: "d64331b9-0d45-4f03-b2da-f6d5ac189422"
+        date_utcz: "2026-03-22T13:24:50Z"
+        date_timezone: "Asia/Jerusalem"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - title: "2. Civil War"
+        description:
+          "What are the conditions needed for a civil war to start? Could we
+          see a modern industrial nation turn upon itself again? Historians Tom Holland
+          and Dominic Sandbrook explore examples from ancient hist"
+        pubDate: "Mon, 02 Nov 2020 03:00:00 -0000"
+        episode: 2
+        duration: 2361
+        episodeType: "full"
+        explicit: "yes"
+        enclosure_url: "https://pdst.fm/e/traffic.megaphone.fm/GLT5809911007.mp3?updated=1706623872"
+        image: "https://megaphone.imgix.net/podcasts/3cbec690-2426-11ee-88f1-7b6b80ae3810/image/show-cover.jpg?ixlib=rails-4.3.1&max-w=3000&max-h=3000&fit=crop&auto=format,compress"
+        author: "Goalhanger"
+        guid: "24104338-377e-42eb-afb7-e3184d74af40"
+        date_utcz: "2026-03-22T13:24:50Z"
+        date_timezone: "Asia/Jerusalem"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - title: "3. Is Trump Caesar or Nixon?"
+        description:
+          "Recorded hours after Joe Biden was named President of the United
+          States, we ask if Donald Trump is a modern day Caesar, willing to do anything
+          to stay in power? Or is Trump the natural successor to th"
+        pubDate: "Mon, 09 Nov 2020 02:00:00 -0000"
+        episode: 3
+        duration: 2329
+        episodeType: "full"
+        explicit: "no"
+        enclosure_url: "https://pdst.fm/e/traffic.megaphone.fm/GLT4982990068.mp3?updated=1706623935"
+        image: "https://megaphone.imgix.net/podcasts/3c9cd22e-2426-11ee-88f1-332e5c03c4b2/image/show-cover.jpg?ixlib=rails-4.3.1&max-w=3000&max-h=3000&fit=crop&auto=format,compress"
+        author: "Goalhanger"
+        guid: "f8d76a6b-51f5-4e4c-9e02-9fd29222bb64"
+        date_utcz: "2026-03-22T13:24:50Z"
+        date_timezone: "Asia/Jerusalem"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - title: "4. We’re all so 17th Century"
+        description:
+          "Plague, pestilence and statue smashing are back in business. Has
+          2020 turned out to be the 17th Century in disguise? And if so, has Boris Johnson
+          become the new Oliver Cromwell, determined to crack do"
+        pubDate: "Mon, 09 Nov 2020 02:15:00 -0000"
+        episode: 4
+        duration: 2218
+        episodeType: "full"
+        explicit: "no"
+        enclosure_url: "https://pdst.fm/e/traffic.megaphone.fm/GLT1251829896.mp3?updated=1706623967"
+        image: "https://megaphone.imgix.net/podcasts/3c7f945c-2426-11ee-88f1-97db41c9245d/image/show-cover.jpg?ixlib=rails-4.3.1&max-w=3000&max-h=3000&fit=crop&auto=format,compress"
+        author: "Goalhanger"
+        guid: "d7b04e6f-4dc6-4b27-aa9e-aa69b44d2cf9"
+        date_utcz: "2026-03-22T13:24:50Z"
+        date_timezone: "Asia/Jerusalem"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - title: "5. 1981"
+        description:
+          "As a new series of The Crown arrives on Netflix, returning viewers
+          to the 1980s, we look back at the year many Britons consider the worst in living
+          memory.\nRocketing unemployment, riots in major citie"
+        pubDate: "Mon, 16 Nov 2020 03:00:00 -0000"
+        episode: 5
+        duration: 2480
+        episodeType: "full"
+        explicit: "yes"
+        enclosure_url: "https://pdst.fm/e/traffic.megaphone.fm/GLT3026558838.mp3?updated=1706624000"
+        image: "https://megaphone.imgix.net/podcasts/3c65277a-2426-11ee-88f1-534371157381/image/show-cover.jpg?ixlib=rails-4.3.1&max-w=3000&max-h=3000&fit=crop&auto=format,compress"
+        author: "Goalhanger"
+        guid: "8583b546-9a5d-4d2c-82bb-5251b5cd1808"
+        date_utcz: "2026-03-22T13:24:50Z"
+        date_timezone: "Asia/Jerusalem"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - title: "6. Troy"
+        description:
+          "It’s been described as the most legendary story ever told. But did
+          the Trojan War actually happen? And was it really fought over a beautiful woman?
+          Tom Holland and Dominic Sandbrook discuss an endurin"
+        pubDate: "Mon, 23 Nov 2020 03:00:00 -0000"
+        episode: 6
+        duration: 2322
+        episodeType: "full"
+        explicit: "no"
+        enclosure_url: "https://pdst.fm/e/traffic.megaphone.fm/GLT4742295987.mp3?updated=1706624040"
+        image: "https://megaphone.imgix.net/podcasts/3bf20998-2426-11ee-88f1-f7249ea0ca26/image/show-cover.jpg?ixlib=rails-4.3.1&max-w=3000&max-h=3000&fit=crop&auto=format,compress"
+        author: "Goalhanger"
+        guid: "19f9fd6c-418e-4d54-935d-ae0fe7e797b6"
+        date_utcz: "2026-03-27T23:32:32Z"
+        date_timezone: "Asia/Jerusalem"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - title: "7. The Lessons of History"
+        description:
+          "Can we truly learn from history? And if we can - do we?\nIt’s one
+          of the big questions this week as Tom Holland and Dominic Sandbrook roam through
+          the centuries in search of certainty.\nNever get involv"
+        pubDate: "Mon, 30 Nov 2020 03:00:00 -0000"
+        episode: 7
+        duration: 2893
+        episodeType: "full"
+        explicit: "no"
+        enclosure_url: "https://pdst.fm/e/traffic.megaphone.fm/GLT2771707131.mp3?updated=1706624078"
+        image: "https://megaphone.imgix.net/podcasts/3bd7362c-2426-11ee-88f1-5b27b2039fe8/image/show-cover.jpg?ixlib=rails-4.3.1&max-w=3000&max-h=3000&fit=crop&auto=format,compress"
+        author: "Goalhanger"
+        guid: "9c12bcb9-a366-4c17-8511-64833851e0da"
+        date_utcz: "2026-03-27T23:32:32Z"
+        date_timezone: "Asia/Jerusalem"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - title: "8. The Echo of a Coffee House"
+        description:
+          "Social media has colonised the world but is it really a new phenomenon?
+          Tom Holland and Dominic Sandbrook debate the effects of technical innovations
+          from the printing press to Twitter. Do they really"
+        pubDate: "Mon, 07 Dec 2020 03:00:00 -0000"
+        episode: 8
+        duration: 2664
+        episodeType: "full"
+        explicit: "no"
+        enclosure_url: "https://pdst.fm/e/traffic.megaphone.fm/GLT8695060101.mp3?updated=1706624130"
+        image: "https://megaphone.imgix.net/podcasts/3babf016-2426-11ee-88f1-73be6ce328f6/image/show-cover.jpg?ixlib=rails-4.3.1&max-w=3000&max-h=3000&fit=crop&auto=format,compress"
+        author: "Goalhanger"
+        guid: "1686e28a-939e-4913-a179-ed0747bbfbd9"
+        date_utcz: "2026-03-27T23:32:32Z"
+        date_timezone: "Asia/Jerusalem"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - title: "9. Causes of the First World War"
+        description:
+          "Whose fault was it? Does the question even make sense? Are wars
+          always somebody's \"fault\"? Was it really the first global war? And should
+          Britain have fought, or stayed out?\nLearn more about your ad c"
+        pubDate: "Mon, 14 Dec 2020 03:00:00 -0000"
+        episode: 9
+        duration: 2767
+        episodeType: "full"
+        explicit: "no"
+        enclosure_url: "https://pdst.fm/e/traffic.megaphone.fm/GLT8234482474.mp3?updated=1706624193"
+        image: "https://megaphone.imgix.net/podcasts/3b90c516-2426-11ee-88f1-0f4e47b18ab7/image/show-cover.jpg?ixlib=rails-4.3.1&max-w=3000&max-h=3000&fit=crop&auto=format,compress"
+        author: "Goalhanger"
+        guid: "9d6008a5-5750-40a9-a132-d72e920d83f2"
+        date_utcz: "2026-03-27T23:32:32Z"
+        date_timezone: "Asia/Jerusalem"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - title: "10. Christmas"
+        description:
+          "Is Christmas an ancient ritual or was it invented by Dickens? Dominic
+          Sandbrook and Tom Holland discuss the transformation of Christmas from public
+          to private event and decide when it became a commerc"
+        pubDate: "Mon, 21 Dec 2020 03:00:00 -0000"
+        episode: 10
+        duration: 2371
+        episodeType: "full"
+        explicit: "no"
+        enclosure_url: "https://pdst.fm/e/traffic.megaphone.fm/GLT9855064623.mp3?updated=1706624220"
+        image: "https://megaphone.imgix.net/podcasts/3b5bcf96-2426-11ee-88f1-1b07c76a4be5/image/show-cover.jpg?ixlib=rails-4.3.1&max-w=3000&max-h=3000&fit=crop&auto=format,compress"
+        author: "Goalhanger"
+        guid: "b3da5f03-3b6c-4e27-804c-48abf5dd70af"
+        date_utcz: "2026-03-27T23:32:32Z"
+        date_timezone: "Asia/Jerusalem"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - title: "11. Brexit"
+        description:
+          "As Britain leaves the EU, Tom Holland and Dominic Sandbrook look
+          at the best & worst comparisons from history that have been made to Brexit. \n\
+          Learn more about your ad choices. Visit podcastchoices.com"
+        pubDate: "Mon, 28 Dec 2020 03:00:00 -0000"
+        episode: 11
+        duration: 2698
+        episodeType: "full"
+        explicit: "no"
+        enclosure_url: "https://pdst.fm/e/traffic.megaphone.fm/GLT9171248177.mp3?updated=1706624268"
+        image: "https://megaphone.imgix.net/podcasts/3b3dda18-2426-11ee-88f1-23a007db85d5/image/show-cover.jpg?ixlib=rails-4.3.1&max-w=3000&max-h=3000&fit=crop&auto=format,compress"
+        author: "Goalhanger"
+        guid: "b42d85a5-8b97-4c13-8529-4c43c6619b51"
+        date_utcz: "2026-03-27T23:32:32Z"
+        date_timezone: "Asia/Jerusalem"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - title: "12. Conspiracy Theories"
+        description:
+          "History is littered with conspiracy theories, from Popish plots
+          to JFK’s assassination. But what makes people believe in them and how do they
+          gain currency? As strange stories continue to swirl around"
+        pubDate: "Mon, 04 Jan 2021 03:00:00 -0000"
+        episode: 12
+        duration: 2869
+        episodeType: "full"
+        explicit: "no"
+        enclosure_url: "https://pdst.fm/e/traffic.megaphone.fm/GLT7580472793.mp3?updated=1706624294"
+        image: "https://megaphone.imgix.net/podcasts/3b2320ce-2426-11ee-88f1-bb6188304118/image/show-cover.jpg?ixlib=rails-4.3.1&max-w=3000&max-h=3000&fit=crop&auto=format,compress"
+        author: "Goalhanger"
+        guid: "b7f5d597-24b2-44a4-a673-e27ceeb1e626"
+        date_utcz: "2026-03-27T23:32:32Z"
+        date_timezone: "Asia/Jerusalem"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - title: "13. Stephen Fry and Troy"
+        description:
+          "Stephen Fry is our guest on The Rest is History as he tells Tom
+          Holland and Dominic Sandbrook about his enduring fascination with the Greek
+          myths.\nLearn more about your ad choices. Visit podcastchoice"
+        pubDate: "Thu, 07 Jan 2021 03:00:00 -0000"
+        episode: 13
+        duration: 3795
+        episodeType: "full"
+        explicit: "no"
+        enclosure_url: "https://pdst.fm/e/traffic.megaphone.fm/GLT5875934078.mp3?updated=1706624317"
+        image: "https://megaphone.imgix.net/podcasts/3b0afc42-2426-11ee-88f1-9fc17a26454d/image/show-cover.jpg?ixlib=rails-4.3.1&max-w=3000&max-h=3000&fit=crop&auto=format,compress"
+        author: "Goalhanger"
+        guid: "e184b185-bbad-4a9a-be77-e5402184fb9e"
+        date_utcz: "2026-03-27T23:32:32Z"
+        date_timezone: "Asia/Jerusalem"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - title: "14. Historical Fiction"
+        description:
+          "Is the author’s responsibility to the quality of the novel or the
+          truth of history? What makes a great historical novel and which authors have
+          contributed to our understanding of history. Tom Holland "
+        pubDate: "Mon, 11 Jan 2021 03:00:00 -0000"
+        episode: 14
+        duration: 3569
+        episodeType: "full"
+        explicit: "no"
+        enclosure_url: "https://pdst.fm/e/traffic.megaphone.fm/GLT2461510190.mp3?updated=1706624341"
+        author: "Goalhanger"
+        guid: "d34eec88-c4b0-4fa9-b717-8557d548e8ab"
+        date_utcz: "2026-03-27T23:32:32Z"
+        date_timezone: "Asia/Jerusalem"
+        location: "Night Walks"
+        device: "Samsung S25"
+      - title: "15. Walls and Borders"
+        description:
+          "From the Great Wall of China to the Berlin Wall, history is littered
+          with the building of barriers aimed at keeping people out, and sometimes in.
+          Do they work? Are they ever a good thing? Tom Holland "
+        pubDate: "Mon, 18 Jan 2021 02:00:00 -0000"
+        episode: 15
+        duration: 2760
+        episodeType: "full"
+        explicit: "no"
+        enclosure_url: "https://pdst.fm/e/traffic.megaphone.fm/GLT1636005045.mp3?updated=1706624363"
+        author: "Goalhanger"
+        guid: "9c8ffd81-a713-4ca2-a6a6-8a183bd74f94"
+        date_utcz: "2026-03-27T23:32:32Z"
+        date_timezone: "Asia/Jerusalem"
+        location: "Night Walks"
+        device: "Samsung S25"
+    rating: 7
+    review: "So-so podcast"
+    internal_id: 1
+  - name:
+      "Sean Carroll's Mindscape: Science, Society, Philosophy, Culture, Arts, and
+      Ideas"
+    url: "https://podcasts.apple.com/us/podcast/sean-carrolls-mindscape-science-society-philosophy/id1406534739?uo=4"
+    rss_feed: "https://rss.libsyn.com/shows/604590/destinations/5264190.xml"
+    chapters:
+      - title: "Welcome to the Mindscape Podcast!"
+        description:
+          "I've decided to officially take the plunge into the world of podcasting.
+          The new show will be called Mindscape, and will mostly consist of me talking
+          to smart people about interesting ideas. (Occasion"
+        pubDate: "Sun, 01 Jul 2018 17:48:00 +0000"
+        duration: 966
+        episodeType: "full"
+        explicit: "false"
+        enclosure_url: "https://dts.podtrac.com/redirect.mp3/pscrb.fm/rss/p/traffic.libsyn.com/secure/1d1ac211-8392-45fe-82db-99fa7f77076e/episode-zero-audio.mp3?dest-id=5264190"
+        image: "https://static.libsyn.com/p/assets/f/0/2/f/f02f450c68a0813616c3140a3186d450/5d05067c2ccf158df1a482ad261d06fd1b7821174458a481352135d90ca2681222ff8f300c6d67ac2b2c67ed9bd927b6803ae4b7650415da3b0e0925221e38df.jpeg"
+        guid: "36c9e4a4360349ad88ca7de2ead4c9f5"
+        date_utcz: "2026-03-27T23:34:12Z"
+        date_timezone: "Asia/Jerusalem"
+        device: "Samsung S25"
+      - title: "1 | Carol Tavris on Mistakes, Justification, and Cognitive Dissonance"
+        description:
+          "For the first full episode of Mindscape, it's an honor to welcome
+          social psychologist Carol Tavris. Her book with co-author Eliot Aronson, Mistakes
+          Were Made (But Not By Me), explores the effect that "
+        pubDate: "Wed, 04 Jul 2018 18:00:12 +0000"
+        episode: 1
+        duration: 4278
+        episodeType: "full"
+        explicit: "false"
+        enclosure_url: "https://dts.podtrac.com/redirect.mp3/pscrb.fm/rss/p/traffic.libsyn.com/secure/1d1ac211-8392-45fe-82db-99fa7f77076e/carol-tavris.mp3?dest-id=5264190"
+        image: "https://static.libsyn.com/p/assets/2/1/0/b/210be53f78fce212d959afa2a1bf1c87/5d05067c2ccf158df1a482ad261d06fd1b7821174458a481352135d90ca2681222ff8f300c6d67ac2b2c67ed9bd927b6803ae4b7650415da3b0e0925221e38df.jpeg"
+        guid: "bff2cb4fbc944fcdb9547a6021712f8f"
+        date_utcz: "2026-03-27T23:34:12Z"
+        date_timezone: "Asia/Jerusalem"
+        device: "Samsung S25"
+    rating: 8
+    review: "A very good podcast"
+    internal_id: 2

@@ -1,4 +1,4 @@
-"""Tests for import_books.py, which flattens books_read.yaml from ../data.
+"""Tests for import_books.py, which flattens data/yaml/books_read.yaml.
 
 The source nests names, authors, ownings and readings per language; the media
 page wants one flat item per book. These pin the rules that are easy to get

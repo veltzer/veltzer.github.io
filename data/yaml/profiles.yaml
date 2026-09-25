@@ -1,0 +1,141 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/any.json
+$schema: "https://veltzer.github.io/web-schemas/json/any.json"
+
+# Profile links. Two repositories read this file, and each builds its own
+# artifact from it -- neither writes into the other:
+#
+#   veltzer/          -> README.md, the GitHub profile page
+#                        (rsconstruct build, scripts/gen_readme.py)
+#   veltzer.github.io -> content/about/_index.{en,he}.md, the site About page
+#                        (scripts/gen_profiles.py)
+#
+# Edit here, never in the generated files. Each group carries an English and a
+# Hebrew heading so /he/about/ is a real translated page rather than an English
+# list under a Hebrew title.
+#
+# intro and extras hold the prose and badges that surround the link list. They
+# live here for the same reason the links do: both pages render them, so a
+# single source is what keeps the two from drifting apart.
+
+# Lead-in line above the link list, on both pages.
+intro:
+  text_en: "Various profiles of mine"
+  text_he: "פרופילים שונים שלי"
+
+# Contact line above the link list: the sentence, then a link whose text is
+# link_text. Used to be a gitter badge; that room is gone.
+contact:
+  text_en: "To contact me, write to"
+  text_he: "ליצירת קשר כתבו אל"
+  link_text: "mark.veltzer@gmail.com"
+  url: "mailto:mark.veltzer@gmail.com"
+
+# Lines and badges below the link list, in render order.
+extras:
+  - id: israel
+    text_en: "It seems like I'm one of the leading github commiters from Israel ->"
+    text_he: "נראה שאני אחד מהמתכנתים המובילים בגיטהאב מישראל ->"
+    link_text_en: "top GitHub users in Israel"
+    link_text_he: "משתמשי הגיטהאב המובילים בישראל"
+    url: "https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/israel.md"
+  - id: stats
+    badge_alt: "GitHub stats"
+    badge_url: "https://github-readme-stats.vercel.app/api?username=veltzer"
+    url: "https://github.com/anuraghazra/github-readme-stats"
+  - id: viewcounter
+    # Rendered as a heading on the GitHub profile, matching how it has always
+    # appeared there. The comment above it in README.md.in explains the link.
+    heading: true
+    badge_alt: "Profile view counter"
+    badge_url: "https://komarev.com/ghpvc/?username=veltzer"
+
+groups:
+  - id: development
+    title_en: "Development sites"
+    title_he: "אתרי פיתוח"
+    items:
+      - name: "github.com"
+        url: "https://github.com/veltzer"
+      - name: "crates.io"
+        url: "https://crates.io/users/veltzer"
+      - name: "pypi.org"
+        url: "https://pypi.org/user/veltzer"
+      - name: "metacpan.org"
+        url: "https://metacpan.org/author/VELTZER"
+      - name: "slideshare.net"
+        url: "https://www.slideshare.net/veltzer"
+
+  - id: learning
+    title_en: "Learning sites with profiles"
+    title_he: "אתרי לימוד עם פרופיל"
+    items:
+      - name: "duolingo"
+        url: "https://www.duolingo.com/profile/mark.veltzer"
+      - name: "udemy"
+        url: "https://www.udemy.com/user/mark-veltzer"
+      - name: "coursera"
+        url: "https://www.coursera.org/learner/mark-veltzer"
+      - name: "projecteuler"
+        url: "https://projecteuler.net/profile/veltzer.png"
+      - name: "chess.com"
+        url: "https://www.chess.com/member/mark_veltzer"
+      - name: "vocabulary"
+        url: "https://www.vocabulary.com/profiles/A1UMEJ6T7U94SH"
+      - name: "cloudskillsboost"
+        url: "https://www.cloudskillsboost.google/public_profiles/f09c6060-43be-4c27-a6f1-375758e8e329"
+      - name: "youtube"
+        url: "https://www.youtube.com/@MarkVeltzer"
+      - name: "ted"
+        url: "https://www.ted.com/profiles/234536"
+
+  - id: learning_no_profile
+    title_en: "Learning sites I use that have no profiles"
+    title_he: "אתרי לימוד שאני משתמש בהם ללא פרופיל"
+    items:
+      - name: "brilliant"
+        url: "https://brilliant.org"
+      - name: "audible"
+        url: "https://www.audible.com"
+      - name: "beato ear training"
+        url: "https://app.beatoeartraining.com"
+      - name: "nebula"
+        url: "https://nebula.tv"
+      - name: "thegreatcoursesplus"
+        url: "https://www.thegreatcoursesplus.com"
+      - name: "kindle"
+        url: "https://read.amazon.com"
+
+  - id: typing
+    title_en: "Touch typing"
+    title_he: "הקלדה עיוורת"
+    items:
+      - name: "ratatype"
+        url: "https://www.ratatype.com/u4784203"
+      - name: "nitrotype"
+        url: "https://www.nitrotype.com/racer/veltzer"
+      - name: "monkeytype"
+        url: "https://monkeytype.com/profile/veltzer"
+      - name: "keybr"
+        url: "https://www.keybr.com"
+        children:
+          - name: "keybr mark.veltzer+keybr@gmail.com"
+            url: "https://www.keybr.com/profile/t1z6z7j"
+          - name: "keybr mark.veltzer@gmail.com"
+            url: "https://www.keybr.com/profile/01l958g"
+          - name: "keybr veltzer@gnu.org"
+            url: "https://www.keybr.com/profile/m4dnhap"
+          - name: "keybr mark2776@yahoo.com"
+            url: "https://www.keybr.com/profile/65vu5dy"
+          - name: "keybr mark.veltzer@protonmail.com"
+            url: "https://www.keybr.com/profile/5508u71"
+
+  - id: trove
+    title_en: "Trove sites with profiles"
+    title_he: "אתרי אוספים עם פרופיל"
+    items:
+      - name: "goodreads"
+        url: "https://www.goodreads.com/user/show/34371877-mark-veltzer"
+      - name: "imdb"
+        url: "https://www.imdb.com/user/ur0872999"

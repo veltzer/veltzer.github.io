@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Import books_read.yaml from ../data into the flat shape the media page renders.
+"""Import data/yaml/books_read.yaml into the flat shape the media page renders.
 
 The source is nested -- a book has a list of names (one per language, carrying
 the goodreads or simania id), a list of authors each with names per language,
@@ -168,7 +168,7 @@ def convert(data):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("input", help="path to books_read.yaml in the data repo")
+    parser.add_argument("input", help="path to data/yaml/books_read.yaml")
     parser.add_argument("output", help="path of the flat yaml to write")
     args = parser.parse_args()
     with open(args.input, encoding="utf-8") as handle:

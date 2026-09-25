@@ -1,0 +1,2242 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/books_read.json
+$schema: "https://veltzer.github.io/web-schemas/json/books_read.json"
+items:
+  - names:
+      - language: "english"
+        name: "Time Out Film Guide"
+        goodreads_id: "14798671"
+    authors:
+      - - language: "english"
+          name: "Time Out"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings: []
+    remark: "was named: Film Guide 1995"
+  - names:
+      - language: "english"
+        name: "Artificial Intelligence"
+      - language: "hebrew"
+        name: "אינטליגנציה מלאכותית"
+        simania_id: "251997"
+    authors:
+      - - language: "english"
+          name: "Arie Kaplan"
+    language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Arsène Lupin, Gentleman-Thief"
+        goodreads_id: "141270"
+    authors: []
+    language: "french"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "author unknown; was named: Arsan Lupan the Shining Burgler"
+  - names:
+      - language: "english"
+        name: "Monty Python's Big Red Book"
+        goodreads_id: "140535"
+    authors: []
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Monty Pythons Big Red Book"
+  - names:
+      - language: "english"
+        name: "Leonard Maltin's Movie and Video Guide 1997"
+        goodreads_id: "2654472"
+    authors:
+      - - language: "english"
+          name: "Leonard Maltin"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings: []
+    remark: "was named: Video Movie Guide 1997"
+  - names:
+      - language: "english"
+        name: "Blockbuster Video Guide to Movies and Videos 1996"
+        goodreads_id: "3147354"
+    authors:
+      - - language: "english"
+          name: "Blockbuster Video"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings: []
+    remark: "was named: Guide to Movies and Videos 1996"
+  - names:
+      - language: "english"
+        name: "Blockbuster Entertainment Guide to Movies and Videos 1998"
+        goodreads_id: "971696"
+    authors:
+      - - language: "english"
+          name: "Blockbuster Video"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings: []
+    remark: "was named: Guide to Movies and Videos 1998"
+  - names:
+      - language: "english"
+        name: "The Necklace"
+        goodreads_id: "420275"
+    authors:
+      - - language: "english"
+          name: "De Mupasan"
+    language: "french"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Fermat's Last Theorem"
+        goodreads_id: "208920"
+    authors:
+      - - language: "english"
+          name: "Amir D. Aczel"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "The Hitch Hiker's Guide to the Galaxy"
+        goodreads_id: "161493"
+    authors:
+      - - language: "english"
+          name: "Douglas Adams"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+      - language: "hebrew"
+        undated: true
+    remark: "was named: The Hitch-Hikers Guide to the Galaxy"
+  - names:
+      - language: "english"
+        name: "The Restaurant at the End of the Universe"
+        goodreads_id: "8695"
+    authors:
+      - - language: "english"
+          name: "Douglas Adams"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Life, the Universe and Everything"
+        goodreads_id: "8694"
+    authors:
+      - - language: "english"
+          name: "Douglas Adams"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "So Long, and Thanks for All the Fish"
+        goodreads_id: "6091075"
+    authors:
+      - - language: "english"
+          name: "Douglas Adams"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Mostly Harmless"
+        goodreads_id: "569429"
+    authors:
+      - - language: "english"
+          name: "Douglas Adams"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Completely Harmless"
+  - names:
+      - language: "english"
+        name: "The Bluffer's Guide to Maths: Bluff Your Way in Maths"
+        goodreads_id: "2468453"
+    authors:
+      - - language: "english"
+          name: "Robert Ainsley"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Bluff Your Way In Maths"
+  - names:
+      - language: "english"
+        name: "Prelude to Foundation"
+        goodreads_id: "30013"
+    authors:
+      - - language: "english"
+          name: "Isaac Asimov"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Foundation"
+        goodreads_id: "29579"
+    authors:
+      - - language: "english"
+          name: "Isaac Asimov"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Foundation and Empire"
+        goodreads_id: "29581"
+    authors:
+      - - language: "english"
+          name: "Isaac Asimov"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings: []
+  - names:
+      - language: "english"
+        name: "The Robots of Dawn"
+        goodreads_id: "41810"
+    authors:
+      - - language: "english"
+          name: "Isaac Asimov"
+    language: "english"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: Robots of Dawn"
+  - names:
+      - language: "english"
+        name: "The Evolution of Cooperation"
+        goodreads_id: "366821"
+    authors:
+      - - language: "english"
+          name: "Robert Axelrod"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: The Evolution of Co-operation"
+  - names:
+      - language: "english"
+        name: "A Clockwork Orange"
+        goodreads_id: "41817486"
+    authors:
+      - - language: "english"
+          name: "Anthony Burgess"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Youth / Heart of Darkness / The End of the Tether"
+        goodreads_id: "12192"
+    authors:
+      - - language: "english"
+          name: "Joseph Conrad"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Youth, Heart of Darkness, The End of Theter"
+  - names:
+      - language: "english"
+        name: "Astonishing Hypothesis: The Scientific Search for the Soul"
+        goodreads_id: "399710"
+    authors:
+      - - language: "english"
+          name: "Francis Crick"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: The Astonishing Hypothesis"
+  - names:
+      - language: "english"
+        name: "The Blind Watchmaker: Why the Evidence of Evolution Reveals a Universe Without Design"
+        goodreads_id: "117047"
+    authors:
+      - - language: "english"
+          name: "Richard Dawkins"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: The Blind Watchmaker"
+  - names:
+      - language: "english"
+        name: "The Selfish Gene"
+        goodreads_id: "61535"
+    authors:
+      - - language: "english"
+          name: "Richard Dawkins"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Darwin's Dangerous Idea: Evolution and the Meanings of Life"
+        goodreads_id: "2068"
+    authors:
+      - - language: "english"
+          name: "Daniel C. Dennet"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Darwin's Dangerous Idea"
+  - names:
+      - language: "english"
+        name: "The Hound of the Baskervilles"
+        goodreads_id: "8921"
+    authors:
+      - - language: "english"
+          name: "Sir Arthur Conan Doyle"
+    language: "english"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: '"Surely You''re Joking, Mr. Feynman!": Adventures of a Curious Character'
+        goodreads_id: "35167685"
+    authors:
+      - - language: "english"
+          name: "Richard P. Feynman"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Surely You're Joking Mr. Feynman"
+  - names:
+      - language: "english"
+        name: '"What Do You Care What Other People Think?": Further Adventures of a Curious Character'
+        goodreads_id: "35167718"
+    authors:
+      - - language: "english"
+          name: "Richard P. Feynman"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: What Do You Care What Other People Think ?"
+  - names:
+      - language: "english"
+        name: "Mister God, This is Anna"
+        goodreads_id: "50807"
+    authors:
+      - - language: "english"
+          name: "Fynn"
+    language: "english"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Chaos: Making a New Science"
+        goodreads_id: "64582"
+    authors:
+      - - language: "english"
+          name: "James Gleick"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Darwin: A Life in Science"
+        goodreads_id: "579722"
+    authors:
+      - - language: "english"
+          name: "John Gribbin"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Lord of the Flies"
+        goodreads_id: "7624"
+    authors:
+      - - language: "english"
+          name: "William Golding"
+    language: "english"
+    ownings:
+      - language: "english"
+      - language: "hebrew"
+    readings:
+      - language: "english"
+        undated: true
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Feynman's Lost Lecture: The Motion of Planets Around the Sun"
+        goodreads_id: "56167"
+    authors:
+      - - language: "english"
+          name: "David L. Goodstein"
+      - - language: "english"
+          name: "Judith R. Goodstein"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Feynman's Lost Lecture- The Motion of the Planets Around the Sun"
+  - names:
+      - language: "english"
+        name: "A Brief History of Time"
+        goodreads_id: "3869"
+    authors:
+      - - language: "english"
+          name: "Stephen W. Hawking"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "The Man in the Maze"
+        goodreads_id: "449329"
+    authors:
+      - - language: "english"
+          name: "Robert Heinline"
+    language: "english"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Catch-22"
+        goodreads_id: "168668"
+    authors:
+      - - language: "english"
+          name: "Joseph Heller"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Something Happened"
+        goodreads_id: "10718"
+    authors:
+      - - language: "english"
+          name: "Joseph Heller"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Closing Time"
+        goodreads_id: "223737"
+    authors:
+      - - language: "english"
+          name: "Joseph Heller"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "God Knows"
+        goodreads_id: "10711"
+    authors:
+      - - language: "english"
+          name: "Joseph Heller"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Picture This"
+        goodreads_id: "10712"
+    authors:
+      - - language: "english"
+          name: "Joseph Heller"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "The Old Man and the Sea"
+        goodreads_id: "2165"
+    authors:
+      - - language: "english"
+          name: "Ernest Hemingway"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Dune"
+        goodreads_id: "44767458"
+    authors:
+      - - language: "english"
+          name: "Frank Herbert"
+    language: "english"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "english"
+        undated: true
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Gödel, Escher, Bach: An Eternal Golden Braid"
+        goodreads_id: "24113"
+    authors:
+      - - language: "english"
+          name: "Douglass R. Hofstaddter"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Godel, Escher & Bach"
+  - names:
+      - language: "english"
+        name: "The Mind’s I: Fantasies and Reflections on Self and Soul"
+        goodreads_id: "2081"
+    authors:
+      - - language: "english"
+          name: "Douglass R. Hofstaddter"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: The Mind's I"
+  - names:
+      - language: "english"
+        name: "Metamagical Themas: Questing for the Essence of Mind and Pattern"
+        goodreads_id: "181239"
+    authors:
+      - - language: "english"
+          name: "Douglass R. Hofstaddter"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings: []
+    remark: "was named: Metamagical Themas"
+  - names:
+      - language: "english"
+        name: "The Prisoner of Zenda"
+        goodreads_id: "54492"
+    authors:
+      - - language: "english"
+          name: "Anthony Hope"
+    language: "unknown"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Brave New World"
+        goodreads_id: "5129"
+    authors:
+      - - language: "english"
+          name: "Aldous Huxley"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Dubliners"
+        goodreads_id: "11012"
+    authors:
+      - - language: "english"
+          name: "James Joyce"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Carrie"
+        goodreads_id: "10592"
+    authors:
+      - - language: "english"
+          name: "Stephen King"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "The Shining"
+        goodreads_id: "11588"
+    authors:
+      - - language: "english"
+          name: "Stephen King"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "The Dead Zone"
+        goodreads_id: "11573"
+    authors:
+      - - language: "english"
+          name: "Stephen King"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Firestarter"
+        goodreads_id: "233667"
+    authors:
+      - - language: "english"
+          name: "Stephen King"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Cujo"
+        goodreads_id: "10603"
+    authors:
+      - - language: "english"
+          name: "Stephen King"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Christine"
+        goodreads_id: "10629"
+    authors:
+      - - language: "english"
+          name: "Stephen King"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "The Talisman"
+        goodreads_id: "59219"
+    authors:
+      - - language: "english"
+          name: "Stephen King"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: The Talisman (with Peter Straub)"
+  - names:
+      - language: "english"
+        name: "The Eyes of the Dragon"
+        goodreads_id: "10611"
+    authors:
+      - - language: "english"
+          name: "Stephen King"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Needful Things"
+        goodreads_id: "107291"
+    authors:
+      - - language: "english"
+          name: "Stephen King"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Gerald's Game"
+        goodreads_id: "32692"
+    authors:
+      - - language: "english"
+          name: "Stephen King"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Geralds Game"
+  - names:
+      - language: "english"
+        name: "The Running Man"
+        goodreads_id: "240129927"
+    authors:
+      - - language: "english"
+          name: "Stephen King"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: The Running Man (as Richard Bachman)"
+  - names:
+      - language: "english"
+        name: "Thinner"
+        goodreads_id: "10605"
+    authors:
+      - - language: "english"
+          name: "Stephen King"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Thinner (as Richard Bachman)"
+  - names:
+      - language: "english"
+        name: "Different Seasons"
+        goodreads_id: "39662"
+    authors:
+      - - language: "english"
+          name: "Stephen King"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Different Seasons (collection)"
+  - names:
+      - language: "english"
+        name: "Skeleton Crew"
+        goodreads_id: "13440"
+    authors:
+      - - language: "english"
+          name: "Stephen King"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Skeleton Crew (collection)"
+  - names:
+      - language: "english"
+        name: "Four Past Midnight"
+        goodreads_id: "133266"
+    authors:
+      - - language: "english"
+          name: "Stephen King"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Four Past Midnight (collection)"
+  - names:
+      - language: "english"
+        name: "The Joke"
+        goodreads_id: "26114"
+    authors:
+      - - language: "english"
+          name: "Milan Kundera"
+    language: "czech"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: Zert (The Joke)"
+  - names:
+      - language: "english"
+        name: "Naked and Other Screenplays"
+        goodreads_id: "530741"
+    authors:
+      - - language: "english"
+          name: "Mike Leigh"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "The Seagull"
+        goodreads_id: "79649"
+    authors:
+      - - language: "english"
+          name: "Johnathan Livingstone"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Moby-Dick or, The Whale"
+        goodreads_id: "153747"
+    authors:
+      - - language: "english"
+          name: "Herman Melville"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Moby Dick"
+  - names:
+      - language: "english"
+        name: "Billy Budd,Sailor"
+        goodreads_id: "42411480"
+    authors:
+      - - language: "english"
+          name: "Herman Melville"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Winnie-the-Pooh"
+        goodreads_id: "99107"
+    authors:
+      - - language: "english"
+          name: "A.A. Millen"
+    language: "unknown"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: Winnie the Poo"
+  - names:
+      - language: "english"
+        name: "Sexus"
+        goodreads_id: "252"
+    authors:
+      - - language: "english"
+          name: "Henry Miller"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Plexus"
+        goodreads_id: "617148"
+    authors:
+      - - language: "english"
+          name: "Henry Miller"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Nexus"
+        goodreads_id: "251"
+    authors:
+      - - language: "english"
+          name: "Henry Miller"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Tropic of Cancer"
+        goodreads_id: "249"
+    authors:
+      - - language: "english"
+          name: "Henry Miller"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings: []
+  - names:
+      - language: "english"
+        name: "Tropic of Capricorn"
+        goodreads_id: "250"
+    authors:
+      - - language: "english"
+          name: "Henry Miller"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings: []
+  - names:
+      - language: "english"
+        name: "Under the Roofs of Paris"
+        goodreads_id: "161218"
+    authors:
+      - - language: "english"
+          name: "Henry Miller"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings: []
+  - names:
+      - language: "english"
+        name: "1984"
+        goodreads_id: "61439040"
+    authors:
+      - - language: "english"
+          name: "George Orwell"
+    language: "english"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "english"
+        undated: true
+      - language: "hebrew"
+        undated: true
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Why I Write - George Orwell"
+        goodreads_id: "20524959"
+    authors:
+      - - language: "english"
+          name: "George Orwell"
+    language: "english"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: Why do I write? Essays"
+  - names:
+      - language: "english"
+        name: "Animal Farm"
+        goodreads_id: "170448"
+    authors:
+      - - language: "english"
+          name: "George Orwell"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Kasparov and Deep Blue: The Historic Chess Match Between Man and Machine"
+        goodreads_id: "1163961"
+    authors:
+      - - language: "english"
+          name: "Bruce Pandolfini"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Kasparov and Deep Blue"
+  - names:
+      - language: "english"
+        name: "Innumeracy: Mathematical Illiteracy and Its Consequences"
+        goodreads_id: "186749"
+    authors:
+      - - language: "english"
+          name: "John Allen Paulos"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Innumeracy"
+  - names:
+      - language: "english"
+        name: "The Emperor's New Mind"
+        goodreads_id: "179744"
+    authors:
+      - - language: "english"
+          name: "Roger Penrose"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "The Myth of the Framework: In Defence of Science and Rationality"
+        goodreads_id: "506501"
+    authors:
+      - - language: "english"
+          name: "Karl R. Popper"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: The Myth of the Framework"
+  - names:
+      - language: "english"
+        name: "The Colour of Magic"
+        goodreads_id: "601238"
+    authors:
+      - - language: "english"
+          name: "Terry Pratchett"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Interview with the Vampire"
+        goodreads_id: "43763"
+    authors:
+      - - language: "english"
+          name: "Anne Rice"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Infinity and the Mind: The Science and Philosophy of the Infinite"
+        goodreads_id: "274050"
+    authors:
+      - - language: "english"
+          name: "Rudy Rucker"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Infinity and the Mind"
+  - names:
+      - language: "english"
+        name: "A Cat's Little Instruction Book"
+        goodreads_id: "807448"
+    authors:
+      - - language: "english"
+          name: "Leigh W. Rutledge"
+    language: "english"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: A Cat's Little Instruction Book: Observation and Suggestions for How to Lead a Contented Life"
+  - names:
+      - language: "english"
+        name: "Cosmos"
+        goodreads_id: "55030"
+    authors:
+      - - language: "english"
+          name: "Carl Sagan"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Contact"
+        goodreads_id: "53000876"
+    authors:
+      - - language: "english"
+          name: "Carl Sagan"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "The Demon-Haunted World: Science as a Candle in the Dark"
+        goodreads_id: "17349"
+    authors:
+      - - language: "english"
+          name: "Carl Sagan"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: The Demon-Haunted World"
+  - names:
+      - language: "english"
+        name: "Broca's Brain: Reflections on the Romance of Science"
+        goodreads_id: "485812"
+    authors:
+      - - language: "english"
+          name: "Carl Sagan"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Broca's Brain"
+  - names:
+      - language: "english"
+        name: "The Catcher in the Rye"
+        goodreads_id: "5107"
+    authors:
+      - - language: "english"
+          name: "J.D. Salinger"
+    language: "english"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Macbeth"
+        goodreads_id: "8852"
+    authors:
+      - - language: "english"
+          name: "William Shakespere"
+    language: "english"
+    ownings:
+      - language: "english"
+      - language: "hebrew"
+    readings:
+      - language: "english"
+        undated: true
+      - language: "hebrew"
+        undated: true
+    remark: "was named: Macbeth"
+  - names:
+      - language: "english"
+        name: "Frankenstein: The 1818 Text"
+        goodreads_id: "35031085"
+    authors:
+      - - language: "english"
+          name: "Mary Shelley"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Frankenstein"
+  - names:
+      - language: "english"
+        name: "Close Encounters of the Third Kind"
+        goodreads_id: "975119"
+    authors:
+      - - language: "english"
+          name: "Steven Spielberg"
+    language: "english"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: Encounters of the Third Kind"
+  - names:
+      - language: "english"
+        name: "Star Wars: From the Adventures of Luke Skywalker"
+        goodreads_id: "2018931"
+    authors:
+      - - language: "english"
+          name: "Steven Spielberg"
+    language: "english"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: Star Wars"
+  - names:
+      - language: "english"
+        name: "The Pearl"
+        goodreads_id: "5308"
+    authors:
+      - - language: "english"
+          name: "John Steinbeck"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Tortilla Flat"
+        goodreads_id: "163977"
+    authors:
+      - - language: "english"
+          name: "John Steinbeck"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "In the Beginning...Was the Command Line"
+        goodreads_id: "40383049"
+    authors:
+      - - language: "english"
+          name: "Neal Stephenson"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: In the Begining...Was the Command Line"
+  - names:
+      - language: "english"
+        name: "Kidnapped"
+        goodreads_id: "325128"
+    authors:
+      - - language: "english"
+          name: "Robert Louis Stevenson"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Strange Case Of Dr. Jekyll & Mr. Hyde"
+        goodreads_id: "21029334"
+    authors:
+      - - language: "english"
+          name: "Robert Louis Stevenson"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: The Strange Case of Dr. Jekyll and Mr. Hyde"
+  - names:
+      - language: "english"
+        name: "Nature's Numbers: The Unreal Reality Of Mathematics"
+        goodreads_id: "287896"
+    authors:
+      - - language: "english"
+          name: "Ian Stewart"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Nature's Numbers"
+  - names:
+      - language: "english"
+        name: "FROM HERE TO INFINITY"
+        goodreads_id: "626958"
+    authors:
+      - - language: "english"
+          name: "Ian Stewart"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Does God Play Dice?: The New Mathematics of Chaos"
+        goodreads_id: "445129"
+    authors:
+      - - language: "english"
+          name: "Ian Stewart"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Does God Play Dice?"
+  - names:
+      - language: "english"
+        name: "Dracula"
+        goodreads_id: "17245"
+    authors:
+      - - language: "english"
+          name: "Bram Stoker"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Hawking and Black Holes"
+        goodreads_id: "498432"
+    authors:
+      - - language: "english"
+          name: "Paul Strathorn"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "The Hobbit, or There and Back Again"
+        goodreads_id: "5907"
+    authors:
+      - - language: "english"
+          name: "J.R.R. Tolkien"
+    language: "english"
+    ownings:
+      - language: "english"
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+      - language: "hebrew"
+        undated: true
+      - language: "hebrew"
+        undated: true
+      - language: "english"
+        undated: true
+    remark: "the owned/read copy is the comics edition; was named: The Hobbit"
+  - names:
+      - language: "english"
+        name: "The Silmarillion"
+        goodreads_id: "7332"
+    authors:
+      - - language: "english"
+          name: "J.R.R. Tolkien"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings: []
+    remark: "was named: The Silmarilion"
+  - names:
+      - language: "english"
+        name: "The Adventures of Huckleberry Finn"
+        goodreads_id: "2956"
+    authors:
+      - - language: "english"
+          name: "Mark Twain"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "A Connecticut Yankee in King Arthur's Court"
+        goodreads_id: "162898"
+    authors:
+      - - language: "english"
+          name: "Mark Twain"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: A Connecticut Yankee in King Arthurs Court"
+  - names:
+      - language: "english"
+        name: "Twenty Thousand Leagues Under the Sea"
+        goodreads_id: "33507"
+    authors:
+      - - language: "english"
+          name: "Jules Vern"
+    language: "french"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: Twenty Thousand Leagues Beneath the Sea"
+  - names:
+      - language: "english"
+        name: "Around the World in Eighty Days"
+        goodreads_id: "54479"
+    authors:
+      - - language: "english"
+          name: "Jules Vern"
+    language: "french"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: Around the World in 80 Days"
+  - names:
+      - language: "english"
+        name: "In Search of the Castaways"
+        goodreads_id: "176443451"
+    authors:
+      - - language: "english"
+          name: "Jules Vern"
+    language: "french"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: The Children of Capitan Grant"
+  - names:
+      - language: "english"
+        name: "Cat’s Cradle"
+        goodreads_id: "135479"
+    authors:
+      - - language: "english"
+          name: "Kurt Vonnegut"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "The Sirens of Titan"
+        goodreads_id: "4982"
+    authors:
+      - - language: "english"
+          name: "Kurt Vonnegut"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Slaughterhouse-Five"
+        goodreads_id: "4981"
+    authors:
+      - - language: "english"
+          name: "Kurt Vonnegut"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Slaghterhourse-Five"
+  - names:
+      - language: "english"
+        name: "Dragons of Autumn Twilight"
+        goodreads_id: "259836"
+    authors:
+      - - language: "english"
+          name: "Margaret Weis"
+      - - language: "english"
+          name: "Tracy Hickman"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Dragons of Winter Night"
+        goodreads_id: "23454"
+    authors:
+      - - language: "english"
+          name: "Margaret Weis"
+      - - language: "english"
+          name: "Tracy Hickman"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Dragons of Spring Dawning"
+        goodreads_id: "68378"
+    authors:
+      - - language: "english"
+          name: "Margaret Weis"
+      - - language: "english"
+          name: "Tracy Hickman"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Time of the Twins"
+        goodreads_id: "29187"
+    authors:
+      - - language: "english"
+          name: "Margaret Weis"
+      - - language: "english"
+          name: "Tracy Hickman"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "War of the Twins"
+        goodreads_id: "93768"
+    authors:
+      - - language: "english"
+          name: "Margaret Weis"
+      - - language: "english"
+          name: "Tracy Hickman"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Test of the Twins"
+        goodreads_id: "260025"
+    authors:
+      - - language: "english"
+          name: "Margaret Weis"
+      - - language: "english"
+          name: "Tracy Hickman"
+    language: "english"
+    readings:
+      - language: "english"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Nine Princes in Amber"
+        goodreads_id: "92121"
+    authors:
+      - - language: "english"
+          name: "Roger Zelazny"
+    language: "english"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Black Box"
+        goodreads_id: "158856"
+    authors:
+      - - language: "english"
+          name: "Amos Oz"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: Kufsa Shora"
+  - names:
+      - language: "english"
+        name: "My Michael: A Haunting Literary Novel – Israel's Modern Madame Bovary Set in 1950s Jerusalem"
+        goodreads_id: "65261"
+    authors:
+      - - language: "english"
+          name: "Amos Oz"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: Michael Shely"
+  - names:
+      - language: "english"
+        name: "Bemo Yadav (Pirkey Alic)"
+      - language: "hebrew"
+        name: "במו ידיו"
+        goodreads_id: "27416628"
+    authors:
+      - - language: "english"
+          name: "Moshe Shamir"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Cfafot"
+      - language: "hebrew"
+        name: "כפפות"
+        goodreads_id: "4611040"
+    authors:
+      - - language: "english"
+          name: "Dan Zalka"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "The Lover"
+        goodreads_id: "65251"
+    authors:
+      - - language: "english"
+          name: "A.B. Yehoshua"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Tehila"
+        goodreads_id: "22293091"
+    authors:
+      - - language: "english"
+          name: "Shay Agnon"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings: []
+  - names:
+      - language: "english"
+        name: "Vehaya Haakob Lemishor"
+      - language: "hebrew"
+        name: "והיה העקוב למישור"
+        goodreads_id: "30734133"
+    authors:
+      - - language: "english"
+          name: "Shay Agnon"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings: []
+  - names:
+      - language: "english"
+        name: "Four Meals"
+        goodreads_id: "250180"
+    authors:
+      - - language: "english"
+          name: "Meir Shalev"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: Cayamim Ahadim"
+  - names:
+      - language: "english"
+        name: "Invitation to Philosophy"
+      - language: "hebrew"
+        name: "הזמנה לפילוסופיה"
+        goodreads_id: "6521410"
+    authors:
+      - - language: "english"
+          name: "Yuval Shteinitz"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Introduction to Computer Science"
+      - language: "hebrew"
+        name: "פרקי יסוד במדעי המחשב"
+        simania_id: "9364"
+    authors:
+      - - language: "english"
+          name: "David Harel"
+    language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Pipelines"
+        goodreads_id: "6486725"
+    authors:
+      - - language: "english"
+          name: "Etgar Keret"
+    language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: Pipes"
+  - names:
+      - language: "english"
+        name: "Missing Kissinger"
+        goodreads_id: "60427"
+    authors:
+      - - language: "english"
+          name: "Etgar Keret"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: Missing Kisinger"
+  - names:
+      - language: "english"
+        name: "Kneller's Happy Campers"
+        goodreads_id: "6324467"
+    authors:
+      - - language: "english"
+          name: "Etgar Keret"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: Kneler's Happy Campers"
+  - names:
+      - language: "english"
+        name: "Thirty Fifth in May"
+      - language: "hebrew"
+        name: "שלושים וחמִשה (וחמישה) במאי [מהדורת 1999]"
+        simania_id: "7005"
+    authors:
+      - - language: "english"
+          name: "Erich Kestner"
+    language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Mishak Mahoor"
+      - language: "hebrew"
+        name: "משחק מכור"
+        goodreads_id: "1955375"
+    authors:
+      - - language: "english"
+          name: "Ram Oren"
+    language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "The Endless Search"
+      - language: "hebrew"
+        name: "החיפוש האינסופי: שיחות עם מדענים"
+        goodreads_id: "214083502"
+    authors:
+      - - language: "english"
+          name: "Zvi Yanai"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Crime and Punishment"
+        goodreads_id: "7144"
+    authors:
+      - - language: "english"
+          name: "Fodor Dostoevsky"
+    language: "russian"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: The Crime and It's Punishment"
+  - names:
+      - language: "english"
+        name: "The Brothers Karamazov"
+        goodreads_id: "4934"
+    authors:
+      - - language: "english"
+          name: "Fodor Dostoevsky"
+    language: "russian"
+    ownings:
+      - language: "hebrew"
+    readings: []
+    remark: "was named: The Karamazof Brothers"
+  - names:
+      - language: "english"
+        name: "Rothschild's Fiddle"
+        goodreads_id: "26822108"
+    authors:
+      - - language: "english"
+          name: "Anton Chekov"
+    language: "russian"
+    readings:
+      - language: "hebrew"
+        undated: true
+      - language: "hebrew"
+        undated: true
+    remark: "was named: The Fiddle of Rotchild"
+  - names:
+      - language: "english"
+        name: "Volokolamsk Highway"
+        goodreads_id: "1769643"
+    authors:
+      - - language: "english"
+          name: "Alexander Beck"
+    language: "russian"
+    ownings:
+      - language: "hebrew"
+    readings: []
+    remark: "was named: The Men of Panpilov"
+  - names:
+      - language: "english"
+        name: "In the Dawn of My Childhood"
+      - language: "hebrew"
+        name: "בשחר ילדותי"
+        simania_id: "67157"
+    authors:
+      - - language: "english"
+          name: "Vera Inbar"
+    language: "russian"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Antigone"
+        goodreads_id: "7728"
+    authors:
+      - - language: "english"
+          name: "Sophocles"
+    language: "greek"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Relativity: The Special and the General Theory"
+        goodreads_id: "15852"
+    authors:
+      - - language: "english"
+          name: "Albert Einstein"
+    language: "german"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        undated: true
+    remark: "was named: Relativity"
+  - names:
+      - language: "english"
+        name: "Narcissus and Goldmund"
+        goodreads_id: "5954"
+    authors:
+      - - language: "english"
+          name: "Herman Hese"
+    language: "german"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: Narkis & Goldmund"
+  - names:
+      - language: "english"
+        name: "The Alchemist"
+        goodreads_id: "18144590"
+    authors:
+      - - language: "english"
+          name: "Paolo Koalo"
+    language: "portuguese"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "A Few Words"
+      - language: "hebrew"
+        name: "כמה מלים (מילים)"
+        simania_id: "18468"
+    authors:
+      - - language: "english"
+          name: "Yonatan Gefen"
+    language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "The Particle Hunters"
+        goodreads_id: "2276232"
+    authors:
+      - - language: "english"
+          name: "Yuval Ne`eman"
+      - - language: "english"
+          name: "Yoram Kirsh"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+  - names:
+      - language: "english"
+        name: "Consciousness Explained"
+        goodreads_id: "2069"
+    authors:
+      - - language: "english"
+          name: "Daniel C. Dennet"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings: []
+    remark: "reading in progress: 2/3 of the book; was named: Conciousness Explained"
+  - names:
+      - language: "english"
+        name: "Ulysses"
+        goodreads_id: "338798"
+    authors:
+      - - language: "english"
+          name: "James Joyce"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings: []
+    remark: "was named: Ulysees"
+  - names:
+      - language: "english"
+        name: "Chess"
+      - language: "hebrew"
+        name: "שחמט"
+        simania_id: "11971"
+    authors:
+      - - language: "english"
+          name: "Vladimir Liberzon"
+    language: "unknown"
+    ownings:
+      - language: "hebrew"
+    readings: []
+  - names:
+      - language: "english"
+        name: "Esau"
+        goodreads_id: "250184"
+    authors:
+      - - language: "english"
+          name: "Meir Shalev"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        undated: true
+    remark: "was named: Eisav"
+  - names:
+      - language: "english"
+        name: "The Lord of the Rings"
+        goodreads_id: "33"
+    authors:
+      - - language: "english"
+          name: "J.R.R. Tolkien"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        date: "2004-08-12T02:45:36Z"
+        timezone: "Asia/Jerusalem"
+        rating: 7
+        review: "I don't like Tolkiens writing that much"
+  - names:
+      - language: "hebrew"
+        name: "רוק מתקדם משנות ה-60 ועד היום"
+        goodreads_id: "55606033"
+    authors:
+      - - language: "english"
+          name: "Uri Brightman"
+        - language: "hebrew"
+          name: "אורי ברייטמן"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        date: "2005-03-04T13:41:08Z"
+        timezone: "Asia/Jerusalem"
+        rating: 6
+        review: "not that bad"
+  - names:
+      - language: "hebrew"
+        name: "לחשוב כמו וודי אלן"
+        simania_id: "38471"
+    authors:
+      - - language: "english"
+          name: "Hanoch Saar"
+        - language: "hebrew"
+          name: "חנוך סער"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        date: "2005-07-23T01:36:46Z"
+        timezone: "Asia/Jerusalem"
+        rating: 6
+        review: "not memorable"
+  - names:
+      - language: "hebrew"
+        name: "ספר משפחתי"
+        simania_id: "961461"
+      - language: "english"
+        name: "Sefer Mishpahti"
+    authors:
+      - - language: "hebrew"
+          name: "אפרים קישון"
+        - language: "english"
+          name: "Ephraim Kishon"
+    language: "hebrew"
+    readings:
+      - language: "hebrew"
+        date: "2005-12-20T02:41:41Z"
+        timezone: "Asia/Jerusalem"
+        rating: 7
+        review: "Some good laughs"
+  - names:
+      - language: "english"
+        name: "The End of Faith: Religion, Terror, and the Future of Reason"
+        goodreads_id: "29501"
+      - language: "hebrew"
+        name: "מהומת אלוהים"
+    authors:
+      - - language: "english"
+          name: "Sam Harris"
+        - language: "hebrew"
+          name: "סם האריס"
+    language: "english"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "english"
+        date: "2021-04-23T12:21:58Z"
+        timezone: "Asia/Jerusalem"
+        rating: 8
+        review: "very good"
+      - language: "hebrew"
+        date: "2006-08-19T09:30:41Z"
+        timezone: "Asia/Jerusalem"
+        rating: 8
+        review: "very good"
+  - names:
+      - language: "english"
+        name: "The Complete Prose of Woody Allen"
+        goodreads_id: "55370"
+    authors:
+      - - language: "english"
+          name: "Woody Allen"
+    language: "english"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        date: "2004-08-12T02:45:36Z"
+        timezone: "Asia/Jerusalem"
+        rating: 8
+        review: "very good"
+  - names:
+      - language: "hebrew"
+        name: "הקתדרלה והבאזאר ועוד מאמרים על קוד פתוח וחופש המידע"
+      - language: "english"
+        name:
+          "The Cathedral & the Bazaar: Musings on Linux and Open Source by an
+          Accidental Revolutionary"
+        goodreads_id: "134825"
+    publisher: "Hitorrerut"
+    authors: []
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        date: "2006-09-21T01:28:24Z"
+        timezone: "Asia/Jerusalem"
+        rating: 8
+        review: "good and short"
+  - names:
+      - language: "english"
+        name:
+          "The Music of the Primes: Searching to Solve the Greatest Mystery in
+          Mathematics"
+        goodreads_id: "208916"
+    authors:
+      - - language: "english"
+          name: "Marcus du Sautoy"
+    publisher: "Yediot Ahronot"
+    language: "english"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        date: "2006-10-12T01:55:31Z"
+        timezone: "Asia/Jerusalem"
+        rating: 7
+        review: "interesting"
+  - names:
+      - language: "hebrew"
+        name: "בעלת הארמון"
+        goodreads_id: "3338499"
+    authors:
+      - - language: "english"
+          name: "Leah Goldberg"
+        - language: "hebrew"
+          name: "לאה גולדברג"
+    publisher: "Sifriat Poalim"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        date: "2006-12-10T06:18:03Z"
+        timezone: "Asia/Jerusalem"
+        rating: 6
+        review: "not very interesting"
+  - names:
+      - language: "english"
+        name: "The full guide to raising cats"
+      - language: "hebrew"
+        name: "המדריך השלם לגידול חתולים"
+        simania_id: "995897"
+    authors:
+      - - language: "english"
+          name: "Liz Felika"
+        - language: "hebrew"
+          name: "ליז פליקה"
+    publisher: "Dorling Kindersley"
+    language: "english"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        date: "2007-02-16T19:05:54Z"
+        timezone: "Asia/Jerusalem"
+        rating: 6
+        review: "not memorable"
+  - names:
+      - language: "english"
+        name:
+          "The Case for Democracy: The Power of Freedom to Overcome Tyranny and
+          Terror"
+        goodreads_id: "328835"
+    authors:
+      - - language: "english"
+          name: "Natan Sharansky"
+      - - language: "english"
+          name: "Ron Dermer"
+    language: "english"
+    publisher: "public affairs - new york"
+    isbn: "1-58648-261-0"
+    ownings:
+      - language: "english"
+    readings:
+      - language: "english"
+        date: "2007-08-03T01:24:34Z"
+        timezone: "Asia/Jerusalem"
+        rating: 7
+        review: "not very intellectual"
+  - names:
+      - language: "hebrew"
+        name: "שיחות על תורת המשחקים: אסטרטגיות, החלטות ותעתועי חשיבה"
+        goodreads_id: "7352213"
+    authors:
+      - - language: "english"
+          name: "Haim Shapira"
+        - language: "hebrew"
+          name: "חיים שפירא"
+    language: "hebrew"
+    ownings:
+      - language: "hebrew"
+    readings:
+      - language: "hebrew"
+        date: "2009-01-15T00:57:18Z"
+        timezone: "Asia/Jerusalem"
+        rating: 8
+        review: "cool book, written well with lots of material for a small book."

@@ -1,0 +1,5 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/text_articles.json
+$schema: "https://veltzer.github.io/web-schemas/json/text_articles.json"
+items: []

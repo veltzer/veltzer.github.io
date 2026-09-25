@@ -549,7 +549,7 @@ came later) and the built page.
 
 - ~~**No link checker for the profile URLs.** — DONE.~~
   `scripts/check_profile_links.py` requests all 30 URLs from
-  `../data/yaml/profiles.yaml` and reports what no longer resolves. Not wired into the
+  `data/yaml/profiles.yaml` and reports what no longer resolves. Not wired into the
   build: a third-party outage must not fail a site build, and nothing else in the build
   needs the network. Exits 1 on a real breakage so it can gate a release script.
 

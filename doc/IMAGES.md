@@ -20,7 +20,7 @@ verbatim to `/images/` in the built site.
 
 ## Adding Images for New Entries
 
-1. Add the entry to the YAML in `../data/`
+1. Add the entry to the YAML in `data/yaml/`
 2. Run `scripts/copy_data.py` to update `static/data/`
 3. Run the appropriate fetch script (see `doc/SCRIPTS.md`)
 4. Run `scripts/check_images.py` to verify all images are present
@@ -79,8 +79,8 @@ increases clone size and slows operations. Several alternatives exist:
 ### Separate Data Repository (current pattern for YAML/PGN)
 
 - Keep images in a dedicated repo or storage location outside this repo.
-- Copy them in via `scripts/copy_data.py`, similar to how `../data/` YAML
-  files are handled today.
+- Copy them in via `scripts/copy_data.py`, the way the chess and YouTube
+  captures in `../data/` are handled today.
 - Keeps this repo lightweight while preserving the current build workflow.
 
 ### GitHub Pages Artifact Deployment

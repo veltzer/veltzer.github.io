@@ -1,0 +1,81 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/lectures.json
+$schema: "https://veltzer.github.io/web-schemas/json/lectures.json"
+items:
+  - name: "E-democracy"
+    lecturers: ["Prof. Akiva Or"]
+    date_utcz: "2005-03-06T22:04:55Z"
+    date_timezone: "Asia/Jerusalem"
+    with: ["Shay Sarid"]
+    location: "Seminar Hakibutzim"
+    country: "Israel"
+    rating: 7
+    review: "He is not up to date."
+  - name: "Encryption with rolling keys over a peer to peer network."
+    lecturers: ["Michael Rabin"]
+    date_utcz: "2006-05-12T01:10:23Z"
+    date_timezone: "Asia/Jerusalem"
+    with: ["Ofir Zwebner"]
+    location: "Michlelet Tel-Aviv Yafo"
+    country: "Israel"
+    rating: 9
+    review: "excellent ideas"
+  - name: "On the importance of the thinking of Ester Alexander"
+    lecturers: ["Dani Gutvein"]
+    date_utcz: "2008-04-23T15:14:34Z"
+    date_timezone: "Asia/Jerusalem"
+    with: ["David Alexander"]
+    location: "Beit Hakibutz Hameuhad, Leonardo Da Vinci, Tel-Aviv"
+    country: "Israel"
+    rating: 8
+    review: "Not very interesting"
+  - name: "Global Economics and Israel"
+    lecturers: ["Tamar Ben Yosef", "Ran Raviv", "Ofer Sitbon"]
+    date_utcz: "2008-04-23T15:14:34Z"
+    date_timezone: "Asia/Jerusalem"
+    with: ["David Alexander"]
+    location: "Beit Hakibutz Hameuhad, Leonardo Da Vinci, Tel-Aviv"
+    country: "Israel"
+    rating: 8
+    review: "Not very interesting"
+  - name: "New initiatives in politics"
+    lecturers: ["Ami Vaturi", "Tal Wolfson", "Yoni Veinriv"]
+    date_utcz: "2008-04-23T15:14:34Z"
+    date_timezone: "Asia/Jerusalem"
+    with: ["David Alexander"]
+    location: "Beit Hakibutz Hameuhad, Leonardo Da Vinci, Tel-Aviv"
+    country: "Israel"
+    rating: 9
+    review: "precursor of direct democracy"
+  - name: "Friedrich Nietzsche"
+    lecturers: ["Jeremy Fogel"]
+    date_utcz: "2016-11-01T22:13:31Z"
+    date_timezone: "Asia/Jerusalem"
+    with: ["Doron Veltzer", "Boaz Yachin"]
+    location: "TalkHouse in Tel Aviv port"
+    country: "Israel"
+    rating: 8
+    review: "The guy is a very good lecturer. The lecture was interesting."
+  - name: "The Mosad and Free Source"
+    description:
+      "A lecture about the paralles between Isaac Asimov's Foundation books
+      and Free/Open source software evolution."
+    lecturers: ["Uri Yanover"]
+    date_utcz: "2017-09-18T21:29:43Z"
+    date_timezone: "Asia/Jerusalem"
+    with: ["Uri Yanover"]
+    location: "Twiggle offices at Even-Gvirol 2"
+    country: "Israel"
+    rating: 7
+    review: "pretty nice lecture."
+  - name: "Diagonals and mating combinations on the diagonals"
+    description: "A lecture on FICS about diagonals"
+    lecturers: []
+    date_utcz: "2019-10-19T04:05:42Z"
+    date_timezone: "Asia/Jerusalem"
+    with: []
+    location: "Home"
+    country: "Israel"
+    rating: 7
+    review: "pretty nice lecture."

@@ -1,0 +1,10 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/people.json
+$schema: "https://veltzer.github.io/web-schemas/json/people.json"
+items:
+  - name: Yoram Avidan
+    company: Schema
+    description: Second head of RND after Udi.
+  - name: Hadas Lahav
+    description: Friend of Vered Shavit who worked in Journalism

@@ -1,0 +1,2238 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/any.json
+# Organizations I taught at, consulted for, was certified by, or consumed media from.
+# Extracted from the myworld MySQL database (TbOrganization, backup of 2019-05-11);
+# status/location/website fields researched on the web on 2026-09-19.
+# logos/<slug>.svg: genuine vector logos fetched 2026-09-20 where one exists (logo_kind/logo_source say which);
+# the rest are colour traces of the original bitmaps in raw/logos/.
+# Every logo sits on the same 1000x1000 canvas (content fitted with a 6% margin, centred) on a transparent
+# background; the traces have the bitmap's white/black surround keyed out before tracing (2026-09-20).
+$schema: https://veltzer.github.io/web-schemas/json/any.json
+items:
+- id: 1
+  name: Alcatel Lucent
+  slug: alcatel-lucent
+  functions:
+  - teaching
+  logo: logos/alcatel-lucent.svg
+  logo_original: raw/logos/alcatel-lucent.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/a/a9/Alcatel-Lucent_logo.svg
+  logo_license: PD-textlogo (public domain, trademark applies)
+  logo_note: historical 2006-2016 Alcatel-Lucent logo (purple swirl mark + wordmark), from the company's independent era before the Nokia acquisition
+  old_url: http://www.alcatel-lucent.com
+  status: acquired
+  what_happened: Acquired by Nokia in an all-stock deal that closed in January 2016 (fully absorbed by November 2016); the brand was retired.
+  website: https://www.nokia.com
+  location: Espoo, Finland
+  israel_office: Petah Tikva, Israel (Alcatel-Lucent Israel HQ and optical R&D); CloudBand/Bell Labs unit in Kfar Saba
+  former_website: http://www.alcatel-lucent.com (now redirects to nokia.com)
+  former_location: Boulogne-Billancourt (Paris), France
+  sources:
+  - https://www.globenewswire.com/news-release/2016/11/02/885798/0/en/Nokia-finalizes-its-acquisition-of-Alcatel-Lucent-ready-to-seize-global-connectivity-opportunities.html
+  - https://en.globes.co.il/en/article-alcatel-lucent-to-set-up-israel-research-center-1000939882
+- id: 2
+  name: Amdocs
+  slug: amdocs
+  remark: Israel Cyprus Champagne/US Moscow India London Malaysia Dublin
+  functions:
+  - teaching
+  - consulting
+  logo: logos/amdocs.svg
+  logo_original: raw/logos/amdocs.gif
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/1/18/Amdocs_Logo.svg
+  logo_license: PD-textlogo (public domain, trademark applies)
+  logo_note: current lowercase 'amdocs' wordmark; the older swoosh logo is also on Commons as File:Amdocs_logo.svg
+  old_url: http://www.amdocs.com
+  status: active
+  website: https://www.amdocs.com
+  location: Chesterfield, Missouri, USA (registered in Guernsey)
+  israel_office: Ra'anana, Israel (main R&D centre and largest site)
+  sources:
+  - https://en.wikipedia.org/wiki/Amdocs
+- id: 3
+  name: Amobee
+  slug: amobee
+  functions:
+  - teaching
+  logo: logos/amobee.svg
+  logo_original: raw/logos/amobee.gif
+  logo_kind: official vector
+  logo_source: https://web.archive.org/web/20210625144910id_/https://www.amobee.com/wp-content/themes/amobee/assets/images/black-logo.svg
+  logo_license: company brand asset (site header logo, archived by the Wayback Machine 2021-06-25)
+  logo_note: AMOBEE wordmark from the company's own site while still independent (pre Tremor/Nexxen acquisition); no Commons or logo-library SVG exists
+  old_url: http://www.amobee.com
+  status: acquired
+  what_happened: Acquired by Tremor International in September 2022 for about $240M; Tremor rebranded its whole group, including Amobee, as Nexxen in June 2023.
+  website: https://www.nexxen.com
+  location: Tel Aviv, Israel (Nexxen International; also a New York office)
+  israel_office: Tel Aviv, Israel
+  former_website: http://www.amobee.com (still up as an 'Amobee is now Nexxen' placeholder page)
+  former_location: Redwood City, California, USA
+  sources:
+  - https://investors.nexxen.com/news-releases/news-release-details/tremor-international-tremor-announces-closing-amobee-acquisition
+  - https://en.wikipedia.org/wiki/Nexxen
+- id: 4
+  name: Answers
+  slug: answers
+  functions:
+  - teaching
+  - consulting
+  logo: logos/answers.svg
+  logo_original: raw/logos/answers.gif
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/d/d6/Answers_dot_com_logo.svg
+  logo_license: PD-textlogo (public domain, trademark applies)
+  logo_note: Answers.com wordmark (blue 'Answers' + green '.com'), the logo of the Answers Corp era
+  old_url: http://www.answers.com
+  status: acquired
+  what_happened: Answers Corp (ex-GuruNet) was bought by AFCV Holdings in 2011, its Jerusalem R&D office was closed in May 2012, it was sold to Apax Partners in 2014, went through Chapter 11 in 2017 and
+    has been owned by System1 since 2022.
+  website: https://www.answers.com
+  location: St. Louis, Missouri, USA (subsidiary of System1)
+  israel_office: Jerusalem, Israel (Jerusalem Technology Park; closed May 2012)
+  former_website: http://www.answers.com (same domain, still live)
+  former_location: Jerusalem, Israel (corporate HQ and R&D) with a US office in New York, New York, USA
+  sources:
+  - https://en.wikipedia.org/wiki/Answers.com
+  - https://www.sec.gov/Archives/edgar/data/0001283073/000128307310000011/form10-k.htm
+- id: 5
+  name: Avaya
+  slug: avaya
+  functions:
+  - teaching
+  logo: logos/avaya.svg
+  logo_original: raw/logos/avaya.gif
+  logo_kind: official vector
+  logo_source: https://www.avaya.com/content/dam/aem-avaya-portal/decorative/AVAYA-LogoRed.svg
+  logo_license: company brand asset (avaya.com header/footer logo)
+  logo_note: current red AVAYA wordmark from the official site; Commons File:Avaya_Logo.svg exists but upload.wikimedia.org was rate-limiting this host
+  old_url: http://www.avaya.com
+  status: active
+  website: https://www.avaya.com
+  location: Morristown, New Jersey, USA
+  israel_office: Ramat Gan, Israel (Atrium Tower; earlier Tel Aviv via the 2012 Radvision acquisition)
+  sources:
+  - https://en.wikipedia.org/wiki/Avaya
+  - https://www.avaya.com/en/contacts/country/israel/
+- id: 6
+  name: Bank Hapoalim
+  slug: bank-hapoalim
+  functions:
+  - teaching
+  logo: logos/bank-hapoalim.svg
+  logo_original: raw/logos/bank-hapoalim.gif
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/6/66/Bank_happoalim_2018_logo.svg
+  logo_license: PD-textlogo (public domain, trademark applies)
+  logo_note: current 2018 logo (red diamond + 'bank hapoalim' English wordmark); older variants also on Commons
+  old_url: http://www.bankhapoalim.com
+  status: active
+  website: https://www.bankhapoalim.co.il
+  location: Tel Aviv, Israel
+  israel_office: Tel Aviv, Israel
+  sources:
+  - https://en.wikipedia.org/wiki/Bank_Hapoalim
+- id: 7
+  name: BMC
+  slug: bmc
+  functions:
+  - teaching
+  logo: logos/bmc.svg
+  logo_original: raw/logos/bmc.gif
+  logo_kind: official vector
+  logo_source: https://www.bmc.com/content/dam/bmc/graphics/bmc-logo.svg
+  logo_license: company brand asset (bmc.com header logo)
+  logo_note: current 'bmc' logo with orange chevron mark from the official site; the older 'bmc software' logo is on vectorlogo.zone and Commons
+  old_url: http://www.bmc.com
+  status: active
+  website: https://www.bmc.com
+  location: Houston, Texas, USA
+  israel_office: Tel Aviv, Israel (Ramat Hahayal R&D centre)
+  sources:
+  - https://en.wikipedia.org/wiki/BMC_Software
+  - https://www.bmc.com/contacts-locations/israel.html
+- id: 8
+  name: Cadence
+  slug: cadence
+  functions:
+  - teaching
+  - consulting
+  logo: logos/cadence.svg
+  logo_original: raw/logos/cadence.gif
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/4/48/Cadence-Logo.svg
+  logo_license: PD-textlogo (public domain, trademark applies)
+  logo_note: current 'cadence' wordmark with red accent
+  old_url: http://www.cadence.com
+  status: active
+  website: https://www.cadence.com
+  location: San Jose, California, USA
+  israel_office: Petah Tikva, Israel (Kiryat Arieh; also Rosh Ha'Ayin)
+  sources:
+  - https://en.wikipedia.org/wiki/Cadence_Design_Systems
+  - https://www.cadence.com/en_US/home/training/emea/israel.html
+- id: 9
+  name: Cellcom
+  slug: cellcom
+  functions:
+  - teaching
+  logo: logos/cellcom.svg
+  logo_original: raw/logos/cellcom.png
+  logo_kind: official vector
+  logo_source: https://cellcom.co.il/Spa/Assets/cellcomLogo.1d12f9b71274521e587d0b164f6c6da1.svg
+  logo_license: company brand asset (cellcom.co.il header logo)
+  logo_note: current 2022 logo (Hebrew 'סלקום' wordmark + purple star), extracted from the site's SPA asset bundle; the he.wikipedia file is non-free and upload.wikimedia.org was rate-limiting
+  old_url: http://www.cellcom.co.il
+  status: active
+  website: https://www.cellcom.co.il
+  location: Netanya, Israel
+  israel_office: Netanya, Israel
+  sources:
+  - https://en.wikipedia.org/wiki/Cellcom_(Israel)
+- id: 10
+  name: Cisco
+  slug: cisco
+  functions:
+  - teaching
+  logo: logos/cisco.svg
+  logo_original: raw/logos/cisco.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg
+  logo_license: PD-textlogo (public domain, trademark applies)
+  logo_note: current blue 2016 Cisco logo (bridge bars + wordmark)
+  old_url: http://www.cisco.com
+  status: active
+  website: https://www.cisco.com
+  location: San Jose, California, USA
+  israel_office: Netanya, Israel (Israel HQ, 32 HaMelacha St; also Caesarea earlier)
+  sources:
+  - https://en.wikipedia.org/wiki/Cisco
+  - https://il.linkedin.com/company/cisco-israel
+- id: 11
+  name: Comverse
+  slug: comverse
+  functions:
+  - teaching
+  logo: logos/comverse.svg
+  logo_original: raw/logos/comverse.jpg
+  logo_kind: official vector
+  logo_source: https://cdn.worldvectorlogo.com/logos/comverse-1.svg
+  logo_license: worldvectorlogo library copy; non-free logo used for identification
+  logo_note: historical Comverse Technology logo ('COMVERSE inspire-create-express' with colour starburst on blue square) from the independent era; Wikipedia only has a PNG
+  old_url: http://www.comverse.com
+  status: acquired
+  what_happened: Comverse Technology broke itself up in 2012-2013 (Verint spun out, Comverse Inc. became independent); Comverse Inc. sold its BSS/billing business to Amdocs in July 2015, renamed itself
+    Xura in 2015 and was merged into Mavenir in 2017.
+  website: https://www.mavenir.com
+  location: Richardson, Texas, USA (Mavenir)
+  israel_office: Tel Aviv, Israel (Ramat Hahayal; the former Comverse Israel HQ)
+  former_website: http://www.comverse.com (now redirects to mavenir.com)
+  former_location: Woodbury, New York, USA (Comverse Technology); Wakefield, Massachusetts, USA (Comverse Inc.); Israel HQ in Tel Aviv
+  sources:
+  - https://en.wikipedia.org/wiki/Comverse_Technology
+  - https://en.wikipedia.org/wiki/Xura
+- id: 12
+  name: ECI
+  slug: eci
+  functions:
+  - teaching
+  logo: logos/eci.svg
+  logo_original: raw/logos/eci.jpg
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.ecitele.com
+  status: acquired
+  what_happened: Acquired by Ribbon Communications for about $463M in cash and stock, completed March 2020.
+  website: https://ribboncommunications.com
+  location: Plano, Texas, USA (Ribbon)
+  israel_office: Petah Tikva, Israel
+  former_website: http://www.ecitele.com (now redirects to ribboncommunications.com)
+  former_location: Petah Tikva, Israel
+  sources:
+  - https://en.globes.co.il/en/article-ribbon-completes-463m-eci-acquisition-1001320578
+  - https://ribboncommunications.com/company/media-center/press-releases/ribbon-communications-inc-merge-eci-telecom-group-ltd
+- id: 13
+  name: Wellsphere
+  slug: wellsphere
+  functions:
+  - consulting
+  logo: logos/wellsphere.svg
+  logo_original: raw/logos/wellsphere.gif
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.wellsphere.com
+  status: acquired
+  what_happened: Acquired by The HealthCentral Network in January 2009; HealthCentral was in turn bought by Remedy Health Media in 2011 (renamed HealthCentral Corporation in 2023) and the Wellsphere brand
+    was retired.
+  website: https://www.healthcentral.com
+  location: Arlington, Virginia, USA (HealthCentral Corporation)
+  former_website: http://www.wellsphere.com (dead; domain no longer resolves; archived at web.archive.org)
+  former_location: San Mateo, California, USA
+  sources:
+  - https://www.cbsnews.com/news/healthcentral-buys-acquires-tech-centric-health-portal-wellsphere/
+  - https://en.wikipedia.org/wiki/HealthCentral
+- id: 14
+  name: Hinbit
+  slug: hinbit
+  remark: public courses
+  functions:
+  - teaching
+  logo: logos/hinbit.svg
+  logo_original: raw/logos/hinbit.gif
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://hinbit.com
+  status: active
+  what_happened: Still trading as Hinbit Development Ltd, but now presents itself as a software/IoT development shop; the site no longer lists public training courses.
+  website: http://hinbit.com
+  location: Ra'anana, Israel
+  israel_office: Ra'anana, Israel
+  sources:
+  - http://www.hinbit.com/hebrew_site/index.php
+  - https://www.kycisrael.com/companies/513739771/hinbit-development-ltd/
+- id: 15
+  name: IBM
+  slug: ibm
+  functions:
+  - teaching
+  logo: logos/ibm.svg
+  logo_original: raw/logos/ibm.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg
+  logo_license: PD-textlogo (public domain, trademarked)
+  logo_note: Current eight-bar IBM wordmark (Paul Rand, 1972).
+  old_url: http://www.ibm.com
+  status: active
+  website: https://www.ibm.com
+  location: Armonk, New York, USA
+  israel_office: Petah Tikva (IBM Israel HQ); IBM Research lab in Haifa, plus Tel Aviv, Givatayim, Beer Sheva
+  sources:
+  - https://en.wikipedia.org/wiki/IBM_Israel
+  - https://research.ibm.com/labs/israel
+- id: 16
+  name: IDS
+  slug: ids
+  remark: Before it turned into RSA
+  functions:
+  - teaching
+  logo: logos/ids.svg
+  logo_original: raw/logos/ids.gif
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/a/a1/RSA_Security_logo.svg
+  logo_license: PD-textlogo (public domain, trademarked)
+  logo_note: 'CAVEAT: no logo exists for ''IDS'' itself (identity unverified); this is the RSA Security logo because the batch lists rsa.com as the current site. Replace if IDS turns out to be unrelated
+    to RSA.'
+  old_url: http://www.rsa.com
+  status: unknown
+  what_happened: Could not verify what IDS stood for or its corporate history; RSA's Israeli site (RSA Security Israel Ltd, Herzliya) originated from Cyota, acquired by RSA in December 2005; RSA itself
+    went EMC (2006) -> Dell (2016) -> Symphony Technology Group (2020). ids.co.il in the Wayback Machine is only a domain-hosting parking page (2013+).
+  website: https://www.rsa.com
+  location: Burlington, Massachusetts, USA
+  israel_office: Herzliya (RSA Security Israel Ltd)
+  former_website: unknown (old_url http://www.rsa.com is RSA's site, still live)
+  former_location: unknown
+  sources:
+  - https://en.wikipedia.org/wiki/RSA_Security
+  - https://en.globes.co.il/en/article-1000036328
+- id: 17
+  name: MySQL
+  slug: mysql
+  from_date: '2008-03-21'
+  functions:
+  - certification
+  logo: logos/mysql.svg
+  logo_original: raw/logos/mysql.jpg
+  logo_kind: official vector
+  logo_source: https://labs.mysql.com/common/logos/mysql-logo.svg
+  logo_license: company brand asset (Oracle/MySQL trademark, used for identification)
+  logo_note: Official MySQL dolphin logo SVG served from mysql.com (same file at www.mysql.com/common/logos/mysql-logo.svg). Commons File:MySQL_textlogo.svg was rate-limited (HTTP 429) throughout.
+  old_url: http://www.mysql.com
+  status: acquired
+  what_happened: Acquired by Sun Microsystems in February 2008 for about $1 billion; Sun was acquired by Oracle in January 2010, so MySQL is now an Oracle product.
+  website: https://www.mysql.com
+  location: Austin, Texas, USA (Oracle)
+  former_website: http://www.mysql.com (still live, now run by Oracle)
+  former_location: Uppsala, Sweden (with a US office in Cupertino, California)
+  sources:
+  - https://en.wikipedia.org/wiki/MySQL_AB
+- id: 18
+  name: Interbit
+  slug: interbit
+  remark: public courses
+  from_date: '2004-11-20'
+  functions:
+  - teaching
+  - consulting
+  - certification
+  logo: logos/interbit.svg
+  logo_original: raw/logos/interbit.jpg
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.interbit.co.il
+  status: active
+  website: https://interbit.co.il
+  location: Ramat Gan, Israel
+  israel_office: Ramat Gan
+  sources:
+  - https://interbit.co.il/
+  - https://www.crunchbase.com/organization/interbit-t-c
+- id: 19
+  name: Israeli Air Industry
+  slug: israeli-air-industry
+  functions:
+  - teaching
+  logo: logos/israeli-air-industry.svg
+  logo_original: raw/logos/israeli-air-industry.jpg
+  logo_kind: official vector
+  logo_source: https://www.iai.co.il/wp-content/themes/generatepress_child/assets/images/iai-logo-dots.svg
+  logo_license: company brand asset (IAI trademark, used for identification)
+  logo_note: 'Current IAI logo (blue, #0049F8) taken from the iai.co.il site theme. enwiki File:Israel_Aerospace_Industries_logo.svg was rejected because it wraps an embedded bitmap (<image>).'
+  old_url: http://www.iai.co.il
+  status: active
+  website: https://www.iai.co.il
+  location: Lod (Ben Gurion Airport), Israel
+  israel_office: Lod
+  sources:
+  - https://en.wikipedia.org/wiki/Israel_Aerospace_Industries
+- id: 20
+  name: Israeli Defence Ministry
+  slug: israeli-defence-ministry
+  functions:
+  - teaching
+  logo: logos/israeli-defence-ministry.svg
+  logo_original: raw/logos/israeli-defence-ministry.gif
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/5/54/MisradHabitahonSymbol.svg
+  logo_license: Public domain (Commons; Israeli state symbol)
+  logo_note: Emblem of the Israel Ministry of Defense. Fetched through the Wayback Machine copy (web.archive.org/web/20251205000807id_/...) because upload.wikimedia.org returned 429 for originals.
+  old_url: http://www.mod.gov.il
+  status: active
+  website: https://www.mod.gov.il
+  location: Tel Aviv (HaKirya), Israel
+  israel_office: Tel Aviv
+  sources:
+  - https://en.wikipedia.org/wiki/Ministry_of_Defense_(Israel)
+- id: 21
+  name: Jacada
+  slug: jacada
+  functions:
+  - teaching
+  logo: logos/jacada.svg
+  logo_original: raw/logos/jacada.jpg
+  logo_kind: official vector
+  logo_source: https://web.archive.org/web/20220309184055id_/https://www.jacada.com/wp-content/uploads/2020/05/Jacada-Autonomous-Logo-outlined-1.svg
+  logo_license: company brand asset (Jacada trademark, used for identification)
+  logo_note: Historical 2020-2021 Jacada logo (pre-Uniphore acquisition) recovered from the archived jacada.com header. No Commons/logo-library entry exists.
+  old_url: http://www.jacada.com
+  status: acquired
+  what_happened: Acquired by Uniphore (Palo Alto) in 2021 (announced July, closed October 2021); the Herzliya team became a Uniphore development center.
+  website: https://www.uniphore.com
+  location: Palo Alto, California, USA
+  israel_office: Herzliya (Uniphore R&D center, ex-Jacada)
+  former_website: http://www.jacada.com (now 301-redirects to uniphore.com)
+  former_location: Herzliya, Israel (US headquarters in Atlanta, Georgia)
+  sources:
+  - https://en.globes.co.il/en/article-us-co-uniphore-buys-israeli-tech-veteran-jacada-1001379742
+  - https://en.wikipedia.org/wiki/Jacada
+- id: 22
+  name: Keshet TV
+  slug: keshet-tv
+  functions:
+  - teaching
+  logo: logos/keshet-tv.svg
+  logo_original: raw/logos/keshet-tv.gif
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/f/f3/Logo_Keshet_Media_Group.svg
+  logo_license: PD-textlogo / PD-shape (Commons)
+  logo_note: 'Keshet Media Group rainbow logo (parent of Keshet 12 / mako). Fetched via Wayback copy due to Wikimedia 429s. Beware: Commons File:Keshet_logo.svg is an unrelated American organization.'
+  old_url: http://www.mako.co.il
+  status: active
+  website: https://www.mako.co.il
+  location: Tel Aviv, Israel
+  israel_office: Tel Aviv
+  sources:
+  - https://en.wikipedia.org/wiki/Keshet_Media_Group
+- id: 23
+  name: McAfee
+  slug: mcafee
+  functions:
+  - teaching
+  logo: logos/mcafee.svg
+  logo_original: raw/logos/mcafee.gif
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/c/cf/McAfee_logo.svg
+  logo_license: PD-textlogo (public domain, trademarked)
+  logo_note: Current McAfee logo (red shield wordmark). Fetched via Wayback copy due to Wikimedia 429s.
+  old_url: http://home.mcafee.com
+  status: active
+  what_happened: 'Still active as a consumer-security company: sold its enterprise business to Symphony Technology Group in 2021 (merged with FireEye and renamed Trellix in 2022), taken private by an Advent-led
+    consortium in March 2022; the Tel Aviv development center was closed in 2021.'
+  website: https://www.mcafee.com
+  location: San Jose, California, USA
+  israel_office: Tel Aviv (Ramat HaHayal development center, closed January 2021)
+  former_website: http://home.mcafee.com (now redirects into mcafee.com; loops for non-browser clients)
+  sources:
+  - https://en.wikipedia.org/wiki/McAfee
+  - https://en.globes.co.il/en/article-mcafee-to-close-israel-development-center-1001356867
+- id: 24
+  name: HP
+  slug: hp
+  remark: Taught the Israeli office that was once Mercury Interactive
+  functions:
+  - teaching
+  logo: logos/hp.svg
+  logo_original: raw/logos/hp.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg
+  logo_license: PD-textlogo (public domain, trademarked)
+  logo_note: Blue circle 'hp' logo, used by Hewlett-Packard from 2008/2012 and still by HP Inc.
+  old_url: http://www.hp.com
+  status: active
+  what_happened: HP acquired Mercury Interactive (Yehud, Israel) in 2006; Hewlett-Packard split in November 2015 into HP Inc (PCs/printers) and Hewlett Packard Enterprise; the ex-Mercury software unit went
+    with HPE, was sold to Micro Focus in September 2017, and Micro Focus was acquired by OpenText in January 2023, so the Yehud site is now OpenText.
+  website: https://www.hp.com
+  location: Palo Alto, California, USA (HP Inc); HPE is in Spring, Texas; OpenText in Waterloo, Ontario, Canada
+  israel_office: Yehud (ex-Mercury Interactive R&D campus, today OpenText Israel)
+  sources:
+  - https://en.wikipedia.org/wiki/Mercury_Interactive
+  - https://en.wikipedia.org/wiki/HP_Inc.
+- id: 25
+  name: MetaCafe
+  slug: metacafe
+  functions:
+  - teaching
+  logo: logos/metacafe.svg
+  logo_original: raw/logos/metacafe.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/en/1/17/Metacafe_new.svg
+  logo_license: non-free logo used for identification (enwiki fair use)
+  logo_note: Last Metacafe logo (the one in the enwiki infobox); company defunct since 2021.
+  old_url: http://www.metacafe.com
+  status: defunct
+  what_happened: Acquired by The Collective (Collective Digital Studio, later Studio71) in June 2012, went dormant, and the site went offline on 28 August 2021; the domain no longer resolves (redirected
+    to VideosHub until October 2022).
+  israel_office: Tel Aviv (founding location and original R&D, 2003)
+  former_website: http://www.metacafe.com (dead, no DNS)
+  former_location: Tel Aviv, Israel (HQ moved to Palo Alto in 2006, then San Francisco, California, USA in 2012)
+  sources:
+  - https://en.wikipedia.org/wiki/Metacafe
+- id: 26
+  name: Mifal Hapayis
+  slug: mifal-hapayis
+  functions:
+  - teaching
+  logo: logos/mifal-hapayis.svg
+  logo_original: raw/logos/mifal-hapayis.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/he/9/9c/Mifaal_hapais_2018.svg
+  logo_license: non-free logo used for identification (hewiki fair use)
+  logo_note: Current Mifal HaPayis logo (August 2018 rebrand).
+  old_url: http://www.pais.co.il
+  status: active
+  website: https://www.pais.co.il
+  location: Tel Aviv, Israel
+  israel_office: Tel Aviv
+  sources:
+  - https://en.wikipedia.org/wiki/Mifal_HaPais
+- id: 27
+  name: Mind CTI
+  slug: mind-cti
+  functions:
+  - teaching
+  logo: logos/mind-cti.svg
+  logo_original: raw/logos/mind-cti.gif
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.mindcti.com
+  status: active
+  website: https://mindcti.com
+  location: Yokneam Illit, Israel
+  israel_office: Yokneam Illit
+  sources:
+  - https://en.wikipedia.org/wiki/Mind_CTI
+  - https://finance.yahoo.com/quote/MNDO/profile/
+- id: 28
+  name: Mocospace
+  slug: mocospace
+  functions:
+  - teaching
+  logo: logos/mocospace.svg
+  logo_original: raw/logos/mocospace.png
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.mocospace.com
+  status: active
+  website: https://www.mocospace.com
+  location: Boston, Massachusetts, USA
+  sources:
+  - https://en.wikipedia.org/wiki/MocoSpace
+  - https://jnjmobile.com/
+- id: 29
+  name: Motorola
+  slug: motorola
+  functions:
+  - teaching
+  logo: logos/motorola.svg
+  logo_original: raw/logos/motorola.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/1/13/Motorola-Logo.svg
+  logo_license: PD-textlogo (Wikimedia Commons)
+  logo_note: Historical Motorola Inc. logo (batwing emblem + MOTOROLA wordmark), the logo used under the Motorola name before the 2011 split.
+  old_url: http://www.motorola.com
+  status: renamed
+  what_happened: Motorola Inc. split on 4 January 2011 into Motorola Solutions and Motorola Mobility; the Israeli operation became Motorola Solutions Israel Ltd.
+  website: https://www.motorolasolutions.com
+  location: Chicago, Illinois, USA
+  israel_office: Airport City (Lod), Israel
+  former_website: http://www.motorola.com (still live, but now the Lenovo-owned Motorola Mobility phone site)
+  former_location: Schaumburg, Illinois, USA
+  sources:
+  - https://en.wikipedia.org/wiki/Motorola_Solutions
+  - https://www.dnb.com/business-directory/company-profiles.motorola_solutions_israel_ltd.527e489d8a591f511c21bb7a090e27b2.html
+- id: 30
+  name: NDS
+  slug: nds
+  remark: Before they were bought by Cisco
+  functions:
+  - teaching
+  logo: logos/nds.svg
+  logo_original: raw/logos/nds.jpg
+  logo_kind: official vector
+  logo_source: https://cdn.worldvectorlogo.com/logos/nds-1.svg
+  logo_license: company trademark, used for identification (worldvectorlogo library copy)
+  logo_note: Historical NDS Group logo (green globe + NDS wordmark) from the independent era before the 2012 Cisco acquisition. Commons files Nds-logo.svg (Lower Saxony horse) and NDS_logo.svg (Japanese
+    construction firm) are different NDS entities and were rejected.
+  old_url: http://www.nds.com
+  status: acquired
+  what_happened: Acquired by Cisco on 31 July 2012 for about US$5bn and folded into Cisco's video software (SPVSS/Videoscape) business; sold to Permira in 2018 and relaunched as Synamedia.
+  website: https://www.synamedia.com
+  location: Maidenhead, UK
+  israel_office: Jerusalem, Israel
+  former_website: http://www.nds.com (dead, does not resolve)
+  former_location: Staines, UK (main R&D in Jerusalem, Israel)
+  sources:
+  - https://newsroom.cisco.com/c/r/newsroom/en/us/a/y2012/m07/cisco-completes-acquisition-of-nds.html
+  - https://en.wikipedia.org/wiki/Synamedia
+- id: 31
+  name: Ness
+  slug: ness
+  remark: public courses
+  functions:
+  - teaching
+  logo: logos/ness.svg
+  logo_original: raw/logos/ness.jpg
+  logo_kind: official vector
+  logo_source: https://cdn-ilemfgf.nitrocdn.com/gSGyNWAzytVlaJPhAbboIpFZKApqAsZn/assets/images/optimized/rev-db441ee/www.ness.com/wp-content/uploads/2026/03/Frame-1000005902.svg
+  logo_license: company brand asset (site header logo of Ness Digital Engineering)
+  logo_note: Current Ness circular emblem (navy). The same emblem is inlined in the ness-tech.co.il header (Ness Israel), so it covers both the batch site and the global brand.
+  old_url: http://www.ness.com
+  status: acquired
+  what_happened: Ness Technologies Inc. was taken private by Citi Venture Capital International in October 2011; the Israeli business (Ness Technologies Israel) was sold to Hilan Group in June 2014, while
+    the rest became KKR-owned Ness Digital Engineering (2022).
+  website: https://www.ness-tech.co.il
+  location: Ra'anana, Israel
+  israel_office: Ra'anana, Israel
+  former_website: http://www.ness.com (still live, but now belongs to Ness Digital Engineering, Teaneck NJ)
+  former_location: Tel Aviv, Israel (Ness Tower, Atidim Park; US HQ Hackensack, New Jersey)
+  sources:
+  - https://www.ness-tech.co.il/en
+  - https://www.sec.gov/Archives/edgar/data/1089638/000114420411012902/v213173_10k.htm
+- id: 32
+  name: Orbotech
+  slug: orbotech
+  functions:
+  - teaching
+  logo: logos/orbotech.svg
+  logo_original: raw/logos/orbotech.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/a/a1/Logo_Orbotech.svg
+  logo_license: PD-textlogo (Wikimedia Commons)
+  logo_note: Orbotech logo from the independent era (before the 2019 KLA acquisition), drawn from the Orbotech annual report.
+  old_url: http://www.orbotech.com
+  status: acquired
+  what_happened: Acquired by KLA-Tencor on 20 February 2019 for about US$3.4bn and became part of KLA's Electronics, Packaging and Components group.
+  website: https://www.kla.com
+  location: Milpitas, California, USA
+  israel_office: Yavne, Israel
+  former_website: http://www.orbotech.com (redirects to kla.com)
+  former_location: Yavne, Israel
+  sources:
+  - https://en.wikipedia.org/wiki/Orbotech
+  - https://www.kla.com/advance/opportunity/kla-location-spotlight-yavne-israel
+- id: 33
+  name: Precise
+  slug: precise
+  functions:
+  - teaching
+  logo: logos/precise.svg
+  logo_original: raw/logos/precise.gif
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.precise.com
+  status: acquired
+  what_happened: Acquired by Veritas in 2003 (about US$609M), passed to Symantec in 2005, carved out to Vector Capital in 2008 as an independent Precise again, and acquired by Idera in July 2013.
+  website: https://www.idera.com
+  location: Houston, Texas, USA
+  israel_office: Or Yehuda, Israel
+  former_website: http://www.precise.com (redirects to idera.com)
+  former_location: Westwood, Massachusetts, USA (R&D in Or Yehuda, Israel)
+  sources:
+  - https://www.computerworld.com/article/1721522/veritas-completes-precise-acquisition-for-609m.html
+  - https://www.apmdigest.com/idera-acquires-precise-software
+- id: 34
+  name: Rafael
+  slug: rafael
+  functions:
+  - teaching
+  - consulting
+  logo: logos/rafael.svg
+  logo_original: raw/logos/rafael.png
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/a/a1/Rafael_Advanced_Defense_Systems_Logo.svg
+  logo_license: PD-textlogo (Wikimedia Commons)
+  logo_note: Current Rafael Advanced Defense Systems logo with 'Smart and to the point' tagline.
+  old_url: http://www.rafael.co.il
+  status: active
+  website: https://www.rafael.co.il
+  location: Haifa, Israel
+  israel_office: Haifa, Israel
+  sources:
+  - https://en.wikipedia.org/wiki/Rafael_Advanced_Defense_Systems
+- id: 35
+  name: Random Logic
+  slug: random-logic
+  functions:
+  - teaching
+  logo: logos/random-logic.svg
+  logo_original: raw/logos/random-logic.gif
+  logo_kind: official vector
+  logo_source: https://www.logo.wine/a/logo/888_Holdings/888_Holdings-Logo.wine.svg
+  logo_license: company trademark, used for identification (logo.wine library copy)
+  logo_note: Random Logic Ltd has no distinct public logo; it operated under its parent's 888 Holdings brand until the May 2024 rename to evoke plc, so the 888 Holdings logo is used. The current parent
+    logo (evoke) is available at https://www.evokeplc.com/application/images/logo.svg if preferred.
+  old_url: http://www.888holdingsplc.com
+  status: renamed
+  what_happened: Parent 888 Holdings plc was renamed evoke plc in May 2024; Random Logic Ltd remains its Israeli R&D and marketing subsidiary in Herzliya.
+  website: https://www.evokeplc.com
+  location: Gibraltar
+  israel_office: Herzliya Pituach, Israel
+  former_website: http://www.888holdingsplc.com (dead, does not resolve)
+  former_location: Gibraltar
+  sources:
+  - https://www.evokeplc.com/news-and-media/latest-news/888-holdings-plc-completes-rebrand-evoke-plc/
+  - https://www.dnb.com/business-directory/company-profiles.random_logic_ltd.c3f54c5a5cebb90333990fcaf55e141a.html
+- id: 36
+  name: RSA
+  slug: rsa
+  functions:
+  - teaching
+  logo: logos/rsa.svg
+  logo_original: raw/logos/rsa.gif
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/2/2a/RSA_Security_logo2.svg
+  logo_license: PD-textlogo (Wikimedia Commons)
+  logo_note: Current RSA wordmark (post-2020 standalone RSA). The earlier EMC-era red-box logo is at https://commons.wikimedia.org/wiki/File:RSA_Security_logo.svg if the historical one is wanted.
+  old_url: http://www.rsa.com
+  status: acquired
+  what_happened: Acquired by EMC in 2006, became part of Dell Technologies in 2016, and sold to a Symphony Technology Group-led consortium on 1 September 2020 (US$2.075bn), operating again as a standalone
+    RSA.
+  website: https://www.rsa.com
+  location: Burlington, Massachusetts, USA
+  israel_office: Herzliya, Israel (from the 2005 Cyota acquisition; current site not verified)
+  former_website: http://www.rsa.com (still live)
+  former_location: Bedford, Massachusetts, USA
+  sources:
+  - https://en.wikipedia.org/wiki/RSA_Security
+  - https://www.dell.com/en-us/dt/corporate/newsroom/announcements/detailpage.press-releases~usa~2020~02~20200218-redstone.htm
+- id: 37
+  name: The Automation Company
+  slug: the-automation-company
+  remark: in Haifa
+  functions:
+  - teaching
+  logo: logos/the-automation-company.svg
+  logo_original: raw/logos/the-automation-company.png
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.ladpc.co.il
+  status: renamed
+  what_happened: The Union of Local Authorities sold control (51%) to One Technologies in 2014; the company became 'Automatzia HaChadasha' and was rebranded ONE City in October 2022.
+  website: https://www.onecity.co.il
+  location: Petah Tikva, Israel
+  israel_office: Petah Tikva, Israel (Haifa branch per owner's note; not verified online)
+  former_website: http://www.ladpc.co.il (redirects to onecity.co.il)
+  former_location: Petah Tikva, Israel
+  sources:
+  - https://www.pc.co.il/news/372039/
+  - https://www.themarker.com/career/2014-03-02/ty-article/0000017f-e5e6-dc7e-adff-f5ef02090000
+- id: 38
+  name: Veraz Networks
+  slug: veraz-networks
+  functions:
+  - teaching
+  logo: logos/veraz-networks.svg
+  logo_original: raw/logos/veraz-networks.gif
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.veraznetworks.com
+  status: merged
+  what_happened: Merged into Dialogic on 1 October 2010 (Veraz holders got 30%); Dialogic was bought by Novacap in 2014 and by Enghouse Systems in January 2020.
+  website: https://www.dialogic.com
+  location: Parsippany, New Jersey, USA
+  israel_office: Petah Tikva, Israel (former ECI NGTS development centre)
+  former_website: http://www.veraznetworks.com (redirects to dialogic.com)
+  former_location: San Jose, California, USA (R&D in Petah Tikva, Israel)
+  sources:
+  - https://www.lightreading.com/mobile-core/dialogic-veraz-close-merger
+  - https://en.wikipedia.org/wiki/Dialogic_Group
+- id: 39
+  name: Voltaire
+  slug: voltaire
+  remark: Before they were acquired by Mellanox
+  functions:
+  - teaching
+  logo: logos/voltaire.svg
+  logo_original: raw/logos/voltaire.png
+  logo_kind: official vector
+  logo_source: https://cdn.worldvectorlogo.com/logos/voltaire.svg
+  logo_license: company trademark, used for identification (worldvectorlogo library copy)
+  logo_note: Historical Voltaire Ltd. logo (red V with blue orbit swoosh and Voltaire wordmark) from the independent era before the 2011 Mellanox acquisition.
+  old_url: http://www.voltaire.com
+  status: acquired
+  what_happened: Acquired by Mellanox Technologies in February 2011 for about US$218M; Mellanox was itself acquired by Nvidia in April 2020.
+  website: https://www.nvidia.com/en-us/networking/
+  location: Santa Clara, California, USA (Nvidia)
+  israel_office: Yokneam, Israel (Nvidia/Mellanox)
+  former_website: http://www.voltaire.com (dead, does not resolve)
+  former_location: Herzliya, Israel
+  sources:
+  - https://en.wikipedia.org/wiki/Mellanox_Technologies
+  - https://www.sec.gov/Archives/edgar/data/1401678/000095012307009751/y35652fv1.htm
+- id: 40
+  name: Websense
+  slug: websense
+  functions:
+  - teaching
+  logo: logos/websense.svg
+  logo_original: raw/logos/websense.jpg
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.websense.com
+  status: renamed
+  what_happened: Acquired by Raytheon in May 2015 (Raytheon|Websense), renamed Forcepoint in January 2016, and sold to Francisco Partners in January 2021.
+  website: https://www.forcepoint.com
+  location: Austin, Texas, USA
+  israel_office: Ra'anana, Israel (former PortAuthority R&D lab, opened 2007)
+  former_website: http://www.websense.com (redirects to forcepoint.com)
+  former_location: San Diego, California, USA
+  sources:
+  - https://en.wikipedia.org/wiki/Forcepoint
+  - https://www.networkworld.com/article/836892/lan-wan-websense-announces-deal-to-buy-portauthority.html
+- id: 41
+  name: Sun Microsystems
+  slug: sun-microsystems
+  from_date: '2008-05-02'
+  functions:
+  - certification
+  logo: logos/sun-microsystems.svg
+  logo_original: raw/logos/sun-microsystems.png
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/8/8b/Sun-Logo.svg
+  logo_license: Public domain (Commons)
+  logo_note: Classic Sun Microsystems logo (ambigram + wordmark) from Wikimedia Commons; 23 paths, verified.
+  old_url: http://www.oracle.com
+  status: acquired
+  what_happened: Acquired by Oracle on 27 January 2010 for about US$7.4bn.
+  website: https://www.oracle.com
+  location: Austin, Texas, USA
+  israel_office: Petah Tikva, Israel (Oracle Israel); Sun Israel was in Herzliya
+  former_website: http://www.sun.com (redirects to oracle.com/it-infrastructure)
+  former_location: Santa Clara, California, USA
+  sources:
+  - https://en.wikipedia.org/wiki/Acquisition_of_Sun_Microsystems_by_Oracle_Corporation
+  - https://www.oracle.com/il-en/corporate/contact/field-offices/
+- id: 42
+  name: Xacct
+  slug: xacct
+  remark: Before aquisition by Amdocs
+  functions:
+  - consulting
+  logo: logos/xacct.svg
+  logo_original: raw/logos/xacct.gif
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.xacct.biz
+  status: acquired
+  what_happened: Acquired by Amdocs in February 2004 for about US$29.5M.
+  website: https://www.amdocs.com
+  location: Chesterfield, Missouri, USA
+  israel_office: Ra'anana, Israel (Amdocs)
+  former_website: http://www.xacct.biz (dead, does not resolve)
+  former_location: Santa Clara, California, USA (R&D in Tel Aviv, Israel)
+  sources:
+  - https://www.lightreading.com/cable-technology/amdocs-buys-xacct-at-last-
+  - https://mergr.com/transaction/amdocs-acquires-xacct-technologies
+- id: 43
+  name: Regard
+  slug: regard
+  remark: Company no longer active
+  functions:
+  - consulting
+  logo: logos/regard.svg
+  logo_original: raw/logos/regard.jpg
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.moit.gov.il/CmsTamat/CompanyProfile.aspx?CompanyType=1&Companyid=69391
+  status: defunct
+  what_happened: Small Israeli software company no longer active (owner's note); no public record found and its only known web presence, a Ministry of Industry (moit.gov.il) company-profile page, was already
+    returning 404 in the earliest Wayback snapshot (2013).
+  former_website: http://www.moit.gov.il/CmsTamat/CompanyProfile.aspx?CompanyType=1&Companyid=69391 (dead; Wayback has only a 2013 404 snapshot)
+  former_location: unknown, Israel
+  sources:
+  - https://web.archive.org/web/2013/http://www.moit.gov.il/CmsTamat/CompanyProfile.aspx?CompanyType=1&Companyid=69391
+- id: 44
+  name: Telmap
+  slug: telmap
+  remark: Before they were bought by Intel
+  functions:
+  - consulting
+  logo: logos/telmap.svg
+  logo_original: raw/logos/telmap.gif
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://global.telmap.com
+  status: acquired
+  what_happened: Acquired by Intel in October 2011 (reported $300M); Intel shut Telmap down in July 2013, laying off its ~150 Israeli staff.
+  website: https://www.intel.com
+  location: Santa Clara, California, USA
+  israel_office: Herzliya, Israel (closed 2013)
+  former_website: http://global.telmap.com (dead; now a hosting-panel error page, Wayback shows 301s since 2025)
+  former_location: Herzliya, Israel
+  sources:
+  - https://en.globes.co.il/en/article-1000686907
+  - https://en.globes.co.il/en/article-1000865885
+- id: 45
+  name: Intel
+  slug: intel
+  functions:
+  - teaching
+  - consulting
+  logo: logos/intel.svg
+  logo_original: raw/logos/intel.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/0/0e/Intel_logo_%282020%2C_light_blue%29.svg
+  logo_license: Public domain (text logo, Commons)
+  logo_note: Current Intel logo (2020 redesign); verified.
+  old_url: http://www.intel.com
+  status: active
+  website: https://www.intel.com
+  location: Santa Clara, California, USA
+  israel_office: Haifa, Petah Tikva, Jerusalem (R&D) and Kiryat Gat (fab), Israel
+  sources:
+  - https://www.intel.com/content/www/us/en/corporate-responsibility/intel-in-israel.html
+  - https://www.timesofisrael.com/intels-israel-staff-could-face-another-wave-of-layoffs-as-global-job-cuts-loom/
+- id: 46
+  name: Flash Networks
+  slug: flash-networks
+  functions:
+  - teaching
+  logo: logos/flash-networks.svg
+  logo_original: raw/logos/flash-networks.png
+  logo_kind: official vector
+  logo_source: https://www.flashnetworks.com/hubfs/Flash%20Networks%202022.svg
+  logo_license: Company trademark (official site header asset)
+  logo_note: Current official logo served by flashnetworks.com header; company still trades under the Flash Networks name; verified.
+  old_url: http://www.flashnetworks.com
+  status: acquired
+  what_happened: Acquired in August 2020 by Volaris Group (Constellation Software), now held by its Lumine Group spin-out; continues to operate under its own name and site.
+  website: https://www.flashnetworks.com
+  location: Ra'anana, Israel
+  israel_office: Ra'anana, Israel (previously Herzliya)
+  former_website: http://www.flashnetworks.com (still live, same domain)
+  former_location: Herzliya, Israel
+  sources:
+  - https://www.luminegroup.com/newsroom/lumine-group-signs-agreement-to-acquire-flash-networks-ltd/
+  - https://www.flashnetworks.com/locations
+- id: 47
+  name: SAP
+  slug: sap
+  functions:
+  - teaching
+  - consulting
+  logo: logos/sap.svg
+  logo_original: raw/logos/sap.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg
+  logo_license: Public domain (Commons)
+  logo_note: Current SAP logo (2011 design); verified.
+  old_url: http://www.sap.com
+  status: active
+  website: https://www.sap.com
+  location: Walldorf, Germany
+  israel_office: Ra'anana, Israel (SAP Labs Israel; also Tel Aviv)
+  sources:
+  - https://www.sap.com/germany/about/company/office-locations/israel.html
+  - https://www.timesofisrael.com/sap-sets-up-new-67-million-hq-in-raanana/
+- id: 48
+  name: Yahoo
+  slug: yahoo
+  remark: Work on 9.yahoo.com
+  functions:
+  - consulting
+  logo: logos/yahoo.svg
+  logo_original: raw/logos/yahoo.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/3/3a/Yahoo%21_%282019%29.svg
+  logo_license: Public domain (text logo, Commons)
+  logo_note: Current Yahoo logo (2019 redesign); verified.
+  old_url: http://www.yahoo.com
+  status: active
+  what_happened: Bought by Verizon in 2017, then sold to Apollo Global Management in 2021; still operates as Yahoo Inc. with R&D centers in Israel.
+  website: https://www.yahoo.com
+  location: New York, New York, USA
+  israel_office: Haifa (research) and Tel Aviv, Israel
+  sources:
+  - https://en.wikipedia.org/wiki/Yahoo_Inc._(2017%E2%80%93present)
+  - https://www.timesofisrael.com/yahoo-to-expand-israel-based-rd-centers-under-new-local-leadership/
+- id: 49
+  name: Cloverleaf
+  slug: cloverleaf
+  functions:
+  - teaching
+  logo: logos/cloverleaf.svg
+  logo_original: raw/logos/cloverleaf.gif
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.cloverleafcomm.com
+  status: acquired
+  what_happened: Acquired by Dot Hill Systems in January 2010 (Dot Hill itself was bought by Seagate in October 2015); the Cloverleaf brand disappeared.
+  website: https://www.seagate.com
+  location: Fremont, California, USA (Seagate)
+  israel_office: unknown city, Israel (R&D; technology spun out of Elta Systems / IAI in 2001)
+  former_website: http://www.cloverleafcomm.com (dead; returns 403 now)
+  former_location: Woodbury, New York, USA (earlier Southborough, Massachusetts); R&D in Israel
+  sources:
+  - https://www.sec.gov/Archives/edgar/data/0001042783/000119312510014898/dex991.htm
+  - https://investors.seagate.com/news/news-details/2015/Seagate-Completes-Acquisition-Of-Dot-Hill-Systems/default.aspx
+- id: 50
+  name: Bank of Israel
+  slug: bank-of-israel
+  functions:
+  - teaching
+  logo: logos/bank-of-israel.svg
+  logo_original: raw/logos/bank-of-israel.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/en/8/8d/Bank_of_Israel_Seal.svg
+  logo_license: Non-free / fair use (enwiki); official emblem of the Bank of Israel
+  logo_note: Official BOI seal (menorah + bilingual ring) used in the enwiki infobox; boi.org.il is a JS app whose inline SVG embeds a bitmap, so the enwiki vector was used; verified.
+  old_url: http://www.bankisrael.gov.il
+  status: active
+  website: https://www.boi.org.il
+  location: Jerusalem, Israel
+  israel_office: Jerusalem, Israel
+  former_website: http://www.bankisrael.gov.il (domain no longer resolves; replaced by boi.org.il)
+  sources:
+  - https://www.boi.org.il/
+- id: 51
+  name: Helios Software Development
+  slug: helios-software-development
+  functions:
+  - teaching
+  logo: logos/helios-software-development.svg
+  logo_original: raw/logos/helios-software-development.jpg
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.helios-sd.co.il
+  status: defunct
+  what_happened: Small Tel Aviv software-infrastructure shop; its site was last captured by the Wayback Machine in August 2014 and the domain no longer resolves; no trace of activity since (not to be confused
+    with the 2021 observability startup Helios bought by Snyk).
+  former_website: http://www.helios-sd.co.il (dead; last Wayback snapshot 2014-08)
+  former_location: Tel Aviv, Israel
+  sources:
+  - https://web.archive.org/web/2014/http://www.helios-sd.co.il/
+  - https://vymaps.com/IL/Helios-Software-Development-Ltd-280110538709981/
+- id: 52
+  name: Imagine Communications
+  slug: imagine-communications
+  functions:
+  - teaching
+  logo: logos/imagine-communications.svg
+  logo_original: raw/logos/imagine-communications.jpg
+  logo_kind: official vector
+  logo_source: https://imaginecommunications.com/ (inline <svg class="c-logo"> in page header)
+  logo_license: Company trademark (official site header asset)
+  logo_note: 'Current Imagine Communications logo extracted from the site header inline SVG (uses currentColor fills). Fallback: this is the logo of the Harris Broadcast-descended company that adopted the
+    name in 2014, not the original San Diego/Netanya QoD-era Imagine Communications, whose pre-2010 logo exists nowhere as a vector.'
+  old_url: http://www.imaginecommunications.com
+  status: acquired
+  what_happened: The San Diego/Netanya video-transcoding company (founded 2004 as QoD) was acquired by Harris Broadcast in January 2014; Harris Broadcast then renamed itself Imagine Communications, which
+    in turn was acquired by Lumine Group in July 2026.
+  website: https://imaginecommunications.com
+  location: Frisco, Texas, USA
+  israel_office: Netanya, Israel (Sappir Industrial Park; R&D kept after the Harris deal)
+  former_website: http://www.imaginecommunications.com (domain still live, now the renamed Harris Broadcast business)
+  former_location: San Diego, California, USA; R&D in Netanya, Israel
+  sources:
+  - https://www.prnewswire.com/news-releases/harris-broadcast-completes-acquisition-of-imagine-communications-240271171.html
+  - https://www.ivc-online.com/Google-Card?id=2f9b410e-207a-e111-ac59-00155d32a403
+  - https://www.luminegroup.com/newsroom/lumine-acquires-imagine-communications/
+- id: 53
+  name: Fundtech
+  slug: fundtech
+  functions:
+  - teaching
+  logo: logos/fundtech.svg
+  logo_original: raw/logos/fundtech.gif
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.fundtech.com
+  status: acquired
+  what_happened: Acquired by D+H for US$1.25B in April 2015; D+H was merged with Misys by Vista Equity in 2017 to form Finastra.
+  website: https://www.finastra.com
+  location: London, United Kingdom (Finastra)
+  israel_office: Ramat Gan, Israel
+  former_website: http://www.fundtech.com (redirects to finastra.com)
+  former_location: Jersey City, New Jersey, USA (Israeli company, R&D in Ramat Gan)
+  sources:
+  - https://www.prnewswire.com/news-releases/dh-completes-acquisition-of-fundtech-501812631.html
+  - https://en.wikipedia.org/wiki/Finastra
+- id: 54
+  name: Final
+  slug: final
+  functions:
+  - teaching
+  logo: logos/final.svg
+  logo_original: raw/logos/final.jpg
+  logo_kind: official vector
+  logo_source: https://web.archive.org/web/20200304050541id_/https://www.final.co.il/images/footer-logo.svg
+  logo_license: company brand asset (own site, 2020 archived footer logo)
+  logo_note: Colored 'final' wordmark with arrow from the 2020 site (header version is white-only; current site serves only logo.png). worldvectorlogo 'final' entries are unrelated companies.
+  old_url: http://www.final.co.il
+  status: active
+  website: https://www.final.co.il
+  location: Herzliya, Israel
+  israel_office: Herzliya, Israel
+  sources:
+  - https://www.final.co.il/
+  - https://www.crunchbase.com/organization/final-israel
+- id: 55
+  name: Finjan
+  slug: finjan
+  functions:
+  - consulting
+  logo: logos/finjan.svg
+  logo_original: raw/logos/finjan.jpg
+  logo_kind: official vector
+  logo_source: https://content.equisolve.net/_0d60e0c812cac097933e2e32620609ff/finjan/files/theme/images/logo-blue.svg
+  logo_license: company brand asset (finjan.com site logo)
+  logo_note: Current Finjan Holdings 'finjan Cybersecurity' logo; enwiki also has File:Finjan_cybersecurity_logo.svg (same mark) but Wikimedia originals were rate-limited (HTTP 429).
+  old_url: http://www.finjan.com
+  status: acquired
+  what_happened: Product business and Netanya development center sold to M86 Security in November 2009 (M86 later absorbed by Trustwave); the remaining patent-licensing entity Finjan Holdings was taken
+    private by Fortress Investment Group in July 2020.
+  website: https://www.finjan.com
+  location: East Palo Alto, California, USA
+  israel_office: Netanya, Israel (R&D, until the 2009 M86 sale)
+  former_website: http://www.finjan.com (still live, now Finjan Holdings LLC patent-licensing site)
+  former_location: Netanya, Israel (R&D) / San Jose, California, USA
+  sources:
+  - https://en.wikipedia.org/wiki/Finjan_Holdings
+  - https://www.globenewswire.com/news-release/2020/07/24/2067294/0/en/Fortress-Affiliates-Complete-Their-Acquisition-of-Finjan.html
+- id: 56
+  name: EMC
+  slug: emc
+  functions:
+  - teaching
+  logo: logos/emc.svg
+  logo_original: raw/logos/emc.jpg
+  logo_kind: official vector
+  logo_source: https://cdn.worldvectorlogo.com/logos/emc-corporation-logo.svg
+  logo_license: PD-textlogo-style wordmark (EMC² text logo); trademark of Dell Technologies
+  logo_note: Historical EMC Corporation EMC² logo (pre-2016 Dell acquisition). Commons File:EMC_Corporation_logo.svg exists but upload.wikimedia.org returned 429 for originals throughout the session.
+  old_url: http://www.emc.com
+  status: acquired
+  what_happened: Acquired by Dell in September 2016 for about $67B and folded into Dell Technologies (Dell EMC).
+  website: https://www.dell.com
+  location: Round Rock, Texas, USA
+  israel_office: Herzliya, Israel (Center of Excellence; also Haifa and Beer Sheva sites)
+  former_website: http://www.emc.com (redirects to dell.com)
+  former_location: Hopkinton, Massachusetts, USA
+  sources:
+  - https://en.wikipedia.org/wiki/Dell_EMC
+  - https://www.timesofisrael.com/dell-emc-merger-creates-giant-74-billion-tech-company/
+- id: 57
+  name: TeleWeb
+  slug: teleweb
+  functions:
+  - teaching
+  logo: logos/teleweb.svg
+  logo_original: raw/logos/teleweb.png
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.teleweb.co.il
+  status: defunct
+  what_happened: Teleweb Services Ltd (Israeli reg. 513927012, founded 2007) is recorded as voluntarily dissolved in the Israeli companies registry (last annual report 2019); teleweb.co.il no longer resolves
+    (no DNS).
+  israel_office: Ramat Gan (registry address; LinkedIn lists Tel Aviv)
+  former_website: http://www.teleweb.co.il (dead - domain does not resolve)
+  former_location: Ramat Gan, Israel
+  sources:
+  - https://www.kycisrael.com/companies/513927012/teleweb-services-ltd/
+  - https://il.linkedin.com/company/teleweb-services
+- id: 58
+  name: MercyCorps
+  slug: mercycorps
+  functions:
+  - teaching
+  logo: logos/mercycorps.svg
+  logo_original: raw/logos/mercycorps.jpg
+  logo_kind: official vector
+  logo_source: https://www.prosperglobal.org/themes/custom/gesso/dist/images/mc-logo.svg
+  logo_license: company brand asset (old mercycorps.org 'gesso' theme asset still served by prosperglobal.org)
+  logo_note: Historical Mercy Corps logo (red mark + MERCY CORPS wordmark) used until the 2026 rebrand to Prosper Global. Commons/enwiki only hold PNG/JPG versions.
+  old_url: http://www.mercycorps.org
+  status: renamed
+  what_happened: Rebranded as Prosper Global in September 2026 (announced 18 March 2026); mercycorps.org now redirects to prosperglobal.org.
+  website: https://www.prosperglobal.org/
+  location: Portland, Oregon, USA
+  former_website: http://www.mercycorps.org (redirects to prosperglobal.org)
+  former_location: Portland, Oregon, USA
+  sources:
+  - https://www.prosperglobal.org/press-room/releases/Introducing-Prosper-Global
+  - https://en.wikipedia.org/wiki/Mercy_Corps
+- id: 59
+  name: TTC
+  slug: ttc
+  functions: []
+  logo: logos/ttc.svg
+  logo_original: raw/logos/ttc.jpg
+  logo_kind: official vector
+  logo_source: https://en.wikipedia.org/wiki/Special:FilePath/The_Great_Courses_logo.svg
+  logo_license: non-free logo used for identification (enwiki)
+  logo_note: Current The Great Courses logo (the Teaching Company's trading name); no vector logo for the old 'Teaching Company / teach12' identity was found.
+  old_url: http://www.teach12.com
+  status: renamed
+  what_happened: The Teaching Company now trades as The Great Courses (its streaming arm was Wondrium 2021-2024, now The Great Courses Plus); owned by Brentwood Associates since 2006; teach12.com redirects
+    to thegreatcourses.com.
+  website: https://www.thegreatcourses.com/
+  location: Chantilly, Virginia, USA
+  former_website: http://www.teach12.com (redirects to thegreatcourses.com)
+  former_location: Chantilly, Virginia, USA
+  sources:
+  - https://en.wikipedia.org/wiki/The_Teaching_Company
+  - https://www.brentwood.com/our-portfolio/the-great-courses/
+- id: 60
+  name: Qualcomm
+  slug: qualcomm
+  functions:
+  - teaching
+  logo: logos/qualcomm.svg
+  logo_original: raw/logos/qualcomm.jpg
+  logo_kind: official vector
+  logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/Qualcomm-Logo.svg
+  logo_license: PD-textlogo (trademarked)
+  logo_note: Current Qualcomm logo.
+  old_url: http://www.qualcomm.com
+  status: active
+  website: https://www.qualcomm.com/
+  location: San Diego, California, USA
+  israel_office: Haifa (Omega Center) and Hod Hasharon
+  sources:
+  - https://finder.startupnationcentral.org/mnc_page/qualcomm
+  - https://www.calcalistech.com/ctechnews/article/hkfdle9s3
+- id: 61
+  name: Broadcom
+  slug: broadcom
+  functions:
+  - teaching
+  logo: logos/broadcom.svg
+  logo_original: raw/logos/broadcom.jpg
+  logo_kind: official vector
+  logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/Broadcom_logo_(2016-present).svg
+  logo_license: PD-textlogo (trademarked)
+  logo_note: Current Broadcom Inc. logo (2016-present).
+  old_url: http://www.broadcom.com
+  status: active
+  website: https://www.broadcom.com/
+  location: Palo Alto, California, USA (moved from San Jose in 2023)
+  israel_office: Yakum (R&D) and Tel Aviv
+  sources:
+  - https://en.wikipedia.org/wiki/Broadcom
+  - https://www.officelovin.com/2017/03/look-inside-broadcom-offices-israel/
+- id: 62
+  name: Computer Associates
+  slug: ca
+  functions:
+  - teaching
+  logo: logos/ca.svg
+  logo_original: raw/logos/ca.gif
+  logo_kind: official vector
+  logo_source: https://cdn.worldvectorlogo.com/logos/computer-associates.svg
+  logo_license: company logo used for identification; trademark of Broadcom Inc.
+  logo_note: Historical 'ca Computer Associates' globe logo (c. 2001-2005 era, under the Computer Associates name). Commons has File:Computer_Associates_logo.svg (1985-2001) and File:CA_Technologies_logo.svg
+    but originals returned HTTP 429 all session.
+  old_url: http://www.ca.com/us/default.aspx
+  status: acquired
+  what_happened: Acquired by Broadcom Inc. on 5 November 2018 for $18.9B; CA Israel (ex-Memco, Herzliya) continues as a Broadcom subsidiary; ca.com now redirects to broadcom.com.
+  website: https://www.broadcom.com/
+  location: Palo Alto, California, USA
+  israel_office: Herzliya
+  former_website: http://www.ca.com (redirects to broadcom.com)
+  former_location: Islandia, New York, USA (New York City from 2014)
+  sources:
+  - https://en.wikipedia.org/wiki/CA_Technologies
+  - https://www.calcalistech.com/ctechnews/article/u29gfh47i
+- id: 63
+  name: Verint
+  slug: verint
+  remark: In Israel and in santa clara
+  functions:
+  - teaching
+  logo: logos/verint.svg
+  logo_original: raw/logos/verint.jpg
+  logo_kind: official vector
+  logo_source: https://www.verint.com/wp-content/themes/verint/assets/svg/symbols.svg
+  logo_license: company brand asset (verint.com site header logo)
+  logo_note: Extracted the <symbol id="logo"> (VERINT wordmark) from the site's SVG sprite and wrapped it as a standalone <svg>; fill is currentColor (renders black by default).
+  old_url: http://verint.com/corporate
+  status: acquired
+  what_happened: Taken private by Thoma Bravo on 26 November 2025 ($2B) and combined with Calabrio; the merged company kept the Verint name (February 2026).
+  website: https://www.verint.com/
+  location: Melville, New York, USA
+  israel_office: Herzliya Pituach (R&D, ~200 staff)
+  former_website: http://verint.com/corporate (still live; redirects to verint.com/our-company/)
+  former_location: Melville, New York, USA
+  sources:
+  - https://www.verint.com/press-room/2025/thoma-bravo-completes-acquisition-of-verint-a-leader-in-ai-driven-customer-experience-automation/
+  - https://en.wikipedia.org/wiki/Verint_Systems
+- id: 64
+  name: Live Person
+  slug: liveperson
+  functions:
+  - teaching
+  logo: logos/liveperson.svg
+  logo_original: raw/logos/liveperson.jpg
+  logo_kind: official vector
+  logo_source: https://logotyp.us/file/liveperson.svg
+  logo_license: company logo used for identification (logotyp.us redraw of official mark)
+  logo_note: Current LivePerson gear + wordmark in dark text. The official site only serves a white-on-transparent variant (https://static.liveperson.com/static-assets/2024/10/24161133/LivePerson-Logos-2-Color.svg).
+  old_url: http://www.liveperson.com
+  status: active
+  website: https://www.liveperson.com/
+  location: New York, New York, USA
+  israel_office: Herzliya Pituach (R&D; was Ra'anana until the 2020 move to remote work)
+  sources:
+  - https://en.wikipedia.org/wiki/LivePerson
+  - https://www.liveperson.com/company/careers/
+- id: 65
+  name: Sentrigo
+  slug: sentrigo
+  remark: Before they were bought by McAfee
+  functions:
+  - consulting
+  logo: logos/sentrigo.svg
+  logo_original: raw/logos/sentrigo.png
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.sentrigo.com
+  status: acquired
+  what_happened: Acquired by McAfee (then Intel-owned) in March/April 2011 for a reported $30-40M; the Hedgehog products went into McAfee's enterprise line, which became Trellix in 2022; sentrigo.com is
+    dead.
+  website: https://www.trellix.com/
+  location: San Jose, California, USA
+  israel_office: Kfar Saba
+  former_website: http://www.sentrigo.com (dead - resolves to a parking IP, serves nothing)
+  former_location: Santa Clara, California, USA (US HQ); Kfar Saba, Israel (R&D)
+  sources:
+  - https://en.wikipedia.org/wiki/Sentrigo
+  - https://en.globes.co.il/en/article-1000632756
+- id: 66
+  name: Giga Spaces
+  slug: gigaspaces
+  functions:
+  - teaching
+  logo: logos/gigaspaces.svg
+  logo_original: raw/logos/gigaspaces.jpg
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.gigaspaces.com
+  status: active
+  website: https://www.gigaspaces.com/
+  location: New York, New York, USA
+  israel_office: Herzliya (10 HaSadnaot St.)
+  sources:
+  - https://en.wikipedia.org/wiki/GigaSpaces
+  - https://www.gigaspaces.com/branches/herzliya-israel
+- id: 67
+  name: At&t
+  slug: att
+  functions:
+  - teaching
+  logo: logos/att.svg
+  logo_original: raw/logos/att.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/3/31/AT%26T_logo_2016.svg
+  logo_license: Public domain (PD-textlogo)
+  logo_note: Current AT&T logo (2016 globe + wordmark).
+  old_url: http://www.att.com
+  status: active
+  website: https://www.att.com/
+  location: Dallas, Texas, USA
+  israel_office: Airport City (Lod) and Tel Aviv (ToHa) R&D center, ~600 staff; the Ra'anana AT&T Foundry (opened 2011 with Amdocs) no longer has its own page - foundry.att.com redirects to about.att.com/innovation
+  sources:
+  - https://en.globes.co.il/en/article-att-opens-new-tel-aviv-rd-center-1001388404
+  - https://www.lightreading.com/business-management/at-t-opens-foundry-in-israel
+- id: 68
+  name: Marvell
+  slug: marvell
+  functions:
+  - teaching
+  logo: logos/marvell.svg
+  logo_original: raw/logos/marvell.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/8/83/Marvell_Logo.svg
+  logo_license: Public domain (PD-textlogo)
+  logo_note: Current Marvell Technology logo (M-in-frame mark + MARVELL wordmark).
+  old_url: http://www.marvell.com
+  status: active
+  website: https://www.marvell.com/
+  location: Santa Clara, California, USA (legally domiciled in Wilmington, Delaware since 2021)
+  israel_office: Yokneam and Petah Tikva
+  sources:
+  - https://en.wikipedia.org/wiki/Marvell_Technology
+  - https://www.calcalistech.com/ctechnews/article/zt28uvt3w
+- id: 69
+  name: Bituach Leumi
+  slug: bituachleumi
+  functions:
+  - teaching
+  logo: logos/bituachleumi.svg
+  logo_original: raw/logos/bituachleumi.png
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/he/4/46/BituachLeumiLogo.svg
+  logo_license: non-free logo used for identification (hewiki fair use)
+  logo_note: Current National Insurance Institute logo (blue roundel + Hebrew wordmark). An older variant exists as hewiki File:BTL-Logo Old.svg.
+  old_url: http://www.btl.gov.il/Pages/default.aspx
+  status: active
+  website: https://www.btl.gov.il/
+  location: Jerusalem, Israel
+  israel_office: Jerusalem (HQ, 13 Weizmann Blvd)
+  sources:
+  - https://en.wikipedia.org/wiki/Bituah_Leumi
+  - https://www.btl.gov.il/English%20Homepage/About/Pages/default.aspx
+- id: 70
+  name: Sigma Designs
+  slug: sigmadesigns
+  functions:
+  - teaching
+  logo: logos/sigmadesigns.svg
+  logo_original: raw/logos/sigmadesigns.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/f/f0/Sigma_Designs_logo.svg
+  logo_license: Public domain (PD-textlogo)
+  logo_note: Historical logo of the independent company (defunct/liquidated 2018).
+  old_url: http://www.sigmadesigns.com
+  status: defunct
+  what_happened: In 2018 sold its Z-Wave business to Silicon Labs ($240M, April) and its Wired Connectivity unit including Sigma Designs Israel S.D.I. Ltd (ex-CopperGate, Tel Aviv) to ISSI ($28M, February),
+    then liquidated; sigmadesigns.com is now a dropped, parked domain.
+  website: https://www.issi.com/
+  israel_office: Tel Aviv (ex-CopperGate Communications, sold to ISSI in 2018)
+  former_website: http://www.sigmadesigns.com (dead - domain now parked on a Japanese host)
+  former_location: Fremont, California, USA
+  sources:
+  - https://en.wikipedia.org/wiki/Sigma_Designs
+  - https://www.sec.gov/Archives/edgar/data/0000790715/000143774918002722/sigm20180215_8k.htm
+- id: 71
+  name: Radware
+  slug: radware
+  functions:
+  - teaching
+  logo: logos/radware.svg
+  logo_original: raw/logos/radware.gif
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/c/cd/Radware_logo.svg
+  logo_license: Public domain (PD-textlogo)
+  logo_note: Current Radware logo.
+  old_url: http://www.radware.com
+  status: active
+  website: https://www.radware.com
+  location: Tel Aviv, Israel
+  israel_office: Tel Aviv, Israel (international HQ; US corporate HQ in Mahwah, NJ)
+  sources:
+  - https://en.wikipedia.org/wiki/Radware
+  - https://craft.co/radware/locations
+- id: 72
+  name: Bituach Yashir
+  slug: bituach-yashir
+  functions:
+  - consulting
+  logo: logos/bituach-yashir.svg
+  logo_original: raw/logos/bituach-yashir.jpg
+  logo_kind: official vector
+  logo_source: https://www.555.co.il/sites/default/files/logo1.svg
+  logo_license: company brand asset
+  logo_note: Current site header logo (four dots mark + 'ביטוח ישיר / IDI חברה לביטוח בע"מ').
+  old_url: http://www.555.co.il
+  status: active
+  website: https://www.555.co.il
+  location: Petah Tikva, Israel
+  israel_office: Petah Tikva, Israel (35 Efal St.)
+  sources:
+  - https://www.555.co.il/clients/contact_us.html
+  - https://en.globes.co.il/en/article-idi-becomes-israels-most-valuable-insurance-co-1001108919
+- id: 73
+  name: mPrest
+  slug: mprest
+  functions:
+  - teaching
+  logo: logos/mprest.svg
+  logo_original: raw/logos/mprest.jpg
+  logo_kind: official vector
+  logo_source: https://mprest-landing.pages.dev/mprest-logo.svg
+  logo_license: company brand asset
+  logo_note: Current site header logo (www.mprest.com redirects to mprest-landing.pages.dev; /mprest-logo.svg is served from there). 'Prest' is white, designed for the site's dark header.
+  old_url: http://www.mprest.com/Default.aspx
+  status: active
+  what_happened: Still independent (Rafael holds ~43-50%); a 2025-2026 takeover bid by US firm Ondas was frozen by Israel's Defense Ministry in Jan 2026.
+  website: https://www.mprest.com
+  location: Petah Tikva, Israel
+  israel_office: Petah Tikva, Israel
+  sources:
+  - https://en.wikipedia.org/wiki/MPrest_Systems
+  - https://www.jns.org/israel-news/israel-blocks-us-firm-takeover-of-iron-dome-software-developer
+- id: 74
+  name: William Hill
+  slug: william-hill
+  functions:
+  - teaching
+  - consulting
+  logo: logos/william-hill.svg
+  logo_original: raw/logos/william-hill.jpg
+  logo_kind: official vector
+  logo_source: https://www.williamhill.com/
+  logo_license: company brand asset
+  logo_note: 'Inline <svg id="Layer_2"> extracted from the williamhill.com page header; current script ''William HILL'' wordmark, fills are #fff (designed for the site''s navy background). Commons/enwiki
+    only have PNG.'
+  old_url: http://www.williamhill.com
+  status: acquired
+  what_happened: Tel Aviv online/tech office closed in 2017-2018 (moved to London/Gibraltar/Krakow); William Hill itself was acquired by Caesars Entertainment in 2021, whose European business was sold to
+    888 Holdings (now evoke plc) in 2022.
+  website: https://www.williamhill.com
+  location: London, United Kingdom
+  israel_office: Tel Aviv, Israel (Azrieli Towers; closed 2018)
+  former_website: http://www.williamhill.com (still live, same domain)
+  former_location: Tel Aviv, Israel (Israeli arm); London, United Kingdom (parent)
+  sources:
+  - https://en.globes.co.il/en/article-william-hill-closing-down-israel-software-operations-1001194200
+  - https://en.wikipedia.org/wiki/William_Hill_(bookmaker)
+- id: 75
+  name: Prime ministers office
+  slug: pmo
+  functions:
+  - teaching
+  logo: logos/pmo.svg
+  logo_original: raw/logos/pmo.gif
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/8/8f/Emblem_of_Israel.svg
+  logo_license: Public domain
+  logo_note: 'PARTIAL: the PMO logo is the State Emblem of Israel above a trilingual ''Prime Minister''s Office'' wordmark (hewiki File:PrimeMinisterOfficeEmblem.png, PNG only). This SVG is the emblem mark
+    alone, without the office wordmark. gov.il returns 403 to fetchers; no PMO-specific SVG found on Commons/hewiki/Wayback (pmo.gov.il only ever served GIF/JPG).'
+  old_url: http://www.pmo.gov.il
+  status: active
+  website: https://www.gov.il/he/departments/prime_ministers_office
+  location: Jerusalem, Israel
+  israel_office: Jerusalem, Israel (Kiryat HaMemshala)
+  former_website: http://www.pmo.gov.il (now redirects to the gov.il portal)
+  sources:
+  - https://en.wikipedia.org/wiki/Prime_Minister%27s_Office_(Israel)
+  - https://www.gov.il/en/departments/prime_ministers_office
+- id: 76
+  name: Applied Materials
+  slug: appliedmaterials
+  functions:
+  - teaching
+  logo: logos/appliedmaterials.svg
+  logo_original: raw/logos/appliedmaterials.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/0/03/Applied_Materials_Logo.svg
+  logo_license: Public domain (PD-textlogo)
+  logo_note: Current Applied Materials logo. A smaller duplicate exists as commons File:Applied Materials Inc. Logo.svg.
+  old_url: http://www.appliedmaterials.com
+  status: active
+  website: https://www.appliedmaterials.com
+  location: Santa Clara, California, USA
+  israel_office: Rehovot, Israel (Applied Materials Israel, PDC business unit)
+  sources:
+  - https://en.wikipedia.org/wiki/Applied_Materials
+  - https://www.calcalistech.com/ctechnews/article/s10hnjbu11g
+- id: 77
+  name: Entropic
+  slug: entropic
+  functions:
+  - teaching
+  logo: logos/entropic.svg
+  logo_original: raw/logos/entropic.jpg
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.entropic.com
+  status: acquired
+  what_happened: Closed its Israel engineering site in a 2014 restructuring, then was acquired by MaxLinear in April 2015 for about $287M; entropic.com now belongs to a patent-licensing entity using the
+    name under MaxLinear license.
+  website: https://www.maxlinear.com
+  location: Carlsbad, California, USA (MaxLinear)
+  israel_office: Israel (city unknown; engineering site closed 2014)
+  former_website: http://www.entropic.com (domain still live, now a patent-portfolio company site)
+  former_location: San Diego, California, USA
+  sources:
+  - https://en.wikipedia.org/wiki/Entropic_Communications
+  - https://sdbj.com/technology/entropic-communications-transfer-workers-californi/
+- id: 78
+  name: Mellanox
+  slug: mellanox
+  functions:
+  - teaching
+  logo: logos/mellanox.svg
+  logo_original: raw/logos/mellanox.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/en/a/ab/Mellanox_Technologies_logo.svg
+  logo_license: non-free logo used for identification (enwiki fair use)
+  logo_note: Historical Mellanox Technologies logo from its independent era (pre-2020 NVIDIA acquisition).
+  old_url: http://www.mellanox.com
+  status: acquired
+  what_happened: Acquired by NVIDIA for about $7B, completed April 2020, and absorbed as NVIDIA Networking.
+  website: https://www.nvidia.com/en-us/networking/
+  location: Santa Clara, California, USA (NVIDIA)
+  israel_office: Yokneam Illit, Israel
+  former_website: http://www.mellanox.com (redirects to nvidia.com/networking)
+  former_location: Yokneam Illit, Israel (and Sunnyvale, California, USA)
+  sources:
+  - https://en.wikipedia.org/wiki/Mellanox_Technologies
+  - https://nvidianews.nvidia.com/news/nvidia-to-acquire-mellanox-for-6-9-billion
+- id: 79
+  name: Elta
+  slug: elta
+  functions:
+  - teaching
+  logo: logos/elta.svg
+  logo_original: raw/logos/elta.jpg
+  logo_kind: official vector
+  logo_source: https://en.wikipedia.org/wiki/Special:FilePath/ELTA_Systems_logo.svg
+  logo_license: non-free logo used for identification (enwiki File:ELTA Systems logo.svg)
+  logo_note: current IAI ELTA logo (IAI emblem + ELTA wordmark)
+  old_url: http://www.iai.co.il/17887-he/ELTA.aspx
+  status: active
+  website: https://www.iai.co.il
+  location: Ashdod, Israel
+  israel_office: Ashdod, Israel (100 Yitzhak HaNassi Blvd.)
+  sources:
+  - https://en.wikipedia.org/wiki/ELTA_Systems
+  - https://www.dnb.com/business-directory/company-profiles.elta_systems_ltd.660c3994511ddc05fa66a2460e487a33.html
+- id: 80
+  name: redhat
+  slug: redhat
+  functions:
+  - teaching
+  logo: logos/redhat.svg
+  logo_original: raw/logos/redhat.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/wiki/Special:FilePath/Red_Hat_Logo_2019.svg
+  logo_license: PD-textlogo / trademarked (Commons)
+  logo_note: current 2019 Red Hat logo; brand continues under IBM
+  old_url: http://www.redhat.com
+  status: acquired
+  what_happened: Acquired by IBM for $34B, completed July 2019; continues to operate as a Red Hat-branded IBM subsidiary.
+  website: https://www.redhat.com
+  location: Raleigh, North Carolina, USA
+  israel_office: Ra'anana, Israel (R&D center, ex-Qumranet)
+  former_website: http://www.redhat.com (still live, same domain)
+  former_location: Raleigh, North Carolina, USA
+  sources:
+  - https://en.wikipedia.org/wiki/Red_Hat
+  - https://www.redhat.com/en/about/office-locations
+- id: 81
+  name: Panaya
+  slug: panaya
+  functions:
+  - teaching
+  logo: logos/panaya.svg
+  logo_original: raw/logos/panaya.jpg
+  logo_kind: official vector
+  logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/Panaya_Logo.svg
+  logo_license: PD-textlogo / trademarked (Commons)
+  logo_note: current Panaya logo; brand continues under Infosys
+  old_url: http://panaya.com
+  status: acquired
+  what_happened: Acquired by Infosys in March 2015 for about $200M; still operates under its own brand as an Infosys subsidiary.
+  website: https://www.panaya.com
+  location: Hod Hasharon, Israel
+  israel_office: Hod Hasharon, Israel (6 Haharash St.)
+  former_website: http://panaya.com (still live, same domain)
+  former_location: Hod Hasharon, Israel (founded in Ra'anana)
+  sources:
+  - https://en.wikipedia.org/wiki/Panaya
+  - https://techcrunch.com/2015/02/15/infosys-panaya/
+- id: 82
+  name: Audible
+  slug: audible
+  remark: Audio book company
+  functions: []
+  logo: logos/audible.svg
+  logo_original: raw/logos/audible.jpg
+  logo_kind: official vector
+  logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/Audible_logo.svg
+  logo_license: PD-textlogo / trademarked (Commons)
+  logo_note: current 'audible, an amazon company' logo
+  old_url: http://www.audible.com
+  status: acquired
+  what_happened: Acquired by Amazon in 2008 for about $300M; operates as a wholly owned Amazon subsidiary.
+  website: https://www.audible.com
+  location: Newark, New Jersey, USA
+  former_website: http://www.audible.com (still live, same domain)
+  former_location: Wayne, New Jersey, USA (moved to Newark in 2007)
+  sources:
+  - https://en.wikipedia.org/wiki/Audible_(service)
+- id: 83
+  name: U-Tx
+  slug: utx
+  remark: In Limassol, Cyprus
+  functions:
+  - teaching
+  - consulting
+  logo: logos/utx.svg
+  logo_original: raw/logos/utx.png
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.u-tx.com
+  status: acquired
+  what_happened: Acquired by Verint Systems in March 2014 for about $83M; Verint's cyber-intelligence business (including UTX) was spun off as Cognyte in February 2021, and u-tx.com now redirects to cognyte.com.
+  website: https://www.cognyte.com
+  location: Herzliya, Israel (Cognyte)
+  israel_office: Herzliya, Israel
+  former_website: http://www.u-tx.com (redirects to cognyte.com)
+  former_location: Limassol, Cyprus (still a Cognyte office at The Maritime Center, Omonoias Ave.)
+  sources:
+  - https://en.globes.co.il/en/article-verint-acquires-utx-for-83m-1000929349
+  - https://en.wikipedia.org/wiki/Cognyte
+- id: 84
+  name: Hebrew University
+  slug: hebrew-university
+  functions: []
+  logo: logos/hebrew-university.svg
+  logo_original: raw/logos/hebrew-university.jpg
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/4/4d/Hebrew_University_Logo.svg
+  logo_license: Public domain (PD-textlogo/simple) per Commons
+  logo_note: current HUJI logo; upload.wikimedia.org was rate-limiting originals (HTTP 429) so the file was fetched from the Wayback Machine copy of the same URL (20260801160647id_), sha1 e8c80cab... identical
+    to the current Commons revision (2025-10-17)
+  old_url: http://new.huji.ac.il
+  status: active
+  website: https://www.huji.ac.il
+  location: Jerusalem, Israel
+  israel_office: Jerusalem, Israel (Mount Scopus, Givat Ram, Ein Kerem; also Rehovot)
+  sources: &id002
+  - https://en.wikipedia.org/wiki/Hebrew_University_of_Jerusalem
+  - https://www.huji.ac.il
+- id: 85
+  name: MediaMind
+  slug: mediamind
+  functions:
+  - teaching
+  logo: logos/mediamind.svg
+  logo_original: raw/logos/mediamind.jpg
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.mediamind.com
+  status: acquired
+  what_happened: Eyeblaster (founded 1999) rebranded as MediaMind in 2010, was acquired by DG (Digital Generation) for $414M in 2011, spun off/renamed Sizmek in 2013-2014; Sizmek went bankrupt in 2019 and
+    its ad server/DCO assets were bought by Amazon (Amazon Ads).
+  website: https://advertising.amazon.com/
+  location: Seattle, Washington, USA
+  israel_office: Herzliya, Israel
+  former_website: http://www.mediamind.com (dead; domain no longer resolves)
+  former_location: New York, New York, USA (R&D in Herzliya, Israel)
+  sources:
+  - https://www.adexchanger.com/ad-exchange-news/tracing-timeline-sizmek-ad-tech-rollup-duopoly-alternative/
+  - https://www.calcalistech.com/ctech/articles/0,7340,L-3763467,00.html
+- id: 87
+  name: EarlySense
+  slug: earlysense
+  functions:
+  - teaching
+  - consulting
+  logo: logos/earlysense.svg
+  logo_original: raw/logos/earlysense.jpg
+  logo_kind: official vector
+  logo_source: https://web.archive.org/web/2020id_/https://www.earlysense.com/wp-content/themes/earlysense/assets/images/logo-earlysense.svg
+  logo_license: company brand asset (EarlySense site header logo, archived copy)
+  logo_note: company defunct since 2021; logo taken from the Wayback Machine copy of the earlysense.com site header (no logo on Commons or logo libraries)
+  old_url: http://www.earlysense.com
+  status: defunct
+  what_happened: Sold its hospital contact-free monitoring technology to Hillrom for $30M in 2021, was put into liquidation in 2022 after Kreos Capital called a loan, and its remaining assets were sold
+    to TytoCare in November 2022 for about $2M.
+  israel_office: Ramat Gan, Israel
+  former_website: http://www.earlysense.com (dead; domain no longer resolves)
+  former_location: Ramat Gan, Israel (US office Woburn/Waltham, Massachusetts)
+  sources:
+  - https://www.calcalistech.com/ctechnews/article/bkyc70u8j
+  - https://en.globes.co.il/en/article-hillrom-buys-medical-monitoring-tech-from-earlysense-1001359190
+- id: 89
+  name: Open University of Israel
+  slug: openuniversityil
+  functions: []
+  logo: logos/open-university.svg
+  logo_original: raw/logos/open-university.jpg
+  logo_kind: official vector
+  logo_source: https://www.openu.ac.il/_layouts/15/OpenU_WWW/Theming/Global/images/LOGO_OU_BLACK.svg?v=8
+  logo_license: company brand asset (Open University site header logo)
+  logo_note: official header logo with trilingual wordmark; Commons File:Open university israel logo.svg (symbol only) was the alternative
+  old_url: http://www.openu.ac.il
+  status: active
+  website: https://www.openu.ac.il/
+  location: Ra'anana, Israel
+  israel_office: Ra'anana, Israel
+  sources:
+  - https://en.wikipedia.org/wiki/Open_University_of_Israel
+- id: 90
+  name: SanDisk
+  slug: sandisk
+  functions:
+  - teaching
+  logo: logos/sandisk.svg
+  logo_original: raw/logos/sandisk.jpg
+  logo_kind: official vector
+  logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/SanDisk_2024_logo.svg
+  logo_license: Public domain / PD-textlogo per Commons
+  logo_note: current logo introduced December 2024 for the spun-off Sandisk; File:SanDisk_Logo_2007.svg holds the 2007-2024 logo if the M-Systems-era look is preferred
+  old_url: http://www.sandisk.com
+  status: active
+  what_happened: Acquired M-Systems (Kfar Saba) in 2006; itself acquired by Western Digital in 2016, then spun out again as an independent Nasdaq company (SNDK) in February 2025.
+  website: https://www.sandisk.com/
+  location: Milpitas, California, USA
+  israel_office: Kfar Saba, Israel (also Tefen and Omer)
+  sources:
+  - https://en.wikipedia.org/wiki/SanDisk
+  - https://www.nasdaq.com/press-release/sandisk-celebrates-nasdaq-listing-after-completing-separation-western-digital-2025-02
+- id: 91
+  name: Mercury Interactive
+  slug: mercury-interactive
+  remark: Before they were bought by HP
+  functions:
+  - teaching
+  logo: logos/mercury-interactive.svg
+  logo_original: raw/logos/mercury-interactive.gif
+  logo_kind: official vector
+  logo_source: https://upload.wikimedia.org/wikipedia/commons/1/11/Mercury_Interactive_logo.svg
+  logo_license: Public domain (PD-textlogo) per Commons
+  logo_note: historical independent-era logo (pre-2006 HP acquisition); fetched via Wayback copy of the Commons URL because upload.wikimedia.org returned HTTP 429, sha1 0e7e1a14... identical to the Commons
+    file
+  old_url: http://www.mercuryinteractive.com
+  status: acquired
+  what_happened: Acquired by Hewlett-Packard for about $4.5B in 2006 (closed November 2006) and folded into HP Software; the product line passed to HPE, then Micro Focus (2017), then OpenText (2023).
+  website: https://www.opentext.com/
+  location: Waterloo, Ontario, Canada
+  israel_office: Yehud, Israel
+  former_website: http://www.mercuryinteractive.com (dead; domain no longer resolves)
+  former_location: Mountain View, California, USA (R&D in Yehud, Israel)
+  sources:
+  - https://en.wikipedia.org/wiki/Mercury_Interactive
+  - https://www.crunchbase.com/acquisition/hewlett-packard-acquires-mercury-interactive--ce5edf64
+- id: 92
+  name: Nice
+  slug: nice
+  remark: The israel branch
+  functions:
+  - teaching
+  logo: logos/nice.svg
+  logo_original: raw/logos/nice.jpg
+  logo_kind: official vector
+  logo_source: https://resources.nice.com/wp-content/uploads/2025/05/nice-new-logo.svg
+  logo_license: company brand asset (NiCE site header logo)
+  logo_note: current 2025 NiCE logo from the company site; enwiki/hewiki only had a PNG of it
+  old_url: http://www.nice.com
+  status: active
+  website: https://www.nice.com/
+  location: Ra'anana, Israel
+  israel_office: Ra'anana, Israel
+  sources:
+  - https://www.nice.com/company/global-locations
+- id: 93
+  name: Matrix
+  slug: matrix
+  remark: The Talpiot branch in Modiin Ilit
+  functions:
+  - teaching
+  logo: logos/matrix.svg
+  logo_original: raw/logos/matrix.jpg
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.matrix.co.il/Pages/default.aspx
+  status: active
+  what_happened: Merged with Magic Software Enterprises in March 2026 (Magic became a wholly owned subsidiary); the Talpiot centre in Modi'in Illit still operates as 'matrix Talpiot'.
+  website: https://www.matrix.co.il/
+  location: Kfar Saba, Israel
+  israel_office: 'Kfar Saba, Israel (Talpiot branch: Modi''in Illit)'
+  sources:
+  - https://www.matrix-globalservices.com/about-us/
+  - https://www.timesofisrael.com/israels-matrix-to-snap-up-magic-software-in-2-1-billion-it-services-merger-deal/
+- id: 94
+  name: vmware
+  slug: vmware
+  functions:
+  - teaching
+  logo: logos/vmware.svg
+  logo_original: raw/logos/vmware.jpg
+  logo_kind: official vector
+  logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/VMware_logo.svg
+  logo_license: PD-textlogo (Wikimedia Commons)
+  logo_note: Classic VMware logo from the independent era (pre-Broadcom); Commons also has Vmware-by-broadcom.svg and Logo of VMware (2000).svg
+  old_url: http://www.vmware.com
+  status: acquired
+  what_happened: Acquired by Broadcom for about $69B, closed November 22, 2023; now operates as a Broadcom division (VMware by Broadcom).
+  website: https://www.vmware.com/
+  location: Palo Alto, California, USA
+  israel_office: Herzliya, Israel
+  former_website: http://www.vmware.com (still live, now under Broadcom)
+  former_location: Palo Alto, California, USA
+  sources:
+  - https://investors.broadcom.com/news-releases/news-release-details/broadcom-completes-acquisition-vmware
+  - https://careers.vmware.com/israel-office
+- id: 95
+  name: Check Point
+  slug: checkpoint
+  functions:
+  - teaching
+  - consulting
+  logo: logos/checkpoint.svg
+  logo_original: raw/logos/checkpoint.png
+  logo_kind: official vector
+  logo_source: https://en.wikipedia.org/wiki/Special:FilePath/Check-Point-2024-logo-color.svg
+  logo_license: non-free logo used for identification (enwiki)
+  logo_note: Current 2024 Check Point logo, from the English Wikipedia infobox
+  old_url: http://www.checkpoint.com
+  status: active
+  website: https://www.checkpoint.com/
+  location: Tel Aviv, Israel
+  israel_office: Tel Aviv, Israel
+  sources:
+  - https://www.checkpoint.com/about-us/
+  - https://en.wikipedia.org/wiki/Check_Point
+- id: 96
+  name: my Things
+  slug: mythings
+  functions:
+  - teaching
+  logo: logos/mythings.svg
+  logo_original: raw/logos/mythings.gif
+  logo_kind: official vector
+  logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/MyThings_Logo.svg
+  logo_license: PD-textlogo (Wikimedia Commons)
+  logo_note: Logo of the defunct myThings ad-tech company
+  old_url: http://www.mythings.com
+  status: defunct
+  what_happened: Retargeting ad-tech company (founded 2005) that entered merger talks with Perion in 2014 which did not complete; listed as closed/deadpooled by Crunchbase and Tracxn, its UK entity was
+    dissolved in 2019; exact closure year unknown.
+  israel_office: Tel Aviv, Israel
+  former_website: http://www.mythings.com (returns a server error now)
+  former_location: Tel Aviv, Israel
+  sources:
+  - https://tracxn.com/d/companies/mythings/__wWuz4YF912q4untCy65LspgBoqTlQZnLYHXkZ4rLqBU
+  - https://en.globes.co.il/en/article-1000910335
+- id: 97
+  name: Arris
+  slug: arris
+  functions:
+  - teaching
+  logo: logos/arris.svg
+  logo_original: raw/logos/arris.jpg
+  logo_kind: official vector
+  logo_source: https://en.wikipedia.org/wiki/Special:FilePath/Logo_of_Arris_Group,_Inc.svg
+  logo_license: non-free logo used for identification (enwiki)
+  logo_note: ARRIS Group logo from its independent era (before the 2019 CommScope acquisition)
+  old_url: http://www.arrisi.com
+  status: acquired
+  what_happened: BigBand Networks was acquired by ARRIS in 2011 (~$172M); ARRIS was acquired by CommScope in April 2019 ($7.4B); in January 2026 CommScope sold its CCS segment to Amphenol and the remaining
+    parent (holding the former ARRIS access-network business) was renamed Vistance Networks.
+  website: https://www.vistancenetworks.com/
+  location: Claremont, North Carolina, USA
+  israel_office: Tel Aviv, Israel
+  former_website: http://www.arrisi.com (redirects to vistancenetworks.com)
+  former_location: 'Suwanee, Georgia, USA (BigBand: Redwood City, California, USA; Israel R&D Tel Aviv)'
+  sources:
+  - https://en.wikipedia.org/wiki/Arris_International
+  - https://www.broadbandtvnews.com/2026/01/12/commscope-completes-sale-of-ccs-to-amphenol-as-parent-rebrands-to-vistance-networks/
+- id: 98
+  name: Basmach
+  slug: basmach
+  functions:
+  - teaching
+  logo: logos/basmach.svg
+  logo_original: raw/logos/basmach.jpg
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.tikshuv.idf.il/894-he/tikshuv.aspx
+  status: active
+  what_happened: IDF School of Computer Professions (split off from Mamram in 1994), now part of the Lotem/C4I directorate; sat at Camp Maklef in Ramat Gan until 2022, then Gav-Yam Negev park in Beersheba,
+    and moved to Kiryat HaTikshuv (Negev) in 2026.
+  website: https://www.idf.il/
+  location: Beersheba area (Kiryat HaTikshuv), Israel
+  israel_office: Beersheba area, Israel (formerly Ramat Gan)
+  former_website: http://www.tikshuv.idf.il/894-he/tikshuv.aspx (dead; domain no longer resolves)
+  sources:
+  - https://he.wikipedia.org/wiki/%D7%91%D7%99%D7%AA_%D7%94%D7%A1%D7%A4%D7%A8_%D7%9C%D7%9E%D7%A7%D7%A6%D7%95%D7%A2%D7%95%D7%AA_%D7%94%D7%9E%D7%97%D7%A9%D7%91
+  - https://en.wikipedia.org/wiki/Mamram
+- id: 99
+  name: John Bryce
+  slug: johnbryce
+  from_date: '2013-06-01'
+  functions:
+  - teaching
+  - consulting
+  - certification
+  logo: logos/johnbryce.svg
+  logo_original: raw/logos/johnbryce.jpg
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.johnbryce.co.il
+  status: active
+  website: https://www.johnbryce.co.il/
+  location: Tel Aviv, Israel
+  israel_office: Tel Aviv, Israel
+  sources:
+  - https://www.johnbryce.co.il/content/john-bryce-training-college/
+  - https://www.matrix-globalservices.com/subsidiaries/
+- id: 100
+  name: Amazon Web Services Certified Instructor
+  slug: aws
+  from_date: '2014-02-02'
+  functions:
+  - certification
+  logo: logos/aws.svg
+  logo_original: raw/logos/aws.png
+  logo_kind: official vector
+  logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/Amazon_Web_Services_Logo.svg
+  logo_license: PD-textlogo (Wikimedia Commons)
+  logo_note: Current AWS logo (used for the AWS Certified Instructor entry)
+  old_url: http://aws.amazon.com
+  status: active
+  website: https://aws.amazon.com/
+  location: Seattle, Washington, USA
+  israel_office: Tel Aviv, Israel
+  sources: &id001
+  - https://press.aboutamazon.com/2023/8/aws-launches-infrastructure-region-in-israel
+- id: 102
+  name: Naxus Audio Books
+  slug: nab
+  functions: []
+  logo: logos/nab.svg
+  logo_original: raw/logos/nab.jpg
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.naxosaudiobooks.com
+  status: active
+  website: https://naxosaudiobooks.com/
+  location: Redhill, United Kingdom
+  sources:
+  - https://naxosaudiobooks.com/about-us/
+  - https://naxosaudiobooks.com/contact-us/
+- id: 103
+  name: FreeScale
+  slug: freescale
+  functions:
+  - teaching
+  logo: logos/freescale.svg
+  logo_original: raw/logos/freescale.jpg
+  logo_kind: official vector
+  logo_source: https://en.wikipedia.org/wiki/Special:FilePath/Freescale_(2).svg
+  logo_license: non-free logo used for identification (enwiki)
+  logo_note: Freescale Semiconductor logo from its independent era (before the 2015 NXP acquisition)
+  old_url: http://www.freescale.com
+  status: acquired
+  what_happened: Acquired by NXP Semiconductors on 7 December 2015; the Herzliya design centre became NXP Semiconductors Israel Ltd.
+  website: https://www.nxp.com/
+  location: Eindhoven, Netherlands
+  israel_office: Herzliya, Israel
+  former_website: http://www.freescale.com (now redirects to nxp.com)
+  former_location: Austin, Texas, USA
+  sources:
+  - https://en.wikipedia.org/wiki/Freescale_Semiconductor
+  - https://en.globes.co.il/en/article-nxp-takes-over-freescale-semiconductors-israel-operations-1001086680
+- id: 104
+  name: RadVision
+  slug: radvision
+  functions:
+  - teaching
+  logo: logos/radvision.svg
+  logo_original: raw/logos/radvision.jpg
+  logo_kind: traced from original bitmap (no vector logo found online)
+  old_url: http://www.radvision.com
+  status: acquired
+  what_happened: Acquired by Avaya for about $230M, completed 5 June 2012; its Scopia video products were folded into Avaya and the Technology Business Unit was sold on to Spirent in 2014.
+  website: https://www.avaya.com/
+  location: Morristown, New Jersey, USA
+  israel_office: Tel Aviv, Israel
+  former_website: http://www.radvision.com (dead, does not resolve)
+  former_location: Tel Aviv, Israel
+  sources:
+  - https://en.wikipedia.org/wiki/Radvision
+  - https://investors.avaya.com/investor-news/press-release-details/2012/Avaya-Completes-Radvision-Acquisition/default.aspx
+- id: 105
+  name: AWS Solutions Architect - Associate Level
+  slug: aws-sol-arch-assoc
+  from_date: '2014-05-15'
+  functions:
+  - certification
+  logo: logos/aws.svg
+  logo_original: raw/logos/aws.png
+  logo_kind: official vector
+  logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/Amazon_Web_Services_Logo.svg
+  logo_license: PD-textlogo (Wikimedia Commons)
+  logo_note: Current AWS logo (used for the AWS Certified Instructor entry)
+  old_url: http://aws.amazon.com
+  status: active
+  website: https://aws.amazon.com/
+  location: Seattle, Washington, USA
+  israel_office: Tel Aviv, Israel
+  sources: *id001
+- id: 106
+  name: VeriFone
+  slug: verifone
+  functions:
+  - teaching
+  logo: logos/verifone.svg
+  logo_original: raw/logos/verifone.jpg
+  logo_kind: official vector
+  logo_source: https://www.verifone.com/
+  logo_license: company brand asset (inline header SVG on verifone.com)
+  logo_note: Current Verifone logo extracted from the site header inline <svg> (nav_logo_wrap); paths use fill=currentColor
+  old_url: http://global.verifone.com
+  status: active
+  what_happened: Israeli site is the former Lipman Electronic Engineering, acquired by Verifone in November 2006; Verifone itself was taken private by Francisco Partners in 2018.
+  website: https://www.verifone.com/
+  location: New York, New York, USA
+  israel_office: Rosh HaAyin, Israel
+  former_website: http://global.verifone.com (now 404; main site is verifone.com)
+  sources:
+  - https://en.wikipedia.org/wiki/Verifone
+  - https://www.americanbanker.com/news/verifone-closes-deal-for-lipman
+- id: 108
+  name: Brilliance Audio
+  slug: brilliance-audio
+  functions: []
+  logo: logos/verifone.svg
+  logo_original: raw/logos/verifone.jpg
+  logo_kind: official vector
+  logo_source: https://www.verifone.com/
+  logo_license: company brand asset (inline header SVG on verifone.com)
+  logo_note: Current Verifone logo extracted from the site header inline <svg> (nav_logo_wrap); paths use fill=currentColor
+  old_url: https://www.brillianceaudio.com
+  status: acquired
+  what_happened: Acquired by Amazon in May 2007; continues as the Brilliance Audio imprint of Amazon's Brilliance Publishing.
+  website: https://www.brilliancepublishing.com/
+  location: Grand Haven, Michigan, USA
+  former_website: https://www.brillianceaudio.com (now redirects to brilliancepublishing.com)
+  former_location: Grand Haven, Michigan, USA
+  sources:
+  - https://press.aboutamazon.com/2007/5/amazon-com-acquires-brilliance-audio
+  - https://www.brilliancepublishing.com/
+- id: 109
+  name: Gildan Media
+  slug: gildan-media
+  functions: []
+  logo: logos/verifone.svg
+  logo_original: raw/logos/verifone.jpg
+  logo_kind: official vector
+  logo_source: https://www.verifone.com/
+  logo_license: company brand asset (inline header SVG on verifone.com)
+  logo_note: Current Verifone logo extracted from the site header inline <svg> (nav_logo_wrap); paths use fill=currentColor
+  old_url: http://www.gildanmedia.com
+  status: acquired
+  what_happened: Acquired by RBmedia in September 2017; the Gildan Media brand was replaced by RBmedia's Ascent Audio in August 2021.
+  website: https://rbmediaglobal.com/ascent-audio/
+  location: Landover, Maryland, USA
+  former_website: http://www.gildanmedia.com (now redirects to rbmediaglobal.com/ascent-audio/)
+  former_location: New York, New York, USA
+  sources:
+  - https://www.publishersweekly.com/pw/by-topic/industry-news/audio-books/article/74845-rbmedia-buys-gildan-media.html
+  - https://www.publishersweekly.com/pw/by-topic/industry-news/audio-books/article/87049-rbmedia-forms-ascent-audio-brand.html
+- id: 110
+  name: Penguin Audio
+  slug: penguin-audio
+  functions: []
+  logo: logos/verifone.svg
+  logo_original: raw/logos/verifone.jpg
+  logo_kind: official vector
+  logo_source: https://www.verifone.com/
+  logo_license: company brand asset (inline header SVG on verifone.com)
+  logo_note: Current Verifone logo extracted from the site header inline <svg> (nav_logo_wrap); paths use fill=currentColor
+  old_url: http://www.penguin.com/static/html/audio
+  status: merged
+  what_happened: Penguin merged with Random House on 1 July 2013; Penguin Audio is now an imprint of Penguin Random House Audio.
+  website: https://penguinrandomhouseaudio.com/
+  location: New York, New York, USA
+  former_website: http://www.penguin.com/static/html/audio (now 404)
+  former_location: New York, New York, USA
+  sources:
+  - https://en.wikipedia.org/wiki/Penguin_Group
+  - https://global.penguinrandomhouse.com/tag/penguin-audio/
+- id: 111
+  name: Pimsleur
+  slug: pimsleur
+  functions: []
+  logo: logos/amobee.svg
+  logo_original: raw/logos/amobee.gif
+  logo_kind: official vector
+  logo_source: https://web.archive.org/web/20210625144910id_/https://www.amobee.com/wp-content/themes/amobee/assets/images/black-logo.svg
+  logo_license: company brand asset (site header logo, archived by the Wayback Machine 2021-06-25)
+  logo_note: AMOBEE wordmark from the company's own site while still independent (pre Tremor/Nexxen acquisition); no Commons or logo-library SVG exists
+  old_url: http://www.pimsleur.com
+  status: active
+  website: https://www.pimsleur.com/
+  location: Concord, Massachusetts, USA
+  sources:
+  - https://en.wikipedia.org/wiki/Pimsleur_Language_Programs
+  - https://www.pimsleur.com/pimsleur-about-us/
+- id: 112
+  name: Hebrew University of Jerusalem
+  slug: hebrew-university-of-jerusalem
+  functions: []
+  logo: logos/verifone.svg
+  logo_original: raw/logos/verifone.jpg
+  logo_kind: official vector
+  logo_source: https://www.verifone.com/
+  logo_license: company brand asset (inline header SVG on verifone.com)
+  logo_note: Current Verifone logo extracted from the site header inline <svg> (nav_logo_wrap); paths use fill=currentColor
+  old_url: http://new.huji.ac.il
+  status: active
+  website: https://www.huji.ac.il
+  location: Jerusalem, Israel
+  israel_office: Jerusalem, Israel (Mount Scopus, Givat Ram, Ein Kerem; also Rehovot)
+  sources: *id002
+- id: 113
+  name: BBC Radio
+  slug: bbc-radio
+  functions: []
+  logo: logos/verifone.svg
+  logo_original: raw/logos/verifone.jpg
+  logo_kind: official vector
+  logo_source: https://www.verifone.com/
+  logo_license: company brand asset (inline header SVG on verifone.com)
+  logo_note: Current Verifone logo extracted from the site header inline <svg> (nav_logo_wrap); paths use fill=currentColor
+  old_url: http://www.bbc.co.uk/radio
+  status: active
+  website: https://www.bbc.co.uk/sounds
+  location: London, United Kingdom
+  sources:
+  - https://en.wikipedia.org/wiki/BBC_Radio
+- id: 114
+  name: Apple
+  slug: apple
+  functions:
+  - teaching
+  logo: logos/apple.svg
+  logo_original: raw/logos/apple.png
+  logo_kind: official vector
+  logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/Apple_logo_black.svg
+  logo_license: PD-shape / trademarked (Wikimedia Commons)
+  logo_note: Current monochrome Apple logo
+  old_url: http://www.apple.com
+  status: active
+  website: https://www.apple.com/
+  location: Cupertino, California, USA
+  israel_office: Herzliya, Israel
+  sources:
+  - https://www.timesofisrael.com/apples-herzliya-rd-center-now-second-largest-in-world/
+  - https://www.apple.com/
+- id: 115
+  name: Allot
+  slug: allot
+  functions:
+  - teaching
+  logo: logos/allot.svg
+  logo_original: raw/logos/allot.png
+  logo_kind: official vector
+  logo_source: https://www.allot.com/wp-content/themes/allot/assets/new-homepage/img/site-header/logo.svg
+  logo_license: company brand asset (site header logo)
+  logo_note: Current Allot logo from the official site header
+  old_url: http://www.allot.com
+  status: active
+  website: https://www.allot.com/
+  location: Hod HaSharon, Israel
+  sources:
+  - https://en.wikipedia.org/wiki/Allot_Ltd.

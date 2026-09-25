@@ -10,7 +10,7 @@ Why not `zola serve`?
     - It skips the theme sync, the teaching import and the stats
       generation that `build_site.py` runs before zola, so the
       shared-themes tokens and the imported app pages can be missing
-      or stale. (The `../data/` copy is `copy_data.py`, a manual step
+      or stale. (The `static/data/` build is `copy_data.py`, a manual step
       that neither path runs.)
     - It injects a livereload script and can handle routing /
       trailing-slashes slightly differently than a plain static server.

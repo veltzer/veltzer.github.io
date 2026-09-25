@@ -1,0 +1,35 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/audio_books.json
+$schema: "https://veltzer.github.io/web-schemas/json/audio_books.json"
+items:
+  - name: "Rhetoric, Poetics, and Logic"
+    authors:
+      - "Aristotle"
+    date_utcz: "2019-10-16T11:42:14Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Night Walks"
+    device: "Samsung S7"
+  - name: "The Apology & Phaedo (Trial of Socrates)"
+    authors:
+      - "Plato"
+    date_started_utcz: "2021-09-30T07:56:11Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Desktop"
+    progress: "did disc 01"
+  - name: "Heretic: Why Islam Needs a Reformation Now"
+    authors:
+      - "Ayaan Hirsi Ali"
+    date_started_utcz: "2022-08-20T12:28:35Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    device: "Desktop"
+    progress: "did part03"
+  - name: "Letter to a Christian Nation"
+    authors:
+      - "Sam Harris"
+    date_utcz: "2016-05-01T21:33:15Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Night Walks"
+    device: "Samsung S7"

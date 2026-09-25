@@ -1,0 +1,220 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/any.json
+$schema: "https://veltzer.github.io/web-schemas/json/any.json"
+info:
+  firstname: "Mark"
+  lastname: "Veltzer"
+  mobile: "+972-50-5665636"
+  email: "mark.veltzer@gmail.com"
+skills:
+  - "Master Instructor (taught more than 150 different courses)"
+  - "Linux embedded"
+  - "Linux Real Time"
+  - "Linux programming"
+  - "Unix expert"
+  - "C/C++/Java/Perl/Python/Php/Scala/JavaScript/Bash"
+  - "Generalist"
+  - "Machine learning"
+  - "Data science"
+  - "Algorithms"
+  - "Optimization"
+  - "Genetic Algorithms"
+languages:
+  - name: "English"
+    level: "Native or Bilingual"
+  - name: "Hebrew"
+    level: "Native or Bilingual"
+  - name: "Russian"
+    level: "Proficient"
+  - name: "Spanish"
+    level: "Beginner"
+  - name: "Arabic"
+    level: "Beginner"
+certifications:
+  # add links to certificates
+  - name: "Games without Chance: Combinatorial Game Theory"
+    teacher: "Thomas Morley"
+    institution: "Georgia Tech"
+    site: "Coursera"
+  - name: "A Brief History of Humankind"
+    teacher: "Yuval Noah Harrari"
+    institution: "Hebrew University of Jerusalem"
+    site: "Coursera"
+  - name: "Jazz improvisation"
+    teacher: "Gray Burton"
+    institution: "Berklee College of Music"
+    site: "Coursera"
+  - name: "Solaris Instructor"
+    company: "Sun Microsystems"
+  - name: "Advanced Java"
+    company: "Sun Microsystems"
+  - name: "MySQL certified instructor"
+    company: "Oracle"
+  - name: "AWS: Associate Architect"
+    company: "AWS"
+  - name: "AWS: certified instructor: Architecting"
+    company: "AWS"
+  - name: "AWS: Associate Advanced Architect"
+    company: "AWS"
+  - name: "AWS: certified instructor: Architecting, professional level"
+    company: "AWS"
+education:
+  - institution: "Tel Aviv University"
+    title: "BSc"
+    field: "Mathematics"
+    year_started: "1990"
+    year_ended: "1993"
+  - institution: "Rimon school of Jazz"
+    title: "Graduate"
+    field: "Jazz performance"
+    year_started: "2004"
+    year_ended: "2009"
+  - institution: "Ha'Universita Ha'Petuha"
+    title: "BA"
+    field: "Philosophy and History"
+    year_started: "2010"
+    year_ended: "2012"
+publications:
+  name: "Democracy Unleashed, A 21st Century Manifesto"
+  authors:
+    - "Mark Veltzer"
+    - "David Alexander"
+  summary: >
+    A book about the upcoming age of direct democracy and giving an overview of
+    systems of government preceding it.
+summary: >
+  A hands on programmer in many languages. I work in at least 5-6
+  languages and have taught about 12. I write code from C at kernel
+  level for driver implementation up to enterprise Scala and most
+  languages in between. I'm also a good instructor and have instructed
+  hundreds of courses for many tech companies in Israel and around
+  the world. I am an architect and not only a coder and have been
+  involved in designing the architecture for several products, a home
+  automation system for Intel, a very scalable website for Yahoo, a real
+  time application for Rafael, AWS scalable processing app for my own
+  private clients and more. I instructed about 150 different courses,
+  syllabus wise, each several times, during the last decade usually for
+  professionals in the industry. From methodological courses like agile
+  programming to very technical courses, like multi-core programming
+  on Intel processors to tools like git and to philosophical courses like
+  introducing free source to companies. I am a self learner on most of
+  the topics that I instruct and use. I have a strong math background (I
+  have not achieved M.Sc but only due to laziness). I have managed
+  teams on various projects but I can also work alone. When I manage
+  a team I try to avoid bureaucratic practices and be part of the team.
+  I have contributed to many free and open source projects like the
+  Linux kernel and I am currently the maintainer of GNU grep(1). I
+  code as a past time on pet projects which you can find on github. My
+  favourite areas are the Linux kernel, UNIX architecture and building
+  embedded Linux systems. I also do my own system administration
+  and have taught many system administration courses. I am certified
+  for mysql, solaris, Linux, AWS and some more stuff. I am also a
+  professional MySQL DBA, offered professional support for it and
+  have taught several MySQL courses.
+  I was the first associate instructor for AWS in Israel.
+  Lately I have been doing data science, machine learning, and NLP
+  on average sized data (few terabytes).
+community:
+  - name: "GNU member from 2001 (veltzer@gnu.org)"
+    description: "Was the maintainer of GNU grep(1) from 2013 to 2020"
+    link: "https://savannah.gnu.org/projects/grep"
+  - name: "Python modules author"
+    description: "I am the author for many python modules"
+    link: "https://pypi.org/user/veltzer"
+  - name: "Github contributor"
+    description: "Contributed to many project (mine and public) on Github"
+    link: "https://github.com/veltzer"
+experience:
+  - name: "Sqlink"
+    title: "Senior Instructor"
+    date_started: "August 2019"
+    date_ended: "NOW"
+    location: "Tel Aviv, Israel"
+    description: >
+      I teach various courses at varying levels of expertise.
+      I also did a long bootcamp for aspiring Linux embedded programmers.
+  - name: "AgileSparks"
+    title: "Senior Technical Consultant"
+    date_started: "October 2019"
+    date_ended: "NOW"
+    location: "Tel Aviv, Israel"
+    description: >
+      I consult various companies regarding correct technology use and architecture
+      regarding many subject and in particular efficient use of public cloud resources
+      such as AWS.
+  - name: "John Bryce"
+    title: "Senior Instructor"
+    date_started: "August 2013"
+    date_ended: "NOW"
+    location: "Tel Aviv, Israel"
+    description: >
+      I teach all things Linux, java, mysql, unix systems programming, linux kernel,
+      Python, Perl, PHP, Javascript, Apache web server, ACE, JEE, Spring,
+      Hibernate, Swing, Ruby and many many other courses.
+  - name: "Interbit T&C Ltd."
+    title: "Senior instructor"
+    date_started: "2006"
+    date_ended: "NOW"
+    location: "Tel Aviv, Israel"
+    description: >
+      I teach all things java, mysql, unix systems programming, linux kernel, Python,
+      Perl, PHP, Javascript, Apache web server, ACE, JEE, Spring, Hibernate,
+      Swing and many many other courses.
+  - name: "Twiggle"
+    title: "Senior Software Engineer"
+    date_started: "August 2016"
+    date_ended: "January 2020"
+    location: "Tel Aviv, Israel"
+    description: >
+      An artificial intelligence startup.
+      Working in the CTO team on various bleeding edge projects. Generally involved with big
+      data, AI, NLP, Machine Learning, Algorithms.
+  - name: "Hinbit Development"
+    title: "CTO"
+    date_started: "March 2005"
+    date_ended: "August 2016"
+    location: "Raanana, Israel"
+    description: >
+      We did sub contracting work in various fields specializing in migration to
+      Linux from anything. Mind you - this means migration TO Linux, NOT FROM
+      Linux. We write device drivers for Linux, help with RT issues, offer consulting,
+      courses, code migration services from other platforms and more. We also do
+      web projects of various kinds.
+      We worked with some of the biggest companies in Israel like Amdocs, Intel, IBM, Checkpoint.
+  - name: "Qlusters"
+    title: "Kernel and userspace engineer"
+    date_started: "February 2003"
+    date_ended: "January 2005"
+    location: "Tel Aviv, Israel"
+    description: >
+      Qlusters did in kernel work to support Mosix (one kernel, many machines) for
+      business clients. I worked on both kernel and user space.
+  - name: "Optivera"
+    title: "Generalist"
+    date_started: "January 2001"
+    date_ended: "January 2003"
+    location: "Tel Aviv, Israel"
+    description: >
+      This was an artificial intelligence startup trying to use genetic algorithms
+      to optimize network routing.
+  - name: "Schema"
+    title: "Generalist"
+    date_started: "July 1997"
+    date_ended: "January 2001"
+    location: "Herzelia, Israel"
+    description: >
+      Schema was a genetic algorithms open shop when I came in.
+      We worked on Linux with C++ to optimize NP complete problems which come
+      up in various industries. I worked on various problems like cargo ship loading, missile
+      balancing, cellular frequency assignment and more.
+      Ultimately the company turned pure cellular and I was one of the top developers of the
+      main product of that company.
+  - name: "Israel Military, Ministry of Defense"
+    title: "C++ developer and operations researcher"
+    date_started: "October 1993"
+    date_ended: "July 1997"
+    description: >
+      I worked in the operations research arm of the ministry of defense.
+      This involved C++, Unix, Solaris, fuzzy logic, simulations, statistics, mapping,
+      UI design and more stuff I cannot talk about.

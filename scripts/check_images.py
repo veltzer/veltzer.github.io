@@ -34,7 +34,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 # static/images, not blog/images: the zola migration moved the image tree and
 # this path was never updated, so the check reported all 312 images missing.
 IMAGE_DIR = REPO_ROOT / "static" / "images"
-DATA_DIR = REPO_ROOT.parent / "data" / "yaml"
+DATA_DIR = REPO_ROOT / "data" / "yaml"
 
 
 def parse_yaml_entries(path):

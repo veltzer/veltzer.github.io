@@ -1,0 +1,25 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/books_loans.json
+$schema: "https://veltzer.github.io/web-schemas/json/books_loans.json"
+items:
+  - to: "Yaron Dorman"
+    what: "Guitar chord book (the book not marked in xml yet)"
+  - to: "Ofra Rozen"
+    what: "The Hobbit"
+  - to: "Orit Wasserman"
+    what: "Surely You're Joking Mr. Feynman"
+  - to: "Doron Veltzer"
+    what: "Moby Dick"
+  - to: "Eran Rom"
+    what: "The Colour of Magic"
+  - to: "Doron Veltzer"
+    what: "The Pearl"
+  - to: "Yaron Dorman or Gilli from Schema or Paolo Supino"
+    what: "In the Begining...Was the Command Line"
+  - to: "Evyatar Meller from former schema"
+    what: "Conciousness Explained"
+  - to: "Doron Veltzer"
+    what: "Ulysees"
+  - to: "Doron Veltzer"
+    what: "Chess"

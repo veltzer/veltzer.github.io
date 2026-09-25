@@ -1,0 +1,252 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/trips.json
+$schema: "https://veltzer.github.io/web-schemas/json/trips.json"
+items:
+  - where: "Up state NT and NY city, US"
+    countries: ["United States of America"]
+    date_my: "05-2000"
+    date_timezone: "America/New_York"
+    duration_days: 14
+    with: ["Doron Veltzer"]
+  - where: "Creek near dimona"
+    countries: ["Israel"]
+    date_my: "06-2001"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    with: ["Marmir", "Marmir's English friend Janet", "Shlomi Noach"]
+  - where: "Brichot ktiznim"
+    countries: ["Israel"]
+    date_my: "08-2001"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    with: ["Marmir", "Shlomi Noach", "Orit Wasserman"]
+  - where: "Carmel (little switzerland)"
+    countries: ["Israel"]
+    date_my: "08-2002"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    with: ["Marmir", "Galit Masa"]
+  - where: "Yodfat (galil maaravi)"
+    countries: ["Israel"]
+    date_my: "08-2002"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    with:
+      ["Shlomi Noach", "Shlomi Noachs friend Nati", "Orit Wasserman", "Marmir"]
+  - where: "Arbel (west kineret coast)"
+    countries: ["Israel"]
+    date_my: "09-2002"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    with:
+      [
+        "Orit Wasserman",
+        "Shlomi Noach",
+        "Ofir Zwebner",
+        "Marmir",
+        "Yuval Davidor",
+        "Yuval Davidor's daughter",
+      ]
+  - where: "Nahal Peres in the south"
+    countries: ["Israel"]
+    date_y: "1999"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    with: ["Marmir", "Shlomi Noach", "Orit Wasserman"]
+  - where: "Nahal pratzim, Israel"
+    countries: ["Israel"]
+    date_ymd: "1999-10-01"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    with: ["Orit Wasserman"]
+  - where: "Nahal Havarim near shde boker"
+    countries: ["Israel"]
+    date_y: "1995"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    with: ["Orit Wasserman", "Orit Wassermans former boyfried Amir"]
+  - where: "Har tzlafim,Eilat"
+    countries: ["Israel"]
+    date_ymd: "1999-10-20"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    with: ["Shlomi Noach", "Rica Gonen", "Marmir", "Orit Wasserman"]
+  - where: "Mearat Namer in the west galili"
+    countries: ["Israel"]
+    date_ymd: "2000-04-07"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    with:
+      ["Shlomi Noach", "Shlomi Noachs friend Nati", "Marmir", "Ofir Zwebner"]
+  - where: "some brook in the north"
+    countries: ["Israel"]
+    date_my: "04-2000"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    remark: "in the water where we played frisby...)"
+    with: ["Rica Gonen", "Shlomi Noach", "Shlomi Noachs friend Nati"]
+  - where: "Nahal Ashalim"
+    countries: ["Israel"]
+    date_ymd: "2000-10-14"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    remark:
+      "the one where we broke all the rules: climbed a cliff, walked in a stream
+      in the rain, walked in the night and all in the middle of rioting by the arabs
+      (this was the Judea Desert if you recall...))"
+    with: ["Tsemach Mizrahi"]
+  - where: "Jerusalem"
+    countries: ["Israel"]
+    date_ymd: "1998-05-04"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    with: ["Hadas Lahav"]
+  - where: "Nahal Yagoor"
+    countries: ["Israel"]
+    date_utcz: "2002-12-08T03:11:03Z"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    remark: "near Haifa"
+    with:
+      [
+        "Shlomi Noach",
+        "Orit Wasserman",
+        "Rica Gonen",
+        "Collin Brady",
+        "Galit Masa",
+      ]
+  - where: "yearot hakarmel"
+    countries: ["Israel"]
+    date_utcz: "2003-04-11T17:17:24Z"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    with:
+      [
+        "Shlomi Noach",
+        "Shlomi Noachs friend Assi",
+        "Orit Wasserman",
+        "Galit Masa",
+        "Omer Mussafi",
+        "Halit Lichtenzon",
+        "Halit Lichtenzons friend",
+        "Avi Telyas",
+      ]
+  - where: "Nahal Gilaboon"
+    countries: ["Israel"]
+    date_ymd: "2003-08-08"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    with:
+      [
+        "Shlomi Noach",
+        "Orit Wasserman",
+        "Omer Mussafi",
+        "Galit Masa",
+        "Rica Gonen",
+        "Collin Brady",
+      ]
+  - where: "nahal havarim"
+    countries: ["Israel"]
+    date_utcz: "2003-08-16T08:34:45Z"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    remark: "overnight stayover at beit sefer sadeh sde boker"
+    with:
+      [
+        "Shlomi Noach",
+        "Orit Wasserman",
+        "Omer Mussafi",
+        "Halit Lichtenzon",
+        "Rica Gonen",
+        "Galit Masa",
+        "Collin Brady",
+      ]
+  - where: "nahal kziv"
+    countries: ["Israel"]
+    date_utcz: "2003-10-17T06:30:53Z"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    with: ["Shlomi Noach", "Orit Wasserman", "Rica Gonen", "Collin Brady"]
+  - where: "mountains of jerusalem (two streams)"
+    countries: ["Israel"]
+    date_utcz: "2003-11-28T08:07:22Z"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    with:
+      [
+        "Shlomi Noach",
+        "Orit Wasserman",
+        "Orit Wassermans friend Sharon from the army",
+        "Omer Mussafi",
+      ]
+  - where: "Shmurat Pora (6 km south of Kiriat Gat)"
+    countries: ["Israel"]
+    date_utcz: "2007-03-10T18:49:40Z"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    remark: "to see flowers bloom"
+    with: ["Galit Masa", "Galit Masas friend Shimrit"]
+  - where: "Kiev"
+    countries: ["Ukraine"]
+    date_ymd: "2016-05-04"
+    date_timezone: "Europe/Kiev"
+    duration_days: 5
+    remark: "Date trip with Ada, we stayed at the Podol Plaza hotel, Kiev"
+    with: ["Ada Skleirova"]
+  - where: "Moscow"
+    countries: ["Russia"]
+    date_utcz: "2008-10-05T15:51:38Z"
+    date_timezone: "Europe/Moscow"
+    duration_days: 8
+    remark: "Kremlin museums and more"
+    with: []
+  - where: "Minzar Latrun"
+    countries: ["Israel"]
+    date_utcz: "2010-01-30T22:03:52Z"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    remark: "To see flowers and blooming"
+    with: ["Galit Masa"]
+  - where: "Barcelona, Paris, London"
+    countries: ["Spain", "France", "United Kingdom"]
+    date_ymd: "2010-02-23"
+    date_timezone: "Europe/Madrid"
+    duration_days: 15
+    remark: "Great trip to Europe by myself. Met Kitty Silveira Basso in Barcelona"
+    with: []
+  - where: "Iasi"
+    countries: ["Romania"]
+    date_ymd: "2008-11-16"
+    date_timezone: "Europe/Bucharest"
+    duration_days: 5
+    remark: "JBoss advanced topics to MindCTI in Iasi. Met Ana Tudosa there."
+    with: ["Barak Levinson"]
+  - where: "Iasi"
+    countries: ["Romania"]
+    date_ymd: "2010-09-25"
+    date_timezone: "Europe/Bucharest"
+    duration_days: 5
+    remark: "Business trip teaching J2EE to MindCTI"
+    with: []
+  - where: "Beijing"
+    countries: ["China"]
+    date_ymd: "2010-12-04"
+    date_timezone: "Asia/Shanghai"
+    duration_days: 8
+    remark: "Business, teaching linux debugging to Alcatel Lucent, Chinese wall"
+    with: []
+  - where: "Jerusalem"
+    countries: ["Israel"]
+    date_utcz: "2017-02-18T22:23:56Z"
+    date_timezone: "Asia/Jerusalem"
+    duration_days: 1
+    remark: "Visit the Chruch of the Holy Sepulcure and the Wailing Wall. One day."
+    with: ["Natalia Kulyk"]
+  - where: "Davos and surrounding area"
+    countries: ["Italy", "Switzerland"]
+    date_my: "02-2020"
+    date_timezone: "Europe/Zurich"
+    duration_days: 12
+    remark: "Spent a lot of the trip in Davos"
+    with: ["Doron Veltzer"]

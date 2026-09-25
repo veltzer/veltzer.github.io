@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
 """
-Copy media/chess/youtube data from the sibling ../data repo into static/data.
+Build static/data from the media YAML in data/yaml and the chess/youtube
+captures in the sibling ../data repo.
 
-YAML data for the media tracker lives in a separate ../data repository and
-is copied in during build. This script validates the sources exist, copies
+The YAML data for the media tracker lives in this repo under data/yaml. The
+chess archives and the youtube CSV are raw captures that still live in the
+separate ../data repository. This script validates the sources exist, copies
 the plain YAML files, merges the gzipped chess archives, runs the audible
 import (type fixes + field cleanup), the books import (nested names, authors
 and readings flattened to one item per book) and the youtube CSV->YAML
@@ -29,10 +31,11 @@ import yaml
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = REPO_ROOT / "scripts"
+YAML_DIR = REPO_ROOT / "data" / "yaml"
 DATA_REPO = REPO_ROOT.parent / "data"
 DEST = REPO_ROOT / "static" / "data"
 
-# Plain YAML files copied verbatim from ../data/yaml.
+# Plain YAML files copied verbatim from data/yaml.
 PLAIN_YAML = [
     "podcasts.yaml",
     "museums.yaml",
@@ -59,29 +62,23 @@ def die(message):
 
 
 def validate_sources():
-    yaml_dir = DATA_REPO / "yaml"
-    if not yaml_dir.is_dir():
-        die(f"{yaml_dir} directory not found. Clone the data repo first.")
     for name in PLAIN_YAML + PROCESSED_YAML:
-        if not (yaml_dir / name).is_file():
-            die(f"Missing source file {yaml_dir / name}")
-    for path in CHESS_PGN_GZ:
+        if not (YAML_DIR / name).is_file():
+            die(f"Missing source file {YAML_DIR / name}")
+    for path in CHESS_PGN_GZ + [YOUTUBE_CSV]:
         if not path.is_file():
-            die(f"Missing source file {path}")
-    if not YOUTUBE_CSV.is_file():
-        die(f"Missing source file {YOUTUBE_CSV}")
+            die(f"Missing source file {path}. Clone the data repo alongside this one.")
 
 
 def copy_plain_yaml():
-    yaml_dir = DATA_REPO / "yaml"
     for name in PLAIN_YAML:
-        shutil.copyfile(yaml_dir / name, DEST / name)
+        shutil.copyfile(YAML_DIR / name, DEST / name)
 
 
 def import_audible():
     # Import audible with type fixes and field cleanup.
     subprocess.run(
-        [str(SCRIPTS / "import_audible.py"), str(DATA_REPO / "yaml" / "audible.yaml"), str(DEST / "audible.yaml")],
+        [str(SCRIPTS / "import_audible.py"), str(YAML_DIR / "audible.yaml"), str(DEST / "audible.yaml")],
         check=True,
     )
 
@@ -90,7 +87,7 @@ def import_books():
     # Flatten the nested books_read.yaml (names/authors per language, readings)
     # into the one-item-per-book shape the media page searches and filters on.
     subprocess.run(
-        [str(SCRIPTS / "import_books.py"), str(DATA_REPO / "yaml" / "books_read.yaml"), str(DEST / "books.yaml")],
+        [str(SCRIPTS / "import_books.py"), str(YAML_DIR / "books_read.yaml"), str(DEST / "books.yaml")],
         check=True,
     )
 
