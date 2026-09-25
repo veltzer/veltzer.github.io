@@ -120,12 +120,19 @@ packages and `cargo install zola` track other versions — prefer the pinned tar
   hand — do not edit it.** It only knows how to ask rsconstruct: checkout,
   caches, download rsconstruct, `tools install-deps` + `tools install`,
   build, status, deploy. Every tool and package the build needs is declared
-  in `rsconstruct.toml` instead — apt and npm packages under `[dependencies]`
-  (`system` and `npm`; the Python linters come from rsconstruct's tool
-  registry, not from there), and tools a wrapper script shells out to via
+  outside the workflow: apt packages under `[dependencies].system` in
+  `rsconstruct.toml`; Python packages in `pyproject.toml` pinned by
+  `uv.lock`; Node packages (stylelint and its postcss-scss syntax) in
+  `package.json` pinned by `package-lock.json`, which `tools install-deps`
+  installs with `npm ci` into `node_modules/` — rsconstruct puts
+  `node_modules/.bin` on PATH, so processors invoke `stylelint` plainly and
+  the locked version wins over any global copy (the Python linters come from
+  rsconstruct's tool registry); and tools a wrapper script shells out to via
   `required_tools` on the processor (that is how zola is installed; its
-  pinned recipe lives in rsconstruct's tool registry). If something cannot
-  be expressed there, the fix belongs in rsconstruct, not in the workflow.
+  pinned recipe lives in rsconstruct's tool registry). Do not list a Node
+  package under `[dependencies].npm` — that is a global, unpinned install
+  and duplicates the manifest. If something cannot be expressed there, the
+  fix belongs in rsconstruct, not in the workflow.
 - **Do not add infrastructure workarounds (apt retries, timeouts) to the
   workflow or to rsconstruct.** GitHub's runners occasionally sit behind a
   degraded Ubuntu mirror (observed 2026-08-19: ~60 KB/s — slow but

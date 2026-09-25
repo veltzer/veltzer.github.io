@@ -1,6 +1,8 @@
+# Node packages (stylelint and its postcss-scss syntax) are not listed
+# here: they come from package.json / package-lock.json, which
+# `tools install-deps` installs with `npm ci`.
 [dependencies]
 system = ["libxml2-utils", "aspell", "aspell-en", "aspell-he"]
-npm = ["stylelint", "postcss-scss"]
 
 [processor.eslint]
 src_dirs = ["static"]
