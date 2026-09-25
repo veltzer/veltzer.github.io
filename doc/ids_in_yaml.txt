@@ -1,0 +1,7 @@
+Should we call our ids:
+	imdb_id
+	goodreads_id
+or:
+	imdbid
+	goodreadsid
+it looks like the first is better.
