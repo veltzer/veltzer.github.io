@@ -1,6 +1,6 @@
 +++
 title = "Media Collection"
-description = "What Mark Veltzer has read, watched and listened to: books, audiobooks, audio courses, movies, series, podcasts, museums and YouTube, with ratings and notes."
+description = "What Mark Veltzer has read, watched and listened to: books, audiobooks, audio courses, movies, series, podcasts, museums and YouTube, with ratings and notes; and the companies he has taught at."
 template = "embed.html"
 +++
 
@@ -106,6 +106,14 @@ font-family: Inter, Heebo, sans-serif;
     transform: scale(1.2);
     filter: blur(14px) saturate(0.8);
     opacity: 0.6;
+}
+/* Company logos: dark marks on a transparent canvas, drawn for a white page.
+   The one place on the site with a fixed colour, deliberately: a logo box
+   that followed a dark theme would swallow half the logos. The padding
+   keeps the 6% canvas margin from looking cramped in the 2:1 box. */
+#media-root .media-card-image--light {
+    background: #fff;
+    padding: 0.75rem;
 }
 </style>
 <style id="toggle-styles"></style>

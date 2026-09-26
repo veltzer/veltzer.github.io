@@ -1,18 +1,20 @@
 ---
 # next line is neccessary for vscode which does not read the $schema attribute
-# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/any.json
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/organizations.json
 # Organizations I taught at, consulted for, was certified by, or consumed media from.
 # Extracted from the myworld MySQL database (TbOrganization, backup of 2019-05-11);
 # status/location/website fields researched on the web on 2026-09-19.
-# logos/<slug>.svg: genuine vector logos fetched 2026-09-20 where one exists (logo_kind/logo_source say which);
-# the rest are colour traces of the original bitmaps in raw/logos/.
+# logos/<slug>.svg (paths relative to data/): genuine vector logos fetched 2026-09-20 where one exists
+# (logo_kind/logo_source say which); the rest are colour traces of the original bitmaps in raw/logos/.
 # Every logo sits on the same 1000x1000 canvas (content fitted with a 6% margin, centred) on a transparent
 # background; the traces have the bitmap's white/black surround keyed out before tracing (2026-09-20).
 # <field>_geo blocks (place, lat, lon) are written by scripts/organizations_geocode.py from Nominatim (2026-09-25); place is
 # the prose reduced to one city - correct by hand if a point is wrong, a re-run without --force keeps it.
 # geo (from, place, lat, lon) is the one point a map should show for the organization, chosen by hand with
 # scripts/organizations_pick_geo.py from those blocks; from names the field it was taken from.
-$schema: https://veltzer.github.io/web-schemas/json/any.json
+# The schema (web-schemas/docs/json/organizations.json) requires geo on every organization, so the build fails
+# when one has no map point.
+$schema: https://veltzer.github.io/web-schemas/json/organizations.json
 items:
 - id: 1
   name: Alcatel Lucent
@@ -1499,14 +1501,19 @@ items:
   status: defunct
   what_happened: Small Israeli software company, a subsidiary of Mer Systems (Mer Group, Holon), no longer active (owner's note); no public record found and its only known web presence, a Ministry of Industry
     (moit.gov.il) company-profile page, was already returning 404 in the earliest Wayback snapshot (2013).
+  israel_office: Holon, Israel (via the parent Mer Systems)
+  israel_office_geo:
+    place: Holon, Israel
+    lat: 32.01931
+    lon: 34.78041
   former_website: http://www.moit.gov.il/CmsTamat/CompanyProfile.aspx?CompanyType=1&Companyid=69391 (dead; Wayback has only a 2013 404 snapshot)
   former_location: Holon, Israel (the parent Mer Systems' home; the Mer Group corporate office is at 5 Hatzoref St., Holon)
   former_location_geo:
     place: Holon, Israel
     lat: 32.01931
     lon: 34.78041
-  israel_office: Holon, Israel (via the parent Mer Systems)
-  israel_office_geo:
+  geo:
+    from: israel_office
     place: Holon, Israel
     lat: 32.01931
     lon: 34.78041
@@ -1772,13 +1779,13 @@ items:
   status: defunct
   what_happened: Small Tel Aviv software-infrastructure shop; its site was last captured by the Wayback Machine in August 2014 and the domain no longer resolves; no trace of activity since (not to be confused
     with the 2021 observability startup Helios bought by Snyk).
-  former_website: http://www.helios-sd.co.il (dead; last Wayback snapshot 2014-08)
-  former_location: Tel Aviv, Israel
   israel_office: Tel Aviv, Israel (10 Hafetz Haim St., 67441; the company's only office)
   israel_office_geo:
     place: Tel Aviv, Israel
     lat: 32.0853
     lon: 34.78181
+  former_website: http://www.helios-sd.co.il (dead; last Wayback snapshot 2014-08)
+  former_location: Tel Aviv, Israel
   former_location_geo:
     place: Tel Aviv, Israel
     lat: 32.0853
@@ -2028,15 +2035,15 @@ items:
   what_happened: Rebranded as Prosper Global in September 2026 (announced 18 March 2026); mercycorps.org now redirects to prosperglobal.org.
   website: https://www.prosperglobal.org/
   location: Portland, Oregon, USA
+  location_geo:
+    place: Portland, Oregon, USA
+    lat: 45.52025
+    lon: -122.67419
   israel_office: Jerusalem, Israel (regional office for the West Bank and Gaza programmes, e.g. Gaza Sky Geeks)
   israel_office_geo:
     place: Jerusalem, Israel
     lat: 31.77885
     lon: 35.22579
-  location_geo:
-    place: Portland, Oregon, USA
-    lat: 45.52025
-    lon: -122.67419
   former_website: http://www.mercycorps.org (redirects to prosperglobal.org)
   former_location: Portland, Oregon, USA
   former_location_geo:
@@ -3827,12 +3834,12 @@ items:
   status: active
   website: https://www.allot.com/
   location: Hod HaSharon, Israel
-  israel_office: Hod HaSharon, Israel (HQ, 22 Hanagar St., Industrial Zone B)
-  israel_office_geo:
+  location_geo:
     place: Hod HaSharon, Israel
     lat: 32.1562
     lon: 34.89304
-  location_geo:
+  israel_office: Hod HaSharon, Israel (HQ, 22 Hanagar St., Industrial Zone B)
+  israel_office_geo:
     place: Hod HaSharon, Israel
     lat: 32.1562
     lon: 34.89304

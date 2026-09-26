@@ -232,6 +232,17 @@ Checks movies, series, audible, audio courses, museums, podcasts, and books.
 Skips YouTube (uses external CDN thumbnails). Not part of the build; run
 manually as needed.
 
+### `scripts/import_companies.py`
+
+Picks the organizations with `teaching` among their `functions` out of
+`data/yaml/organizations.yaml`, trims each to the fields the companies tab
+shows (name, logo, status, headquarters, Israel office, the one `geo` map
+point, website, logo attribution) and gives each a `review` line: what
+happened to it, or its status when nothing did. Writes gzipped JSON with a
+fixed mtime. Unlike the other importers this is a build step: `build_site.py`
+runs it after zola and writes `_site/data/companies.json.gz`, and copies
+`data/logos/*.svg` to `_site/logos/` next to it. Nothing is committed.
+
 ### `scripts/check_profile_links.py`
 
 Requests every profile URL in `data/yaml/profiles.yaml` — the ~30 links

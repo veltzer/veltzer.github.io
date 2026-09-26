@@ -35,6 +35,7 @@
         'audio': MEDIA_BASE + 'plugin-audio-courses.js',
         'audible': MEDIA_BASE + 'plugin-audible.js',
         'books': MEDIA_BASE + 'plugin-books.js',
+        'companies': MEDIA_BASE + 'plugin-companies.js',
         'features': MEDIA_BASE + 'plugin-movies.js',
         'museums': MEDIA_BASE + 'plugin-museums.js',
         'podcasts': MEDIA_BASE + 'plugin-podcasts.js',
@@ -670,12 +671,18 @@
                 // whose sources are portrait declares imageFit: 'contain':
                 // the whole image is shown, and the bands either side are a
                 // blurred, enlarged copy of the same image rather than flat
-                // colour. Styles for the three classes live in
+                // colour. A plugin whose images are logos on a transparent
+                // canvas declares imageBackground: 'light' as well: the box is
+                // then white whatever the theme, since the marks were drawn
+                // for a white page, and the blurred backdrop is dropped
+                // because a blurred logo behind a crisp one reads as a
+                // printing error. Styles for the classes live in
                 // content/media/_index.en.md next to the other #media-root rules.
                 const contain = activeConfig.imageFit === 'contain';
+                const light = activeConfig.imageBackground === 'light';
                 const imgHtml = imgUrl
-                    ? '<div class="media-card-image' + (contain ? ' media-card-image--contain' : '') + '">' +
-                        (contain ? '<img class="media-card-backdrop" src="' + escapeHtml(imgUrl) + '" alt="" aria-hidden="true" loading="lazy">' : '') +
+                    ? '<div class="media-card-image' + (contain ? ' media-card-image--contain' : '') + (light ? ' media-card-image--light' : '') + '">' +
+                        (contain && !light ? '<img class="media-card-backdrop" src="' + escapeHtml(imgUrl) + '" alt="" aria-hidden="true" loading="lazy">' : '') +
                         '<img class="media-card-img" src="' + escapeHtml(imgUrl) + '" alt="' + escapeHtml(item.name || '') + '" loading="lazy">' +
                       '</div>'
                     : '';

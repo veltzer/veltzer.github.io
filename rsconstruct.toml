@@ -24,13 +24,17 @@ inputs = [
     "config.toml",
     "scripts/build_site.py",
     "scripts/gen_stats.py",
+    "scripts/import_companies.py",
     "scripts/import_teaching.py",
 ]
+# data/ feeds the companies tab: organizations.yaml becomes
+# _site/data/companies.json.gz and data/logos/ is copied to _site/logos/.
 input_globs = [
     "content/**/*",
     "templates/**/*",
     "sass/**/*",
     "static/**/*",
+    "data/**/*",
 ]
 output_dirs = [ "_site" ]
 [processor.ruff]
@@ -48,6 +52,7 @@ dep_inputs = [
     "scripts/gen_stats.py",
     "scripts/import_audible.py",
     "scripts/import_books.py",
+    "scripts/import_companies.py",
     "templates/404.html",
     "templates/_date.html",
     "templates/app.html",
@@ -135,9 +140,15 @@ src_exclude_files = ["package-lock.json"]
 [processor.duplicate_files]
 src_dirs = ["static/images"]
 src_extensions = [".jpg", ".jpeg", ".png", ".gif", ".webp"]
+# data/logos/*.svg are the organization logos organizations.yaml points at
+# (paths in that file are relative to data/): well-formed XML via xmllint,
+# valid SVG via svglint. The bitmaps they were traced from are in
+# data/raw/logos/ and are not checked.
 [processor.xmllint]
-src_dirs = ["static"]
+src_dirs = ["static", "data/logos"]
 src_exclude_dirs = ["vendor"]
+[processor.svglint]
+src_dirs = ["data/logos"]
 [processor.generator.aspell_he_dict]
 command = "scripts/build_he_dict.sh"
 src_files = [".aspell.he.txt"]

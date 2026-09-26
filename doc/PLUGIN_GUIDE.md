@@ -37,7 +37,12 @@ The page that hosts the app is `content/media/_index.en.md` (served at
 Plugin data is authored as YAML in `data/yaml/`.
 `scripts/copy_data.py` converts it to JSON and gzips it into
 `static/data/<name>.json.gz`; the frontend loads the JSON, never the YAML
-(see `CLAUDE.md` for why). The YAML structure should be:
+(see `CLAUDE.md` for why). That is a manual step whose output is committed,
+because the chess and YouTube sources it also handles live in the private
+`../data` repo. A plugin whose sources are entirely in this repo can instead
+be generated at build time: `scripts/build_site.py` runs
+`scripts/import_companies.py` and writes `_site/data/companies.json.gz`
+directly, nothing committed. The YAML structure should be:
 
 ```yaml
 items:
@@ -178,6 +183,12 @@ window.mediaPlugins['mykey'] = {
     // blurred backdrop instead of being cropped to the middle third.
     imageFit: 'contain',
 
+    // imageBackground — optional, 'light'. With imageFit 'contain', makes the
+    // box white in every theme and drops the blurred backdrop. For logos on a
+    // transparent canvas, which were drawn for a white page and would vanish
+    // against a dark theme's card surface.
+    imageBackground: 'light',
+
     // placeholderImage — optional. When the image renderImage named fails to
     // load (not fetched yet, wrong id), the card swaps in this one instead of
     // showing the browser's broken-image icon. renderImage can also return it
@@ -252,6 +263,7 @@ renderStatCard(42, 'Total Items');
 | `audio` | `plugin-audio-courses.js` | `data/audio_courses.json.gz` |
 | `audible` | `plugin-audible.js` | `data/audible.json.gz` |
 | `books` | `plugin-books.js` | `data/books.json.gz` (flattened from `books_read.yaml` by `scripts/import_books.py`) |
+| `companies` | `plugin-companies.js` | `data/companies.json.gz` (the `teaching` organizations of `organizations.yaml`, written into `_site/` at build time by `scripts/import_companies.py`; their logos are copied from `data/logos/` to `/logos/` the same way) |
 | `features` | `plugin-movies.js` | `data/video_features.json.gz` |
 | `museums` | `plugin-museums.js` | `data/museums.json.gz` |
 | `podcasts` | `plugin-podcasts.js` | `data/podcasts.json.gz` |

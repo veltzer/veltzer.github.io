@@ -25,6 +25,9 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_DIR = REPO_ROOT / "_site"
 IMPORTER = REPO_ROOT / "scripts" / "import_teaching.py"
 STATS_GENERATOR = REPO_ROOT / "scripts" / "gen_stats.py"
+COMPANIES_IMPORTER = REPO_ROOT / "scripts" / "import_companies.py"
+ORGANIZATIONS_YAML = REPO_ROOT / "data" / "yaml" / "organizations.yaml"
+LOGOS_SRC = REPO_ROOT / "data" / "logos"
 SIBLINGS_PRESENT = all(
     (REPO_ROOT.parent / name / "_site" / "index.html").is_file()
     for name in ("teaching-slides", "teaching-syllabi", "teaching-animations")
@@ -450,6 +453,33 @@ def build(zola):
     )
 
 
+def write_companies(root):
+    """Build the companies tab's data and logos straight into the output.
+
+    The other media tabs read committed static/data/*.json.gz files that
+    scripts/copy_data.py produces by hand, because half of their sources
+    live in the private ../data repo that CI cannot see. organizations.yaml
+    and the logos it names live in this repo, so there is nothing to commit:
+    the JSON is generated and the SVGs copied into _site/ on every build,
+    after zola has populated it. The logo paths inside the YAML are relative
+    to data/ (logos/<slug>.svg), and data/logos/ lands at /logos/, so the
+    plugin can use them as they are.
+    """
+    data_dir = root / "data"
+    data_dir.mkdir(parents=True, exist_ok=True)
+    subprocess.run(
+        [sys.executable, str(COMPANIES_IMPORTER), str(ORGANIZATIONS_YAML), str(data_dir / "companies.json.gz")],
+        check=True,
+        cwd=REPO_ROOT,
+    )
+    if not LOGOS_SRC.is_dir():
+        die(f"{LOGOS_SRC} missing")
+    logos_dest = root / "logos"
+    logos_dest.mkdir(parents=True, exist_ok=True)
+    for source in sorted(LOGOS_SRC.glob("*.svg")):
+        shutil.copyfile(source, logos_dest / source.name)
+
+
 def copy_root_feed(root):
     """Serve the English feed at /atom.xml as well as /en/atom.xml.
 
@@ -472,6 +502,7 @@ def main():
         write_build_info()
         sync_theme()
         build(zola)
+        write_companies(OUTPUT_DIR)
         copy_root_feed(OUTPUT_DIR)
         write_legacy_redirects(OUTPUT_DIR, base_url())
         fix_sitemap(OUTPUT_DIR, base_url())
