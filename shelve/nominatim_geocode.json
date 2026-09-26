@@ -247,6 +247,14 @@
   "osm_type": "relation",
   "type": "administrative"
  },
+ "Holon, Israel": {
+  "display_name": "Holon, Tel Aviv Subdistrict, Tel-Aviv District, Israel",
+  "lat": 32.0193121,
+  "lon": 34.7804076,
+  "osm_id": 1382460,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
  "Hopkinton, Massachusetts, USA": {
   "display_name": "Hopkinton, Middlesex County, Massachusetts, United States",
   "lat": 42.2288875,

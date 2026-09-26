@@ -1489,7 +1489,7 @@ items:
 - id: 43
   name: Regard
   slug: regard
-  remark: Company no longer active
+  remark: Company no longer active; was a subsidiary of Mer Systems (Mer Group), Holon, Israel (owner's note, 2026-09-26)
   functions:
   - consulting
   logo: logos/regard.svg
@@ -1497,12 +1497,23 @@ items:
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.moit.gov.il/CmsTamat/CompanyProfile.aspx?CompanyType=1&Companyid=69391
   status: defunct
-  what_happened: Small Israeli software company no longer active (owner's note); no public record found and its only known web presence, a Ministry of Industry (moit.gov.il) company-profile page, was already
-    returning 404 in the earliest Wayback snapshot (2013).
+  what_happened: Small Israeli software company, a subsidiary of Mer Systems (Mer Group, Holon), no longer active (owner's note); no public record found and its only known web presence, a Ministry of Industry
+    (moit.gov.il) company-profile page, was already returning 404 in the earliest Wayback snapshot (2013).
   former_website: http://www.moit.gov.il/CmsTamat/CompanyProfile.aspx?CompanyType=1&Companyid=69391 (dead; Wayback has only a 2013 404 snapshot)
-  former_location: unknown, Israel
+  former_location: Holon, Israel (the parent Mer Systems' home; the Mer Group corporate office is at 5 Hatzoref St., Holon)
+  former_location_geo:
+    place: Holon, Israel
+    lat: 32.01931
+    lon: 34.78041
+  israel_office: Holon, Israel (via the parent Mer Systems)
+  israel_office_geo:
+    place: Holon, Israel
+    lat: 32.01931
+    lon: 34.78041
   sources:
   - https://web.archive.org/web/2013/http://www.moit.gov.il/CmsTamat/CompanyProfile.aspx?CompanyType=1&Companyid=69391
+  - https://www.zoominfo.com/pic/mer-group/111477519
+  - https://en.wikipedia.org/wiki/Mer_Group
 - id: 44
   name: Telmap
   slug: telmap
