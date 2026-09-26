@@ -237,11 +237,14 @@ manually as needed.
 Picks the organizations with `teaching` among their `functions` out of
 `data/yaml/organizations.yaml`, trims each to the fields the companies tab
 shows (name, logo, status, headquarters, Israel office, the one `geo` map
-point, website, logo attribution) and gives each a `review` line: what
-happened to it, or its status when nothing did. Writes gzipped JSON with a
-fixed mtime. Unlike the other importers this is a build step: `build_site.py`
-runs it after zola and writes `_site/data/companies.json.gz`, and copies
-`data/logos/*.svg` to `_site/logos/` next to it. Nothing is committed.
+point and the path of its static map image, website, logo attribution) and
+gives each a `review` line: what happened to it, or its status when nothing
+did. Writes gzipped JSON with a fixed mtime. Unlike the other importers this
+is a build step: `build_site.py` runs it after zola and writes
+`_site/data/companies.json.gz`, and copies `data/logos/*.svg` to
+`_site/logos/` next to it. Nothing is committed. With `--images-dir` (the
+build passes `static/images/`) it fails when a company's map image has not
+been rendered by `organizations_fetch_maps.py`.
 
 ### `scripts/check_profile_links.py`
 
@@ -344,6 +347,21 @@ all fall on one spot are decided silently; the rest prompt with every
 distinct spot and the prose behind it, the Israel office suggested first.
 The file is saved after each answer, so `q` or Ctrl-C loses nothing and the
 next run resumes. `--auto` takes every suggestion, `--force` asks again.
+
+### `scripts/organizations_fetch_maps.py`
+
+Renders the static map image each company card shows: for every teaching
+organization's `geo` point, an 800x320 JPEG of OpenStreetMap tiles at zoom
+13 with a pin on the point, written to `static/images/map-<lat>_<lon>.jpg`
+(one file per distinct point, named by `import_companies.map_path`, so
+companies on the same city centroid share one image and the duplicate-image
+check stays happy). Tiles are fetched paced with a real User-Agent, as the
+OSM tile policy asks, and cached under `out/osm_tiles/` (gitignored), so a
+re-run fetches nothing. Existing images are skipped unless `--force`. Run
+it after adding an organization or changing its point: the build fails
+(`import_companies.py --images-dir`) when an image is missing. The images
+are committed. Why a static image and not a Google Maps iframe is in
+`doc/DECISIONS.md`.
 
 ### `scripts/podcasts_add_podcast.py`
 

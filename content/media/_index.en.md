@@ -115,17 +115,22 @@ font-family: Inter, Heebo, sans-serif;
     background: #fff;
     padding: 0.75rem;
 }
-/* The small Google Maps embed on a company card (plugin-companies.js). A
-   short landscape strip above the "on Google Maps" link; the surface colour
-   shows while the lazy iframe has not loaded yet. */
+/* The static map image on a company card (plugin-companies.js): a short
+   landscape strip, 800x320 rendered for a box about 400x160, above the
+   "on Google Maps" link and the OpenStreetMap credit. */
 #media-root .media-card-map {
     display: block;
     width: 100%;
     height: 10rem;
+    object-fit: cover;
     margin-bottom: 0.5rem;
-    border: 0;
     border-radius: 0.375rem;
     background: var(--bg-surface);
+}
+#media-root .media-card-map-credit {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
 }
 </style>
 <style id="toggle-styles"></style>

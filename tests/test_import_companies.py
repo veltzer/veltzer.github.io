@@ -72,6 +72,11 @@ class TestFields:
         out = import_companies.convert_item(organization())
         assert out["geo"] == {"place": "Ra'anana, Israel", "lat": 32.18602, "lon": 34.86784}
 
+    def test_map_image_is_named_after_the_point(self):
+        out = import_companies.convert_item(organization())
+        assert out["map"] == "images/map-32.18602_34.86784.jpg"
+        assert import_companies.map_path({"lat": 42.35883, "lon": -71.05783}) == "images/map-42.35883_-71.05783.jpg"
+
     def test_incomplete_geo_is_omitted(self):
         out = import_companies.convert_item(organization(geo={"place": "Somewhere"}))
         assert "geo" not in out
@@ -93,6 +98,21 @@ class TestBlurb:
 
     def test_other_status_without_a_story_is_capitalized(self):
         assert import_companies.blurb(organization(status="defunct")) == "Defunct."
+
+
+class TestMissingMaps:
+    def test_present_image_is_not_missing(self, tmp_path):
+        (tmp_path / "map-32.18602_34.86784.jpg").write_bytes(b"jpeg")
+        items = import_companies.convert({"items": [organization()]})["items"]
+        assert import_companies.missing_maps(items, tmp_path) == []
+
+    def test_absent_image_is_reported_once_per_point(self, tmp_path):
+        items = import_companies.convert({"items": [organization(), organization(id=3, name="Other")]})["items"]
+        assert import_companies.missing_maps(items, tmp_path) == ["images/map-32.18602_34.86784.jpg"]
+
+    def test_item_without_geo_needs_no_image(self, tmp_path):
+        items = import_companies.convert({"items": [organization(geo=None)]})["items"]
+        assert import_companies.missing_maps(items, tmp_path) == []
 
 
 class TestOutput:

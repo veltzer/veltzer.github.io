@@ -57,7 +57,10 @@ which records the traps that outlived the migration.
   holds the bitmaps the traced ones were made from. The companies tab of the media
   page is built from these at build time: `build_site.py` writes
   `_site/data/companies.json.gz` via `scripts/import_companies.py` and copies the
-  SVGs to `_site/logos/`. Neither is committed, unlike the rest of `static/data/`
+  SVGs to `_site/logos/`. Neither is committed, unlike the rest of `static/data/`.
+  The static map image on each company card (`static/images/map-<lat>_<lon>.jpg`,
+  one per distinct `geo` point) *is* committed: `scripts/organizations_fetch_maps.py`
+  renders it from OpenStreetMap tiles, and the build fails when one is missing
 - `shelve/` — the imdb / goodreads / simania lookup caches that pydatacheck's
   `check_videos` and `check_books` read (committed, so CI never hits the network),
   plus the Nominatim geocoding cache `organizations_geocode.py` reads and writes
@@ -73,7 +76,8 @@ which records the traps that outlived the migration.
   the sibling teaching repos), image fetchers, data importers, the `data/yaml/`
   maintenance scripts (`podcasts_*.py`, `books_fetch_ids.py`, `great_courses_*.py`,
   `audio_courses_check_*.py`, `youtube_add_names.py`, `organizations_geocode.py`,
-  `organizations_pick_geo.py` — all run from the repo root),
+  `organizations_pick_geo.py`, `organizations_fetch_maps.py` — all run from the
+  repo root),
   `serve.py`, and the `build_*_dict.sh` / `spellcheck_*.sh` pair behind the aspell
   processors
 - `tests/` — pytest suite for the data import scripts and template determinism

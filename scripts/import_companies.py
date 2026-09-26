@@ -8,9 +8,18 @@ geocoded place fields and logo provenance. The companies tab of the media
 page wants only the ones with ``teaching`` among their ``functions``, and
 only the fields a card shows: the name, the logo path, the current status
 and what happened, where the company is and where its Israel office was,
-the one map point chosen for it, and the logo attribution. The media page
-prints ``review`` under every card's name, so each company gets one: what
-happened to it, or a word on its status when nothing did.
+the one map point chosen for it, the static map image of that point, and
+the logo attribution. The media page prints ``review`` under every card's
+name, so each company gets one: what happened to it, or a word on its status
+when nothing did.
+
+The map image is ``static/images/map-<lat>_<lon>.jpg``, rendered by
+scripts/organizations_fetch_maps.py and committed. It is named after the
+point, not the company, because every company in a city sits on that city's
+centroid and one image per point avoids byte-identical copies. The name is
+computed here (``map_path``) so the renderer and the card agree, and with
+``--images-dir`` the importer fails when an image is missing, which is how
+the build catches a new organization whose map was never rendered.
 
 Everything else stays behind: the research ``sources``, the three per-field
 ``*_geo`` blocks the ``geo`` point was picked from, the bitmap the logo was
@@ -28,6 +37,7 @@ import argparse
 import gzip
 import json
 import sys
+from pathlib import Path
 
 import yaml
 
@@ -50,6 +60,8 @@ KEPT = (
     "remark",
 )
 GEO_KEYS = ("place", "lat", "lon")
+MAP_PREFIX = "images/map-"
+MAP_SUFFIX = ".jpg"
 STATUS_BLURB = {
     "active": "Still active.",
     "unknown": "Whereabouts unknown.",
@@ -69,8 +81,13 @@ def blurb(item):
     return STATUS_BLURB.get(status, status.capitalize() + ".")
 
 
+def map_path(geo):
+    """The site-relative path of the static map image for a geo point."""
+    return f"{MAP_PREFIX}{geo['lat']}_{geo['lon']}{MAP_SUFFIX}"
+
+
 def convert_item(item):
-    """Keep the card fields of one organization and its one map point."""
+    """Keep the card fields of one organization, its one map point and map image."""
     out = {}
     for key in KEPT:
         value = item.get(key)
@@ -81,7 +98,13 @@ def convert_item(item):
     geo = item.get("geo")
     if geo and all(key in geo for key in GEO_KEYS):
         out["geo"] = {key: geo[key] for key in GEO_KEYS}
+        out["map"] = map_path(geo)
     return out
+
+
+def missing_maps(items, images_dir):
+    """The map paths of ``items`` whose image is not in ``images_dir``, sorted, unique."""
+    return sorted({item["map"] for item in items if "map" in item and not (images_dir / item["map"].rsplit("/", 1)[-1]).is_file()})
 
 
 def convert(data):
@@ -101,6 +124,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("input", help="path to data/yaml/organizations.yaml")
     parser.add_argument("output", help="path of the .json.gz to write")
+    parser.add_argument("--images-dir", type=Path,
+                        help="static/images/; when given, fail if any company's map image is missing")
     args = parser.parse_args()
     with open(args.input, encoding="utf-8") as handle:
         data = yaml.safe_load(handle)
@@ -111,6 +136,14 @@ def main():
     if not converted["items"]:
         print(f"ERROR: {args.input} has no organization with '{TEACHING}' among its functions", file=sys.stderr)
         return 1
+    if args.images_dir is not None:
+        missing = missing_maps(converted["items"], args.images_dir)
+        if missing:
+            print(f"ERROR: {len(missing)} map image(s) missing under {args.images_dir}, run scripts/organizations_fetch_maps.py:",
+                  file=sys.stderr)
+            for path in missing:
+                print(f"  {path}", file=sys.stderr)
+            return 1
     write_json_gz(args.output, converted)
     print(f"Imported {len(converted['items'])} companies to {args.output}")
     return 0

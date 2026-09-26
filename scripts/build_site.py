@@ -468,7 +468,8 @@ def write_companies(root):
     data_dir = root / "data"
     data_dir.mkdir(parents=True, exist_ok=True)
     subprocess.run(
-        [sys.executable, str(COMPANIES_IMPORTER), str(ORGANIZATIONS_YAML), str(data_dir / "companies.json.gz")],
+        [sys.executable, str(COMPANIES_IMPORTER), str(ORGANIZATIONS_YAML), str(data_dir / "companies.json.gz"),
+         "--images-dir", str(REPO_ROOT / "static" / "images")],
         check=True,
         cwd=REPO_ROOT,
     )
