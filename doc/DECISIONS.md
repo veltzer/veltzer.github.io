@@ -80,6 +80,39 @@ credential, this decision should be revisited — a proxy would then be
 warranted. As long as it stays a referrer-restricted, read-only Calendar
 browser key, the visible-in-source key is the correct, simplest design.
 
+## Company cards embed the keyless Google Maps iframe
+
+Each card on the companies tab shows a small Google map of the company's one
+`geo` point (chosen in `organizations.yaml`, see `organizations_pick_geo.py`)
+above the "on Google Maps" link. The map is the classic keyless embed,
+`https://maps.google.com/maps?q=LAT,LON&z=13&output=embed`, in an
+`<iframe loading="lazy">`. The alternatives and why they lost:
+
+- **The Maps Embed API** (`google.com/maps/embed/v1/place?key=...`) is the
+  documented form of the same iframe. It is free and unmetered, but it
+  needs an API key from a Google Cloud project with **billing enabled**, and
+  the one key the site has (`static/keys.js`) is deliberately restricted to
+  the Calendar API. Extending it means a billing account on the calendar
+  project, or a second project and key to rotate and document, for a map
+  that looks identical to the keyless one. If Google ever retires the
+  keyless form (it has been undocumented since the 2013 Maps redesign and
+  still works in 2026), switch to this: it is the same URL shape, and
+  `scripts/manage_api_key.py` already creates referrer-restricted keys.
+- **Leaflet + OpenStreetMap tiles** needs no key either, but loading a
+  tile layer per card is far more JavaScript and more requests than one
+  lazy iframe, and the ask was a Google map: the visitor gets the Google
+  map they know, and the link under it opens the same point in their own
+  maps app.
+- **A single map of all companies** was considered and rejected as a
+  different feature: the card is the unit of the media page, and a map
+  on the card is what was asked for. It can still be added on top.
+
+The iframe is `loading="lazy"`, so a page of 48 cards fetches only the
+maps that scroll into view, and the "Map" toggle hides the whole `<li>`
+(map and link) for anyone who finds them noisy. Note that each loaded map
+is a third-party frame that sets Google cookies, the same trade-off as
+GA4 recorded in `doc/ANALYTICS.md`.
+
 ## MkDocs owns `docs/` — manual files go in `blog/`
 
 **Historical (MkDocs era).** There is no `docs/` or `blog/` directory any more:

@@ -22,6 +22,20 @@ function companyMapUrl(item) {
         encodeURIComponent(item.geo.lat + ',' + item.geo.lon);
 }
 
+// The small map on the card is the classic keyless Google Maps embed
+// (maps.google.com/maps?...&output=embed), not the Maps Embed API: that one
+// wants an API key from a billing-enabled Maps Platform project, and the
+// calendar key is restricted to the Calendar API. Why the keyless form was
+// chosen over it, and over a Leaflet map, is in doc/DECISIONS.md. The
+// iframe is loading="lazy", so a page of 48 cards fetches only the maps
+// that scroll into view.
+function companyMapEmbedUrl(item) {
+    if (!item.geo) return '';
+    return 'https://maps.google.com/maps?q=' +
+        encodeURIComponent(item.geo.lat + ',' + item.geo.lon) +
+        '&z=13&hl=en&output=embed';
+}
+
 function capitalize(text) {
     return text ? text.charAt(0).toUpperCase() + text.substring(1) : '';
 }
@@ -93,7 +107,11 @@ window.mediaPlugins['companies'] = {
         }
         const mapUrl = companyMapUrl(item);
         if (mapUrl) {
-            html += '<li class="py-2" data-toggle="map"><a href="' + window.escapeHtml(mapUrl) +
+            html += '<li class="py-2" data-toggle="map">' +
+                '<iframe class="media-card-map" src="' + window.escapeHtml(companyMapEmbedUrl(item)) +
+                '" title="' + window.escapeHtml(companyPlace(item)) + ' on Google Maps' +
+                '" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>' +
+                '<a href="' + window.escapeHtml(mapUrl) +
                 '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">' +
                 '&#x1F4CD; ' + window.escapeHtml(companyPlace(item)) + ' on Google Maps</a></li>';
         }

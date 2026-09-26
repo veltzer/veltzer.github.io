@@ -115,6 +115,18 @@ font-family: Inter, Heebo, sans-serif;
     background: #fff;
     padding: 0.75rem;
 }
+/* The small Google Maps embed on a company card (plugin-companies.js). A
+   short landscape strip above the "on Google Maps" link; the surface colour
+   shows while the lazy iframe has not loaded yet. */
+#media-root .media-card-map {
+    display: block;
+    width: 100%;
+    height: 10rem;
+    margin-bottom: 0.5rem;
+    border: 0;
+    border-radius: 0.375rem;
+    background: var(--bg-surface);
+}
 </style>
 <style id="toggle-styles"></style>
 
