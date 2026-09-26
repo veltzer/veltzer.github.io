@@ -11,13 +11,17 @@ Akkadian
 Alls
 AlphaZero
 Amalekite
+Ammon
+Amorites
 Angra
 Annaka
 Annihilationist
 Apostolicity
+Aramean
 Arian
 Asch's
 Asherah
+Ashtoreth
 Assyriologists
 Athanasius's
 Atrahasis
@@ -30,6 +34,7 @@ Bavel
 Beilock
 Beilock's
 Bel
+Bethel
 Bibi
 Bolyai
 Bostrom
@@ -46,6 +51,7 @@ CVEs
 Campo
 Casscells
 ChallengeResponseAuthentication
+Chemosh
 Chiang's
 Christiana
 ClearType
@@ -81,6 +87,7 @@ Ehud
 Eliezer
 Elyon
 Embeddings
+Endor
 Enki
 Euthyphro
 Evidential
@@ -151,6 +158,7 @@ Interpretatio
 Invicti
 Invictus
 Irenaeus
+Isra
 Israelites
 Ius
 Jamnia
@@ -158,6 +166,7 @@ Jethro
 Johansson
 Judahite
 Judean
+Judeans
 Kadima
 Kahan
 Kahneman
@@ -175,6 +184,7 @@ Lachish
 Leibnizian
 Lem's
 Lepper
+Levite
 Libertarianism
 Libet
 Libet's
@@ -187,6 +197,7 @@ Marcion
 Marcion's
 Marcionite
 Markan
+Masoretic
 McCloskey
 Megiddo
 Memetic
@@ -194,13 +205,18 @@ Mendenhall
 Mengele
 Mercier
 Meridor
+Micaiah
+Michal
 Midian
 Midianite
 Midianites
 Mikolov
+Milcom
 Millerites
 MkDocs
+Moab
 Mofaz
+Molech
 Molière's
 Moshik
 Moshik's
@@ -209,11 +225,13 @@ Muratorian
 NGINX
 NVMe
 Naama
+Naaman
 NameBPM
 Nassim
 Natalis
 Nebo
 Nephesh
+Nephilim
 Netanyahu
 Neurotheology
 Nimush
@@ -227,6 +245,7 @@ Omnibenevolence
 OpenAI
 Optimizers
 Origen
+Orpah
 Ostara
 Ostern
 Ostrom
@@ -260,6 +279,7 @@ Publics
 Pyszczynski
 Pâques
 Q's
+QDeut
 Qedah
 Quartodeciman
 Quelle
@@ -287,8 +307,10 @@ Seir
 Semmelweis
 Servetus
 Seti
+Shaddai
 Sharot
 Sharot's
+Shema
 Shi'a
 Shia
 Shimon
@@ -564,6 +586,7 @@ elohim
 else's
 embeddings
 endosymbiotic
+ephod
 epicycle
 epicycles
 epigraphic
@@ -809,6 +832,7 @@ mkdocs
 mlock
 moderato
 mon
+monolatrous
 monolatry
 monotheisms
 monotheizing
@@ -870,6 +894,7 @@ pagesubtitle
 pagetitle
 paginationcontainer
 palatability
+panai
 params
 parasocial
 parseint
@@ -1065,6 +1090,7 @@ systemd
 tagging
 tagname
 taskset
+teraphim
 testability
 textcontent
 tf
@@ -1197,6 +1223,7 @@ xml
 xperf
 xvid
 xvidencopts
+yah
 yaml
 yamltext
 yday
