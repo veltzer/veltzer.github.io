@@ -312,6 +312,28 @@ verifies a confirmed hit against the book page and writes the id (and the
 exact page title, which `check_books` insists on). Caches page lookups in
 `shelve/`, the same caches `check_books` reads.
 
+### `scripts/organizations_geocode.py`
+
+Adds map coordinates to `organizations.yaml`: every `location`,
+`israel_office` and `former_location` gets a `<field>_geo` block right after
+it (`place`, the prose reduced to one city; `lat`/`lon` in WGS84 decimal
+degrees), resolved through Nominatim (OpenStreetMap) at one request per
+second. Lookups are cached in `shelve/nominatim_geocode.json`, so a re-run
+after adding an organization only resolves the new places; existing `_geo`
+blocks survive unless `--force`. Edits the yaml textually (the file is
+hand-wrapped, no dumper round-trips it), so the diff is only the new blocks.
+Places with no city (`unknown, Israel`) get no block.
+
+### `scripts/organizations_pick_geo.py`
+
+Interactive: chooses the one map point per organization from the `_geo`
+blocks the geocoder wrote, and records it as a `geo` block (`from`, `place`,
+`lat`, `lon`) just before the item's `sources`. Organizations whose points
+all fall on one spot are decided silently; the rest prompt with every
+distinct spot and the prose behind it, the Israel office suggested first.
+The file is saved after each answer, so `q` or Ctrl-C loses nothing and the
+next run resumes. `--auto` takes every suggestion, `--force` asks again.
+
 ### `scripts/podcasts_add_podcast.py`
 
 Interactive: search the iTunes Search API, pick a result, and append the

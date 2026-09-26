@@ -8,6 +8,10 @@
 # the rest are colour traces of the original bitmaps in raw/logos/.
 # Every logo sits on the same 1000x1000 canvas (content fitted with a 6% margin, centred) on a transparent
 # background; the traces have the bitmap's white/black surround keyed out before tracing (2026-09-20).
+# <field>_geo blocks (place, lat, lon) are written by scripts/organizations_geocode.py from Nominatim (2026-09-25); place is
+# the prose reduced to one city - correct by hand if a point is wrong, a re-run without --force keeps it.
+# geo (from, place, lat, lon) is the one point a map should show for the organization, chosen by hand with
+# scripts/organizations_pick_geo.py from those blocks; from names the field it was taken from.
 $schema: https://veltzer.github.io/web-schemas/json/any.json
 items:
 - id: 1
@@ -26,9 +30,26 @@ items:
   what_happened: Acquired by Nokia in an all-stock deal that closed in January 2016 (fully absorbed by November 2016); the brand was retired.
   website: https://www.nokia.com
   location: Espoo, Finland
+  location_geo:
+    place: Espoo, Finland
+    lat: 60.20497
+    lon: 24.65598
   israel_office: Petah Tikva, Israel (Alcatel-Lucent Israel HQ and optical R&D); CloudBand/Bell Labs unit in Kfar Saba
+  israel_office_geo:
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   former_website: http://www.alcatel-lucent.com (now redirects to nokia.com)
   former_location: Boulogne-Billancourt (Paris), France
+  former_location_geo:
+    place: Boulogne-Billancourt, France
+    lat: 48.83566
+    lon: 2.24021
+  geo:
+    from: israel_office
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   sources:
   - https://www.globenewswire.com/news-release/2016/11/02/885798/0/en/Nokia-finalizes-its-acquisition-of-Alcatel-Lucent-ready-to-seize-global-connectivity-opportunities.html
   - https://en.globes.co.il/en/article-alcatel-lucent-to-set-up-israel-research-center-1000939882
@@ -49,7 +70,20 @@ items:
   status: active
   website: https://www.amdocs.com
   location: Chesterfield, Missouri, USA (registered in Guernsey)
+  location_geo:
+    place: Chesterfield, Missouri, USA
+    lat: 38.65818
+    lon: -90.56806
   israel_office: Ra'anana, Israel (main R&D centre and largest site)
+  israel_office_geo:
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
+  geo:
+    from: israel_office
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   sources:
   - https://en.wikipedia.org/wiki/Amdocs
 - id: 3
@@ -68,9 +102,26 @@ items:
   what_happened: Acquired by Tremor International in September 2022 for about $240M; Tremor rebranded its whole group, including Amobee, as Nexxen in June 2023.
   website: https://www.nexxen.com
   location: Tel Aviv, Israel (Nexxen International; also a New York office)
+  location_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   israel_office: Tel Aviv, Israel
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   former_website: http://www.amobee.com (still up as an 'Amobee is now Nexxen' placeholder page)
   former_location: Redwood City, California, USA
+  former_location_geo:
+    place: Redwood City, California, USA
+    lat: 37.48632
+    lon: -122.23252
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://investors.nexxen.com/news-releases/news-release-details/tremor-international-tremor-announces-closing-amobee-acquisition
   - https://en.wikipedia.org/wiki/Nexxen
@@ -92,9 +143,26 @@ items:
     has been owned by System1 since 2022.
   website: https://www.answers.com
   location: St. Louis, Missouri, USA (subsidiary of System1)
+  location_geo:
+    place: St. Louis, Missouri, USA
+    lat: 38.62541
+    lon: -90.19001
   israel_office: Jerusalem, Israel (Jerusalem Technology Park; closed May 2012)
+  israel_office_geo:
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
   former_website: http://www.answers.com (same domain, still live)
   former_location: Jerusalem, Israel (corporate HQ and R&D) with a US office in New York, New York, USA
+  former_location_geo:
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
+  geo:
+    from: israel_office
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
   sources:
   - https://en.wikipedia.org/wiki/Answers.com
   - https://www.sec.gov/Archives/edgar/data/0001283073/000128307310000011/form10-k.htm
@@ -113,7 +181,20 @@ items:
   status: active
   website: https://www.avaya.com
   location: Morristown, New Jersey, USA
+  location_geo:
+    place: Morristown, New Jersey, USA
+    lat: 40.79704
+    lon: -74.48099
   israel_office: Ramat Gan, Israel (Atrium Tower; earlier Tel Aviv via the 2012 Radvision acquisition)
+  israel_office_geo:
+    place: Ramat Gan, Israel
+    lat: 32.06869
+    lon: 34.82468
+  geo:
+    from: israel_office
+    place: Ramat Gan, Israel
+    lat: 32.06869
+    lon: 34.82468
   sources:
   - https://en.wikipedia.org/wiki/Avaya
   - https://www.avaya.com/en/contacts/country/israel/
@@ -132,7 +213,20 @@ items:
   status: active
   website: https://www.bankhapoalim.co.il
   location: Tel Aviv, Israel
+  location_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   israel_office: Tel Aviv, Israel
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://en.wikipedia.org/wiki/Bank_Hapoalim
 - id: 7
@@ -150,7 +244,20 @@ items:
   status: active
   website: https://www.bmc.com
   location: Houston, Texas, USA
+  location_geo:
+    place: Houston, Texas, USA
+    lat: 29.75894
+    lon: -95.3677
   israel_office: Tel Aviv, Israel (Ramat Hahayal R&D centre)
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://en.wikipedia.org/wiki/BMC_Software
   - https://www.bmc.com/contacts-locations/israel.html
@@ -170,7 +277,20 @@ items:
   status: active
   website: https://www.cadence.com
   location: San Jose, California, USA
+  location_geo:
+    place: San Jose, California, USA
+    lat: 37.33617
+    lon: -121.89059
   israel_office: Petah Tikva, Israel (Kiryat Arieh; also Rosh Ha'Ayin)
+  israel_office_geo:
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
+  geo:
+    from: israel_office
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   sources:
   - https://en.wikipedia.org/wiki/Cadence_Design_Systems
   - https://www.cadence.com/en_US/home/training/emea/israel.html
@@ -189,7 +309,20 @@ items:
   status: active
   website: https://www.cellcom.co.il
   location: Netanya, Israel
+  location_geo:
+    place: Netanya, Israel
+    lat: 32.32862
+    lon: 34.85662
   israel_office: Netanya, Israel
+  israel_office_geo:
+    place: Netanya, Israel
+    lat: 32.32862
+    lon: 34.85662
+  geo:
+    from: israel_office
+    place: Netanya, Israel
+    lat: 32.32862
+    lon: 34.85662
   sources:
   - https://en.wikipedia.org/wiki/Cellcom_(Israel)
 - id: 10
@@ -207,7 +340,20 @@ items:
   status: active
   website: https://www.cisco.com
   location: San Jose, California, USA
+  location_geo:
+    place: San Jose, California, USA
+    lat: 37.33617
+    lon: -121.89059
   israel_office: Netanya, Israel (Israel HQ, 32 HaMelacha St; also Caesarea earlier)
+  israel_office_geo:
+    place: Netanya, Israel
+    lat: 32.32862
+    lon: 34.85662
+  geo:
+    from: israel_office
+    place: Netanya, Israel
+    lat: 32.32862
+    lon: 34.85662
   sources:
   - https://en.wikipedia.org/wiki/Cisco
   - https://il.linkedin.com/company/cisco-israel
@@ -228,9 +374,26 @@ items:
     Xura in 2015 and was merged into Mavenir in 2017.
   website: https://www.mavenir.com
   location: Richardson, Texas, USA (Mavenir)
+  location_geo:
+    place: Richardson, Texas, USA
+    lat: 32.94818
+    lon: -96.72972
   israel_office: Tel Aviv, Israel (Ramat Hahayal; the former Comverse Israel HQ)
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   former_website: http://www.comverse.com (now redirects to mavenir.com)
   former_location: Woodbury, New York, USA (Comverse Technology); Wakefield, Massachusetts, USA (Comverse Inc.); Israel HQ in Tel Aviv
+  former_location_geo:
+    place: Woodbury, New York, USA
+    lat: 40.81833
+    lon: -73.47062
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://en.wikipedia.org/wiki/Comverse_Technology
   - https://en.wikipedia.org/wiki/Xura
@@ -247,9 +410,26 @@ items:
   what_happened: Acquired by Ribbon Communications for about $463M in cash and stock, completed March 2020.
   website: https://ribboncommunications.com
   location: Plano, Texas, USA (Ribbon)
+  location_geo:
+    place: Plano, Texas, USA
+    lat: 33.01368
+    lon: -96.69251
   israel_office: Petah Tikva, Israel
+  israel_office_geo:
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   former_website: http://www.ecitele.com (now redirects to ribboncommunications.com)
   former_location: Petah Tikva, Israel
+  former_location_geo:
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
+  geo:
+    from: israel_office
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   sources:
   - https://en.globes.co.il/en/article-ribbon-completes-463m-eci-acquisition-1001320578
   - https://ribboncommunications.com/company/media-center/press-releases/ribbon-communications-inc-merge-eci-telecom-group-ltd
@@ -267,8 +447,21 @@ items:
     was retired.
   website: https://www.healthcentral.com
   location: Arlington, Virginia, USA (HealthCentral Corporation)
+  location_geo:
+    place: Arlington, Virginia, USA
+    lat: 38.87693
+    lon: -77.08931
   former_website: http://www.wellsphere.com (dead; domain no longer resolves; archived at web.archive.org)
   former_location: San Mateo, California, USA
+  former_location_geo:
+    place: San Mateo, California, USA
+    lat: 37.563
+    lon: -122.32533
+  geo:
+    from: former_location
+    place: San Mateo, California, USA
+    lat: 37.563
+    lon: -122.32533
   sources:
   - https://www.cbsnews.com/news/healthcentral-buys-acquires-tech-centric-health-portal-wellsphere/
   - https://en.wikipedia.org/wiki/HealthCentral
@@ -286,7 +479,20 @@ items:
   what_happened: Still trading as Hinbit Development Ltd, but now presents itself as a software/IoT development shop; the site no longer lists public training courses.
   website: http://hinbit.com
   location: Ra'anana, Israel
+  location_geo:
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   israel_office: Ra'anana, Israel
+  israel_office_geo:
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
+  geo:
+    from: israel_office
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   sources:
   - http://www.hinbit.com/hebrew_site/index.php
   - https://www.kycisrael.com/companies/513739771/hinbit-development-ltd/
@@ -305,7 +511,20 @@ items:
   status: active
   website: https://www.ibm.com
   location: Armonk, New York, USA
+  location_geo:
+    place: Armonk, New York, USA
+    lat: 41.13297
+    lon: -73.71261
   israel_office: Petah Tikva (IBM Israel HQ); IBM Research lab in Haifa, plus Tel Aviv, Givatayim, Beer Sheva
+  israel_office_geo:
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
+  geo:
+    from: israel_office
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   sources:
   - https://en.wikipedia.org/wiki/IBM_Israel
   - https://research.ibm.com/labs/israel
@@ -328,9 +547,22 @@ items:
     went EMC (2006) -> Dell (2016) -> Symphony Technology Group (2020). ids.co.il in the Wayback Machine is only a domain-hosting parking page (2013+).
   website: https://www.rsa.com
   location: Burlington, Massachusetts, USA
+  location_geo:
+    place: Burlington, Massachusetts, USA
+    lat: 42.50482
+    lon: -71.19561
   israel_office: Herzliya (RSA Security Israel Ltd)
+  israel_office_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   former_website: unknown (old_url http://www.rsa.com is RSA's site, still live)
   former_location: unknown
+  geo:
+    from: israel_office
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   sources:
   - https://en.wikipedia.org/wiki/RSA_Security
   - https://en.globes.co.il/en/article-1000036328
@@ -351,8 +583,21 @@ items:
   what_happened: Acquired by Sun Microsystems in February 2008 for about $1 billion; Sun was acquired by Oracle in January 2010, so MySQL is now an Oracle product.
   website: https://www.mysql.com
   location: Austin, Texas, USA (Oracle)
+  location_geo:
+    place: Austin, Texas, USA
+    lat: 30.27113
+    lon: -97.7437
   former_website: http://www.mysql.com (still live, now run by Oracle)
   former_location: Uppsala, Sweden (with a US office in Cupertino, California)
+  former_location_geo:
+    place: Uppsala, Sweden
+    lat: 59.85861
+    lon: 17.63874
+  geo:
+    from: location
+    place: Austin, Texas, USA
+    lat: 30.27113
+    lon: -97.7437
   sources:
   - https://en.wikipedia.org/wiki/MySQL_AB
 - id: 18
@@ -371,7 +616,20 @@ items:
   status: active
   website: https://interbit.co.il
   location: Ramat Gan, Israel
+  location_geo:
+    place: Ramat Gan, Israel
+    lat: 32.06869
+    lon: 34.82468
   israel_office: Ramat Gan
+  israel_office_geo:
+    place: Ramat Gan, Israel
+    lat: 32.06869
+    lon: 34.82468
+  geo:
+    from: israel_office
+    place: Ramat Gan, Israel
+    lat: 32.06869
+    lon: 34.82468
   sources:
   - https://interbit.co.il/
   - https://www.crunchbase.com/organization/interbit-t-c
@@ -390,7 +648,20 @@ items:
   status: active
   website: https://www.iai.co.il
   location: Lod (Ben Gurion Airport), Israel
+  location_geo:
+    place: Lod, Israel
+    lat: 31.9489
+    lon: 34.88849
   israel_office: Lod
+  israel_office_geo:
+    place: Lod, Israel
+    lat: 31.9489
+    lon: 34.88849
+  geo:
+    from: israel_office
+    place: Lod, Israel
+    lat: 31.9489
+    lon: 34.88849
   sources:
   - https://en.wikipedia.org/wiki/Israel_Aerospace_Industries
 - id: 20
@@ -408,7 +679,20 @@ items:
   status: active
   website: https://www.mod.gov.il
   location: Tel Aviv (HaKirya), Israel
+  location_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   israel_office: Tel Aviv
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://en.wikipedia.org/wiki/Ministry_of_Defense_(Israel)
 - id: 21
@@ -427,9 +711,26 @@ items:
   what_happened: Acquired by Uniphore (Palo Alto) in 2021 (announced July, closed October 2021); the Herzliya team became a Uniphore development center.
   website: https://www.uniphore.com
   location: Palo Alto, California, USA
+  location_geo:
+    place: Palo Alto, California, USA
+    lat: 37.44433
+    lon: -122.15985
   israel_office: Herzliya (Uniphore R&D center, ex-Jacada)
+  israel_office_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   former_website: http://www.jacada.com (now 301-redirects to uniphore.com)
   former_location: Herzliya, Israel (US headquarters in Atlanta, Georgia)
+  former_location_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
+  geo:
+    from: israel_office
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   sources:
   - https://en.globes.co.il/en/article-us-co-uniphore-buys-israeli-tech-veteran-jacada-1001379742
   - https://en.wikipedia.org/wiki/Jacada
@@ -448,7 +749,20 @@ items:
   status: active
   website: https://www.mako.co.il
   location: Tel Aviv, Israel
+  location_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   israel_office: Tel Aviv
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://en.wikipedia.org/wiki/Keshet_Media_Group
 - id: 23
@@ -468,8 +782,21 @@ items:
     consortium in March 2022; the Tel Aviv development center was closed in 2021.'
   website: https://www.mcafee.com
   location: San Jose, California, USA
+  location_geo:
+    place: San Jose, California, USA
+    lat: 37.33617
+    lon: -121.89059
   israel_office: Tel Aviv (Ramat HaHayal development center, closed January 2021)
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   former_website: http://home.mcafee.com (now redirects into mcafee.com; loops for non-browser clients)
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://en.wikipedia.org/wiki/McAfee
   - https://en.globes.co.il/en/article-mcafee-to-close-israel-development-center-1001356867
@@ -491,7 +818,20 @@ items:
     with HPE, was sold to Micro Focus in September 2017, and Micro Focus was acquired by OpenText in January 2023, so the Yehud site is now OpenText.
   website: https://www.hp.com
   location: Palo Alto, California, USA (HP Inc); HPE is in Spring, Texas; OpenText in Waterloo, Ontario, Canada
+  location_geo:
+    place: Palo Alto, California, USA
+    lat: 37.44433
+    lon: -122.15985
   israel_office: Yehud (ex-Mercury Interactive R&D campus, today OpenText Israel)
+  israel_office_geo:
+    place: Yehud, Israel
+    lat: 32.03318
+    lon: 34.89075
+  geo:
+    from: israel_office
+    place: Yehud, Israel
+    lat: 32.03318
+    lon: 34.89075
   sources:
   - https://en.wikipedia.org/wiki/Mercury_Interactive
   - https://en.wikipedia.org/wiki/HP_Inc.
@@ -511,8 +851,21 @@ items:
   what_happened: Acquired by The Collective (Collective Digital Studio, later Studio71) in June 2012, went dormant, and the site went offline on 28 August 2021; the domain no longer resolves (redirected
     to VideosHub until October 2022).
   israel_office: Tel Aviv (founding location and original R&D, 2003)
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   former_website: http://www.metacafe.com (dead, no DNS)
   former_location: Tel Aviv, Israel (HQ moved to Palo Alto in 2006, then San Francisco, California, USA in 2012)
+  former_location_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://en.wikipedia.org/wiki/Metacafe
 - id: 26
@@ -530,7 +883,20 @@ items:
   status: active
   website: https://www.pais.co.il
   location: Tel Aviv, Israel
+  location_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   israel_office: Tel Aviv
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://en.wikipedia.org/wiki/Mifal_HaPais
 - id: 27
@@ -545,7 +911,20 @@ items:
   status: active
   website: https://mindcti.com
   location: Yokneam Illit, Israel
+  location_geo:
+    place: Yokneam Illit, Israel
+    lat: 32.64806
+    lon: 35.09435
   israel_office: Yokneam Illit
+  israel_office_geo:
+    place: Yokneam Illit, Israel
+    lat: 32.64806
+    lon: 35.09435
+  geo:
+    from: israel_office
+    place: Yokneam Illit, Israel
+    lat: 32.64806
+    lon: 35.09435
   sources:
   - https://en.wikipedia.org/wiki/Mind_CTI
   - https://finance.yahoo.com/quote/MNDO/profile/
@@ -561,6 +940,15 @@ items:
   status: active
   website: https://www.mocospace.com
   location: Boston, Massachusetts, USA
+  location_geo:
+    place: Boston, Massachusetts, USA
+    lat: 42.35883
+    lon: -71.05783
+  geo:
+    from: location
+    place: Boston, Massachusetts, USA
+    lat: 42.35883
+    lon: -71.05783
   sources:
   - https://en.wikipedia.org/wiki/MocoSpace
   - https://jnjmobile.com/
@@ -580,9 +968,26 @@ items:
   what_happened: Motorola Inc. split on 4 January 2011 into Motorola Solutions and Motorola Mobility; the Israeli operation became Motorola Solutions Israel Ltd.
   website: https://www.motorolasolutions.com
   location: Chicago, Illinois, USA
+  location_geo:
+    place: Chicago, Illinois, USA
+    lat: 41.87556
+    lon: -87.62442
   israel_office: Airport City (Lod), Israel
+  israel_office_geo:
+    place: Airport City, Israel
+    lat: 31.98894
+    lon: 34.91283
   former_website: http://www.motorola.com (still live, but now the Lenovo-owned Motorola Mobility phone site)
   former_location: Schaumburg, Illinois, USA
+  former_location_geo:
+    place: Schaumburg, Illinois, USA
+    lat: 42.03336
+    lon: -88.08341
+  geo:
+    from: israel_office
+    place: Airport City, Israel
+    lat: 31.98894
+    lon: 34.91283
   sources:
   - https://en.wikipedia.org/wiki/Motorola_Solutions
   - https://www.dnb.com/business-directory/company-profiles.motorola_solutions_israel_ltd.527e489d8a591f511c21bb7a090e27b2.html
@@ -604,9 +1009,26 @@ items:
   what_happened: Acquired by Cisco on 31 July 2012 for about US$5bn and folded into Cisco's video software (SPVSS/Videoscape) business; sold to Permira in 2018 and relaunched as Synamedia.
   website: https://www.synamedia.com
   location: Maidenhead, UK
+  location_geo:
+    place: Maidenhead, UK
+    lat: 51.52274
+    lon: -0.71974
   israel_office: Jerusalem, Israel
+  israel_office_geo:
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
   former_website: http://www.nds.com (dead, does not resolve)
   former_location: Staines, UK (main R&D in Jerusalem, Israel)
+  former_location_geo:
+    place: Staines, UK
+    lat: 51.43401
+    lon: -0.51104
+  geo:
+    from: israel_office
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
   sources:
   - https://newsroom.cisco.com/c/r/newsroom/en/us/a/y2012/m07/cisco-completes-acquisition-of-nds.html
   - https://en.wikipedia.org/wiki/Synamedia
@@ -628,9 +1050,26 @@ items:
     the rest became KKR-owned Ness Digital Engineering (2022).
   website: https://www.ness-tech.co.il
   location: Ra'anana, Israel
+  location_geo:
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   israel_office: Ra'anana, Israel
+  israel_office_geo:
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   former_website: http://www.ness.com (still live, but now belongs to Ness Digital Engineering, Teaneck NJ)
   former_location: Tel Aviv, Israel (Ness Tower, Atidim Park; US HQ Hackensack, New Jersey)
+  former_location_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  geo:
+    from: israel_office
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   sources:
   - https://www.ness-tech.co.il/en
   - https://www.sec.gov/Archives/edgar/data/1089638/000114420411012902/v213173_10k.htm
@@ -650,9 +1089,26 @@ items:
   what_happened: Acquired by KLA-Tencor on 20 February 2019 for about US$3.4bn and became part of KLA's Electronics, Packaging and Components group.
   website: https://www.kla.com
   location: Milpitas, California, USA
+  location_geo:
+    place: Milpitas, California, USA
+    lat: 37.43323
+    lon: -121.89892
   israel_office: Yavne, Israel
+  israel_office_geo:
+    place: Yavne, Israel
+    lat: 31.87689
+    lon: 34.7383
   former_website: http://www.orbotech.com (redirects to kla.com)
   former_location: Yavne, Israel
+  former_location_geo:
+    place: Yavne, Israel
+    lat: 31.87689
+    lon: 34.7383
+  geo:
+    from: israel_office
+    place: Yavne, Israel
+    lat: 31.87689
+    lon: 34.7383
   sources:
   - https://en.wikipedia.org/wiki/Orbotech
   - https://www.kla.com/advance/opportunity/kla-location-spotlight-yavne-israel
@@ -669,9 +1125,26 @@ items:
   what_happened: Acquired by Veritas in 2003 (about US$609M), passed to Symantec in 2005, carved out to Vector Capital in 2008 as an independent Precise again, and acquired by Idera in July 2013.
   website: https://www.idera.com
   location: Houston, Texas, USA
+  location_geo:
+    place: Houston, Texas, USA
+    lat: 29.75894
+    lon: -95.3677
   israel_office: Or Yehuda, Israel
+  israel_office_geo:
+    place: Or Yehuda, Israel
+    lat: 32.027
+    lon: 34.86299
   former_website: http://www.precise.com (redirects to idera.com)
   former_location: Westwood, Massachusetts, USA (R&D in Or Yehuda, Israel)
+  former_location_geo:
+    place: Westwood, Massachusetts, USA
+    lat: 42.21869
+    lon: -71.22338
+  geo:
+    from: israel_office
+    place: Or Yehuda, Israel
+    lat: 32.027
+    lon: 34.86299
   sources:
   - https://www.computerworld.com/article/1721522/veritas-completes-precise-acquisition-for-609m.html
   - https://www.apmdigest.com/idera-acquires-precise-software
@@ -691,7 +1164,20 @@ items:
   status: active
   website: https://www.rafael.co.il
   location: Haifa, Israel
+  location_geo:
+    place: Haifa, Israel
+    lat: 32.81912
+    lon: 34.99839
   israel_office: Haifa, Israel
+  israel_office_geo:
+    place: Haifa, Israel
+    lat: 32.81912
+    lon: 34.99839
+  geo:
+    from: israel_office
+    place: Haifa, Israel
+    lat: 32.81912
+    lon: 34.99839
   sources:
   - https://en.wikipedia.org/wiki/Rafael_Advanced_Defense_Systems
 - id: 35
@@ -711,9 +1197,26 @@ items:
   what_happened: Parent 888 Holdings plc was renamed evoke plc in May 2024; Random Logic Ltd remains its Israeli R&D and marketing subsidiary in Herzliya.
   website: https://www.evokeplc.com
   location: Gibraltar
+  location_geo:
+    place: Gibraltar
+    lat: 36.12859
+    lon: -5.34748
   israel_office: Herzliya Pituach, Israel
+  israel_office_geo:
+    place: Herzliya Pituach, Israel
+    lat: 32.17394
+    lon: 34.80818
   former_website: http://www.888holdingsplc.com (dead, does not resolve)
   former_location: Gibraltar
+  former_location_geo:
+    place: Gibraltar
+    lat: 36.12859
+    lon: -5.34748
+  geo:
+    from: israel_office
+    place: Herzliya Pituach, Israel
+    lat: 32.17394
+    lon: 34.80818
   sources:
   - https://www.evokeplc.com/news-and-media/latest-news/888-holdings-plc-completes-rebrand-evoke-plc/
   - https://www.dnb.com/business-directory/company-profiles.random_logic_ltd.c3f54c5a5cebb90333990fcaf55e141a.html
@@ -734,9 +1237,26 @@ items:
     RSA.
   website: https://www.rsa.com
   location: Burlington, Massachusetts, USA
+  location_geo:
+    place: Burlington, Massachusetts, USA
+    lat: 42.50482
+    lon: -71.19561
   israel_office: Herzliya, Israel (from the 2005 Cyota acquisition; current site not verified)
+  israel_office_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   former_website: http://www.rsa.com (still live)
   former_location: Bedford, Massachusetts, USA
+  former_location_geo:
+    place: Bedford, Massachusetts, USA
+    lat: 42.49173
+    lon: -71.28179
+  geo:
+    from: israel_office
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   sources:
   - https://en.wikipedia.org/wiki/RSA_Security
   - https://www.dell.com/en-us/dt/corporate/newsroom/announcements/detailpage.press-releases~usa~2020~02~20200218-redstone.htm
@@ -754,9 +1274,26 @@ items:
   what_happened: The Union of Local Authorities sold control (51%) to One Technologies in 2014; the company became 'Automatzia HaChadasha' and was rebranded ONE City in October 2022.
   website: https://www.onecity.co.il
   location: Petah Tikva, Israel
+  location_geo:
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   israel_office: Petah Tikva, Israel (Haifa branch per owner's note; not verified online)
+  israel_office_geo:
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   former_website: http://www.ladpc.co.il (redirects to onecity.co.il)
   former_location: Petah Tikva, Israel
+  former_location_geo:
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
+  geo:
+    from: israel_office
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   sources:
   - https://www.pc.co.il/news/372039/
   - https://www.themarker.com/career/2014-03-02/ty-article/0000017f-e5e6-dc7e-adff-f5ef02090000
@@ -773,9 +1310,26 @@ items:
   what_happened: Merged into Dialogic on 1 October 2010 (Veraz holders got 30%); Dialogic was bought by Novacap in 2014 and by Enghouse Systems in January 2020.
   website: https://www.dialogic.com
   location: Parsippany, New Jersey, USA
+  location_geo:
+    place: Parsippany, New Jersey, USA
+    lat: 40.86238
+    lon: -74.40324
   israel_office: Petah Tikva, Israel (former ECI NGTS development centre)
+  israel_office_geo:
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   former_website: http://www.veraznetworks.com (redirects to dialogic.com)
   former_location: San Jose, California, USA (R&D in Petah Tikva, Israel)
+  former_location_geo:
+    place: San Jose, California, USA
+    lat: 37.33617
+    lon: -121.89059
+  geo:
+    from: israel_office
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   sources:
   - https://www.lightreading.com/mobile-core/dialogic-veraz-close-merger
   - https://en.wikipedia.org/wiki/Dialogic_Group
@@ -796,9 +1350,26 @@ items:
   what_happened: Acquired by Mellanox Technologies in February 2011 for about US$218M; Mellanox was itself acquired by Nvidia in April 2020.
   website: https://www.nvidia.com/en-us/networking/
   location: Santa Clara, California, USA (Nvidia)
+  location_geo:
+    place: Santa Clara, California, USA
+    lat: 37.35411
+    lon: -121.95517
   israel_office: Yokneam, Israel (Nvidia/Mellanox)
+  israel_office_geo:
+    place: Yokneam, Israel
+    lat: 32.64806
+    lon: 35.09435
   former_website: http://www.voltaire.com (dead, does not resolve)
   former_location: Herzliya, Israel
+  former_location_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
+  geo:
+    from: former_location
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   sources:
   - https://en.wikipedia.org/wiki/Mellanox_Technologies
   - https://www.sec.gov/Archives/edgar/data/1401678/000095012307009751/y35652fv1.htm
@@ -815,9 +1386,26 @@ items:
   what_happened: Acquired by Raytheon in May 2015 (Raytheon|Websense), renamed Forcepoint in January 2016, and sold to Francisco Partners in January 2021.
   website: https://www.forcepoint.com
   location: Austin, Texas, USA
+  location_geo:
+    place: Austin, Texas, USA
+    lat: 30.27113
+    lon: -97.7437
   israel_office: Ra'anana, Israel (former PortAuthority R&D lab, opened 2007)
+  israel_office_geo:
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   former_website: http://www.websense.com (redirects to forcepoint.com)
   former_location: San Diego, California, USA
+  former_location_geo:
+    place: San Diego, California, USA
+    lat: 32.71571
+    lon: -117.16383
+  geo:
+    from: israel_office
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   sources:
   - https://en.wikipedia.org/wiki/Forcepoint
   - https://www.networkworld.com/article/836892/lan-wan-websense-announces-deal-to-buy-portauthority.html
@@ -838,9 +1426,26 @@ items:
   what_happened: Acquired by Oracle on 27 January 2010 for about US$7.4bn.
   website: https://www.oracle.com
   location: Austin, Texas, USA
+  location_geo:
+    place: Austin, Texas, USA
+    lat: 30.27113
+    lon: -97.7437
   israel_office: Petah Tikva, Israel (Oracle Israel); Sun Israel was in Herzliya
+  israel_office_geo:
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   former_website: http://www.sun.com (redirects to oracle.com/it-infrastructure)
   former_location: Santa Clara, California, USA
+  former_location_geo:
+    place: Santa Clara, California, USA
+    lat: 37.35411
+    lon: -121.95517
+  geo:
+    from: israel_office
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   sources:
   - https://en.wikipedia.org/wiki/Acquisition_of_Sun_Microsystems_by_Oracle_Corporation
   - https://www.oracle.com/il-en/corporate/contact/field-offices/
@@ -858,9 +1463,26 @@ items:
   what_happened: Acquired by Amdocs in February 2004 for about US$29.5M.
   website: https://www.amdocs.com
   location: Chesterfield, Missouri, USA
+  location_geo:
+    place: Chesterfield, Missouri, USA
+    lat: 38.65818
+    lon: -90.56806
   israel_office: Ra'anana, Israel (Amdocs)
+  israel_office_geo:
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   former_website: http://www.xacct.biz (dead, does not resolve)
   former_location: Santa Clara, California, USA (R&D in Tel Aviv, Israel)
+  former_location_geo:
+    place: Santa Clara, California, USA
+    lat: 37.35411
+    lon: -121.95517
+  geo:
+    from: israel_office
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   sources:
   - https://www.lightreading.com/cable-technology/amdocs-buys-xacct-at-last-
   - https://mergr.com/transaction/amdocs-acquires-xacct-technologies
@@ -895,9 +1517,26 @@ items:
   what_happened: Acquired by Intel in October 2011 (reported $300M); Intel shut Telmap down in July 2013, laying off its ~150 Israeli staff.
   website: https://www.intel.com
   location: Santa Clara, California, USA
+  location_geo:
+    place: Santa Clara, California, USA
+    lat: 37.35411
+    lon: -121.95517
   israel_office: Herzliya, Israel (closed 2013)
+  israel_office_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   former_website: http://global.telmap.com (dead; now a hosting-panel error page, Wayback shows 301s since 2025)
   former_location: Herzliya, Israel
+  former_location_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
+  geo:
+    from: israel_office
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   sources:
   - https://en.globes.co.il/en/article-1000686907
   - https://en.globes.co.il/en/article-1000865885
@@ -917,7 +1556,20 @@ items:
   status: active
   website: https://www.intel.com
   location: Santa Clara, California, USA
+  location_geo:
+    place: Santa Clara, California, USA
+    lat: 37.35411
+    lon: -121.95517
   israel_office: Haifa, Petah Tikva, Jerusalem (R&D) and Kiryat Gat (fab), Israel
+  israel_office_geo:
+    place: Haifa, Israel
+    lat: 32.81912
+    lon: 34.99839
+  geo:
+    from: israel_office
+    place: Haifa, Israel
+    lat: 32.81912
+    lon: 34.99839
   sources:
   - https://www.intel.com/content/www/us/en/corporate-responsibility/intel-in-israel.html
   - https://www.timesofisrael.com/intels-israel-staff-could-face-another-wave-of-layoffs-as-global-job-cuts-loom/
@@ -937,9 +1589,26 @@ items:
   what_happened: Acquired in August 2020 by Volaris Group (Constellation Software), now held by its Lumine Group spin-out; continues to operate under its own name and site.
   website: https://www.flashnetworks.com
   location: Ra'anana, Israel
+  location_geo:
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   israel_office: Ra'anana, Israel (previously Herzliya)
+  israel_office_geo:
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   former_website: http://www.flashnetworks.com (still live, same domain)
   former_location: Herzliya, Israel
+  former_location_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
+  geo:
+    from: israel_office
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   sources:
   - https://www.luminegroup.com/newsroom/lumine-group-signs-agreement-to-acquire-flash-networks-ltd/
   - https://www.flashnetworks.com/locations
@@ -959,7 +1628,20 @@ items:
   status: active
   website: https://www.sap.com
   location: Walldorf, Germany
+  location_geo:
+    place: Walldorf, Germany
+    lat: 49.30327
+    lon: 8.64321
   israel_office: Ra'anana, Israel (SAP Labs Israel; also Tel Aviv)
+  israel_office_geo:
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
+  geo:
+    from: israel_office
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   sources:
   - https://www.sap.com/germany/about/company/office-locations/israel.html
   - https://www.timesofisrael.com/sap-sets-up-new-67-million-hq-in-raanana/
@@ -980,7 +1662,20 @@ items:
   what_happened: Bought by Verizon in 2017, then sold to Apollo Global Management in 2021; still operates as Yahoo Inc. with R&D centers in Israel.
   website: https://www.yahoo.com
   location: New York, New York, USA
+  location_geo:
+    place: New York, New York, USA
+    lat: 40.71273
+    lon: -74.00602
   israel_office: Haifa (research) and Tel Aviv, Israel
+  israel_office_geo:
+    place: Haifa, Israel
+    lat: 32.81912
+    lon: 34.99839
+  geo:
+    from: israel_office
+    place: Haifa, Israel
+    lat: 32.81912
+    lon: 34.99839
   sources:
   - https://en.wikipedia.org/wiki/Yahoo_Inc._(2017%E2%80%93present)
   - https://www.timesofisrael.com/yahoo-to-expand-israel-based-rd-centers-under-new-local-leadership/
@@ -997,12 +1692,31 @@ items:
   what_happened: Acquired by Dot Hill Systems in January 2010 (Dot Hill itself was bought by Seagate in October 2015); the Cloverleaf brand disappeared.
   website: https://www.seagate.com
   location: Fremont, California, USA (Seagate)
-  israel_office: unknown city, Israel (R&D; technology spun out of Elta Systems / IAI in 2001)
+  location_geo:
+    place: Fremont, California, USA
+    lat: 37.54827
+    lon: -121.98857
+  israel_office: Petah Tikva, Israel (R&D, 24 of its 28 staff in 2009; technology spun out of Elta Systems / IAI in 2001; city per PitchBook, not confirmed on the company's own site)
+  israel_office_geo:
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   former_website: http://www.cloverleafcomm.com (dead; returns 403 now)
   former_location: Woodbury, New York, USA (earlier Southborough, Massachusetts); R&D in Israel
+  former_location_geo:
+    place: Woodbury, New York, USA
+    lat: 40.81833
+    lon: -73.47062
+  geo:
+    from: israel_office
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   sources:
   - https://www.sec.gov/Archives/edgar/data/0001042783/000119312510014898/dex991.htm
   - https://investors.seagate.com/news/news-details/2015/Seagate-Completes-Acquisition-Of-Dot-Hill-Systems/default.aspx
+  - https://pitchbook.com/profiles/company/52755-58
+  - https://www.sec.gov/Archives/edgar/data/0001042783/000119312510002792/dex991.htm
 - id: 50
   name: Bank of Israel
   slug: bank-of-israel
@@ -1018,8 +1732,21 @@ items:
   status: active
   website: https://www.boi.org.il
   location: Jerusalem, Israel
+  location_geo:
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
   israel_office: Jerusalem, Israel
+  israel_office_geo:
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
   former_website: http://www.bankisrael.gov.il (domain no longer resolves; replaced by boi.org.il)
+  geo:
+    from: israel_office
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
   sources:
   - https://www.boi.org.il/
 - id: 51
@@ -1036,9 +1763,24 @@ items:
     with the 2021 observability startup Helios bought by Snyk).
   former_website: http://www.helios-sd.co.il (dead; last Wayback snapshot 2014-08)
   former_location: Tel Aviv, Israel
+  israel_office: Tel Aviv, Israel (10 Hafetz Haim St., 67441; the company's only office)
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  former_location_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://web.archive.org/web/2014/http://www.helios-sd.co.il/
   - https://vymaps.com/IL/Helios-Software-Development-Ltd-280110538709981/
+  - https://web.archive.org/web/2014/http://www.helios-sd.co.il/contactus.asp
 - id: 52
   name: Imagine Communications
   slug: imagine-communications
@@ -1057,9 +1799,26 @@ items:
     in turn was acquired by Lumine Group in July 2026.
   website: https://imaginecommunications.com
   location: Frisco, Texas, USA
+  location_geo:
+    place: Frisco, Texas, USA
+    lat: 33.1506
+    lon: -96.82382
   israel_office: Netanya, Israel (Sappir Industrial Park; R&D kept after the Harris deal)
+  israel_office_geo:
+    place: Netanya, Israel
+    lat: 32.32862
+    lon: 34.85662
   former_website: http://www.imaginecommunications.com (domain still live, now the renamed Harris Broadcast business)
   former_location: San Diego, California, USA; R&D in Netanya, Israel
+  former_location_geo:
+    place: San Diego, California, USA
+    lat: 32.71571
+    lon: -117.16383
+  geo:
+    from: israel_office
+    place: Netanya, Israel
+    lat: 32.32862
+    lon: 34.85662
   sources:
   - https://www.prnewswire.com/news-releases/harris-broadcast-completes-acquisition-of-imagine-communications-240271171.html
   - https://www.ivc-online.com/Google-Card?id=2f9b410e-207a-e111-ac59-00155d32a403
@@ -1077,9 +1836,26 @@ items:
   what_happened: Acquired by D+H for US$1.25B in April 2015; D+H was merged with Misys by Vista Equity in 2017 to form Finastra.
   website: https://www.finastra.com
   location: London, United Kingdom (Finastra)
+  location_geo:
+    place: London, United Kingdom
+    lat: 51.50745
+    lon: -0.12777
   israel_office: Ramat Gan, Israel
+  israel_office_geo:
+    place: Ramat Gan, Israel
+    lat: 32.06869
+    lon: 34.82468
   former_website: http://www.fundtech.com (redirects to finastra.com)
   former_location: Jersey City, New Jersey, USA (Israeli company, R&D in Ramat Gan)
+  former_location_geo:
+    place: Jersey City, New Jersey, USA
+    lat: 40.72157
+    lon: -74.04745
+  geo:
+    from: israel_office
+    place: Ramat Gan, Israel
+    lat: 32.06869
+    lon: 34.82468
   sources:
   - https://www.prnewswire.com/news-releases/dh-completes-acquisition-of-fundtech-501812631.html
   - https://en.wikipedia.org/wiki/Finastra
@@ -1098,7 +1874,20 @@ items:
   status: active
   website: https://www.final.co.il
   location: Herzliya, Israel
+  location_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   israel_office: Herzliya, Israel
+  israel_office_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
+  geo:
+    from: israel_office
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   sources:
   - https://www.final.co.il/
   - https://www.crunchbase.com/organization/final-israel
@@ -1119,9 +1908,26 @@ items:
     private by Fortress Investment Group in July 2020.
   website: https://www.finjan.com
   location: East Palo Alto, California, USA
+  location_geo:
+    place: East Palo Alto, California, USA
+    lat: 37.46883
+    lon: -122.14108
   israel_office: Netanya, Israel (R&D, until the 2009 M86 sale)
+  israel_office_geo:
+    place: Netanya, Israel
+    lat: 32.32862
+    lon: 34.85662
   former_website: http://www.finjan.com (still live, now Finjan Holdings LLC patent-licensing site)
   former_location: Netanya, Israel (R&D) / San Jose, California, USA
+  former_location_geo:
+    place: Netanya, Israel
+    lat: 32.32862
+    lon: 34.85662
+  geo:
+    from: israel_office
+    place: Netanya, Israel
+    lat: 32.32862
+    lon: 34.85662
   sources:
   - https://en.wikipedia.org/wiki/Finjan_Holdings
   - https://www.globenewswire.com/news-release/2020/07/24/2067294/0/en/Fortress-Affiliates-Complete-Their-Acquisition-of-Finjan.html
@@ -1141,9 +1947,26 @@ items:
   what_happened: Acquired by Dell in September 2016 for about $67B and folded into Dell Technologies (Dell EMC).
   website: https://www.dell.com
   location: Round Rock, Texas, USA
+  location_geo:
+    place: Round Rock, Texas, USA
+    lat: 30.50859
+    lon: -97.67881
   israel_office: Herzliya, Israel (Center of Excellence; also Haifa and Beer Sheva sites)
+  israel_office_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   former_website: http://www.emc.com (redirects to dell.com)
   former_location: Hopkinton, Massachusetts, USA
+  former_location_geo:
+    place: Hopkinton, Massachusetts, USA
+    lat: 42.22889
+    lon: -71.51964
+  geo:
+    from: israel_office
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   sources:
   - https://en.wikipedia.org/wiki/Dell_EMC
   - https://www.timesofisrael.com/dell-emc-merger-creates-giant-74-billion-tech-company/
@@ -1160,8 +1983,21 @@ items:
   what_happened: Teleweb Services Ltd (Israeli reg. 513927012, founded 2007) is recorded as voluntarily dissolved in the Israeli companies registry (last annual report 2019); teleweb.co.il no longer resolves
     (no DNS).
   israel_office: Ramat Gan (registry address; LinkedIn lists Tel Aviv)
+  israel_office_geo:
+    place: Ramat Gan, Israel
+    lat: 32.06869
+    lon: 34.82468
   former_website: http://www.teleweb.co.il (dead - domain does not resolve)
   former_location: Ramat Gan, Israel
+  former_location_geo:
+    place: Ramat Gan, Israel
+    lat: 32.06869
+    lon: 34.82468
+  geo:
+    from: israel_office
+    place: Ramat Gan, Israel
+    lat: 32.06869
+    lon: 34.82468
   sources:
   - https://www.kycisrael.com/companies/513927012/teleweb-services-ltd/
   - https://il.linkedin.com/company/teleweb-services
@@ -1181,11 +2017,31 @@ items:
   what_happened: Rebranded as Prosper Global in September 2026 (announced 18 March 2026); mercycorps.org now redirects to prosperglobal.org.
   website: https://www.prosperglobal.org/
   location: Portland, Oregon, USA
+  israel_office: Jerusalem, Israel (regional office for the West Bank and Gaza programmes, e.g. Gaza Sky Geeks)
+  israel_office_geo:
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
+  location_geo:
+    place: Portland, Oregon, USA
+    lat: 45.52025
+    lon: -122.67419
   former_website: http://www.mercycorps.org (redirects to prosperglobal.org)
   former_location: Portland, Oregon, USA
+  former_location_geo:
+    place: Portland, Oregon, USA
+    lat: 45.52025
+    lon: -122.67419
+  geo:
+    from: israel_office
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
   sources:
   - https://www.prosperglobal.org/press-room/releases/Introducing-Prosper-Global
   - https://en.wikipedia.org/wiki/Mercy_Corps
+  - https://reliefweb.int/report/israel/mercy-corps-front-lines-west-bank
+  - https://www.impactpool.org/jobs/674119
 - id: 59
   name: TTC
   slug: ttc
@@ -1202,8 +2058,21 @@ items:
     to thegreatcourses.com.
   website: https://www.thegreatcourses.com/
   location: Chantilly, Virginia, USA
+  location_geo:
+    place: Chantilly, Virginia, USA
+    lat: 38.88522
+    lon: -77.44868
   former_website: http://www.teach12.com (redirects to thegreatcourses.com)
   former_location: Chantilly, Virginia, USA
+  former_location_geo:
+    place: Chantilly, Virginia, USA
+    lat: 38.88522
+    lon: -77.44868
+  geo:
+    from: location
+    place: Chantilly, Virginia, USA
+    lat: 38.88522
+    lon: -77.44868
   sources:
   - https://en.wikipedia.org/wiki/The_Teaching_Company
   - https://www.brentwood.com/our-portfolio/the-great-courses/
@@ -1222,7 +2091,20 @@ items:
   status: active
   website: https://www.qualcomm.com/
   location: San Diego, California, USA
+  location_geo:
+    place: San Diego, California, USA
+    lat: 32.71571
+    lon: -117.16383
   israel_office: Haifa (Omega Center) and Hod Hasharon
+  israel_office_geo:
+    place: Haifa, Israel
+    lat: 32.81912
+    lon: 34.99839
+  geo:
+    from: israel_office
+    place: Haifa, Israel
+    lat: 32.81912
+    lon: 34.99839
   sources:
   - https://finder.startupnationcentral.org/mnc_page/qualcomm
   - https://www.calcalistech.com/ctechnews/article/hkfdle9s3
@@ -1241,7 +2123,20 @@ items:
   status: active
   website: https://www.broadcom.com/
   location: Palo Alto, California, USA (moved from San Jose in 2023)
+  location_geo:
+    place: Palo Alto, California, USA
+    lat: 37.44433
+    lon: -122.15985
   israel_office: Yakum (R&D) and Tel Aviv
+  israel_office_geo:
+    place: Yakum, Israel
+    lat: 32.24857
+    lon: 34.84209
+  geo:
+    from: israel_office
+    place: Yakum, Israel
+    lat: 32.24857
+    lon: 34.84209
   sources:
   - https://en.wikipedia.org/wiki/Broadcom
   - https://www.officelovin.com/2017/03/look-inside-broadcom-offices-israel/
@@ -1262,9 +2157,26 @@ items:
   what_happened: Acquired by Broadcom Inc. on 5 November 2018 for $18.9B; CA Israel (ex-Memco, Herzliya) continues as a Broadcom subsidiary; ca.com now redirects to broadcom.com.
   website: https://www.broadcom.com/
   location: Palo Alto, California, USA
+  location_geo:
+    place: Palo Alto, California, USA
+    lat: 37.44433
+    lon: -122.15985
   israel_office: Herzliya
+  israel_office_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   former_website: http://www.ca.com (redirects to broadcom.com)
   former_location: Islandia, New York, USA (New York City from 2014)
+  former_location_geo:
+    place: Islandia, New York, USA
+    lat: 40.80426
+    lon: -73.169
+  geo:
+    from: israel_office
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   sources:
   - https://en.wikipedia.org/wiki/CA_Technologies
   - https://www.calcalistech.com/ctechnews/article/u29gfh47i
@@ -1285,9 +2197,26 @@ items:
   what_happened: Taken private by Thoma Bravo on 26 November 2025 ($2B) and combined with Calabrio; the merged company kept the Verint name (February 2026).
   website: https://www.verint.com/
   location: Melville, New York, USA
+  location_geo:
+    place: Melville, New York, USA
+    lat: 40.78359
+    lon: -73.40756
   israel_office: Herzliya Pituach (R&D, ~200 staff)
+  israel_office_geo:
+    place: Herzliya Pituach, Israel
+    lat: 32.17394
+    lon: 34.80818
   former_website: http://verint.com/corporate (still live; redirects to verint.com/our-company/)
   former_location: Melville, New York, USA
+  former_location_geo:
+    place: Melville, New York, USA
+    lat: 40.78359
+    lon: -73.40756
+  geo:
+    from: israel_office
+    place: Herzliya Pituach, Israel
+    lat: 32.17394
+    lon: 34.80818
   sources:
   - https://www.verint.com/press-room/2025/thoma-bravo-completes-acquisition-of-verint-a-leader-in-ai-driven-customer-experience-automation/
   - https://en.wikipedia.org/wiki/Verint_Systems
@@ -1306,7 +2235,20 @@ items:
   status: active
   website: https://www.liveperson.com/
   location: New York, New York, USA
+  location_geo:
+    place: New York, New York, USA
+    lat: 40.71273
+    lon: -74.00602
   israel_office: Herzliya Pituach (R&D; was Ra'anana until the 2020 move to remote work)
+  israel_office_geo:
+    place: Herzliya Pituach, Israel
+    lat: 32.17394
+    lon: 34.80818
+  geo:
+    from: israel_office
+    place: Herzliya Pituach, Israel
+    lat: 32.17394
+    lon: 34.80818
   sources:
   - https://en.wikipedia.org/wiki/LivePerson
   - https://www.liveperson.com/company/careers/
@@ -1325,9 +2267,26 @@ items:
     dead.
   website: https://www.trellix.com/
   location: San Jose, California, USA
+  location_geo:
+    place: San Jose, California, USA
+    lat: 37.33617
+    lon: -121.89059
   israel_office: Kfar Saba
+  israel_office_geo:
+    place: Kfar Saba, Israel
+    lat: 32.17735
+    lon: 34.90746
   former_website: http://www.sentrigo.com (dead - resolves to a parking IP, serves nothing)
   former_location: Santa Clara, California, USA (US HQ); Kfar Saba, Israel (R&D)
+  former_location_geo:
+    place: Santa Clara, California, USA
+    lat: 37.35411
+    lon: -121.95517
+  geo:
+    from: israel_office
+    place: Kfar Saba, Israel
+    lat: 32.17735
+    lon: 34.90746
   sources:
   - https://en.wikipedia.org/wiki/Sentrigo
   - https://en.globes.co.il/en/article-1000632756
@@ -1343,7 +2302,20 @@ items:
   status: active
   website: https://www.gigaspaces.com/
   location: New York, New York, USA
+  location_geo:
+    place: New York, New York, USA
+    lat: 40.71273
+    lon: -74.00602
   israel_office: Herzliya (10 HaSadnaot St.)
+  israel_office_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
+  geo:
+    from: israel_office
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   sources:
   - https://en.wikipedia.org/wiki/GigaSpaces
   - https://www.gigaspaces.com/branches/herzliya-israel
@@ -1362,7 +2334,20 @@ items:
   status: active
   website: https://www.att.com/
   location: Dallas, Texas, USA
+  location_geo:
+    place: Dallas, Texas, USA
+    lat: 32.77627
+    lon: -96.79686
   israel_office: Airport City (Lod) and Tel Aviv (ToHa) R&D center, ~600 staff; the Ra'anana AT&T Foundry (opened 2011 with Amdocs) no longer has its own page - foundry.att.com redirects to about.att.com/innovation
+  israel_office_geo:
+    place: Airport City, Israel
+    lat: 31.98894
+    lon: 34.91283
+  geo:
+    from: israel_office
+    place: Airport City, Israel
+    lat: 31.98894
+    lon: 34.91283
   sources:
   - https://en.globes.co.il/en/article-att-opens-new-tel-aviv-rd-center-1001388404
   - https://www.lightreading.com/business-management/at-t-opens-foundry-in-israel
@@ -1381,7 +2366,20 @@ items:
   status: active
   website: https://www.marvell.com/
   location: Santa Clara, California, USA (legally domiciled in Wilmington, Delaware since 2021)
+  location_geo:
+    place: Santa Clara, California, USA
+    lat: 37.35411
+    lon: -121.95517
   israel_office: Yokneam and Petah Tikva
+  israel_office_geo:
+    place: Yokneam, Israel
+    lat: 32.64806
+    lon: 35.09435
+  geo:
+    from: israel_office
+    place: Yokneam, Israel
+    lat: 32.64806
+    lon: 35.09435
   sources:
   - https://en.wikipedia.org/wiki/Marvell_Technology
   - https://www.calcalistech.com/ctechnews/article/zt28uvt3w
@@ -1400,7 +2398,20 @@ items:
   status: active
   website: https://www.btl.gov.il/
   location: Jerusalem, Israel
+  location_geo:
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
   israel_office: Jerusalem (HQ, 13 Weizmann Blvd)
+  israel_office_geo:
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
+  geo:
+    from: israel_office
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
   sources:
   - https://en.wikipedia.org/wiki/Bituah_Leumi
   - https://www.btl.gov.il/English%20Homepage/About/Pages/default.aspx
@@ -1421,8 +2432,21 @@ items:
     then liquidated; sigmadesigns.com is now a dropped, parked domain.
   website: https://www.issi.com/
   israel_office: Tel Aviv (ex-CopperGate Communications, sold to ISSI in 2018)
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   former_website: http://www.sigmadesigns.com (dead - domain now parked on a Japanese host)
   former_location: Fremont, California, USA
+  former_location_geo:
+    place: Fremont, California, USA
+    lat: 37.54827
+    lon: -121.98857
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://en.wikipedia.org/wiki/Sigma_Designs
   - https://www.sec.gov/Archives/edgar/data/0000790715/000143774918002722/sigm20180215_8k.htm
@@ -1441,7 +2465,20 @@ items:
   status: active
   website: https://www.radware.com
   location: Tel Aviv, Israel
+  location_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   israel_office: Tel Aviv, Israel (international HQ; US corporate HQ in Mahwah, NJ)
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://en.wikipedia.org/wiki/Radware
   - https://craft.co/radware/locations
@@ -1460,7 +2497,20 @@ items:
   status: active
   website: https://www.555.co.il
   location: Petah Tikva, Israel
+  location_geo:
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   israel_office: Petah Tikva, Israel (35 Efal St.)
+  israel_office_geo:
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
+  geo:
+    from: israel_office
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   sources:
   - https://www.555.co.il/clients/contact_us.html
   - https://en.globes.co.il/en/article-idi-becomes-israels-most-valuable-insurance-co-1001108919
@@ -1480,7 +2530,20 @@ items:
   what_happened: Still independent (Rafael holds ~43-50%); a 2025-2026 takeover bid by US firm Ondas was frozen by Israel's Defense Ministry in Jan 2026.
   website: https://www.mprest.com
   location: Petah Tikva, Israel
+  location_geo:
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   israel_office: Petah Tikva, Israel
+  israel_office_geo:
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
+  geo:
+    from: israel_office
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
   sources:
   - https://en.wikipedia.org/wiki/MPrest_Systems
   - https://www.jns.org/israel-news/israel-blocks-us-firm-takeover-of-iron-dome-software-developer
@@ -1503,9 +2566,26 @@ items:
     888 Holdings (now evoke plc) in 2022.
   website: https://www.williamhill.com
   location: London, United Kingdom
+  location_geo:
+    place: London, United Kingdom
+    lat: 51.50745
+    lon: -0.12777
   israel_office: Tel Aviv, Israel (Azrieli Towers; closed 2018)
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   former_website: http://www.williamhill.com (still live, same domain)
   former_location: Tel Aviv, Israel (Israeli arm); London, United Kingdom (parent)
+  former_location_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://en.globes.co.il/en/article-william-hill-closing-down-israel-software-operations-1001194200
   - https://en.wikipedia.org/wiki/William_Hill_(bookmaker)
@@ -1525,8 +2605,21 @@ items:
   status: active
   website: https://www.gov.il/he/departments/prime_ministers_office
   location: Jerusalem, Israel
+  location_geo:
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
   israel_office: Jerusalem, Israel (Kiryat HaMemshala)
+  israel_office_geo:
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
   former_website: http://www.pmo.gov.il (now redirects to the gov.il portal)
+  geo:
+    from: israel_office
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
   sources:
   - https://en.wikipedia.org/wiki/Prime_Minister%27s_Office_(Israel)
   - https://www.gov.il/en/departments/prime_ministers_office
@@ -1545,7 +2638,20 @@ items:
   status: active
   website: https://www.appliedmaterials.com
   location: Santa Clara, California, USA
+  location_geo:
+    place: Santa Clara, California, USA
+    lat: 37.35411
+    lon: -121.95517
   israel_office: Rehovot, Israel (Applied Materials Israel, PDC business unit)
+  israel_office_geo:
+    place: Rehovot, Israel
+    lat: 31.89525
+    lon: 34.81056
+  geo:
+    from: israel_office
+    place: Rehovot, Israel
+    lat: 31.89525
+    lon: 34.81056
   sources:
   - https://en.wikipedia.org/wiki/Applied_Materials
   - https://www.calcalistech.com/ctechnews/article/s10hnjbu11g
@@ -1563,12 +2669,31 @@ items:
     name under MaxLinear license.
   website: https://www.maxlinear.com
   location: Carlsbad, California, USA (MaxLinear)
-  israel_office: Israel (city unknown; engineering site closed 2014)
+  location_geo:
+    place: Carlsbad, California, USA
+    lat: 33.15809
+    lon: -117.3506
+  israel_office: Manof (Misgav), Israel (ex-Arabella Software, acquired March 2007; engineering site closed in the 2014 restructuring)
+  israel_office_geo:
+    place: Manof, Israel
+    lat: 32.85413
+    lon: 35.23677
   former_website: http://www.entropic.com (domain still live, now a patent-portfolio company site)
   former_location: San Diego, California, USA
+  former_location_geo:
+    place: San Diego, California, USA
+    lat: 32.71571
+    lon: -117.16383
+  geo:
+    from: israel_office
+    place: Manof, Israel
+    lat: 32.85413
+    lon: 35.23677
   sources:
   - https://en.wikipedia.org/wiki/Entropic_Communications
   - https://sdbj.com/technology/entropic-communications-transfer-workers-californi/
+  - https://www.globenewswire.com/news-release/2007/03/07/356158/115018/en/Entropic-Communications-Agrees-to-Acquire-Arabella-Software-Ltd.html
+  - https://www.sec.gov/Archives/edgar/data/1227930/000122793014000008/entr2013123110-k.htm
 - id: 78
   name: Mellanox
   slug: mellanox
@@ -1585,9 +2710,26 @@ items:
   what_happened: Acquired by NVIDIA for about $7B, completed April 2020, and absorbed as NVIDIA Networking.
   website: https://www.nvidia.com/en-us/networking/
   location: Santa Clara, California, USA (NVIDIA)
+  location_geo:
+    place: Santa Clara, California, USA
+    lat: 37.35411
+    lon: -121.95517
   israel_office: Yokneam Illit, Israel
+  israel_office_geo:
+    place: Yokneam Illit, Israel
+    lat: 32.64806
+    lon: 35.09435
   former_website: http://www.mellanox.com (redirects to nvidia.com/networking)
   former_location: Yokneam Illit, Israel (and Sunnyvale, California, USA)
+  former_location_geo:
+    place: Yokneam Illit, Israel
+    lat: 32.64806
+    lon: 35.09435
+  geo:
+    from: israel_office
+    place: Yokneam Illit, Israel
+    lat: 32.64806
+    lon: 35.09435
   sources:
   - https://en.wikipedia.org/wiki/Mellanox_Technologies
   - https://nvidianews.nvidia.com/news/nvidia-to-acquire-mellanox-for-6-9-billion
@@ -1606,7 +2748,20 @@ items:
   status: active
   website: https://www.iai.co.il
   location: Ashdod, Israel
+  location_geo:
+    place: Ashdod, Israel
+    lat: 31.79773
+    lon: 34.65299
   israel_office: Ashdod, Israel (100 Yitzhak HaNassi Blvd.)
+  israel_office_geo:
+    place: Ashdod, Israel
+    lat: 31.79773
+    lon: 34.65299
+  geo:
+    from: israel_office
+    place: Ashdod, Israel
+    lat: 31.79773
+    lon: 34.65299
   sources:
   - https://en.wikipedia.org/wiki/ELTA_Systems
   - https://www.dnb.com/business-directory/company-profiles.elta_systems_ltd.660c3994511ddc05fa66a2460e487a33.html
@@ -1626,9 +2781,26 @@ items:
   what_happened: Acquired by IBM for $34B, completed July 2019; continues to operate as a Red Hat-branded IBM subsidiary.
   website: https://www.redhat.com
   location: Raleigh, North Carolina, USA
+  location_geo:
+    place: Raleigh, North Carolina, USA
+    lat: 35.7804
+    lon: -78.6391
   israel_office: Ra'anana, Israel (R&D center, ex-Qumranet)
+  israel_office_geo:
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   former_website: http://www.redhat.com (still live, same domain)
   former_location: Raleigh, North Carolina, USA
+  former_location_geo:
+    place: Raleigh, North Carolina, USA
+    lat: 35.7804
+    lon: -78.6391
+  geo:
+    from: israel_office
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   sources:
   - https://en.wikipedia.org/wiki/Red_Hat
   - https://www.redhat.com/en/about/office-locations
@@ -1648,9 +2820,26 @@ items:
   what_happened: Acquired by Infosys in March 2015 for about $200M; still operates under its own brand as an Infosys subsidiary.
   website: https://www.panaya.com
   location: Hod Hasharon, Israel
+  location_geo:
+    place: Hod Hasharon, Israel
+    lat: 32.1562
+    lon: 34.89304
   israel_office: Hod Hasharon, Israel (6 Haharash St.)
+  israel_office_geo:
+    place: Hod Hasharon, Israel
+    lat: 32.1562
+    lon: 34.89304
   former_website: http://panaya.com (still live, same domain)
   former_location: Hod Hasharon, Israel (founded in Ra'anana)
+  former_location_geo:
+    place: Hod Hasharon, Israel
+    lat: 32.1562
+    lon: 34.89304
+  geo:
+    from: israel_office
+    place: Hod Hasharon, Israel
+    lat: 32.1562
+    lon: 34.89304
   sources:
   - https://en.wikipedia.org/wiki/Panaya
   - https://techcrunch.com/2015/02/15/infosys-panaya/
@@ -1670,8 +2859,21 @@ items:
   what_happened: Acquired by Amazon in 2008 for about $300M; operates as a wholly owned Amazon subsidiary.
   website: https://www.audible.com
   location: Newark, New Jersey, USA
+  location_geo:
+    place: Newark, New Jersey, USA
+    lat: 40.73566
+    lon: -74.17237
   former_website: http://www.audible.com (still live, same domain)
   former_location: Wayne, New Jersey, USA (moved to Newark in 2007)
+  former_location_geo:
+    place: Wayne, New Jersey, USA
+    lat: 40.94917
+    lon: -74.23768
+  geo:
+    from: location
+    place: Newark, New Jersey, USA
+    lat: 40.73566
+    lon: -74.17237
   sources:
   - https://en.wikipedia.org/wiki/Audible_(service)
 - id: 83
@@ -1689,9 +2891,26 @@ items:
   what_happened: Acquired by Verint Systems in March 2014 for about $83M; Verint's cyber-intelligence business (including UTX) was spun off as Cognyte in February 2021, and u-tx.com now redirects to cognyte.com.
   website: https://www.cognyte.com
   location: Herzliya, Israel (Cognyte)
+  location_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   israel_office: Herzliya, Israel
+  israel_office_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   former_website: http://www.u-tx.com (redirects to cognyte.com)
   former_location: Limassol, Cyprus (still a Cognyte office at The Maritime Center, Omonoias Ave.)
+  former_location_geo:
+    place: Limassol, Cyprus
+    lat: 34.68529
+    lon: 33.03327
+  geo:
+    from: israel_office
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   sources:
   - https://en.globes.co.il/en/article-verint-acquires-utx-for-83m-1000929349
   - https://en.wikipedia.org/wiki/Cognyte
@@ -1710,7 +2929,20 @@ items:
   status: active
   website: https://www.huji.ac.il
   location: Jerusalem, Israel
+  location_geo:
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
   israel_office: Jerusalem, Israel (Mount Scopus, Givat Ram, Ein Kerem; also Rehovot)
+  israel_office_geo:
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
+  geo:
+    from: israel_office
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
   sources: &id002
   - https://en.wikipedia.org/wiki/Hebrew_University_of_Jerusalem
   - https://www.huji.ac.il
@@ -1728,9 +2960,26 @@ items:
     its ad server/DCO assets were bought by Amazon (Amazon Ads).
   website: https://advertising.amazon.com/
   location: Seattle, Washington, USA
+  location_geo:
+    place: Seattle, Washington, USA
+    lat: 47.60383
+    lon: -122.33006
   israel_office: Herzliya, Israel
+  israel_office_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   former_website: http://www.mediamind.com (dead; domain no longer resolves)
   former_location: New York, New York, USA (R&D in Herzliya, Israel)
+  former_location_geo:
+    place: New York, New York, USA
+    lat: 40.71273
+    lon: -74.00602
+  geo:
+    from: israel_office
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   sources:
   - https://www.adexchanger.com/ad-exchange-news/tracing-timeline-sizmek-ad-tech-rollup-duopoly-alternative/
   - https://www.calcalistech.com/ctech/articles/0,7340,L-3763467,00.html
@@ -1751,8 +3000,21 @@ items:
   what_happened: Sold its hospital contact-free monitoring technology to Hillrom for $30M in 2021, was put into liquidation in 2022 after Kreos Capital called a loan, and its remaining assets were sold
     to TytoCare in November 2022 for about $2M.
   israel_office: Ramat Gan, Israel
+  israel_office_geo:
+    place: Ramat Gan, Israel
+    lat: 32.06869
+    lon: 34.82468
   former_website: http://www.earlysense.com (dead; domain no longer resolves)
   former_location: Ramat Gan, Israel (US office Woburn/Waltham, Massachusetts)
+  former_location_geo:
+    place: Ramat Gan, Israel
+    lat: 32.06869
+    lon: 34.82468
+  geo:
+    from: israel_office
+    place: Ramat Gan, Israel
+    lat: 32.06869
+    lon: 34.82468
   sources:
   - https://www.calcalistech.com/ctechnews/article/bkyc70u8j
   - https://en.globes.co.il/en/article-hillrom-buys-medical-monitoring-tech-from-earlysense-1001359190
@@ -1770,7 +3032,20 @@ items:
   status: active
   website: https://www.openu.ac.il/
   location: Ra'anana, Israel
+  location_geo:
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   israel_office: Ra'anana, Israel
+  israel_office_geo:
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
+  geo:
+    from: israel_office
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   sources:
   - https://en.wikipedia.org/wiki/Open_University_of_Israel
 - id: 90
@@ -1789,7 +3064,20 @@ items:
   what_happened: Acquired M-Systems (Kfar Saba) in 2006; itself acquired by Western Digital in 2016, then spun out again as an independent Nasdaq company (SNDK) in February 2025.
   website: https://www.sandisk.com/
   location: Milpitas, California, USA
+  location_geo:
+    place: Milpitas, California, USA
+    lat: 37.43323
+    lon: -121.89892
   israel_office: Kfar Saba, Israel (also Tefen and Omer)
+  israel_office_geo:
+    place: Kfar Saba, Israel
+    lat: 32.17735
+    lon: 34.90746
+  geo:
+    from: israel_office
+    place: Kfar Saba, Israel
+    lat: 32.17735
+    lon: 34.90746
   sources:
   - https://en.wikipedia.org/wiki/SanDisk
   - https://www.nasdaq.com/press-release/sandisk-celebrates-nasdaq-listing-after-completing-separation-western-digital-2025-02
@@ -1811,9 +3099,26 @@ items:
   what_happened: Acquired by Hewlett-Packard for about $4.5B in 2006 (closed November 2006) and folded into HP Software; the product line passed to HPE, then Micro Focus (2017), then OpenText (2023).
   website: https://www.opentext.com/
   location: Waterloo, Ontario, Canada
+  location_geo:
+    place: Waterloo, Ontario, Canada
+    lat: 43.46527
+    lon: -80.5223
   israel_office: Yehud, Israel
+  israel_office_geo:
+    place: Yehud, Israel
+    lat: 32.03318
+    lon: 34.89075
   former_website: http://www.mercuryinteractive.com (dead; domain no longer resolves)
   former_location: Mountain View, California, USA (R&D in Yehud, Israel)
+  former_location_geo:
+    place: Mountain View, California, USA
+    lat: 37.38939
+    lon: -122.08321
+  geo:
+    from: israel_office
+    place: Yehud, Israel
+    lat: 32.03318
+    lon: 34.89075
   sources:
   - https://en.wikipedia.org/wiki/Mercury_Interactive
   - https://www.crunchbase.com/acquisition/hewlett-packard-acquires-mercury-interactive--ce5edf64
@@ -1833,7 +3138,20 @@ items:
   status: active
   website: https://www.nice.com/
   location: Ra'anana, Israel
+  location_geo:
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   israel_office: Ra'anana, Israel
+  israel_office_geo:
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
+  geo:
+    from: israel_office
+    place: Ra'anana, Israel
+    lat: 32.18602
+    lon: 34.86784
   sources:
   - https://www.nice.com/company/global-locations
 - id: 93
@@ -1850,7 +3168,20 @@ items:
   what_happened: Merged with Magic Software Enterprises in March 2026 (Magic became a wholly owned subsidiary); the Talpiot centre in Modi'in Illit still operates as 'matrix Talpiot'.
   website: https://www.matrix.co.il/
   location: Kfar Saba, Israel
+  location_geo:
+    place: Kfar Saba, Israel
+    lat: 32.17735
+    lon: 34.90746
   israel_office: 'Kfar Saba, Israel (Talpiot branch: Modi''in Illit)'
+  israel_office_geo:
+    place: Kfar Saba, Israel
+    lat: 32.17735
+    lon: 34.90746
+  geo:
+    from: israel_office
+    place: Kfar Saba, Israel
+    lat: 32.17735
+    lon: 34.90746
   sources:
   - https://www.matrix-globalservices.com/about-us/
   - https://www.timesofisrael.com/israels-matrix-to-snap-up-magic-software-in-2-1-billion-it-services-merger-deal/
@@ -1870,9 +3201,26 @@ items:
   what_happened: Acquired by Broadcom for about $69B, closed November 22, 2023; now operates as a Broadcom division (VMware by Broadcom).
   website: https://www.vmware.com/
   location: Palo Alto, California, USA
+  location_geo:
+    place: Palo Alto, California, USA
+    lat: 37.44433
+    lon: -122.15985
   israel_office: Herzliya, Israel
+  israel_office_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   former_website: http://www.vmware.com (still live, now under Broadcom)
   former_location: Palo Alto, California, USA
+  former_location_geo:
+    place: Palo Alto, California, USA
+    lat: 37.44433
+    lon: -122.15985
+  geo:
+    from: israel_office
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   sources:
   - https://investors.broadcom.com/news-releases/news-release-details/broadcom-completes-acquisition-vmware
   - https://careers.vmware.com/israel-office
@@ -1892,7 +3240,20 @@ items:
   status: active
   website: https://www.checkpoint.com/
   location: Tel Aviv, Israel
+  location_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   israel_office: Tel Aviv, Israel
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://www.checkpoint.com/about-us/
   - https://en.wikipedia.org/wiki/Check_Point
@@ -1912,8 +3273,21 @@ items:
   what_happened: Retargeting ad-tech company (founded 2005) that entered merger talks with Perion in 2014 which did not complete; listed as closed/deadpooled by Crunchbase and Tracxn, its UK entity was
     dissolved in 2019; exact closure year unknown.
   israel_office: Tel Aviv, Israel
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   former_website: http://www.mythings.com (returns a server error now)
   former_location: Tel Aviv, Israel
+  former_location_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://tracxn.com/d/companies/mythings/__wWuz4YF912q4untCy65LspgBoqTlQZnLYHXkZ4rLqBU
   - https://en.globes.co.il/en/article-1000910335
@@ -1934,9 +3308,26 @@ items:
     parent (holding the former ARRIS access-network business) was renamed Vistance Networks.
   website: https://www.vistancenetworks.com/
   location: Claremont, North Carolina, USA
+  location_geo:
+    place: Claremont, North Carolina, USA
+    lat: 35.71458
+    lon: -81.14619
   israel_office: Tel Aviv, Israel
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   former_website: http://www.arrisi.com (redirects to vistancenetworks.com)
   former_location: 'Suwanee, Georgia, USA (BigBand: Redwood City, California, USA; Israel R&D Tel Aviv)'
+  former_location_geo:
+    place: Suwanee, Georgia, USA
+    lat: 34.05149
+    lon: -84.0713
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://en.wikipedia.org/wiki/Arris_International
   - https://www.broadbandtvnews.com/2026/01/12/commscope-completes-sale-of-ccs-to-amphenol-as-parent-rebrands-to-vistance-networks/
@@ -1954,8 +3345,21 @@ items:
     and moved to Kiryat HaTikshuv (Negev) in 2026.
   website: https://www.idf.il/
   location: Beersheba area (Kiryat HaTikshuv), Israel
+  location_geo:
+    place: Beersheba, Israel
+    lat: 31.24574
+    lon: 34.79252
   israel_office: Beersheba area, Israel (formerly Ramat Gan)
+  israel_office_geo:
+    place: Beersheba, Israel
+    lat: 31.24574
+    lon: 34.79252
   former_website: http://www.tikshuv.idf.il/894-he/tikshuv.aspx (dead; domain no longer resolves)
+  geo:
+    from: israel_office
+    place: Beersheba, Israel
+    lat: 31.24574
+    lon: 34.79252
   sources:
   - https://he.wikipedia.org/wiki/%D7%91%D7%99%D7%AA_%D7%94%D7%A1%D7%A4%D7%A8_%D7%9C%D7%9E%D7%A7%D7%A6%D7%95%D7%A2%D7%95%D7%AA_%D7%94%D7%9E%D7%97%D7%A9%D7%91
   - https://en.wikipedia.org/wiki/Mamram
@@ -1974,7 +3378,20 @@ items:
   status: active
   website: https://www.johnbryce.co.il/
   location: Tel Aviv, Israel
+  location_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   israel_office: Tel Aviv, Israel
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://www.johnbryce.co.il/content/john-bryce-training-college/
   - https://www.matrix-globalservices.com/subsidiaries/
@@ -1994,7 +3411,20 @@ items:
   status: active
   website: https://aws.amazon.com/
   location: Seattle, Washington, USA
+  location_geo:
+    place: Seattle, Washington, USA
+    lat: 47.60383
+    lon: -122.33006
   israel_office: Tel Aviv, Israel
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources: &id001
   - https://press.aboutamazon.com/2023/8/aws-launches-infrastructure-region-in-israel
 - id: 102
@@ -2008,6 +3438,15 @@ items:
   status: active
   website: https://naxosaudiobooks.com/
   location: Redhill, United Kingdom
+  location_geo:
+    place: Redhill, United Kingdom
+    lat: 51.24047
+    lon: -0.16828
+  geo:
+    from: location
+    place: Redhill, United Kingdom
+    lat: 51.24047
+    lon: -0.16828
   sources:
   - https://naxosaudiobooks.com/about-us/
   - https://naxosaudiobooks.com/contact-us/
@@ -2027,9 +3466,26 @@ items:
   what_happened: Acquired by NXP Semiconductors on 7 December 2015; the Herzliya design centre became NXP Semiconductors Israel Ltd.
   website: https://www.nxp.com/
   location: Eindhoven, Netherlands
+  location_geo:
+    place: Eindhoven, Netherlands
+    lat: 51.43926
+    lon: 5.47863
   israel_office: Herzliya, Israel
+  israel_office_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   former_website: http://www.freescale.com (now redirects to nxp.com)
   former_location: Austin, Texas, USA
+  former_location_geo:
+    place: Austin, Texas, USA
+    lat: 30.27113
+    lon: -97.7437
+  geo:
+    from: israel_office
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   sources:
   - https://en.wikipedia.org/wiki/Freescale_Semiconductor
   - https://en.globes.co.il/en/article-nxp-takes-over-freescale-semiconductors-israel-operations-1001086680
@@ -2046,9 +3502,26 @@ items:
   what_happened: Acquired by Avaya for about $230M, completed 5 June 2012; its Scopia video products were folded into Avaya and the Technology Business Unit was sold on to Spirent in 2014.
   website: https://www.avaya.com/
   location: Morristown, New Jersey, USA
+  location_geo:
+    place: Morristown, New Jersey, USA
+    lat: 40.79704
+    lon: -74.48099
   israel_office: Tel Aviv, Israel
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   former_website: http://www.radvision.com (dead, does not resolve)
   former_location: Tel Aviv, Israel
+  former_location_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources:
   - https://en.wikipedia.org/wiki/Radvision
   - https://investors.avaya.com/investor-news/press-release-details/2012/Avaya-Completes-Radvision-Acquisition/default.aspx
@@ -2068,7 +3541,20 @@ items:
   status: active
   website: https://aws.amazon.com/
   location: Seattle, Washington, USA
+  location_geo:
+    place: Seattle, Washington, USA
+    lat: 47.60383
+    lon: -122.33006
   israel_office: Tel Aviv, Israel
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
   sources: *id001
 - id: 106
   name: VeriFone
@@ -2086,8 +3572,21 @@ items:
   what_happened: Israeli site is the former Lipman Electronic Engineering, acquired by Verifone in November 2006; Verifone itself was taken private by Francisco Partners in 2018.
   website: https://www.verifone.com/
   location: New York, New York, USA
+  location_geo:
+    place: New York, New York, USA
+    lat: 40.71273
+    lon: -74.00602
   israel_office: Rosh HaAyin, Israel
+  israel_office_geo:
+    place: Rosh HaAyin, Israel
+    lat: 32.09529
+    lon: 34.95332
   former_website: http://global.verifone.com (now 404; main site is verifone.com)
+  geo:
+    from: israel_office
+    place: Rosh HaAyin, Israel
+    lat: 32.09529
+    lon: 34.95332
   sources:
   - https://en.wikipedia.org/wiki/Verifone
   - https://www.americanbanker.com/news/verifone-closes-deal-for-lipman
@@ -2106,8 +3605,21 @@ items:
   what_happened: Acquired by Amazon in May 2007; continues as the Brilliance Audio imprint of Amazon's Brilliance Publishing.
   website: https://www.brilliancepublishing.com/
   location: Grand Haven, Michigan, USA
+  location_geo:
+    place: Grand Haven, Michigan, USA
+    lat: 43.06307
+    lon: -86.22839
   former_website: https://www.brillianceaudio.com (now redirects to brilliancepublishing.com)
   former_location: Grand Haven, Michigan, USA
+  former_location_geo:
+    place: Grand Haven, Michigan, USA
+    lat: 43.06307
+    lon: -86.22839
+  geo:
+    from: location
+    place: Grand Haven, Michigan, USA
+    lat: 43.06307
+    lon: -86.22839
   sources:
   - https://press.aboutamazon.com/2007/5/amazon-com-acquires-brilliance-audio
   - https://www.brilliancepublishing.com/
@@ -2126,8 +3638,21 @@ items:
   what_happened: Acquired by RBmedia in September 2017; the Gildan Media brand was replaced by RBmedia's Ascent Audio in August 2021.
   website: https://rbmediaglobal.com/ascent-audio/
   location: Landover, Maryland, USA
+  location_geo:
+    place: Landover, Maryland, USA
+    lat: 38.92531
+    lon: -76.88154
   former_website: http://www.gildanmedia.com (now redirects to rbmediaglobal.com/ascent-audio/)
   former_location: New York, New York, USA
+  former_location_geo:
+    place: New York, New York, USA
+    lat: 40.71273
+    lon: -74.00602
+  geo:
+    from: location
+    place: Landover, Maryland, USA
+    lat: 38.92531
+    lon: -76.88154
   sources:
   - https://www.publishersweekly.com/pw/by-topic/industry-news/audio-books/article/74845-rbmedia-buys-gildan-media.html
   - https://www.publishersweekly.com/pw/by-topic/industry-news/audio-books/article/87049-rbmedia-forms-ascent-audio-brand.html
@@ -2146,8 +3671,21 @@ items:
   what_happened: Penguin merged with Random House on 1 July 2013; Penguin Audio is now an imprint of Penguin Random House Audio.
   website: https://penguinrandomhouseaudio.com/
   location: New York, New York, USA
+  location_geo:
+    place: New York, New York, USA
+    lat: 40.71273
+    lon: -74.00602
   former_website: http://www.penguin.com/static/html/audio (now 404)
   former_location: New York, New York, USA
+  former_location_geo:
+    place: New York, New York, USA
+    lat: 40.71273
+    lon: -74.00602
+  geo:
+    from: location
+    place: New York, New York, USA
+    lat: 40.71273
+    lon: -74.00602
   sources:
   - https://en.wikipedia.org/wiki/Penguin_Group
   - https://global.penguinrandomhouse.com/tag/penguin-audio/
@@ -2165,6 +3703,15 @@ items:
   status: active
   website: https://www.pimsleur.com/
   location: Concord, Massachusetts, USA
+  location_geo:
+    place: Concord, Massachusetts, USA
+    lat: 42.46052
+    lon: -71.3489
+  geo:
+    from: location
+    place: Concord, Massachusetts, USA
+    lat: 42.46052
+    lon: -71.3489
   sources:
   - https://en.wikipedia.org/wiki/Pimsleur_Language_Programs
   - https://www.pimsleur.com/pimsleur-about-us/
@@ -2182,7 +3729,20 @@ items:
   status: active
   website: https://www.huji.ac.il
   location: Jerusalem, Israel
+  location_geo:
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
   israel_office: Jerusalem, Israel (Mount Scopus, Givat Ram, Ein Kerem; also Rehovot)
+  israel_office_geo:
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
+  geo:
+    from: israel_office
+    place: Jerusalem, Israel
+    lat: 31.77885
+    lon: 35.22579
   sources: *id002
 - id: 113
   name: BBC Radio
@@ -2198,6 +3758,15 @@ items:
   status: active
   website: https://www.bbc.co.uk/sounds
   location: London, United Kingdom
+  location_geo:
+    place: London, United Kingdom
+    lat: 51.50745
+    lon: -0.12777
+  geo:
+    from: location
+    place: London, United Kingdom
+    lat: 51.50745
+    lon: -0.12777
   sources:
   - https://en.wikipedia.org/wiki/BBC_Radio
 - id: 114
@@ -2215,7 +3784,20 @@ items:
   status: active
   website: https://www.apple.com/
   location: Cupertino, California, USA
+  location_geo:
+    place: Cupertino, California, USA
+    lat: 37.32289
+    lon: -122.03229
   israel_office: Herzliya, Israel
+  israel_office_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
+  geo:
+    from: israel_office
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
   sources:
   - https://www.timesofisrael.com/apples-herzliya-rd-center-now-second-largest-in-world/
   - https://www.apple.com/
@@ -2234,5 +3816,20 @@ items:
   status: active
   website: https://www.allot.com/
   location: Hod HaSharon, Israel
+  israel_office: Hod HaSharon, Israel (HQ, 22 Hanagar St., Industrial Zone B)
+  israel_office_geo:
+    place: Hod HaSharon, Israel
+    lat: 32.1562
+    lon: 34.89304
+  location_geo:
+    place: Hod HaSharon, Israel
+    lat: 32.1562
+    lon: 34.89304
+  geo:
+    from: israel_office
+    place: Hod HaSharon, Israel
+    lat: 32.1562
+    lon: 34.89304
   sources:
   - https://en.wikipedia.org/wiki/Allot_Ltd.
+  - https://panjiva.com/Allot-Communications-Ltd/5887161

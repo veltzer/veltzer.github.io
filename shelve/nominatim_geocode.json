@@ -1,0 +1,690 @@
+{
+ "Airport City, Israel": {
+  "display_name": "Airport City, Hevel Modiin Regional Council, Ramla Subdistrict, Center District, Israel",
+  "lat": 31.9889356,
+  "lon": 34.9128317,
+  "osm_id": 51819507,
+  "osm_type": "way",
+  "type": "commercial"
+ },
+ "Arlington, Virginia, USA": {
+  "display_name": "Arlington County, Virginia, United States",
+  "lat": 38.8769326,
+  "lon": -77.0893094,
+  "osm_id": 962190,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Armonk, New York, USA": {
+  "display_name": "Armonk, Town of North Castle, Westchester County, New York, 10504, United States",
+  "lat": 41.132973,
+  "lon": -73.7126064,
+  "osm_id": 175818,
+  "osm_type": "relation",
+  "type": "census"
+ },
+ "Ashdod, Israel": {
+  "display_name": "Ashdod, Ashkelon Subdistrict, South District, Israel",
+  "lat": 31.7977314,
+  "lon": 34.6529922,
+  "osm_id": 1380013,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Austin, Texas, USA": {
+  "display_name": "Austin, Travis County, Texas, United States",
+  "lat": 30.2711286,
+  "lon": -97.7436995,
+  "osm_id": 113314,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Bedford, Massachusetts, USA": {
+  "display_name": "Bedford, Middlesex County, Massachusetts, 01730, United States",
+  "lat": 42.4917301,
+  "lon": -71.2817947,
+  "osm_id": 1838335,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Beersheba, Israel": {
+  "display_name": "Be’er-Sheva, Beersheba Subdistrict, South District, Israel",
+  "lat": 31.2457442,
+  "lon": 34.7925181,
+  "osm_id": 1377264,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Boston, Massachusetts, USA": {
+  "display_name": "Boston, Suffolk County, Massachusetts, United States",
+  "lat": 42.3588336,
+  "lon": -71.0578303,
+  "osm_id": 2315704,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Boulogne-Billancourt, France": {
+  "display_name": "Boulogne-Billancourt, Hauts-de-Seine, Ile-de-France, Metropolitan France, 92100, France",
+  "lat": 48.8356649,
+  "lon": 2.240206,
+  "osm_id": 72020,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Burlington, Massachusetts, USA": {
+  "display_name": "Burlington, Middlesex County, Massachusetts, United States",
+  "lat": 42.5048167,
+  "lon": -71.1956111,
+  "osm_id": 1838337,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Carlsbad, California, USA": {
+  "display_name": "Carlsbad, San Diego County, California, United States",
+  "lat": 33.1580933,
+  "lon": -117.3505966,
+  "osm_id": 2305279,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Chantilly, Virginia, USA": {
+  "display_name": "Chantilly, Fairfax County, Virginia, United States",
+  "lat": 38.885219,
+  "lon": -77.4486772,
+  "osm_id": 206712,
+  "osm_type": "relation",
+  "type": "census"
+ },
+ "Chesterfield, Missouri, USA": {
+  "display_name": "Chesterfield, Saint Louis County, Missouri, United States",
+  "lat": 38.6581764,
+  "lon": -90.5680617,
+  "osm_id": 139951,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Chesterfield, St. Louis County, Missouri, USA": {
+  "display_name": "Chesterfield, Saint Louis County, Missouri, United States",
+  "lat": 38.6581764,
+  "lon": -90.5680617,
+  "osm_id": 139951,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Chicago, Illinois, USA": {
+  "display_name": "Chicago, South Chicago Township, Cook County, Illinois, United States",
+  "lat": 41.8755616,
+  "lon": -87.6244212,
+  "osm_id": 122604,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Claremont, North Carolina, USA": {
+  "display_name": "Claremont, Catawba County, North Carolina, United States",
+  "lat": 35.7145776,
+  "lon": -81.1461917,
+  "osm_id": 180153,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Concord, Massachusetts, USA": {
+  "display_name": "Concord, Middlesex County, Massachusetts, 01742, United States",
+  "lat": 42.4605189,
+  "lon": -71.3488963,
+  "osm_id": 1840166,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Cupertino, California, USA": {
+  "display_name": "Cupertino, Santa Clara County, California, 95014, United States",
+  "lat": 37.3228934,
+  "lon": -122.0322895,
+  "osm_id": 2221709,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Dallas, Texas, USA": {
+  "display_name": "Dallas, Dallas County, Texas, United States",
+  "lat": 32.7762719,
+  "lon": -96.7968559,
+  "osm_id": 6571629,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "East Palo Alto, California, USA": {
+  "display_name": "East Palo Alto, San Mateo County, California, United States",
+  "lat": 37.4688273,
+  "lon": -122.141075,
+  "osm_id": 2220740,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Eindhoven, Netherlands": {
+  "display_name": "Eindhoven, North Brabant, Netherlands",
+  "lat": 51.4392648,
+  "lon": 5.478633,
+  "osm_id": 296014,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Espoo, Finland": {
+  "display_name": "Espoo, Helsinki sub-region, Uusimaa, Mainland Finland, Finland",
+  "lat": 60.2049651,
+  "lon": 24.6559808,
+  "osm_id": 36097,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Fremont, California, USA": {
+  "display_name": "Fremont, Alameda County, California, United States",
+  "lat": 37.5482697,
+  "lon": -121.988571,
+  "osm_id": 111943,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Frisco, Texas, USA": {
+  "display_name": "Frisco, Collin County, Texas, United States",
+  "lat": 33.1505998,
+  "lon": -96.8238183,
+  "osm_id": 6579857,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Gibraltar": {
+  "display_name": "Gibraltar",
+  "lat": 36.1285933,
+  "lon": -5.3474761,
+  "osm_id": 1278736,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Grand Haven, Michigan, USA": {
+  "display_name": "Grand Haven, Ottawa County, Michigan, United States",
+  "lat": 43.0630734,
+  "lon": -86.2283864,
+  "osm_id": 134452,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Haifa, Israel": {
+  "display_name": "Haifa, Haifa Subdistrict, Haifa District, Israel",
+  "lat": 32.8191218,
+  "lon": 34.9983856,
+  "osm_id": 1387888,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Herzliya Pituach, Israel": {
+  "display_name": "Herzliya Pituach, Herzliya, Tel Aviv Subdistrict, Tel-Aviv District, 4675095, Israel",
+  "lat": 32.1739444,
+  "lon": 34.8081804,
+  "osm_id": 1025002630,
+  "osm_type": "node",
+  "type": "suburb"
+ },
+ "Herzliya, Israel": {
+  "display_name": "Herzliya, Tel Aviv Subdistrict, Tel-Aviv District, Israel",
+  "lat": 32.1676842,
+  "lon": 34.8308279,
+  "osm_id": 60363615,
+  "osm_type": "way",
+  "type": "town"
+ },
+ "Hod HaSharon, Israel": {
+  "display_name": "Hod HaSharon, Petah Tikva Subdistrict, Center District, Israel",
+  "lat": 32.1561974,
+  "lon": 34.8930354,
+  "osm_id": 1383629,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Hod Hasharon, Israel": {
+  "display_name": "Hod HaSharon, Petah Tikva Subdistrict, Center District, Israel",
+  "lat": 32.1561974,
+  "lon": 34.8930354,
+  "osm_id": 1383629,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Hopkinton, Massachusetts, USA": {
+  "display_name": "Hopkinton, Middlesex County, Massachusetts, United States",
+  "lat": 42.2288875,
+  "lon": -71.5196439,
+  "osm_id": 1865800,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Houston, Texas, USA": {
+  "display_name": "Houston, Harris County, Texas, United States",
+  "lat": 29.7589382,
+  "lon": -95.3676974,
+  "osm_id": 2688911,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Islandia, New York, USA": {
+  "display_name": "Village of Islandia, Town of Islip, Suffolk County, New York, 11749, United States",
+  "lat": 40.8042649,
+  "lon": -73.1690019,
+  "osm_id": 175515,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Jersey City, New Jersey, USA": {
+  "display_name": "Jersey City, Hudson County, New Jersey, United States",
+  "lat": 40.7215682,
+  "lon": -74.047455,
+  "osm_id": 170953,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Jerusalem, Israel": {
+  "display_name": "Jerusalem, Jerusalem Subdistrict, Jerusalem District, Israel",
+  "lat": 31.7788472,
+  "lon": 35.2257856,
+  "osm_id": 1381350,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Kfar Saba, Israel": {
+  "display_name": "Kfar Saba, Petah Tikva Subdistrict, Center District, Israel",
+  "lat": 32.1773471,
+  "lon": 34.907459,
+  "osm_id": 1383631,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Landover, Maryland, USA": {
+  "display_name": "Landover, Prince George's County, Maryland, 20785, United States",
+  "lat": 38.925313,
+  "lon": -76.8815433,
+  "osm_id": 133396,
+  "osm_type": "relation",
+  "type": "statistical"
+ },
+ "Limassol, Cyprus": {
+  "display_name": "Limassol, Limassol Municipality, Limassol District, Cyprus, 3085, Cyprus",
+  "lat": 34.6852901,
+  "lon": 33.0332657,
+  "osm_id": 9331795,
+  "osm_type": "node",
+  "type": "city"
+ },
+ "Lod, Israel": {
+  "display_name": "Lod, Ramla Subdistrict, Center District, Israel",
+  "lat": 31.9489012,
+  "lon": 34.8884857,
+  "osm_id": 1381532,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "London, United Kingdom": {
+  "display_name": "Greater London, England, United Kingdom",
+  "lat": 51.5074456,
+  "lon": -0.1277653,
+  "osm_id": 175342,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Maidenhead, UK": {
+  "display_name": "Maidenhead, Royal Borough of Windsor and Maidenhead, England, SL6 1QB, United Kingdom",
+  "lat": 51.522743,
+  "lon": -0.7197368,
+  "osm_id": 604393285,
+  "osm_type": "node",
+  "type": "town"
+ },
+ "Manof, Israel": {
+  "display_name": "Manof, Misgav Regional Council, Acre Subdistrict, North District, Israel",
+  "lat": 32.8541336,
+  "lon": 35.2367706,
+  "osm_id": 21252210,
+  "osm_type": "relation",
+  "type": "village"
+ },
+ "Melville, New York, USA": {
+  "display_name": "Melville, Town of Huntington, Suffolk County, New York, 11747, United States",
+  "lat": 40.7835914,
+  "lon": -73.4075575,
+  "osm_id": 175763,
+  "osm_type": "relation",
+  "type": "census"
+ },
+ "Milpitas, California, USA": {
+  "display_name": "Milpitas, Santa Clara County, California, 95035, United States",
+  "lat": 37.4332273,
+  "lon": -121.8989248,
+  "osm_id": 112134,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Morristown, New Jersey, USA": {
+  "display_name": "Morristown, Morris County, New Jersey, United States",
+  "lat": 40.7970382,
+  "lon": -74.4809868,
+  "osm_id": 170938,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Mountain View, California, USA": {
+  "display_name": "Mountain View, Santa Clara County, California, United States",
+  "lat": 37.3893889,
+  "lon": -122.0832101,
+  "osm_id": 1544956,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Netanya, Israel": {
+  "display_name": "Netanya, HaSharon Subdistrict, Center District, 42***, Israel",
+  "lat": 32.3286181,
+  "lon": 34.8566246,
+  "osm_id": 1383391,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "New York, New York, USA": {
+  "display_name": "New York, United States",
+  "lat": 40.7127281,
+  "lon": -74.0060152,
+  "osm_id": 175905,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Newark, New Jersey, USA": {
+  "display_name": "Newark, Essex County, New Jersey, United States",
+  "lat": 40.735657,
+  "lon": -74.1723667,
+  "osm_id": 170486,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Or Yehuda, Israel": {
+  "display_name": "Or Yehuda, Tel Aviv Subdistrict, Tel-Aviv District, Israel",
+  "lat": 32.0270045,
+  "lon": 34.8629898,
+  "osm_id": 1382464,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Palo Alto, California, USA": {
+  "display_name": "Palo Alto, Santa Clara County, California, United States",
+  "lat": 37.4443293,
+  "lon": -122.1598465,
+  "osm_id": 1544955,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Parsippany, New Jersey, USA": {
+  "display_name": "Parsippany, Lake Hiawatha, Parsippany-Troy Hills, Morris County, New Jersey, 07054, United States",
+  "lat": 40.8623835,
+  "lon": -74.4032354,
+  "osm_id": 18523366,
+  "osm_type": "relation",
+  "type": "census"
+ },
+ "Petah Tikva, Israel": {
+  "display_name": "Petah Tikva, Petah Tikva Subdistrict, Center District, Israel",
+  "lat": 32.0877639,
+  "lon": 34.8859985,
+  "osm_id": 1382816,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Plano, Texas, USA": {
+  "display_name": "Plano, Collin County, Texas, United States",
+  "lat": 33.0136764,
+  "lon": -96.6925096,
+  "osm_id": 6575893,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Portland, Oregon, USA": {
+  "display_name": "Portland, Multnomah County, Oregon, United States",
+  "lat": 45.5202471,
+  "lon": -122.674194,
+  "osm_id": 186579,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Ra'anana, Israel": {
+  "display_name": "Raanana, Petah Tikva Subdistrict, Center District, Israel",
+  "lat": 32.1860244,
+  "lon": 34.8678359,
+  "osm_id": 1383630,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Raleigh, North Carolina, USA": {
+  "display_name": "Raleigh, Wake County, North Carolina, United States",
+  "lat": 35.7803977,
+  "lon": -78.6390989,
+  "osm_id": 179052,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Ramat Gan, Israel": {
+  "display_name": "Ramat Gan, Tel Aviv Subdistrict, Tel-Aviv District, Israel",
+  "lat": 32.0686867,
+  "lon": 34.8246812,
+  "osm_id": 1382493,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Redhill, United Kingdom": {
+  "display_name": "Redhill, Reigate and Banstead, Surrey, England, RH1 1RJ, United Kingdom",
+  "lat": 51.2404691,
+  "lon": -0.1682816,
+  "osm_id": 29141200,
+  "osm_type": "node",
+  "type": "town"
+ },
+ "Redwood City, California, USA": {
+  "display_name": "Redwood City, San Mateo County, California, United States",
+  "lat": 37.4863239,
+  "lon": -122.232523,
+  "osm_id": 112309,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Rehovot, Israel": {
+  "display_name": "Rehovot, Rehovot Subdistrict, Center District, Israel",
+  "lat": 31.8952532,
+  "lon": 34.8105616,
+  "osm_id": 1246791,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Richardson, Texas, USA": {
+  "display_name": "Richardson, Dallas County, Texas, United States",
+  "lat": 32.9481789,
+  "lon": -96.7297206,
+  "osm_id": 6577487,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Rosh HaAyin, Israel": {
+  "display_name": "Rosh HaAyin, Petah Tikva Subdistrict, Center District, Israel",
+  "lat": 32.0952929,
+  "lon": 34.9533225,
+  "osm_id": 1401781,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Round Rock, Texas, USA": {
+  "display_name": "Round Rock, Williamson County, Texas, United States",
+  "lat": 30.5085915,
+  "lon": -97.6788056,
+  "osm_id": 115318,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "San Diego, California, USA": {
+  "display_name": "San Diego, San Diego County, California, United States",
+  "lat": 32.7157062,
+  "lon": -117.1638284,
+  "osm_id": 253832,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "San Jose, California, USA": {
+  "display_name": "San Jose, Santa Clara County, California, United States",
+  "lat": 37.3361663,
+  "lon": -121.890591,
+  "osm_id": 112143,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "San Mateo, California, USA": {
+  "display_name": "San Mateo, San Mateo County, California, United States",
+  "lat": 37.5629997,
+  "lon": -122.3253265,
+  "osm_id": 2835017,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Santa Clara, California, USA": {
+  "display_name": "Santa Clara, Santa Clara County, California, United States",
+  "lat": 37.3541132,
+  "lon": -121.955174,
+  "osm_id": 2221647,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Schaumburg, Illinois, USA": {
+  "display_name": "Schaumburg, Schaumburg Township, Cook County, Illinois, United States",
+  "lat": 42.0333608,
+  "lon": -88.083406,
+  "osm_id": 122054,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Seattle, Washington, USA": {
+  "display_name": "Seattle, King County, Washington, United States",
+  "lat": 47.6038321,
+  "lon": -122.330062,
+  "osm_id": 237385,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "St. Louis, Missouri, USA": {
+  "display_name": "Saint Louis, Missouri, United States",
+  "lat": 38.6254063,
+  "lon": -90.190009,
+  "osm_id": 1180533,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Staines, UK": {
+  "display_name": "Staines-upon-Thames, Borough of Spelthorne, Surrey, England, TW18 4PP, United Kingdom",
+  "lat": 51.434012,
+  "lon": -0.511044,
+  "osm_id": 21434600,
+  "osm_type": "node",
+  "type": "town"
+ },
+ "Suwanee, Georgia, USA": {
+  "display_name": "Suwanee, Gwinnett County, Georgia, United States",
+  "lat": 34.0514898,
+  "lon": -84.0712997,
+  "osm_id": 119378,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Tel Aviv, Israel": {
+  "display_name": "Tel-Aviv, Tel Aviv Subdistrict, Tel-Aviv District, Israel",
+  "lat": 32.0852997,
+  "lon": 34.7818064,
+  "osm_id": 1382494,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Uppsala, Sweden": {
+  "display_name": "Uppsala, Uppsala kommun, Uppsala County, 753 20, Sweden",
+  "lat": 59.8586126,
+  "lon": 17.6387436,
+  "osm_id": 25735371,
+  "osm_type": "node",
+  "type": "city"
+ },
+ "Walldorf, Germany": {
+  "display_name": "Walldorf, Rhein-Neckar-Kreis, Baden-Württemberg, 69190, Germany",
+  "lat": 49.3032669,
+  "lon": 8.6432056,
+  "osm_id": 453404,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Waterloo, Ontario, Canada": {
+  "display_name": "Waterloo, Region of Waterloo, Southwestern Ontario, Ontario, Canada",
+  "lat": 43.4652699,
+  "lon": -80.5222961,
+  "osm_id": 2062154,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Wayne, New Jersey, USA": {
+  "display_name": "Wayne, Passaic County, New Jersey, 07470, United States",
+  "lat": 40.9491723,
+  "lon": -74.2376802,
+  "osm_id": 170717,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Westwood, Massachusetts, USA": {
+  "display_name": "Westwood, Norfolk County, Massachusetts, 02090, United States",
+  "lat": 42.2186913,
+  "lon": -71.2233829,
+  "osm_id": 2389802,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Woodbury, New York, USA": {
+  "display_name": "Woodbury, Town of Oyster Bay, Nassau County, New York, 11797, United States",
+  "lat": 40.8183265,
+  "lon": -73.4706151,
+  "osm_id": 175643,
+  "osm_type": "relation",
+  "type": "census"
+ },
+ "Yakum, Israel": {
+  "display_name": "Yaqum, Hof HaSharon Regional Council, HaSharon Subdistrict, Center District, Israel",
+  "lat": 32.2485734,
+  "lon": 34.842087,
+  "osm_id": 30678665,
+  "osm_type": "way",
+  "type": "village"
+ },
+ "Yavne, Israel": {
+  "display_name": "Yavne, Rehovot Subdistrict, Center District, 8155205, Israel",
+  "lat": 31.8768863,
+  "lon": 34.7382974,
+  "osm_id": 1380415,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Yehud, Israel": {
+  "display_name": "Yehud Monosson, Petah Tikva Subdistrict, Center District, Israel",
+  "lat": 32.0331756,
+  "lon": 34.8907527,
+  "osm_id": 1382466,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Yokneam Illit, Israel": {
+  "display_name": "Yokneam Ilit, Jezreel Subdistrict, North District, 2069208, Israel",
+  "lat": 32.6480601,
+  "lon": 35.0943545,
+  "osm_id": 1391621,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Yokneam, Israel": {
+  "display_name": "Yokneam Ilit, Jezreel Subdistrict, North District, 2069208, Israel",
+  "lat": 32.6480601,
+  "lon": 35.0943545,
+  "osm_id": 1391621,
+  "osm_type": "relation",
+  "type": "administrative"
+ }
+}

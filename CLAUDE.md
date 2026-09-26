@@ -53,7 +53,8 @@ which records the traps that outlived the migration.
   the private `../data` repo in 2026-09; the chess archives and the youtube CSV are
   still there (see `scripts/copy_data.py`)
 - `shelve/` — the imdb / goodreads / simania lookup caches that pydatacheck's
-  `check_videos` and `check_books` read (committed, so CI never hits the network)
+  `check_videos` and `check_books` read (committed, so CI never hits the network),
+  plus the Nominatim geocoding cache `organizations_geocode.py` reads and writes
 - `templates/` — Tera templates (`base.html`, `page.html`, `blog.html`, taxonomy pages)
 - `sass/style.scss` — compiled to `/style.css` by zola
 - `static/` — copied verbatim to the site root: media plugins, images, data, `vendor/`
@@ -65,7 +66,8 @@ which records the traps that outlived the migration.
   `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
   the sibling teaching repos), image fetchers, data importers, the `data/yaml/`
   maintenance scripts (`podcasts_*.py`, `books_fetch_ids.py`, `great_courses_*.py`,
-  `audio_courses_check_*.py`, `youtube_add_names.py` — all run from the repo root),
+  `audio_courses_check_*.py`, `youtube_add_names.py`, `organizations_geocode.py`,
+  `organizations_pick_geo.py` — all run from the repo root),
   `serve.py`, and the `build_*_dict.sh` / `spellcheck_*.sh` pair behind the aspell
   processors
 - `tests/` — pytest suite for the data import scripts and template determinism
