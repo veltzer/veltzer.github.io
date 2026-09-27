@@ -215,6 +215,7 @@ Milcom
 Millerites
 MkDocs
 Moab
+Modus
 Mofaz
 Molech
 Molière's
@@ -273,6 +274,7 @@ Polygenic
 Pontius
 PowerShell
 Prescientific
+Prosthetics
 Psilocybin
 PubkeyAuthentication
 Publics
@@ -794,6 +796,7 @@ localstorage
 localtime
 logotherapy
 lookups
+lossy
 luazptar
 macOS
 machina
@@ -917,6 +920,7 @@ pname
 png
 podcaster
 podcasters
+ponens
 poor's
 popstate
 popularisers
@@ -1003,6 +1007,7 @@ rsa
 rss
 résumés
 satan
+savannah
 savedpref
 savesortpref
 savetogglepref

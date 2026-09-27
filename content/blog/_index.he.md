@@ -11,23 +11,23 @@ generate_feeds = true
 #
 # Regenerated on every build. Do not hand-edit -- add a post instead.
 [extra.stats]
-total = 172
-pages = 344
+total = 173
+pages = 346
 
 # Post count per language.
 [[extra.stats.languages]]
 code = "en"
-count = 172
+count = 173
 [[extra.stats.languages]]
 code = "he"
-count = 172
+count = 173
 
 # Post count per year, newest first, broken down by language.
 [[extra.stats.years]]
 year = 2026
-total = 73
-en = 73
-he = 73
+total = 74
+en = 74
+he = 74
 [[extra.stats.years]]
 year = 2025
 total = 6
