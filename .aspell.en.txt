@@ -34,6 +34,7 @@ Bavel
 Beilock
 Beilock's
 Bel
+Bellah
 Bethel
 Bibi
 Bolyai
@@ -112,6 +113,7 @@ Garstang's
 Gazzaniga
 Gazzaniga's
 Geary
+Geertz
 Gezer
 Ghazali
 Giordano
@@ -212,6 +214,7 @@ Midianite
 Midianites
 Mikolov
 Milcom
+Millenarian
 Millerites
 MkDocs
 Moab
@@ -1006,6 +1009,7 @@ robert
 rsa
 rss
 résumés
+sacralizes
 satan
 savannah
 savedpref
