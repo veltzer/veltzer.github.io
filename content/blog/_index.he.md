@@ -11,38 +11,38 @@ generate_feeds = true
 #
 # Regenerated on every build. Do not hand-edit -- add a post instead.
 [extra.stats]
-total = 174
-pages = 348
+total = 392
+pages = 784
 
 # Post count per language.
 [[extra.stats.languages]]
 code = "en"
-count = 174
+count = 392
 [[extra.stats.languages]]
 code = "he"
-count = 174
+count = 392
 
 # Post count per year, newest first, broken down by language.
 [[extra.stats.years]]
 year = 2026
-total = 75
-en = 75
-he = 75
+total = 115
+en = 115
+he = 115
 [[extra.stats.years]]
 year = 2025
-total = 6
-en = 6
-he = 6
+total = 63
+en = 63
+he = 63
 [[extra.stats.years]]
 year = 2024
-total = 4
-en = 4
-he = 4
+total = 49
+en = 49
+he = 49
 [[extra.stats.years]]
 year = 2023
-total = 4
-en = 4
-he = 4
+total = 45
+en = 45
+he = 45
 [[extra.stats.years]]
 year = 2022
 total = 5
@@ -85,27 +85,37 @@ en = 5
 he = 5
 [[extra.stats.years]]
 year = 2014
-total = 4
-en = 4
-he = 4
+total = 7
+en = 7
+he = 7
 [[extra.stats.years]]
 year = 2013
-total = 6
-en = 6
-he = 6
+total = 13
+en = 13
+he = 13
 [[extra.stats.years]]
 year = 2012
-total = 5
-en = 5
-he = 5
+total = 14
+en = 14
+he = 14
 [[extra.stats.years]]
 year = 2011
-total = 11
-en = 11
-he = 11
+total = 20
+en = 20
+he = 20
 [[extra.stats.years]]
 year = 2010
-total = 22
-en = 22
-he = 22
+total = 27
+en = 27
+he = 27
+[[extra.stats.years]]
+year = 2009
+total = 1
+en = 1
+he = 1
+[[extra.stats.years]]
+year = 2008
+total = 1
+en = 1
+he = 1
 +++

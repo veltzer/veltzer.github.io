@@ -31,6 +31,10 @@ en = "browser"
 he = "דפדפן"
 
 [[terms]]
+en = "climate"
+he = "אקלים"
+
+[[terms]]
 en = "command-line"
 he = "שורת-פקודה"
 
@@ -61,6 +65,10 @@ he = "תיעוד"
 [[terms]]
 en = "economics"
 he = "כלכלה"
+
+[[terms]]
+en = "education"
+he = "חינוך"
 
 [[terms]]
 en = "embedded"
@@ -107,12 +115,20 @@ en = "history"
 he = "היסטוריה"
 
 [[terms]]
+en = "israel"
+he = "ישראל"
+
+[[terms]]
 en = "java"
 he = "ג׳אווה"
 
 [[terms]]
 en = "keyboard"
 he = "מקלדת"
+
+[[terms]]
+en = "law"
+he = "משפט"
 
 [[terms]]
 en = "linux"
@@ -125,6 +141,10 @@ he = "ספרות"
 [[terms]]
 en = "markets"
 he = "שווקים"
+
+[[terms]]
+en = "media"
+he = "תקשורת"
 
 [[terms]]
 en = "memory"
@@ -143,6 +163,10 @@ en = "neuroscience"
 he = "מדעי-המוח"
 
 [[terms]]
+en = "open-source"
+he = "קוד-פתוח"
+
+[[terms]]
 en = "opinion"
 he = "דעה"
 
@@ -157,6 +181,10 @@ he = "פרל"
 [[terms]]
 en = "philosophy"
 he = "פילוסופיה"
+
+[[terms]]
+en = "php"
+he = "php"
 
 [[terms]]
 en = "politics"
@@ -201,6 +229,10 @@ he = "סטטיסטיקה"
 [[terms]]
 en = "sysadmin"
 he = "ניהול-מערכות"
+
+[[terms]]
+en = "technology"
+he = "טכנולוגיה"
 
 [[terms]]
 en = "theory"
