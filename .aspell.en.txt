@@ -138,6 +138,7 @@ Elyon
 Embeddings
 Endor
 Enki
+Epistemologically
 Equilibria
 Euthyphro
 Evidential
@@ -272,6 +273,7 @@ Libet's
 LilyPond
 Loftus
 Logotherapy
+Luckmann
 MKV
 Mainyu
 Mancur
@@ -954,6 +956,7 @@ hegemon
 henhouse
 henotheism
 heritability
+hermeneutics
 heterogenous
 hiddenness
 hippocampi
@@ -1034,6 +1037,7 @@ kerberosauthentication
 keygen
 keyring
 keyrings
+kippah
 kle
 knower
 korg
@@ -1338,6 +1342,7 @@ redistributive
 refetchevents
 reflowing
 reflux
+reframe
 reframed
 reframes
 reframing
@@ -1515,6 +1520,7 @@ theodicies
 theodicy
 throated
 thumbor
+tilak
 timegridday
 timegridweek
 timezone
@@ -1545,6 +1551,7 @@ tuplet
 tuplets
 txt
 typeof
+tzitzit
 ubiqitous
 ubuntu
 ui
