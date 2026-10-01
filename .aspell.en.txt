@@ -175,6 +175,7 @@ Ghazali
 Gilad
 Giordano
 GloVe
+Gogh
 Goodacre
 Goshen
 Gottwald
@@ -271,6 +272,7 @@ Libertarianism
 Libet
 Libet's
 LilyPond
+Lincolnshire
 Loftus
 Logotherapy
 Luckmann
