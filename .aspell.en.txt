@@ -122,6 +122,7 @@ Docker's
 Dolan
 DropBox
 Durations
+Dutton
 Duverger
 Duverger's
 ENT
@@ -170,8 +171,10 @@ Gazzaniga
 Gazzaniga's
 Geary
 Geertz
+Gervais
 Gezer
 Ghazali
+Gignac
 Gilad
 Giordano
 GloVe
@@ -339,8 +342,10 @@ Nimush
 Nisbett
 Noam
 Noam's
+Norenzayan
 Noth
 Nouveau
+Nyborg
 ODF
 OEM
 OUTPUTTYPE
@@ -467,6 +472,7 @@ Sumer
 Supermajority
 Surowiecki's
 Syscall
+Szodorai
 TBD
 TCP
 Taber
@@ -527,6 +533,7 @@ Yocto
 Yuval
 Zellig
 Ziva
+Zuckerman
 aac
 abc
 abcde
