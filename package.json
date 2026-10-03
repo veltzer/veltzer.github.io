@@ -1,6 +1,0 @@
-{
-  "devDependencies": {
-    "postcss-scss": "latest",
-    "stylelint": "latest"
-  }
-}
