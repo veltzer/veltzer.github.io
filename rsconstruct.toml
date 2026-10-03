@@ -4,10 +4,10 @@
 [dependencies]
 system = ["libxml2-utils", "aspell", "aspell-en", "aspell-he"]
 
-[processor.eslint]
+[processor.oxlint]
 src_dirs = ["static"]
 src_exclude_dirs = ["vendor"]
-args = ["-c", ".eslint.config.js"]
+args = ["-c", ".oxlintrc.json"]
 [processor.tidy]
 src_dirs = ["static"]
 # not linted: templates (zola templates, not standalone HTML)
