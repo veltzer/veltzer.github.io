@@ -11,9 +11,6 @@ args = ["-c", ".oxlintrc.json"]
 [processor.tidy]
 src_dirs = ["static"]
 # not linted: templates (zola templates, not standalone HTML)
-[processor.htmlhint]
-src_dirs = ["static"]
-
 [processor.explicit]
 command = "scripts/build_site.py"
 required_tools = ["zola"]
