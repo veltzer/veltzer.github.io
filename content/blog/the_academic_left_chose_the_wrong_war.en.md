@@ -43,3 +43,7 @@ The insularity also hides from the academy its own loss of cultural authority. A
 If the intellectual left wants its vitality and its moral standing back, it has to go back to where it came from. Human liberation was always, at bottom, a fight for the human mind against falsehood, fatalism and unearned authority.
 
 That takes courage of a fairly old-fashioned kind: the courage to say that reason, evidence and universal human rights outrank religious sensibilities; the courage to criticise an irrational doctrine regardless of how much cultural prestige its believers carry; and the sense to see that the greatest threat facing humanity is not insufficient ideological conformity inside the university but the continuing grip of ancient superstition on human societies. The skirmishes of moral vanity can be dropped. The war that matters is the old one, reason against dogma, and it is far from won.
+
+## Where This Started
+
+Some time ago I watched a YouTube series of a history course taught by Yuval Noah Harari. At one point a student asked him, "Where did God come into this?" Harari's answer was: "Give me evidence of how God changed things and I will consider it, but until you do, I cannot relate to your question." I remember hearing that and thinking: what cowardice! The answer should have been, "There is no God. Next question, please." That moment is what started me thinking about the cowardice of academia on this subject.
