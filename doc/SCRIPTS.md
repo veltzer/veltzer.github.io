@@ -4,31 +4,45 @@
 
 ### `scripts/build_site.py`
 
-The zola build, run by `rsconstruct build` (never invoke `zola build` by
-hand -- see `CLAUDE.md`). Imports the teaching pages via
-`scripts/import_teaching.py` (skipped when the sibling repos are absent, as in
-CI), regenerates the archive stats via `scripts/gen_stats.py`, writes
-`static/build_info.toml`, syncs the theme submodule's tokens into `static/`,
-then runs `zola build` into `_site/` and post-processes the output (copies
-the English feed to `/atom.xml`, the URL every page advertised until
-2026-09-21; writes the legacy redirects; drops the paginator redirect stubs
-from the sitemap and adds the root to it; writes the root language-chooser
-page). `relocate_english()`, which used to sweep unprefixed English output
-under `/en/`, was removed on 2026-09-21: every section is an explicit
-`_index.en.md`, so zola emits both languages prefixed itself.
+The build steps around zola, one subcommand each, all run by `rsconstruct
+build` as processors (see `rsconstruct.toml`; never invoke `zola build` by
+hand -- see `CLAUDE.md`). zola itself is rsconstruct's
+`processor.mass_generator.zola`, which predicts every file zola writes and
+caches each one separately.
 
-`write_legacy_redirects()` serves the pre-migration URLs Google still has
-indexed -- MkDocs-era `/YYYY/MM/DD/<slug>/` permalinks and the root-level
-zola URLs from before English moved to `/en/`. The map is `LEGACY_REDIRECTS`;
-paginator URLs are expanded from the build output rather than listed. It is
-kept as a post-processing step rather than zola `aliases` because aliases
-exist only for pages, and half of what it rescues is not one (paginator URLs,
-`/ascx/public_key.asc`, a section); see `doc/SEO.md` for the history.
+- `build-info` writes `out/build_info.toml` (the commit hash and dirty flag
+  the footer shows), which `templates/section.html` reads with `load_data`.
+- `shared-themes` copies the theme submodule's tokens to `_site/shared-themes/`.
+- `companies` runs `scripts/import_companies.py` into
+  `_site/data/companies.json.gz` and copies `data/logos/*.svg` to `_site/logos/`.
+- `root-feed` copies the English feed to `/atom.xml`, the URL every page
+  advertised until 2026-09-21.
+- `redirects` writes the legacy redirect stubs; `redirects --plan` prints the
+  list of stubs it will write, which is how rsconstruct's generic mass
+  generator knows them in advance.
 
-`fix_sitemap()` also drops every `/page/1/` entry (`drop_redirecting_urls()`).
-Zola emits that URL for each paginated section and builds it as a redirect to
-the paginator root, so listing it makes the sitemap advertise 112 redirects.
-The redirect stays for anyone holding such a link; only the sitemap entry goes.
+The rest of what used to be post-processing is zola's own now: the root
+language chooser is the root section's template (`templates/lang_choice.html`),
+and the sitemap is `templates/sitemap.xml`. `relocate_english()`, which used
+to sweep unprefixed English output under `/en/`, was removed on 2026-09-21:
+every section is an explicit `_index.en.md`, so zola emits both languages
+prefixed itself.
+
+The redirect stubs serve the pre-migration URLs Google still has indexed --
+MkDocs-era `/YYYY/MM/DD/<slug>/` permalinks and the root-level zola URLs from
+before English moved to `/en/`. The map is `LEGACY_REDIRECTS`; paginator URLs
+are expanded from the number of English posts and the blog's `paginate_by`
+rather than listed. They are a build step rather than zola `aliases` because
+aliases exist only for pages, and half of what they rescue is not one
+(paginator URLs, `/ascx/public_key.asc`, a section); see `doc/SEO.md` for the
+history. A stub whose path zola also writes fails the build when the graph is
+built, as two processors declaring one output.
+
+`templates/sitemap.xml` is zola's built-in sitemap minus every `/page/1/`
+entry. Zola emits that URL for each paginated section and builds it as a
+redirect to the paginator root, so listing it makes the sitemap advertise 112
+redirects. The redirect stays for anyone holding such a link; only the
+sitemap entry goes.
 
 ## check_redirects.py
 
@@ -52,10 +66,9 @@ Imports the three sibling teaching sites (`../teaching-slides`,
 sibling builds a single self-contained `_site/index.html`; the script strips
 the document wrapper, drops the embedded header and theme `<select>` (this
 site's chrome supplies both), scopes the page's CSS under an `#app-<section>`
-wrapper, and writes the result with this site's front matter. Run by
-`scripts/build_site.py` when the sibling `_site/` directories exist, and
-skipped otherwise, so CI (which has no sibling checkouts) builds from the
-committed copies. `--check` reports what would be written without writing.
+wrapper, and writes the result with this site's front matter. A manual step,
+run after rebuilding a sibling site; the output is committed, and the build
+(local and CI, which has no sibling checkouts) uses the committed copies. `--check` reports what would be written without writing.
 The Hebrew `_index.he.md` stubs are hand-written and are not touched.
 
 ### `scripts/gen_stats.py`
@@ -70,9 +83,10 @@ tag page's language switcher and hreflang alternates point at the same tag in
 the other language. Fails the build if any `.en.md` post lacks its `.he.md`
 translation or vice versa (an unpaired post would otherwise lose its language
 switcher silently), if a pair's tag lists differ in length, or if a tag lines
-up with two different counterparts. Part of the build (run from
-`scripts/build_site.py`); both outputs are committed so `zola serve` shows the
-right numbers and links.
+up with two different counterparts. The build runs it with `--check`, which
+writes nothing and fails listing the stale files; `rsconstruct fix` runs it
+for real. Both outputs are committed, so zola (and `zola serve`) always reads
+current numbers and links.
 
 ### `scripts/gen_profiles.py`
 
@@ -240,7 +254,7 @@ shows (name, logo, status, headquarters, Israel office, the one `geo` map
 point and the path of its static map image, website, logo attribution) and
 gives each a `review` line: what happened to it, or its status when nothing
 did. Writes gzipped JSON with a fixed mtime. Unlike the other importers this
-is a build step: `build_site.py` runs it after zola and writes
+is a build step: `build_site.py companies` runs it and writes
 `_site/data/companies.json.gz`, and copies `data/logos/*.svg` to
 `_site/logos/` next to it. Nothing is committed. With `--images-dir` (the
 build passes `static/images/`) it fails when a company's map image has not
@@ -273,9 +287,9 @@ of hosts do not implement HEAD properly.
 
 ### `scripts/serve.py`
 
-Runs the full `scripts/build_site.py` build, then serves `_site/` with a plain
-static server, which is the closest local approximation to GitHub Pages
-(`zola serve` builds in memory and skips the post-processing). Options:
+Runs `rsconstruct build`, then serves `_site/` with a plain static server,
+which is the closest local approximation to GitHub Pages (`zola serve` builds
+in memory and skips the steps around zola). Options:
 `--port`, `--preview` (open a browser), `--anonymous` (a browser with a fresh
 temp profile, implies `--preview`), `--no-build`.
 

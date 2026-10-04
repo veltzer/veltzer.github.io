@@ -55,9 +55,9 @@ which records the traps that outlived the migration.
 - `data/logos/` — one SVG per organization in `organizations.yaml` (which refers to
   them by paths relative to `data/`), linted by xmllint and svglint; `data/raw/logos/`
   holds the bitmaps the traced ones were made from. The companies tab of the media
-  page is built from these at build time: `build_site.py` writes
-  `_site/data/companies.json.gz` via `scripts/import_companies.py` and copies the
-  SVGs to `_site/logos/`. Neither is committed, unlike the rest of `static/data/`.
+  page is built from these at build time: the `companies` step of `build_site.py`
+  writes `_site/data/companies.json.gz` via `scripts/import_companies.py` and copies
+  the SVGs to `_site/logos/`. Neither is committed, unlike the rest of `static/data/`.
   The static map image on each company card (`static/images/map-<lat>_<lon>.jpg`,
   one per distinct `geo` point) *is* committed: `scripts/organizations_fetch_maps.py`
   renders it from OpenStreetMap tiles, and the build fails when one is missing
@@ -71,7 +71,7 @@ which records the traps that outlived the migration.
   redirects from retired URLs (the apps themselves live in `content/<app>/`)
 - `shared/shared-themes/` — git submodule providing the design tokens. **Run
   `git submodule update --init --recursive` on a fresh clone or the build fails.**
-- `scripts/` — `build_site.py` (the build), `gen_stats.py` (archive stats),
+- `scripts/` — `build_site.py` (the build steps around zola), `gen_stats.py` (archive stats),
   `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
   the sibling teaching repos), image fetchers, data importers, the `data/yaml/`
   maintenance scripts (`podcasts_*.py`, `books_fetch_ids.py`, `great_courses_*.py`,
@@ -91,24 +91,32 @@ which records the traps that outlived the migration.
 - `rsconstruct build` — full build (this is what CI runs; `--verbose` for detail.
   Parallelism comes from `[build] parallel = 0` in `rsconstruct.toml`, not a flag)
 - `rsconstruct status` — show build status
-- `scripts/build_site.py` — the zola build on its own
+- `rsconstruct fix` — regenerate the archive stats when the `gen_stats` check fails
 - `scripts/serve.py` — build, then serve `_site/` locally the way Pages will
+
+The site is built by rsconstruct's `processor.mass_generator.zola`, which
+predicts every file zola writes and makes each one a product: an unchanged
+site runs zola zero times, and `clean outputs` + `build` restores the site
+from cache. The steps zola does not do are small processors around it, all
+subcommands of `scripts/build_site.py`: `build-info` (`out/build_info.toml`),
+`shared-themes`, `companies`, `root-feed` (`/atom.xml`) and `redirects` (the
+legacy-URL stubs). See `rsconstruct.toml`.
 
 **Never run `zola build` by hand — always go through the build system.**
 Bare `zola build` writes to `public/` (zola's hardcoded default; an
-`output_dir` key in config.toml is silently ignored) and skips
-`build_site.py`'s post-processing (`write_legacy_redirects()`, `fix_sitemap()`).
-The result is a second output tree that looks authoritative but is neither
-the real build nor post-processed — stale copies of it have produced wrong
+`output_dir` key in config.toml is silently ignored) and skips the steps
+above (the legacy redirects, the shared themes, the companies data).
+The result is a second output tree that looks authoritative but is not
+the real build — stale copies of it have produced wrong
 page counts and false "missing post" reports. The real output is `_site/`,
 and only after a build; cross-check any number you derive from it against
 what the build itself reports (zola prints "Creating N pages").
 
 ### Prerequisite: zola
 
-`scripts/build_site.py` shells out to zola, which is **not** installed by
-`rsconstruct tools install`, so a fresh clone fails with
-`ERROR: zola not found on PATH`. Install it by hand:
+The build runs zola, at exactly 0.23.3: the zola processor predicts zola's
+output, and refuses any other version. `rsconstruct tools install` installs it
+(that is what CI does); by hand:
 
 ```bash
 ZOLA_VERSION=v0.23.3
@@ -218,7 +226,7 @@ tags = ["religion", "philosophy", "ethics"]
   greys, because cm-chessboard's own fills are hardcoded and a pure-token pairing hid the
   black pieces. Setting `data-theme` on `<html>` switches between the six themes; azure
   is the default.
-- `themes.css` is *copied* into `static/` by `build_site.py` and linked from `base.html`,
+- `themes.css` is *copied* into `_site/shared-themes/` by `build_site.py shared-themes` and linked from `base.html`,
   not `@import`-ed from the SCSS: dart-sass leaves a plain `@import` of a `.css` file as a
   runtime import, and the relative path then resolves against `/style.css` and 404s.
 - Prefer external stylesheets over inline `<style>` blocks or `style=` attributes.
@@ -242,10 +250,10 @@ tags = ["religion", "philosophy", "ethics"]
   ~399ms on the 6.5MB youtube dataset against ~31ms for `JSON.parse`.
 - **The `[extra.stats]` block in `content/blog/_index.{en,he}.md` is generated — do
   not hand-edit it.** `scripts/gen_stats.py` rewrites everything below the
-  `# BEGIN generated stats` marker on every build; the hand-written section keys
-  above it are preserved. It runs from `build_site.py` before zola, so the
-  numbers are always current, and the output is committed so `zola serve` and
-  any build that skips the step still show the right figures. `templates/blog.html`
+  `# BEGIN generated stats` marker; the hand-written section keys above it are
+  preserved. The build runs it as a check (`gen_stats.py --check`), which fails
+  when the committed stats are stale; `rsconstruct fix` rewrites them. The output
+  is committed, so `zola serve` and zola itself always see current figures. `templates/blog.html`
   renders it as the archive sidebar. Computing this in Tera was the alternative
   and was rejected: Tera has no `group_by` over a derived key, so per-year counts
   would mean looping the section once per year.
@@ -259,7 +267,7 @@ tags = ["religion", "philosophy", "ethics"]
   `<!-- BEGIN generated profiles -->` markers is replaced, so the hand-written prose
   above it survives. Edit the YAML, run the script, commit. It is a manual step,
   not part of the build, and the generated content is committed; now that the YAML
-  is in this repo it could run from `build_site.py` like `gen_stats.py` does, but
+  is in this repo it could become a check-plus-fix step like `gen_stats.py`, but
   that change has not been made.
 - **`static/identity.toml` is generated — do not hand-edit it.** `gen_profiles.py`
   writes it from the same `profiles.yaml`, and `templates/base.html` reads it with

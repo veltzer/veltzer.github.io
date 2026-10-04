@@ -23,8 +23,8 @@ description = "Mark Veltzer -- software engineer from Israel. Blog on programmin
 # every real language is then a non-default one, so every file carries an
 # explicit suffix and English stops being a special case. The cost is the
 # [translations] table below and the root /index.html -- which zola would
-# otherwise leave empty, so scripts/build_site.py writes a language-chooser
-# page there -- both of which exist only to service a language nobody reads.
+# otherwise leave empty, so content/_index.md renders a language-chooser
+# page there (templates/lang_choice.html) -- both of which exist only to service a language nobody reads.
 #
 # build_search_index is off here for the same reason: zola only ships stemmers
 # for a fixed list of languages and errors out on an unsupported one. The real

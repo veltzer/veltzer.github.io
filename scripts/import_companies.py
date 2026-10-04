@@ -26,10 +26,10 @@ Everything else stays behind: the research ``sources``, the three per-field
 traced from, and the ``old_url`` the 2019 database held.
 
 Unlike the other importers this one is a build step, not a copy_data.py
-step: the YAML lives in this repo, so build_site.py runs it on every build
+step: the YAML lives in this repo, so ``build_site.py companies`` runs it
 and writes the gzipped JSON straight into the output directory. Nothing is
 committed. The logo paths are kept as they are in the YAML, relative to
-data/ (``logos/<slug>.svg``), because build_site.py copies data/logos/ to
+data/ (``logos/<slug>.svg``), because the same step copies data/logos/ to
 the same path under the site root.
 """
 

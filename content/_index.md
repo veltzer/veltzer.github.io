@@ -1,6 +1,6 @@
 +++
 title = "Mark Veltzer's personal site"
-render = false
+template = "lang_choice.html"
 +++
 
 <!--
@@ -9,7 +9,7 @@ note at the top of config.toml for why the default is a language with no
 content.
 
 Zola insists the default language has a root _index.md even when that language
-has no pages, so this file exists only to satisfy that. `render = false` keeps
-it from emitting anything: the real page at "/" is the language chooser written
-by scripts/build_site.py after the build.
+has no pages. Neither real language owns "/", so this section renders the
+language chooser there (templates/lang_choice.html). Rendering it also puts
+"/" in zola's sitemap, which used to be patched in by hand after the build.
 -->

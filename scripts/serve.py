@@ -7,16 +7,15 @@ Why not `zola serve`?
   `zola serve` is great for authoring (live rebuild + browser
   auto-reload), but it is NOT faithful to what gets deployed:
     - It serves from an in-memory build, not the real `_site/` output.
-    - It skips the theme sync, the teaching import and the stats
-      generation that `build_site.py` runs before zola, so the
-      shared-themes tokens and the imported app pages can be missing
-      or stale. (The `static/data/` build is `copy_data.py`, a manual step
-      that neither path runs.)
+    - It runs zola alone, without the steps rsconstruct runs around it
+      (the shared-themes copy, the companies data, the redirect stubs,
+      build provenance), so those are missing. (The `static/data/` build is
+      `copy_data.py`, a manual step that neither path runs.)
     - It injects a livereload script and can handle routing /
       trailing-slashes slightly differently than a plain static server.
 
 For QA we want the closest local approximation to GitHub Pages:
-  1. Run the full build (`scripts/build_site.py`) to produce `_site/`
+  1. Run the full build (`rsconstruct build`) to produce `_site/`
      exactly as it will be deployed.
   2. Serve `_site/` with a dumb static server.
 
@@ -47,12 +46,12 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def read_site_dir():
-    # zola's output dir, set by scripts/build_site.py.
+    # The site's output dir: [processor.mass_generator.zola] output_dir.
     return (REPO_ROOT / "_site").resolve()
 
 
 def build_site():
-    subprocess.run([str(REPO_ROOT / "scripts" / "build_site.py")], check=True)
+    subprocess.run(["rsconstruct", "build"], check=True, cwd=REPO_ROOT)
 
 
 def start_server(port, docs_dir):
@@ -139,7 +138,7 @@ def main():
     )
     parser.add_argument(
         "--no-build", action="store_true",
-        help="skip running scripts/build_site.py before serving",
+        help="skip running `rsconstruct build` before serving",
     )
     args = parser.parse_args()
 

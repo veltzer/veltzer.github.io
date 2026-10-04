@@ -505,6 +505,12 @@ came later) and the built page.
   the paginator redirect stubs and appends the root. `/atom.xml` is now a copy of the
   English feed (`copy_root_feed()`), because every page advertised that URL until today.
 
+  Update 2026-10-04: the post-processing is gone entirely. The site is built by
+  rsconstruct's zola processor, so nothing may rewrite zola's output afterwards: the root
+  chooser became the root section's template (`templates/lang_choice.html`), the
+  `/page/1/` filter moved into `templates/sitemap.xml`, and the rest (root feed,
+  redirects, themes, companies) became separate steps writing files zola does not.
+
   Lesson worth keeping: "verified inert" here had meant reading the code and spot-checking
   the output, not diffing a build with the step removed. Only the second is verification.
 

@@ -40,7 +40,7 @@ Plugin data is authored as YAML in `data/yaml/`.
 (see `CLAUDE.md` for why). That is a manual step whose output is committed,
 because the chess and YouTube sources it also handles live in the private
 `../data` repo. A plugin whose sources are entirely in this repo can instead
-be generated at build time: `scripts/build_site.py` runs
+be generated at build time: `scripts/build_site.py companies` runs
 `scripts/import_companies.py` and writes `_site/data/companies.json.gz`
 directly, nothing committed. The YAML structure should be:
 

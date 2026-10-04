@@ -40,10 +40,10 @@ generations of stale URL were represented:
 Plus `/ascx/public_key.asc`, an address from the pre-MkDocs site still linked
 from old signatures and mailing-list archives.
 
-Fixed by `write_legacy_redirects()` in `scripts/build_site.py`, which emits a
+Fixed by the `redirects` step of `scripts/build_site.py`, which emits a
 meta-refresh stub carrying `rel=canonical` and `noindex, follow` for each. The
-map is `LEGACY_REDIRECTS`; paginator URLs are expanded from the build output
-rather than hand-listed, so the archive can grow without the list going stale.
+map is `LEGACY_REDIRECTS`; paginator URLs are expanded from the number of
+English posts rather than hand-listed, so the archive can grow without the list going stale.
 
 **These cannot be zola `aliases`, and that was verified rather than assumed.**
 An alias for a default-language page is written to the site root, and
@@ -79,7 +79,8 @@ indexes, that was **112 of 629 sitemap entries pointing at a redirect**.
 
 A sitemap is a statement about canonical, indexable URLs, so an entry that
 redirects contradicts it. Fixed by `drop_redirecting_urls()`, called from
-`fix_sitemap()`.
+`fix_sitemap()`; since the move to rsconstruct's zola processor the same rule
+lives in `templates/sitemap.xml`, an override of zola's built-in sitemap.
 
 Only `/page/1/` is affected. `page/2` upward are real paginated pages and are
 left alone -- a filter broad enough to catch them would drop the archive tail
@@ -288,7 +289,7 @@ Zola generates the sitemap from what it built out of `content/`, `templates/`
 and `static/`; the books are built by 21 other repositories' workflows and
 deployed to `veltzer.org/<repo>/` independently. Nothing in this build knows
 those paths exist, so covering them would mean hand-injecting a list of 21 repo
-names into `fix_sitemap()` -- a hand-maintained parallel list that cannot
+names into the sitemap -- a hand-maintained parallel list that cannot
 verify a repo still exists or which chapters it now has. `doc/IMPROVEMENTS.md`
 records deleting exactly that shape of thing once already (the old
 `blog/sitemap.xml`, stale and listing URLs that no longer existed).

@@ -11,29 +11,76 @@ args = ["-c", ".oxlintrc.json"]
 [processor.checker.tidy]
 src_dirs = ["static"]
 # not linted: templates (zola templates, not standalone HTML)
-[processor.explicit.generic]
+# ─── site ───────────────────────────────────────────────────────────────────
+# zola renders the site: processor.mass_generator.zola plans every file zola
+# writes (one cached product each), runs the official zola into a private
+# staging directory, and moves the files into _site/. The steps zola cannot do
+# are scripts/build_site.py subcommands, each declaring what it reads and
+# writes, so rsconstruct orders, caches and restores them like everything else.
+[processor.mass_generator.zola]
+output_dir = "_site"
+
+# The commit the About page names. templates/section.html loads it with
+# load_data, which makes it a source of every rendered page, so zola runs
+# after it. .git/HEAD and .git/index change with every commit (and every
+# `git add`); a dirty working tree that nothing staged is not seen.
+[processor.explicit.generic.build_info]
 command = "scripts/build_site.py"
-required_tools = ["zola"]
-# The command itself and the scripts it invokes: rsconstruct hashes the command
-# string, not the file it names, so without these a change to the
-# post-processing in build_site.py would not invalidate a warm cache.
-inputs = [
-    "config.toml",
-    "scripts/build_site.py",
-    "scripts/gen_stats.py",
-    "scripts/import_companies.py",
-    "scripts/import_teaching.py",
-]
-# data/ feeds the companies tab: organizations.yaml becomes
-# _site/data/companies.json.gz and data/logos/ is copied to _site/logos/.
-input_globs = [
-    "content/**/*",
-    "templates/**/*",
-    "sass/**/*",
-    "static/**/*",
-    "data/**/*",
-]
-output_dirs = [ "_site" ]
+args = ["build-info"]
+inputs = [".git/HEAD", ".git/index"]
+output_files = ["out/build_info.toml"]
+
+# The theme palette and switcher from the shared-themes submodule, served next
+# to zola's output (templates/base.html links them).
+[processor.explicit.generic.shared_themes]
+command = "scripts/build_site.py"
+args = ["shared-themes"]
+inputs = ["shared/shared-themes/themes.css", "shared/shared-themes/theme-switcher.js"]
+output_files = ["_site/shared-themes/themes.css", "_site/shared-themes/theme-switcher.js"]
+
+# The companies tab: organizations.yaml becomes _site/data/companies.json.gz,
+# and data/logos/ is copied to _site/logos/. The importer checks every map
+# image the YAML names exists under static/images/.
+[processor.explicit.generic.companies]
+command = "scripts/build_site.py"
+args = ["companies"]
+inputs = ["data/yaml/organizations.yaml", "scripts/import_companies.py"]
+input_globs = ["data/logos/*.svg", "static/images/map-*.jpg"]
+output_files = ["_site/data/companies.json.gz"]
+output_dirs = ["_site/logos"]
+
+# The English feed served at /atom.xml too (see copy_root_feed). Its input is
+# zola's output, so it runs after zola.
+[processor.explicit.generic.root_feed]
+command = "scripts/build_site.py"
+args = ["root-feed"]
+inputs = ["_site/en/atom.xml"]
+output_files = ["_site/atom.xml"]
+
+# Redirect stubs for retired URLs. A mass generator: `--plan` lists every stub
+# (the LEGACY_REDIRECTS map plus one per English blog page), so each is its own
+# product. The scan fields are what the plan is computed from; while none of
+# them changes, the plan is reused.
+[processor.mass_generator.generic.redirects]
+command = "scripts/build_site.py"
+args = ["redirects"]
+predict_command = "scripts/build_site.py"
+predict_args = ["redirects", "--plan"]
+output_dirs = ["_site"]
+src_dirs = ["content/blog"]
+src_extensions = [".md"]
+src_files = ["scripts/build_site.py", "config.toml"]
+
+# The blog statistics are generated into committed files (the blog _index
+# pages and static/tag_translations.toml). The build checks they are current;
+# `rsconstruct fix` regenerates them.
+[processor.checker.script.gen_stats]
+command = "scripts/gen_stats.py"
+args = ["--check"]
+fix_command = "scripts/gen_stats.py"
+src_files = ["content/blog/_index.en.md"]
+dep_inputs = ["content/blog/*.md", "static/tag_translations.toml", "scripts/gen_stats.py"]
+
 [processor.checker.ruff]
 src_dirs = ["scripts", "tests"]
 [processor.checker.mypy]
@@ -60,6 +107,7 @@ dep_inputs = [
     "templates/chess.html",
     "templates/embed.html",
     "templates/index.html",
+    "templates/lang_choice.html",
     "templates/page.html",
     "templates/section.html",
     "templates/taxonomy_list.html",

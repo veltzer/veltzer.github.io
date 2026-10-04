@@ -31,12 +31,15 @@ the year range known up front. That is both ugly and quadratic in a way that
 grows with the archive. The numbers change only when a post is added, so the
 build is the right place to compute them once.
 
-Unlike gen_profiles.py this IS part of the build: it reads only content/blog,
-which is always present, so there is no sibling-repo problem to work around.
-The output is still committed, which keeps `zola serve` and any build that
-skips this step showing the right numbers.
+Unlike gen_profiles.py this is part of the build, as a check: the output is
+committed (so `zola serve` and every build show the right numbers), and the
+build runs `gen_stats.py --check`, which fails when a post was added without
+regenerating. `rsconstruct fix` (or running this script) regenerates. It
+reads only content/blog, which is always present, so there is no sibling-repo
+problem to work around.
 """
 
+import argparse
 import json
 import re
 import sys
@@ -241,15 +244,17 @@ def render(per_language):
     return "\n".join(lines)
 
 
-def write_file(path, text):
-    """Write a whole generated file; returns whether it changed."""
+def write_file(path, text, check):
+    """Write a whole generated file; returns whether it changed. With
+    `check`, only reports whether it would."""
     if path.is_file() and path.read_text(encoding="utf-8") == text:
         return False
-    path.write_text(text, encoding="utf-8")
+    if not check:
+        path.write_text(text, encoding="utf-8")
     return True
 
 
-def write(path, table):
+def write(path, table, check):
     """Replace the generated region of one _index file, keeping the rest."""
     if not path.is_file():
         die(f"Missing {path}")
@@ -265,11 +270,22 @@ def write(path, table):
 
     if updated == text:
         return False
-    path.write_text(updated, encoding="utf-8")
+    if not check:
+        path.write_text(updated, encoding="utf-8")
     return True
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__.strip().splitlines()[0])
+    parser.add_argument(
+        "--check", action="store_true",
+        help="write nothing; fail if a generated file is out of date",
+    )
+    # The checker processor passes the file it is anchored on; the stats
+    # always cover the whole blog, so the argument is not needed.
+    parser.add_argument("files", nargs="*", help=argparse.SUPPRESS)
+    args = parser.parse_args()
+
     if not BLOG_DIR.is_dir():
         die(f"Missing {BLOG_DIR}")
 
@@ -281,15 +297,22 @@ def main():
     check_pairing()
     table = render(per_language)
 
+    stale = []
     for lang in LANGUAGES:
         path = BLOG_DIR / f"_index.{lang}.md"
-        changed = write(path, table)
-        state = "wrote" if changed else "unchanged"
-        print(f"{state} {path.relative_to(REPO_ROOT)}")
+        if write(path, table, args.check):
+            stale.append(path)
+    tags = render_tag_translations(tag_pairs(BLOG_DIR))
+    if write_file(TAG_TRANSLATIONS, tags, args.check):
+        stale.append(TAG_TRANSLATIONS)
 
-    changed = write_file(TAG_TRANSLATIONS, render_tag_translations(tag_pairs(BLOG_DIR)))
-    state = "wrote" if changed else "unchanged"
-    print(f"{state} {TAG_TRANSLATIONS.relative_to(REPO_ROOT)}")
+    if args.check:
+        if stale:
+            names = ", ".join(str(p.relative_to(REPO_ROOT)) for p in stale)
+            die(f"out of date: {names}. Run scripts/gen_stats.py (or `rsconstruct fix`) and commit the result.")
+        return
+    for path in stale:
+        print(f"wrote {path.relative_to(REPO_ROOT)}")
 
 
 if __name__ == "__main__":

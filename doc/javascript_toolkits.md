@@ -44,10 +44,9 @@ classes.
 ### The site stylesheet
 
 `sass/style.scss`, compiled by zola. Colours come from the `shared-themes`
-submodule (`static/shared-themes/themes.css`), copied in at build time by
-`scripts/build_site.py`. That copy is why editing `static/shared-themes/`
-directly is pointless -- it is overwritten on every build, and the submodule is
-the source of truth.
+submodule (`shared/shared-themes/`), copied to `_site/shared-themes/` at build
+time by `scripts/build_site.py shared-themes`. The submodule is the source of
+truth; the copy is build output.
 
 ## JavaScript libraries
 
