@@ -50,6 +50,10 @@ SAMEAS_GROUPS = ("development", "learning", "trove")
 # GitHub and the site.
 BEGIN = "<!-- BEGIN generated profiles -- edit data/yaml/profiles.yaml -->"
 END = "<!-- END generated profiles -->"
+# An existing block is found by this prefix, not by the full BEGIN line, so
+# rewording the hint in BEGIN rewrites the old block instead of appending a
+# second one next to it.
+BEGIN_PREFIX = "<!-- BEGIN generated profiles"
 
 
 def die(message):
@@ -178,10 +182,13 @@ def splice(path, body):
     text = path.read_text(encoding="utf-8")
     block = f"{BEGIN}\n{body}\n{END}\n"
 
-    if BEGIN in text:
+    count = text.count(BEGIN_PREFIX)
+    if count > 1:
+        die(f"{path} has {count} generated profile blocks; remove all but one")
+    if count == 1:
         if END not in text:
-            die(f"{path} has a {BEGIN} marker but no closing {END}")
-        head, rest = text.split(BEGIN, 1)
+            die(f"{path} has a {BEGIN_PREFIX} marker but no closing {END}")
+        head, rest = text.split(BEGIN_PREFIX, 1)
         _, tail = rest.split(END, 1)
         # Re-separate the block from whatever follows. tail starts with the
         # newline that ended the END line, and block already supplies it, so
