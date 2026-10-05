@@ -61,6 +61,13 @@ def die(message):
     sys.exit(1)
 
 
+def report(path, what):
+    # One line per file shipped in static/data, printed here rather than by the
+    # helper scripts so every output is reported the same way. It names the
+    # final .gz, which gzip_data_files() writes once all reports are out.
+    print(f"{path.relative_to(REPO_ROOT)}: {what}")
+
+
 def validate_sources():
     for name in PLAIN_YAML + PROCESSED_YAML:
         if not (YAML_DIR / name).is_file():
@@ -102,6 +109,10 @@ def copy_chess():
                 out.write(b"\n\n")
             with gzip.open(path, "rb") as handle:
                 shutil.copyfileobj(handle, out)
+    # Count games the way the viewer splits them: one [Event header each.
+    with open(DEST / "games.pgn", "rb") as handle:
+        games = sum(1 for line in handle if line.startswith(b"[Event "))
+    report(DEST / "games.pgn.gz", f"{games} games")
 
 
 def convert_youtube():
@@ -123,6 +134,7 @@ def convert_yaml_to_json():
         with open(dest, "w", encoding="utf-8") as handle:
             json.dump(data, handle, separators=(",", ":"), sort_keys=True, ensure_ascii=False)
         src.unlink()
+        report(dest.with_name(dest.name + ".gz"), f"{len(data['items'])} items")
 
 
 def gzip_data_files():

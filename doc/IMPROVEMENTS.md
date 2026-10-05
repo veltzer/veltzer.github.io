@@ -230,8 +230,8 @@ came later) and the built page.
   `fetch_audiocourse_images.py` converted to `logging` with a bare `%(message)s` format
   (it is an interactive tool read by a person, so level/timestamp prefixes would be
   noise). `check_images.py` already used logging. The remaining `print`-based scripts
-  (`manage_api_key.py`, `poster_utils.py`, `image_picker.py`, `serve.py`, and the small
-  `copy_data.py` / `csv_to_yaml.py` / `import_audible.py` summaries) were left alone —
+  (`manage_api_key.py`, `poster_utils.py`, `image_picker.py`, `serve.py`, and the
+  per-file summary `copy_data.py` prints) were left alone —
   they are all short interactive tools where `print` is fine, and churning them would be
   change for its own sake.
 

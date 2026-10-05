@@ -4,7 +4,6 @@
 
 import argparse
 import csv
-import sys
 
 import yaml
 
@@ -71,8 +70,6 @@ def main():
     data = {"items": items}
     with open(args.output, "w", encoding="utf-8") as f:
         yaml.dump(data, f, default_flow_style=False, allow_unicode=True, sort_keys=False)
-
-    print(f"Converted {len(items)} items to {args.output}", file=sys.stderr)
 
 
 if __name__ == "__main__":

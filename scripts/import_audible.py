@@ -3,7 +3,6 @@
 """Import data/yaml/audible.yaml, keeping only needed fields with correct types."""
 
 import argparse
-import sys
 
 import yaml
 
@@ -81,8 +80,6 @@ def main():
 
     with open(args.output, "w", encoding="utf-8") as f:
         yaml.dump({"items": items}, f, default_flow_style=False, allow_unicode=True, sort_keys=False)
-
-    print(f"Imported {len(items)} audible items to {args.output}", file=sys.stderr)
 
 
 if __name__ == "__main__":
