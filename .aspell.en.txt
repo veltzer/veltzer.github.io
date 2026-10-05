@@ -574,6 +574,7 @@ apis
 apiurl
 apologetics
 apophatic
+apophenia
 appendchild
 applyfilters
 applyfiltersortrender
@@ -687,6 +688,7 @@ compatibilist
 confessionally
 config
 configs
+confounders
 confusable
 consequentialist
 const
@@ -962,6 +964,7 @@ heatless
 hebrew
 heebo
 hegemon
+heliocentrism
 henhouse
 henotheism
 heritability
@@ -1072,6 +1075,7 @@ libsecret
 liburing
 libx
 lilypond
+limbic
 linux
 listmonth
 literalism's
@@ -1192,6 +1196,7 @@ ncurses
 nd
 ne
 nephesh
+neurochemical
 newaliases
 newroot
 nihilo
@@ -1252,6 +1257,7 @@ permalink
 petrostate
 pgn
 pgrep
+philosophes
 php
 phpinfo
 phylogenetic
@@ -1369,6 +1375,7 @@ renderpagination
 renderstatcard
 renderstats
 reoffending
+replicability
 repo
 reportable
 repos
@@ -1400,6 +1407,7 @@ savedpref
 savesortpref
 savetogglepref
 schemas
+scholastics
 screencast
 scriptable
 scripturally
@@ -1592,6 +1600,7 @@ unfought
 unfree
 unfreedom
 unglamorous
+ungrounded
 unhoused
 unicode
 universalizability
@@ -1726,7 +1735,3 @@ zwwvjod
 Ēostre
 Ēosturmōnaþ
 Ṣeba
-limbic
-neurochemical
-replicability
-philosophes

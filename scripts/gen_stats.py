@@ -34,7 +34,7 @@ build is the right place to compute them once.
 Unlike gen_profiles.py this is part of the build, as a check: the output is
 committed (so `zola serve` and every build show the right numbers), and the
 build runs `gen_stats.py --check`, which fails when a post was added without
-regenerating. `rsconstruct fix` (or running this script) regenerates. It
+regenerating. Running this script without --check regenerates. It
 reads only content/blog, which is always present, so there is no sibling-repo
 problem to work around.
 """
@@ -309,7 +309,7 @@ def main():
     if args.check:
         if stale:
             names = ", ".join(str(p.relative_to(REPO_ROOT)) for p in stale)
-            die(f"out of date: {names}. Run scripts/gen_stats.py (or `rsconstruct fix`) and commit the result.")
+            die(f"out of date: {names}. Run scripts/gen_stats.py and commit the result.")
         return
     for path in stale:
         print(f"wrote {path.relative_to(REPO_ROOT)}")

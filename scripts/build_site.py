@@ -21,7 +21,7 @@ rsconstruct appends `--inputs ... --output-files ... [--output-dirs ...]`.
 What used to be done here and no longer is:
   - the language chooser at "/" and the sitemap clean-up are zola's job now
     (templates/lang_choice.html, templates/sitemap.xml);
-  - gen_stats.py is a checker (`rsconstruct fix` regenerates the stats);
+  - gen_stats.py is a checker (running it without --check regenerates the stats);
   - import_teaching.py reads the sibling teaching-* repos and rewrites
     committed content, so it is run by hand, not by the build.
 

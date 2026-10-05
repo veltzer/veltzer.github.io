@@ -91,7 +91,7 @@ which records the traps that outlived the migration.
 - `rsconstruct build` — full build (this is what CI runs; `--verbose` for detail.
   Parallelism comes from `[build] parallel = 0` in `rsconstruct.toml`, not a flag)
 - `rsconstruct status` — show build status
-- `rsconstruct fix` — regenerate the archive stats when the `gen_stats` check fails
+- `scripts/gen_stats.py` — regenerate the archive stats when the `gen_stats` check fails
 - `scripts/serve.py` — build, then serve `_site/` locally the way Pages will
 
 The site is built by rsconstruct's `processor.mass_generator.zola`, which
@@ -252,7 +252,7 @@ tags = ["religion", "philosophy", "ethics"]
   not hand-edit it.** `scripts/gen_stats.py` rewrites everything below the
   `# BEGIN generated stats` marker; the hand-written section keys above it are
   preserved. The build runs it as a check (`gen_stats.py --check`), which fails
-  when the committed stats are stale; `rsconstruct fix` rewrites them. The output
+  when the committed stats are stale; running `scripts/gen_stats.py` rewrites them. The output
   is committed, so `zola serve` and zola itself always see current figures. `templates/blog.html`
   renders it as the archive sidebar. Computing this in Tera was the alternative
   and was rejected: Tera has no `group_by` over a derived key, so per-year counts

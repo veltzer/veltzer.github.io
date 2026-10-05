@@ -84,8 +84,8 @@ the other language. Fails the build if any `.en.md` post lacks its `.he.md`
 translation or vice versa (an unpaired post would otherwise lose its language
 switcher silently), if a pair's tag lists differ in length, or if a tag lines
 up with two different counterparts. The build runs it with `--check`, which
-writes nothing and fails listing the stale files; `rsconstruct fix` runs it
-for real. Both outputs are committed, so zola (and `zola serve`) always reads
+writes nothing and fails listing the stale files; run it without `--check` to
+regenerate them. Both outputs are committed, so zola (and `zola serve`) always reads
 current numbers and links.
 
 ### `scripts/gen_profiles.py`

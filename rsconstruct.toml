@@ -73,7 +73,7 @@ src_files = ["scripts/build_site.py", "config.toml"]
 
 # The blog statistics are generated into committed files (the blog _index
 # pages and static/tag_translations.toml). The build checks they are current;
-# `rsconstruct fix` regenerates them.
+# running scripts/gen_stats.py regenerates them.
 [processor.checker.script.gen_stats]
 command = "scripts/gen_stats.py"
 args = ["--check"]
