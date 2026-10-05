@@ -46,9 +46,9 @@ DONE: maybe use a better tool than mkdocs?
     See the "Internationalization" entry in doc/IMPROVEMENTS.md for the full
     write-up, including why mkdocs-static-i18n must not be retried.
 
-    Confirmed: no mkdocs.yml in the repo, and `rsconstruct tools
+    Confirmed: no mkdocs.yml in the repo, and `rsconstruct tool
     list-configured` shows zola pinned to v0.23.3 (the workflow only runs
-    `rsconstruct tools install`, which is what fetches it).
+    `rsconstruct tool install`, which is what fetches it).
 
 
 DROPPED: Find a way to count number of visitors on each page of the

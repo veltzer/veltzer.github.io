@@ -115,7 +115,7 @@ what the build itself reports (zola prints "Creating N pages").
 ### Prerequisite: zola
 
 The build runs zola, at exactly 0.23.3: the zola processor predicts zola's
-output, and refuses any other version. `rsconstruct tools install` installs it
+output, and refuses any other version. `rsconstruct tool install` installs it
 (that is what CI does); by hand:
 
 ```bash
@@ -128,7 +128,7 @@ zola --version   # expect: zola 0.23.3
 ```
 
 Keep the version in step with rsconstruct's tool registry, which is what CI installs from:
-`rsconstruct tools list-configured` prints the pinned URL. The pin is deliberate: 0.23
+`rsconstruct tool list-configured` prints the pinned URL. The pin is deliberate: 0.23
 renamed config keys (`highlight_code` → `[markdown.highlighting]`) and swapped the
 highlighter, so an unpinned upgrade can fail the build on `config.toml` alone. Distro
 packages and `cargo install zola` track other versions — prefer the pinned tarball.
