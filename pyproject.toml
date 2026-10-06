@@ -41,3 +41,7 @@ module = [
     "PIL.*",
 ]
 ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+# Tests import from here: the scripts under test are standalone executables, not an installed package.
+pythonpath = ["scripts"]
