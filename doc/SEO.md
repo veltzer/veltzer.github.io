@@ -303,6 +303,64 @@ site only when that repo next cuts a release.
 This site's own sitemap is complete and correct for this site's own pages, and
 that is the scope being maintained here.
 
+## The 2026-10-07 round: two validations failed, one new reason
+
+Search Console sent three messages on 2026-10-07, the next round after the
+2026-09-22 fix whose validations had all read *Started*:
+
+- *Some fixes failed for Page indexing issues* -- the `Not found (404)`
+  validation.
+- *Some fixes failed for Page indexing issues* -- the `Page with redirect`
+  validation.
+- *New reasons prevent pages from being indexed* and *...pages in a sitemap...*
+  -- both naming one new reason, **`Duplicate, Google chose different
+  canonical than user`**. Note this is *not* the 2026-09-16 reason
+  `Duplicate without user-selected canonical`: that one meant no canonical was
+  declared at all; this one means a canonical **is** declared and Google
+  overrode it.
+
+### The repo is not regressed -- the half that can be checked without a login
+
+Checked against the live site on 2026-10-07, exactly the three invariants the
+"How to check the verdict" section names:
+
+- All **30** one-off `LEGACY_REDIRECTS` sources return 200 (the `page/N`
+  paginator sources are expanded by the build and were not re-walked here).
+- Sitemap: **1103** URLs (551 `/en/` + 551 `/he/` + root), zero `/page/1/`,
+  zero duplicates. The jump from 527 is real growth -- the archive reached
+  403 bilingual posts -- not stubs or `rs*` books leaking in; every entry is
+  under `/en/` or `/he/`.
+- All three non-canonical host variants (`http://veltzer.org/`,
+  `http://www.veltzer.org/`, `https://www.veltzer.org/`) serve a single 301
+  to `https://veltzer.org/`.
+- A sampled redirect stub (`/blog/two-kinds-of-believers/`) still carries
+  `rel=canonical` to its `/en/` target and `noindex, follow`.
+
+So the two *fixes failed* messages are the 9/15 pattern again: a validation
+re-checks the URL set it **started** with, and one uncovered URL in that set
+fails the whole run even though every URL the fix named is now 200. Nothing in
+this repo is broken; the action is to read which URLs the run lists as still
+failing and, if any are genuinely uncovered, add them to `LEGACY_REDIRECTS` --
+then restart validation.
+
+### Why this round needs a human, and what was handed over
+
+The specific affected URLs for all three reasons live only in the Page
+indexing report, behind a Google login -- there is no API key for this domain
+property, so no script or cloud agent can fetch them (see *How to check the
+verdict*). The new `Duplicate, Google chose different canonical` reason in
+particular cannot be fixed blind: changing canonical logic without knowing
+which pages Google folded risks breaking the bilingual setup that is correct
+as it stands (the `/en/calendar/` case under *Alternate page* is the standing
+warning). No code change was made this round for that reason.
+
+The report link was handed to Mark so the login half can be done by hand:
+open the [Page indexing
+report](https://search.google.com/search-console/index?resource_id=sc-domain%3Aveltzer.org),
+read the failing URLs under each of the three reasons, check each against the
+live site, map any genuinely-uncovered legacy URL into `LEGACY_REDIRECTS`, and
+restart validation for all three.
+
 ## Current state
 
 As of 2026-09-22, read off the Page indexing report before the second fix
