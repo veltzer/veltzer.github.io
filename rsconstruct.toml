@@ -190,7 +190,7 @@ src_extensions = [".jpg", ".jpeg", ".png", ".gif", ".webp"]
 # (paths in that file are relative to data/): well-formed XML via xmllint.
 # The bitmaps they were traced from are in data/raw/logos/ and are not
 # checked.
-[processor.checker.xmllint]
+[processor.checker.ixmllint]
 src_dirs = ["static", "data/logos"]
 src_exclude_dirs = ["vendor"]
 [processor.generator.generic.aspell_he_dict]
