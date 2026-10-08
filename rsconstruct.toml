@@ -187,7 +187,7 @@ src_exclude_paths = [
 src_dirs = ["static/images"]
 src_extensions = [".jpg", ".jpeg", ".png", ".gif", ".webp"]
 # data/logos/*.svg are the organization logos organizations.yaml points at
-# (paths in that file are relative to data/): well-formed XML via xmllint.
+# (paths in that file are relative to data/): well-formed XML via ixmllint.
 # The bitmaps they were traced from are in data/raw/logos/ and are not
 # checked.
 [processor.checker.ixmllint]
