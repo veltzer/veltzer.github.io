@@ -122,9 +122,8 @@ dep_inputs = [
 # came with it: lint, schema validation ($schema in each file), a JSON
 # conversion that proves every file parses, and pydatacheck's cross-checks
 # against imdb / goodreads / simania, which read their caches from shelve/.
-[processor.checker.yamllint]
+[processor.checker.iyamllint]
 src_dirs = [".github", "data/yaml"]
-dep_inputs = [".yamllint.yaml"]
 
 [processor.checker.iyamlschema]
 src_dirs = ["data/yaml"]

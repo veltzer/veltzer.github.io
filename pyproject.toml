@@ -23,7 +23,6 @@ dev = [
     "types-beautifulsoup4",
     "types-PyYAML",
     "types-requests",
-    "yamllint",
 ]
 
 [tool.uv]
