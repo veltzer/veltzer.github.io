@@ -83,7 +83,7 @@ dep_inputs = ["content/blog/*.md", "static/tag_translations.toml", "scripts/gen_
 
 [processor.checker.ruff]
 src_dirs = ["scripts", "tests"]
-[processor.checker.mypy]
+[processor.checker.pyrefly]
 src_dirs = ["scripts", "tests"]
 [processor.checker.pytest]
 src_dirs = ["tests"]
