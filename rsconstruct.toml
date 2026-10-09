@@ -221,7 +221,7 @@ dir = "_site"
 parallel = 0
 
 # lint the GitHub Actions workflow files with actionlint
-[processor.checker.actionlint]
+[processor.checker.iactionlint]
 src_dirs = [".github/workflows"]
 
 # ─── shell ───────────────────────────────────────────────────────────────────
