@@ -8,7 +8,7 @@ system = ["libxml2-utils", "aspell", "aspell-en", "aspell-he"]
 src_dirs = ["static"]
 src_exclude_dirs = ["vendor"]
 args = ["-c", ".oxlintrc.json"]
-[processor.checker.tidy]
+[processor.checker.itidy]
 src_dirs = ["static"]
 # not linted: templates (zola templates, not standalone HTML)
 # ─── site ───────────────────────────────────────────────────────────────────
