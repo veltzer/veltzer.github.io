@@ -76,7 +76,7 @@ command = "scripts/gen_stats.py"
 args = ["--check"]
 fix_command = "scripts/gen_stats.py"
 src_files = ["content/blog/_index.en.md"]
-dep_inputs = ["content/blog/*.md", "static/tag_translations.toml", "scripts/gen_stats.py"]
+dep_inputs = ["content/blog/*.md", "static/tag_translations.toml"]
 
 [processor.checker.ruff]
 src_dirs = ["scripts", "tests"]
@@ -163,7 +163,6 @@ src_extensions = [".css"]
 [processor.checker.rumdl.prose]
 src_dirs = ["doc"]
 src_files = ["README.md", "CLAUDE.md"]
-dep_inputs = [".rumdl.toml"]
 src_exclude_dirs = ["content"]
 
 # content/ is Zola pages: the H1 comes from the frontmatter title via
