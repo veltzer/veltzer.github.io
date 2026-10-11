@@ -227,7 +227,8 @@ plain commands because aspell resolves relative paths against
 `/usr/lib/aspell` and cannot take the allowlist as a `--personal` wordlist
 (Hebrew segfaults, English mojibakes non-Latin-1 entries). Run by
 `rsconstruct build` as generator processors; the comments in the scripts
-record the aspell quirks in detail.
+record the aspell quirks in detail. Why aspell and not rsconstruct's built-in
+zspell checker is in `doc/DECISIONS.md`.
 
 ### `scripts/spellcheck_en.sh`, `scripts/spellcheck_he.sh`
 

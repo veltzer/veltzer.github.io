@@ -278,3 +278,38 @@ it because:
 - Adding build tooling for near-zero user-perceived improvement is not
   worth the complexity. If performance becomes a concern, better wins
   would come from lazy-loading images or other optimizations.
+
+## Spellchecking runs on aspell, not rsconstruct's zspell
+
+rsconstruct has a built-in `zspell` checker, and it would replace both
+`build_*_dict.sh` / `spellcheck_*.sh` pairs with a few lines of config. It is
+not used because it cannot load the Hebrew dictionary.
+
+The `he_IL` hunspell dictionary has 469,509 stems and 3,335 PFX rules; English
+(`en_US`) has 79,013 stems and 14 PFX rules -- 6x the stems, 238x the prefix
+rules. zspell expands the affix table eagerly when it builds the dictionary
+instead of applying prefixes at lookup, so for Hebrew the cross product is on
+the order of 1e9 strings. Measured on a 30GB machine it reached 18GB resident
+and was still climbing. Narrowing the file set and forcing `max_jobs = 1` did
+not help: a single loaded dictionary is the entire cost, so this is not a
+parallelism problem. aspell checks the whole blog in ~17MB peak, in under a
+second.
+
+English alone would work on zspell. Both languages use aspell anyway, so there
+is one spellcheck mechanism to understand rather than two.
+
+The aspell side has its own traps, which is why it runs through scripts
+rather than plain commands in `rsconstruct.toml`; each script's header
+records them (see also `doc/SCRIPTS.md`):
+
+- every aspell path option resolves relative names against `/usr/lib/aspell`,
+  not the working directory, so the scripts compute absolute paths at run time;
+- the allowlists (`.aspell.{en,he}.txt`) cannot be passed as `--personal`
+  wordlists -- with Hebrew, any non-ASCII entry there segfaults aspell, and for
+  English aspell reads that file as Latin-1 whatever `--encoding` says -- so
+  they are compiled to `.rws` extra dictionaries under `out/aspell/`.
+
+**When to revisit:** if zspell (rsconstruct pins `zspell = "0.5"`, 0.5.5 as of
+2026-10) starts applying affixes lazily at lookup, re-measure loading `he_IL`.
+If it fits comfortably in memory, moving both languages to the built-in
+checker would delete four scripts.
