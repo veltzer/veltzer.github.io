@@ -6,6 +6,8 @@ paginate_by = 10
 template = "blog.html"
 page_template = "page.html"
 generate_feeds = true
+# One listing per year at blog/<year>/, the pages the archive table links to.
+year_archives = true
 
 # BEGIN generated stats -- written by scripts/gen_stats.py
 #

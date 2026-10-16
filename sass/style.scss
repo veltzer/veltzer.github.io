@@ -477,3 +477,9 @@ th { background: var(--bg-surface); }
     font-size: 0.95em;
   }
 }
+
+/* The year strip on a year archive page and the archive table's year links. */
+.archive-years-nav { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0 0 1.5rem; }
+.archive-years-nav .current { font-weight: 700; }
+.archive-years th a { text-decoration: none; }
+.archive-years th a:hover { text-decoration: underline; }

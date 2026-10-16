@@ -229,7 +229,7 @@
   {#- Provenance, on every page: the generator and its version come from
       rssite itself, the commit from out/build_info.toml (see the top of this
       file). -#}
-  <p class="site-inscription" dir="ltr">Made by <a href="{{ rssite.url }}">{{ rssite.name }}</a> version {{ rssite.version }}{% if build and build.short %}, commit <a href="https://github.com/veltzer/veltzer.github.io/commit/{{ build.commit }}"><code>{{ build.short }}</code></a>{% if build.dirty %} (with uncommitted changes){% endif %}{% endif %}, Mark Veltzer &lt;<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>&gt;</p>
+  <p class="site-inscription" dir="ltr">Made with <a href="{{ rssite.url }}">{{ rssite.name }}</a> version {{ rssite.version }}, my own static site generator{% if build and build.short %}, from commit <a href="https://github.com/veltzer/veltzer.github.io/commit/{{ build.commit }}"><code>{{ build.short }}</code></a>{% if build.dirty %} (with uncommitted changes){% endif %}{% endif %} &middot; Mark Veltzer &lt;<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>&gt;</p>
 </footer>
 
 </body>

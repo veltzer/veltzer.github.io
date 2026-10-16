@@ -57,7 +57,10 @@
     <tbody>
       {%- for row in stats.years %}
       <tr>
-        <th scope="row">{{ row.year }}</th>
+        {#- get_url checks the year's archive is a page this build writes, so
+            a year in the generated stats with no archive fails the build
+            instead of linking to a 404. -#}
+        <th scope="row"><a href="{{ get_url(path=lang ~ '/blog/' ~ row.year ~ '/') }}">{{ row.year }}</a></th>
         <td>{{ row.total }}</td>
       </tr>
       {%- endfor %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{#- One year of the blog: every post of that year, newest first, with the
+    other years beside it. rssite writes this at /<lang>/blog/<year>/ for
+    every year with posts (year_archives in content/blog/_index.*.md), and
+    hands it the same year in the other language as its translation, so the
+    language switcher and the hreflang alternates work here too. -#}
+{% block title %}{{ trans(key="posts_of_year") }} {{ year }} &middot; {{ config.title }}{% endblock %}
+{% block og_title %}{{ trans(key="posts_of_year") }} {{ year }}{% endblock %}
+{% block content %}
+<h1>{{ trans(key="posts_of_year") }} {{ year }}</h1>
+<p class="archive-years-nav">
+  {%- for y in years %}
+  {%- if y.year == year %}<span class="current">{{ y.year }}</span>{% else %}<a href="{{ y.permalink }}">{{ y.year }}</a>{% endif %}
+  {%- endfor %}
+</p>
+<ul class="post-list">
+  {%- for post in pages %}
+  <li>
+    <a class="post-link" href="{{ post.permalink }}">{{ post.title }}</a>
+    <time datetime="{{ post.date }}">{% set d = post.date %}{% include "_date.html" %}</time>
+    {%- if post.taxonomies.tags %}
+    <span class="post-tags">
+      {%- for tag in post.taxonomies.tags %}<a class="tag" href="{{ tag.permalink }}">{{ tag.name }}</a>{% endfor %}
+    </span>
+    {%- endif %}
+  </li>
+  {%- endfor %}
+</ul>
+{% endblock %}
