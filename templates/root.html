@@ -9,6 +9,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{#- The reader's theme, applied before anything paints. The switcher at the
+    end of the body persists the choice; this applies it on the next page, so a
+    dark-theme reader never sees the default light theme flash in first.
+    Inlined from the shared-themes submodule (load_data records the file as a
+    source of every page), ahead of the stylesheets. -#}
+<script>{{ load_data(path="shared/shared-themes/theme-onload.js") | safe }}</script>
 <title>{{ config.title }}</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="{{ get_url(path='shared-themes/fonts.css') }}">
