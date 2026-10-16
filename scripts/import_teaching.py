@@ -41,7 +41,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 SIBLINGS = REPO_ROOT.parent
 
 # (section name, sibling repo, page title, meta description); nav order comes
-# from config.toml. The description feeds <meta name="description"> and
+# from rssite.toml. The description feeds <meta name="description"> and
 # og:description via base.html; without one the page falls back to the
 # whole-site blurb. The Hebrew stub _index.he.md carries its own.
 SITES = [
@@ -335,11 +335,10 @@ def main():
             die(f"{source}: no <body> found")
         page = rewrite_assets(page, repo)
 
-        # _index.en.md, like every other section: the default language is the
-        # phantom "cs" (see config.toml), so the English body carries an
-        # explicit suffix and zola files it under /en/ itself. The Hebrew
-        # _index.he.md stub is hand-written and pulls this body in through
-        # templates/app_body.html, so it is not regenerated here.
+        # _index.en.md, like every other section: every file carries its
+        # language suffix. The Hebrew _index.he.md stub is hand-written and
+        # takes this body through `body_from = "en"`, so it is not regenerated
+        # here.
         dest = REPO_ROOT / "content" / section / "_index.en.md"
         text = FRONT_MATTER.format(title=title, description=description) + page
         if args.check:

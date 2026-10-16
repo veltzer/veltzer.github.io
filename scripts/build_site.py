@@ -1,26 +1,26 @@
 #!/usr/bin/env python
 
 """
-The site build steps around zola, one subcommand per rsconstruct product.
+The site build steps around rssite, one subcommand per rsconstruct product.
 
-Zola itself is run by rsconstruct's processor.mass_generator.zola, which
-plans every file zola writes and caches each one. What zola cannot produce
-is done here, each step declaring exactly what it reads and writes in
-rsconstruct.toml so rsconstruct can order, cache and restore it:
+rssite itself is run by rsconstruct's processor.mass_generator.generic.site:
+`rssite plan` lists every file a build writes with its sources, and each
+becomes a cached product. What rssite does not produce is done here, each
+step declaring exactly what it reads and writes in rsconstruct.toml so
+rsconstruct can order, cache and restore it:
 
-  build-info     out/build_info.toml, the commit the About page names
-  shared-themes  _site/shared-themes/ (tokens, switcher, fonts), copied from the submodule
+  build-info     out/build_info.toml, the commit every page's footer names
   companies      _site/data/companies.json.gz and _site/logos/
   root-feed      _site/atom.xml, a copy of the English feed
   redirects      the legacy-URL redirect stubs (a mass generator: --plan
                  prints the files it will write)
 
-build-info, shared-themes, companies and root-feed are explicit processors:
-rsconstruct appends `--inputs ... --output-files ... [--output-dirs ...]`.
+build-info, companies and root-feed are explicit processors: rsconstruct
+appends `--inputs ... --output-files ... [--output-dirs ...]`.
 
 What used to be done here and no longer is:
-  - the language chooser at "/" and the sitemap clean-up are zola's job now
-    (templates/lang_choice.html, templates/sitemap.xml);
+  - the shared-themes files are published by rssite itself ([[publish]] in
+    rssite.toml); the language chooser at "/" is templates/root.html;
   - gen_stats.py is a checker (running it without --check regenerates the stats);
   - import_teaching.py reads the sibling teaching-* repos and rewrites
     committed content, so it is run by hand, not by the build.
@@ -55,16 +55,16 @@ def die(message):
 
 
 def write_build_info(path):
-    """Record the commit this build came from, for the About page to display.
+    """Record the commit this build came from, for every page's footer.
 
     Deliberately not committed, and deliberately not produced by gen_stats.py
     alongside the archive counts: a hash written into content before committing
     can only ever name the previous commit. Reading it from git at build time is
     the only way the number on the page matches the build that produced it.
 
-    A missing or dirty git tree is not an error. A reader cloning this repo and
-    running `zola serve` still gets a site; the About page simply omits the
-    provenance line, which is what the template's `if` guards.
+    A missing or dirty git tree is not an error. A reader cloning this repo
+    still gets a site; the footer simply omits the commit, which is what the
+    template's `if` guards.
     """
     def git(*args):
         try:
@@ -99,25 +99,6 @@ def write_build_info(path):
     )
 
 
-SHARED_THEMES_DIR = Path("shared/shared-themes")
-
-
-def copy_theme_files(sources, output_dir):
-    """Copy the shared-themes files into the site, next to zola's output,
-    keeping their layout under the submodule (fonts.css expects fonts/
-    beside it).
-
-    Kept as a copy rather than a symlink or a sass @import: dart-sass leaves a
-    plain @import of a .css file as a runtime import, and Zola does not follow
-    symlinks out of the project. The submodule is the single source of truth;
-    the copy is build output.
-    """
-    for source in sources:
-        if not source.is_file():
-            die(f"{source} missing. Run: git submodule update --init --recursive")
-        destination = output_dir / source.relative_to(SHARED_THEMES_DIR)
-        destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source, destination)
 
 
 # Legacy URLs that Google still holds, mapped to the page that serves the same
@@ -229,16 +210,16 @@ REDIRECT_PAGE = """<!DOCTYPE html>
 
 
 def base_url():
-    for line in (REPO_ROOT / "config.toml").read_text(encoding="utf-8").splitlines():
+    for line in (REPO_ROOT / "rssite.toml").read_text(encoding="utf-8").splitlines():
         if line.startswith("base_url"):
             return line.split("=", 1)[1].strip().strip('"\'')
     return "https://veltzer.org"
 
 
 def english_blog_pages():
-    """How many pages zola paginates the English blog into.
+    """How many pages the English blog is paginated into.
 
-    The redirect stubs are planned before zola runs, so the count comes from
+    The redirect stubs are planned before rssite runs, so the count comes from
     the sources rather than from the built tree: one page per `paginate_by`
     English posts (every post in content/blog is dated and listed).
     """
@@ -268,14 +249,10 @@ def redirect_stub_path(source):
 def write_legacy_redirects(root, site_url):
     """Write a meta-refresh stub for every retired URL.
 
-    Written here rather than as zola `aliases` in the posts' front matter.
-    Until 2026-09-21 an alias could not work at all: zola wrote it to the site
-    root and relocate_english() then swept it into /en/, so it served
-    /en/blog/blog/x/ while the URL it was meant to rescue still 404ed (verified
-    by building with one in place; see doc/SEO.md). That sweep is gone, but
-    this step stays: aliases only exist for pages, and half of what is rescued
-    here is not one -- the paginator URLs expanded below, /ascx/public_key.asc,
-    a section. One mechanism for every legacy URL beats two.
+    Written here rather than as `aliases` in the posts' front matter: aliases
+    only exist for pages, and half of what is rescued here is not one -- the
+    paginator URLs expanded below, /ascx/public_key.asc, a section. One
+    mechanism for every legacy URL beats two.
 
     GitHub Pages serves static files only, so there is no way to emit a real 301;
     a meta-refresh page with rel=canonical is the standard substitute and is what
@@ -303,8 +280,8 @@ def write_legacy_redirects(root, site_url):
 def plan_legacy_redirects(root):
     """The rsconstruct mass-generator manifest for write_legacy_redirects:
     every stub it writes, each depending on this script (the map and the
-    page template) and config.toml (the base URL)."""
-    sources = ["scripts/build_site.py", "config.toml"]
+    page template) and rssite.toml (the base URL)."""
+    sources = ["scripts/build_site.py", "rssite.toml"]
     outputs = [
         {"path": f"{root}/{redirect_stub_path(source)}", "sources": sources}
         for source in sorted(legacy_redirect_targets())
@@ -320,7 +297,7 @@ def write_companies(output_file, logos_dir):
     live in the private ../data repo that CI cannot see. organizations.yaml
     and the logos it names live in this repo, so there is nothing to commit:
     the JSON is generated and the SVGs copied into _site/ on every build,
-    after zola has populated it. The logo paths inside the YAML are relative
+    beside rssite's output. The logo paths inside the YAML are relative
     to data/ (logos/<slug>.svg), and data/logos/ lands at /logos/, so the
     plugin can use them as they are.
     """
@@ -341,13 +318,10 @@ def write_companies(output_file, logos_dir):
 def copy_root_feed(feed, destination):
     """Serve the English feed at /atom.xml as well as /en/atom.xml.
 
-    Until 2026-09-21 every page advertised /atom.xml as the site feed, and
-    zola generated that file for the phantom default language: valid Atom,
-    zero entries. The pages now advertise the per-language feeds and the
-    phantom one is no longer generated (no top-level generate_feeds in
-    config.toml), but a reader who subscribed to the advertised URL would
-    otherwise get a 404 where they used to get an empty feed. GitHub Pages
-    cannot redirect, so the English feed is copied there instead.
+    Until 2026-09-21 every page advertised /atom.xml as the site feed. The
+    pages now advertise the per-language feeds, but a reader who subscribed
+    to the old URL would otherwise get a 404. GitHub Pages cannot redirect,
+    so the English feed is copied there instead.
     """
     destination.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(feed, destination)
@@ -359,7 +333,6 @@ STEPS = {
     "companies": "write _site/data/companies.json.gz and _site/logos/",
     "redirects": "write the legacy-URL redirect stubs (--plan lists them)",
     "root-feed": "copy the English feed to _site/atom.xml",
-    "shared-themes": "copy the shared-themes tokens into _site/shared-themes/",
 }
 
 
@@ -375,7 +348,7 @@ def list_steps(prog):
 def main():
     parser = argparse.ArgumentParser(description=__doc__.strip().splitlines()[0])
     sub = parser.add_subparsers(dest="step")
-    for name in ("build-info", "companies", "root-feed", "shared-themes"):
+    for name in ("build-info", "companies", "root-feed"):
         step = sub.add_parser(name, help=STEPS[name])
         # The arguments rsconstruct's explicit processor appends.
         step.add_argument("--inputs", nargs="*", type=Path, default=[])
@@ -392,8 +365,6 @@ def main():
     try:
         if args.step == "build-info":
             write_build_info(*args.output_files)
-        elif args.step == "shared-themes":
-            copy_theme_files(args.inputs, *args.output_dirs)
         elif args.step == "companies":
             write_companies(*args.output_files, *args.output_dirs)
         elif args.step == "root-feed":

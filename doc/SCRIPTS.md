@@ -4,15 +4,15 @@
 
 ### `scripts/build_site.py`
 
-The build steps around zola, one subcommand each, all run by `rsconstruct
-build` as processors (see `rsconstruct.toml`; never invoke `zola build` by
-hand -- see `CLAUDE.md`). zola itself is rsconstruct's
-`processor.mass_generator.zola`, which predicts every file zola writes and
-caches each one separately.
+The build steps around rssite, one subcommand each, all run by `rsconstruct
+build` as processors (see `rsconstruct.toml`; a real build goes through the
+build system -- see `CLAUDE.md`). rssite itself is rsconstruct's
+`processor.mass_generator.generic.site`: `rssite plan` lists every file a
+build writes with its sources, and each is cached separately.
 
 - `build-info` writes `out/build_info.toml` (the commit hash and dirty flag
-  the footer shows), which `templates/section.html` reads with `load_data`.
-- `shared-themes` copies the theme submodule's tokens to `_site/shared-themes/`.
+  every page's footer shows), which `templates/base.html` reads with
+  `load_data`.
 - `companies` runs `scripts/import_companies.py` into
   `_site/data/companies.json.gz` and copies `data/logos/*.svg` to `_site/logos/`.
 - `root-feed` copies the English feed to `/atom.xml`, the URL every page
@@ -21,28 +21,21 @@ caches each one separately.
   list of stubs it will write, which is how rsconstruct's generic mass
   generator knows them in advance.
 
-The rest of what used to be post-processing is zola's own now: the root
-language chooser is the root section's template (`templates/lang_choice.html`),
-and the sitemap is `templates/sitemap.xml`. `relocate_english()`, which used
-to sweep unprefixed English output under `/en/`, was removed on 2026-09-21:
-every section is an explicit `_index.en.md`, so zola emits both languages
-prefixed itself.
+The rest of what used to be post-processing is the generator's own now: the
+root language chooser is `templates/root.html`, the sitemap and the feeds are
+built in (the feeds capped at 20 entries by `[feeds] limit`), and the
+shared-themes files are published by the `[[publish]]` entry in
+`rssite.toml`.
 
 The redirect stubs serve the pre-migration URLs Google still has indexed --
-MkDocs-era `/YYYY/MM/DD/<slug>/` permalinks and the root-level zola URLs from
+MkDocs-era `/YYYY/MM/DD/<slug>/` permalinks and the root-level URLs from
 before English moved to `/en/`. The map is `LEGACY_REDIRECTS`; paginator URLs
 are expanded from the number of English posts and the blog's `paginate_by`
-rather than listed. They are a build step rather than zola `aliases` because
+rather than listed. They are a build step rather than `aliases` because
 aliases exist only for pages, and half of what they rescue is not one
 (paginator URLs, `/ascx/public_key.asc`, a section); see `doc/SEO.md` for the
-history. A stub whose path zola also writes fails the build when the graph is
-built, as two processors declaring one output.
-
-`templates/sitemap.xml` is zola's built-in sitemap minus every `/page/1/`
-entry. Zola emits that URL for each paginated section and builds it as a
-redirect to the paginator root, so listing it makes the sitemap advertise 112
-redirects. The redirect stays for anyone holding such a link; only the
-sitemap entry goes.
+history. A stub whose path rssite also writes fails the build when the graph
+is built, as two processors declaring one output.
 
 ## check_redirects.py
 
@@ -62,7 +55,7 @@ login, and `doc/SEO.md` says where to read it by hand.
 
 Imports the three sibling teaching sites (`../teaching-slides`,
 `../teaching-syllabi`, `../teaching-animations`) into
-`content/{slides,syllabi,animations}/_index.en.md` as native zola pages. Each
+`content/{slides,syllabi,animations}/_index.en.md` as native site pages. Each
 sibling builds a single self-contained `_site/index.html`; the script strips
 the document wrapper, drops the embedded header and theme `<select>` (this
 site's chrome supplies both), scopes the page's CSS under an `#app-<section>`
@@ -85,7 +78,7 @@ translation or vice versa (an unpaired post would otherwise lose its language
 switcher silently), if a pair's tag lists differ in length, or if a tag lines
 up with two different counterparts. The build runs it with `--check`, which
 writes nothing and fails listing the stale files; run it without `--check` to
-regenerate them. Both outputs are committed, so zola (and `zola serve`) always reads
+regenerate them. Both outputs are committed, so rssite (and `rssite serve`) always reads
 current numbers and links.
 
 ### `scripts/gen_profiles.py`
@@ -289,8 +282,8 @@ of hosts do not implement HEAD properly.
 ### `scripts/serve.py`
 
 Runs `rsconstruct build`, then serves `_site/` with a plain static server,
-which is the closest local approximation to GitHub Pages (`zola serve` builds
-in memory and skips the steps around zola). Options:
+which is the closest local approximation to GitHub Pages (`rssite serve`
+rebuilds on change but skips the steps around rssite). Options:
 `--port`, `--preview` (open a browser), `--anonymous` (a browser with a fresh
 temp profile, implies `--preview`), `--no-build`.
 

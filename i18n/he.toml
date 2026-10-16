@@ -1,0 +1,35 @@
+# Hebrew strings for the templates (trans()), and the month names the date
+# filter uses for %B: "2 בספטמבר 2026", the ב prefix being how Hebrew says
+# "on the 2nd of September". Hebrew has no month abbreviations in common use,
+# so the short names are the long ones.
+nav_blog = "בלוג"
+nav_about = "אודות"
+nav_tags = "תגיות"
+nav_media = "מדיה"
+nav_calendar = "יומן"
+nav_chess = "שחמט"
+nav_slides = "מצגות"
+nav_syllabi = "סילבוסים"
+nav_animations = "אנימציות"
+nav_training = "הדרכות"
+tags_title = "תגיות"
+tagged_with = "מתויג"
+latest_posts = "הפוסטים האחרונים"
+all_posts = "כל הפוסטים"
+newer = "חדשים יותר"
+older = "ישנים יותר"
+label_language = "שפה"
+label_theme = "ערכת נושא"
+label_translations = "תרגומים"
+stats_title = "ארכיון"
+stats_posts = "פוסטים"
+stats_in_languages = "בשתי שפות"
+stats_by_year = "לפי שנה"
+stats_year = "שנה"
+stats_count = "פוסטים"
+home_title = "מארק ולצר -- מהנדס תוכנה, ישראל"
+home_intro = "שמי מארק ולצר, מהנדס תוכנה מישראל. אני כותב כאן על תכנות, לינוקס, מתמטיקה ופילוסופיה, ומתעד את משחקי השחמט שלי, את הספרים וההרצאות שאני צורך ואת הקורסים שאני מלמד."
+
+[dates]
+months = ["ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"]
+months_short = ["ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"]

@@ -1,14 +1,14 @@
 {#- The 404 page GitHub Pages serves for any unmatched URL.
 
-    Without this template zola emits a bare 68-byte document: no stylesheet, no
-    nav, no way back. That is a dead end on a site where URLs have moved -- the
+    Without this template the generator's built-in 404 is a bare document: no
+    stylesheet, no nav, no way back. That is a dead end on a site where URLs have moved -- the
     app sections went from /chess/ to /en/chess/ and the posts from /blog/ to
     /en/blog/, so old links and bookmarks land here.
 
-    It is a single static page for the whole site, so it cannot know the
-    reader's language: GitHub Pages serves the same file under /en/ and /he/
-    alike. Both languages are therefore shown, English first, rather than
-    guessing wrong half the time.
+    GitHub Pages serves the one /404.html for every unmatched URL, so that
+    page cannot know the reader's language: both languages are shown, English
+    first, rather than guessing wrong half the time. rssite renders it in the
+    fallback language (English), and a per-language copy under /en/ and /he/.
 
     It extends base.html for the header, theme and styling, which is the whole
     point -- a reader who lands here gets the nav and can leave. -#}

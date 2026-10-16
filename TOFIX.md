@@ -15,5 +15,5 @@ Findings from a code scan on 2026-10-04.
 - `pyproject.toml:34` - `mypy_path = "src:python:scripts"` lists `src` and `python`, which do not exist in this repo; reduce it to `scripts`.
 - `pyproject.toml:30` - comment calls this a "Demo/teaching repo"; it is the personal website - correct the comment.
 - `scripts/books_fetch_ids.py:40` - `import bs4  # type: ignore` is unused (`mypy --warn-unused-ignores` reports `unused-ignore`, bs4 4.15 ships its own types); remove the suppression, and drop the obsolete `types-beautifulsoup4` stub package at `pyproject.toml:23`.
-- `.rumdl.zola.toml:1` - header claims the file is the fleet `.rumdl.toml` plus MD041 off, but it does not disable MD053 (the fleet file does), and it carries the Marp/teaching-slides MD057/MD014 rationale that does not apply to this site's content; make the comment match the rule list.
+- `.rumdl.content.toml:1` - header claims the file is the fleet `.rumdl.toml` plus MD041 off, but it does not disable MD053 (the fleet file does), and it carries the Marp/teaching-slides MD057/MD014 rationale that does not apply to this site's content; make the comment match the rule list.
 - `doc/DONE.md:37` - refers to `scripts/copy_data.sh`, now `scripts/copy_data.py`; similarly `doc/IMPROVEMENTS.md:412` cites a nonexistent `scripts/build_docs.py`; update or mark as historical.

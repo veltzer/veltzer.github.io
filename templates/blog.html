@@ -18,7 +18,7 @@
     <time datetime="{{ post.date }}">{% set d = post.date %}{% include "_date.html" %}</time>
     {%- if post.taxonomies.tags %}
     <span class="post-tags">
-      {%- for tag in post.taxonomies.tags %}<a class="tag" href="{{ get_taxonomy_url(kind='tags', name=tag, lang=lang) }}">{{ tag }}</a>{% endfor %}
+      {%- for tag in post.taxonomies.tags %}<a class="tag" href="{{ tag.permalink }}">{{ tag.name }}</a>{% endfor %}
     </span>
     {%- endif %}
   </li>
@@ -27,9 +27,9 @@
 
 {%- if paginator %}
 <nav class="pagination">
-  {%- if paginator.previous %}<a href="{{ paginator.previous }}">&larr; {{ trans(key="newer", lang=page_lang) }}</a>{% endif %}
+  {%- if paginator.previous %}<a href="{{ paginator.previous }}">&larr; {{ trans(key="newer") }}</a>{% endif %}
   <span>{{ paginator.current_index }} / {{ paginator.number_pagers }}</span>
-  {%- if paginator.next %}<a href="{{ paginator.next }}">{{ trans(key="older", lang=page_lang) }} &rarr;</a>{% endif %}
+  {%- if paginator.next %}<a href="{{ paginator.next }}">{{ trans(key="older") }} &rarr;</a>{% endif %}
 </nav>
 {%- endif %}
 </div>
@@ -41,17 +41,17 @@
 {%- set stats = section.extra.stats %}
 {%- if stats %}
 <aside class="archive-stats" aria-labelledby="archive-stats-heading">
-  <h2 id="archive-stats-heading">{{ trans(key="stats_title", lang=page_lang) }}</h2>
+  <h2 id="archive-stats-heading">{{ trans(key="stats_title") }}</h2>
   <p class="archive-total">
-    <strong>{{ stats.total }}</strong>&nbsp;{{ trans(key="stats_posts", lang=page_lang) }}<br>
-    <span class="archive-langs">{{ trans(key="stats_in_languages", lang=page_lang) }}</span>
+    <strong>{{ stats.total }}</strong>&nbsp;{{ trans(key="stats_posts") }}<br>
+    <span class="archive-langs">{{ trans(key="stats_in_languages") }}</span>
   </p>
   <table class="archive-years">
-    <caption>{{ trans(key="stats_by_year", lang=page_lang) }}</caption>
+    <caption>{{ trans(key="stats_by_year") }}</caption>
     <thead>
       <tr>
-        <th scope="col">{{ trans(key="stats_year", lang=page_lang) }}</th>
-        <th scope="col">{{ trans(key="stats_count", lang=page_lang) }}</th>
+        <th scope="col">{{ trans(key="stats_year") }}</th>
+        <th scope="col">{{ trans(key="stats_count") }}</th>
       </tr>
     </thead>
     <tbody>

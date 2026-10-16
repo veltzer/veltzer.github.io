@@ -1,0 +1,53 @@
+{#- The site root, "/": neither language owns it, so it is the language
+    chooser. rssite renders this file there (templates/root.html) with the
+    fallback language's context; without it the root would be a redirect to
+    /en/. Returning readers are sent to the language they last used, see the
+    script at the end. -#}
+{%- set build = load_data(path="out/build_info.toml", required=false) -%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ config.title }}</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="{{ get_url(path='shared-themes/fonts.css') }}">
+<link rel="stylesheet" href="{{ get_url(path='shared-themes/themes.css') }}">
+<link rel="stylesheet" href="{{ get_url(path='style.css') }}">
+{%- for entry in languages %}
+<link rel="alternate" hreflang="{{ entry.code }}" href="{{ config.base_url }}{{ entry.url_prefix }}">
+{%- endfor %}
+<link rel="alternate" hreflang="x-default" href="{{ config.base_url }}/en/">
+<style>
+  .lang-choice { max-width: 28rem; margin: 6rem auto; padding: 0 1.25rem; text-align: center; }
+  .lang-choice h1 { margin-bottom: 2rem; }
+  .lang-choice a {
+    display: block; padding: 1rem; margin-bottom: 0.75rem;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    text-decoration: none; color: var(--text-primary);
+    background: var(--bg-surface);
+  }
+  .lang-choice a:hover { border-color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="lang-choice">
+  <h1>Mark Veltzer</h1>
+  {%- for entry in languages %}
+  <a href="{{ entry.url_prefix }}" hreflang="{{ entry.code }}" lang="{{ entry.code }}">{{ entry.name }}</a>
+  {%- endfor %}
+</div>
+<script>
+  // Send returning readers straight to the language they last used, but only
+  // when they arrive at the root with no explicit choice -- a link to /en/ or
+  // /he/ is always honoured because this page never runs for those.
+  try {
+    var last = localStorage.getItem("veltzer-site-lang");
+    if (last === "en" || last === "he") { location.replace("/" + last + "/"); }
+  } catch (e) { /* storage blocked: show the chooser */ }
+</script>
+<footer class="site-footer">
+  <p class="site-inscription" dir="ltr">Made by <a href="{{ rssite.url }}">{{ rssite.name }}</a> version {{ rssite.version }}{% if build and build.short %}, commit <a href="https://github.com/veltzer/veltzer.github.io/commit/{{ build.commit }}"><code>{{ build.short }}</code></a>{% endif %}, Mark Veltzer &lt;<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>&gt;</p>
+</footer>
+</body>
+</html>

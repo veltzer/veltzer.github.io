@@ -1,11 +1,20 @@
 {% extends "base.html" %}
 {% block title %}{{ term.name }} &middot; {{ config.title }}{% endblock %}
 {% block content %}
-<h1>{{ trans(key="tagged_with", lang=page_lang) }} &ldquo;{{ term.name }}&rdquo;</h1>
+<h1>{{ trans(key="tagged_with") }} &ldquo;{{ term.name }}&rdquo;</h1>
+{#- paginate_by = 20 on the taxonomy: this pager's slice, with the pager
+    links below when there is more than one. -#}
 <ul class="post-list">
-  {%- for post in term.pages %}
+  {%- for post in paginator.pages %}
   <li><a class="post-link" href="{{ post.permalink }}">{{ post.title }}</a>
       <time datetime="{{ post.date }}">{% set d = post.date %}{% include "_date.html" %}</time></li>
   {%- endfor %}
 </ul>
+{%- if paginator.number_pagers > 1 %}
+<nav class="pagination">
+  {%- if paginator.previous %}<a href="{{ paginator.previous }}">&larr; {{ trans(key="newer") }}</a>{% endif %}
+  <span>{{ paginator.current_index }} / {{ paginator.number_pagers }}</span>
+  {%- if paginator.next %}<a href="{{ paginator.next }}">{{ trans(key="older") }} &rarr;</a>{% endif %}
+</nav>
+{%- endif %}
 {% endblock %}

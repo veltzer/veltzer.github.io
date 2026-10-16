@@ -1,5 +1,7 @@
 [dependencies]
 system = ["libxml2-utils", "aspell", "aspell-en", "aspell-he"]
+# rssite renders the site (crates.io, cargo install).
+cargo = ["rssite"]
 
 [processor.checker.oxlint]
 src_dirs = ["static"]
@@ -7,19 +9,21 @@ src_exclude_dirs = ["vendor"]
 args = ["-c", ".oxlintrc.json"]
 [processor.checker.itidy]
 src_dirs = ["static"]
-# not linted: templates (zola templates, not standalone HTML)
-# ─── site ───────────────────────────────────────────────────────────────────
-# zola renders the site: processor.mass_generator.zola plans every file zola
-# writes (one cached product each), runs the official zola into a private
-# staging directory, and moves the files into _site/. The steps zola cannot do
-# are scripts/build_site.py subcommands, each declaring what it reads and
-# writes, so rsconstruct orders, caches and restores them like everything else.
-[processor.mass_generator.zola]
-output_dir = "_site"
+# rssite renders the site: `rssite plan` lists every file a build writes with
+# the sources each depends on, and rsconstruct makes each one a product, so an
+# edited post rebuilds only the files that list it and other processors can
+# write into _site/ beside rssite's files. The steps rssite cannot do are
+# scripts/build_site.py subcommands, each declaring what it reads and writes.
+[processor.mass_generator.generic.site]
+command = "rssite"
+args = ["build"]
+predict_command = "rssite"
+predict_args = ["plan"]
+output_dirs = ["_site"]
 
-# The commit the About page names. templates/section.html loads it with
-# load_data, which makes it a source of every rendered page, so zola runs
-# after it. .git/HEAD and .git/index change with every commit (and every
+# The commit every page's footer names. templates/base.html loads it with
+# load_data, which makes it a source of every rendered page, so rssite runs
+# after it and a new commit rebuilds the site. .git/HEAD and .git/index change with every commit (and every
 # `git add`); a dirty working tree that nothing staged is not seen.
 [processor.explicit.generic.build_info]
 command = "scripts/build_site.py"
@@ -27,19 +31,6 @@ args = ["build-info"]
 inputs = [".git/HEAD", ".git/index"]
 output_files = ["out/build_info.toml"]
 
-# The theme palette, switcher and fonts from the shared-themes submodule,
-# served next to zola's output (templates/base.html links them). The fonts
-# are committed files in the submodule; nothing is fetched at page view.
-[processor.explicit.generic.shared_themes]
-command = "scripts/build_site.py"
-args = ["shared-themes"]
-inputs = [
-    "shared/shared-themes/themes.css",
-    "shared/shared-themes/theme-switcher.js",
-    "shared/shared-themes/fonts.css",
-]
-input_globs = ["shared/shared-themes/fonts/*"]
-output_dirs = ["_site/shared-themes"]
 
 # The companies tab: organizations.yaml becomes _site/data/companies.json.gz,
 # and data/logos/ is copied to _site/logos/. The importer checks every map
@@ -53,7 +44,7 @@ output_files = ["_site/data/companies.json.gz"]
 output_dirs = ["_site/logos"]
 
 # The English feed served at /atom.xml too (see copy_root_feed). Its input is
-# zola's output, so it runs after zola.
+# rssite's output, so it runs after rssite.
 [processor.explicit.generic.root_feed]
 command = "scripts/build_site.py"
 args = ["root-feed"]
@@ -72,17 +63,17 @@ predict_args = ["redirects", "--plan"]
 output_dirs = ["_site"]
 src_dirs = ["content/blog"]
 src_extensions = [".md"]
-src_files = ["scripts/build_site.py", "config.toml"]
+src_files = ["scripts/build_site.py", "rssite.toml"]
 
 # The blog statistics are generated into committed files (the blog _index
-# pages and static/tag_translations.toml). The build checks they are current;
+# pages and i18n/tags.toml). The build checks they are current;
 # running scripts/gen_stats.py regenerates them.
 [processor.checker.script.gen_stats]
 command = "scripts/gen_stats.py"
 args = ["--check"]
 fix_command = "scripts/gen_stats.py"
 src_files = ["content/blog/_index.en.md"]
-dep_inputs = ["content/blog/*.md", "static/tag_translations.toml"]
+dep_inputs = ["content/blog/*.md", "i18n/tags.toml"]
 
 [processor.checker.ruff]
 src_dirs = ["scripts", "tests"]
@@ -91,8 +82,7 @@ src_dirs = ["scripts", "tests"]
 [processor.checker.pytest]
 src_dirs = ["tests"]
 # Everything the tests import or read, so an edit to any of it re-runs the
-# suite on a warm cache. There is no glob form, hence every template by name;
-# tests/test_template_determinism.py reads all of templates/*.html.
+# suite on a warm cache.
 dep_inputs = [
     "scripts/build_site.py",
     "scripts/csv_to_yaml.py",
@@ -100,21 +90,6 @@ dep_inputs = [
     "scripts/import_audible.py",
     "scripts/import_books.py",
     "scripts/import_companies.py",
-    "templates/404.html",
-    "templates/_date.html",
-    "templates/app.html",
-    "templates/app_body.html",
-    "templates/atom.xml",
-    "templates/base.html",
-    "templates/blog.html",
-    "templates/chess.html",
-    "templates/embed.html",
-    "templates/index.html",
-    "templates/lang_choice.html",
-    "templates/page.html",
-    "templates/section.html",
-    "templates/taxonomy_list.html",
-    "templates/taxonomy_single.html",
 ]
 [analyzer.markdown]
 
@@ -145,10 +120,10 @@ src_files = ["data/yaml/books_read.yaml"]
 command = "pydatacheck"
 args = ["check_books"]
 [processor.checker.taplo]
-src_files = ["config.toml", "rsconstruct.toml", ".rumdl.toml", ".rumdl.zola.toml", "pyproject.toml", "static/identity.toml", "static/tag_translations.toml"]
+src_files = ["rssite.toml", "rsconstruct.toml", ".rumdl.toml", ".rumdl.content.toml", "pyproject.toml", "static/identity.toml", "i18n/en.toml", "i18n/he.toml", "i18n/tags.toml"]
 
 [processor.checker.encoding]
-src_dirs = ["scripts", "static", "templates", "sass"]
+src_dirs = ["scripts", "static", "templates", "sass", "i18n"]
 src_exclude_dirs = ["vendor"]
 # sass/style.scss is compiled with rsconstruct's native (Rust) sass compiler
 # and the resulting CSS is linted with biome: biome reads CSS, not SCSS. Zola
@@ -172,13 +147,13 @@ src_files = ["README.md", "CLAUDE.md"]
 src_exclude_dirs = ["content"]
 
 # content/ is Zola pages: the H1 comes from the frontmatter title via
-# templates/page.html, so they are linted with the zola-dialect config.
+# templates/page.html, so they are linted with the content config.
 # The three imported app pages are generated by scripts/import_teaching.py
 # and inline the upstream sites' <style>, which rumdl reads as headings.
 [processor.checker.rumdl.content]
 src_dirs = ["content"]
-args = ["--config", ".rumdl.zola.toml"]
-dep_inputs = [".rumdl.zola.toml"]
+args = ["--config", ".rumdl.content.toml"]
+dep_inputs = [".rumdl.content.toml"]
 src_exclude_paths = [
 	"content/animations/_index.en.md",
 	"content/slides/_index.en.md",

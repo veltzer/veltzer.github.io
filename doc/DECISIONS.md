@@ -313,3 +313,48 @@ records them (see also `doc/SCRIPTS.md`):
 2026-10) starts applying affixes lazily at lookup, re-measure loading `he_IL`.
 If it fits comfortably in memory, moving both languages to the built-in
 checker would delete four scripts.
+
+## The site is built by rssite, not zola (2026-10-16)
+
+zola built the site from 2026-08 to 2026-10. It worked, through a long list of
+workarounds that `rssite`'s own documentation records in full (its "Lessons
+from zola" chapter was written from this repository): a phantom default
+language `cs` so that every real file could carry a language suffix; a
+`content/_index.md` that existed only to satisfy the generator; translations
+lists whose order changed between builds, so every template looped the config
+instead; no translation link between tag pages, patched with a generated table
+and a template lookup; `now()` in templates, which no reproducible build can
+have; `/page/1/` stubs the sitemap had to be told to hide; the shared design
+tokens copied by a script because a sass `@import` of a `.css` file is left
+for the browser; and the sibling teaching sites imported by hand because the
+layout could not be shared. Every one of those is a design choice in rssite
+rather than a workaround here.
+
+### What changed
+
+- `config.toml` is `rssite.toml`; the translations moved from it to
+  `i18n/{en,he}.toml`, with the Hebrew month names beside the strings; the
+  tag translation table moved from `static/` to `i18n/tags.toml`.
+- Every template gets `lang`, `language`, `languages`, `translations` and
+  `alternates` from the generator, so `base.html` lost its alt-URL string
+  juggling and the tag pages link to their counterpart with no template
+  lookup. `page.taxonomies.tags` are objects with a `permalink`. The post
+  neighbours are `previous` and `next`.
+- The root language chooser is `templates/root.html`; the custom feed and
+  sitemap templates are gone, the built-in ones do the same.
+- The shared-themes files are published by `[[publish]]` in `rssite.toml`;
+  the Python copy step is gone.
+- Every page's footer names the generator, its version and the commit it was
+  built from ("Made by rssite version ..."). The commit comes from
+  `out/build_info.toml`, which is therefore a source of every page: a new
+  commit rebuilds the site, which takes seconds.
+- The Hebrew app stubs declare `body_from = "en"` instead of the template
+  fetching the English section.
+
+### Not preserved
+
+URL compatibility with the zola build was not a goal. One Hebrew tag slug
+changed (the geresh in `ג׳אווה` is not a slug character to rssite), the
+`/page/1/` stubs are not written, and heading anchors in Hebrew posts are
+Hebrew rather than transliterated. The legacy redirects from the MkDocs era
+stay as they were.

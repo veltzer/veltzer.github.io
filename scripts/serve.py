@@ -3,11 +3,11 @@
 """
 Local QA preview of the site as GitHub Pages will serve it.
 
-Why not `zola serve`?
-  `zola serve` is great for authoring (live rebuild + browser
+Why not `rssite serve`?
+  `rssite serve` is great for authoring (live rebuild + browser
   auto-reload), but it is NOT faithful to what gets deployed:
     - It serves from an in-memory build, not the real `_site/` output.
-    - It runs zola alone, without the steps rsconstruct runs around it
+    - It runs rssite alone, without the steps rsconstruct runs around it
       (the shared-themes copy, the companies data, the redirect stubs,
       build provenance), so those are missing. (The `static/data/` build is
       `copy_data.py`, a manual step that neither path runs.)
@@ -46,7 +46,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 def read_site_dir():
-    # The site's output dir: [processor.mass_generator.zola] output_dir.
+    # The site's output dir: [processor.mass_generator.generic.site] output_dirs.
     return (REPO_ROOT / "_site").resolve()
 
 

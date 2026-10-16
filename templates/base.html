@@ -1,69 +1,18 @@
-{#- "cs" is the phantom default language (see config.toml): it has no content
-    of its own. Every section, the six app sections included, is now an
-    explicit _index.en.md, so no page body is filed under it -- but zola still
-    renders the site-wide 404.html once, in the default language, and any
-    future unsuffixed file would land there too. Map it to "en" here, once, so
-    every nav link, lang_root and <html lang> downstream is English rather
-    than pointing at /cs/, which does not exist. -#}
-{%- set page_lang = lang | default(value="en") -%}
-{%- if page_lang == "cs" %}{% set page_lang = "en" %}{% endif -%}
-{#- The translations of whatever is being rendered. Posts carry
-    page.translations; sections (the blog index, the apps, about) carry
-    section.translations, which zola 0.23.3 exposes but this template used to
-    ignore, so every section page's hreflang alternates were missing and its
-    language switch went to the other language's home instead of the sibling
-    section. Taxonomy pages have neither, and are handled just below. The
-    root section additionally lists the phantom "cs" entry; it never matches
-    a code in config.extra.languages, so the loop below drops it for free. -#}
-{%- if page and page.translations %}{% set translations = page.translations %}
-{%- elif section and section.translations %}{% set translations = section.translations %}
-{%- else %}{% set translations = [] %}{% endif -%}
-{#- alt_urls: this document's URL in each language, one entry per
-    config.extra.languages in that order ("" where there is none). Computed
-    once here and read by both the hreflang alternates and the language
-    switcher, so the two can never disagree. It is a "|"-separated string
-    read back with split + nth, because zola 0.23.3's Tera has no `concat`
-    filter and so no way to append to an array; a leading "|" makes the
-    1-based loop.index the right position.
+{#- The layout every page extends.
 
-    Looping the fixed config list rather than `translations` directly is
-    deliberate: zola's translations list comes out in a different order on
-    different runs -- verified, three consecutive builds of identical input
-    emitted "he en", "he en", then "en he" -- which would make the build
-    non-reproducible for no benefit.
-
-    Tag pages have no translations list in zola at all. Their counterpart
-    comes from static/tag_translations.toml, which scripts/gen_stats.py
-    derives from the posts (a post and its translation carry the same tags
-    in the same order), and get_taxonomy_url turns the translated name into
-    the other language's tag page -- failing the build if that tag page does
-    not exist. The tag list page maps to the other language's tag list. -#}
-{%- if term %}{% set tagmap = load_data(path="static/tag_translations.toml") %}{% endif %}
-{%- set_global alt_urls = "" %}
-{%- for entry in config.extra.languages %}
-  {%- set_global alt_url = "" %}
-  {%- for translation in translations %}
-    {%- if translation.lang == entry.code %}{% set_global alt_url = translation.permalink %}{% endif %}
-  {%- endfor %}
-  {%- if term %}
-    {%- for pair in tagmap.terms %}
-      {%- if pair | get(key=page_lang) == term.name %}
-        {%- set_global alt_url = get_taxonomy_url(kind="tags", name=pair | get(key=entry.code), lang=entry.code) %}
-      {%- endif %}
-    {%- endfor %}
-  {%- elif terms %}
-    {%- set_global alt_url = config.base_url ~ "/" ~ entry.code ~ "/tags/" %}
-  {%- endif %}
-  {%- set_global alt_urls = alt_urls ~ "|" ~ alt_url %}
-{%- endfor -%}
+    rssite hands every template the same language-aware context: `lang`,
+    `language` (code, name, direction, url_prefix), `languages` in configured
+    order, `translations` (this document in every language it exists in, in
+    that same order) and `alternates` (the same as a map from language code to
+    permalink). Posts, sections, tag pages and the tag list all get them, so
+    the hreflang alternates and the language switcher below are the same few
+    lines for every kind of page, and a translated tag page links to the same
+    tag in the other language (i18n/tags.toml) rather than to that language's
+    home. -#}
 {#- One description for <meta name="description"> and og:description, so the
-    two never disagree. Posts: their own description, else the opening text --
-    `if page.description` rather than the `default` filter, because zola sets
-    description to the empty string when the front matter omits it and
-    `default` only fills in a *missing* value; with the filter every post
-    shipped an empty meta description. Sections: the `description` in their
-    front matter, which every nav section sets. Anything else (taxonomies,
-    404) gets the site blurb. -#}
+    two never disagree. Posts: their own description, else the opening text.
+    Sections: the `description` in their front matter, which every nav section
+    sets. Anything else (taxonomies, 404) gets the site blurb. -#}
 {%- if page and page.description %}{% set meta_desc = page.description %}
 {%- elif page %}{% set meta_desc = page.content | striptags | truncate(length=160) %}
 {%- elif section and section.description %}{% set meta_desc = section.description %}
@@ -71,8 +20,15 @@
 {#- Default for templates/_date.html: list pages show "2 Sep 2026", a post
     header overrides this to true for "2 September 2026". -#}
 {%- set d_long = false -%}
+{#- The commit this build came from, written by `scripts/build_site.py
+    build-info` (the processor.explicit.generic.build_info step) and not
+    committed: a hash written into content before committing can only ever
+    name the previous commit. Loading it here makes it a source of every page,
+    so a new commit rebuilds the site; that is a few seconds. Absent (no git,
+    a fresh clone), the footer omits the commit. -#}
+{%- set build = load_data(path="out/build_info.toml", required=false) -%}
 <!DOCTYPE html>
-<html lang="{{ page_lang }}"{% if page_lang == "he" %} dir="rtl"{% endif %}>
+<html lang="{{ lang }}" dir="{{ language.direction }}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -81,24 +37,19 @@
 
 {#- Canonical, alternates and Open Graph.
 
-    current_url is absolute and already carries the language prefix. Sections
-    and taxonomy pages have it too, so this covers every page rather than only
-    posts.
-
-    The canonical must stay on veltzer.org: veltzer.github.io 301s here, and
-    pointing canonicals at the redirecting host splits ranking off the real
-    site. config.base_url is veltzer.org, and current_url is built from it.
+    current_url is absolute and already carries the language prefix, for
+    every kind of page. The canonical must stay on veltzer.org:
+    veltzer.github.io 301s here, and pointing canonicals at the redirecting
+    host splits ranking off the real site. config.base_url is veltzer.org, and
+    current_url is built from it.
 
     og:* is what Slack, WhatsApp, Mastodon and the rest read. Without them a
     shared link renders as a bare URL with no title or summary. -#}
-{%- if current_url %}
 <link rel="canonical" href="{{ current_url }}">
 <meta property="og:url" content="{{ current_url }}">
-{%- endif %}
-{#- One alternate per language this document exists in; see alt_urls at the
-    top of this file for where the URLs come from and why the order is fixed. -#}
-{%- for entry in config.extra.languages %}
-{%- set alt_url = alt_urls | split(pat="|") | nth(n=loop.index) %}
+{#- One alternate per language this document exists in, in configured order. -#}
+{%- for entry in languages %}
+{%- set alt_url = alternates | get(key=entry.code, default="") %}
 {%- if alt_url %}
 <link rel="alternate" hreflang="{{ entry.code }}" href="{{ alt_url }}">
 {%- if entry.code == "en" %}
@@ -110,10 +61,10 @@
 {%- endfor %}
 <meta property="og:type" content="{% if page %}article{% else %}website{% endif %}">
 <meta property="og:site_name" content="{{ config.title }}">
-<meta property="og:locale" content="{% if page_lang == 'he' %}he_IL{% else %}en_US{% endif %}">
+<meta property="og:locale" content="{% if lang == 'he' %}he_IL{% else %}en_US{% endif %}">
 {#- `term` is set on a single tag's page, `terms` on the tag list; without
     those branches every tag page shared the site title as its og:title. -#}
-<meta property="og:title" content="{% block og_title %}{% if page %}{{ page.title }}{% elif section %}{{ section.title }}{% elif term %}{{ term.name }}{% elif terms %}{{ trans(key="tags_title", lang=page_lang) }}{% else %}{{ config.title }}{% endif %}{% endblock %}">
+<meta property="og:title" content="{% block og_title %}{% if page %}{{ page.title }}{% elif section %}{{ section.title }}{% elif term %}{{ term.name }}{% elif terms %}{{ trans(key="tags_title") }}{% else %}{{ config.title }}{% endif %}{% endblock %}">
 <meta property="og:description" content="{{ meta_desc }}">
 <meta name="twitter:card" content="summary">
 {%- if page and page.date %}
@@ -143,7 +94,7 @@
 {
   "@context": "https://schema.org",
   "@type": "Person",
-  {%- if page_lang == "he" %}
+  {%- if lang == "he" %}
   "name": "מארק ולצר",
   "alternateName": "Mark Veltzer",
   {%- else %}
@@ -160,6 +111,9 @@
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/favicon.svg">
+{#- The design tokens, the fonts and the switcher come from the shared-themes
+    submodule, published beside the pages by the [[publish]] entry in
+    rssite.toml. get_url checks that each file is one the build writes. -#}
 <link rel="stylesheet" href="{{ get_url(path='shared-themes/fonts.css') }}">
 <link rel="stylesheet" href="{{ get_url(path='shared-themes/themes.css') }}">
 {#- Vendor stylesheets go before ours so our theme overrides win on order.
@@ -167,10 +121,9 @@
     as our overrides, so load order is what decides it. -#}
 {%- block vendor_css %}{% endblock %}
 <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
-{#- lang= is load-bearing: without it get_url resolves to the root /atom.xml,
-    which is zola's feed for the phantom default language -- valid XML with
-    zero entries. The real feeds are /en/atom.xml and /he/atom.xml. -#}
-<link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path='atom.xml', lang=page_lang) }}">
+<link rel="stylesheet" href="{{ get_url(path='highlight.css') }}">
+{#- The feed of this language: /en/atom.xml or /he/atom.xml. -#}
+<link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path=lang ~ '/atom.xml') }}">
 {%- block extra_head %}{% endblock %}
 
 {#- Google Analytics 4.
@@ -200,60 +153,37 @@
 <body>
 
 {#- Both languages are prefixed (/en/ and /he/), so every in-site link is built
-    from the current language's root rather than assuming English owns "/". -#}
-{#- Falls back to "en", NOT config.default_language: the default is the empty
-    "cs" (see config.toml), so defaulting to it would point every unprefixed
-    link at a language with no pages. -#}
-{%- set lang_root = "/" ~ page_lang ~ "/" %}
+    from the current language's root. -#}
 <header class="site-header">
-  <a class="site-title" href="{{ lang_root }}">{{ config.title }}</a>
+  <a class="site-title" href="{{ language.url_prefix }}">{{ config.title }}</a>
   <nav class="site-nav">
     {%- for item in config.extra.nav %}
-    {#- Every entry takes the language prefix, apps included. The apps used to
-        be unprefixed because they existed only in English, which meant a Hebrew
-        reader who opened one lost their language: the nav, the switcher and the
-        way back all flipped to English. They now have Hebrew sections too --
-        stubs that reuse the English body, see app_body.html -- so /he/chess/ is
-        a real page and there is no reason to send readers out of their
-        language. `app = true` in config.extra.nav is now unused. -#}
-    <a href="{{ lang_root }}{{ item.path }}">{{ trans(key=item.key, lang=page_lang) }}</a>
+    {#- Every entry takes the language prefix, apps included: a Hebrew reader
+        who opens an app keeps the Hebrew nav, switcher and way back. The app
+        sections exist in Hebrew as stubs that take the English body
+        (body_from = "en"), so /he/chess/ is a real page. -#}
+    <a href="{{ language.url_prefix }}{{ item.path }}">{{ trans(key=item.key) }}</a>
     {%- endfor %}
   </nav>
 
   {#- Header controls: language and theme, both as <select> elements.
 
       Language: where the current document exists in the other language --
-      posts, sections and tag pages alike, see alt_urls at the top of this
-      file -- the option points straight at it so the reader stays where they
-      are. Anything without a counterpart falls back to the other language's
-      home page, better than hiding the switcher and leaving /he/
-      unreachable. Navigation is
-      a plain location change on `change`, so it still works without JS in the
-      sense that the options carry real URLs.
-
-      Both lists come from config.extra, so adding a language or theme is a
-      config line rather than a template change. -#}
+      posts, sections and tag pages alike -- the option points straight at it
+      so the reader stays where they are. Anything without a counterpart
+      falls back to the other language's home page, better than hiding the
+      switcher and leaving /he/ unreachable. Navigation is a plain location
+      change on `change`, so the options carry real URLs and work without JS
+      in that sense. -#}
   <div class="site-controls">
-    <label class="visually-hidden" for="lang-select">{{ trans(key="label_language", lang=page_lang) }}</label>
+    <label class="visually-hidden" for="lang-select">{{ trans(key="label_language") }}</label>
     <select id="lang-select" class="site-select">
-      {#- page_lang, not `lang | default(config.default_language)`: the default
-          is the phantom "cs", and while the app pages were still filed under it
-          `here` matched neither "en" nor "he", so no option was marked selected
-          and the <select> showed its first option, English, whatever language
-          the reader had arrived from. page_lang already maps cs to en at the
-          top of this file. -#}
-      {%- set here = page_lang %}
-      {%- for entry in config.extra.languages %}
-        {#- set_global must not be shadowed by a plain `set` of the same name in
-            this scope, or the write lands on a different variable and the value
-            comes out empty. Seed it once per iteration with set_global too. -#}
-        {%- set_global target = alt_urls | split(pat="|") | nth(n=loop.index) %}
-        {%- if not target %}{% set_global target = "/" ~ entry.code ~ "/" %}{% endif %}
-      <option value="{{ target }}" hreflang="{{ entry.code }}"{% if entry.code == here %} selected{% endif %}>{{ entry.name }}</option>
+      {%- for entry in languages %}
+      <option value="{{ alternates | get(key=entry.code, default=entry.url_prefix) }}" hreflang="{{ entry.code }}"{% if entry.code == lang %} selected{% endif %}>{{ entry.name }}</option>
       {%- endfor %}
     </select>
 
-    <label class="visually-hidden" for="theme-select">{{ trans(key="label_theme", lang=page_lang) }}</label>
+    <label class="visually-hidden" for="theme-select">{{ trans(key="label_theme") }}</label>
     {#- The theme list, its order and its labels come from the shared-themes
         submodule, never retyped here; azure is the default and :root applies it. -#}
     {%- set palette = load_data(path="shared/shared-themes/themes.json") %}
@@ -266,7 +196,7 @@
 </header>
 
 {# main_class is a block so a template can opt out of the narrow reading
-   column -- the embed pages use a wide one. #}
+   column -- the application pages use a wide one. #}
 <main class="{% block main_class %}site-main{% endblock %}">
 {% block content %}{% endblock %}
 </main>
@@ -290,12 +220,16 @@
 </script>
 
 <footer class="site-footer">
-  {#- dir="ltr": the line is Latin text and symbols only, and inside the
-      Hebrew <html dir="rtl"> the bidi algorithm would scatter it into
-      "Mark Veltzer · RSS 2026 ©". The year comes from the build clock so it
-      never goes stale. -#}
-  <p dir="ltr">&copy; {{ now() | date(format="%Y") }} {{ config.author }} &middot;
-     <a href="{{ get_url(path='atom.xml', lang=page_lang) }}">RSS</a></p>
+  {#- dir="ltr": these lines are Latin text and symbols only, and inside the
+      Hebrew <html dir="rtl"> the bidi algorithm would scatter them. The year
+      is the commit's date rather than the build clock, which templates cannot
+      read: the same sources always give the same page. -#}
+  <p dir="ltr">&copy; {% if build and build.date %}{{ build.date | date(format="%Y") }} {% endif %}{{ config.author }} &middot;
+     <a href="{{ get_url(path=lang ~ '/atom.xml') }}">RSS</a></p>
+  {#- Provenance, on every page: the generator and its version come from
+      rssite itself, the commit from out/build_info.toml (see the top of this
+      file). -#}
+  <p class="site-inscription" dir="ltr">Made by <a href="{{ rssite.url }}">{{ rssite.name }}</a> version {{ rssite.version }}{% if build and build.short %}, commit <a href="https://github.com/veltzer/veltzer.github.io/commit/{{ build.commit }}"><code>{{ build.short }}</code></a>{% if build.dirty %} (with uncommitted changes){% endif %}{% endif %}, Mark Veltzer &lt;<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>&gt;</p>
 </footer>
 
 </body>

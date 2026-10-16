@@ -8,15 +8,17 @@ calendar integration.
 
 ## Tech Stack
 
-- **Site generator**: [zola](https://www.getzola.org/) — single Rust binary, pinned to
-  v0.23.3. Templates are [Tera](https://keats.github.io/tera/) (Jinja2-like).
+- **Site generator**: [rssite](https://github.com/veltzer/rssite) — the fleet's own
+  static site generator (Rust, crates.io). Templates are
+  [Tera](https://keats.github.io/tera/) (Jinja2-like). It replaced zola on
+  2026-10-16; `doc/DECISIONS.md` records why.
 - **Build orchestration**: rsconstruct (single binary, configured via `rsconstruct.toml`
   and `config/*.lua`), npm
 - **Frontend**: HTML5, SCSS, JavaScript (ES9+)
 - **Linting**: everything is a processor in `rsconstruct.toml` — eslint
   (`.eslint.config.js`), tidy and htmlhint (HTML), stylelint (`.stylelintrc.json`),
   ruff, mypy (`[tool.mypy]` in `pyproject.toml`), pytest (`tests/`), shellcheck,
-  rumdl (`.rumdl.toml` for prose, `.rumdl.zola.toml` for `content/`), taplo, yamllint,
+  rumdl (`.rumdl.toml` for prose, `.rumdl.content.toml` for `content/`), taplo, yamllint,
   actionlint, xmllint, an encoding check, a duplicate-image check, an aspell
   spellcheck of the blog in both languages (`scripts/spellcheck_{en,he}.sh` against
   the word lists in `.aspell.{en,he}.txt`), and over `data/yaml/` a schema check
@@ -29,20 +31,20 @@ which records the traps that outlived the migration.
 
 ## Directory Structure
 
-- `config.toml` — zola config: `base_url`, taxonomies, the `[languages.en]` and
-  `[languages.he]` blocks, and `[extra.nav]` / `[extra.languages]` which drive the nav
-  and language switcher. **`default_language` is `"cs"`, a phantom language with no
-  content.** Zola marks its default language by the *absence* of a filename suffix, and
-  `foo.en.md` cannot exist while English is the default, so the default was pointed at a
-  language nobody writes: every real file then carries an explicit `.en` or `.he` suffix.
-  The long comment at the top of `config.toml` explains it; `content/_index.md`
-  (`render = false`) exists only because zola insists the default language has a root
-  section
+- `rssite.toml` — the site config: `base_url`, the two `[[languages]]` (every
+  language is explicit, there is no default; English is only the `fallback_language`
+  for the root redirect and the global 404), the `tags` taxonomy with its translation
+  table, the `[[publish]]` entry that serves the shared-themes files, and `[extra.nav]`
+  which drives the header navigation. Every key is known to the generator; an unknown
+  one fails the build
+- `i18n/` — `en.toml` and `he.toml`, the strings `trans()` returns plus the Hebrew
+  month names the `date` filter uses; `tags.toml`, the tag translation table
+  `scripts/gen_stats.py` generates
 - `content/` — all page and post source
     - `content/blog/*.en.md` — blog posts, flat (no `YYYY/MM/` nesting). TOML front
   matter between `+++` lines: `title`, `date`, and a `[taxonomies]` block with `tags`.
-  A bare `*.md` would be a page in the phantom default language, not an English one
-    - `content/blog/*.he.md` — Hebrew translations. The shared base name is how zola
+  A bare `*.md` without a language suffix is an error
+    - `content/blog/*.he.md` — Hebrew translations. The shared base name is how rssite
   pairs a post with its translation; nothing else is needed
     - `content/<page>/_index.{en,he}.md` — the standalone nav pages (about, media, calendar, …)
 - `data/yaml/` — the source of truth for the media tracker (podcasts, museums, courses,
@@ -65,13 +67,13 @@ which records the traps that outlived the migration.
   `check_videos` and `check_books` read (committed, so CI never hits the network),
   plus the Nominatim geocoding cache `organizations_geocode.py` reads and writes
 - `templates/` — Tera templates (`base.html`, `page.html`, `blog.html`, taxonomy pages)
-- `sass/style.scss` — compiled to `/style.css` by zola
+- `sass/style.scss` — compiled to `/style.css` by rssite
 - `static/` — copied verbatim to the site root: media plugins, images, data, `vendor/`
   (locally vendored JS libraries), and four `*.html` files that are meta-refresh
   redirects from retired URLs (the apps themselves live in `content/<app>/`)
 - `shared/shared-themes/` — git submodule providing the design tokens. **Run
   `git submodule update --init --recursive` on a fresh clone or the build fails.**
-- `scripts/` — `build_site.py` (the build steps around zola), `gen_stats.py` (archive stats),
+- `scripts/` — `build_site.py` (the build steps around rssite), `gen_stats.py` (archive stats),
   `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
   the sibling teaching repos), image fetchers, data importers, the `data/yaml/`
   maintenance scripts (`podcasts_*.py`, `books_fetch_ids.py`, `great_courses_*.py`,
@@ -80,7 +82,7 @@ which records the traps that outlived the migration.
   repo root),
   `serve.py`, and the `build_*_dict.sh` / `spellcheck_*.sh` pair behind the aspell
   processors
-- `tests/` — pytest suite for the data import scripts and template determinism
+- `tests/` — pytest suite for the data import scripts and the legacy redirect map
 - `.aspell.{en,he}.txt` — the spellcheck word lists; `out/aspell/` holds the compiled
   dictionaries (gitignored build output)
 - `_site/` — generated output (gitignored, never edit)
@@ -94,45 +96,31 @@ which records the traps that outlived the migration.
 - `scripts/gen_stats.py` — regenerate the archive stats when the `gen_stats` check fails
 - `scripts/serve.py` — build, then serve `_site/` locally the way Pages will
 
-The site is built by rsconstruct's `processor.mass_generator.zola`, which
-predicts every file zola writes and makes each one a product: an unchanged
-site runs zola zero times, and `clean outputs` + `build` restores the site
-from cache. The steps zola does not do are small processors around it, all
-subcommands of `scripts/build_site.py`: `build-info` (`out/build_info.toml`),
-`shared-themes`, `companies`, `root-feed` (`/atom.xml`) and `redirects` (the
-legacy-URL stubs). See `rsconstruct.toml`.
+The site is built by rsconstruct's `processor.mass_generator.generic.site`:
+`rssite plan` lists every file a build writes with the sources each depends
+on, and each becomes a product, so an unchanged site runs rssite zero times,
+an edited post rebuilds only the files that list it, and `clean outputs` +
+`build` restores the site from cache. The steps rssite does not do are small
+processors around it, all subcommands of `scripts/build_site.py`:
+`build-info` (`out/build_info.toml`, the commit every footer names),
+`companies`, `root-feed` (`/atom.xml`) and `redirects` (the legacy-URL
+stubs). The shared-themes files are published by rssite itself (`[[publish]]`
+in `rssite.toml`). See `rsconstruct.toml`.
 
-**Never run `zola build` by hand — always go through the build system.**
-Bare `zola build` writes to `public/` (zola's hardcoded default; an
-`output_dir` key in config.toml is silently ignored) and skips the steps
-above (the legacy redirects, the shared themes, the companies data).
-The result is a second output tree that looks authoritative but is not
-the real build — stale copies of it have produced wrong
-page counts and false "missing post" reports. The real output is `_site/`,
-and only after a build; cross-check any number you derive from it against
-what the build itself reports (zola prints "Creating N pages").
+**Never run `rssite build` by hand for a real build — go through the build
+system.** `rssite build` alone skips the steps above (the build info, the
+legacy redirects, the companies data). `rssite check` is fine at any time:
+it renders the whole site twice in memory and reports every broken link,
+template or translation without writing anything. The real output is
+`_site/`, and only after `rsconstruct build`.
 
-### Prerequisite: zola
+### Prerequisite: rssite
 
-The build runs zola, at exactly 0.23.3: the zola processor predicts zola's
-output, and refuses any other version. `rsconstruct tool install` installs it
-(that is what CI does); by hand:
-
-```bash
-ZOLA_VERSION=v0.23.3
-gh release download "$ZOLA_VERSION" --repo getzola/zola \
-  --pattern '*x86_64-unknown-linux-gnu.tar.gz' --output /tmp/zola.tar.gz
-tar xzf /tmp/zola.tar.gz -C ~/.local/bin zola
-chmod +x ~/.local/bin/zola
-zola --version   # expect: zola 0.23.3
-```
-
-Keep the version in step with rsconstruct's tool registry, which is what CI installs from:
-`rsconstruct tool list-configured` prints the pinned URL. The pin is deliberate: 0.23
-renamed config keys (`highlight_code` → `[markdown.highlighting]`) and swapped the
-highlighter, so an unpinned upgrade can fail the build on `config.toml` alone. Distro
-packages and `cargo install zola` track other versions — prefer the pinned tarball.
-(`cargo install zola` in particular fetches an unrelated yanked crate, not the real zola.)
+The build runs `rssite`, declared under `[dependencies].cargo` in
+`rsconstruct.toml`, so `rsconstruct tool install-deps` installs it from
+crates.io (that is what CI does). By hand: `cargo install rssite`. The
+`rssite` context variable in the templates (the "Made by rssite" footer line)
+needs rssite 0.1.8 or later.
 
 ## CI and the Workflow File
 
@@ -148,8 +136,8 @@ packages and `cargo install zola` track other versions — prefer the pinned tar
   `node_modules/.bin` on PATH, so processors invoke `stylelint` plainly and
   the locked version wins over any global copy (the Python linters come from
   rsconstruct's tool registry); and tools a wrapper script shells out to via
-  `required_tools` on the processor (that is how zola is installed; its
-  pinned recipe lives in rsconstruct's tool registry). Do not list a Node
+  `required_tools` on the processor; and Rust tools under
+  `[dependencies].cargo` (that is how rssite is installed). Do not list a Node
   package under `[dependencies].npm` — that is a global, unpinned install
   and duplicates the manifest. If something cannot be expressed there, the
   fix belongs in rsconstruct, not in the workflow.
@@ -166,7 +154,7 @@ packages and `cargo install zola` track other versions — prefer the pinned tar
 
 - One file per post in `content/blog/`, flat, named `<base>.en.md`. The base name
   becomes the URL slug: `euthyphro_dilemma.en.md` → `/en/blog/euthyphro-dilemma/`.
-  **Zola slugifies the filename, not the title** — worth remembering when hunting for a
+  **rssite slugifies the filename, not the title** — worth remembering when hunting for a
   built page.
 - Front matter is TOML between `+++` lines:
 
@@ -183,12 +171,11 @@ tags = ["religion", "philosophy", "ethics"]
 - **Translations**: add `content/blog/<same-base-name>.he.md`. Copy `date` verbatim
   from the English file — it is a shared key, and a mismatch splits the pair.
   Translate the `title` value and the `tags` (see below). Do not add a `lang` key;
-  zola infers it from the suffix (`.en` / `.he`; a file with neither would land in
-  the phantom default language). The language switcher renders itself from
-  `page.translations`, so never hand-write cross-links between a post and its
-  translation.
+  rssite reads it from the suffix (`.en` / `.he`; a file with neither is an error).
+  The language switcher renders itself from the `translations` rssite hands every
+  template, so never hand-write cross-links between a post and its translation.
 - **Post slugs are shared between languages, deliberately.** `/en/blog/foo/` and
-  `/he/blog/foo/` use the same English slug, because zola derives it from the
+  `/he/blog/foo/` use the same English slug, because rssite derives it from the
   filename and the filename is what pairs the two files. Do not "fix" this by
   renaming the Hebrew file or adding a `slug =` key — see
   `doc/DECISIONS.md` for why. Tag slugs *are* translated; posts are the exception.
@@ -197,12 +184,12 @@ tags = ["religion", "philosophy", "ethics"]
   sets. This is safe precisely because the pairing is by filename, not by tag.
 - **Tag lists must be in the same order in both languages.** Position N in the
   English list is the translation of position N in the Hebrew list. That is how
-  `scripts/gen_stats.py` derives `static/tag_translations.toml` (generated, do not
+  `scripts/gen_stats.py` derives `i18n/tags.toml` (generated, do not
   hand-edit; committed like the stats), which `templates/base.html` reads so a tag
   page's language switcher and hreflang alternates reach the same tag in the other
   language. A pair whose lists differ in length, or a tag that lines up with two
   different counterparts, fails the build.
-- Links between posts use zola's `@/` syntax, resolved against the content root:
+- Links between posts use the `@/` syntax, resolved against the content root:
   `[text](@/blog/other_post.md)`.
 - Every post exists in both English and Hebrew, and the build enforces it:
   `scripts/gen_stats.py` fails if any `.en.md` lacks its `.he.md` (or the
@@ -219,7 +206,7 @@ tags = ["religion", "philosophy", "ethics"]
 
 ## Style Sheets
 
-- `sass/style.scss` is the site stylesheet, compiled by zola to `/style.css`.
+- `sass/style.scss` is the site stylesheet, compiled by rssite to `/style.css`.
 - **Colours, radii, fonts and shadows come from `shared/shared-themes`** (the submodule).
   Nothing in `style.scss` hardcodes a colour — every value is a `var(--token)` — with
   one commented exception: the chessboard squares mix the accent token against fixed
@@ -253,7 +240,7 @@ tags = ["religion", "philosophy", "ethics"]
   `# BEGIN generated stats` marker; the hand-written section keys above it are
   preserved. The build runs it as a check (`gen_stats.py --check`), which fails
   when the committed stats are stale; running `scripts/gen_stats.py` rewrites them. The output
-  is committed, so `zola serve` and zola itself always see current figures. `templates/blog.html`
+  is committed, so `rssite serve` and every build see current figures. `templates/blog.html`
   renders it as the archive sidebar. Computing this in Tera was the alternative
   and was rejected: Tera has no `group_by` over a derived key, so per-year counts
   would mean looping the section once per year.
@@ -287,29 +274,31 @@ tags = ["religion", "philosophy", "ethics"]
   README's own `### Mark Veltzer's Github profile` heading plus its `main profile`
   self-link (`MAIN_PROFILE_URL` in that repo's `gen_readme.py`) — the site does not
   link to itself. Anything meant to appear on both belongs in the YAML.
-- Custom domain is `veltzer.org` (see `CNAME`); `base_url` in `config.toml` matches it,
+- Custom domain is `veltzer.org` (see `CNAME`); `base_url` in `rssite.toml` matches it,
   and `veltzer.github.io` 301-redirects there. Keep every public URL (canonical tags,
   sitemap, RSS, `og:url`, `robots.txt`) on `veltzer.org` — pointing them at the
   redirecting domain splits SEO ranking off the real site.
 - **URLs that ever shipped must keep working.** Two URL schemes have been retired
-  (MkDocs `/YYYY/MM/DD/<slug-from-title>/`, and root-level zola URLs from before
+  (MkDocs `/YYYY/MM/DD/<slug-from-title>/`, and root-level URLs from before
   English moved to `/en/`), and Google still requests both. `LEGACY_REDIRECTS` in
-  `scripts/build_site.py` maps them; add to it rather than letting a URL 404, and
-  note that zola `aliases` do not work here — see `doc/SEO.md` for why, and for the
-  current Search Console state.
+  `scripts/build_site.py` maps them; add to it rather than letting a URL 404 (see
+  `doc/SEO.md` for the Search Console state). The URLs of the zola era are not
+  preserved beyond that: the 2026-10 move to rssite changed one Hebrew tag slug
+  and dropped the `/page/1/` stubs, deliberately.
 - Google Calendar API key is public by design in `static/keys.js` — it is referrer- and
   API-restricted (see `doc/DECISIONS.md`). This is not a leak.
-- **Google Analytics is wired and switched on**: `config.toml`'s
+- **Google Analytics is wired and switched on**: `rssite.toml`'s
   `extra.google_analytics_id` holds the `G-XXXXXXXXXX` measurement ID, and
   `templates/base.html` emits the `gtag` snippet only when it is non-empty, so
   emptying it disables tracking site-wide. The ID is public by design — it
   identifies the property, it does not grant access to the data. Note GA4 sets
   cookies and there is no consent banner; that trade-off is recorded in
   `doc/ANALYTICS.md` under "Consent".
-- **Two Tera features do not work in zola 0.23.3.** `{% macro %}` is rejected as
-  "Unknown tag", and the `date` filter's `locale` argument is silently ignored. Shared
-  template logic is an `{% include %}` that reads variables the caller `set`s (see
-  `templates/_date.html`, which is also how Hebrew month names are produced).
+- Shared template logic is an `{% include %}` that reads variables the caller `set`s
+  (see `templates/_date.html`); rssite's `date` filter takes the month names from
+  `i18n/he.toml`, which is how Hebrew dates are produced. `now()` is not available to
+  templates: the output of a build is a function of its sources, so the footer's year
+  comes from the commit date in `out/build_info.toml`.
 - Site uses `.nojekyll` to bypass Jekyll processing on GitHub Pages.
 - CI checks out submodules recursively; without that the build fails on missing tokens.
 
@@ -317,7 +306,7 @@ tags = ["religion", "philosophy", "ethics"]
 
 - **Do not add `mkdocs-static-i18n` or any MkDocs i18n plugin.** They are incompatible
   with the `blog` plugin, and the failure is silent: the build exits 0 while emitting
-  *zero* post pages. This is why the site moved to zola. Full write-up in
+  *zero* post pages. This is why the site moved off MkDocs. Full write-up in
   `doc/IMPROVEMENTS.md` under "Internationalization".
 - Several 2010–2011 posts were imported from WordPress and the import ate `<` characters,
   truncating code listings. One (the grep post) has been reconstructed; if a code block in

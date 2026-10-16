@@ -1,0 +1,83 @@
+# rssite configuration. Every key here is known to the generator; an unknown
+# key is an error, never an ignored line. The directory keys keep their
+# defaults (content/, templates/, static/, sass/, i18n/, _site/).
+
+base_url = "https://veltzer.org"
+title = "Mark Veltzer's personal site"
+author = "Mark Veltzer"
+description = "Mark Veltzer -- software engineer from Israel. Blog on programming, Linux and philosophy, plus chess games, media notes and teaching material."
+
+# Both languages are explicit and symmetrical: every content file carries a
+# language suffix (post.en.md, post.he.md) and every language is served under
+# its own prefix (/en/, /he/). There is no default language. English is only
+# the fallback for the root redirect and the global 404.html, which a static
+# host cannot negotiate.
+fallback_language = "en"
+
+[[languages]]
+code = "en"
+name = "English"
+direction = "ltr"
+title = "Mark Veltzer's personal site"
+description = "Mark Veltzer -- software engineer from Israel. Blog on programming, Linux and philosophy, plus chess games, media notes and teaching material."
+generate_feeds = true
+
+[[languages]]
+code = "he"
+name = "עברית"
+direction = "rtl"
+title = "האתר האישי של מארק ולצר"
+description = "מארק ולצר -- מהנדס תוכנה מישראל. בלוג על תכנות, לינוקס ופילוסופיה, לצד משחקי שחמט, המלצות מדיה וחומרי הוראה."
+generate_feeds = true
+
+# The one taxonomy. A term's translation (religion <-> דת) comes from
+# i18n/tags.toml, which scripts/gen_stats.py derives from the posts, so a
+# tag page links to the same tag in the other language.
+[[taxonomies]]
+name = "tags"
+feed = true
+paginate_by = 20
+translations = "i18n/tags.toml"
+
+[slugify]
+# Hebrew tags keep their letters in the URL (/he/tags/דת/); post URLs come
+# from ASCII file names either way.
+paths = "safe"
+taxonomies = "safe"
+anchors = "safe"
+
+[markdown]
+smart_punctuation = false
+highlight = true
+highlight_theme = "InspiredGitHub"
+
+[feeds]
+# A feed is a "what's new" window, not an archive; the blog index has the rest.
+limit = 20
+
+[sitemap]
+enabled = true
+
+# The shared design tokens, switcher and fonts, published from the submodule
+# beside the generated pages; templates/base.html links them.
+[[publish]]
+from = "shared/shared-themes"
+to = "shared-themes"
+files = ["themes.css", "fonts.css", "theme-switcher.js", "fonts/*"]
+
+[extra]
+google_analytics_id = "G-LXVE94D5KX"
+# The header navigation: each entry is a translation key and a path below the
+# language prefix, so every item follows the reader's language, apps included.
+nav = [
+    { key = "nav_blog", path = "blog/" },
+    { key = "nav_tags", path = "tags/" },
+    { key = "nav_media", path = "media/" },
+    { key = "nav_calendar", path = "calendar/" },
+    { key = "nav_chess", path = "chess/" },
+    { key = "nav_slides", path = "slides/" },
+    { key = "nav_syllabi", path = "syllabi/" },
+    { key = "nav_animations", path = "animations/" },
+    { key = "nav_training", path = "training/" },
+    { key = "nav_about", path = "about/" },
+]

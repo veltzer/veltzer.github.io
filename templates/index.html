@@ -3,24 +3,19 @@
     its <title> leads with the name and what he does rather than the generic
     site title. base.html's default would emit "Mark Veltzer's personal site",
     which buries the name in a possessive and says nothing about the subject. -#}
-{% block title %}{{ trans(key="home_title", lang=page_lang) }}{% endblock %}
+{% block title %}{{ trans(key="home_title") }}{% endblock %}
 {#- Without this og:title falls back to section.title, which is the literal
     word "Home" -- the front matter title of content/_index.en.md, never meant
     to be user-facing. A shared link should carry the same name the <title>
     does. -#}
-{% block og_title %}{{ trans(key="home_title", lang=page_lang) }}{% endblock %}
+{% block og_title %}{{ trans(key="home_title") }}{% endblock %}
 {% block content %}
-<h1>{{ trans(key="home_title", lang=page_lang) }}</h1>
-{#- Real prose, not config.description. The page was previously an <h1> and a
-    bare list of post links, which gives a crawler almost no text to judge the
-    page by; a first-person paragraph naming the subject is what makes it read
-    as an identity page. -#}
-<p class="home-intro">{{ trans(key="home_intro", lang=page_lang) }}</p>
-{#- Every language is suffixed now (see default_language in config.toml), so
-    there is no bare blog/_index.md to fall back on: the path has to name the
-    language explicitly rather than relying on the lang= argument alone. -#}
-{%- set blog = get_section(path="blog/_index." ~ page_lang ~ ".md", lang=page_lang) %}
-<h2>{{ trans(key="latest_posts", lang=page_lang) }}</h2>
+<h1>{{ trans(key="home_title") }}</h1>
+{#- Real prose, not config.description: a first-person paragraph naming the
+    subject is what makes the page read as an identity page to a crawler. -#}
+<p class="home-intro">{{ trans(key="home_intro") }}</p>
+{%- set blog = get_section(path="blog/_index.md") %}
+<h2>{{ trans(key="latest_posts") }}</h2>
 <ul class="post-list">
   {%- for post in blog.pages %}
   {%- if loop.index > 10 %}{% break %}{% endif %}
@@ -28,7 +23,5 @@
       <time datetime="{{ post.date }}">{% set d = post.date %}{% include "_date.html" %}</time></li>
   {%- endfor %}
 </ul>
-{#- get_url appends the language suffix itself, so this path stays bare and
-    takes lang= -- unlike get_section above, which wants the real filename. -#}
-<p><a href="{{ get_url(path='@/blog/_index.md', lang=page_lang) }}">{{ trans(key="all_posts", lang=page_lang) }} &rarr;</a></p>
+<p><a href="{{ get_url(path='@/blog/_index.md') }}">{{ trans(key="all_posts") }} &rarr;</a></p>
 {% endblock %}
