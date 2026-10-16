@@ -27,13 +27,19 @@ args = ["build-info"]
 inputs = [".git/HEAD", ".git/index"]
 output_files = ["out/build_info.toml"]
 
-# The theme palette and switcher from the shared-themes submodule, served next
-# to zola's output (templates/base.html links them).
+# The theme palette, switcher and fonts from the shared-themes submodule,
+# served next to zola's output (templates/base.html links them). The fonts
+# are committed files in the submodule; nothing is fetched at page view.
 [processor.explicit.generic.shared_themes]
 command = "scripts/build_site.py"
 args = ["shared-themes"]
-inputs = ["shared/shared-themes/themes.css", "shared/shared-themes/theme-switcher.js"]
-output_files = ["_site/shared-themes/themes.css", "_site/shared-themes/theme-switcher.js"]
+inputs = [
+    "shared/shared-themes/themes.css",
+    "shared/shared-themes/theme-switcher.js",
+    "shared/shared-themes/fonts.css",
+]
+input_globs = ["shared/shared-themes/fonts/*"]
+output_dirs = ["_site/shared-themes"]
 
 # The companies tab: organizations.yaml becomes _site/data/companies.json.gz,
 # and data/logos/ is copied to _site/logos/. The importer checks every map

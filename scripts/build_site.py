@@ -9,7 +9,7 @@ is done here, each step declaring exactly what it reads and writes in
 rsconstruct.toml so rsconstruct can order, cache and restore it:
 
   build-info     out/build_info.toml, the commit the About page names
-  shared-themes  _site/shared-themes/*, copied from the shared-themes submodule
+  shared-themes  _site/shared-themes/ (tokens, switcher, fonts), copied from the submodule
   companies      _site/data/companies.json.gz and _site/logos/
   root-feed      _site/atom.xml, a copy of the English feed
   redirects      the legacy-URL redirect stubs (a mass generator: --plan
@@ -99,17 +99,23 @@ def write_build_info(path):
     )
 
 
-def copy_theme_files(sources, destinations):
-    """Copy the shared-themes files into the site, next to zola's output.
+SHARED_THEMES_DIR = Path("shared/shared-themes")
+
+
+def copy_theme_files(sources, output_dir):
+    """Copy the shared-themes files into the site, next to zola's output,
+    keeping their layout under the submodule (fonts.css expects fonts/
+    beside it).
 
     Kept as a copy rather than a symlink or a sass @import: dart-sass leaves a
     plain @import of a .css file as a runtime import, and Zola does not follow
     symlinks out of the project. The submodule is the single source of truth;
     the copy is build output.
     """
-    for source, destination in zip(sources, destinations, strict=True):
+    for source in sources:
         if not source.is_file():
             die(f"{source} missing. Run: git submodule update --init --recursive")
+        destination = output_dir / source.relative_to(SHARED_THEMES_DIR)
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, destination)
 
@@ -387,7 +393,7 @@ def main():
         if args.step == "build-info":
             write_build_info(*args.output_files)
         elif args.step == "shared-themes":
-            copy_theme_files(args.inputs, args.output_files)
+            copy_theme_files(args.inputs, *args.output_dirs)
         elif args.step == "companies":
             write_companies(*args.output_files, *args.output_dirs)
         elif args.step == "root-feed":
