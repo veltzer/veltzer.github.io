@@ -54,6 +54,7 @@ Beilock's
 Bel
 Bellah
 Bethel
+Bhagavad
 Bibi
 Bolyai
 Bootloader
@@ -165,6 +166,7 @@ GPL
 GSSAPIAuthentication
 GTK
 GUIs
+Galilei
 Galle
 Garstang
 Garstang's
@@ -178,6 +180,7 @@ Ghazali
 Gignac
 Gilad
 Giordano
+Gita
 GloVe
 Gogh
 Goodacre
@@ -405,6 +408,8 @@ QDeut
 Qedah
 Quartodeciman
 Quelle
+Quran
+Quran's
 Ramachandran
 Ramesses
 Rathje
@@ -919,6 +924,7 @@ fundable
 funders
 fusiform
 gamers
+gatekeeping
 gb
 gc
 gcal
@@ -1005,6 +1011,7 @@ imgproxy
 imgurl
 infomation
 ini
+inimitability
 init
 initialview
 initramfs
@@ -1068,6 +1075,7 @@ latin
 lcd
 ldconfig
 ldd
+lectionary
 lex
 lf
 lfs
@@ -1081,6 +1089,7 @@ lilypond
 limbic
 linux
 listmonth
+literalism
 literalism's
 literalist
 lmylib
@@ -1254,6 +1263,7 @@ pcb
 pdf
 pe
 percepts
+performatively
 perl
 perldoc
 permalink
@@ -1268,6 +1278,7 @@ phylogenies
 physicalism
 pid
 piecewise
+pieties
 pithos
 pname
 png
@@ -1386,6 +1397,7 @@ repositioned
 reproducibly
 reputational
 ret
+retellings
 revisable
 revisitable
 rf
@@ -1517,6 +1529,7 @@ substring
 subtree
 sudo
 sudoers
+sura
 surveilled
 sustainer
 svg
@@ -1527,6 +1540,7 @@ sys
 syscall
 systemctl
 systemd
+tafsir
 tagging
 tagname
 taskset
@@ -1738,8 +1752,3 @@ zwwvjod
 Ēostre
 Ēosturmōnaþ
 Ṣeba
-Galilei
-gatekeeping
-literalism
-performatively
-pieties
