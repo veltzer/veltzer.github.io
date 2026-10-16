@@ -253,9 +253,12 @@
     </select>
 
     <label class="visually-hidden" for="theme-select">{{ trans(key="label_theme", lang=page_lang) }}</label>
+    {#- The theme list, its order and its labels come from the shared-themes
+        submodule, never retyped here; azure is the default and :root applies it. -#}
+    {%- set palette = load_data(path="shared/shared-themes/themes.json") %}
     <select id="theme-select" class="site-select">
-      {%- for entry in config.extra.themes %}
-      <option value="{{ entry.code }}">{{ entry.name }}</option>
+      {%- for entry in palette.themes %}
+      <option value="{{ entry.code }}">{{ entry.label }}</option>
       {%- endfor %}
     </select>
   </div>
