@@ -94,7 +94,8 @@ which records the traps that outlived the migration.
   Parallelism comes from `[build] parallel = 0` in `rsconstruct.toml`, not a flag)
 - `rsconstruct status` — show build status
 - `scripts/gen_stats.py` — regenerate the archive stats when the `gen_stats` check fails
-- `scripts/serve.py` — build, then serve `_site/` locally the way Pages will
+- `scripts/serve.py` — serve an already-built `_site/` locally the way Pages will
+  (it does not build; run `rsconstruct build` first)
 
 The site is built by rsconstruct's `processor.mass_generator.generic.site`:
 `rssite plan` lists every file a build writes with the sources each depends

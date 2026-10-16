@@ -15,12 +15,14 @@ Why not `rssite serve`?
       trailing-slashes slightly differently than a plain static server.
 
 For QA we want the closest local approximation to GitHub Pages:
-  1. Run the full build (`rsconstruct build`) to produce `_site/`
-     exactly as it will be deployed.
-  2. Serve `_site/` with a dumb static server.
+serve `_site/` with a dumb static server.
 
-By default this script just builds and serves; it does not open a
-browser. Use --preview to launch a browser pointed at the local URL,
+This script does not build. Run `rsconstruct build` first to produce
+`_site/` exactly as it will be deployed; the script refuses to start
+when `_site/` is missing.
+
+By default this script just serves; it does not open a browser.
+Use --preview to launch a browser pointed at the local URL,
 and --anonymous to launch that browser against a fresh temp profile
 (so it is a brand-new browser process, not a tab handed off to your
 running browser).
@@ -48,10 +50,6 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 def read_site_dir():
     # The site's output dir: [processor.mass_generator.generic.site] output_dirs.
     return (REPO_ROOT / "_site").resolve()
-
-
-def build_site():
-    subprocess.run(["rsconstruct", "build"], check=True, cwd=REPO_ROOT)
 
 
 def start_server(port, docs_dir):
@@ -121,7 +119,7 @@ def launch_browser(url, anonymous):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Build the site and serve _site/ locally.",
+        description="Serve the built _site/ locally (run `rsconstruct build` first).",
     )
     parser.add_argument(
         "--port", type=int, default=DEFAULT_PORT,
@@ -136,21 +134,17 @@ def main():
         help="launch the preview browser with a fresh temp profile "
              "(implies --preview; default: off)",
     )
-    parser.add_argument(
-        "--no-build", action="store_true",
-        help="skip running `rsconstruct build` before serving",
-    )
     args = parser.parse_args()
 
     if args.anonymous:
         args.preview = True
 
-    if not args.no_build:
-        build_site()
-
     docs_dir = read_site_dir()
     if not docs_dir.is_dir():
-        print(f"site directory not found at {docs_dir}", file=sys.stderr)
+        print(
+            f"site directory not found at {docs_dir}; run `rsconstruct build` first",
+            file=sys.stderr,
+        )
         return 1
 
     url = f"http://127.0.0.1:{args.port}/"

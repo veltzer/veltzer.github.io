@@ -281,11 +281,12 @@ of hosts do not implement HEAD properly.
 
 ### `scripts/serve.py`
 
-Runs `rsconstruct build`, then serves `_site/` with a plain static server,
-which is the closest local approximation to GitHub Pages (`rssite serve`
-rebuilds on change but skips the steps around rssite). Options:
-`--port`, `--preview` (open a browser), `--anonymous` (a browser with a fresh
-temp profile, implies `--preview`), `--no-build`.
+Serves `_site/` with a plain static server, which is the closest local
+approximation to GitHub Pages (`rssite serve` rebuilds on change but skips
+the steps around rssite). It does not build: run `rsconstruct build` first,
+and it refuses to start when `_site/` is missing. Options: `--port`,
+`--preview` (open a browser), `--anonymous` (a browser with a fresh temp
+profile, implies `--preview`).
 
 ## API Key Management
 
