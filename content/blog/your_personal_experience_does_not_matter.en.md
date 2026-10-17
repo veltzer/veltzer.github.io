@@ -1,5 +1,5 @@
 +++
-title = "Your Personal Experience. Does Not Matter."
+title = "Your Personal Experience Does Not Matter."
 date = 2026-10-17
 
 [taxonomies]
@@ -19,6 +19,10 @@ To reach objective truth, one must systematically discard personal anecdotes in 
 ## The Failure of the Modern Educational System
 
 The persistence of narrative bias is not merely a biological accident; it is an institutional failure. Contemporary educational institutions consistently prioritize storytelling, subjective lived experiences, and emotional empathy over statistical literacy, formal epistemology, and analytical rigor. Students are trained to validate conclusions on the basis of emotional resonance rather than empirical substantiation. By actively encouraging reliance on narrative heuristics rather than teaching students to interrogate them, the educational system commits a severe intellectual disservice: it reinforces cognitive biases, weaponizes emotional narratives, and deprives individuals of the analytical tools necessary to perceive societal reality objectively.
+
+## The Media and the Corruption of the Public Mind
+
+Where the educational system fails to correct this bias, the media actively exploits it. News broadcasts, documentaries, and political commentary are saturated with "personal stories" — carefully selected human-interest profiles designed to provoke sympathy, outrage, or fear. Whenever a complex policy question, economic trade-off, or geopolitical conflict arises, journalists routinely bypass aggregate data in favor of a close-up on a single grieving family or an individual hardship. This practice is not journalism; it is emotional manipulation, and it must stop. By substituting "personal stories" for statistical reality, the media systematically corrupts the public's mind, hijacking rational deliberation and replacing it with sentimental tribalism. If the media is to serve the public interest rather than subvert it, it must abandon the cult of the personal story and report the world through verified numbers, base rates, and proportions.
 
 ## Conclusion
 
