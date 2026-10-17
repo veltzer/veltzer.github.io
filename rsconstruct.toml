@@ -71,7 +71,6 @@ src_files = ["scripts/build_site.py", "rssite.toml"]
 [processor.checker.script.gen_stats]
 command = "scripts/gen_stats.py"
 args = ["--check"]
-fix_command = "scripts/gen_stats.py"
 src_files = ["content/blog/_index.en.md"]
 dep_inputs = ["content/blog/*.md", "i18n/tags.toml"]
 
