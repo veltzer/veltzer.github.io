@@ -1,4 +1,4 @@
-# Markdown lint rules for this site's Zola content. Same as the fleet
+# Markdown lint rules for this site's rssite content. Same as the fleet
 # .rumdl.toml (which still governs README.md and doc/) plus MD041 off.
 
 # MD057 (existing-relative-links) resolves link targets relative to the file
@@ -12,7 +12,7 @@
 # repos: it separates the command from its output and marks the shell
 # being used (a Windows example uses ">"), so the rule's fix would
 # rewrite authored teaching material. Kept off fleet-wide.
-# MD041 (first line should be a level-1 heading) does not fit Zola content
+# MD041 (first line should be a level-1 heading) does not fit rssite content
 # pages: templates/page.html renders <h1>{{ page.title }}</h1> from the +++
 # frontmatter, so the page already has exactly one H1 and a body heading
 # would duplicate it. Posts here start with prose and use ## for sections.
