@@ -62,11 +62,13 @@ Bostrom
 Bostrom's
 Brafman
 Broca's
+Brookings
 Bruner
 Budish
 Buehler
 Buildroot
 Busybox
+CBO
 CLASSPATH
 CLIs
 CMake
@@ -76,6 +78,7 @@ CQ
 CTL
 CVE
 CVEs
+Cadaveric
 Caladea
 Calibri
 Cambria
@@ -119,6 +122,7 @@ Deuteronomistic
 Deuteronomists
 Dillahunty
 Dillahunty's
+Disemployment
 Docker's
 Dolan
 DropBox
@@ -132,13 +136,16 @@ ETF
 ETW
 ETag
 EXTR
+EconStor
 Edom
 Ehrman
 Ehud
 Eliezer
 Elon
 Elyon
+Elías
 Embeddings
+Emporiophobia
 Endor
 Enki
 Epistemologically
@@ -149,6 +156,7 @@ ExpiresActive
 ExpiresByType
 Farrer
 FastCGI
+Fehr
 Festinger
 FilesMatch
 Finkelstein
@@ -181,6 +189,8 @@ Gignac
 Gilad
 Giordano
 Gita
+Glaeser
+Glaeser's
 GloVe
 Gogh
 Goodacre
@@ -192,11 +202,13 @@ Gouldner's
 Grandmasters
 Gratian
 Grayboys
+Greaney
 Greco
 Greenberg
 Griesbach
 Griggs
 Gump
+Gyourko
 Gödel
 Gödel's
 HFT
@@ -222,6 +234,7 @@ Hiddenness
 Higgs
 Hippocampal
 Hotfix
+Hsieh
 Hspell
 IOCP
 IOCP's
@@ -241,6 +254,7 @@ Israelites
 Ius
 JDK
 JNI
+Jaehee
 Jamnia
 Jethro
 Johansson
@@ -252,6 +266,7 @@ Jürgen
 KDE
 Kadima
 Kahan
+Kahn
 Kahneman
 Kalam
 Kconfig
@@ -318,6 +333,7 @@ Modus
 Mofaz
 Molech
 Molière's
+Moretti
 Moshik
 Moshik's
 Multisite
@@ -326,8 +342,10 @@ Muratorian
 Mustafa
 Mutuals
 Muxing
+NBER
 NGINX
 NOPASSWD
+NOTA
 NSS
 NVMe
 Naama
@@ -340,6 +358,7 @@ Nebo
 Nephesh
 Nephilim
 Netanyahu
+Neumark
 Neuroscientists
 Neurotheology
 Nimush
@@ -424,6 +443,7 @@ RewriteEngine
 RewriteRule
 Riecken
 RocksDB
+Rosen
 Rothbard
 Rozman
 Ruehl
@@ -453,6 +473,8 @@ Sharot
 Sharot's
 ShellQuote
 Shema
+Sherwin
+Sheskin
 Shi'a
 Shia
 Shimon
@@ -471,6 +493,8 @@ Sperber
 StaffGroup
 Stanislas
 Stanovich
+StarLab
+Starmans
 StdioLogic
 StudioLogic
 Substitutionary
@@ -482,6 +506,7 @@ Szodorai
 TBD
 TCP
 Taber
+Tai
 Taleb
 Tanakh
 Tay
@@ -517,6 +542,7 @@ Vitalism
 Vosoughi
 WAV
 WPA
+Wascher
 Wason
 Weimar
 Weinstein
@@ -685,6 +711,7 @@ cloudinary
 cmake
 cmd
 cmp
+coalitional
 codebase
 codec
 collation
@@ -702,6 +729,7 @@ consequentialist
 const
 contentless
 coreplugins
+costless
 couldn
 countelement
 counterfactuals
@@ -811,6 +839,7 @@ ef
 efd
 eka
 el
+elasticities
 electability
 electrochemistry
 electronification
@@ -1009,6 +1038,8 @@ imghtml
 imgix
 imgproxy
 imgurl
+incentivize
+inelasticity
 infomation
 ini
 inimitability
@@ -1112,6 +1143,7 @@ ly
 macOS
 machina
 macos
+macroeconomy
 mainnav
 makefile
 makefiles
@@ -1466,6 +1498,7 @@ sl
 sm
 smtpd
 smybpbjrimt
+sociality
 sociopathy
 softwares
 solaris
@@ -1577,6 +1610,7 @@ totalitems
 totalpages
 trailhead
 transcode
+transformative
 translatey
 transmissibility
 trinitarian
