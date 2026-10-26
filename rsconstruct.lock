@@ -4,9 +4,6 @@
 
 version = 1
 
-[rsconstruct]
-version = "0.9.140"
-
 [cargo]
 rssite = "0.1.14"
 
