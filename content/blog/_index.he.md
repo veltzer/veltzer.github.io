@@ -13,23 +13,23 @@ year_archives = true
 #
 # Regenerated on every build. Do not hand-edit -- add a post instead.
 [extra.stats]
-total = 409
-pages = 818
+total = 410
+pages = 820
 
 # Post count per language.
 [[extra.stats.languages]]
 code = "en"
-count = 409
+count = 410
 [[extra.stats.languages]]
 code = "he"
-count = 409
+count = 410
 
 # Post count per year, newest first, broken down by language.
 [[extra.stats.years]]
 year = 2026
-total = 132
-en = 132
-he = 132
+total = 133
+en = 133
+he = 133
 [[extra.stats.years]]
 year = 2025
 total = 63

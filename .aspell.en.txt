@@ -24,6 +24,7 @@ Amorites
 Angra
 Annaka
 Annihilationist
+Apollonius
 Apostolicity
 Aramean
 Arendt
@@ -282,6 +283,8 @@ Korsakoff's
 Kunda
 Kuntillet
 LIBS
+LLM
+LLMs
 LONGBLOB
 LVDS
 LaTeX
@@ -429,6 +432,7 @@ Quartodeciman
 Quelle
 Quran
 Quran's
+RLHF
 Ramachandran
 Ramesses
 Rathje
@@ -522,6 +526,7 @@ Tikopia
 Tokio
 Toolchain
 Tversky
+Tyana
 UMDF
 URIs
 USBID
@@ -1225,6 +1230,7 @@ myps
 mypy
 mysql
 mysqldump
+mythmaking
 namebpm
 namespace
 namespaces
