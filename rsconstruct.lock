@@ -5,7 +5,7 @@
 version = 1
 
 [cargo]
-rssite = "0.1.14"
+rssite = "0.1.15"
 
 [binary.biome]
 url = "https://github.com/biomejs/biome/releases/download/@biomejs/biome@2.6.3/biome-linux-x64"
