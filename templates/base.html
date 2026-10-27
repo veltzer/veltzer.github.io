@@ -225,8 +225,8 @@
 <footer class="site-footer">
   {#- dir="ltr": these lines are Latin text and symbols only, and inside the
       Hebrew <html dir="rtl"> the bidi algorithm would scatter them. The year
-      is the commit's date rather than the build clock, which templates cannot
-      read: the same sources always give the same page. -#}
+      is the commit's date rather than the build clock: the same sources
+      always give the same copyright. -#}
   <p dir="ltr">&copy; {% if git %}{{ git.year }} {% endif %}{{ config.author }} &middot;
      <a href="{{ get_url(path=lang ~ '/atom.xml') }}">RSS</a></p>
   {#- Provenance, on every page: the generator and its version come from
@@ -234,6 +234,11 @@
       every page, so a new commit rebuilds the site. Outside git (a tarball)
       the line omits the commit. -#}
   <p class="site-inscription" dir="ltr">Made with <a href="{{ rssite.url }}">{{ rssite.name }}</a> version {{ rssite.version }}, my own static site generator{% if git %}, from commit <a href="https://github.com/veltzer/veltzer.github.io/commit/{{ git.commit }}"><code>{{ git.short }}</code></a>{% if git.dirty %} (with uncommitted changes){% endif %}{% endif %} &middot; Mark Veltzer &lt;<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>&gt;</p>
+  {#- When the site was built (`build`, UTC): the one line that changes on
+      every build of the same sources. -#}
+  {%- if build %}
+  <p class="site-inscription" dir="ltr">Built on <time datetime="{{ build.time }}">{{ build.date }}</time></p>
+  {%- endif %}
 </footer>
 
 </body>

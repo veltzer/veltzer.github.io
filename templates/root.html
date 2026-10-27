@@ -53,6 +53,9 @@
 </script>
 <footer class="site-footer">
   <p class="site-inscription" dir="ltr">Made with <a href="{{ rssite.url }}">{{ rssite.name }}</a> version {{ rssite.version }}, my own static site generator{% if git %}, from commit <a href="https://github.com/veltzer/veltzer.github.io/commit/{{ git.commit }}"><code>{{ git.short }}</code></a>{% endif %} &middot; Mark Veltzer &lt;<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>&gt;</p>
+  {%- if build %}
+  <p class="site-inscription" dir="ltr">Built on <time datetime="{{ build.time }}">{{ build.date }}</time></p>
+  {%- endif %}
 </footer>
 </body>
 </html>
