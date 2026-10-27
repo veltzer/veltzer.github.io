@@ -4,8 +4,8 @@
 
 Search Console reports an indexing problem weeks after it appears, so this
 answers the smaller question that does not need Google: is the fix still
-live? It reads LEGACY_REDIRECTS from build_site.py -- the same map the build
-generates stubs from -- and requests each source against the real site, so
+live? It reads the [[redirects]] of rssite.toml -- the same list rssite
+writes the stubs from -- and requests each source against the real site, so
 the list cannot drift out of step with what is deployed.
 
 What it deliberately does not do is read a validation verdict. That lives
@@ -17,11 +17,23 @@ Exits non-zero if anything fails, so it can gate a deploy or run from cron.
 """
 
 import sys
+import tomllib
 import urllib.error
 import urllib.parse
 import urllib.request
+from pathlib import Path
 
-from build_site import LEGACY_REDIRECTS, base_url
+CONFIG = tomllib.loads(
+    (Path(__file__).resolve().parent.parent / "rssite.toml").read_text(encoding="utf-8")
+)
+# Retired URL (a site path without the leading slash) -> where it now lives.
+LEGACY_REDIRECTS = {
+    entry["from"].strip("/"): entry["to"] for entry in CONFIG.get("redirects", [])
+}
+
+
+def base_url():
+    return CONFIG["base_url"]
 
 # Hosts that must each collapse to the canonical one in a single hop. A chain
 # or a 200 here splits ranking across hostnames.

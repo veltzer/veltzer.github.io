@@ -33,13 +33,12 @@ which records the traps that outlived the migration.
 
 - `rssite.toml` — the site config: `base_url`, the two `[[languages]]` (every
   language is explicit, there is no default; English is only the `fallback_language`
-  for the root redirect and the global 404), the `tags` taxonomy with its translation
-  table, the `[[publish]]` entry that serves the shared-themes files, and `[extra.nav]`
+  for the root redirect and the global 404), the `tags` taxonomy (its translations
+  inferred from the posts), the `[[redirects]]` for retired URLs, the `[[publish]]` entry that serves the shared-themes files, and `[extra.nav]`
   which drives the header navigation. Every key is known to the generator; an unknown
   one fails the build
 - `i18n/` — `en.toml` and `he.toml`, the strings `trans()` returns plus the Hebrew
-  month names the `date` filter uses; `tags.toml`, the tag translation table
-  `scripts/gen_stats.py` generates
+  month names the `date` filter uses
 - `content/` — all page and post source
     - `content/blog/*.en.md` — blog posts, flat (no `YYYY/MM/` nesting). TOML front
   matter between `+++` lines: `title`, `date`, and a `[taxonomies]` block with `tags`.
@@ -73,8 +72,8 @@ which records the traps that outlived the migration.
   redirects from retired URLs (the apps themselves live in `content/<app>/`)
 - `shared/shared-themes/` — git submodule providing the design tokens. **Run
   `git submodule update --init --recursive` on a fresh clone or the build fails.**
-- `scripts/` — `build_site.py` (the build steps around rssite), `gen_stats.py` (archive stats),
-  `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
+- `scripts/` — `build_site.py` (the companies build step), `check_redirects.py` (checks the
+  live site still serves every retired URL), `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
   the sibling teaching repos), image fetchers, data importers, the `data/yaml/`
   maintenance scripts (`podcasts_*.py`, `books_fetch_ids.py`, `great_courses_*.py`,
   `audio_courses_check_*.py`, `youtube_add_names.py`, `organizations_geocode.py`,
@@ -93,7 +92,6 @@ which records the traps that outlived the migration.
 - `rsconstruct build` — full build (this is what CI runs; `--verbose` for detail.
   Parallelism comes from `[build] parallel = 0` in `rsconstruct.toml`, not a flag)
 - `rsconstruct status` — show build status
-- `scripts/gen_stats.py` — regenerate the archive stats when the `gen_stats` check fails
 - `scripts/serve.py` — serve an already-built `_site/` locally the way Pages will
   (it does not build; run `rsconstruct build` first)
 
@@ -101,16 +99,15 @@ The site is built by rsconstruct's `processor.mass_generator.generic.site`:
 `rssite plan` lists every file a build writes with the sources each depends
 on, and each becomes a product, so an unchanged site runs rssite zero times,
 an edited post rebuilds only the files that list it, and `clean outputs` +
-`build` restores the site from cache. The steps rssite does not do are small
-processors around it, all subcommands of `scripts/build_site.py`:
-`build-info` (`out/build_info.toml`, the commit every footer names),
-`companies`, `root-feed` (`/atom.xml`) and `redirects` (the legacy-URL
-stubs). The shared-themes files are published by rssite itself (`[[publish]]`
-in `rssite.toml`). See `rsconstruct.toml`.
+`build` restores the site from cache. rssite also writes the legacy-URL
+redirect stubs (`[[redirects]]` in `rssite.toml`, `pager_aliases` in the blog
+index), the English feed again at `/atom.xml` (`feeds.root`) and the
+shared-themes files (`[[publish]]`), and reads the commit every footer names
+itself (`git` in the templates). The one step it does not do is the
+companies data, `scripts/build_site.py companies`. See `rsconstruct.toml`.
 
 **Never run `rssite build` by hand for a real build — go through the build
-system.** `rssite build` alone skips the steps above (the build info, the
-legacy redirects, the companies data). `rssite check` is fine at any time:
+system.** `rssite build` alone skips the companies data. `rssite check` is fine at any time:
 it renders the whole site twice in memory and reports every broken link,
 template or translation without writing anything. The real output is
 `_site/`, and only after `rsconstruct build`.
@@ -120,8 +117,11 @@ template or translation without writing anything. The real output is
 The build runs `rssite`, declared under `[dependencies].cargo` in
 `rsconstruct.toml`, so `rsconstruct tool install-deps` installs it from
 crates.io (that is what CI does). By hand: `cargo install rssite`. The
-`rssite` context variable in the templates (the "Made by rssite" footer line)
-needs rssite 0.1.8 or later.
+templates and `rssite.toml` use `[[redirects]]`, `pager_aliases`,
+`require_translations`, `infer_translations`, `feeds.root`, per-language
+`locale`/`date_format`, and the `git`, `x_default`, `meta_description`,
+`json_ld` and `page.related` context, all of which need rssite 0.1.15 or
+later.
 
 ## CI and the Workflow File
 
@@ -185,16 +185,15 @@ tags = ["religion", "philosophy", "ethics"]
   sets. This is safe precisely because the pairing is by filename, not by tag.
 - **Tag lists must be in the same order in both languages.** Position N in the
   English list is the translation of position N in the Hebrew list. That is how
-  `scripts/gen_stats.py` derives `i18n/tags.toml` (generated, do not
-  hand-edit; committed like the stats), which `templates/base.html` reads so a tag
-  page's language switcher and hreflang alternates reach the same tag in the other
+  rssite pairs the tags (`infer_translations` on the taxonomy in `rssite.toml`), so a
+  tag page's language switcher and hreflang alternates reach the same tag in the other
   language. A pair whose lists differ in length, or a tag that lines up with two
   different counterparts, fails the build.
 - Links between posts use the `@/` syntax, resolved against the content root:
   `[text](@/blog/other_post.md)`.
 - Every post exists in both English and Hebrew, and the build enforces it:
-  `scripts/gen_stats.py` fails if any `.en.md` lacks its `.he.md` (or the
-  reverse). An unpaired post would otherwise lose its language switcher
+  `require_translations` in `content/blog/_index.{en,he}.md` makes rssite fail
+  on any `.en.md` without its `.he.md` (or the reverse). An unpaired post would otherwise lose its language switcher
   silently, since `page.translations` just comes up empty.
 
 ## Coding Conventions
@@ -236,15 +235,9 @@ tags = ["religion", "philosophy", "ethics"]
   checked out in CI — which is why `copy_data.py` is still a manual step and
   `static/data/` is committed). **The frontend reads JSON, not YAML** — js-yaml took
   ~399ms on the 6.5MB youtube dataset against ~31ms for `JSON.parse`.
-- **The `[extra.stats]` block in `content/blog/_index.{en,he}.md` is generated — do
-  not hand-edit it.** `scripts/gen_stats.py` rewrites everything below the
-  `# BEGIN generated stats` marker; the hand-written section keys above it are
-  preserved. The build runs it as a check (`gen_stats.py --check`), which fails
-  when the committed stats are stale; running `scripts/gen_stats.py` rewrites them. The output
-  is committed, so `rssite serve` and every build see current figures. `templates/blog.html`
-  renders it as the archive sidebar. Computing this in Tera was the alternative
-  and was rejected: Tera has no `group_by` over a derived key, so per-year counts
-  would mean looping the section once per year.
+- The archive sidebar of `templates/blog.html` reads rssite's `section.page_count`
+  and `section.years` (the year archives with their counts). Nothing about it is
+  generated or committed.
 - **The profile block on the About page is generated — do not hand-edit it.** It
   lives in `data/yaml/profiles.yaml` and is rendered by `scripts/gen_profiles.py`
   into `content/about/_index.en.md` and `content/about/_index.he.md`. The YAML holds
@@ -255,8 +248,8 @@ tags = ["religion", "philosophy", "ethics"]
   `<!-- BEGIN generated profiles -->` markers is replaced, so the hand-written prose
   above it survives. Edit the YAML, run the script, commit. It is a manual step,
   not part of the build, and the generated content is committed; now that the YAML
-  is in this repo it could become a check-plus-fix step like `gen_stats.py`, but
-  that change has not been made.
+  is in this repo it could become a check-plus-fix step, but that change has not
+  been made.
 - **`static/identity.toml` is generated — do not hand-edit it.** `gen_profiles.py`
   writes it from the same `profiles.yaml`, and `templates/base.html` reads it with
   `load_data()` into the `Person` JSON-LD as schema.org `sameAs`. It lives in
@@ -281,8 +274,8 @@ tags = ["religion", "philosophy", "ethics"]
   redirecting domain splits SEO ranking off the real site.
 - **URLs that ever shipped must keep working.** Two URL schemes have been retired
   (MkDocs `/YYYY/MM/DD/<slug-from-title>/`, and root-level URLs from before
-  English moved to `/en/`), and Google still requests both. `LEGACY_REDIRECTS` in
-  `scripts/build_site.py` maps them; add to it rather than letting a URL 404 (see
+  English moved to `/en/`), and Google still requests both. `[[redirects]]` in
+  `rssite.toml` maps them; add to it rather than letting a URL 404 (see
   `doc/SEO.md` for the Search Console state). The URLs of the zola era are not
   preserved beyond that: the 2026-10 move to rssite changed one Hebrew tag slug
   and dropped the `/page/1/` stubs, deliberately.
@@ -295,11 +288,11 @@ tags = ["religion", "philosophy", "ethics"]
   identifies the property, it does not grant access to the data. Note GA4 sets
   cookies and there is no consent banner; that trade-off is recorded in
   `doc/ANALYTICS.md` under "Consent".
-- Shared template logic is an `{% include %}` that reads variables the caller `set`s
-  (see `templates/_date.html`); rssite's `date` filter takes the month names from
-  `i18n/he.toml`, which is how Hebrew dates are produced. `now()` is not available to
+- Dates are `{{ post.date | date }}` (or `date(long=true)` in a post header): the
+  format is each language's `date_format` in `rssite.toml`, and the month names come
+  from `i18n/he.toml`, which is how Hebrew dates are produced. `now()` is not available to
   templates: the output of a build is a function of its sources, so the footer's year
-  comes from the commit date in `out/build_info.toml`.
+  is `git.year`, the commit's date.
 - Site uses `.nojekyll` to bypass Jekyll processing on GitHub Pages.
 - CI checks out submodules recursively; without that the build fails on missing tokens.
 

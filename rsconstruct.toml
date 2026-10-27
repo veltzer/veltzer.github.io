@@ -12,25 +12,17 @@ src_dirs = ["static"]
 # rssite renders the site: `rssite plan` lists every file a build writes with
 # the sources each depends on, and rsconstruct makes each one a product, so an
 # edited post rebuilds only the files that list it and other processors can
-# write into _site/ beside rssite's files. The steps rssite cannot do are
-# scripts/build_site.py subcommands, each declaring what it reads and writes.
+# write into _site/ beside rssite's files. rssite also writes the legacy-URL
+# redirects ([[redirects]]), the root feed and the archive stats, and reads
+# the commit for the footer itself (its git files are page sources). The one
+# step it cannot do is the companies data, a scripts/build_site.py
+# subcommand declaring what it reads and writes.
 [processor.mass_generator.generic.site]
 command = "rssite"
 args = ["build"]
 predict_command = "rssite"
 predict_args = ["plan"]
 output_dirs = ["_site"]
-
-# The commit every page's footer names. templates/base.html loads it with
-# load_data, which makes it a source of every rendered page, so rssite runs
-# after it and a new commit rebuilds the site. .git/HEAD and .git/index change with every commit (and every
-# `git add`); a dirty working tree that nothing staged is not seen.
-[processor.explicit.generic.build_info]
-command = "scripts/build_site.py"
-args = ["build-info"]
-inputs = [".git/HEAD", ".git/index"]
-output_files = ["out/build_info.toml"]
-
 
 # The companies tab: organizations.yaml becomes _site/data/companies.json.gz,
 # and data/logos/ is copied to _site/logos/. The importer checks every map
@@ -43,37 +35,6 @@ input_globs = ["data/logos/*.svg", "static/images/map-*.jpg"]
 output_files = ["_site/data/companies.json.gz"]
 output_dirs = ["_site/logos"]
 
-# The English feed served at /atom.xml too (see copy_root_feed). Its input is
-# rssite's output, so it runs after rssite.
-[processor.explicit.generic.root_feed]
-command = "scripts/build_site.py"
-args = ["root-feed"]
-inputs = ["_site/en/atom.xml"]
-output_files = ["_site/atom.xml"]
-
-# Redirect stubs for retired URLs. A mass generator: `--plan` lists every stub
-# (the LEGACY_REDIRECTS map plus one per English blog page), so each is its own
-# product. The scan fields are what the plan is computed from; while none of
-# them changes, the plan is reused.
-[processor.mass_generator.generic.redirects]
-command = "scripts/build_site.py"
-args = ["redirects"]
-predict_command = "scripts/build_site.py"
-predict_args = ["redirects", "--plan"]
-output_dirs = ["_site"]
-src_dirs = ["content/blog"]
-src_extensions = [".md"]
-src_files = ["scripts/build_site.py", "rssite.toml"]
-
-# The blog statistics are generated into committed files (the blog _index
-# pages and i18n/tags.toml). The build checks they are current;
-# running scripts/gen_stats.py regenerates them.
-[processor.checker.script.gen_stats]
-command = "scripts/gen_stats.py"
-args = ["--check"]
-src_files = ["content/blog/_index.en.md"]
-dep_inputs = ["content/blog/*.md", "i18n/tags.toml"]
-
 [processor.checker.ruff]
 src_dirs = ["scripts", "tests"]
 [processor.checker.pyrefly]
@@ -83,9 +44,10 @@ src_dirs = ["tests"]
 # Everything the tests import or read, so an edit to any of it re-runs the
 # suite on a warm cache.
 dep_inputs = [
+    "rssite.toml",
     "scripts/build_site.py",
+    "scripts/check_redirects.py",
     "scripts/csv_to_yaml.py",
-    "scripts/gen_stats.py",
     "scripts/import_audible.py",
     "scripts/import_books.py",
     "scripts/import_companies.py",
@@ -119,7 +81,7 @@ src_files = ["data/yaml/books_read.yaml"]
 command = "pydatacheck"
 args = ["check_books"]
 [processor.checker.taplo]
-src_files = ["rssite.toml", "rsconstruct.toml", ".rumdl.toml", ".rumdl.content.toml", "pyproject.toml", "static/identity.toml", "i18n/en.toml", "i18n/he.toml", "i18n/tags.toml"]
+src_files = ["rssite.toml", "rsconstruct.toml", ".rumdl.toml", ".rumdl.content.toml", "pyproject.toml", "static/identity.toml", "i18n/en.toml", "i18n/he.toml"]
 
 [processor.checker.encoding]
 src_dirs = ["scripts", "static", "templates", "sass", "i18n"]

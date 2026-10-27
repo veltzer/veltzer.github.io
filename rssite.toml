@@ -18,6 +18,10 @@ fallback_language = "en"
 code = "en"
 name = "English"
 direction = "ltr"
+locale = "en_US"
+# Listings show "2 Sep 2026", a post header "2 September 2026".
+date_format = "%-d %b %Y"
+date_format_long = "%-d %B %Y"
 title = "Mark Veltzer's personal site"
 description = "Mark Veltzer -- software engineer from Israel. Blog on programming, Linux and philosophy, plus chess games, media notes and teaching material."
 generate_feeds = true
@@ -26,18 +30,24 @@ generate_feeds = true
 code = "he"
 name = "עברית"
 direction = "rtl"
+locale = "he_IL"
+# "2 בספטמבר 2026": the ב prefix is how Hebrew says "on the 2nd of
+# September". Hebrew has no month abbreviations in common use, so the long
+# form is the only one.
+date_format = "%-d ב%B %Y"
 title = "האתר האישי של מארק ולצר"
 description = "מארק ולצר -- מהנדס תוכנה מישראל. בלוג על תכנות, לינוקס ופילוסופיה, לצד משחקי שחמט, המלצות מדיה וחומרי הוראה."
 generate_feeds = true
 
-# The one taxonomy. A term's translation (religion <-> דת) comes from
-# i18n/tags.toml, which scripts/gen_stats.py derives from the posts, so a
-# tag page links to the same tag in the other language.
+# The one taxonomy. A post and its translation list the same tags in the
+# same order, so rssite pairs them by position (religion <-> דת) and a tag
+# page links to the same tag in the other language. A pair of posts whose
+# lists differ in length or order fails the build.
 [[taxonomies]]
 name = "tags"
 feed = true
 paginate_by = 20
-translations = "i18n/tags.toml"
+infer_translations = true
 
 [slugify]
 # Hebrew tags keep their letters in the URL (/he/tags/דת/); post URLs come
@@ -54,6 +64,9 @@ highlight_theme = "InspiredGitHub"
 [feeds]
 # A feed is a "what's new" window, not an archive; the blog index has the rest.
 limit = 20
+# The English feed is also served at /atom.xml: until 2026-09-21 every
+# page advertised that URL, and GitHub Pages cannot redirect a subscriber.
+root = true
 
 [sitemap]
 enabled = true
@@ -81,3 +94,155 @@ nav = [
     { key = "nav_training", path = "training/" },
     { key = "nav_about", path = "about/" },
 ]
+
+# Legacy URLs that Google still holds, mapped to the page that serves the
+# same content today. Every one was reported as "Not found (404)" in Search
+# Console. rssite fails the build when a target is not a file it writes, so
+# a target renamed since cannot quietly become a redirect to a 404.
+#
+# Two generations of URL are represented:
+#
+#   * MkDocs-era permalinks, /YYYY/MM/DD/<slug-from-title>/. The slug came
+#     from the post title, so a later retitling stranded the old URL even
+#     though the post never went anywhere.
+#   * Root-level zola URLs from before English moved under /en/ (2026-08).
+#     These differ from the live URL by that one path segment.
+#
+# Redirects rather than resurrected pages: what the old URL owes a visitor
+# is the way there, and what it owes Google is the signal that consolidates
+# the two into one ranking. GitHub Pages serves static files only, so each
+# is a meta-refresh page with rel=canonical and `noindex, follow`, which is
+# what Google documents for exactly this case. The old blog pagination
+# (/page/N/) is `pager_aliases` in content/blog/_index.en.md, which covers
+# every pager the archive has rather than a hand-kept list.
+
+[[redirects]]
+from = "2026/03/29/linux-io_uring-vs-windows-io-a-technical-comparison"
+to = "/en/blog/linux-io-uring-vs-windows-io/"
+
+[[redirects]]
+from = "2026/04/14/why-wont-god-heal-amputees"
+to = "/en/blog/amputees-never-regrow/"
+
+[[redirects]]
+from = "2026/05/06/vicarious-atonement-punishing-the-innocent-to-forgive-the-guilty"
+to = "/en/blog/vicarious-atonement/"
+
+[[redirects]]
+from = "2026/05/13/what-divine-command-theory-actually-implies"
+to = "/en/blog/divine-command-theory-problems/"
+
+[[redirects]]
+from = "2026/05/18/what-brain-damage-tells-us-about-the-soul"
+to = "/en/blog/brain-damage-disproves-the-soul/"
+# Reported 2026-09-16 as Not found (404). A retitling stranded each of
+# these the same way the five above were stranded: the MkDocs permalink
+# carried the old title's slug, and the date in the URL is the publication
+# date of the time, not the one in the post's current front matter.
+[[redirects]]
+from = "2026/04/18/what-brain-damage-tells-us-about-the-soul"
+to = "/en/blog/brain-damage-disproves-the-soul/"
+
+[[redirects]]
+from = "2026/04/07/religions-behave-like-memes-not-revelations"
+to = "/en/blog/religions-as-memes/"
+
+[[redirects]]
+from = "2026/04/26/the-equivocation-of-god-one-word-many-gods"
+to = "/en/blog/the-equivocation-of-god/"
+# The one Hebrew MkDocs permalink Google still requests. The slug is the
+# post's Hebrew title, percent-encoded in the wild; the directory is
+# written with the literal characters and the server matches either.
+[[redirects]]
+from = "2010/07/21/חוץ-וביטחון-יותר-ביצים-משכל"
+to = "/he/blog/hebrew-security-policy/"
+
+[[redirects]]
+from = "blog/algo-trading-short-timescales"
+to = "/en/blog/algo-trading-short-timescales/"
+# Root-level post URLs from before English moved to /en/. Reported
+# 2026-09-16 as "Duplicate without user-selected canonical": Google had
+# both the old root URL and the /en/ one, neither pointed at the other,
+# so it picked its own canonical and dropped the rest. The redirect stub
+# supplies the missing signal.
+[[redirects]]
+from = "blog/engineers-pay-for-everyones-fantasies"
+to = "/en/blog/engineers-pay-for-everyones-fantasies/"
+
+[[redirects]]
+from = "blog/imagination-of-science-vs-fiction"
+to = "/en/blog/imagination-of-science-vs-fiction/"
+
+[[redirects]]
+from = "blog/kant-misread-game-theory"
+to = "/en/blog/kant-misread-game-theory/"
+
+[[redirects]]
+from = "blog/moral-progress-against-scripture"
+to = "/en/blog/moral-progress-against-scripture/"
+
+[[redirects]]
+from = "blog/the-argument-that-convicts-itself"
+to = "/en/blog/the-argument-that-convicts-itself/"
+
+[[redirects]]
+from = "blog/two-kinds-of-believers"
+to = "/en/blog/two-kinds-of-believers/"
+
+[[redirects]]
+from = "blog/vicarious-atonement"
+to = "/en/blog/vicarious-atonement/"
+# Section roots. Every one was a real URL before English moved under /en/,
+# and they are still linked from elsewhere -- doc/IMPROVEMENTS.md recorded
+# "/blog/ is a bare 404" as an open item. The English section is the
+# target: these URLs only ever served English.
+[[redirects]]
+from = "blog"
+to = "/en/blog/"
+
+[[redirects]]
+from = "tags"
+to = "/en/tags/"
+
+[[redirects]]
+from = "about"
+to = "/en/about/"
+
+[[redirects]]
+from = "media"
+to = "/en/media/"
+
+[[redirects]]
+from = "chess"
+to = "/en/chess/"
+
+[[redirects]]
+from = "slides"
+to = "/en/slides/"
+
+[[redirects]]
+from = "syllabi"
+to = "/en/syllabi/"
+
+[[redirects]]
+from = "animations"
+to = "/en/animations/"
+
+[[redirects]]
+from = "training"
+to = "/en/training/"
+
+[[redirects]]
+from = "calendar"
+to = "/en/calendar/"
+# The chess viewer's first home, from before it was a site page at all.
+# Predates /chess.html, which is its own redirect stub in static/.
+[[redirects]]
+from = "jschess"
+to = "/en/chess/"
+# An address from the pre-MkDocs site, still linked from old signatures and
+# mailing-list archives. The key itself is long gone from this repo; the
+# about page is where a reader now finds how to reach Mark.
+[[redirects]]
+from = "ascx/public_key.asc"
+to = "/en/about/"

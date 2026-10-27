@@ -40,10 +40,13 @@ generations of stale URL were represented:
 Plus `/ascx/public_key.asc`, an address from the pre-MkDocs site still linked
 from old signatures and mailing-list archives.
 
-Fixed by the `redirects` step of `scripts/build_site.py`, which emits a
-meta-refresh stub carrying `rel=canonical` and `noindex, follow` for each. The
-map is `LEGACY_REDIRECTS`; paginator URLs are expanded from the number of
-English posts rather than hand-listed, so the archive can grow without the list going stale.
+Fixed by a meta-refresh stub carrying `rel=canonical` and `noindex, follow`
+for each. The map was `LEGACY_REDIRECTS` in `scripts/build_site.py`; since
+2026-10-27 it is `[[redirects]]` in `rssite.toml`, which rssite writes and
+checks (a target the build does not write fails it). Paginator URLs are
+`pager_aliases` in `content/blog/_index.en.md`, one per pager the archive
+has, so it can grow without the list going stale; `/page/1/` now goes to
+`/en/blog/` rather than to `/en/blog/page/1/`, which never existed.
 
 **These cannot be zola `aliases`, and that was verified rather than assumed.**
 An alias for a default-language page is written to the site root, and

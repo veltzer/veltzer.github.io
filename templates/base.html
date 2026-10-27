@@ -10,23 +10,10 @@
     tag in the other language (i18n/tags.toml) rather than to that language's
     home. -#}
 {#- One description for <meta name="description"> and og:description, so the
-    two never disagree. Posts: their own description, else the opening text.
-    Sections: the `description` in their front matter, which every nav section
-    sets. Anything else (taxonomies, 404) gets the site blurb. -#}
-{%- if page and page.description %}{% set meta_desc = page.description %}
-{%- elif page %}{% set meta_desc = page.content | striptags | truncate(length=160) %}
-{%- elif section and section.description %}{% set meta_desc = section.description %}
-{%- else %}{% set meta_desc = config.description %}{% endif -%}
-{#- Default for templates/_date.html: list pages show "2 Sep 2026", a post
-    header overrides this to true for "2 September 2026". -#}
-{%- set d_long = false -%}
-{#- The commit this build came from, written by `scripts/build_site.py
-    build-info` (the processor.explicit.generic.build_info step) and not
-    committed: a hash written into content before committing can only ever
-    name the previous commit. Loading it here makes it a source of every page,
-    so a new commit rebuilds the site; that is a few seconds. Absent (no git,
-    a fresh clone), the footer omits the commit. -#}
-{%- set build = load_data(path="out/build_info.toml", required=false) -%}
+    two never disagree: rssite's meta_description. Posts: their own
+    description, else the opening text. Sections: the `description` in their
+    front matter, which every nav section sets. Anything else (taxonomies,
+    404) gets the language's blurb. -#}
 <!DOCTYPE html>
 <html lang="{{ lang }}" dir="{{ language.direction }}">
 <head>
@@ -39,7 +26,7 @@
     source of every page), ahead of the stylesheets. -#}
 <script>{{ load_data(path="shared/shared-themes/theme-onload.js") | safe }}</script>
 <title>{% block title %}{{ config.title }}{% endblock %}</title>
-<meta name="description" content="{% block description %}{{ meta_desc }}{% endblock %}">
+<meta name="description" content="{% block description %}{{ meta_description }}{% endblock %}">
 
 {#- Canonical, alternates and Open Graph.
 
@@ -58,20 +45,21 @@
 {%- set alt_url = alternates | get(key=entry.code, default="") %}
 {%- if alt_url %}
 <link rel="alternate" hreflang="{{ entry.code }}" href="{{ alt_url }}">
-{%- if entry.code == "en" %}
-{#- x-default names the page to serve a reader whose language matches
-    neither alternate; English is the site's lingua franca. -#}
-<link rel="alternate" hreflang="x-default" href="{{ alt_url }}">
-{%- endif %}
 {%- endif %}
 {%- endfor %}
+{#- x-default names the page to serve a reader whose language matches
+    neither alternate: the fallback language's (English, the site's lingua
+    franca) version of this document. -#}
+{%- if x_default %}
+<link rel="alternate" hreflang="x-default" href="{{ x_default }}">
+{%- endif %}
 <meta property="og:type" content="{% if page %}article{% else %}website{% endif %}">
 <meta property="og:site_name" content="{{ config.title }}">
-<meta property="og:locale" content="{% if lang == 'he' %}he_IL{% else %}en_US{% endif %}">
+<meta property="og:locale" content="{{ language.locale }}">
 {#- `term` is set on a single tag's page, `terms` on the tag list; without
     those branches every tag page shared the site title as its og:title. -#}
 <meta property="og:title" content="{% block og_title %}{% if page %}{{ page.title }}{% elif section %}{{ section.title }}{% elif term %}{{ term.name }}{% elif terms %}{{ trans(key="tags_title") }}{% else %}{{ config.title }}{% endif %}{% endblock %}">
-<meta property="og:description" content="{{ meta_desc }}">
+<meta property="og:description" content="{{ meta_description }}">
 <meta name="twitter:card" content="summary">
 {%- if page and page.date %}
 <meta property="article:published_time" content="{{ page.date }}">
@@ -114,6 +102,15 @@
   "sameAs": {{ identity.sameas | json_encode | safe }}{% endif %}
 }
 </script>
+
+{#- The post itself as schema.org data (a BlogPosting: headline, dates,
+    author, tags as keywords, the translation as workTranslation), built by
+    rssite. -#}
+{%- if page %}
+<script type="application/ld+json">
+{{ json_ld | safe }}
+</script>
+{%- endif %}
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/favicon.svg">
@@ -230,12 +227,13 @@
       Hebrew <html dir="rtl"> the bidi algorithm would scatter them. The year
       is the commit's date rather than the build clock, which templates cannot
       read: the same sources always give the same page. -#}
-  <p dir="ltr">&copy; {% if build and build.date %}{{ build.date | date(format="%Y") }} {% endif %}{{ config.author }} &middot;
+  <p dir="ltr">&copy; {% if git %}{{ git.year }} {% endif %}{{ config.author }} &middot;
      <a href="{{ get_url(path=lang ~ '/atom.xml') }}">RSS</a></p>
   {#- Provenance, on every page: the generator and its version come from
-      rssite itself, the commit from out/build_info.toml (see the top of this
-      file). -#}
-  <p class="site-inscription" dir="ltr">Made with <a href="{{ rssite.url }}">{{ rssite.name }}</a> version {{ rssite.version }}, my own static site generator{% if build and build.short %}, from commit <a href="https://github.com/veltzer/veltzer.github.io/commit/{{ build.commit }}"><code>{{ build.short }}</code></a>{% if build.dirty %} (with uncommitted changes){% endif %}{% endif %} &middot; Mark Veltzer &lt;<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>&gt;</p>
+      rssite itself, and so does the commit (`git`): its files are sources of
+      every page, so a new commit rebuilds the site. Outside git (a tarball)
+      the line omits the commit. -#}
+  <p class="site-inscription" dir="ltr">Made with <a href="{{ rssite.url }}">{{ rssite.name }}</a> version {{ rssite.version }}, my own static site generator{% if git %}, from commit <a href="https://github.com/veltzer/veltzer.github.io/commit/{{ git.commit }}"><code>{{ git.short }}</code></a>{% if git.dirty %} (with uncommitted changes){% endif %}{% endif %} &middot; Mark Veltzer &lt;<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>&gt;</p>
 </footer>
 
 </body>

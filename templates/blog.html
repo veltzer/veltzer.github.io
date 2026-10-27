@@ -15,7 +15,7 @@
   {%- for post in posts %}
   <li>
     <a class="post-link" href="{{ post.permalink }}">{{ post.title }}</a>
-    <time datetime="{{ post.date }}">{% set d = post.date %}{% include "_date.html" %}</time>
+    <time datetime="{{ post.date }}">{{ post.date | date }}</time>
     {%- if post.taxonomies.tags %}
     <span class="post-tags">
       {%- for tag in post.taxonomies.tags %}<a class="tag" href="{{ tag.permalink }}">{{ tag.name }}</a>{% endfor %}
@@ -34,16 +34,15 @@
 {%- endif %}
 </div>
 
-{#- Archive stats. The numbers come from [extra.stats] in the section front
-    matter, written by scripts/gen_stats.py at build time -- see that script for
-    why they are not computed in Tera. Guarded on `stats` so the page still
-    renders if the generator has not run yet. -#}
-{%- set stats = section.extra.stats %}
-{%- if stats %}
+{#- Archive stats, from rssite: section.page_count is the number of posts
+    (every post exists in both languages, require_translations in the
+    section front matter), section.years the year archives with their
+    counts, newest first. -#}
+{%- if section.years %}
 <aside class="archive-stats" aria-labelledby="archive-stats-heading">
   <h2 id="archive-stats-heading">{{ trans(key="stats_title") }}</h2>
   <p class="archive-total">
-    <strong>{{ stats.total }}</strong>&nbsp;{{ trans(key="stats_posts") }}<br>
+    <strong>{{ section.page_count }}</strong>&nbsp;{{ trans(key="stats_posts") }}<br>
     <span class="archive-langs">{{ trans(key="stats_in_languages") }}</span>
   </p>
   <table class="archive-years">
@@ -55,13 +54,10 @@
       </tr>
     </thead>
     <tbody>
-      {%- for row in stats.years %}
+      {%- for row in section.years %}
       <tr>
-        {#- get_url checks the year's archive is a page this build writes, so
-            a year in the generated stats with no archive fails the build
-            instead of linking to a 404. -#}
-        <th scope="row"><a href="{{ get_url(path=lang ~ '/blog/' ~ row.year ~ '/') }}">{{ row.year }}</a></th>
-        <td>{{ row.total }}</td>
+        <th scope="row"><a href="{{ row.permalink }}">{{ row.year }}</a></th>
+        <td>{{ row.count }}</td>
       </tr>
       {%- endfor %}
     </tbody>

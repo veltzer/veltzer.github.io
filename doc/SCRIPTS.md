@@ -4,44 +4,34 @@
 
 ### `scripts/build_site.py`
 
-The build steps around rssite, one subcommand each, all run by `rsconstruct
-build` as processors (see `rsconstruct.toml`; a real build goes through the
-build system -- see `CLAUDE.md`). rssite itself is rsconstruct's
+The one build step around rssite, run by `rsconstruct build` as a processor
+(see `rsconstruct.toml`; a real build goes through the build system -- see
+`CLAUDE.md`). rssite itself is rsconstruct's
 `processor.mass_generator.generic.site`: `rssite plan` lists every file a
 build writes with its sources, and each is cached separately.
 
-- `build-info` writes `out/build_info.toml` (the commit hash and dirty flag
-  every page's footer shows), which `templates/base.html` reads with
-  `load_data`.
 - `companies` runs `scripts/import_companies.py` into
   `_site/data/companies.json.gz` and copies `data/logos/*.svg` to `_site/logos/`.
-- `root-feed` copies the English feed to `/atom.xml`, the URL every page
-  advertised until 2026-09-21.
-- `redirects` writes the legacy redirect stubs; `redirects --plan` prints the
-  list of stubs it will write, which is how rsconstruct's generic mass
-  generator knows them in advance.
 
-The rest of what used to be post-processing is the generator's own now: the
-root language chooser is `templates/root.html`, the sitemap and the feeds are
-built in (the feeds capped at 20 entries by `[feeds] limit`), and the
-shared-themes files are published by the `[[publish]]` entry in
-`rssite.toml`.
+Everything else that used to be a step here is the generator's own now: the
+commit every footer names is the `git` context variable; the English feed at
+`/atom.xml`, the URL every page advertised until 2026-09-21, is `feeds.root`;
+the legacy redirect stubs are `[[redirects]]` in `rssite.toml` plus
+`pager_aliases` in `content/blog/_index.en.md`; the root language chooser is
+`templates/root.html`; the sitemap and the feeds are built in; and the
+shared-themes files are published by the `[[publish]]` entry.
 
 The redirect stubs serve the pre-migration URLs Google still has indexed --
 MkDocs-era `/YYYY/MM/DD/<slug>/` permalinks and the root-level URLs from
-before English moved to `/en/`. The map is `LEGACY_REDIRECTS`; paginator URLs
-are expanded from the number of English posts and the blog's `paginate_by`
-rather than listed. They are a build step rather than `aliases` because
-aliases exist only for pages, and half of what they rescue is not one
-(paginator URLs, `/ascx/public_key.asc`, a section); see `doc/SEO.md` for the
-history. A stub whose path rssite also writes fails the build when the graph
-is built, as two processors declaring one output.
+before English moved to `/en/`. rssite fails the build when a stub's target
+is not a file it writes, or when a stub would overwrite a real page; see
+`doc/SEO.md` for the history.
 
 ## check_redirects.py
 
-Asks the deployed site whether the retired URLs still work. It imports
-`LEGACY_REDIRECTS` from `build_site.py` rather than keeping its own list, so
-it cannot drift from what the build generates, and requests each source
+Asks the deployed site whether the retired URLs still work. It reads the
+`[[redirects]]` of `rssite.toml` rather than keeping its own list, so it
+cannot drift from what the build generates, and requests each source
 against the live site along with the sitemap and the three non-canonical
 host variants. Exits non-zero on any failure.
 
@@ -63,23 +53,6 @@ wrapper, and writes the result with this site's front matter. A manual step,
 run after rebuilding a sibling site; the output is committed, and the build
 (local and CI, which has no sibling checkouts) uses the committed copies. `--check` reports what would be written without writing.
 The Hebrew `_index.he.md` stubs are hand-written and are not touched.
-
-### `scripts/gen_stats.py`
-
-Computes the blog archive statistics (post counts per year and per language)
-and rewrites the `[extra.stats]` table below the `# BEGIN generated stats`
-marker in `content/blog/_index.en.md` and `_index.he.md`; everything above the
-marker is preserved. Also writes `static/tag_translations.toml`, one row per
-tag pair, derived by zipping each post's tag list with its translation's
-(the lists must be in the same order); `templates/base.html` reads it so a
-tag page's language switcher and hreflang alternates point at the same tag in
-the other language. Fails the build if any `.en.md` post lacks its `.he.md`
-translation or vice versa (an unpaired post would otherwise lose its language
-switcher silently), if a pair's tag lists differ in length, or if a tag lines
-up with two different counterparts. The build runs it with `--check`, which
-writes nothing and fails listing the stale files; run it without `--check` to
-regenerate them. Both outputs are committed, so rssite (and `rssite serve`) always reads
-current numbers and links.
 
 ### `scripts/gen_profiles.py`
 

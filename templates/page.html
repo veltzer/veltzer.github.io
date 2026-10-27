@@ -11,7 +11,7 @@
   <header class="post-header">
     <h1>{{ page.title }}</h1>
     <p class="post-meta">
-      <time datetime="{{ page.date }}">{% set d = page.date %}{% set d_long = true %}{% include "_date.html" %}</time>
+      <time datetime="{{ page.date }}">{{ page.date | date(long=true) }}</time>
       {%- if page.taxonomies.tags %}
       <span class="post-tags">
         {%- for tag in page.taxonomies.tags %}
@@ -25,12 +25,12 @@
         language it exists in, in configured order. Adding a language means
         adding a file -- no template change and no hand-maintained
         cross-links between posts. Hidden when a post has no translation; in
-        practice every post has both languages (scripts/gen_stats.py fails the
-        build otherwise). -#}
+        practice every post has both languages (require_translations in
+        content/blog/_index.*.md fails the build otherwise). -#}
     {%- if translations | length > 1 %}
     <nav class="lang-switcher" aria-label="{{ trans(key='label_translations') }}">
       {%- for translation in translations %}
-      {%- if translation.lang == lang %}
+      {%- if translation.current %}
       <span class="lang current" aria-current="page">{{ translation.lang }}</span>
       {%- else %}
       <a class="lang" href="{{ translation.permalink }}" hreflang="{{ translation.lang }}">{{ translation.lang }}</a>
@@ -43,6 +43,19 @@
   <div class="post-body">
     {{ page.content | safe }}
   </div>
+
+  {#- The posts sharing the most tags with this one, from rssite
+      (page.related, five at most, same language). -#}
+  {%- if page.related %}
+  <aside class="related-posts" aria-labelledby="related-heading">
+    <h2 id="related-heading">{{ trans(key="related_title") }}</h2>
+    <ul>
+      {%- for post in page.related %}
+      <li><a href="{{ post.permalink }}">{{ post.title }}</a></li>
+      {%- endfor %}
+    </ul>
+  </aside>
+  {%- endif %}
 
   {#- Neighbours in the section's order (newest first): `previous` is the
       post listed before this one, `next` the one after, the same two links

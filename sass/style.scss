@@ -248,6 +248,14 @@ th { background: var(--bg-surface); }
   margin-top: 3rem;
   font-size: 0.9rem;
 }
+.related-posts {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.95rem;
+}
+.related-posts h2 { font-size: 1.1rem; margin: 0 0 0.5rem; }
+.related-posts ul { margin: 0; padding-inline-start: 1.2rem; }
 .pagination { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; }
 .tag-cloud { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .tag-cloud .count { color: var(--text-muted); font-size: 0.8rem; }
