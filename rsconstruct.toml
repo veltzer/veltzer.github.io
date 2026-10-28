@@ -12,8 +12,8 @@ src_dirs = ["static"]
 # rssite renders the site: `rssite plan` lists every file a build writes with
 # the sources each depends on, and rsconstruct makes each one a product, so an
 # edited post rebuilds only the files that list it and other processors can
-# write into _site/ beside rssite's files. rssite also writes the legacy-URL
-# redirects ([[redirects]]), the root feed and the archive stats, and reads
+# write into _site/ beside rssite's files. rssite also writes the feeds, the
+# sitemap and the archive stats, and reads
 # the commit for the footer itself (its git files are page sources). The one
 # step it cannot do is the companies data, a scripts/build_site.py
 # subcommand declaring what it reads and writes.
@@ -44,9 +44,6 @@ src_dirs = ["tests"]
 # Everything the tests import or read, so an edit to any of it re-runs the
 # suite on a warm cache.
 dep_inputs = [
-    "rssite.toml",
-    "scripts/build_site.py",
-    "scripts/check_redirects.py",
     "scripts/csv_to_yaml.py",
     "scripts/import_audible.py",
     "scripts/import_books.py",

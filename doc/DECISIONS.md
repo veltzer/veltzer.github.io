@@ -19,7 +19,8 @@ answered was not worth the maintenance: both still carried live code against
 `keys.js` and the Calendar API. Their history is in git if the comparison ever
 needs revisiting.
 
-`static/calendar_app.html` remains, as a redirect to `/en/calendar/`.
+`static/calendar_app.html` remained as a redirect to `/en/calendar/` until the
+legacy redirects were all removed on 2026-10-28 (see the end of this file).
 
 ## No `<noscript>` fallback needed
 
@@ -358,3 +359,20 @@ changed (the geresh in `ג׳אווה` is not a slug character to rssite), the
 `/page/1/` stubs are not written, and heading anchors in Hebrew posts are
 Hebrew rather than transliterated. The legacy redirects from the MkDocs era
 stay as they were.
+
+## No legacy-URL redirects (2026-10-28)
+
+The site is built as if it were made today. Until this date it carried every
+earlier generation of URL forward: 30 `[[redirects]]` in `rssite.toml`
+(MkDocs-era `/YYYY/MM/DD/<slug>/` permalinks, root-level paths from before
+English moved under `/en/`, `/jschess/`, `/ascx/public_key.asc`),
+`pager_aliases` for the old `/page/N/` pagers, `feeds.root` serving the
+English feed again at `/atom.xml`, and four meta-refresh stubs in `static/`
+(`chess.html`, `media_app.html`, `calendar_app.html`, `full_index.html`).
+They were kept for Search Console and old bookmarks; the decision is that
+those are not worth the configuration, the tests and the check that kept
+them alive. All of it was removed, along with `tests/test_legacy_redirects.py`
+and the retired-URL half of `scripts/check_redirects.py`, which now checks
+only the host redirects and the sitemap. An old URL now gets the 404 page.
+`doc/SEO.md` is the history of the Search Console work and still describes
+the redirects as they were.

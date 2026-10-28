@@ -5,7 +5,7 @@
  * /he/media/. It sets window.mediaBasePath BEFORE loading this script.
  *
  * There used to be a second -- a standalone static/media_app.html carrying its
- * own copy of the page. It was replaced with a redirect on 2026-08-18: bypassing
+ * own copy of the page. It was replaced with a redirect on 2026-08-18 (since removed): bypassing
  * templates/base.html meant it silently missed whatever the templates added, and
  * the analytics snippet was the case that surfaced it.
  *

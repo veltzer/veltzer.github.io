@@ -16,9 +16,6 @@ companies is an explicit processor: rsconstruct appends `--inputs ...
 
 What used to be done here and no longer is:
   - the commit every footer names is rssite's `git` context variable;
-  - the legacy-URL redirect stubs are `[[redirects]]` in rssite.toml and
-    `pager_aliases` in content/blog/_index.en.md;
-  - the English feed at /atom.xml is `feeds.root` in rssite.toml;
   - the shared-themes files are published by rssite itself ([[publish]] in
     rssite.toml); the language chooser at "/" is templates/root.html;
   - the archive stats and the tag translation table that gen_stats.py

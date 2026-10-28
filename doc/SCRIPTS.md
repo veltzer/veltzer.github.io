@@ -14,26 +14,16 @@ build writes with its sources, and each is cached separately.
   `_site/data/companies.json.gz` and copies `data/logos/*.svg` to `_site/logos/`.
 
 Everything else that used to be a step here is the generator's own now: the
-commit every footer names is the `git` context variable; the English feed at
-`/atom.xml`, the URL every page advertised until 2026-09-21, is `feeds.root`;
-the legacy redirect stubs are `[[redirects]]` in `rssite.toml` plus
-`pager_aliases` in `content/blog/_index.en.md`; the root language chooser is
-`templates/root.html`; the sitemap and the feeds are built in; and the
-shared-themes files are published by the `[[publish]]` entry.
-
-The redirect stubs serve the pre-migration URLs Google still has indexed --
-MkDocs-era `/YYYY/MM/DD/<slug>/` permalinks and the root-level URLs from
-before English moved to `/en/`. rssite fails the build when a stub's target
-is not a file it writes, or when a stub would overwrite a real page; see
-`doc/SEO.md` for the history.
+commit every footer names is the `git` context variable; the root language
+chooser is `templates/root.html`; the sitemap and the feeds are built in; and
+the shared-themes files are published by the `[[publish]]` entry.
 
 ## check_redirects.py
 
-Asks the deployed site whether the retired URLs still work. It reads the
-`[[redirects]]` of `rssite.toml` rather than keeping its own list, so it
-cannot drift from what the build generates, and requests each source
-against the live site along with the sitemap and the three non-canonical
-host variants. Exits non-zero on any failure.
+Asks the deployed site whether its host redirects and sitemap are sound:
+each of the three non-canonical host variants (http, www) must 301 once to
+`https://veltzer.org/`, and the sitemap must list real pages only. Exits
+non-zero on any failure.
 
 Not part of the build -- it talks to the network and tests the deployment,
 not the tree. Run it after a deploy, or when Search Console reports an

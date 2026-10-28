@@ -7,9 +7,8 @@ Why not `rssite serve`?
   `rssite serve` is great for authoring (live rebuild + browser
   auto-reload), but it is NOT faithful to what gets deployed:
     - It serves from an in-memory build, not the real `_site/` output.
-    - It runs rssite alone, without the steps rsconstruct runs around it
-      (the shared-themes copy, the companies data, the redirect stubs,
-      build provenance), so those are missing. (The `static/data/` build is
+    - It runs rssite alone, without the step rsconstruct runs around it
+      (the companies data), so that is missing. (The `static/data/` build is
       `copy_data.py`, a manual step that neither path runs.)
     - It injects a livereload script and can handle routing /
       trailing-slashes slightly differently than a plain static server.

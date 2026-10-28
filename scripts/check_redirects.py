@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 
-"""Check the deployed site still serves every retired URL.
+"""Check the deployed site's host redirects and sitemap.
 
 Search Console reports an indexing problem weeks after it appears, so this
-answers the smaller question that does not need Google: is the fix still
-live? It reads the [[redirects]] of rssite.toml -- the same list rssite
-writes the stubs from -- and requests each source against the real site, so
-the list cannot drift out of step with what is deployed.
+answers the smaller question that does not need Google: is the deployment
+sound? Every non-canonical host (http, www) must 301 straight to
+https://veltzer.org/, and the sitemap must list real pages only.
 
 What it deliberately does not do is read a validation verdict. That lives
 behind a Google login, there is no API key for this property, and inventing
@@ -19,17 +18,12 @@ Exits non-zero if anything fails, so it can gate a deploy or run from cron.
 import sys
 import tomllib
 import urllib.error
-import urllib.parse
 import urllib.request
 from pathlib import Path
 
 CONFIG = tomllib.loads(
     (Path(__file__).resolve().parent.parent / "rssite.toml").read_text(encoding="utf-8")
 )
-# Retired URL (a site path without the leading slash) -> where it now lives.
-LEGACY_REDIRECTS = {
-    entry["from"].strip("/"): entry["to"] for entry in CONFIG.get("redirects", [])
-}
 
 
 def base_url():
@@ -65,20 +59,6 @@ def fetch_status(url, follow):
         return None, str(error)
 
 
-def check_redirects(site):
-    """Every source in the map must serve a page, not a 404."""
-    failures = []
-    for source in sorted(LEGACY_REDIRECTS):
-        # The map holds raw characters; a Hebrew slug has to go out encoded.
-        url = site + "/" + urllib.parse.quote(source)
-        if not source.rsplit("/", 1)[-1].count("."):
-            url += "/"
-        status, _ = fetch_status(url, follow=True)
-        if status != 200:
-            failures.append(f"{status} {url}")
-    return failures
-
-
 def check_hosts():
     """Each non-canonical host redirects once to the canonical one."""
     failures = []
@@ -112,16 +92,13 @@ def main():
     site = base_url().rstrip("/")
     print(f"checking {site}\n")
 
-    redirects = check_redirects(site)
-    print(f"retired URLs: {len(LEGACY_REDIRECTS)} checked, {len(redirects)} failed")
-
     hosts = check_hosts()
     print(f"host variants: {len(ALTERNATE_HOSTS)} checked, {len(hosts)} failed")
 
     sitemap, entries = check_sitemap(site)
     print(f"sitemap: {entries} URLs, {len(sitemap)} problems")
 
-    failures = redirects + hosts + sitemap
+    failures = hosts + sitemap
     if failures:
         print("\nFAILED:")
         for failure in failures:
@@ -130,7 +107,7 @@ def main():
         print("Search Console validation. See doc/SEO.md.")
         return 1
 
-    print("\nAll good. The deployed fix is intact.")
+    print("\nAll good.")
     print("The validation verdict itself must be read while logged in:")
     print("https://search.google.com/search-console/index?resource_id=sc-domain%3Aveltzer.org")
     return 0

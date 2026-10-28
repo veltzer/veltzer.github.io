@@ -34,7 +34,7 @@ which records the traps that outlived the migration.
 - `rssite.toml` — the site config: `base_url`, the two `[[languages]]` (every
   language is explicit, there is no default; English is only the `fallback_language`
   for the root redirect and the global 404), the `tags` taxonomy (its translations
-  inferred from the posts), the `[[redirects]]` for retired URLs, the `[[publish]]` entry that serves the shared-themes files, and `[extra.nav]`
+  inferred from the posts), the `[[publish]]` entry that serves the shared-themes files, and `[extra.nav]`
   which drives the header navigation. Every key is known to the generator; an unknown
   one fails the build
 - `i18n/` — `en.toml` and `he.toml`, the strings `trans()` returns plus the Hebrew
@@ -67,13 +67,12 @@ which records the traps that outlived the migration.
   plus the Nominatim geocoding cache `organizations_geocode.py` reads and writes
 - `templates/` — Tera templates (`base.html`, `page.html`, `blog.html`, taxonomy pages)
 - `sass/style.scss` — compiled to `/style.css` by rssite
-- `static/` — copied verbatim to the site root: media plugins, images, data, `vendor/`
-  (locally vendored JS libraries), and four `*.html` files that are meta-refresh
-  redirects from retired URLs (the apps themselves live in `content/<app>/`)
+- `static/` — copied verbatim to the site root: media plugins, images, data and `vendor/`
+  (locally vendored JS libraries); the apps themselves live in `content/<app>/`
 - `shared/shared-themes/` — git submodule providing the design tokens. **Run
   `git submodule update --init --recursive` on a fresh clone or the build fails.**
 - `scripts/` — `build_site.py` (the companies build step), `check_redirects.py` (checks the
-  live site still serves every retired URL), `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
+  live site's host redirects and sitemap), `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
   the sibling teaching repos), image fetchers, data importers, the `data/yaml/`
   maintenance scripts (`podcasts_*.py`, `books_fetch_ids.py`, `great_courses_*.py`,
   `audio_courses_check_*.py`, `youtube_add_names.py`, `organizations_geocode.py`,
@@ -81,7 +80,7 @@ which records the traps that outlived the migration.
   repo root),
   `serve.py`, and the `build_*_dict.sh` / `spellcheck_*.sh` pair behind the aspell
   processors
-- `tests/` — pytest suite for the data import scripts and the legacy redirect map
+- `tests/` — pytest suite for the data import scripts
 - `.aspell.{en,he}.txt` — the spellcheck word lists; `out/aspell/` holds the compiled
   dictionaries (gitignored build output)
 - `_site/` — generated output (gitignored, never edit)
@@ -99,10 +98,8 @@ The site is built by rsconstruct's `processor.mass_generator.generic.site`:
 `rssite plan` lists every file a build writes with the sources each depends
 on, and each becomes a product, so an unchanged site runs rssite zero times,
 an edited post rebuilds only the files that list it, and `clean outputs` +
-`build` restores the site from cache. rssite also writes the legacy-URL
-redirect stubs (`[[redirects]]` in `rssite.toml`, `pager_aliases` in the blog
-index), the English feed again at `/atom.xml` (`feeds.root`) and the
-shared-themes files (`[[publish]]`), and reads the commit every footer names
+`build` restores the site from cache. rssite also writes the feeds, the
+sitemap and the shared-themes files (`[[publish]]`), and reads the commit every footer names
 itself (`git` in the templates). The one step it does not do is the
 companies data, `scripts/build_site.py companies`. See `rsconstruct.toml`.
 
@@ -117,8 +114,8 @@ template or translation without writing anything. The real output is
 The build runs `rssite`, declared under `[dependencies].cargo` in
 `rsconstruct.toml`, so `rsconstruct tool install-deps` installs it from
 crates.io (that is what CI does). By hand: `cargo install rssite`. The
-templates and `rssite.toml` use `[[redirects]]`, `pager_aliases`,
-`require_translations`, `infer_translations`, `feeds.root`, per-language
+templates and `rssite.toml` use `require_translations`,
+`infer_translations`, per-language
 `locale`/`date_format`, and the `git`, `x_default`, `meta_description`,
 `json_ld` and `page.related` context, all of which need rssite 0.1.15 or
 later.
@@ -272,13 +269,13 @@ tags = ["religion", "philosophy", "ethics"]
   and `veltzer.github.io` 301-redirects there. Keep every public URL (canonical tags,
   sitemap, RSS, `og:url`, `robots.txt`) on `veltzer.org` — pointing them at the
   redirecting domain splits SEO ranking off the real site.
-- **URLs that ever shipped must keep working.** Two URL schemes have been retired
-  (MkDocs `/YYYY/MM/DD/<slug-from-title>/`, and root-level URLs from before
-  English moved to `/en/`), and Google still requests both. `[[redirects]]` in
-  `rssite.toml` maps them; add to it rather than letting a URL 404 (see
-  `doc/SEO.md` for the Search Console state). The URLs of the zola era are not
-  preserved beyond that: the 2026-10 move to rssite changed one Hebrew tag slug
-  and dropped the `/page/1/` stubs, deliberately.
+- **No legacy-URL redirects, by decision.** The site is built as if it were
+  made today: URLs from earlier generators (MkDocs `/YYYY/MM/DD/<slug>/`,
+  root-level paths from before English moved to `/en/`, the standalone
+  `*.html` apps, the root `/atom.xml`) 404, and nothing maps them. All of it
+  was removed on 2026-10-28 (see `doc/DECISIONS.md`). Do not add
+  `[[redirects]]`, `pager_aliases`, `feeds.root` or redirect stubs in
+  `static/` to rescue an old URL.
 - Google Calendar API key is public by design in `static/keys.js` — it is referrer- and
   API-restricted (see `doc/DECISIONS.md`). This is not a leak.
 - **Google Analytics is wired and switched on**: `rssite.toml`'s

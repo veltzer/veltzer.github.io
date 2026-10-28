@@ -4,6 +4,11 @@ The state of the site as Google sees it: what was wrong, what was fixed, what
 is deliberately left alone, and what is still open. Written 2026-09-07 against
 the `veltzer.org` domain property.
 
+**2026-10-28: every legacy redirect described below has been removed** --
+the `[[redirects]]`, `pager_aliases`, the root `/atom.xml` and the static
+stubs. The site is built as if made today and old URLs 404 by decision; see
+`doc/DECISIONS.md`. What follows is the history as it was.
+
 Search Console is at
 <https://search.google.com/search-console?resource_id=sc-domain:veltzer.org>.
 

@@ -137,17 +137,6 @@ fields: [
 
 ## Standalone HTML in `static/`
 
-Four files, all redirect stubs (meta refresh plus a canonical) since
-2026-08-18, when the standalone apps were replaced by the templated sections.
-They survive because the old URLs were linked from the old nav and may be
-bookmarked:
-
-| File | Redirects to |
-|------|--------------|
-| `media_app.html` | `/en/media/` |
-| `calendar_app.html` | `/en/calendar/` |
-| `chess.html` | `/en/chess/` |
-| `full_index.html` | `/` |
-
-The app sections are language-prefixed (`/en/chess/`, not `/chess/`) now that
-they have Hebrew versions, which is why the redirect points where it does.
+None. The standalone apps were replaced by the templated sections on
+2026-08-18 and kept as redirect stubs until 2026-10-28, when every legacy
+redirect was removed (see `doc/DECISIONS.md`).
