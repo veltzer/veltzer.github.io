@@ -52,9 +52,9 @@
   } catch (e) { /* storage blocked: show the chooser */ }
 </script>
 <footer class="site-footer">
-  <p class="site-inscription" dir="ltr">Made with <a href="{{ rssite.url }}">{{ rssite.name }}</a> version {{ rssite.version }}, my own static site generator{% if git %}, from commit <a href="https://github.com/veltzer/veltzer.github.io/commit/{{ git.commit }}"><code>{{ git.short }}</code></a>{% endif %} &middot; Mark Veltzer &lt;<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>&gt;</p>
-  {%- if build %}
-  <p class="site-inscription" dir="ltr">Built on <time datetime="{{ build.time }}">{{ build.date }}</time></p>
+  <p class="site-inscription" dir="ltr">Built with <a href="{{ rssite.url }}">{{ rssite.name }}</a> version {{ rssite.version }}, a static site generator by Mark Veltzer &lt;<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>&gt;</p>
+  {%- if git or build %}
+  <p class="site-inscription" dir="ltr">Built{% if git %} from <a href="https://github.com/veltzer/veltzer.github.io">veltzer.github.io</a> commit <a href="https://github.com/veltzer/veltzer.github.io/commit/{{ git.commit }}"><code>{{ git.short }}</code></a>{% endif %}{% if build %} on <time datetime="{{ build.time }}">{{ build.time | truncate(length=16, end="") | replace(from="T", to=" ") }} UTC</time>{% endif %}</p>
   {%- endif %}
 </footer>
 </body>
