@@ -20,13 +20,12 @@ dev = [
     "pyrefly",
     "pytest",
     "ruff",
-    "types-beautifulsoup4",
     "types-PyYAML",
     "types-requests",
 ]
 
 [tool.uv]
-# Demo/teaching repo: not an installable package.
+# The personal website: not an installable package.
 package = false
 
 [tool.pyrefly]

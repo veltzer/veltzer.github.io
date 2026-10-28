@@ -1,17 +1,15 @@
-# Markdown lint rules for this site's rssite content. Same as the fleet
-# .rumdl.toml (which still governs README.md and doc/) plus MD041 off.
+# Markdown lint rules for this site's rssite content (content/). The fleet
+# .rumdl.toml still governs README.md and doc/; this file starts from it and
+# differs in two rules: MD041 is off here, and MD053 stays on, because no post
+# uses the [//]: <> comment idiom the fleet file turns MD053 off for.
 
-# MD057 (existing-relative-links) resolves link targets relative to the file
-# that contains them. Marp decks address images from the project root
-# instead (.marprc.mjs sets baseUrl to the repo root), so every such link
-# is reported as broken while resolving correctly at render time. The
-# repos that carry decks verify these targets themselves against the real
-# root -- teaching-slides does it in scripts/check_md.py --images.
+# MD057 (existing-relative-links) resolves link targets as files relative to
+# the post. Posts link to each other as @/blog/post.md, which rssite resolves
+# to a permalink at build time, failing the build when the target does not
+# exist; rumdl cannot resolve them and would report every one as broken.
 # MD014 (commands-show-output) wants a shell example either to show its
-# output or to drop the "$" prompt. The prompt is deliberate in these
-# repos: it separates the command from its output and marks the shell
-# being used (a Windows example uses ">"), so the rule's fix would
-# rewrite authored teaching material. Kept off fleet-wide.
+# output or to drop the "$" prompt. A few posts keep the prompt on purpose,
+# to set the command apart from its output, as the fleet file explains.
 # MD041 (first line should be a level-1 heading) does not fit rssite content
 # pages: templates/page.html renders <h1>{{ page.title }}</h1> from the +++
 # frontmatter, so the page already has exactly one H1 and a body heading

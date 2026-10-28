@@ -11,7 +11,7 @@ Incremental: skips entries that already have both great_courses_id and
 great_courses_slug. Writes after each confirmed entry so progress is not lost.
 
 Usage:
-  scripts/fetch_great_courses_ids.py [--dry-run]
+  scripts/great_courses_fetch_ids.py [--dry-run]
 """
 
 import argparse

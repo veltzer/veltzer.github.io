@@ -5,7 +5,7 @@
 base_url = "https://veltzer.org"
 title = "Mark Veltzer's personal site"
 author = "Mark Veltzer"
-description = "Mark Veltzer -- software engineer from Israel. Blog on programming, Linux and philosophy, plus chess games, media notes and teaching material."
+description = "Mark Veltzer – software engineer from Israel. Blog on programming, Linux and philosophy, plus chess games, media notes and teaching material."
 
 # Both languages are explicit and symmetrical: every content file carries a
 # language suffix (post.en.md, post.he.md) and every language is served under
@@ -23,7 +23,7 @@ locale = "en_US"
 date_format = "%-d %b %Y"
 date_format_long = "%-d %B %Y"
 title = "Mark Veltzer's personal site"
-description = "Mark Veltzer -- software engineer from Israel. Blog on programming, Linux and philosophy, plus chess games, media notes and teaching material."
+description = "Mark Veltzer – software engineer from Israel. Blog on programming, Linux and philosophy, plus chess games, media notes and teaching material."
 generate_feeds = true
 
 [[languages]]
@@ -36,7 +36,7 @@ locale = "he_IL"
 # form is the only one.
 date_format = "%-d ב%B %Y"
 title = "האתר האישי של מארק ולצר"
-description = "מארק ולצר -- מהנדס תוכנה מישראל. בלוג על תכנות, לינוקס ופילוסופיה, לצד משחקי שחמט, המלצות מדיה וחומרי הוראה."
+description = "מארק ולצר – מהנדס תוכנה מישראל. בלוג על תכנות, לינוקס ופילוסופיה, לצד משחקי שחמט, המלצות מדיה וחומרי הוראה."
 generate_feeds = true
 
 # The one taxonomy. A post and its translation list the same tags in the

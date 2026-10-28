@@ -12,8 +12,9 @@
 {% block content %}
 <h1>{{ trans(key="home_title") }}</h1>
 {#- Real prose, not config.description: a first-person paragraph naming the
-    subject is what makes the page read as an identity page to a crawler. -#}
-<p class="home-intro">{{ trans(key="home_intro") }}</p>
+    subject is what makes the page read as an identity page to a crawler.
+    It is inline markdown, so it can link to a section. -#}
+<p class="home-intro">{{ trans(key="home_intro") | markdown(inline=true) | safe }}</p>
 {%- set blog = get_section(path="blog/_index.md") %}
 <h2>{{ trans(key="latest_posts") }}</h2>
 <ul class="post-list">

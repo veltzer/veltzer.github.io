@@ -5,7 +5,7 @@ Check that every audio course has at least one identifier:
 great_courses_id, audible_asin, or internal_id.
 
 Usage:
-  scripts/check_audio_courses_ids.py
+  scripts/audio_courses_check_ids.py
 """
 
 import sys

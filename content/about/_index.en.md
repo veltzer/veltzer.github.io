@@ -6,8 +6,8 @@ template = "section.html"
 
 My name is Mark Veltzer and I am a software engineer from Israel.
 
-I work mostly in and around Linux -- C, C++, Python, Rust and the systems layer
-underneath them -- and I have spent a good part of my career teaching those
+I work mostly in and around Linux – C, C++, Python, Rust and the systems layer
+underneath them – and I have spent a good part of my career teaching those
 subjects as well as writing them. Much of the teaching material I use is
 published on this site under [Syllabi](/en/syllabi/) and [Slides](/en/slides/).
 

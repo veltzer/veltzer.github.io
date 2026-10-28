@@ -413,6 +413,8 @@ came later) and the built page.
   `SOURCE_DATE_EPOCH` from `git log -1 --format=%ct` before calling `mkdocs build`, so
   `<pubDate>` / `<lastBuildDate>` are pinned to the last git commit time and the feed
   is byte-for-byte stable across rebuilds as long as no new commits are made.
+  (2026-10-28: historical. MkDocs and `scripts/build_docs.py` are gone; rssite builds
+  the site and its feeds are a function of the sources.)
 
 - ~~**Use a persistent cache directory for image picker.** — DONE.~~
   `SEARCH_CACHE_DIR` moved from `/tmp/image_picker_cache` to
@@ -809,14 +811,15 @@ open unless struck through. Ordered roughly by how visible the fault is.
   get a text-only card. One site-wide image (a 1200x630 JPEG under `static/`) emitted from
   `base.html` is enough; posts could override it later via `[extra]` front matter.
 
-- **The home page does not mention Training.** `home_intro` lists chess, books and
-  courses taught but not the new section. A sentence with a link to `/en/training/` (and
-  the Hebrew equivalent) belongs in the `home_intro` strings in `config.toml`.
+- ~~**The home page does not mention Training.** — DONE, 2026-10-28.~~
+  `home_intro` in `i18n/en.toml` and `i18n/he.toml` ends with a sentence linking to
+  `/en/training/` and `/he/training/`; `templates/index.html` renders the string as
+  inline markdown (`markdown(inline=true)`) so the link is a link.
 
-- **Literal double hyphen in the home title.** "Mark Veltzer -- Software Engineer,
-  Israel" ships the two hyphens verbatim because `smart_punctuation = false`. Put a real
-  en dash in the `home_title` strings (both languages) and in the About/description
-  strings that use the same idiom.
+- ~~**Literal double hyphen in the home title.** — DONE, 2026-10-28.~~
+  A spaced en dash replaces `--` in `home_title` (both languages), in the three
+  `description` strings in `rssite.toml`, and in the About page's prose in both
+  languages. The `--` inside HTML comments stays.
 
 - **Nav crowding on phones.** Ten items in `.site-nav` with `flex-wrap` and no mobile
   rule will wrap to three lines on a 360 px screen. Could not be verified from the

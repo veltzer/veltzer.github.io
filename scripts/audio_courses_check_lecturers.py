@@ -5,7 +5,7 @@ Check that lecturer names in the YAML match the professor names
 on The Great Courses website for courses that have a great_courses_slug.
 
 Usage:
-  scripts/check_audio_courses_lecturers.py
+  scripts/audio_courses_check_lecturers.py
 """
 
 import re

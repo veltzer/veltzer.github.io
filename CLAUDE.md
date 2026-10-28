@@ -13,11 +13,12 @@ calendar integration.
   [Tera](https://keats.github.io/tera/) (Jinja2-like). It replaced zola on
   2026-10-16; `doc/DECISIONS.md` records why.
 - **Build orchestration**: rsconstruct (single binary, configured via `rsconstruct.toml`
-  and `config/*.lua`), npm
+  and `config/*.lua`)
 - **Frontend**: HTML5, SCSS, JavaScript (ES9+)
-- **Linting**: everything is a processor in `rsconstruct.toml` — eslint
-  (`.eslint.config.js`), tidy and htmlhint (HTML), stylelint (`.stylelintrc.json`),
-  ruff, mypy (`[tool.mypy]` in `pyproject.toml`), pytest (`tests/`), shellcheck,
+- **Linting**: everything is a processor in `rsconstruct.toml` — oxlint
+  (`.oxlintrc.json`, JavaScript), tidy (HTML), biome (`.biome.jsonc`, the CSS
+  compiled from `sass/`), ruff, pyrefly (`[tool.pyrefly]` in `pyproject.toml`),
+  pytest (`tests/`), shellcheck,
   rumdl (`.rumdl.toml` for prose, `.rumdl.content.toml` for `content/`), taplo, yamllint,
   actionlint, xmllint, an encoding check, a duplicate-image check, an aspell
   spellcheck of the blog in both languages (`scripts/spellcheck_{en,he}.sh` against
@@ -54,7 +55,7 @@ which records the traps that outlived the migration.
   the private `../data` repo in 2026-09; the chess archives and the youtube CSV are
   still there (see `scripts/copy_data.py`)
 - `data/logos/` — one SVG per organization in `organizations.yaml` (which refers to
-  them by paths relative to `data/`), linted by xmllint and svglint; `data/raw/logos/`
+  them by paths relative to `data/`), linted by xmllint; `data/raw/logos/`
   holds the bitmaps the traced ones were made from. The companies tab of the media
   page is built from these at build time: the `companies` step of `build_site.py`
   writes `_site/data/companies.json.gz` via `scripts/import_companies.py` and copies
@@ -124,21 +125,17 @@ later.
 
 - **`.github/workflows/build.yml` is deliberately minimal and maintained by
   hand — do not edit it.** It only knows how to ask rsconstruct: checkout,
-  caches, download rsconstruct, `tools install-deps` + `tools install`,
-  build, status, deploy. Every tool and package the build needs is declared
-  outside the workflow: apt packages under `[dependencies].system` in
-  `rsconstruct.toml`; Python packages in `pyproject.toml` pinned by
-  `uv.lock`; Node packages (stylelint and its postcss-scss syntax) in
-  `package.json` pinned by `package-lock.json`, which `tools install-deps`
-  installs with `npm ci` into `node_modules/` — rsconstruct puts
-  `node_modules/.bin` on PATH, so processors invoke `stylelint` plainly and
-  the locked version wins over any global copy (the Python linters come from
-  rsconstruct's tool registry); and tools a wrapper script shells out to via
-  `required_tools` on the processor; and Rust tools under
-  `[dependencies].cargo` (that is how rssite is installed). Do not list a Node
-  package under `[dependencies].npm` — that is a global, unpinned install
-  and duplicates the manifest. If something cannot be expressed there, the
-  fix belongs in rsconstruct, not in the workflow.
+  caches, download rsconstruct, `tool install machine` + `tool install
+  project`, build, status, deploy. Every tool and package the build needs is
+  declared outside the workflow: apt packages under `[dependencies].system`
+  in `rsconstruct.toml`; Python packages in `pyproject.toml` pinned by
+  `uv.lock` (the Python linters come from rsconstruct's tool registry); tools
+  a wrapper script shells out to via `required_tools` on the processor; Rust
+  tools under `[dependencies].cargo` (that is how rssite is installed); and
+  the exact version of each in `rsconstruct.lock`. The site has no Node
+  packages: oxlint and biome are single binaries rsconstruct downloads. If
+  something cannot be expressed there, the fix belongs in rsconstruct, not
+  in the workflow.
 - **Do not add infrastructure workarounds (apt retries, timeouts) to the
   workflow or to rsconstruct.** GitHub's runners occasionally sit behind a
   degraded Ubuntu mirror (observed 2026-08-19: ~60 KB/s — slow but
@@ -195,11 +192,11 @@ tags = ["religion", "philosophy", "ethics"]
 
 ## Coding Conventions
 
-- JavaScript: camelCase, ES9+, eslint-clean
+- JavaScript: camelCase, ES9+, oxlint-clean
 - Media plugins follow a consistent interface: `file`, `navTitle`, `title`, `subtitle`,
   `searchPlaceholder`, `searchFields`, `defaultSort`, `fields`, `renderDetails`,
   `renderStats` and the rest documented in `doc/PLUGIN_GUIDE.md`
-- Python: ruff- and mypy-clean; both run in CI over `scripts/` and `tests/`
+- Python: ruff- and pyrefly-clean; both run in CI over `scripts/` and `tests/`
 
 ## Style Sheets
 

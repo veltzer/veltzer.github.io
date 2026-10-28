@@ -5,7 +5,7 @@ Check that all great_courses_id and great_courses_slug values
 in the audio courses YAML are unique.
 
 Usage:
-  scripts/check_great_courses_unique.py
+  scripts/great_courses_check_unique.py
 """
 
 import sys

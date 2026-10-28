@@ -37,7 +37,7 @@ import sys
 import time
 import urllib.parse
 
-import bs4  # type: ignore
+import bs4
 import requests
 import yaml
 
