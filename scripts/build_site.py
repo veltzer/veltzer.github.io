@@ -70,7 +70,11 @@ def write_companies(output_file, logos_dir):
         die(f"{LOGOS_SRC} missing")
     logos_dir.mkdir(parents=True, exist_ok=True)
     for source in sorted(LOGOS_SRC.glob("*.svg")):
-        shutil.copyfile(source, logos_dir / source.name)
+        # A previous build's copy is read-only (rsconstruct leaves its
+        # outputs that way), so replace it rather than write into it.
+        target = logos_dir / source.name
+        target.unlink(missing_ok=True)
+        shutil.copyfile(source, target)
 
 
 # The steps, in the order the bare command lists them, each with its line.
