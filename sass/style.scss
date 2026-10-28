@@ -109,6 +109,20 @@ h1 { font-size: 1.9rem; line-height: 1.25; margin: 0 0 0.5rem; }
 h2 { font-size: 1.35rem; margin: 2.2rem 0 0.6rem; }
 h3 { font-size: 1.1rem; margin: 1.8rem 0 0.5rem; }
 
+// rssite's heading_anchors: an <a class="heading-anchor">#</a> at the end of
+// each heading in a post, faint until the heading is hovered or focused.
+.heading-anchor {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: normal;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+:is(h2, h3, h4):is(:hover, :focus-within) .heading-anchor {
+  opacity: 1;
+}
+
 .post-meta { color: var(--text-secondary); font-size: 0.9rem; margin: 0 0 1.5rem; }
 .post-header {
   border-bottom: 1px solid var(--border-subtle);
@@ -262,7 +276,9 @@ th { background: var(--bg-surface); }
 
 // ─── Hebrew (RTL) ───
 // <html dir="rtl"> from base.html handles direction; these cover what direction
-// alone does not -- content that must stay LTR inside RTL prose. The layout
+// alone does not -- content that must stay LTR inside RTL prose. rssite already
+// marks the code in posts dir="ltr"; this rule is for the code it does not
+// write: templates (the footer's commit id), the apps, and kbd/samp. The layout
 // above uses logical properties (margin-inline, text-align: start), so it flips
 // on its own.
 

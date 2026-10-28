@@ -60,6 +60,12 @@ anchors = "safe"
 smart_punctuation = false
 highlight = true
 highlight_theme = "InspiredGitHub"
+# A "#" link after every heading in a post, shown on hover (sass/style.scss),
+# to copy a link to that section.
+heading_anchors = "end"
+# Links in posts that leave the site open in a new tab (with rel="noopener").
+# No nofollow: the outbound links here are citations, not ads.
+external_links_target_blank = true
 
 [feeds]
 # A feed is a "what's new" window, not an archive; the blog index has the rest.
