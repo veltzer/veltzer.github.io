@@ -50,9 +50,9 @@ Democritus is the same story, except he lost the coin flip. He guessed that atom
 
 After 2,500 years, philosophers still disagree about free will, causation and what exists. Surveys of professional philosophers show the same old splits, decade after decade. A field that makes progress converges. Physics converges. Metaphysics doesn't.
 
-## Metaphysics can't lose
+## The untestable part can't lose
 
-No observation can refute a metaphysical theory, so bad ideas never die. Aristotle is still taught right next to his opposites, and nobody can say who won. A game you can't lose isn't a game, and a theory that can't be wrong isn't saying anything.
+Some metaphysical claims can be proven wrong. Atomism was. But those were physics all along, just physics that hadn't been tested yet. Take them away and what remains is the claims no observation could ever refute. That's why bad ideas in metaphysics never die: Aristotle is still taught right next to his opposites, and nobody can say who won. A game you can't lose isn't a game, and a theory that can't be wrong isn't saying anything.
 
 ## The intuitions have a source
 
