@@ -15,9 +15,9 @@ blog loads nothing at all.
 
 | Page | CSS | JS libraries |
 |------|-----|--------------|
-| `/en/media/` | Tailwind (CDN) | none -- plain JS in `static/media-app.js` + eight plugins |
+| `/en/media/` | Tailwind (compiled, vendored) | none -- plain JS in `static/media-app.js` + eight plugins |
 | `/en/chess/` | site stylesheet | chess.js, cm-chessboard -- both **vendored**, not CDN |
-| `/en/calendar/` | site stylesheet | FullCalendar 6.1.20 + its Google Calendar plugin (CDN) |
+| `/en/calendar/` | site stylesheet | FullCalendar 6.1.20 + its Google Calendar plugin -- **vendored** |
 | `/en/slides/`, `/en/syllabi/`, `/en/animations/` | site stylesheet | Material Web 2 (CDN) |
 | Blog posts, About, tags | site stylesheet (`sass/style.scss`) | none |
 
@@ -25,8 +25,18 @@ blog loads nothing at all.
 
 ### Tailwind, on one page only
 
-`content/media/_index.en.md` loads Tailwind from `https://cdn.tailwindcss.com` in
-JIT mode.
+`content/media/_index.en.md` links `static/vendor/tailwind-media.css`: the
+utilities the media app uses, compiled with Tailwind 3 by
+`scripts/build_media_css.sh` from `config/tailwind.media.config.js` (the
+theme-token palette) and committed. Until 2026-10-29 the page loaded Tailwind's
+in-browser compiler from `https://cdn.tailwindcss.com`, which Tailwind says is
+not for production: a render-blocking third-party script that compiled the CSS
+on every visit.
+
+Tailwind finds classes by scanning the files the config lists for whole class
+names. A class added to the media app or a plugin has no rule until the script
+is rerun, and a class assembled at run time (`'bg-' + colour`) is never found;
+write class names out in full.
 
 **It is the only page that does.** The previous version of this file claimed
 Tailwind was "the sole CSS framework for all custom standalone pages"; that was
@@ -35,10 +45,10 @@ else uses the site's own stylesheet, compiled from `sass/style.scss`.
 
 Keeping Tailwind for the media app is deliberate. The card grid, filter row and
 stat tiles are utility-class layouts that would have to be rewritten to move
-off it, and the CDN's JIT mode ships only the classes the page actually uses.
+off it, and the compiled file holds only the classes the app uses (about 9 KB).
 
 The rest of the site does not need it, and adding it to `base.html` would put a
-render-blocking CDN request on all ~630 built pages to serve a handful of
+render-blocking stylesheet on all ~630 built pages to serve a handful of
 classes.
 
 ### The site stylesheet
@@ -65,13 +75,13 @@ unstyled-but-working elements if the CDN fails.
 
 ### FullCalendar 6.1.20 -- calendar
 
-```text
-https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.js
-https://cdn.jsdelivr.net/npm/@fullcalendar/google-calendar@6.1.20/index.global.min.js
-```
-
-Pinned, and **the only CDN dependency on the site carrying SRI integrity
-hashes.** The Google Calendar plugin reads a public API key from
+**Vendored** since 2026-10-29: `static/vendor/fullcalendar/` holds the two
+files the jsDelivr URLs served
+(`fullcalendar@6.1.20/index.global.min.js` and
+`@fullcalendar/google-calendar@6.1.20/index.global.min.js`), verified byte for
+byte against the SRI hashes the page used to carry, and the MIT licence. To
+upgrade, download the new version's two files into that directory and change
+the version here. The Google Calendar plugin reads a public API key from
 `static/keys.js`; that key is public by design and referrer-restricted, see
 `doc/DECISIONS.md`.
 

@@ -1,0 +1,5 @@
+/* The input scripts/build_media_css.sh compiles: the three layers the CDN
+   compiler injected (base without preflight, which the config turns off). */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

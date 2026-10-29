@@ -7,8 +7,10 @@ template = "app.html"
 <div id="calendar-error" class="calendar-error"></div>
 <div id="calendar" style="max-width:100%; margin:0 auto;"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.js" integrity="sha384-cdgKlW4XCZfQ8yQFLScLHBujFrHf3sMYBPBjRimt2H/ut44fe4t/PUk3luazptar" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/google-calendar@6.1.20/index.global.min.js" integrity="sha384-rIPPQ/9RkgMsV+B8X0s5dZLu2CKA38gLcRt62d9QkwznKY5C4Qagxmt8CEQHg/V9" crossorigin="anonymous"></script>
+<!-- FullCalendar 6.1.20 (MIT), vendored in static/vendor/fullcalendar/: the
+     files the jsDelivr URLs served, byte for byte (same SRI hashes). -->
+<script src="/vendor/fullcalendar/fullcalendar.global.min.js"></script>
+<script src="/vendor/fullcalendar/google-calendar.global.min.js"></script>
 <script src="/keys.js"></script>
 <script>
 function themeToken(name, fallback) {
