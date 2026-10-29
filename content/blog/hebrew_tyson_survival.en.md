@@ -3,7 +3,7 @@ title = "On Mike Tyson, Survivor, and the Binding of Ehud"
 date = 2010-07-21
 
 [taxonomies]
-tags = ["politics", "culture", "hebrew"]
+tags = ["politics", "culture"]
 +++
 
 **An old article I wrote on the blog of the Movement for Direct Democracy...**

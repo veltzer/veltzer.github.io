@@ -3,7 +3,7 @@ title = "Foreign and Security Policy: More Guts Than Brains?"
 date = 2010-07-21
 
 [taxonomies]
-tags = ["politics", "game-theory", "hebrew"]
+tags = ["politics", "game-theory"]
 +++
 
 **This is an old article I published at the time on the Imago website...**
