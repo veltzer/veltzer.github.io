@@ -401,6 +401,7 @@ PasswordAuthentication
 Pennycook
 Penzias
 Peres
+Perrin
 Persinger's
 Pesach
 PhDs
@@ -627,6 +628,7 @@ asin
 asins
 async
 atime
+atomism
 atomists
 attester
 attr
@@ -1173,6 +1175,7 @@ memtester
 mencoder
 menuconfig
 metacharacter
+metaphysician
 mf
 mhz
 midi
@@ -1643,6 +1646,7 @@ uncheckable
 uncommented
 uncompetitive
 unconstraining
+uncuttable
 underconfident
 underdetermine
 underperform
