@@ -2,8 +2,8 @@
 
 Struck-through entries are done; the note under each records what was actually
 changed and how it was verified. **The open items are in the "Site review,
-2026-09-07" section at the end**, plus one older one: the `hebrew` language tag
-noted under "Right-to-left rendering" is still open. Everything else above the
+2026-09-07" section at the end**; the older `hebrew` language tag noted under
+"Right-to-left rendering" was resolved on 2026-10-29. Everything else above the
 site review is closed. Where a closed verdict was later overtaken by the code, a
 dated correction sits under it rather than a rewrite.
 
@@ -718,7 +718,11 @@ came later) and the built page.
   while the header and `<body>` stay `ltr`; an English post has no wrapper and computes
   `ltr`. Post count (80) and sitemap (105 URLs) unchanged.
 
-  Still open: `hebrew` remains a language tag in an otherwise topical tag vocabulary.
+  ~~Still open: `hebrew` remains a language tag in an otherwise topical tag vocabulary.~~
+  DONE, 2026-10-29: the two politics posts that carried `hebrew` / `עברית` only because
+  they were written in Hebrew (`hebrew_security_policy`, `hebrew_tyson_survival`) no
+  longer do. "Hebrew on Linux" keeps it, since Hebrew is its subject, so the tag is
+  topical now.
 
 - ~~**Is everything from the old WordPress blog in this repo?** — CLOSED, 2026-09-19.~~
   Checked against the last WordPress database dump (2019-05-11, the newest backup under
@@ -807,9 +811,12 @@ open unless struck through. Ordered roughly by how visible the fault is.
   Stats (61,636 games, win/loss) come from the headers, so the index alone can render
   the stat tiles.
 
-- **No `og:image` / `twitter:image` anywhere.** Links shared into Slack, WhatsApp, X etc.
-  get a text-only card. One site-wide image (a 1200x630 JPEG under `static/`) emitted from
-  `base.html` is enough; posts could override it later via `[extra]` front matter.
+- ~~**No `og:image` / `twitter:image` anywhere.** — DONE, 2026-10-29.~~
+  `scripts/make_og_images.py` draws a 1200x630 card per language (the favicon's V, the
+  name and the line from `home_title`) into `static/images/og/card-{en,he}.jpg`;
+  `base.html` emits `og:image` with its size and alt text on every page, and
+  `twitter:card` is `summary_large_image`. Posts could still override it later via
+  `[extra]` front matter.
 
 - ~~**The home page does not mention Training.** — DONE, 2026-10-28.~~
   `home_intro` in `i18n/en.toml` and `i18n/he.toml` ends with a sentence linking to
@@ -821,8 +828,8 @@ open unless struck through. Ordered roughly by how visible the fault is.
   `description` strings in `rssite.toml`, and in the About page's prose in both
   languages. The `--` inside HTML comments stays.
 
-- **Nav crowding on phones.** Ten items in `.site-nav` with `flex-wrap` and no mobile
-  rule will wrap to three lines on a 360 px screen. Could not be verified from the
-  desktop browser (it would not shrink below ~1450 px); check on a real phone. Options if
-  it is bad: collapse the six app sections under one "Apps" entry, or a hamburger below a
-  breakpoint.
+- ~~**Nav crowding on phones.** — DONE, 2026-10-29.~~
+  Checked at 360 px with headless Chrome: the ten items wrapped to two lines and the
+  header took 170 px, a quarter of the screen. Below 40rem `.site-nav` is now one line
+  that scrolls sideways, with a fade at the end edge (mirrored on Hebrew pages); the
+  header is 125 px and every item is still one swipe away, none behind a menu.
