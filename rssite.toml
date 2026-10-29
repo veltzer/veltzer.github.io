@@ -67,6 +67,15 @@ heading_anchors = "end"
 # No nofollow: the outbound links here are citations, not ads.
 external_links_target_blank = true
 
+# Markdown images of files in static/ become <picture>s: smaller widths, AVIF
+# and WebP (half the bytes of the JPEGs), width and height so the text does
+# not jump while they load, and lazy loading.
+[images]
+enabled = true
+formats = ["avif", "webp"]
+# A post's column: .site-main is 42rem with 1.25rem padding each side.
+sizes = "(max-width: 42rem) calc(100vw - 2.5rem), 39.5rem"
+
 [feeds]
 # A feed is a "what's new" window, not an archive; the blog index has the rest.
 limit = 20
