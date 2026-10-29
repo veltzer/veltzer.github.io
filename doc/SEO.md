@@ -12,6 +12,24 @@ stubs. The site is built as if made today and old URLs 404 by decision; see
 Search Console is at
 <https://search.google.com/search-console?resource_id=sc-domain:veltzer.org>.
 
+**2026-10-29 round: nothing to fix, by that decision.** The Page indexing report
+(last updated 2026-10-23) shows three failed validations. Every URL listed was
+read and checked against the live site:
+
+- *Not found (404)*, 47: MkDocs-era `/YYYY/MM/DD/<slug>/` posts (27, each of
+  which exists today under `/en/blog/` or `/he/blog/`), old tag pagers
+  `/<lang>/tags/<t>/page/1/`, Hebrew tag slugs that were renamed, `/page/5/`,
+  `/openbook/`, `/blog/<slug>/`, and four `/rsconstruct/processors/*.html` pages
+  that belong to the rsconstruct repository's mdBook. All 404 as decided.
+- *Page with redirect*, 17: the three non-canonical hosts (correct 301s), old
+  tag pagers, and `/pysvgview` (another repository's GitHub Pages directory).
+- *Duplicate without user-selected canonical*, 7: six root-level `/blog/<slug>/`
+  URLs, which now 404, and `/pydmt/index.html` (the pydmt repository's site).
+
+`scripts/check_redirects.py` passes: three host variants, 1167 sitemap URLs.
+Validation was not restarted: the retired URLs would fail it again by design.
+Google drops a 404 from the report on its own over the following weeks.
+
 ## The two issues that were fixed
 
 Search Console raised two messages on 2026-09-07, both under Page indexing:
