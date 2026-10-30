@@ -881,12 +881,13 @@ full-text search, feeds and a share card per language.
 
 - **DECLINED: an "updated" date.** Not wanted; see `doc/DECISIONS.md`.
 
-- **Open: "Discovered – currently not indexed"** in Search Console, the one
-  remaining SEO item, written up in `doc/SEO.md`. The descriptions above
-  are the part a build can do. What remains needs a login: export the
-  affected URLs from the Page indexing report and find out which repo
-  under `veltzer.org` they belong to before treating them as this site's
-  defect.
+- ~~**"Discovered – currently not indexed" in Search Console.** — READ,
+  nothing to fix here.~~ Every URL was read off the report on 2026-10-30;
+  `doc/SEO.md` has the breakdown. The 716 *Crawled* are almost all other
+  repos' files (675 teaching-syllabi downloads, ~30 Sphinx internals). The
+  143 *Discovered* are this site's: ~110 blog and tag pagers and ~33 live
+  posts awaiting a crawl. The one possible lever, dropping the 154 `/page/N/`
+  pagers from the sitemap, is an rssite change and has not been made.
 
 - ~~**Content slips found while writing the descriptions.** — DONE.~~
   `understanding_is_compression` had Ptolemy fitting an epicycle to

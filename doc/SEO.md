@@ -252,26 +252,50 @@ host variants should each serve a single 301. A failure there is a real
 regression in this repo and explains a failed validation; everything green
 there means the build is fine and the verdict is purely Google's timing.
 
-## Open: 190 "Discovered - currently not indexed"
+## "Discovered" and "Crawled - currently not indexed": read 2026-10-30
 
-The largest not-indexed bucket by far -- 190 of 218 -- and **untouched by the
-work above**, deliberately.
+These two used to be the open item here, with the caveat that nobody knew
+whose pages they were (this is a domain property, covering every repo that
+publishes to `veltzer.org`). On 2026-10-30 every URL in both buckets was read
+off the Page indexing report (last updated 2026-10-23; 2.61K indexed, 955 not)
+and sorted. Neither needs a change in this repo.
 
-Search Console attributes it to *Google systems*, not *Website*. Google found
-the URLs and chose not to spend crawl budget on them. There is no broken thing
-in the build to fix; it is a content, internal-linking and site-authority
-question, and it deserves real investigation rather than a guess at a cause.
-The 9 "Crawled - currently not indexed" are the same category, smaller.
+**Crawled - currently not indexed, 716: almost none of it is this site.**
 
-This is the obvious next piece of SEO work on this site, and it is genuinely
-open.
+- 675 are under `/teaching-syllabi/`, nearly all of them (669) the `.docx`
+  downloads that repository publishes beside each syllabus. Google fetched
+  them and declined to index Word files; that is its call, and it belongs to
+  the teaching-syllabi repository if anyone wants it otherwise.
+- ~30 are Sphinx internals of the `py*` repos' documentation sites
+  (`_modules/`, `_sources/*.rst.txt`, `py-modindex.html`, `modules.html`):
+  pydmt, pyscrapers, pytconf, pylogconf, pypowerline, pybookmarks,
+  pypipegzip, pysvgview. Not built here.
+- The rest, about ten, are this site's: the two feeds (`/en/atom.xml`,
+  `/he/atom.xml`, which are not pages and are not meant to be indexed), a
+  handful of retired URLs (root `/atom.xml`, `/page/N/`, MkDocs-era
+  `/2026/MM/DD/...` posts, `/openbook/`) that now 404 by decision, and one
+  teaching-slides PDF.
 
-One caveat before anyone investigates: this is a **domain** property, so it
-covers every repo publishing to `veltzer.org`, not just this site. The indexed
-count (807) is well above this site's sitemap (517 URLs), and other repos'
-generated docs -- `pyscrapers`, `pytconf` -- appear in the indexed list. So the
-190 are not known to be this site's pages, and the first step is to find out
-whose they are before treating them as a defect here.
+**Discovered - currently not indexed, 143: all of it is this site, and three
+quarters of it is listing pages.**
+
+- ~110 are listing pages: blog pagers (`/en/blog/page/N/`, `/he/blog/page/N/`,
+  ~52), tag pagers (`/<lang>/tags/<t>/page/N/`, ~50), a few tag pages
+  (`/en/tags/economics/`, `/he/tags/ישראל/`, ...), the `/en/blog/2019/` year
+  archive and `/he/calendar/`.
+- ~33 are posts, 13 English and 20 Hebrew, every one live (200) and in the
+  sitemap. Thirty-odd of ~1650 post pages waiting their turn is ordinary
+  crawl scheduling, not a defect.
+
+The one lever this repo holds is the sitemap: of its 1169 URLs, 154 are
+`/page/N/` pagers, which is most of what Google is declining to crawl. They
+are listings of posts that are themselves in the sitemap, so dropping them
+from it would lose nothing. That is a change to rssite's sitemap, not to this
+repo, and has not been made.
+
+The other three Website-sourced reasons (404, redirect, duplicate without
+canonical) and the four *Google chose different canonical* pages are covered
+by the 2026-10-29 round above and by *Excluded by 'noindex'* below.
 
 ## Deliberately not fixed: Excluded by 'noindex' -- 4 pages
 
@@ -407,3 +431,15 @@ as they stand and need no change: `/en/calendar/` under *Alternate page*, and
 
 Note the `noindex` count went 4 -> 9, which is the drift toward 42 predicted
 above as Google works through the 21 `rs*` mdBooks. Not a regression.
+
+As of 2026-10-30 (report last updated 2026-10-23): 2.61K indexed, 955 not.
+Of the 955, 716 *Crawled* and 143 *Discovered* are sorted above; 47 404,
+17 redirect and 7 duplicate are the 2026-10-29 round; 4 are *Google chose
+different canonical* -- four tag pagers (`/en/tags/politics/page/4/`,
+`/en/tags/religion/page/4/`, `/en/tags/psychology/page/2/`,
+`/he/tags/לינוקס/page/3/`), each live and declaring itself canonical, which
+Google folded into a sibling listing; and 21 are *Excluded by 'noindex'*:
+13 mdBook/Sphinx `print.html`/`toc.html`/`search.html` pages of other repos
+(the drift predicted above), and 8 retired URLs of this site (`/slides/`,
+`/syllabi/`, `/calendar/`, `/jschess/`, `/page/2/`, `/page/4/` and three old
+posts) that were `noindex` redirect stubs when crawled and now 404.
