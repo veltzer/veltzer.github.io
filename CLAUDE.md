@@ -79,7 +79,7 @@ which records the traps that outlived the migration.
   `audio_courses_check_*.py`, `youtube_add_names.py`, `organizations_geocode.py`,
   `organizations_pick_geo.py`, `organizations_fetch_maps.py` — all run from the
   repo root),
-  `serve.py`, `export_posts_for_ai.py` (mirrors the posts to `~/insync/for_ai` for AI agents
+  `serve.py`, `export_posts_for_ai.py` (mirrors the posts to `~/insync/for_ai/blog` for AI agents
   reading Google Drive), and the `build_*_dict.sh` / `spellcheck_*.sh` pair behind the aspell
   processors
 - `tests/` — pytest suite for the data import scripts

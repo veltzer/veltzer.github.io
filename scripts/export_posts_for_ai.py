@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Copy every blog post to ~/insync/for_ai, for AI agents that read Google Drive.
+"""Copy every blog post to ~/insync/for_ai/blog, for AI agents that read Google Drive.
 
 Insync syncs ~/insync to Google Drive, so the posts become readable there by
 any agent with access to the Drive. Only the posts are copied: the English and
@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 
 BLOG = Path(__file__).resolve().parent.parent / "content" / "blog"
-DEFAULT_DEST = Path.home() / "insync" / "for_ai"
+DEFAULT_DEST = Path.home() / "insync" / "for_ai" / "blog"
 
 
 def posts():
