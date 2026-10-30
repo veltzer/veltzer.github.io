@@ -232,8 +232,8 @@ tags = ["religion", "philosophy", "ethics"]
   ~399ms on the 6.5MB youtube dataset against ~31ms for `JSON.parse`.
 - The blog index has a search box (`static/blog-search.js`) over rssite's
   `<lang>/search.json` (`[search]` in `rssite.toml`). It indexes titles, opening
-  text and tags only; `content = true` would add the full text at ~800 KB
-  gzipped per language. The box links as `/en/blog/?q=…`.
+  text, tags and the full text (`content = true`, ~800 KB gzipped per language
+  against ~55 KB without it; fetched only on first focus of the box). The box links as `/en/blog/?q=…`.
 - The archive sidebar of `templates/blog.html` reads rssite's `section.page_count`
   and `section.years` (the year archives with their counts). Nothing about it is
   generated or committed.

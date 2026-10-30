@@ -84,11 +84,12 @@ limit = 20
 enabled = true
 
 # The blog search (static/blog-search.js) reads <lang>/search.json: every
-# post's title, opening text and tags. Without the full text the index is
-# ~55 KB gzipped per language; with it (content = true) ~800 KB.
+# post's title, opening text, tags and full text. The full text (content =
+# true) takes the index from ~55 KB gzipped per language to ~800 KB; the page
+# fetches it only when the reader first focuses the search box.
 [search]
 enabled = true
-content = false
+content = true
 
 # The shared design tokens, switcher and fonts, published from the submodule
 # beside the generated pages; templates/base.html links them.

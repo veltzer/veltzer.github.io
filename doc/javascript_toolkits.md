@@ -107,8 +107,8 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
 - **elasticlunr / `search_index.en.js`** -- gone. Under zola it was switched off
   (the 4.1 MB index was generated and deployed on every build and nothing ever
   loaded it). The blog search replaced it: `[search]` in `rssite.toml` writes
-  `<lang>/search.json` (title, opening text and tags of every post, ~55 KB
-  gzipped per language, not the full text), and `static/blog-search.js` on the
+  `<lang>/search.json` (title, opening text, tags and full text of every post,
+  ~800 KB gzipped per language), and `static/blog-search.js` on the
   blog index fetches it on first use and matches every query word as a
   substring, case- and diacritic-insensitive, so Hebrew needs no stemmer. The
   other search boxes are per-page filters over each page's own data: the media

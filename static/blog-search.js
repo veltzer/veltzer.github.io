@@ -1,7 +1,8 @@
 // Search over the blog's posts, on the blog index page.
 //
 // The index is rssite's own: [search] in rssite.toml writes <lang>/search.json
-// with every post's title, opening text (description) and tags, newest first.
+// with every post's title, opening text (description), tags and full text
+// (content), newest first.
 // It is fetched the first time the reader focuses or types in the box, so a
 // visit that never searches costs nothing. Matching is a plain substring test
 // of every word of the query, case- and diacritic-insensitive (niqqud too), so
@@ -57,7 +58,7 @@
                             page: page,
                             tags: tags,
                             title: normalize(page.title),
-                            rest: normalize((page.description || '') + ' ' + tags.join(' ')),
+                            rest: normalize([page.description || '', tags.join(' '), page.content || ''].join(' ')),
                         };
                     });
                 })
