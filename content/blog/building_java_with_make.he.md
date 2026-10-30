@@ -1,5 +1,6 @@
 +++
 title = "בניית Java עם Makefile במקום Ant"
+description = "Makefile של חמש-עשרה שורות בונה Java עם קומפילציה מצטברת ו-jar שאפשר להריץ, בלי ה-XML של Ant. אלא אם עץ תלויות גדול דורש כלי משלו, make פשוט יותר."
 date = 2011-03-06
 
 [taxonomies]

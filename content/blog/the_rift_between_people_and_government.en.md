@@ -1,5 +1,6 @@
 +++
 title = "The Rift Between the People and the Government Widens on Its Own"
+description = "A government runs on cooperation it cannot compel. People who see that it is not theirs stop behaving like owners, which widens the rift further. Only closing the distance heals it."
 date = 2026-06-30
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Minority Rule Is What Lets the Majority Keep Its Myths"
+description = "Representation spares citizens from ever deciding a hard question, so myths survive unused. Direct decisions on war and death would wear them down and make populations harder to march."
 date = 2023-06-24
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Silence Has Never Killed a Bad Idea"
+description = "Keeping quiet does not starve religion of attention. Bad ideas die by being shown to be bad, and a one-sided silence is surrender with better manners."
 date = 2025-12-12
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "The Bible Was the Entertainment of Its Day, and Entertainment Is Not a Census"
+description = "The Bible was the entertainment of its day, selected for drama like Hollywood films. Read it as evidence of what people wanted to hear, not of how they lived."
 date = 2025-10-29
 
 [taxonomies]

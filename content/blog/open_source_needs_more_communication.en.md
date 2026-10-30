@@ -1,5 +1,6 @@
 +++
 title = "A Fork Is a Mutiny, and Mutinies Happen Where Nobody Was Allowed to Talk"
+description = "Like a mutiny at sea, a fork needs a grievance with no channel to be voiced. A project that talks more than its maintainers naturally would stays whole."
 date = 2011-05-22
 
 [taxonomies]

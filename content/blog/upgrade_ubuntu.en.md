@@ -1,5 +1,6 @@
 +++
 title = "How to upgrade Ubuntu without their upgrade tool"
+description = "When the Ubuntu upgrade tool fails, as it did for plucky (25.04), upgrade by hand: move third party repos aside, point ubuntu.sources at the new release and dist-upgrade."
 date = 2025-09-04
 
 [taxonomies]

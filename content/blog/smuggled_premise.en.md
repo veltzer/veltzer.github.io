@@ -1,5 +1,6 @@
 +++
 title = "The Smuggled Premise: How the Ontological and Cosmological Arguments Misunderstand the Scientific Method"
+description = "Deduction yields no new facts about the world. The ontological and cosmological arguments smuggle in loaded empirical terms like existence and cause as logical tokens."
 date = 2026-10-30
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "MkDocs עם GitHub Pages: מבנה קבצים שעובד"
+description = "MkDocs מוחק את תיקיית הפלט בכל בנייה, ולכן קבצי HTML, JS ו־CSS סטטיים שמונחים ב־docs נעלמים. שמרו אותם בתיקיית המקור ו־MkDocs יעתיק אותם כמות שהם."
 date = 2026-03-21
 
 [taxonomies]

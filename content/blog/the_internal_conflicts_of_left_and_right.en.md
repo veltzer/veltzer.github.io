@@ -1,5 +1,6 @@
 +++
 title = "Both the Left and the Right Contradict Themselves, and Neither Notices"
+description = "Left and right each propose means that contradict their own goals, and ideological commitment stops them noticing. The way out is not the centre but judging each question on its own."
 date = 2025-08-30
 
 [taxonomies]

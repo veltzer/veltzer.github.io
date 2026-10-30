@@ -1,5 +1,6 @@
 +++
 title = "Is Religion an Ideology?"
+description = "Religion is an ideology in the descriptive sense, and its distinctive features, claims beyond evidence and unquestionable authority, earn it more scrutiny, not less."
 date = 2026-09-29
 
 [taxonomies]

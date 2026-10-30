@@ -1,5 +1,6 @@
 +++
 title = "The Lottery Salesman Who Agreed With Me and Kept Selling"
+description = "A Mifal HaPayis salesman agreed the lottery is a tax on the poor and kept selling. An argument won against a member of an organisation is not won against the organisation."
 date = 2025-06-01
 
 [taxonomies]

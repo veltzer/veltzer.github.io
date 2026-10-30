@@ -1,5 +1,6 @@
 +++
 title = "Philosophy Is Hard to Read Because It Had to Be"
+description = "Philosophy had to answer the biggest questions without the tools, so it left its terms undefined to sound founded. Where it has a real subject, as with Dennett, it reads clearly."
 date = 2024-11-03
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "The Anthropocentric Conceit and the Long Demotion"
+description = "Copernicus took our location, Darwin our separateness, and every advance since has been a demotion. That one-way pattern shows our centrality was a projection, not a discovery."
 date = 2026-08-07
 
 [taxonomies]

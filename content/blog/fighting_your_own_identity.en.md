@@ -1,5 +1,6 @@
 +++
 title = "Fighting the Identities Imposed on You"
+description = "Name, religion, country and language were assigned to you before you could object. Hold them without being held by them, starting with something as trivial as a spelling."
 date = 2019-03-07
 
 [taxonomies]

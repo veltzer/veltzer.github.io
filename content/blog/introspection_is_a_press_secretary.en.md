@@ -1,5 +1,6 @@
 +++
 title = "Introspection Is a Press Secretary, Not a President"
+description = "Split-brain patients, choice blindness and Nisbett and Wilson show introspection does not report why we chose. It invents a plausible story afterwards, without knowing it guesses."
 date = 2026-08-13
 
 [taxonomies]

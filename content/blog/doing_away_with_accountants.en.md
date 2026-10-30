@@ -1,5 +1,6 @@
 +++
 title = "Accounting Is a Job Software Already Does, and We Keep the Humans to Have Someone to Blame"
+description = "Accounting is rule-following, which software already does. The profession survives because the law demands a licensed human to blame, and blame never stopped a fraud."
 date = 2024-04-15
 
 [taxonomies]

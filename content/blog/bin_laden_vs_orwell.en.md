@@ -1,5 +1,6 @@
 +++
 title = "Orwell Was Right About the State, and That Is No Longer the Whole Problem"
+description = "Orwell was right to fear the state, but a few dozen people can now threaten a whole society. A free society has two ways to die, and the cure for one causes the other."
 date = 2025-04-17
 
 [taxonomies]

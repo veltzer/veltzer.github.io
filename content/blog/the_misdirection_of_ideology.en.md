@@ -1,5 +1,6 @@
 +++
 title = "Arguing About What an Ideology Really Means Is the Misdirection"
+description = "Debating what Nazism, Marx or the Quran really mean is a magic trick: the doctrine is where we are told to look while the struggle between the many and the few goes on."
 date = 2025-03-04
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Many of Our Legal Norms Are Workarounds for a Government We Cannot Control"
+description = "We keep police, prisons and armies public because a little control over the state beats none over a company. That rule is a symptom of weak government, not a sacred principle."
 date = 2023-09-04
 
 [taxonomies]

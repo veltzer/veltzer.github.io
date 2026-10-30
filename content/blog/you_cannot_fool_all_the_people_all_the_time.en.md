@@ -1,5 +1,6 @@
 +++
 title = "You Cannot Fool All the People All the Time, So Do Not Let a Decision Stand Still"
+description = "A lobby only needs to fool the public once, at the moment a decision is taken. A direct democracy that keeps revisiting its decisions cannot be bought that way."
 date = 2024-03-10
 
 [taxonomies]

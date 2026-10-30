@@ -1,5 +1,6 @@
 +++
 title = "What Do Hierarchies Actually Select For?"
+description = "Peterson says hierarchies track competence. My guess: they do where performance is measurable and fast, and reward office politics where it is diffuse and slow. Research it."
 date = 2016-08-16
 
 [taxonomies]

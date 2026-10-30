@@ -1,5 +1,6 @@
 +++
 title = "A Voting Formula for a Party That Takes Its Orders From the Public"
+description = "A party that votes as an online poll tells it should go winner-takes-all when small and proportional when large. One formula blends the two by its share of the seats."
 date = 2023-07-12
 
 [taxonomies]

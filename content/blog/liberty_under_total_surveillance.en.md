@@ -1,5 +1,6 @@
 +++
 title = "A Society Can Be Watched Closely and Still Be Free, on Three Conditions"
+description = "Surveillance is not the enemy of liberty. A watched society stays free if the watching runs both ways, the watchers are watched, and the watched set the rules."
 date = 2026-09-01
 
 [taxonomies]

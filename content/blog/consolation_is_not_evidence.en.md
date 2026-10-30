@@ -1,5 +1,6 @@
 +++
 title = "Consolation Is Not Evidence"
+description = "Comfort is produced by fitting our wants, truth by fitting the world. Where the two diverge, the comforting belief is more likely false, so consolation counts against it."
 date = 2026-08-05
 
 [taxonomies]

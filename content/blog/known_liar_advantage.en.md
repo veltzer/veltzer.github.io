@@ -1,5 +1,6 @@
 +++
 title = "The Structural Advantages of Being a Known Political Liar"
+description = "Our political system rewards a known liar: one sentence serves voters and donors, contradictions go unchecked, and the lies spare us bad policy. Better candidates fix none of it."
 date = 2014-03-22
 
 [taxonomies]

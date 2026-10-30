@@ -1,5 +1,6 @@
 +++
 title = "Producing MySQL dates on the command line"
+description = "A one-line shell alias, date +'%F %T', prints the current date and time in MySQL format for pasting into database editors that will not take SQL."
 date = 2010-07-21
 
 [taxonomies]

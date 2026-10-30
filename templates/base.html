@@ -60,13 +60,22 @@
     those branches every tag page shared the site title as its og:title. -#}
 <meta property="og:title" content="{% block og_title %}{% if page %}{{ page.title }}{% elif section %}{{ section.title }}{% elif term %}{{ term.name }}{% elif terms %}{{ trans(key="tags_title") }}{% else %}{{ config.title }}{% endif %}{% endblock %}">
 <meta property="og:description" content="{{ meta_description }}">
-{#- The share card: one per language, drawn by scripts/make_og_images.py at
-    1200x630, the size every network's large preview expects. Without it a
-    shared link gets a text-only card. -#}
+{#- The share card, 1200x630, the size every network's large preview
+    expects; without it a shared link gets a text-only card. A blog post
+    has its own, with its title and tags, drawn at build time by
+    scripts/make_post_cards.py into images/og/<file stem>.jpg
+    (check=false: rsconstruct writes it, not rssite). Every other page
+    uses its language's card, drawn by scripts/make_og_images.py. -#}
+{%- if page and page.relative_path is starting_with("blog/") %}
+{%- set card_name = page.relative_path | split(pat="/") | last | replace(from=".md", to=".jpg") %}
+<meta property="og:image" content="{{ get_url(path="images/og/" ~ card_name, check=false) }}">
+<meta property="og:image:alt" content="{{ page.title }}">
+{%- else %}
 <meta property="og:image" content="{{ get_url(path="images/og/card-" ~ lang ~ ".jpg") }}">
+<meta property="og:image:alt" content="{{ trans(key="home_title") }}">
+{%- endif %}
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="{{ trans(key="home_title") }}">
 <meta name="twitter:card" content="summary_large_image">
 {%- if page and page.date %}
 <meta property="article:published_time" content="{{ page.date }}">

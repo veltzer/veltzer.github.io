@@ -1,5 +1,6 @@
 +++
 title = "Why I Criticise Religion So Much: It Is the Best Single Predictor of a Person"
+description = "Of all the facts you could learn about a stranger, his relationship to religion best predicts his views on everything else. That is why I write about it so much."
 date = 2026-03-06
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Try to Define \"The Good of the People\" and See What You Get"
+description = "Personal goods cannot be summed because one person's gain is another's loss. The good of a people is the most just compromise between its subgroups that keeps everyone cooperating."
 date = 2026-06-27
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Why Did Revelation Stop?"
+description = "The major revelations all happened long ago, in eras with no way to check them. Revelation did not stop because God fell silent; it stopped because we learned to verify."
 date = 2026-04-09
 
 [taxonomies]

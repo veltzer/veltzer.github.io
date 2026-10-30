@@ -1,5 +1,6 @@
 +++
 title = "Philosophy: Anti Education"
+description = "Philosophy is not just unproductive but anti-education: it never fixes its terms, trains people to think imprecisely, and rewards them for feeling rigorous."
 date = 2026-09-09
 
 [taxonomies]

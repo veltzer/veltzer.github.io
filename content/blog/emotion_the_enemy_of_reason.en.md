@@ -1,5 +1,6 @@
 +++
 title = "Emotion: The Enemy of Reason"
+description = "Emotion has its place, but when the job is finding truth or deciding well it is reason's chief adversary: older machinery that wins unless discipline holds it back."
 date = 2026-10-01
 
 [taxonomies]

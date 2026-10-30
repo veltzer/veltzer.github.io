@@ -1,5 +1,6 @@
 +++
 title = "Raising the WordPress Upload Limit Means Finding Which of Four Limits You Hit"
+description = "WordPress upload failures come from four PHP limits that override each other, plus a multisite cap of its own. Check phpinfo first, then fix the one that applies."
 date = 2011-02-20
 
 [taxonomies]

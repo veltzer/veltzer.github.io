@@ -1,5 +1,6 @@
 +++
 title = "Politics Moved Into the Workplace Because It Had Nowhere Else to Go"
+description = "Employees push companies to take political stands because the political system no longer registers their views. The fix is upstream: let citizens decide public questions directly."
 date = 2026-05-10
 
 [taxonomies]

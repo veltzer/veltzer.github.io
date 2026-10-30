@@ -1,5 +1,6 @@
 +++
 title = "Debugging shared library problems"
+description = "When libraries installed from source make it unclear which one a program really loads, ldconfig -p prints the dynamic linker cache and settles it."
 date = 2011-05-13
 
 [taxonomies]

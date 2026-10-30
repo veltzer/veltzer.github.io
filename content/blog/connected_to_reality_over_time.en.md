@@ -1,5 +1,6 @@
 +++
 title = "Are We Becoming More Connected to Reality, or Less?"
+description = "We got much better at reality where feedback is fast, like engineering and medicine, and worse where it is slow, now that the internet lets cranks find each other."
 date = 2019-10-25
 
 [taxonomies]

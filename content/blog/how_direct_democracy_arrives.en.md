@@ -1,5 +1,6 @@
 +++
 title = "Four Roads to Direct Democracy, and Why the Destination Is More Certain Than the Route"
+description = "Crisis, technology, a party that is a pipe, draining legitimacy: four independent roads lead to direct democracy. The route and the timing are uncertain; the destination is a forecast."
 date = 2023-08-17
 
 [taxonomies]

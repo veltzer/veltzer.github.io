@@ -1,5 +1,6 @@
 +++
 title = "On Mike Tyson, Survivor, and the Binding of Ehud"
+description = "Politics, like Survivor, rewards the best manipulators, so hating prime ministers for winning is hypocrisy. The public should take the management into its own hands."
 date = 2010-07-21
 
 [taxonomies]

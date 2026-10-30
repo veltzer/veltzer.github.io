@@ -1,5 +1,6 @@
 +++
 title = "Freedom as a Conserved Quantity"
+description = "One person's freedom comes at another's expense, so total freedom is roughly fixed. Justice means equal freedom, measured by free time, and breaking up its concentration."
 date = 2020-07-19
 
 [taxonomies]

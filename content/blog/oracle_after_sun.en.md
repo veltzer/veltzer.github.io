@@ -1,5 +1,6 @@
 +++
 title = "Oracle Bought Sun and Showed What It Thinks Open Source Is For"
+description = "Eight months after buying Sun, Oracle has shown that a single company's open source lasts only while it is convenient. Only a community able to fork is truly open."
 date = 2010-08-08
 
 [taxonomies]

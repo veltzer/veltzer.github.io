@@ -1,5 +1,6 @@
 +++
 title = "Every Year a Regime Buys Its Population, the Eventual Reform Gets More Dangerous"
+description = "Oil regimes buy quiet with subsidies, and the ratchet only turns one way. Every year of it makes the eventual growing up more painful and more dangerous, and we finance it."
 date = 2025-06-10
 
 [taxonomies]

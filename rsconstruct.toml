@@ -1,5 +1,8 @@
 [dependencies]
-system = ["libxml2-utils", "aspell", "aspell-en", "aspell-he"]
+# libfribidi0 and fonts-liberation: the post share cards (make_post_cards.py)
+# lay Hebrew out right to left through Pillow, whose wheel loads fribidi from
+# the system, and set it in Liberation Sans.
+system = ["libxml2-utils", "aspell", "aspell-en", "aspell-he", "libfribidi0", "fonts-liberation"]
 # rssite renders the site (crates.io, cargo install).
 cargo = ["rssite"]
 
@@ -34,6 +37,20 @@ inputs = ["data/yaml/organizations.yaml", "scripts/import_companies.py"]
 input_globs = ["data/logos/*.svg", "static/images/map-*.jpg"]
 output_files = ["_site/data/companies.json.gz"]
 output_dirs = ["_site/logos"]
+
+# A share card (og:image) per blog post: content/blog/foo.en.md becomes
+# _site/images/og/foo.en.jpg, which templates/base.html names. Build output,
+# not committed, so a card is redrawn whenever its post changes. The site-wide
+# cards beside them (static/images/og/card-*.jpg) are drawn by hand by
+# make_og_images.py, whose layout constants these share.
+[processor.generator.generic.post_cards]
+command = "scripts/make_post_cards.py"
+src_dirs = ["content/blog"]
+src_extensions = [".md"]
+src_exclude_files = ["content/blog/_index.en.md", "content/blog/_index.he.md"]
+output_dir = "_site/images/og"
+output_extension = "jpg"
+dep_inputs = ["scripts/make_og_images.py", "i18n/en.toml", "i18n/he.toml"]
 
 [processor.checker.ruff]
 src_dirs = ["scripts", "tests"]

@@ -1,5 +1,6 @@
 +++
 title = "Nobody Has a Get-Out-of-Politics Card"
+description = "Tyson cares about beliefs only once they become law, but in a democracy every belief is counted, and freedom of belief is choosing from a menu someone else writes."
 date = 2026-01-30
 
 [taxonomies]

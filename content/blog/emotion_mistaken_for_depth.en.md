@@ -1,5 +1,6 @@
 +++
 title = "People Mistake the Emotion a Topic Provokes for the Topic's Depth"
+description = "Death is simple; our feelings about it are not. Strong emotion gets mistaken for depth, in scripture and beyond. The test: hard to understand, or only hard to discuss calmly?"
 date = 2019-06-08
 
 [taxonomies]

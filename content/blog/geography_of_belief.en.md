@@ -1,5 +1,6 @@
 +++
 title = "The Geography of Belief: Why Your Religion Is Almost Always Your Parents'"
+description = "The best predictor of someone's religion is where they were born and what their parents believed. That alone is strong evidence religions are human inventions, not revelations."
 date = 2026-05-03
 
 [taxonomies]

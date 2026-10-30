@@ -1,8 +1,8 @@
 # Suggested Improvements
 
 Struck-through entries are done; the note under each records what was actually
-changed and how it was verified. **The open items are in the "Site review,
-2026-09-07" section at the end**; the older `hebrew` language tag noted under
+changed and how it was verified. **The open items are in the last two
+sections, "Site review, 2026-09-07" and "Blog review, 2026-10-30"**; the older `hebrew` language tag noted under
 "Right-to-left rendering" was resolved on 2026-10-29. Everything else above the
 site review is closed. Where a closed verdict was later overtaken by the code, a
 dated correction sits under it rather than a rewrite.
@@ -833,3 +833,66 @@ open unless struck through. Ordered roughly by how visible the fault is.
   header took 170 px, a quarter of the screen. Below 40rem `.site-nav` is now one line
   that scrolls sideways, with a fade at the end edge (mirrored on Hebrew pages); the
   header is 125 px and every item is still one swipe away, none behind a menu.
+
+## Blog review, 2026-10-30
+
+What the blog itself still lacked once the backlog above was closed. Posts
+already had related posts, previous/next, tags, the language switcher,
+full-text search, feeds and a share card per language.
+
+- ~~**No post had a meta description.** — DONE, 2026-10-30.~~
+  All 414 posts, in both languages (828 files), now carry a hand-written
+  `description` in their front matter, stating what the post argues, in its
+  own stance. rssite uses it for `<meta name="description">`,
+  `og:description` and the search index; before this every one of them fell
+  back to the opening text, which made weak snippets. English runs 125-191
+  characters (median 168), Hebrew 98-184. Both spellcheckers pass on them,
+  and nothing was added to the word lists for them. A new post should get a
+  `description` line when it is written.
+
+- ~~**Every post shared the language's share card.** — DONE, 2026-10-30.~~
+  `scripts/make_post_cards.py` draws a 1200x630 card per post (the author
+  line, the title, the tags, veltzer.org; right to left in Hebrew) as
+  rsconstruct's `processor.generator.generic.post_cards`, into
+  `_site/images/og/<file stem>.jpg`, and `templates/base.html` points a
+  post's `og:image` at it. Unlike the two site-wide cards these are build
+  output: 828 of them are 37 MB, and a committed card would go stale when
+  its title changed. `libfribidi0` and `fonts-liberation` joined the
+  system dependencies for the Hebrew ones.
+
+- ~~**No reading time.** — DONE, 2026-10-30.~~
+  The post header shows rssite's `reading_time` (words / 200, rounded up):
+  "6 min read" / "4 דקות קריאה", from `reading_time` and
+  `reading_time_one` in `i18n/`. A Hebrew post reads shorter than its
+  English original because Hebrew says the same in about a quarter fewer
+  words; that is the measure working, not a bug.
+
+- ~~**No table of contents on the long essays.** — DONE, 2026-10-30.~~
+  `templates/page.html` renders `page.toc` (two levels) as a collapsed
+  `<details>` under the header when a post has six sections or more: 78
+  posts, the same 78 in both languages. The threshold is in sections, not
+  words, precisely so a post and its translation agree; a 1000-word
+  threshold gave the English post a TOC and its Hebrew translation none.
+  A typical post is ~850 words in four or five sections, where a contents
+  box is noise.
+
+- **DECLINED: series navigation.** A `series` taxonomy with "part N of M"
+  links. Not wanted; see `doc/DECISIONS.md`.
+
+- **DECLINED: an "updated" date.** Not wanted; see `doc/DECISIONS.md`.
+
+- **Open: "Discovered – currently not indexed"** in Search Console, the one
+  remaining SEO item, written up in `doc/SEO.md`. The descriptions above
+  are the part a build can do. What remains needs a login: export the
+  affected URLs from the Page indexing report and find out which repo
+  under `veltzer.org` they belong to before treating them as this site's
+  defect.
+
+- ~~**Content slips found while writing the descriptions.** — DONE.~~
+  `understanding_is_compression` had Ptolemy fitting an epicycle to
+  Neptune, discovered in 1846; now Saturn, in both languages.
+  `test-procedures-for-new-memory-installations` read "ubiqitous" (which
+  had been whitelisted in `.aspell.en.txt`, now removed) and "the memory
+  with will". The Fatar post's title said "StdioLogic" for StudioLogic in
+  both languages (the slug keeps the typo: changing it would change the
+  URL).

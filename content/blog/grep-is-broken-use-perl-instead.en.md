@@ -1,5 +1,6 @@
 +++
 title = "Grep is broken - use perl instead"
+description = "The regular expression syntax of grep is too limited for hunting defects in source files, so here is a short Perl script that greps with Perl's far better regular expressions."
 date = 2010-07-02
 
 [taxonomies]

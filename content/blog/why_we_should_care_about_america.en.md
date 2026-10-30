@@ -1,5 +1,6 @@
 +++
 title = "We Have Been Lucky With Our Superpower, and We Should Say So"
+description = "America's flaws are real, but the alternative superpower would be worse. Its problems are fought out in public by a country that must still persuade its own people."
 date = 2025-11-18
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Cryptocurrency Removes the One Thing That Kept Decentralized Organizations Poor"
+description = "The Starfish and the Spider says a decentralized organization cannot take money without growing a head that can be cut off. Cryptocurrency breaks that link."
 date = 2024-10-11
 
 [taxonomies]

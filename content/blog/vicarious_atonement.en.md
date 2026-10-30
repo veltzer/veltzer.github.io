@@ -1,5 +1,6 @@
 +++
 title = "Vicarious Atonement: Punishing the Innocent to Forgive the Guilty"
+description = "Killing an innocent so the guilty can be forgiven violates basic justice. Guilt is not transferable, and a God who could simply forgive has no need of a blood sacrifice."
 date = 2026-05-06
 
 [taxonomies]

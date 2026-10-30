@@ -1,5 +1,6 @@
 +++
 title = "Corporations Defect Where Individuals Cooperate"
+description = "Axelrod's cooperation needs repetition, memory and small groups, which humans evolved for and corporations lack. Firms defect by structure, so make their game truly iterated."
 date = 2015-02-17
 
 [taxonomies]

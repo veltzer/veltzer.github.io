@@ -1,5 +1,6 @@
 +++
 title = "The Missing Solidarity of Israeli High-Tech"
+description = "Israeli high-tech has the resources to pressure government on the cost of living and never uses them. The gap in pay is unfair, and we should pay to close it."
 date = 2021-05-13
 
 [taxonomies]

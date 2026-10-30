@@ -1,5 +1,6 @@
 +++
 title = "Why Philosophy Is in Such a Dismal State"
+description = "Philosophy wants conclusions about the real world but borrows the rigour of mathematics, on premises that cannot bear it. One payoff matrix explains more than Kant on morals."
 date = 2012-09-16
 
 [taxonomies]

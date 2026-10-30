@@ -1,5 +1,6 @@
 +++
 title = "We Already Pay the Price of Freedom, We Just Do Not Collect the Goods"
+description = "We already pay freedom's price in instability, free to leave a job, a spouse and a church. The one place freedom has not arrived is government, where it would pay for itself."
 date = 2024-01-16
 
 [taxonomies]

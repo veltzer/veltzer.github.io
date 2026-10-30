@@ -1,5 +1,6 @@
 +++
 title = "A LilyPond Cheat Sheet: Everything I Look Up, on One Page"
+description = "The LilyPond syntax I keep looking up on one short page: skeleton, pitches, relative mode, note lengths, chords, dynamics, lyrics, voices, staves, repeats and compiling."
 date = 2014-08-03
 
 [taxonomies]

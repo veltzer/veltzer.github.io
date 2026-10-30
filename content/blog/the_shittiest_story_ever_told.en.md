@@ -1,5 +1,6 @@
 +++
 title = "The Shittiest Story Ever Told"
+description = "Scripture looks like a masterpiece only to readers whose beliefs it confirms. Read without faith, it is repetitive, primitive and incoherent: a piece of shit."
 date = 2026-10-15
 
 [taxonomies]

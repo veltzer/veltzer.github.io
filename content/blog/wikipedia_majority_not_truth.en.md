@@ -1,5 +1,6 @@
 +++
 title = "Wikipedia Reports the Majority, Not the Truth"
+description = "Wikipedia settles contested facts by counting the motivated, as my Exodus fight on Hebrew Wikipedia showed. Could an expert-only edition do better? Its problems are real too."
 date = 2017-11-23
 
 [taxonomies]

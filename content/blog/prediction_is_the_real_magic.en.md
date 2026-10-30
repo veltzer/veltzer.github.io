@@ -1,5 +1,6 @@
 +++
 title = "Prediction Is the Real Magic"
+description = "Mendeleev described germanium from a gap in his table before anyone found it. Science predicts the unseen in advance, routinely; religion has never done it once."
 date = 2026-08-09
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "The Unaligned Steering Wheel: Why Religious Confirmation Bias Is Larger"
+description = "Everyone has confirmation bias, but its pull grows with what a belief promises. Religion promises the most, so honest reasoning has to steer against it harder."
 date = 2026-01-08
 
 [taxonomies]

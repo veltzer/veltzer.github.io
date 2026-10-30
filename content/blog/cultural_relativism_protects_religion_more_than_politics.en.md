@@ -1,5 +1,6 @@
 +++
 title = "Cultural Relativism Protects Religion Far More Than It Protects Politics"
+description = "Nobody exempts North Korea from criticism as a culture, yet Saudi Arabia, just as unfree, gets a pass. The relativism is selective, and it exists to protect religion."
 date = 2026-01-11
 
 [taxonomies]

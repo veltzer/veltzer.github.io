@@ -1,5 +1,6 @@
 +++
 title = "The Consent of the Governed Is Not Given, It Is Assumed"
+description = "Leaving the country and voting for someone else are not ways to withhold consent. The consent of the governed is a fiction you need only when someone else decides for you."
 date = 2026-03-15
 
 [taxonomies]

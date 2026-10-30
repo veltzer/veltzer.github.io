@@ -1,5 +1,6 @@
 +++
 title = "Wars Have Several Causes, and the Betrayal of the People Is Only One"
+description = "Rulers who profit while peoples pay explain some wars, but one aggressor is enough and some institutions feed on enmity. Direct democracy reduces wars; it cannot end them."
 date = 2025-11-09
 
 [taxonomies]

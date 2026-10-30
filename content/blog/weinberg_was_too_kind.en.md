@@ -1,5 +1,6 @@
 +++
 title = "Weinberg Was Too Kind: Religion Does Not Need Good People to Do Evil"
+description = "Weinberg looked only at individuals. Religion's larger harm is institutional: its hierarchies do evil without anyone needing to be good or bad at all."
 date = 2026-01-20
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Build a Myth Yourself — It Is the Only Way to Understand Myths"
+description = "Write a 300-word myth packed with true facts and wholly false. It takes five minutes, and after it corroborated details stop impressing you as proof that scripture is history."
 date = 2015-08-23
 
 [taxonomies]

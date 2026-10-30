@@ -1,5 +1,6 @@
 +++
 title = "Who Sets the Dose of Self-Deception a Society Runs On?"
+description = "Societies run on a dose of self-deception, and today it is set by whoever profits from selling illusions. Only open public decision lets a society grow up."
 date = 2023-11-15
 
 [taxonomies]

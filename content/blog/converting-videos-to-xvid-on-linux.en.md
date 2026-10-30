@@ -1,5 +1,6 @@
 +++
 title = "Converting videos to xvid on Linux"
+description = "A bash script that uses mencoder to convert videos to the xvid codec in place, so they play on a PS3, stopping at the first file that fails."
 date = 2010-06-11
 
 [taxonomies]

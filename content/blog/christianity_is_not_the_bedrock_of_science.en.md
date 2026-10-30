@@ -1,5 +1,6 @@
 +++
 title = "Christianity Is Not the Bedrock of Science, and the Argument for It Falls Apart on the Word Law"
+description = "The claim that Christianity founded science rests on equivocating on the word law. No verse teaches natural law, and science grew in spite of the Church, not from it."
 date = 2025-12-15
 
 [taxonomies]

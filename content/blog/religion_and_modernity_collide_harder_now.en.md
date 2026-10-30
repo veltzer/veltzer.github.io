@@ -1,5 +1,6 @@
 +++
 title = "Religion and Modernity Collide Harder Every Year, and Not Every Religion Braked in Time"
+description = "Modernity nullifies religious claims one by one, so the collision grows every year. Christianity retreated quietly; traditional Islam did not, and the danger is rising."
 date = 2026-02-25
 
 [taxonomies]

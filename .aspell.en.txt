@@ -1636,7 +1636,6 @@ tuplets
 txt
 typeof
 tzitzit
-ubiqitous
 ubuntu
 ui
 ul

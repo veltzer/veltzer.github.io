@@ -1,5 +1,6 @@
 +++
 title = "Capitalism, Human Rights and Representative Democracy Arrived Together, and That Is Not a Coincidence"
+description = "Representative government, capitalism and human rights each took a monopoly from the ruler: over decisions, wealth and the person. They are one dispersal of power, not three."
 date = 2026-05-17
 
 [taxonomies]

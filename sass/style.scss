@@ -143,6 +143,17 @@ h3 { font-size: 1.1rem; margin: 1.8rem 0 0.5rem; }
 }
 
 .post-meta { color: var(--text-secondary); font-size: 0.9rem; margin: 0 0 1.5rem; }
+.post-meta .reading-time::before { content: "·"; margin-inline: 0.4rem; }
+.toc {
+  margin: 0 0 1.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+.toc summary { cursor: pointer; color: var(--text-secondary); }
+.toc ol { margin: 0.5rem 0 0; padding-inline-start: 1.2rem; }
+.toc ol ol { margin-top: 0.2rem; }
 .post-header {
   border-bottom: 1px solid var(--border-subtle);
   padding-bottom: 1rem;

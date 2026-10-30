@@ -1,5 +1,6 @@
 +++
 title = "The Argument from Embarrassment, Inverted"
+description = "Apologists treat awkward Gospel details as marks of truth. Every long-lived movement generates awkward material, so awkwardness shows a story was told, not that it is true."
 date = 2026-08-23
 
 [taxonomies]

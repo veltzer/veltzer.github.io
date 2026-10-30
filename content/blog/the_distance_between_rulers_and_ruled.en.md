@@ -1,5 +1,6 @@
 +++
 title = "Treat the Government as a Black Box and Measure the Distance to the Public"
+description = "Treat the government as one object and measure how far its wishes sit from the public's. That distance appears in every representative regime ever tried, so it belongs to the design."
 date = 2026-05-26
 
 [taxonomies]

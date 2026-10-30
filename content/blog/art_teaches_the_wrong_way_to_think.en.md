@@ -1,5 +1,6 @@
 +++
 title = "Art Teaches the Wrong Way to Think"
+description = "Art's four biases: the individual over the population, feeling over measurement, symbol over case, patron over crowd. Read the novel, then look up the number."
 date = 2025-02-06
 
 [taxonomies]

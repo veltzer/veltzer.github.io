@@ -1,5 +1,6 @@
 +++
 title = "Big Pharma Is Paid to Treat the People Who Would Have Recovered Anyway"
+description = "The mildly ill recover anyway, so any pill seems to work on them. Drug makers follow that money, harming the mostly well with side effects while the seriously ill wait."
 date = 2024-04-06
 
 [taxonomies]

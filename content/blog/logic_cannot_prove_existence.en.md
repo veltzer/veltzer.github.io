@@ -1,5 +1,6 @@
 +++
 title = "Logic Cannot Bring Anything Into Existence"
+description = "Logic only unpacks what the premises contain, so no deduction can prove God exists. What exists is settled by looking; calling God a necessary being just hides the assumption."
 date = 2014-07-19
 
 [taxonomies]

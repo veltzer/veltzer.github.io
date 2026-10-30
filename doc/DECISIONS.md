@@ -376,3 +376,21 @@ and the retired-URL half of `scripts/check_redirects.py`, which now checks
 only the host redirects and the sitemap. An old URL now gets the 404 page.
 `doc/SEO.md` is the history of the Search Console work and still describes
 the redirects as they were.
+
+## No "updated" date on posts (2026-10-30)
+
+rssite supports an `updated` front-matter key (shown in the post header,
+`dateModified` in the JSON-LD, the feeds' `<updated>`). The site does not
+use it, by the author's decision: a post carries the date it was published
+and nothing else. Revisions, including the meta descriptions added to every
+post on 2026-10-30, do not get a second date. Do not add `updated =` to
+posts or render `page.updated` in the templates.
+
+## No series navigation (2026-10-30)
+
+Considered with the blog improvements of 2026-10-30: a `series` taxonomy
+with "part N of M" links on runs of related posts (the 2026 religion
+sequence, the 2023 direct-democracy posts, the two-part WordPress security
+post). Declined by the author. Posts link to each other with `@/` links
+where the text calls for it, and `page.related` plus previous/next cover
+the rest. Do not reopen it as an improvement.

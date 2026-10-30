@@ -1,5 +1,6 @@
 +++
 title = "The Sweet Spot of Climate Alarm, and Why Nobody Aims for It"
+description = "Too much alarm breeds resignation, too little breeds delay. Everyone pushes the seesaw harder than they believe, so public debate swings between panic and shrugging."
 date = 2023-02-01
 
 [taxonomies]

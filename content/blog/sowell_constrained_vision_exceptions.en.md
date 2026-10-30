@@ -1,5 +1,6 @@
 +++
 title = "Sowell's Constrained Vision Fails Exactly When It Matters Most"
+description = "Sowell's tragic vision would have counselled against ending hunger in 1750. It cannot tell a permanent limit from one about to lift, and those moments, like AI now, are what count."
 date = 2018-09-27
 
 [taxonomies]

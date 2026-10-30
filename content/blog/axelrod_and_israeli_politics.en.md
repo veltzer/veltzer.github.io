@@ -1,5 +1,6 @@
 +++
 title = "Coalition Politics Is an Iterated Game That Ends Every Election, So Everyone Defects"
+description = "Axelrod showed cooperation needs a long shadow of the future. Israeli coalitions end at every election, so everyone defects. Voting on issues is a game with no last round."
 date = 2025-04-08
 
 [taxonomies]

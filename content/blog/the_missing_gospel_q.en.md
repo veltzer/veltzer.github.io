@@ -1,5 +1,6 @@
 +++
 title = "The Missing Gospel: Q and the Synoptic Problem"
+description = "Matthew and Luke copy Mark, often word for word, and share a lost sayings source, Q. The Gospels are dependent literary works written decades later, not independent eyewitness reports."
 date = 2026-04-21
 
 [taxonomies]

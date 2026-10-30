@@ -1,5 +1,6 @@
 +++
 title = "Representative Democracy Is Designed to Make Half the Country Distrust Its Government"
+description = "Make the parties far apart and the losing half distrusts the government; make them alike and the vote is theatre. Deciding questions instead of choosing rulers escapes the paradox."
 date = 2026-05-11
 
 [taxonomies]

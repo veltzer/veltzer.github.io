@@ -1,5 +1,6 @@
 +++
 title = "Sacred Bullshit: Why Believing at 30 Is Stupid"
+description = "No adult believes in Santa Claus, yet millions believe a dead man rose from his tomb. Faith dodges the test, runs on fear, and believing it at 30 is plain stupidity."
 date = 2026-10-27
 
 [taxonomies]

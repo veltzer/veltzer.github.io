@@ -1,5 +1,6 @@
 +++
 title = "Problems with Netflix web and Netflix webos clients"
+description = "Previews that play on their own, lost playback positions, titles vanishing from My List without warning, a single list and no data API. The problems are in Netflix itself, so I left."
 date = 2025-09-01
 
 [taxonomies]

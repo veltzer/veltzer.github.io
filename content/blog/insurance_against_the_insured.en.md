@@ -1,5 +1,6 @@
 +++
 title = "Your Insurer Is Paid to Fail You"
+description = "Insurers profit from every claim they deny and from selling fear. Mutuals, costly denials and published payout ratios would fix it, and only a direct vote will pass them."
 date = 2024-06-08
 
 [taxonomies]

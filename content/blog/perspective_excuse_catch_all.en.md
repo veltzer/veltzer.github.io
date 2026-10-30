@@ -1,5 +1,6 @@
 +++
 title = "\"You Lack God's Perspective\" Is a Catch-All, and Catch-Alls Are Worthless"
+description = "The appeal to God's hidden perspective on evil is indistinguishable from indifference, fits every observation, and is invoked only when the evidence turns against belief."
 date = 2013-02-26
 
 [taxonomies]

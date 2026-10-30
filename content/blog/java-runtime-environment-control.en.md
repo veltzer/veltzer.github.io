@@ -1,5 +1,6 @@
 +++
 title = "Java runtime environment control"
+description = "Four ways to set JVM properties at run time: environment, command line, source code and JNLP file, plus the anti-aliasing setting that fixes Java's poor default fonts."
 date = 2011-06-09
 
 [taxonomies]

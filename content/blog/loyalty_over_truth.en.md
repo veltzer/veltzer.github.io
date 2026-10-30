@@ -1,5 +1,6 @@
 +++
 title = "Why You Stay With Your Side Even When the Other Side Is Right"
+description = "A side is an alliance, not a vote on one question, so defecting when the other side is right costs too much. As long as sides decide questions, loyalty decides them."
 date = 2025-06-02
 
 [taxonomies]

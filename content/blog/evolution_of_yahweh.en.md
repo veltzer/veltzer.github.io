@@ -1,5 +1,6 @@
 +++
 title = "The Evolution of Yahweh: From Desert War God to Creator of the Universe"
+description = "Yahweh began as a southern storm and warrior god, perhaps from Midian or Edom, and became the universal creator only through centuries of crisis and reinterpretation."
 date = 2026-04-06
 
 [taxonomies]

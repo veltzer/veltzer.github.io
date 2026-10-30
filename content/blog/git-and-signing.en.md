@@ -1,5 +1,6 @@
 +++
 title = "Git and signing"
+description = "Step by step instructions for signing git commits and tags with a GPG key: generate the key pair with gpg2, set your email in git, and commit or tag with -s."
 date = 2010-07-03
 
 [taxonomies]

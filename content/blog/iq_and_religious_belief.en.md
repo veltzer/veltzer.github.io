@@ -1,5 +1,6 @@
 +++
 title = "IQ and Religious Belief: What the Correlation Actually Says"
+description = "The inverse correlation between IQ and religious belief is real, modest and says nothing about individuals, but it refutes the claim that faith and intelligence go together."
 date = 2026-10-01
 
 [taxonomies]

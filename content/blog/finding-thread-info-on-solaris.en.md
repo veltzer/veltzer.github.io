@@ -1,5 +1,6 @@
 +++
 title = "Finding thread info on Solaris"
+description = "Solaris /proc files are binary, so this small Perl script finds a process by name with pgrep and filters ps -eL to show only its threads."
 date = 2010-06-11
 
 [taxonomies]

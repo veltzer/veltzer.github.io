@@ -1,5 +1,6 @@
 +++
 title = "AI and Religious Political Correctness: The Unholy Alliance"
+description = "Asked about the resurrection, LLMs claim historians cannot judge miracles, which is false. AI companies, fearing religious backlash, train their models to lie."
 date = 2026-10-25
 
 [taxonomies]

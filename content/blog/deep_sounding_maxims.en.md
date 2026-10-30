@@ -1,5 +1,6 @@
 +++
 title = "Maxims That Sound Deep but Tell You Nothing"
+description = "Insanity-is-repetition, the same river twice, everything in moderation: each is sometimes true, gives no criterion for when, and launders a preference as a principle."
 date = 2013-06-14
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "טבלת המרה משמות טמפו ל־BPM"
+description = "טבלה תמציתית של שמות טמפו, מ־Largo ועד Prestissimo, עם טווחי ה־BPM שלהם, לפי מטרונום מודרני סטנדרטי של Korg."
 date = 2010-08-14
 
 [taxonomies]

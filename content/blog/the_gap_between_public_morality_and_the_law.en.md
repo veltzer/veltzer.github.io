@@ -1,5 +1,6 @@
 +++
 title = "The Law Encodes One Morality and the Public Holds Another"
+description = "The public holds a simple, stable morality; the law encodes the morality of the organised interests that lobbied for it. Change who writes the law and the two begin to converge."
 date = 2023-12-29
 
 [taxonomies]

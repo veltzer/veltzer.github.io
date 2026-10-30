@@ -1,5 +1,6 @@
 +++
 title = "Correlation Without Entailment: Atheism and Marijuana Legalization"
+description = "Atheism does not entail support for legalizing marijuana, yet the two go together. When positions correlate without entailment, look upstream for the shared commitment."
 date = 2020-10-14
 
 [taxonomies]

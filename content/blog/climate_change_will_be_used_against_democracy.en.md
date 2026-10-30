@@ -1,5 +1,6 @@
 +++
 title = "Climate Change Will Be Used to Roll Back Democracy Unless the System Changes First"
+description = "Governments use every emergency to take back liberties, and climate is an emergency that never ends. Only a public deciding its own consumption is safe from that."
 date = 2023-01-23
 
 [taxonomies]

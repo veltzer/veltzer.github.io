@@ -1,5 +1,6 @@
 +++
 title = "The Suspicious Convenience of Religious Doctrine"
+description = "On slavery, wealth, sex and tithing, religious doctrine tracks the interests of the institutions that teach it, and shifts when they shift — the fingerprint of human invention."
 date = 2026-04-08
 
 [taxonomies]

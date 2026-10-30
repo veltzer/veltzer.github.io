@@ -1,5 +1,6 @@
 +++
 title = "Direct Democracy Will Not Slide Back Into Autocracy, Because Nobody Wants It To"
+description = "Sliding back into autocracy needs a constituency that gains from it and a concentration of power to capture. A direct democracy has neither; representation has both."
 date = 2023-07-03
 
 [taxonomies]

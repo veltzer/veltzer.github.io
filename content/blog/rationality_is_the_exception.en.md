@@ -1,5 +1,6 @@
 +++
 title = "Rationality Is the Exception: Humans Were Not Built to Think"
+description = "Rationality is a rare, effortful trick, not the brain's default, as a century of psychology and two decades of social media show. Institutions must work without it."
 date = 2026-09-25
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Our System Hands Extra Power to the People Most Certain They Are Right"
+description = "Voluntary voting gives the ideologically certain extra weight: evangelicals were a fifth of Americans and about a quarter of 2016 voters. Vote on questions, not tribes."
 date = 2025-09-18
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Set Your Screens With xrandr Once and Never Open the Display Dialog Again"
+description = "Display dialogs forget your layout and guess again every time. xrandr does everything they do from the shell, and a short script saves each layout as one command."
 date = 2012-09-30
 
 [taxonomies]

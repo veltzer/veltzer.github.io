@@ -1,5 +1,6 @@
 +++
 title = "The Construction of the Canon: How Humans Decided What God Said"
+description = "Which books are the Word of God was settled by bishops and councils with political agendas, and Catholic, Protestant and Ethiopian Bibles still differ. The canon was built, not revealed."
 date = 2026-04-20
 
 [taxonomies]

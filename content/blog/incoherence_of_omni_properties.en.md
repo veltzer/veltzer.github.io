@@ -1,5 +1,6 @@
 +++
 title = "The Incoherence of the Omni-Properties"
+description = "All-powerful, all-knowing, all-good: each attribute undermines itself, and together they clash. A God abstract enough to escape that is too abstract to argue for or to worship."
 date = 2026-04-30
 
 [taxonomies]

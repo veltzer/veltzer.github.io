@@ -1,5 +1,6 @@
 +++
 title = "Real time programming tips: running critical tests at application startup"
+description = "Check every environmental condition a real time application depends on, from OS versions to free memory and devices, in its first second, and halt if any fails."
 date = 2010-09-04
 
 [taxonomies]

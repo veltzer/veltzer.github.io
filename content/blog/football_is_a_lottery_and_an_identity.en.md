@@ -1,5 +1,6 @@
 +++
 title = "Football Is a Lottery, Which Is Exactly Why It Works as an Identity"
+description = "With two or three goals a game, the better team loses often and results are largely chance. That randomness is exactly why fans can build a lifelong identity on it."
 date = 2026-08-24
 
 [taxonomies]

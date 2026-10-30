@@ -1,5 +1,6 @@
 +++
 title = "Metaphysics Is Shit"
+description = "Ask for one metaphysical result and you get a puzzle about planks and a wrong guess about atoms. Whatever metaphysics gets right turns out to be physics."
 date = 2026-10-29
 
 [taxonomies]

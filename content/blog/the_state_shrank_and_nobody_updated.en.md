@@ -1,5 +1,6 @@
 +++
 title = "The State Got Smaller Than the Things It Regulates, and Our Fear Did Not Move"
+description = "Political theory still treats the state as the giant to fear, but the largest firms now rival it. Only the whole population deciding directly is bigger than they are."
 date = 2026-06-05
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "If a Tweet Can Move a Market, the Fault Is the Market's"
+description = "Blaming Musk for moving prices with a tweet misses the point: a market that swings a fifth on talk is broken, driven by short horizons, herding and nobody doing the homework."
 date = 2024-05-30
 
 [taxonomies]

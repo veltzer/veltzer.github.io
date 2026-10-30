@@ -1,5 +1,6 @@
 +++
 title = "Why There Will Never Be Just One Cryptocurrency"
+description = "The Internet Protocol converged because nobody cares how packets are addressed. Money decides who is rich, so several currencies will compete and none will win alone."
 date = 2023-03-18
 
 [taxonomies]

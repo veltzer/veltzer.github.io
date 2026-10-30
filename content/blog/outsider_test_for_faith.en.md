@@ -1,5 +1,6 @@
 +++
 title = "The Outsider Test for Faith"
+description = "The test John Loftus proposed: judge your own religion by the skeptical standards you already apply to every other one. Almost no religion survives, and that asymmetry is data."
 date = 2026-04-12
 
 [taxonomies]

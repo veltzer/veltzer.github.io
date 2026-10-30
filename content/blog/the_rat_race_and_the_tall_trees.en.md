@@ -1,5 +1,6 @@
 +++
 title = "The Rat Race Is a Forest of Trees That Cannot Agree to Stay Short"
+description = "Like trees growing tall only to shade each other out, workers, firms and countries run a race nobody wants. Only a direct democracy can agree on a height and enforce it."
 date = 2024-06-17
 
 [taxonomies]

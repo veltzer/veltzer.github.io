@@ -1,5 +1,6 @@
 +++
 title = "A Cellular Network Nobody Owns Is Technically Easy and Politically Forbidden"
+description = "A phone mesh with self-made cryptographic identities needs no new invention. What blocks it is spectrum licensed to carriers and the state's need to listen."
 date = 2026-09-12
 
 [taxonomies]

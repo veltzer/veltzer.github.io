@@ -1,5 +1,6 @@
 +++
 title = "Atheism May Be the World's Most Effective Force for Religious Peace"
+description = "Rival monotheisms stopped fighting each other once unbelief became their common enemy. The rude, public atheism moderates dislike is what produces the civility they value."
 date = 2011-04-17
 
 [taxonomies]

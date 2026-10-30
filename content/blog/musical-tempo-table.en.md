@@ -1,5 +1,6 @@
 +++
 title = "Musical tempo name to BPM table"
+description = "A concise table of tempo names, from Largo to Prestissimo, with their BPM ranges, taken from a standard modern Korg metronome."
 date = 2010-08-14
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Using \"noatime\" on a running Linux system"
+description = "atime turns every disk read into a write, one of the worst UNIX defaults. Add noatime to the mount options in /etc/fstab for a faster system and longer disk life."
 date = 2010-07-24
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Religion as a Private Benefit Paid For by the Public"
+description = "Belief without evidence is a private benefit with a public cost: it degrades citizens in a role that requires tracking reality. Describe it honestly; restrict nothing."
 date = 2022-04-05
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Religion Does Not Give You a Basis for Morality, It Takes Away Your Basis for Thinking"
+description = "Atheism supposedly costs you a basis for morality you never had. Religion costs something far larger: the habit of thinking for yourself about anything that matters."
 date = 2026-01-02
 
 [taxonomies]

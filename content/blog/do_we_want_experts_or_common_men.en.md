@@ -1,5 +1,6 @@
 +++
 title = "You Want the Smartest Surgeon and an Ordinary Prime Minister, and That Tells You What Governing Is"
+description = "We demand the best surgeon but an ordinary leader, so what we want at the top is alignment, not intellect. The most aligned decider available is the public itself."
 date = 2026-06-12
 
 [taxonomies]

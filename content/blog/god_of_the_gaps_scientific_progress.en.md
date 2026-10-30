@@ -1,5 +1,6 @@
 +++
 title = "The \"God of the Gaps\" and Scientific Progress"
+description = "As science advances, the gaps God was invoked to fill keep closing. A God found only in the unknown is in permanent retreat, and knowledge becomes the enemy of faith."
 date = 2026-03-30
 
 [taxonomies]

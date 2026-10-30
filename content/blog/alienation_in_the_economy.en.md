@@ -1,5 +1,6 @@
 +++
 title = "Half of Our Alienation Is Biology, the Other Half Is Policy"
+description = "Some dissatisfaction is evolution's doing and no society will remove it. The rest is amplified by an economy that profits from envy, and that half is a political choice."
 date = 2024-03-19
 
 [taxonomies]

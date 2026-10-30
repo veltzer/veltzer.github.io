@@ -1,5 +1,6 @@
 +++
 title = "Foreign and Security Policy: More Guts Than Brains?"
+description = "Axelrod's tournament shows that the ideal foreign and security policy is simple tit for tat. A state needs no clever ruler, only the decisiveness to carry it out."
 date = 2010-07-21
 
 [taxonomies]

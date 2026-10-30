@@ -1,5 +1,6 @@
 +++
 title = "I Accuse the Israeli Political System"
+description = "A Zola-style indictment of a design, not of people: party lists, no constituencies, coalition bargaining and questions kept off the ballot leave Israelis choosing no one."
 date = 2024-11-25
 
 [taxonomies]

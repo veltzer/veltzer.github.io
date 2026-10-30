@@ -1,5 +1,6 @@
 +++
 title = "Running sudo Without a Password, and What You Give Up"
+description = "How to drop the sudo password with a sudoers.d drop-in, or exempt only a few commands, and the honest cost: any process running as you becomes root."
 date = 2013-05-05
 
 [taxonomies]

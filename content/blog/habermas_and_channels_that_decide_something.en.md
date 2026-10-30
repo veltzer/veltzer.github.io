@@ -1,5 +1,6 @@
 +++
 title = "Habermas Was Right About the Channels and Wrong About the Manners"
+description = "Habermas was right that democracy is a matter of channels connecting everyone. The channels now exist; plug them into real decisions and accept that the debate will be rude."
 date = 2023-07-30
 
 [taxonomies]

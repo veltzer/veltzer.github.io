@@ -1,5 +1,6 @@
 +++
 title = "\"Everyone Is Entitled to Their Own Beliefs\" Is Nearly Empty"
+description = "Everyone is entitled to their beliefs means only that government may not coerce belief. It was never a shield against argument: we are all combatants in a permanent war of ideas."
 date = 2016-02-28
 
 [taxonomies]

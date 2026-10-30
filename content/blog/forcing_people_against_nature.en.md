@@ -1,5 +1,6 @@
 +++
 title = "Should Society Push People to Act Against Their Instincts?"
+description = "Pushing people against their instincts is not wrong in itself: pension saving shows it can be good. What makes it legitimate is consent, which is why it belongs to direct democracy."
 date = 2015-10-04
 
 [taxonomies]

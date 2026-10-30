@@ -1,5 +1,6 @@
 +++
 title = "Your Personal Experience Does Not Matter."
+description = "One kind friend or one attacker tells you nothing about a group. On social and political questions only aggregate data counts, and schools and media teach the opposite."
 date = 2026-10-17
 
 [taxonomies]

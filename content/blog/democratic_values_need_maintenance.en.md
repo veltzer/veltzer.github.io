@@ -1,5 +1,6 @@
 +++
 title = "Democratic Values Need Constant Maintenance, and That Tells You Who Is Eroding Them"
+description = "Every emergency erodes democratic values for the benefit of government, security services and business, and volunteers restore them. The public should hold the decision."
 date = 2026-03-24
 
 [taxonomies]

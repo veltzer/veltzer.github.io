@@ -1,5 +1,6 @@
 +++
 title = "Organizational Corruption Differs in Kind from Personal Corruption"
+description = "'Everyone is a bit corrupt' is false. Scale, promotion that selects the corruptible and the payoff-to-risk ratio at the top make organizational corruption different in kind."
 date = 2011-11-08
 
 [taxonomies]

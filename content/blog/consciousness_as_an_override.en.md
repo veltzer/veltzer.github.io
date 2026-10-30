@@ -1,5 +1,6 @@
 +++
 title = "Consciousness May Be the Override Switch on a Crude Emotional Calculator"
+description = "Emotions are a calculator tuned to an old world; once we invented the spear it gave wrong verdicts. Consciousness may be the partial override that overrules them."
 date = 2023-02-28
 
 [taxonomies]

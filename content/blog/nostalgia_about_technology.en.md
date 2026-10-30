@@ -1,5 +1,6 @@
 +++
 title = "Complaints About New Technology Are Always the Same Complaint"
+description = "The mourned video store was once the intruder that killed the bookshop. Complaints about new technology are always the same complaint: familiarity dressed up as criticism."
 date = 2013-09-05
 
 [taxonomies]

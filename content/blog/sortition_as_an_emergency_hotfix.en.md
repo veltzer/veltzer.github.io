@@ -1,5 +1,6 @@
 +++
 title = "When an Institution Fails in an Emergency, Inject Randomly Chosen Citizens Into It"
+description = "A hotfix for organisations that fail in crises, like the CDC in the pandemic: when an emergency is declared, put random citizens inside who may see everything."
 date = 2025-02-05
 
 [taxonomies]

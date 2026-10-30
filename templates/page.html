@@ -12,6 +12,11 @@
     <h1>{{ page.title }}</h1>
     <p class="post-meta">
       <time datetime="{{ page.date }}">{{ page.date | date(long=true) }}</time>
+      {#- rssite's reading_time: words / 200, rounded up, at least 1. -#}
+      <span class="reading-time">
+        {%- if page.reading_time == 1 %}{{ trans(key="reading_time_one") }}
+        {%- else %}{{ trans(key="reading_time") | replace(from="{n}", to=page.reading_time ~ "") }}{% endif -%}
+      </span>
       {%- if page.taxonomies.tags %}
       <span class="post-tags">
         {%- for tag in page.taxonomies.tags %}
@@ -39,6 +44,32 @@
     </nav>
     {%- endif %}
   </header>
+
+  {#- A table of contents for the long essays only: six sections or more,
+      about one post in five. The typical post has four or five and reads
+      in one sitting, where a contents box is noise. Counted in sections,
+      not words, because a post and its translation must agree and Hebrew
+      says the same thing in a quarter fewer words. Closed by default so it
+      never pushes the opening paragraph off the first screen. Two levels:
+      the sections and their subsections. -#}
+  {%- if page.toc | length >= 6 %}
+  <details class="toc">
+    <summary>{{ trans(key="toc_title") }}</summary>
+    <ol>
+      {%- for h in page.toc %}
+      <li><a href="#{{ h.id }}">{{ h.title }}</a>
+        {%- if h.children %}
+        <ol>
+          {%- for c in h.children %}
+          <li><a href="#{{ c.id }}">{{ c.title }}</a></li>
+          {%- endfor %}
+        </ol>
+        {%- endif %}
+      </li>
+      {%- endfor %}
+    </ol>
+  </details>
+  {%- endif %}
 
   <div class="post-body">
     {{ page.content | safe }}

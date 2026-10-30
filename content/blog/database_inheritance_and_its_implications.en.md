@@ -1,5 +1,6 @@
 +++
 title = "Database Inheritance: Three Ways to Do It and What Each One Costs"
+description = "Single-table, class-table, concrete-table and PostgreSQL's INHERITS, compared on constraints, queries, indexes and what the mapper does, with a rule for choosing."
 date = 2012-01-22
 
 [taxonomies]

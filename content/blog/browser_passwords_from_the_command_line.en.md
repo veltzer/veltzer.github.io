@@ -1,5 +1,6 @@
 +++
 title = "Reading Your Browser's Saved Passwords From the Command Line"
+description = "Saved Firefox and Chrome passwords print from a shell in seconds. They are safe from a stolen disk, not from anything running as you: set a master password and lock the screen."
 date = 2014-05-20
 
 [taxonomies]

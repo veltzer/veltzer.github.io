@@ -1,5 +1,6 @@
 +++
 title = "The Mesopotamian Roots of the Flood Myth"
+description = "Noah's flood adapts the Mesopotamian Atrahasis and Gilgamesh stories, recasting a whim of squabbling gods as a moral drama of one sovereign God."
 date = 2026-04-02
 
 [taxonomies]

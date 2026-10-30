@@ -1,5 +1,6 @@
 +++
 title = "The Engineers Pay for Everyone's Fantasies"
+description = "Engineers are punished by physics the moment they are wrong; pundits, gurus and politicians never are. Yet it is the untethered class that gets to steer the culture."
 date = 2026-05-31
 
 [taxonomies]

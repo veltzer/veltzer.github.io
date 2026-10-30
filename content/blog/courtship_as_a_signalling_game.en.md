@@ -1,5 +1,6 @@
 +++
 title = "Courtship Is a Signalling Game, and the Signals Have Reasons"
+description = "Courtship is a signalling game under asymmetric information, and sampling several partners, a real cost to leaving and terminal defection are its rational solutions."
 date = 2025-12-06
 
 [taxonomies]

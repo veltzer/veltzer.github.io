@@ -1,5 +1,6 @@
 +++
 title = "A Book Idea: Are We Steering, or Drifting?"
+description = "Humanity is much closer to drifting than steering: markets and checks and balances each traded control for safety from tyranny, and nobody ever added up the cost."
 date = 2020-08-21
 
 [taxonomies]

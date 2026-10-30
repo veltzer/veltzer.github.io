@@ -1,5 +1,6 @@
 +++
 title = "Austrians and Keynesians Agree on One Thing, and It Is the Important One"
+description = "Strip the vocabulary and both schools say the same thing: the state does not represent the public. The problem is not its size but the distance between deciders and payers."
 date = 2025-08-27
 
 [taxonomies]

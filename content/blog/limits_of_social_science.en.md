@@ -1,5 +1,6 @@
 +++
 title = "The Limits of Understanding: Do the Social Sciences Actually Explain Anything?"
+description = "The sceptical case against political science and economics, the best defence of them, and a verdict: the structural results are real knowledge, the forecasts mostly are not."
 date = 2026-09-02
 
 [taxonomies]

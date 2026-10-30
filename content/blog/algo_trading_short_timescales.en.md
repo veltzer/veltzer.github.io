@@ -1,5 +1,6 @@
 +++
 title = "Is Short-Timescale Algorithmic Trading Good or Bad for the Market?"
+description = "Fast electronic trading narrowed spreads and deepened liquidity, but liquidity can vanish under stress. Fast markets are good; the marginal nanosecond probably is not."
 date = 2026-05-16
 
 [taxonomies]

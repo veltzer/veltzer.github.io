@@ -1,5 +1,6 @@
 +++
 title = "Every Catastrophe Is Paid For in Liberties, and the System Is Glad to Collect"
+description = "Every catastrophe costs citizens liberties that do not come back, because governments welcome the excuse. Only far more direct democracy, built beforehand, can resist."
 date = 2024-08-27
 
 [taxonomies]

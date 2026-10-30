@@ -1,5 +1,6 @@
 +++
 title = "Representative Government Hoards Information, and the Hoarding Is the Point"
+description = "Representative government conceals information because its power lives there. A public that decides directly must be told everything, and a crowd can sift what it is told."
 date = 2023-04-14
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Switching Java versions on a Debian/Ubuntu system"
+description = "update-java-alternatives switches the default Java between Sun and openjdk on Debian or Ubuntu, and --auto returns to auto mode so new installs take over again."
 date = 2010-07-26
 
 [taxonomies]

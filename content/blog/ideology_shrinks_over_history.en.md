@@ -1,5 +1,6 @@
 +++
 title = "Every Ideology Explains Less Than the One Before It, and That Is the Point"
+description = "From religion to liberalism, each ideology claims a smaller slice of the world, because testing cuts away what fails. Only representative government still needs them."
 date = 2024-10-09
 
 [taxonomies]

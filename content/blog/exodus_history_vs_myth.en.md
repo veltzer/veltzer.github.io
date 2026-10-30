@@ -1,5 +1,6 @@
 +++
 title = "The Exodus: Foundation Myth or Historical Fact?"
+description = "No trace of the Exodus in Sinai or in Egyptian records, Canaan was then Egyptian territory, and the text is full of anachronisms. It is a national foundation myth."
 date = 2026-04-01
 
 [taxonomies]

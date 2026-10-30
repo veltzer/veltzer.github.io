@@ -1,5 +1,6 @@
 +++
 title = "Update WordPress by Hand, Because the Button Requires a Hole"
+description = "The one-click updater needs the web server to be able to rewrite the code it runs. Updating by hand takes ten minutes and keeps a hacked plugin from becoming a takeover."
 date = 2011-07-10
 
 [taxonomies]

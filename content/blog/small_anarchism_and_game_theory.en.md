@@ -1,5 +1,6 @@
 +++
 title = "Small Anarchism Could Be Right and Still Not Worth Supporting"
+description = "A world of small communities might well be better, but every step toward it is a step toward being conquered. A destination with no reachable path is not a proposal."
 date = 2023-01-05
 
 [taxonomies]

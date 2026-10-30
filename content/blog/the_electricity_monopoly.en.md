@@ -1,5 +1,6 @@
 +++
 title = "A Monopoly Does Not Need to Serve You, and the Electricity Company Proves It"
+description = "Service quality is set by what happens to an organisation when it serves you badly. To the Israel Electric Corporation nothing happened, and only competitors change that."
 date = 2024-12-13
 
 [taxonomies]

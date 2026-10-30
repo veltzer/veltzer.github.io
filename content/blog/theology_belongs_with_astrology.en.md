@@ -1,5 +1,6 @@
 +++
 title = "Theology Belongs with Astrology, Outside the University"
+description = "Theology has no evidence and no valid logic, exactly like astrology. Religion can be studied in a university; theology cannot be done there and should leave."
 date = 2026-10-01
 
 [taxonomies]

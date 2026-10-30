@@ -1,5 +1,6 @@
 +++
 title = "Unfalsifiability Is Not a Strength"
+description = "A claim is informative to the extent it rules things out. A belief insulated from all possible evidence is not profound but empty, and there is nothing in it to believe."
 date = 2026-04-11
 
 [taxonomies]

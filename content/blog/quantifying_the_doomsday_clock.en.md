@@ -1,5 +1,6 @@
 +++
 title = "I Do Not Trust the Doomsday Clock Is Three Different Objections, and All of Them Fail"
+description = "Distrust of the Doomsday Clock splits into three objections: biased scientists, a silly unit, the unquantifiable. None survives, and refusing to quantify is evasion posing as humility."
 date = 2025-07-07
 
 [taxonomies]

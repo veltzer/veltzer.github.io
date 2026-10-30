@@ -1,5 +1,6 @@
 +++
 title = "Polarization Has Five Authors, and We Are One of Them"
+description = "Polarization has five authors: the internet, the media, the parties, the schools and us. The effects compound, so any remedy aimed at a single villain will fail."
 date = 2025-09-08
 
 [taxonomies]

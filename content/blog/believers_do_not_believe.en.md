@@ -1,5 +1,6 @@
 +++
 title = "Believers Do Not Believe, and Apologetics Is Not What Religion Is For"
+description = "Most believers' behaviour shows they do not believe their doctrines. Religion delivers consolation, belonging and meaning, which is why arguing theology misses."
 date = 2026-01-29
 
 [taxonomies]

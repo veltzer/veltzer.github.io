@@ -1,5 +1,6 @@
 +++
 title = "The Pagan Origins of Christmas and Easter"
+description = "The December date, the Christmas tree, Easter eggs and the hare all predate Christianity. The Church did not conquer paganism; it absorbed it under a thin Christian rebranding."
 date = 2026-04-23
 
 [taxonomies]

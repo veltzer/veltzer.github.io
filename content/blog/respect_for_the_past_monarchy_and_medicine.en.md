@@ -1,5 +1,6 @@
 +++
 title = "Universal, Ancient and Respected Are Not Evidence That a Thing Was Good"
+description = "Pre-scientific medicine was universal, ancient and respected, and it killed its patients. Monarchy's defence rests on the same properties, which prove stability, not goodness."
 date = 2024-07-31
 
 [taxonomies]

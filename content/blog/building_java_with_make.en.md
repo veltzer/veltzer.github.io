@@ -1,5 +1,6 @@
 +++
 title = "Building Java With a Makefile Instead of Ant"
+description = "A fifteen-line Makefile builds Java with incremental compiles and an executable jar, no Ant XML needed. Unless a big dependency tree demands its own tool, make is simpler."
 date = 2011-03-06
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "The Evolution of the Immortal Soul"
+description = "The Hebrew Bible knows no immortal soul: nephesh means a living being, and the hope was bodily resurrection. The immaterial soul is a Greek import via Plato."
 date = 2026-04-03
 
 [taxonomies]

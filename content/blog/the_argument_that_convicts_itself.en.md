@@ -1,5 +1,6 @@
 +++
 title = "The Argument That Convicts Itself"
+description = "Plantinga says evolved brains cannot be trusted. Granted: truth and fitness split exactly where beliefs bind groups and console, which is where religion lives. Science is the fix."
 date = 2026-08-03
 
 [taxonomies]

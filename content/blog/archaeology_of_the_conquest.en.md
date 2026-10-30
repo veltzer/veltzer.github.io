@@ -1,5 +1,6 @@
 +++
 title = "The Archaeology of the Conquest: When the Walls Didn't Fall"
+description = "Jericho and Ai were not even inhabited when Joshua supposedly took them, and the destruction a conquest would leave is missing. Israel emerged gradually from within Canaan."
 date = 2026-04-22
 
 [taxonomies]

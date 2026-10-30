@@ -1,5 +1,6 @@
 +++
 title = "An Open Letter to Children About the Things School Told You That Are Not True"
+description = "School teaches that heroes make history, grammar is law, knowledge is certain, the state is benevolent and effort is rewarded. None is true; each keeps the institution running."
 date = 2024-08-18
 
 [taxonomies]

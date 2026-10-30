@@ -1,5 +1,6 @@
 +++
 title = "The Fax Machine Should Have Died Decades Ago, and Why It Has Not Is the Interesting Part"
+description = "The fax is the worst way to move a document, kept alive by legal habit, risk-averse institutions and a network effect running backwards. Rules keep it, not people."
 date = 2026-09-19
 
 [taxonomies]

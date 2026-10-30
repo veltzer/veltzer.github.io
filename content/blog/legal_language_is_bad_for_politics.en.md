@@ -1,5 +1,6 @@
 +++
 title = "Legal Language Is the Wrong Language for Politics"
+description = "Bribe, guilty, proven: courtroom words decide one person's fate under one rule. Imported into public life, they make the real questions about systems unaskable."
 date = 2025-01-27
 
 [taxonomies]

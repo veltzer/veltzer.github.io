@@ -1,5 +1,6 @@
 +++
 title = "Plato's Cave Has No Exit, and Science Says So Openly"
+description = "Plato's parable is wrong in every part: leaving the cave lands you in another cave. Science admits it and compares shadows; philosophy keeps looking for the door."
 date = 2025-03-12
 
 [taxonomies]

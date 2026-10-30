@@ -1,5 +1,6 @@
 +++
 title = "Political Problems May Need a Language We Have Not Built Yet"
+description = "Flight and medicine needed vocabularies built from scratch to make progress. Politics alone insists on everyday words, then wonders why its reasoning goes nowhere."
 date = 2011-09-14
 
 [taxonomies]

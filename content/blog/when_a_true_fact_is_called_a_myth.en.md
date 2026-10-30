@@ -1,5 +1,6 @@
 +++
 title = "When Historians Say \"It Did Not Happen,\" the Encyclopedia Says \"Tradition\""
+description = "There was no Exodus, yet encyclopedias call it tradition, narrative or myth. Those words protect the reader; only 'did not happen' actually transmits the finding."
 date = 2025-10-08
 
 [taxonomies]

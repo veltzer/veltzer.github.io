@@ -1,5 +1,6 @@
 +++
 title = "Atatürk and the Uncomfortable Case for the Interim Autocrat"
+description = "Atatürk forced Turkey toward a secular state by decree, and it was real progress. But a reform administered to a people rather than adopted by it can later be rejected."
 date = 2025-03-30
 
 [taxonomies]

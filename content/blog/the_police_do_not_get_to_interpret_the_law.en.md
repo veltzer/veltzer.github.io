@@ -1,5 +1,6 @@
 +++
 title = "The Police Do Not Get to Interpret the Law"
+description = "Laws must be interpreted, but by courts, in public. Israel's police read a 1979 wiretap law as allowing spyware in private, because a public reading would have failed."
 date = 2024-12-22
 
 [taxonomies]

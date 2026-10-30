@@ -1,5 +1,6 @@
 +++
 title = "Microsoft's Damage Was Never Mainly About the Desktop"
+description = "Owning the layer everything ran on froze chips on one architecture, taxed every PC and indirectly funded the SCO attack on Linux. The cost was every direction the industry could not go."
 date = 2026-04-25
 
 [taxonomies]

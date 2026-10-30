@@ -1,5 +1,6 @@
 +++
 title = "If Existential Risk Is What Matters, Direct Democracy Is Not Optional"
+description = "If Bostrom is right that cutting extinction risk outweighs nearly everything, then the speed and legitimacy of direct decisions make direct democracy a safety measure."
 date = 2024-09-05
 
 [taxonomies]

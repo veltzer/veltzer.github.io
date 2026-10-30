@@ -1,5 +1,6 @@
 +++
 title = "The Self Is a Useful Illusion"
+description = "There is no place in the brain where it all comes together and no single author of behaviour. The self is a narrative laid over parallel processing, useful and not real."
 date = 2026-08-15
 
 [taxonomies]

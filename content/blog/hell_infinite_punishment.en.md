@@ -1,5 +1,6 @@
 +++
 title = "Hell: Infinite Punishment for Finite Crimes"
+description = "Any wrong a finite human commits is finite, so eternal torment can never fit it. A God who designed hell is morally worse than an ordinary judge who would refuse such a sentence."
 date = 2026-05-04
 
 [taxonomies]

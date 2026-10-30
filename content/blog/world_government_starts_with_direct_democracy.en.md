@@ -1,5 +1,6 @@
 +++
 title = "Everyone Who Wants World Government Has No Route to It, Except One"
+description = "Advocates of world government admit they have no route to it, since governments will not abolish themselves. Publics deciding directly are the only way there."
 date = 2024-03-01
 
 [taxonomies]

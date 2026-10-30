@@ -1,5 +1,6 @@
 +++
 title = "The Illusion of Separation: Why Religion and Culture Are the Same Thing"
+description = "Religion and culture are not two separate domains but one phenomenon. Religion was once all of culture and is still its main engine; the dividing line is an academic fiction."
 date = 2026-10-24
 
 [taxonomies]

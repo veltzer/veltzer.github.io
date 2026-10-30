@@ -1,5 +1,6 @@
 +++
 title = "Forty Years of Secrecy Is the Length of a Career, and That Is Not a Coincidence"
+description = "Israel sealed the minutes of its 1982 decision to enter Lebanon for forty years, about until the deciders are dead. Redaction protects security; a blanket seal protects only them."
 date = 2024-10-29
 
 [taxonomies]

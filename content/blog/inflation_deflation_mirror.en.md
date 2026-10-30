@@ -1,5 +1,6 @@
 +++
 title = "Deflation's Problems Mirror Inflation's, and Deserve the Same List"
+description = "Deflation's costs mirror inflation's: unstable prices, an unlegislated transfer, debt that grows by itself, a cascade of delay. It is ignored because it sounds like good news."
 date = 2013-10-08
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Fighting the Wrong Battle: How the Academic Left Chose the Wrong War"
+description = "The academic left traded reason against dogma for a culture war that judges claims by who makes them, and left religion, still a powerful force, unopposed."
 date = 2026-10-04
 
 [taxonomies]

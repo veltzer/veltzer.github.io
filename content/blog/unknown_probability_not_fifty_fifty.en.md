@@ -1,5 +1,6 @@
 +++
 title = "Not Knowing the Probability Is Not the Same as 50/50"
+description = "Not knowing a probability is no reason to call it 50/50. The honest answer is to say you do not know, then reason from base rates and indirect evidence."
 date = 2026-03-27
 
 [taxonomies]

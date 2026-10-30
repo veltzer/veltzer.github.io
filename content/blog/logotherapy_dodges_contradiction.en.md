@@ -1,5 +1,6 @@
 +++
 title = "Frankl's Logotherapy Dodges the Contradiction It Should Confront"
+description = "Frankl's logotherapy supplies meaning without admitting it is manufactured. We must inflate our significance while knowing it is invented, and face that openly."
 date = 2021-07-16
 
 [taxonomies]

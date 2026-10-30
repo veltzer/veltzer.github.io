@@ -1,5 +1,6 @@
 +++
 title = "You Could Be Consistently Libertarian in 1970 and Socialist in 2020"
+description = "Aim reform at whichever sector does the most harm, and as private capital outgrew the state, the same rule could yield libertarianism in 1970 and socialism in 2020."
 date = 2016-10-05
 
 [taxonomies]

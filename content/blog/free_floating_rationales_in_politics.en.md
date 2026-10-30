@@ -1,5 +1,6 @@
 +++
 title = "Free-Floating Rationales: Why Nobody Wanted the Policy You Are Living Under"
+description = "Like a cuckoo chick's shoving, a bad policy persists for a reason nobody holds: concentrated benefit, dispersed cost. Change the environment, not the people."
 date = 2025-04-18
 
 [taxonomies]

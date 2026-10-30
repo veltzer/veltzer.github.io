@@ -1,5 +1,6 @@
 +++
 title = "New blog set up"
+description = "The blog moves from Google to my own machine, for more control over my data and over the look, feel and features of the blog."
 date = 2010-06-05
 
 [taxonomies]

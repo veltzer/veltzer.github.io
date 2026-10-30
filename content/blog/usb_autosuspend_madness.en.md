@@ -1,5 +1,6 @@
 +++
 title = "USB Autosuspend Is Why Your Mouse Keeps Falling Asleep"
+description = "A lagging mouse on Ubuntu 12.04 is not broken hardware but laptop-mode-tools suspending it. One line in its USB autosuspend config turns that off for good."
 date = 2012-06-10
 
 [taxonomies]

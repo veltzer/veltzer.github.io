@@ -1,5 +1,6 @@
 +++
 title = "Ranking Humanity's Problems by Tractability, Not Severity"
+description = "Rank humanity's problems by whether they can be solved, not by how bad they are. Religion comes out most tractable, because secular Scandinavia is an existence proof."
 date = 2012-01-30
 
 [taxonomies]

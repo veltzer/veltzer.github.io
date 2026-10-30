@@ -1,5 +1,6 @@
 +++
 title = "The Equivocation of \"God\": One Word, Many Gods"
+description = "The word 'God' covers a first cause, Yahweh, a loving Father and more. Arguments for the vague one are smuggled in as evidence for the one people actually worship."
 date = 2026-04-26
 
 [taxonomies]

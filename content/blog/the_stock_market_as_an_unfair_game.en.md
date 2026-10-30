@@ -1,5 +1,6 @@
 +++
 title = "The Stock Market Is a Casino Where Some Players See the Cards"
+description = "Hold the stock market to a casino's standard of fairness and it fails: insiders see the cards, the fast act first, access is private and the fees are hidden."
 date = 2024-06-26
 
 [taxonomies]

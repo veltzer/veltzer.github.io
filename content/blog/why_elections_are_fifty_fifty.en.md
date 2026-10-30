@@ -1,5 +1,6 @@
 +++
 title = "Why Elections Come Out Fifty-Fifty Even When Every Issue Has a Clear Majority"
+description = "A small simulation: six issues, each with a 70 percent majority, split between two parties, and the vote lands at fifty-fifty. Bundling destroys the information."
 date = 2026-08-06
 
 [taxonomies]

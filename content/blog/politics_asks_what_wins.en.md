@@ -1,5 +1,6 @@
 +++
 title = "The System Asks What Wins, Never What Is Right"
+description = "Politics trains everyone inside it to answer what is right with what wins. It turned vaccination into a tribal marker and, by example, teaches a whole economy to distrust."
 date = 2016-05-30
 
 [taxonomies]

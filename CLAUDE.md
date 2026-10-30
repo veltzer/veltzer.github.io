@@ -102,11 +102,14 @@ on, and each becomes a product, so an unchanged site runs rssite zero times,
 an edited post rebuilds only the files that list it, and `clean outputs` +
 `build` restores the site from cache. rssite also writes the feeds, the
 sitemap and the shared-themes files (`[[publish]]`), and reads the commit every footer names
-itself (`git` in the templates). The one step it does not do is the
-companies data, `scripts/build_site.py companies`. See `rsconstruct.toml`.
+itself (`git` in the templates). The two steps it does not do are the
+companies data, `scripts/build_site.py companies`, and the per-post share
+cards, `scripts/make_post_cards.py` (one 1200x630 `og:image` per post,
+written to `_site/images/og/<file stem>.jpg`, never committed). See
+`rsconstruct.toml`.
 
 **Never run `rssite build` by hand for a real build — go through the build
-system.** `rssite build` alone skips the companies data. `rssite check` is fine at any time:
+system.** `rssite build` alone skips the companies data and the post cards. `rssite check` is fine at any time:
 it renders the whole site twice in memory and reports every broken link,
 template or translation without writing anything. The real output is
 `_site/`, and only after `rsconstruct build`.
@@ -157,6 +160,7 @@ later.
 ```toml
 +++
 title = "The Euthyphro Dilemma: Why Morality Cannot Come From God"
+description = "Is something good because God commands it, or commanded because it is good? Either morality is arbitrary or it is independent of God; there is no third option."
 date = 2026-04-28
 
 [taxonomies]
@@ -164,9 +168,14 @@ tags = ["religion", "philosophy", "ethics"]
 +++
 ```
 
+- **Every post has a `description`**: one or two plain-text sentences, ~160
+  characters, saying what the post argues. It becomes the meta description,
+  `og:description` and the search snippet; without it they fall back to the
+  opening text. Posts carry no `updated` key and are not grouped into series,
+  both by decision (`doc/DECISIONS.md`).
 - **Translations**: add `content/blog/<same-base-name>.he.md`. Copy `date` verbatim
   from the English file — it is a shared key, and a mismatch splits the pair.
-  Translate the `title` value and the `tags` (see below). Do not add a `lang` key;
+  Translate the `title`, the `description` and the `tags` (see below). Do not add a `lang` key;
   rssite reads it from the suffix (`.en` / `.he`; a file with neither is an error).
   The language switcher renders itself from the `translations` rssite hands every
   template, so never hand-write cross-links between a post and its translation.

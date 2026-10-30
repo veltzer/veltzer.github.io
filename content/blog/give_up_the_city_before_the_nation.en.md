@@ -1,5 +1,6 @@
 +++
 title = "If You Had to Give Up One Election, Give Up the City"
+description = "If you could keep elections at only one level, you would keep the national one, because wars and currencies are national. That is where direct democracy should aim first."
 date = 2025-06-24
 
 [taxonomies]

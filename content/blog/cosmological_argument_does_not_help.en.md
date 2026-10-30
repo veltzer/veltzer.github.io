@@ -1,5 +1,6 @@
 +++
 title = "The Cosmological Argument Does Not Get You to God"
+description = "Grant the Kalam argument in full and it yields only some unknown cause of the universe. The leap from there to the personal God of any religion is made silently by the believer."
 date = 2026-04-16
 
 [taxonomies]

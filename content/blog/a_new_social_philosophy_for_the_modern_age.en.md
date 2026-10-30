@@ -1,5 +1,6 @@
 +++
 title = "A New Social Philosophy and Governance for the Modern Age"
+description = "Each form of government fits a communication medium. The internet exposed voters as irrational and tribal, so we need a philosophy and a government built on that fact."
 date = 2026-10-11
 
 [taxonomies]

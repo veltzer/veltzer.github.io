@@ -1,5 +1,6 @@
 +++
 title = "How to Call system() in Perl Without Getting Burned"
+description = "Most Perl scripts call system() wrong: a shell-parsed string and an ignored return value. Use the list form, unpack the exit status, and never try to quote your way out."
 date = 2011-08-14
 
 [taxonomies]

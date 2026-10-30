@@ -1,5 +1,6 @@
 +++
 title = "Large Events Come From Stored Tension, and Direct Democracy Releases It Early"
+description = "Crashes, wars and revolutions are stored tension released at once. Direct democracy lets the majority correct continuously, storing the least and suffering the smallest events."
 date = 2023-04-05
 
 [taxonomies]

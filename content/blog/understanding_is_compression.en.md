@@ -1,5 +1,6 @@
 +++
 title = "Understanding Is Compression"
+description = "Knowledge is compression: understanding something means being able to say it shorter. The criterion sorts Ptolemy from Newton, and machine learning arrives at it independently."
 date = 2011-07-05
 
 [taxonomies]
@@ -22,7 +23,7 @@ So why is 16 better? **Because its formula is shorter.** *n²* against a fourth-
 
 The same criterion sorts the history of astronomy, and does it more cleanly than any story about evidence.
 
-Ptolemy's system worked. It predicted planetary positions with real accuracy, and it did so with epicycles — circles on circles, tuned individually. But he had no account of *why* Mars needed its particular epicycle and Neptune another. Each was a separate stipulation, fitted to that planet.
+Ptolemy's system worked. It predicted planetary positions with real accuracy, and it did so with epicycles — circles on circles, tuned individually. But he had no account of *why* Mars needed its particular epicycle and Saturn another. Each was a separate stipulation, fitted to that planet.
 
 Newton explained everything Ptolemy explained, using laws that fit on an index card, with no per-planet adjustments.
 

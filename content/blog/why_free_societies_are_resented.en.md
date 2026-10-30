@@ -1,5 +1,6 @@
 +++
 title = "Free Societies Are Resented Because Their Governments Arm the Jailers"
+description = "Free societies are hated abroad because their governments sell dictators weapons and keep them solvent. Only taking that decision from the hands that profit from it would be believed."
 date = 2024-02-21
 
 [taxonomies]

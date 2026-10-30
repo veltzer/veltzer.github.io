@@ -1,5 +1,6 @@
 +++
-title = "ניתוח לב פתוח ב-Fatar StdioLogic SL880"
+title = "ניתוח לב פתוח ב-Fatar StudioLogic SL880"
+description = "קליד צונח ב-Fatar StudioLogic SL880 פירושו בדרך כלל חלק פלסטיק פנימי שנשבר. פתחו את המארז והחליפו אותו בחלק מקליד נמוך שאינו בשימוש, צעד אחר צעד עם תמונות."
 date = 2011-06-18
 
 [taxonomies]

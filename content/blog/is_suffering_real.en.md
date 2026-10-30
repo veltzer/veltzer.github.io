@@ -1,5 +1,6 @@
 +++
 title = "Is Suffering as Real as We Think It Is?"
+description = "Against Harris and Harari: consciousness may exist without suffering, and our sense that suffering is supremely real comes from a system built to overrate pain."
 date = 2023-02-19
 
 [taxonomies]

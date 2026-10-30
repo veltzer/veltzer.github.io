@@ -1,5 +1,6 @@
 +++
 title = "Refusing to Count Lives Is Also a Way of Counting Them"
+description = "Every budget trades lives against lives whether anyone counts or not. Refusing the arithmetic saves nobody; it only protects the decider from knowing whom the choice killed."
 date = 2024-09-23
 
 [taxonomies]

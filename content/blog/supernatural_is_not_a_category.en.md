@@ -1,5 +1,6 @@
 +++
 title = "There Is No Such Thing as the Supernatural"
+description = "Atheists should stop saying science cannot deal with the supernatural. There is one world, and the word only marks the edge of what we know, as lightning once did."
 date = 2026-03-13
 
 [taxonomies]

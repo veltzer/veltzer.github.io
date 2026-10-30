@@ -1,5 +1,6 @@
 +++
 title = "Open Source Is Lucky to Have Microsoft Where It Is"
+description = "Microsoft's dominance helps free software: one target concentrates effort, a common adversary unites rival projects, and lock-in creates the demand for freedom."
 date = 2009-02-15
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "History Is the Discipline That Decides Which Explanation Mattered"
+description = "Every discipline finds its own cause the important one. History's real job, beyond the breadth and change Harari names, is to judge which mechanism did the work."
 date = 2024-10-20
 
 [taxonomies]

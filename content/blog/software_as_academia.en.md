@@ -1,5 +1,6 @@
 +++
 title = "Basic Software Is Turning Into Academia, and the Corporations Have Not Noticed"
+description = "The bottom of the software stack is becoming a commons that works like academia. Corporations still sell copies, the one thing losing value, and miss where the value went."
 date = 2012-05-13
 
 [taxonomies]

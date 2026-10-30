@@ -1,5 +1,6 @@
 +++
 title = "Two Organizations Can Be Allies on Monday and Enemies on Tuesday, and Both Are Sincere"
+description = "Organisations have interests, not friendships, and interests are indexed by issue. The US and China trade and arm against each other at once, and neither is a mask."
 date = 2025-02-14
 
 [taxonomies]

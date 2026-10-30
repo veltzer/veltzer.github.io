@@ -1,5 +1,6 @@
 +++
 title = "What the Prayer Studies Actually Found"
+description = "The Templeton-funded STEP trial and other controlled studies found no benefit from praying for the sick. The most testable claim in religion was tested, and it failed."
 date = 2026-05-01
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Representative Democracy Cannot Bind Its Future Self"
+description = "A new administration may repudiate its predecessor's treaties, so democratic promises are worth less. A referendum hands the commitment to the body that does not turn over."
 date = 2026-01-22
 
 [taxonomies]

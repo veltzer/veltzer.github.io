@@ -1,5 +1,6 @@
 +++
 title = "Political Science Is Not a Science Because Its Biggest Truths Cannot Be Said"
+description = "Power corrupts, elections carry little information and legislatures do not represent, yet the field cannot say so and keep its funding: a priesthood with statistics."
 date = 2024-08-09
 
 [taxonomies]

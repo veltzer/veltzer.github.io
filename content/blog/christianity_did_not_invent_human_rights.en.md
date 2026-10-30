@@ -1,5 +1,6 @@
 +++
 title = "Christianity and Human Rights: A Historical Reality Check"
+description = "Between the 5th and 15th centuries almost no Christian thinker claimed Christianity produced human rights. The idea did not exist yet; the claim is a modern anachronism."
 date = 2026-08-31
 
 [taxonomies]

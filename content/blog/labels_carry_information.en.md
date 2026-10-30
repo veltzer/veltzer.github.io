@@ -1,5 +1,6 @@
 +++
 title = "If a Label Carries No Properties, What Is It For?"
+description = "A label is useful because it carries information. Strip it of every property and it predicts nothing, which is a point about categories that settles nothing political."
 date = 2023-08-24
 
 [taxonomies]

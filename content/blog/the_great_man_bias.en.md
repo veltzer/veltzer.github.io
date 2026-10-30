@@ -1,5 +1,6 @@
 +++
 title = "History Books Should Carry a Warning About the Great-Man Bias"
+description = "Crediting events to individuals was accurate in a band of a hundred and fails in societies of millions. We index history by names, then mistake the index for the cause."
 date = 2017-06-21
 
 [taxonomies]

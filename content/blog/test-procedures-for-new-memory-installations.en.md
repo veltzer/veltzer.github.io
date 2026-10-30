@@ -1,5 +1,6 @@
 +++
 title = "Test procedures for new memory installations"
+description = "New RAM is faulty more often than you think, and the symptoms look like anything but memory. A two-step check: memtest86+ first, then a kernel compile that loads every core."
 date = 2011-03-29
 
 [taxonomies]
@@ -8,7 +9,7 @@ tags = ["hardware", "linux", "memory"]
 
 When you buy a new computer or get one and you are not sure of the quality of memory that it has, or when you
 buy, upgrade or add new memory you should test it before going on to simply use it. The reason is quite
-intricate. In most probability the memory with will either work or won't and if the machine works it will be a
+intricate. In most probability the memory will either work or won't and if the machine works it will be a
 good indication that the memory works fine. But in a few of the cases your machine may exhibit very strange
 behavior indeed. Various programs crashing, machine freezes, kernel crashes and the like. In that case, which
 may happen some time after the upgrade you may fail to connect the symptoms with hardware memory issues and
@@ -19,7 +20,7 @@ using new memory in order to be sure that your memory is functional and well con
 you money since from my experience the probability of buying faulty memory is very high (at least 15% from my
 statistics).
 
-**First phase is to run the ubiqitous memtest86+.** This is available via the boot menu of most current linux distros. This test runs for some time and long years of using it have led me to a solid statistic according to which if memtest does not find a problem with your memory in the first 30 seconds it will not find any problems in the next 30 hours. But, then again, this is just a statistic, feel free to run this for as long as you wish. If memtest fails return the chips to the manufacturer and get new ones (if you feel that it is the chips fauls - see the note below). If it succeeds then you need to go on to the second phase of configuring the memory properly.
+**First phase is to run the ubiquitous memtest86+.** This is available via the boot menu of most current linux distros. This test runs for some time and long years of using it have led me to a solid statistic according to which if memtest does not find a problem with your memory in the first 30 seconds it will not find any problems in the next 30 hours. But, then again, this is just a statistic, feel free to run this for as long as you wish. If memtest fails return the chips to the manufacturer and get new ones (if you feel that it is the chips fauls - see the note below). If it succeeds then you need to go on to the second phase of configuring the memory properly.
 
 Once the memory is installed open your bios configuration and see how is it configured. How are its parameters (speed and 4 more numbers) set. Is it on automatic or is it on manual? Do you have heterogenous memory banks? If so what is the speed of each and what is the overall speed of the entire memory subsystem? Why should you know all of this info, you rightly ask. Well, in a perfect world you would just buy memory, plug it in and the BIOS would configure and use it properly. Alas, this is not the world we live in. In reality you usualy buy the motherboard at date X and buy the upgrade or new memory at date Y. Y is a couple of years following X. This means that the memory you are buying is too fast for your motherboard. Shouldn't your BIOS be able to handle this? Well, yes and no. In lots of cases it does manage to handle it but in some it doesn't and believe me, you don't want to get stuck in the latter.
 

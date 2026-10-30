@@ -1,5 +1,6 @@
 +++
 title = "To Understand Religion Is to Understand Atheism"
+description = "Read faith as virtue, eternal hell and the fear of apostasy as defences against unbelief and they make sense. Theology follows the market, built to keep talk away from evidence."
 date = 2018-04-12
 
 [taxonomies]

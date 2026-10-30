@@ -1,5 +1,6 @@
 +++
 title = "Realpolitik Is Usually a Cover Story, and We Have No Way to Check"
+description = "Realpolitik and plain corruption predict the same arms sale and the same speech, so we can never tell which one we got. Honest realpolitik needs deciders with no stake."
 date = 2025-07-17
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Hebrew on Linux: A Practical Tour"
+description = "Everything Hebrew on Linux needs, in one place: the keyboard layout and switch key, fonts, right-to-left text in terminals, spelling, LibreOffice, and what still hurts."
 date = 2012-02-26
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Jefferson Wrote Down the Right to Replace a Government, and We Filed It Away"
+description = "The Declaration of Independence, not the Constitution, says the people may abolish a failing government and institute a new one. That right is to keep asking, and it covers direct democracy."
 date = 2024-02-12
 
 [taxonomies]

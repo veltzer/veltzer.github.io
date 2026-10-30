@@ -1,5 +1,6 @@
 +++
 title = "Design the Process, Don't Write the Law"
+description = "Laws are static and the world is not, as the American right to bear arms shows. Design the process that makes laws instead: a bad process can correct itself, a bad law cannot."
 date = 2012-06-11
 
 [taxonomies]

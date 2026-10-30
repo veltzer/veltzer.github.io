@@ -1,5 +1,6 @@
 +++
 title = "Capitalism Feeds Us and Then Has to Convince Us We Are Hungry"
+description = "Capitalism fills the shops, then must manufacture want through advertising to keep them emptying. It could be balanced, but governments sit on the business side of the conflict."
 date = 2024-05-12
 
 [taxonomies]

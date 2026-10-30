@@ -1,5 +1,6 @@
 +++
 title = "מדוע מסמכי Word נראים שגויים ב-LibreOffice, ומה באמת עוזר"
+description = "קובצי Word נשברים ב-LibreOffice בעיקר בגלל גופנים חסרים. התקינו גופנים תואמי מידות כמו Carlito ו-Caladea, תקנו את ההחלפות, ובקשו PDF כשרק צריך להסתכל."
 date = 2013-09-08
 
 [taxonomies]

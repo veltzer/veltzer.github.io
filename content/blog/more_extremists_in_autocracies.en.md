@@ -1,5 +1,6 @@
 +++
 title = "The Extremists Are Being Born Where Nobody Is Allowed to Argue With Them"
+description = "Population growth is concentrated in young autocracies with no release valves, whose rulers profit from supplying an enemy. Propping them up is a bet against arithmetic."
 date = 2024-09-14
 
 [taxonomies]

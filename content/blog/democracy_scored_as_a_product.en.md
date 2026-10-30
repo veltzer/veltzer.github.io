@@ -1,5 +1,6 @@
 +++
 title = "Read the Spec of Representative Democracy as If Someone Were Proposing It Today"
+description = "Read as a new proposal, representative democracy fails review: one vote every few years, for people rather than decisions, with no performance review. The fix is direct democracy."
 date = 2026-05-14
 
 [taxonomies]

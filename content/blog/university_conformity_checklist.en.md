@@ -1,5 +1,6 @@
 +++
 title = "The University Does Not Produce Non-Conformists, and Here Is the Checklist"
+description = "On religion, free will, Darwin, the sexes and why some cultures succeed, the university has the evidence and publicly says what offends no one. That is conformity."
 date = 2026-03-20
 
 [taxonomies]

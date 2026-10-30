@@ -1,5 +1,6 @@
 +++
 title = "Government Has Less Unity of Purpose Than Any Corporation, and by Design"
+description = "If a corporation cannot achieve unity of purpose, a government built on mutual obstruction never will. The paralysis is no accident: it protects the people already in power."
 date = 2026-05-08
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "The Planet Would Vote Against Nuclear Weapons, and Cannot"
+description = "The whole planet would vote against nuclear weapons, yet nothing stops their spread. Humanity is losing to its own hierarchies; direct democracy is the step left to take."
 date = 2023-04-23
 
 [taxonomies]

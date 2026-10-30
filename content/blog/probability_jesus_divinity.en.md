@@ -1,5 +1,6 @@
 +++
 title = "Can You Put a Number on the Divinity of Jesus?"
+description = "Split the claim into a chain: a God exists, intervenes, and the Christian account is the true one. The links multiply the number down to tiny, but not literally zero."
 date = 2026-08-29
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "We Trust the Judges We Did Not Choose More Than the Representatives We Did"
+description = "People trust their supreme court more than their legislature because judges do not control the money. Elections, it turns out, are a brake on whoever holds the purse."
 date = 2026-05-09
 
 [taxonomies]

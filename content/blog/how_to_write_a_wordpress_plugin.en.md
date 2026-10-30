@@ -1,5 +1,6 @@
 +++
 title = "A WordPress Plugin Is One File and Two Functions"
+description = "A WordPress plugin is a PHP file with a header comment and functions hooked to actions and filters. Built here from nothing, with the habits worth forming from line one."
 date = 2010-09-12
 
 [taxonomies]

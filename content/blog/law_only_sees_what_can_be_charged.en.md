@@ -1,5 +1,6 @@
 +++
 title = "The Law Only Sees What Can Be Charged"
+description = "The law can act only on harm written down as a defined offence, so years of domestic cruelty, or a financial scheme where no single act is illegal, do not exist for it."
 date = 2025-01-09
 
 [taxonomies]

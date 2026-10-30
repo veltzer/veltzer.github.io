@@ -1,5 +1,6 @@
 +++
 title = "Companies Should Declare the Philosophy They Depend On"
+description = "You can believe in astrology and still board a plane. Companies built on science should openly declare the philosophy they rely on; the present silence is unacceptable."
 date = 2022-02-16
 
 [taxonomies]

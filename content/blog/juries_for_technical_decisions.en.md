@@ -1,5 +1,6 @@
 +++
 title = "Direct Democracy Does Not Decide Technical Questions, It Decides Who Inspects Them"
+description = "The public cannot vote on a water treatment plant, and need not. One vote can set up citizen juries to inspect technical decisions, so officials keep the expertise and lose the impunity."
 date = 2023-11-24
 
 [taxonomies]

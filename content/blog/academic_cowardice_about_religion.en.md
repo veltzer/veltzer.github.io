@@ -1,5 +1,6 @@
 +++
 title = "Academia Is More Afraid of Blaming Religion Than of Blaming Anything Else"
+description = "Historians demand extra proof before blaming religion for a war and none for economics. Philosophy even recasts Socrates' trial for impiety as a martyrdom for free inquiry."
 date = 2017-01-31
 
 [taxonomies]

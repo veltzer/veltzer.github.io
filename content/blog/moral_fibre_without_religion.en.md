@@ -1,5 +1,6 @@
 +++
 title = "The West Lost Its Religion and Was Handed Nothing to Think About Instead"
+description = "The West shed religion and with it the occasion to think about right and wrong. Binding people to real decisions on war, tax and dying brings that back without a single false belief."
 date = 2023-12-11
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Firefox favicon cache is over caching"
+description = "Firefox keeps showing an old favicon long after Chrome updates it. Delete it from the cache by hand, or simply browse to the favicon URL to refresh it."
 date = 2010-06-25
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "Learn to Disrespect What Cost You the Most to Learn"
+description = "Years of theology and philosophy taught me mostly that they are empty, and that negative result is real knowledge. Mathematics survived the test. Saying a field was bad is growth."
 date = 2015-05-11
 
 [taxonomies]

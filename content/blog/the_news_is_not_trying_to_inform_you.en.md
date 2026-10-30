@@ -1,5 +1,6 @@
 +++
 title = "The News Is Not Trying to Inform You"
+description = "A news segment that opens with a family is built for catharsis, not understanding. Real news would be statistics and comparisons; a medium that cannot do that is not news."
 date = 2025-03-25
 
 [taxonomies]

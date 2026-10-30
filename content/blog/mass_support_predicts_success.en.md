@@ -1,5 +1,6 @@
 +++
 title = "A System of Government That Needs Mass Support to Exist Is More Likely to Last"
+description = "Direct democracy cannot be imposed on an unwilling public. That barrier is also its guarantee: a system that needs mass support to begin is the one likely to last."
 date = 2023-06-15
 
 [taxonomies]

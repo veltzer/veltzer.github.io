@@ -1,5 +1,6 @@
 +++
 title = "Why There Are Different Societies, and Why Their Meetings Go Badly"
+description = "Geography made societies different, and the payoffs facing leaders make their meetings violent. The mountain made them strangers; the leadership made them enemies."
 date = 2025-10-31
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "The Two Kinds of Believers and the Hypocrisy of the Sophisticated"
+description = "Literal believers are wrong but honest. Sophisticated believers call the miracles metaphor while their community believes them word for word, and that is hypocrisy."
 date = 2026-05-30
 
 [taxonomies]

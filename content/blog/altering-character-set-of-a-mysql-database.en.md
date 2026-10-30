@@ -1,5 +1,6 @@
 +++
 title = "Altering the character set of a MySQL database"
+description = "ALTER DATABASE changes only the default character set, not existing tables. A short bash script runs ALTER TABLE CONVERT TO CHARSET on every table instead."
 date = 2010-08-12
 
 [taxonomies]

@@ -1,5 +1,6 @@
 +++
 title = "The Invention of Satan"
+description = "In the Hebrew Bible satan is a title, an adversary in God's service. The cosmic rebel was invented later, out of Persian dualism and the hopes of an occupied people."
 date = 2026-04-04
 
 [taxonomies]

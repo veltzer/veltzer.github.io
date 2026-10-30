@@ -1,5 +1,6 @@
 +++
 title = "Economists Argue About Value Because Nobody Is Allowed to Negotiate It"
+description = "No theory of value says how to split returns between worker and firm, because wages follow scarcity and the answer would change nothing. Politics decides which questions matter."
 date = 2023-05-01
 
 [taxonomies]
