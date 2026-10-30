@@ -887,8 +887,10 @@ full-text search, feeds and a share card per language.
   repos' files (675 teaching-syllabi downloads, ~30 Sphinx internals). The
   143 *Discovered* are this site's: ~110 blog and tag pagers and ~33 live
   posts awaiting a crawl. The 154 `/page/N/` pagers were then dropped
-  from the sitemap (`[sitemap] pagers = false`, rssite 0.1.25), and the 33
-  posts were submitted for indexing.
+  from the sitemap (`[sitemap] pagers = false`, rssite 0.1.25), the
+  sitemap was resubmitted, and 11 of the 33 posts were sent through
+  "Request indexing" before its daily quota ran out; the other 22 are
+  listed in `doc/SEO.md`.
 
 - ~~**Content slips found while writing the descriptions.** — DONE.~~
   `understanding_is_compression` had Ptolemy fitting an epicycle to

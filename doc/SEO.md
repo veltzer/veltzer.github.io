@@ -293,8 +293,37 @@ are listings of posts that are themselves in the sitemap, so dropping them
 from it would lose nothing. **Done 2026-10-30:** rssite 0.1.25 added
 `[sitemap] pagers`, `rssite.toml` sets it to `false`, and the sitemap went
 from 1169 URLs to 1015. The pagers are still built, linked and canonical;
-they are only no longer advertised. The sitemap was then resubmitted and the
-33 posts sent through URL Inspection's "Request indexing".
+they are only no longer advertised. The sitemap was resubmitted the same
+day (2026-10-31).
+
+The 33 posts go through URL Inspection's "Request indexing", which has no
+API for ordinary pages (the Indexing API is limited to job postings and
+livestreams) and a daily quota: it said *Quota exceeded* after 11. Requested
+2026-10-31: the first 11 English posts, `browser-passwords-from-the-command-line`
+through `mind-brain-no-distinction`. Still to request, about 11 a day:
+
+- `/en/blog/muxing-subtitles-into-video-files/`
+- `/en/blog/the-disadvantages-of-sortition/`
+- `/he/blog/backing-up-a-debian-system-configuration/`
+- `/he/blog/catastrophes-cost-us-our-liberties/`
+- `/he/blog/central-bank-vote-of-no-confidence/`
+- `/he/blog/commons-under-a-minority/`
+- `/he/blog/defending-the-whole-beachhead/`
+- `/he/blog/democracies-cannot-bind-themselves/`
+- `/he/blog/do-we-want-experts-or-common-men/`
+- `/he/blog/forty-years-of-censorship/`
+- `/he/blog/law-only-sees-what-can-be-charged/`
+- `/he/blog/laziness-and-a-bad-memory-make-a-programmer/`
+- `/he/blog/muxing-subtitles-into-video-files/`
+- `/he/blog/organizational-corruption/`
+- `/he/blog/purging-unneeded-packages-on-a-debian-system/`
+- `/he/blog/rawls-forgot-the-institution/`
+- `/he/blog/scarcity-is-no-longer-the-issue/`
+- `/he/blog/serving-a-blob-from-mysql-in-php/`
+- `/he/blog/software-as-academia/`
+- `/he/blog/the-gap-between-public-morality-and-the-law/`
+- `/he/blog/why-elections-are-fifty-fifty/`
+- `/he/blog/why-the-religious-right-distrusts-human-nature/`
 
 The other three Website-sourced reasons (404, redirect, duplicate without
 canonical) and the four *Google chose different canonical* pages are covered
