@@ -394,3 +394,13 @@ sequence, the 2023 direct-democracy posts, the two-part WordPress security
 post). Declined by the author. Posts link to each other with `@/` links
 where the text calls for it, and `page.related` plus previous/next cover
 the rest. Do not reopen it as an improvement.
+
+## Unindexed .docx downloads are fine (2026-10-31)
+
+Search Console lists ~670 `.docx` files under `/teaching-syllabi/` as
+"Crawled - currently not indexed". They are the Word downloads that the
+teaching-syllabi repository publishes beside each syllabus; the syllabus
+itself is an HTML page, and that is what search should find. Google
+declining to index the Word copies is acceptable, by the author's decision.
+Do not treat them as an SEO defect, add `noindex` headers for them, or
+remove them from that repository to clear the report.

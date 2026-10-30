@@ -264,8 +264,9 @@ and sorted. Neither needs a change in this repo.
 
 - 675 are under `/teaching-syllabi/`, nearly all of them (669) the `.docx`
   downloads that repository publishes beside each syllabus. Google fetched
-  them and declined to index Word files; that is its call, and it belongs to
-  the teaching-syllabi repository if anyone wants it otherwise.
+  them and declined to index Word files. **That is fine, by decision**
+  (`doc/DECISIONS.md`): the `.docx` files are downloads of syllabi whose
+  HTML pages are the searchable version. Not a defect, nothing to fix.
 - ~30 are Sphinx internals of the `py*` repos' documentation sites
   (`_modules/`, `_sources/*.rst.txt`, `py-modindex.html`, `modules.html`):
   pydmt, pyscrapers, pytconf, pylogconf, pypowerline, pybookmarks,
