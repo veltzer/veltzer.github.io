@@ -104,11 +104,12 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
   `static/media-app.js` is the comment recording that decision.
 - **Bootstrap** -- removed before the zola migration, in favour of Tailwind on the
   media page.
-- **elasticlunr / `search_index.en.js`** -- switched off. `build_search_index`
-  is `false` in every language block of `config.toml` (the comment on the flag
-  records why: the 4.1 MB index was generated and deployed on every build and
-  nothing ever loaded it). The only search on the site is the media app's, which
-  filters its own JSON client-side.
+- **elasticlunr / `search_index.en.js`** -- gone. Under zola it was switched off
+  (the 4.1 MB index was generated and deployed on every build and nothing ever
+  loaded it), and rssite has no site-wide index at all. There is no full-text
+  search over the blog. The only search boxes are per-page filters over each
+  page's own data, client-side: the media app, chess, slides, syllabi and
+  animations.
 
 ## Media plugin filter system
 
