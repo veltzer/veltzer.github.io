@@ -248,6 +248,24 @@ h3 { font-size: 1.1rem; margin: 1.8rem 0 0.5rem; }
   margin-bottom: 2rem;
 }
 
+// Blog search (static/blog-search.js): the box above the post list, and the
+// opening text each result carries so a match outside the title shows why.
+.blog-search { margin-bottom: 0.5rem; }
+.blog-search-input {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 0.5rem 0.7rem;
+  font: inherit;
+}
+.blog-search-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.blog-search-status { margin: 0.4rem 0 0; color: var(--text-muted); font-size: 0.85rem; }
+.blog-search-status:empty { display: none; }
+.post-summary { margin: 0.3rem 0 0; color: var(--text-secondary); font-size: 0.9rem; }
+
 .post-list { list-style: none; padding: 0; }
 .post-list li { padding: 0.6rem 0; border-bottom: 1px solid var(--border-subtle); }
 .post-link { font-weight: 600; text-decoration: none; }

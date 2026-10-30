@@ -106,10 +106,13 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
   media page.
 - **elasticlunr / `search_index.en.js`** -- gone. Under zola it was switched off
   (the 4.1 MB index was generated and deployed on every build and nothing ever
-  loaded it), and rssite has no site-wide index at all. There is no full-text
-  search over the blog. The only search boxes are per-page filters over each
-  page's own data, client-side: the media app, chess, slides, syllabi and
-  animations.
+  loaded it). The blog search replaced it: `[search]` in `rssite.toml` writes
+  `<lang>/search.json` (title, opening text and tags of every post, ~55 KB
+  gzipped per language, not the full text), and `static/blog-search.js` on the
+  blog index fetches it on first use and matches every query word as a
+  substring, case- and diacritic-insensitive, so Hebrew needs no stemmer. The
+  other search boxes are per-page filters over each page's own data: the media
+  app, chess, slides, syllabi and animations.
 
 ## Media plugin filter system
 

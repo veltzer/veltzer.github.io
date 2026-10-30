@@ -5,11 +5,32 @@
    below the list under the breakpoint in style.scss, at which point the
    extra width costs nothing because the column is capped there anyway. #}
 {% block main_class %}blog-main{% endblock %}
+{% block extra_head %}
+<script src="{{ get_url(path='blog-search.js') }}" defer></script>
+{% endblock %}
 {% block content %}
 <h1>{{ section.title }}</h1>
 
 <div class="blog-layout">
 <div class="blog-posts">
+{#- Search over every post of this language, static/blog-search.js. Hidden
+    until the script shows it, since without JavaScript it cannot work. The
+    index is rssite's ([search] in rssite.toml); the strings travel as data
+    attributes so the script needs no translations of its own. -#}
+<form id="blog-search" class="blog-search" role="search" hidden
+      data-index="{{ get_url(path=lang ~ '/search.json') }}"
+      data-found="{{ trans(key='search_found') }}"
+      data-found-one="{{ trans(key='search_found_one') }}"
+      data-none="{{ trans(key='search_none') }}"
+      data-error="{{ trans(key='search_error') }}">
+  <label class="visually-hidden" for="blog-search-input">{{ trans(key="search_label") }}</label>
+  <input type="search" id="blog-search-input" class="blog-search-input"
+         placeholder="{{ trans(key='search_placeholder') }}" autocomplete="off">
+  <p id="blog-search-status" class="blog-search-status" role="status" aria-live="polite"></p>
+</form>
+<ul id="blog-search-results" class="post-list" hidden></ul>
+
+<div id="blog-posts-listing">
 {%- set posts = paginator.pages | default(value=section.pages) %}
 <ul class="post-list">
   {%- for post in posts %}
@@ -32,6 +53,7 @@
   {%- if paginator.next %}<a href="{{ paginator.next }}">{{ trans(key="older") }} &rarr;</a>{% endif %}
 </nav>
 {%- endif %}
+</div>
 </div>
 
 {#- Archive stats, from rssite: section.page_count is the number of posts
