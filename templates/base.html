@@ -128,22 +128,28 @@
 </script>
 {%- endif %}
 
+{#- `v` is appended to our own stylesheets and icons so that a deploy changes
+    their URLs. GitHub Pages lets browsers cache them for ten minutes; without
+    it a reader got new HTML with the old style.css (an unstyled logo) and
+    kept the old favicon. -#}
+{%- set v = "" %}
+{%- if git %}{% set v = "?v=" ~ git.short %}{% endif %}
 {#- The logo, drawn by scripts/make_logo.py: SVG for browsers that take it,
     ICO for the rest, and a PNG for iOS, which ignores SVG icons. -#}
-<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico{{ v }}" sizes="16x16 32x32 48x48">
+<link rel="icon" href="/favicon.svg{{ v }}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png{{ v }}">
 {#- The design tokens, the fonts and the switcher come from the shared-themes
     submodule, published beside the pages by the [[publish]] entry in
     rssite.toml. get_url checks that each file is one the build writes. -#}
-<link rel="stylesheet" href="{{ get_url(path='shared-themes/fonts.css') }}">
-<link rel="stylesheet" href="{{ get_url(path='shared-themes/themes.css') }}">
+<link rel="stylesheet" href="{{ get_url(path='shared-themes/fonts.css') }}{{ v }}">
+<link rel="stylesheet" href="{{ get_url(path='shared-themes/themes.css') }}{{ v }}">
 {#- Vendor stylesheets go before ours so our theme overrides win on order.
     cm-chessboard's own square fills are hardcoded hex at the same specificity
     as our overrides, so load order is what decides it. -#}
 {%- block vendor_css %}{% endblock %}
-<link rel="stylesheet" href="{{ get_url(path='style.css') }}">
-<link rel="stylesheet" href="{{ get_url(path='highlight.css') }}">
+<link rel="stylesheet" href="{{ get_url(path='style.css') }}{{ v }}">
+<link rel="stylesheet" href="{{ get_url(path='highlight.css') }}{{ v }}">
 {#- The feed of this language: /en/atom.xml or /he/atom.xml. -#}
 <link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path=lang ~ '/atom.xml') }}">
 {%- block extra_head %}{% endblock %}
@@ -179,9 +185,10 @@
 <header class="site-header">
   <a class="site-title" href="{{ language.url_prefix }}">
     {#- The logo inline rather than an <img>, so its colours are the theme's
-        (sass/style.scss). The geometry is scripts/make_logo.py's;
-        tests/test_logo.py keeps this copy in step. -#}
-    <svg class="site-logo" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14"/><path d="M15 19 L31 32 L15 45 M35 45 H50"/></svg>
+        (sass/style.scss). The attributes are the default theme's colours and
+        size, for a page whose stylesheet has not loaded. The geometry is
+        scripts/make_logo.py's; tests/test_logo.py keeps this copy in step. -#}
+    <svg class="site-logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#4051b5"/><path d="M15 19 L31 32 L15 45 M35 45 H50" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
     {{- config.title -}}
   </a>
   <nav class="site-nav">
