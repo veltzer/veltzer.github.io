@@ -15,17 +15,36 @@
 <div class="blog-posts">
 {#- Search over every post of this language, static/blog-search.js. Hidden
     until the script shows it, since without JavaScript it cannot work. The
-    index is rssite's ([search] in rssite.toml); the strings travel as data
-    attributes so the script needs no translations of its own. -#}
+    index is rssite's ([search] in rssite.toml), the word vectors of the
+    semantic mode scripts/make_word_vectors.py's; the strings travel as data
+    attributes so the script needs no translations of its own. The mode
+    selector offers search_modes ([extra] in rssite.toml) and is hidden when
+    that names only one. -#}
+{%- set search_modes = config.extra.search_modes %}
 <form id="blog-search" class="blog-search" role="search" hidden
       data-index="{{ get_url(path=lang ~ '/search.json') }}"
+      data-words="{{ get_url(path='data/vectors/' ~ lang ~ '.words.json') }}"
+      data-rows="{{ get_url(path='data/vectors/' ~ lang ~ '.int8') }}"
+      data-scale="{{ get_url(path='data/vectors/' ~ lang ~ '.scale.f32') }}"
+      data-mode="{{ config.extra.search_mode }}"
+      data-closest="{{ trans(key='search_closest') }}"
+      data-unknown="{{ trans(key='search_unknown') }}"
+      data-loading="{{ trans(key='search_loading') }}"
       data-found="{{ trans(key='search_found') }}"
       data-found-one="{{ trans(key='search_found_one') }}"
       data-none="{{ trans(key='search_none') }}"
       data-error="{{ trans(key='search_error') }}">
+  <div class="blog-search-row">
   <label class="visually-hidden" for="blog-search-input">{{ trans(key="search_label") }}</label>
   <input type="search" id="blog-search-input" class="blog-search-input"
          placeholder="{{ trans(key='search_placeholder') }}" autocomplete="off">
+  <label class="visually-hidden" for="blog-search-mode">{{ trans(key="search_mode_label") }}</label>
+  <select id="blog-search-mode" class="blog-search-mode"{% if search_modes | length < 2 %} hidden{% endif %}>
+    {%- for mode in search_modes %}
+    <option value="{{ mode }}">{{ trans(key="search_mode_" ~ mode) }}</option>
+    {%- endfor %}
+  </select>
+  </div>
   <p id="blog-search-status" class="blog-search-status" role="status" aria-live="polite"></p>
 </form>
 <ul id="blog-search-results" class="post-list" hidden></ul>

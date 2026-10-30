@@ -100,6 +100,14 @@ files = ["themes.css", "fonts.css", "theme-switcher.js", "fonts/*"]
 
 [extra]
 google_analytics_id = "G-LXVE94D5KX"
+# The blog search box (static/blog-search.js) has three modes: "simple" (the
+# words in the title, opening text or tags), "full" (the full text too) and
+# "semantic" (posts ranked by meaning, through the word vectors
+# scripts/make_word_vectors.py writes). search_mode is the one a reader starts
+# in; search_modes are the ones the selector beside the box offers, in its
+# order, and with a single entry the selector is not shown at all.
+search_mode = "semantic"
+search_modes = ["semantic", "full", "simple"]
 # The header navigation: each entry is a translation key and a path below the
 # language prefix, so every item follows the reader's language, apps included.
 nav = [

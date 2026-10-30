@@ -65,6 +65,7 @@ dep_inputs = [
     "scripts/import_audible.py",
     "scripts/import_books.py",
     "scripts/import_companies.py",
+    "scripts/make_word_vectors.py",
 ]
 [analyzer.markdown]
 

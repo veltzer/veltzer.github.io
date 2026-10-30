@@ -8,6 +8,7 @@ dependencies = [
     "PyYAML",
     "Pillow",
     "beautifulsoup4",
+    "numpy",
     "pydatacheck",
     # pydatacheck imports pylogconf but does not declare it; remove once it does.
     "pylogconf",

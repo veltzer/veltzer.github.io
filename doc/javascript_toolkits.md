@@ -109,8 +109,13 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
   loaded it). The blog search replaced it: `[search]` in `rssite.toml` writes
   `<lang>/search.json` (title, opening text, tags and full text of every post,
   ~800 KB gzipped per language), and `static/blog-search.js` on the
-  blog index fetches it on first use and matches every query word as a
-  substring, case- and diacritic-insensitive, so Hebrew needs no stemmer. The
+  blog index fetches it on first use. It has three modes (`search_mode` and
+  `search_modes` under `[extra]` in `rssite.toml`): two match every query word
+  as a substring, case- and diacritic-insensitive so Hebrew needs no stemmer,
+  over the titles, opening text and tags or over the full text too; the third
+  ranks posts by meaning, with word vectors from
+  [veltzer/embeddings](https://github.com/veltzer/embeddings) that
+  `scripts/make_word_vectors.py` trims into `static/data/vectors/`. The
   other search boxes are per-page filters over each page's own data: the media
   app, chess, slides, syllabi and animations.
 

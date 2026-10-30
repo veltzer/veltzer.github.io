@@ -40,6 +40,13 @@ search_found = "{n} פוסטים תואמים"
 search_found_one = "פוסט תואם אחד"
 search_none = "אין פוסטים תואמים."
 search_error = "לא ניתן לטעון את אינדקס החיפוש."
+search_closest = "{n} הפוסטים הקרובים ביותר במשמעות"
+search_unknown = "אף אחת מהמילים האלה אינה מוכרת."
+search_loading = "טוען את וקטורי המילים…"
+search_mode_label = "אופן החיפוש"
+search_mode_semantic = "לפי משמעות"
+search_mode_full = "טקסט מלא"
+search_mode_simple = "כותרות ותגיות"
 
 [dates]
 months = ["ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"]

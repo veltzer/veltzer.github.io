@@ -81,6 +81,18 @@ languages), and writes `static/identity.toml`, the `sameAs` URLs the
 `Person` JSON-LD in `templates/base.html` reads. A manual step whose
 output is committed. Run it after editing `profiles.yaml` and commit.
 
+### `scripts/make_word_vectors.py`
+
+Writes the word vectors behind the blog search's semantic mode into
+`static/data/vectors/`: from the newest release of
+[veltzer/embeddings](https://github.com/veltzer/embeddings) (downloaded once
+into `download/embeddings/<tag>/`, 160 MB per language), the 10,000 most
+frequent words plus every word a post uses, as int8 rows with a float32 scale
+per row (~6 MB English, ~11 MB Hebrew). Checks that the release's tokenizer
+version is the one it and `static/blog-search.js` implement. A manual step,
+and the output is committed; the browser builds the post vectors itself, so
+rerun it only for a new release or once new posts have brought many new words.
+
 ### `scripts/copy_data.py`
 
 Builds `static/data/` from the media YAML in `data/yaml/` and the chess

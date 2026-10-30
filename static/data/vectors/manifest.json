@@ -1,0 +1,16 @@
+{
+  "release": "20261001",
+  "tokenizer_version": 1,
+  "languages": {
+    "en": {
+      "words": 18399,
+      "dim": 300,
+      "post_words_missing": 819
+    },
+    "he": {
+      "words": 35814,
+      "dim": 300,
+      "post_words_missing": 9498
+    }
+  }
+}

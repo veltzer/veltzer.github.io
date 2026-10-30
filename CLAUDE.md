@@ -79,7 +79,7 @@ which records the traps that outlived the migration.
   `audio_courses_check_*.py`, `youtube_add_names.py`, `organizations_geocode.py`,
   `organizations_pick_geo.py`, `organizations_fetch_maps.py` — all run from the
   repo root),
-  `serve.py`, `export_posts_for_ai.py` (mirrors the posts to `~/insync/for_ai/blog` for AI agents
+  `serve.py`, `make_word_vectors.py` (the blog search's word vectors), `export_posts_for_ai.py` (mirrors the posts to `~/insync/for_ai/blog` for AI agents
   reading Google Drive), and the `build_*_dict.sh` / `spellcheck_*.sh` pair behind the aspell
   processors
 - `tests/` — pytest suite for the data import scripts
@@ -243,6 +243,15 @@ tags = ["religion", "philosophy", "ethics"]
   `<lang>/search.json` (`[search]` in `rssite.toml`). It indexes titles, opening
   text, tags and the full text (`content = true`, ~800 KB gzipped per language
   against ~55 KB without it; fetched only on first focus of the box). The box links as `/en/blog/?q=…`.
+  It has three modes: `simple` (substring over titles, opening text and tags),
+  `full` (the full text too) and `semantic` (posts ranked by meaning, through
+  the word vectors in `static/data/vectors/`, which `scripts/make_word_vectors.py`
+  trims from the [veltzer/embeddings](https://github.com/veltzer/embeddings)
+  release; a manual step, committed, ~6 MB English and ~11 MB Hebrew, fetched
+  only when the semantic mode is used). `search_mode` under `[extra]` in
+  `rssite.toml` is the mode a reader starts in, `search_modes` the ones the
+  selector beside the box offers (one entry hides it); `?mode=` overrides the
+  default for a link.
 - The archive sidebar of `templates/blog.html` reads rssite's `section.page_count`
   and `section.years` (the year archives with their counts). Nothing about it is
   generated or committed.
