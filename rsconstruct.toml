@@ -50,7 +50,7 @@ src_extensions = [".md"]
 src_exclude_files = ["content/blog/_index.en.md", "content/blog/_index.he.md"]
 output_dir = "_site/images/og"
 output_extension = "jpg"
-dep_inputs = ["scripts/make_og_images.py", "i18n/en.toml", "i18n/he.toml"]
+dep_inputs = ["scripts/make_og_images.py", "scripts/make_logo.py", "i18n/en.toml", "i18n/he.toml"]
 
 [processor.checker.ruff]
 src_dirs = ["scripts", "tests"]

@@ -43,9 +43,27 @@ a:hover { text-decoration: underline; }
 }
 
 .site-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-weight: 700;
   text-decoration: none;
   color: var(--text-primary);
+}
+// The logo: the accent tile with the page background as ink, so every
+// theme, light or dark, gets its own colours.
+.site-logo {
+  width: 1.75rem;
+  height: 1.75rem;
+  flex: none;
+}
+.site-logo rect { fill: var(--accent); }
+.site-logo path {
+  fill: none;
+  stroke: var(--bg);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .site-nav { display: flex; flex-wrap: wrap; gap: 1rem; }

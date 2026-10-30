@@ -35,7 +35,18 @@ Liberation Sans (`fonts-liberation`), all declared in `rsconstruct.toml`.
 Draws the two site-wide share cards, `static/images/og/card-{en,he}.jpg`,
 used by every page that is not a blog post. Run by hand after changing
 `home_title` or the colours; the JPEGs are committed. `make_post_cards.py`
-imports its layout constants, so the two kinds of card match.
+imports its layout constants, so the two kinds of card match. Both paste
+the logo from `make_logo.py`.
+
+### `scripts/make_logo.py`
+
+The one definition of the site's logo (a shell prompt on an accent tile, on
+a 64x64 grid), and the writer of the icon files drawn from it:
+`static/favicon.svg`, `static/favicon.ico` (16/32/48 px) and
+`static/apple-touch-icon.png` (180 px). Run by hand after changing the mark,
+then run `make_og_images.py`; all of these are committed. The header's
+inline copy in `templates/base.html` is checked against it by
+`tests/test_logo.py`.
 
 ## check_redirects.py
 

@@ -28,7 +28,30 @@ The site is JavaScript-dependent by design. All target users have JS enabled.
 
 ## Favicon is consistent across all pages
 
-All pages use `<link rel="icon" href="/favicon.svg">`.
+Every page gets the same three icon links from `templates/base.html`:
+`/favicon.svg`, `/favicon.ico` and `/apple-touch-icon.png`.
+
+## The logo is a shell prompt, one geometry in every format (2026-10-31)
+
+Chosen by the author from six candidates: the "V" of Veltzer turned on its
+side into a `>` with a cursor after it, white on a rounded accent tile.
+`scripts/make_logo.py` holds its geometry, and each target gets the format
+that suits it:
+
+- **SVG** for the browser tab (`static/favicon.svg`): vector, tiny, sharp
+  at every size; it switches to a lighter tile on a dark system.
+- **ICO** (16, 32, 48 px, `static/favicon.ico`) for browsers and tools that
+  ask for `/favicon.ico` or skip SVG.
+- **PNG** (180 px, full-bleed, `static/apple-touch-icon.png`) for iOS, which
+  ignores SVG icons and rounds the corners itself.
+- **Inline SVG** in the site header, coloured with `var(--accent)` and
+  `var(--bg)` so it follows all six themes; an `<img>` could not.
+- **Pasted into the JPEG** share cards, drawn by Pillow from the same
+  geometry.
+
+No BMP anywhere: no browser asks for it and it is uncompressed.
+`tests/test_logo.py` keeps the header's inline copy and the committed
+`favicon.svg` in step with the script.
 
 ## YouTube thumbnails are loaded from CDN, not stored locally
 

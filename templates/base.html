@@ -128,8 +128,11 @@
 </script>
 {%- endif %}
 
+{#- The logo, drawn by scripts/make_logo.py: SVG for browsers that take it,
+    ICO for the rest, and a PNG for iOS, which ignores SVG icons. -#}
+<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 {#- The design tokens, the fonts and the switcher come from the shared-themes
     submodule, published beside the pages by the [[publish]] entry in
     rssite.toml. get_url checks that each file is one the build writes. -#}
@@ -174,7 +177,13 @@
 {#- Both languages are prefixed (/en/ and /he/), so every in-site link is built
     from the current language's root. -#}
 <header class="site-header">
-  <a class="site-title" href="{{ language.url_prefix }}">{{ config.title }}</a>
+  <a class="site-title" href="{{ language.url_prefix }}">
+    {#- The logo inline rather than an <img>, so its colours are the theme's
+        (sass/style.scss). The geometry is scripts/make_logo.py's;
+        tests/test_logo.py keeps this copy in step. -#}
+    <svg class="site-logo" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14"/><path d="M15 19 L31 32 L15 45 M35 45 H50"/></svg>
+    {{- config.title -}}
+  </a>
   <nav class="site-nav">
     {%- for item in config.extra.nav %}
     {#- Every entry takes the language prefix, apps included: a Hebrew reader

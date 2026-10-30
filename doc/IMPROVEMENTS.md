@@ -812,7 +812,7 @@ open unless struck through. Ordered roughly by how visible the fault is.
   the stat tiles.
 
 - ~~**No `og:image` / `twitter:image` anywhere.** — DONE, 2026-10-29.~~
-  `scripts/make_og_images.py` draws a 1200x630 card per language (the favicon's V, the
+  `scripts/make_og_images.py` draws a 1200x630 card per language (the logo, the
   name and the line from `home_title`) into `static/images/og/card-{en,he}.jpg`;
   `base.html` emits `og:image` with its size and alt text on every page, and
   `twitter:card` is `summary_large_image`. Posts could still override it later via

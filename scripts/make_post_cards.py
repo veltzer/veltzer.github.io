@@ -14,7 +14,7 @@ there are two per post, and a card drawn by hand goes stale the moment a
 title changes. Each card is a product of its post, so editing a post
 redraws its card and nothing else.
 
-The look matches the site-wide card: the favicon's "V" and the author's
+The look matches the site-wide card: the logo and the author's
 name at the top, the title large, the tags under it, veltzer.org and the
 accent band at the bottom. Hebrew is laid out right to left (Pillow needs
 libraqm, which its wheels bundle).
@@ -111,10 +111,10 @@ def card(lang, title, tags):
     anchor = "ra" if rtl else "la"
     mark = 64
     if rtl:
-        draw_mark(draw, edge - mark, 70, mark)
+        draw_mark(image, edge - mark, 70, mark)
         name_x = edge - mark - 24
     else:
-        draw_mark(draw, edge, 70, mark)
+        draw_mark(image, edge, 70, mark)
         name_x = edge + mark + 24
     draw.text((name_x, 80), name, font=name_font, fill=TEXT, anchor=anchor, direction=direction)
 
