@@ -31,6 +31,15 @@ indexing problem, to tell a regression here from Google's own crawl timing.
 It deliberately cannot read a validation verdict: that is behind a Google
 login, and `doc/SEO.md` says where to read it by hand.
 
+### `scripts/export_posts_for_ai.py`
+
+Mirrors every blog post (`content/blog/*.{en,he}.md`, front matter included,
+the section's `_index` files left out) into `~/insync/for_ai`, which Insync
+syncs to Google Drive, so AI agents with access to the Drive can read them.
+Only changed posts are copied again, and a `.md` there with no post behind it
+(renamed or deleted) is removed; other files are never touched. `--dest`
+picks another directory. Not part of the build: run it after adding posts.
+
 ### `scripts/import_teaching.py`
 
 Imports the three sibling teaching sites (`../teaching-slides`,
