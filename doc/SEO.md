@@ -290,8 +290,11 @@ quarters of it is listing pages.**
 The one lever this repo holds is the sitemap: of its 1169 URLs, 154 are
 `/page/N/` pagers, which is most of what Google is declining to crawl. They
 are listings of posts that are themselves in the sitemap, so dropping them
-from it would lose nothing. That is a change to rssite's sitemap, not to this
-repo, and has not been made.
+from it would lose nothing. **Done 2026-10-30:** rssite 0.1.25 added
+`[sitemap] pagers`, `rssite.toml` sets it to `false`, and the sitemap went
+from 1169 URLs to 1015. The pagers are still built, linked and canonical;
+they are only no longer advertised. The sitemap was then resubmitted and the
+33 posts sent through URL Inspection's "Request indexing".
 
 The other three Website-sourced reasons (404, redirect, duplicate without
 canonical) and the four *Google chose different canonical* pages are covered

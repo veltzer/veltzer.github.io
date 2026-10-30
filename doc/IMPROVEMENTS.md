@@ -886,8 +886,9 @@ full-text search, feeds and a share card per language.
   `doc/SEO.md` has the breakdown. The 716 *Crawled* are almost all other
   repos' files (675 teaching-syllabi downloads, ~30 Sphinx internals). The
   143 *Discovered* are this site's: ~110 blog and tag pagers and ~33 live
-  posts awaiting a crawl. The one possible lever, dropping the 154 `/page/N/`
-  pagers from the sitemap, is an rssite change and has not been made.
+  posts awaiting a crawl. The 154 `/page/N/` pagers were then dropped
+  from the sitemap (`[sitemap] pagers = false`, rssite 0.1.25), and the 33
+  posts were submitted for indexing.
 
 - ~~**Content slips found while writing the descriptions.** — DONE.~~
   `understanding_is_compression` had Ptolemy fitting an epicycle to

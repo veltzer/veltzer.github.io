@@ -123,7 +123,8 @@ templates and `rssite.toml` use `require_translations`,
 `infer_translations`, per-language
 `locale`/`date_format`, and the `git`, `x_default`, `meta_description`,
 `json_ld` and `page.related` context, all of which need rssite 0.1.15 or
-later.
+later; `[sitemap] pagers = false` (no page 2, 3, ... of a listing in the
+sitemap) needs 0.1.25.
 
 ## CI and the Workflow File
 

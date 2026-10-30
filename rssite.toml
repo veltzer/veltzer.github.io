@@ -82,6 +82,10 @@ limit = 20
 
 [sitemap]
 enabled = true
+# No page 2, 3, ... of the blog or of a tag: they only list posts the sitemap
+# already names, and they were most of what Search Console reported as
+# "Discovered - currently not indexed" (doc/SEO.md).
+pagers = false
 
 # The blog search (static/blog-search.js) reads <lang>/search.json: every
 # post's title, opening text, tags and full text. The full text (content =
