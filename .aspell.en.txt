@@ -172,6 +172,7 @@ Frege
 Fridman
 Friedrich
 Frontotemporal
+Fyodor
 GPL
 GSSAPIAuthentication
 GTK
@@ -312,6 +313,7 @@ Marcion
 Marcion's
 Marcionite
 Markan
+Marmeladova
 Masoretic
 Matroska
 McCloskey
@@ -406,7 +408,9 @@ Penzias
 Peres
 Perrin
 Persinger's
+Personalist
 Pesach
+Petersburg
 PhDs
 Pharma
 Phenylketonuria
@@ -441,6 +445,7 @@ Quran's
 RLHF
 Ramachandran
 Ramesses
+Raskolnikov
 Rathje
 Ratione
 Rawls
@@ -453,6 +458,7 @@ RewriteEngine
 RewriteRule
 Riecken
 RocksDB
+Rodion
 Rosen
 Rothbard
 Rozman
@@ -695,6 +701,7 @@ cdgklw
 cdn
 cdns
 cdparanoia
+centric
 ceqhg
 cfe
 cgroups
@@ -1008,6 +1015,7 @@ handwashing
 hardcoded
 hardcodes
 hardsubbed
+hardwiring
 hcat
 headertoolbar
 healings
@@ -1509,11 +1517,13 @@ showstats
 showstatsonly
 signifier
 sizeof
+skewness
 sl
 sm
 smtpd
 smybpbjrimt
 sociality
+sociodemographic
 sociopathy
 softwares
 solaris
