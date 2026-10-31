@@ -1,5 +1,6 @@
 All four items below were re-checked on 2026-08-18. The three DONE ones are
-still done -- the details are confirmed inline. The fourth is still partly open.
+still done -- the details are confirmed inline. The fourth was dropped the next
+day, 2026-08-19; it is closed, not open.
 
 
 DONE: rewrite /scripts/manage_api_key.sh in python
