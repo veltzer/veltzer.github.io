@@ -1062,6 +1062,7 @@ imgix
 imgproxy
 imgurl
 incentivize
+incentivizes
 inelasticity
 infomation
 ini
