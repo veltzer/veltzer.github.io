@@ -103,6 +103,17 @@ to = "shared-themes"
 files = ["themes.css", "fonts.css", "theme-switcher.js", "fonts/*"]
 
 [extra]
+# Which analytics the pages load: "goatcounter" (the current choice, since
+# 2026-11-06), "google" (the choice from 2026-08-18 to 2026-11-06), or "" for
+# none. Both identifiers below stay filled in on purpose, so switching back is
+# this one word and nothing has to be set up again. See doc/ANALYTICS.md.
+analytics = "goatcounter"
+# The GoatCounter site code: pages report to
+# https://<code>.goatcounter.com/count and the public dashboard that the
+# footer links to is https://<code>.goatcounter.com.
+goatcounter_code = "veltzer"
+# The Google Analytics 4 measurement ID. Kept while GoatCounter is in use;
+# nothing loads it unless analytics = "google".
 google_analytics_id = "G-LXVE94D5KX"
 # The blog search box (static/blog-search.js) has three modes: "simple" (the
 # words in the title, opening text or tags), "full" (the full text too) and

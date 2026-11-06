@@ -299,13 +299,18 @@ tags = ["religion", "philosophy", "ethics"]
   `static/` to rescue an old URL.
 - Google Calendar API key is public by design in `static/keys.js` — it is referrer- and
   API-restricted (see `doc/DECISIONS.md`). This is not a leak.
-- **Google Analytics is wired and switched on**: `rssite.toml`'s
-  `extra.google_analytics_id` holds the `G-XXXXXXXXXX` measurement ID, and
-  `templates/base.html` emits the `gtag` snippet only when it is non-empty, so
-  emptying it disables tracking site-wide. The ID is public by design — it
-  identifies the property, it does not grant access to the data. Note GA4 sets
-  cookies and there is no consent banner; that trade-off is recorded in
-  `doc/ANALYTICS.md` under "Consent".
+- **Analytics is GoatCounter, switched on**: `extra.analytics` in `rssite.toml`
+  names the provider (`"goatcounter"`, `"google"` or `""` for none) and
+  `templates/base.html` emits the matching script, guarded on the provider's
+  identifier being non-empty. `extra.goatcounter_code` is the GoatCounter site
+  code (`veltzer`); the dashboard at `https://veltzer.goatcounter.com` is
+  public and every footer links to it. The GA4 measurement ID is still in
+  `extra.google_analytics_id` on purpose: GA4 was the provider from
+  2026-08-18 to 2026-11-06, nothing was erased, and switching back is the one
+  word `analytics = "google"`. Both identifiers are public by design — they
+  name the property, they do not grant access to the data. GoatCounter sets no
+  cookies, which is why it replaced GA4 (GA4 needed a consent banner the site
+  never had); the history is in `doc/ANALYTICS.md` and `doc/DECISIONS.md`.
 - Dates are `{{ post.date | date }}` (or `date(long=true)` in a post header): the
   format is each language's `date_format` in `rssite.toml`, and the month names come
   from `i18n/he.toml`, which is how Hebrew dates are produced. `now()` is not available to

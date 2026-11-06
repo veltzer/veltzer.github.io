@@ -1,10 +1,12 @@
 # Analytics Options for the Blog
 
-**Current state:** GA4 is wired and switched on -- see "Decision: GA4, wired in
-2026-08-18" at the end. The option survey below predates the move from MkDocs
-to zola, so its `mkdocs.yml` setup snippets no longer apply; on this site the
-analytics hook is `extra.google_analytics_id` in `config.toml` and the guarded
-`gtag` block in `templates/base.html`.
+**Current state:** GoatCounter is wired and switched on -- see "Decision:
+GoatCounter, wired in 2026-11-06" at the end. GA4 was the provider from
+2026-08-18 to 2026-11-06 and stays wired but off; "Decision: GA4, wired in
+2026-08-18" records that period. The option survey below predates the move
+from MkDocs to zola (and then rssite), so its `mkdocs.yml` setup snippets no
+longer apply; on this site the analytics hook is `extra.analytics` in
+`rssite.toml` and the guarded block in `templates/base.html`.
 
 Since this site is a static site hosted on GitHub Pages, there is no server-side analytics. We must use client-side (JavaScript) tracking or third-party integrations.
 
@@ -201,3 +203,57 @@ That leaves nothing untracked. `calendar_google_embed.html` and
 `calendar_list_view.html` were the last two standalone pages outside the templates; they
 were deleted on 2026-08-18 as losing alternatives from a calendar comparison that has long
 since concluded in FullCalendar's favour. See `doc/DECISIONS.md`.
+
+## Decision: GoatCounter, wired in 2026-11-06
+
+GA4 was switched off and GoatCounter switched on. The reasoning, from the
+author's own notes written the day before (a Google Doc titled "Analytics for a
+static GitHub Pages site - conclusions", since deleted; this section is its
+only remaining copy):
+
+* **Goal:** see which pages get the most visits. No tracking of individual
+  users, no sharing of data with Google.
+* **Google Analytics** works on GitHub Pages (a script tag in the page head),
+  but it sets tracking cookies, so it needs a GDPR cookie-consent banner. Not
+  wanted. That is exactly the exposure the "Consent" section above recorded as
+  the one real cost of GA4; the switch resolves it instead of carrying it.
+* **Cookieless alternatives** usually need no banner. GoatCounter is free for
+  personal sites and is one script tag: chosen. Plausible looks nicer but is
+  paid unless self-hosted.
+* **Setup:** sign up and pick a code; the dashboard lives at
+  `https://<code>.goatcounter.com`, and the pages carry the GoatCounter script
+  tag. The dashboard shows page views, top pages, referrers and so on.
+* **Sharing the stats publicly:** in the GoatCounter settings turn on public
+  viewing of the dashboard. Anyone with the link can then see the stats
+  without logging in, but cannot change anything.
+
+### How it is wired
+
+* The account's code is `veltzer`: the pages report to
+  `https://veltzer.goatcounter.com/count` and the dashboard is
+  <https://veltzer.goatcounter.com>. The site URL registered there is
+  `https://veltzer.org`.
+* `extra.analytics` in `rssite.toml` names the provider: `"goatcounter"`,
+  `"google"` or `""`. `extra.goatcounter_code` holds the code and
+  `extra.google_analytics_id` the GA4 measurement ID. **Both identifiers stay
+  filled in**; nothing was erased, so switching back to GA4 is changing the one
+  word `analytics = "goatcounter"` to `"google"` and rebuilding. The GA4
+  property itself was not touched either, it simply stops receiving hits.
+* `templates/base.html` branches on `extra.analytics`, each branch guarded on
+  its own identifier being non-empty, so a fork or a CI run with the identifier
+  blanked sends nothing anywhere. GoatCounter's `count.js` skips `localhost`
+  on its own, so a locally served `_site/` does not show up in the dashboard.
+* **The dashboard is public** ("Dashboard viewable by: Anyone" in the
+  GoatCounter site settings, set 2026-11-06), and the footer of every page
+  links to it as "Stats" / "סטטיסטיקות" (the `label_stats` string in
+  `i18n/`). The link is rendered only while GoatCounter is the provider, since
+  Google's dashboard is login-only.
+* Coverage is the same as it was for GA4 (see "Coverage" above): everything
+  rendered through `base.html`, in both languages, plus `404.html`.
+
+### What this does not change
+
+The "Why Google cannot do this" section still applies to GoatCounter too: it
+is a dashboard, not an on-page number. GoatCounter does have an "Allow adding
+visitor counts on your website" option (a small fetched widget); it is off, and
+the visible counter remains dropped per `doc/problems.txt`.
