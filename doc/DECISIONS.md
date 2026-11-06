@@ -434,7 +434,8 @@ GA4 was wired on 2026-08-18 with no consent banner, a recorded exposure for
 EU/UK readers. On 2026-11-06 the author concluded that cookies-plus-banner is
 not wanted at all and switched to GoatCounter, which sets no cookies, keeps no
 personal data and needs no banner. The dashboard at
-<https://veltzer.goatcounter.com> is public and the footer links to it.
+<https://veltzer.goatcounter.com> is public and the footer links to it, next
+to a public Data Studio report over the GA4 history (`doc/ANALYTICS.md`).
 
 Nothing was erased: `extra.analytics` in `rssite.toml` selects the provider,
 and the GA4 measurement ID stays in the file next to the GoatCounter code, so

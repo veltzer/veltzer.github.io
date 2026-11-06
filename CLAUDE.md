@@ -307,7 +307,9 @@ tags = ["religion", "philosophy", "ethics"]
   public and every footer links to it. The GA4 measurement ID is still in
   `extra.google_analytics_id` on purpose: GA4 was the provider from
   2026-08-18 to 2026-11-06, nothing was erased, and switching back is the one
-  word `analytics = "google"`. Both identifiers are public by design — they
+  word `analytics = "google"`. That GA4 history is public as a Data Studio
+  report (`extra.google_analytics_report`, linked from every footer next to
+  the GoatCounter one). Both identifiers are public by design — they
   name the property, they do not grant access to the data. GoatCounter sets no
   cookies, which is why it replaced GA4 (GA4 needed a consent banner the site
   never had); the history is in `doc/ANALYTICS.md` and `doc/DECISIONS.md`.

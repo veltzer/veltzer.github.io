@@ -115,6 +115,12 @@ goatcounter_code = "veltzer"
 # The Google Analytics 4 measurement ID. Kept while GoatCounter is in use;
 # nothing loads it unless analytics = "google".
 google_analytics_id = "G-LXVE94D5KX"
+# A public Data Studio (Looker Studio) report over that GA4 property, fixed to
+# the period GA4 was the provider (2026-08-18 to 2026-11-06). Owned by the
+# author, shared "Public / Viewer", reading GA through the owner's credentials,
+# so viewers need no Google login. Every footer links to it next to the
+# GoatCounter dashboard; "" drops the link. See doc/ANALYTICS.md.
+google_analytics_report = "https://lookerstudio.google.com/reporting/24e02d9a-1d16-4b2b-8af3-906f5e80be2d"
 # The blog search box (static/blog-search.js) has three modes: "simple" (the
 # words in the title, opening text or tags), "full" (the full text too) and
 # "semantic" (posts ranked by meaning, through the word vectors

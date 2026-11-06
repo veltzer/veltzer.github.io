@@ -267,9 +267,15 @@
      <a href="{{ get_url(path=lang ~ '/atom.xml') }}">RSS</a>
      {#- The public GoatCounter dashboard: anyone can see which pages are
          read, nobody but the owner can change anything. Only offered while
-         GoatCounter is the provider; Google's dashboard is login-only. -#}
+         GoatCounter is the provider. -#}
      {%- if config.extra.analytics == "goatcounter" and config.extra.goatcounter_code %} &middot;
      <a href="https://{{ config.extra.goatcounter_code }}.goatcounter.com" rel="noopener">{{ trans(key="label_stats") }}</a>
+     {%- endif %}
+     {#- The public Data Studio report over the GA4 history (2026-08-18 to
+         2026-11-06). Offered whatever the current provider, since the
+         history it shows does not depend on it. -#}
+     {%- if config.extra.google_analytics_report %} &middot;
+     <a href="{{ config.extra.google_analytics_report }}" rel="noopener">{{ trans(key="label_ga_stats") }}</a>
      {%- endif %}</p>
   {#- Provenance, on every page: the generator and its version come from
       rssite itself, and so do the commit (`git`) and the build time

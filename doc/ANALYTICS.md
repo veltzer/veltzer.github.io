@@ -246,8 +246,18 @@ only remaining copy):
 * **The dashboard is public** ("Dashboard viewable by: Anyone" in the
   GoatCounter site settings, set 2026-11-06), and the footer of every page
   links to it as "Stats" / "סטטיסטיקות" (the `label_stats` string in
-  `i18n/`). The link is rendered only while GoatCounter is the provider, since
-  Google's dashboard is login-only.
+  `i18n/`). The link is rendered only while GoatCounter is the provider.
+* **The GA4 history is public too.** GA4's own dashboard is login-only, so on
+  2026-11-06 a Data Studio (Looker Studio) report was built over the GA4
+  property: <https://lookerstudio.google.com/reporting/24e02d9a-1d16-4b2b-8af3-906f5e80be2d>.
+  It is owned by the author, shared "Public / Viewer", and reads GA through
+  the owner's credentials, so viewers need no Google account. A date range
+  control fixed to 2026-08-18 to 2026-11-06 drives views and active users over
+  time, a country map and table, top pages and traffic sources. The footer
+  links to it as "Google Analytics stats" (`label_ga_stats`), from
+  `extra.google_analytics_report` in `rssite.toml`, independently of the
+  current provider. Every view queries the GA4 Data API on the owner's token
+  quota; Data Studio's default 12-hour cache keeps that small.
 * Coverage is the same as it was for GA4 (see "Coverage" above): everything
   rendered through `base.html`, in both languages, plus `404.html`.
 
