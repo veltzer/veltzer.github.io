@@ -56,6 +56,10 @@ class TestSelection:
         assert [item["name"] for item in import_companies.convert(data, "training-provider")["items"]] == ["Logtel"]
         assert [item["name"] for item in import_companies.convert(data)["items"]] == ["Amdocs"]
 
+    def test_an_organization_on_both_tabs_is_reported(self):
+        data = {"items": [organization(), organization(id=3, name="Both", functions=["teaching", "training-provider"])]}
+        assert import_companies.overlapping(data) == ["Both"]
+
     def test_both_tabs_are_shown(self):
         assert import_companies.shown(organization(functions=["training-provider"]))
         assert not import_companies.shown(organization(functions=["consulting"]))

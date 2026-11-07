@@ -4,7 +4,7 @@
 # Organizations I taught at, taught for (training companies that hired me to teach: function training-provider),
 # consulted for, was certified by, or consumed media from.
 # ids 122-124 (AgileSparks, DevelopIntelligence, Logtel) were added on 2026-11-07 as training providers, and Hinbit,
-# Interbit and John Bryce moved from teaching to training-provider the same day.
+# Interbit, John Bryce and Ness moved from teaching to training-provider the same day.
 # Extracted from the myworld MySQL database (TbOrganization, backup of 2019-05-11);
 # ids 116-121 were added on 2026-11-07 from companies_i_taught.txt in the private ../data repo, so they
 # have no old_url, and the three with no bitmap behind their logo have no logo_original.
@@ -1044,7 +1044,7 @@ items:
   slug: ness
   remark: public courses
   functions:
-  - teaching
+  - training-provider
   logo: logos/ness.svg
   logo_original: raw/logos/ness.jpg
   logo_kind: official vector

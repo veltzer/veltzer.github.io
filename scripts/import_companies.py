@@ -84,6 +84,17 @@ def shown(item):
     return any(has_function(item, function) for function in TABS)
 
 
+def overlapping(data):
+    """The names of organizations on more than one tab, which must not happen.
+
+    The tabs are disjoint relationships: a client I taught at (teaching) is
+    not a training company I taught for (training-provider), and the page
+    would show such an organization twice.
+    """
+    return [item.get("name", "?") for item in data.get("items") or []
+            if sum(has_function(item, function) for function in TABS) > 1]
+
+
 def blurb(item):
     """The line under the name: what happened, or the status when nothing did."""
     if item.get("what_happened"):
@@ -144,6 +155,11 @@ def main():
         data = yaml.safe_load(handle)
     if not data or "items" not in data:
         print(f"ERROR: {args.input} has no items", file=sys.stderr)
+        return 1
+    both = overlapping(data)
+    if both:
+        print(f"ERROR: {args.input}: on more than one tab ({', '.join(TABS)} are exclusive): {', '.join(both)}",
+              file=sys.stderr)
         return 1
     converted = convert(data, args.function)
     if not converted["items"]:
