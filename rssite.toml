@@ -142,6 +142,7 @@ nav = [
     { key = "nav_training", children = [
         { key = "nav_training_overview", path = "training/" },
         { key = "nav_teaching_data", path = "training/data/" },
+        { key = "nav_consulting_data", path = "training/consulting/" },
         { key = "nav_syllabi", path = "syllabi/" },
         { key = "nav_slides", path = "slides/" },
         { key = "nav_animations", path = "animations/" },

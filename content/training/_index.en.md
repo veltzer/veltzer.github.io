@@ -21,6 +21,8 @@ Courses can be tailored to your team's needs and delivered on site or online.
 The [clients I have taught at](/en/training/data/) range from startups to
 multinationals, and I have also taught courses for
 [training companies](/en/training/data/?data=providers) in Israel and the US.
+Beyond teaching, I have worked as a consultant for
+[companies](/en/training/consulting/), from startups to multinationals.
 
 ## Contact
 

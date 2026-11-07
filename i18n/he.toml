@@ -14,6 +14,7 @@ nav_animations = "אנימציות"
 nav_training = "הדרכות"
 nav_training_overview = "סקירה"
 nav_teaching_data = "נתוני הדרכה"
+nav_consulting_data = "נתוני ייעוץ"
 tags_title = "תגיות"
 tagged_with = "מתויג"
 latest_posts = "הפוסטים האחרונים"
@@ -418,6 +419,9 @@ app_companies_chart_by_place = "לפי מקום"
 app_companies_providers_nav_title = "חברות הדרכה"
 app_companies_providers_title = "חברות הדרכה שלימדתי עבורן"
 app_companies_providers_subtitle = "חברות ההדרכה ששכרו אותי כדי ללמד את הקורסים שלהן, איפה הן נמצאות ומה עלה בגורלן."
+app_companies_consulting_nav_title = "לקוחות ייעוץ"
+app_companies_consulting_title = "חברות שייעצתי להן"
+app_companies_consulting_subtitle = "החברות ששכרו אותי כיועץ, איפה הן נמצאות ומה עלה בגורלן."
 
 [dates]
 months = ["ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"]

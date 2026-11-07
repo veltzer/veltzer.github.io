@@ -28,14 +28,15 @@ predict_args = ["plan"]
 output_dirs = ["_site"]
 
 # The organization tabs: organizations.yaml becomes _site/data/companies.json.gz
-# (taught at) and training_providers.json.gz (taught for), and data/logos/ is copied to _site/logos/. The importer checks every map
+# (taught at), training_providers.json.gz (taught for) and consulting.json.gz
+# (consulted for), and data/logos/ is copied to _site/logos/. The importer checks every map
 # image the YAML names exists under static/images/.
 [processor.explicit.generic.companies]
 command = "scripts/build_site.py"
 args = ["companies"]
 inputs = ["data/yaml/organizations.yaml", "scripts/import_companies.py"]
 input_globs = ["data/logos/*.svg", "static/images/map-*.jpg"]
-output_files = ["_site/data/companies.json.gz", "_site/data/training_providers.json.gz"]
+output_files = ["_site/data/companies.json.gz", "_site/data/training_providers.json.gz", "_site/data/consulting.json.gz"]
 output_dirs = ["_site/logos"]
 
 # A share card (og:image) per blog post: content/blog/foo.en.md becomes

@@ -173,7 +173,7 @@ items:
     place: Jerusalem, Israel
     lat: 31.77885
     lon: 35.22579
-  address: Jerusalem Technology Park (Malha), Building 98, P.O. Box 48253, Jerusalem 91481, Israel
+  address: Jerusalem Technology Park (Malha), Building 98, Jerusalem, Israel
   address_source: https://www.sec.gov/Archives/edgar/data/1283073/000114420405022894/v022567.htm
   geo:
     from: israel_office
@@ -490,6 +490,8 @@ items:
     place: San Mateo, California, USA
     lat: 37.563
     lon: -122.32533
+  address: 1730 S. El Camino Real, Suite 600, San Mateo, California, USA
+  address_source: https://www.cbinsights.com/company/wellsphere
   geo:
     from: former_location
     place: San Mateo, California, USA
@@ -1566,6 +1568,8 @@ items:
     place: Santa Clara, California, USA
     lat: 37.35411
     lon: -121.95517
+  address: 1 Dolev St., Ra'anana, Israel
+  address_source: https://www.amdocs.com/careers/locations
   geo:
     from: israel_office
     place: Ra'anana, Israel
@@ -1598,6 +1602,8 @@ items:
     place: Holon, Israel
     lat: 32.01931
     lon: 34.78041
+  address: 5 HaTzoref St., Holon, Israel (Mer Group, its parent)
+  address_source: https://craft.co/mer-group-company
   geo:
     from: israel_office
     place: Holon, Israel
@@ -1636,6 +1642,8 @@ items:
     place: Herzliya, Israel
     lat: 32.16768
     lon: 34.83083
+  address: 11 Bareket St., Herzliya, Israel
+  address_source: https://www.cbinsights.com/company/telmap1
   geo:
     from: israel_office
     place: Herzliya, Israel
@@ -1781,6 +1789,8 @@ items:
     place: Haifa, Israel
     lat: 32.81912
     lon: 34.99839
+  address: MATAM High-Tech Park, Haifa, Israel
+  address_source: https://en.globes.co.il/en/article-1000308378
   geo:
     from: israel_office
     place: Haifa, Israel
@@ -2045,6 +2055,8 @@ items:
     place: Netanya, Israel
     lat: 32.32862
     lon: 34.85662
+  address: 1 Hamachshev St., New Industrial Area, Netanya, Israel
+  address_source: https://ised-isde.canada.ca/cipo/trademark-search/1352281?wbdisable=true
   geo:
     from: israel_office
     place: Netanya, Israel
@@ -2420,6 +2432,8 @@ items:
     place: Santa Clara, California, USA
     lat: 37.35411
     lon: -121.95517
+  address: 20 Hata'as St., Kfar Saba, Israel
+  address_source: http://web.archive.org/web/20070702175933/http://www.sentrigo.com:80/contact_us.htm
   geo:
     from: israel_office
     place: Kfar Saba, Israel
@@ -2656,6 +2670,8 @@ items:
     place: Petah Tikva, Israel
     lat: 32.08776
     lon: 34.886
+  address: 35 Efal St., Petah Tikva, Israel
+  address_source: https://www.555.co.il/clients/contact_us.html
   geo:
     from: israel_office
     place: Petah Tikva, Israel

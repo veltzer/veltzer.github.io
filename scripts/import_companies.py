@@ -4,11 +4,14 @@
 
 organizations.yaml records every organization I dealt with -- taught at,
 taught for, consulted for, was certified by -- with research notes, sources,
-three geocoded place fields and logo provenance. The teaching data page
-(/training/data/) has a tab per relationship, each the organizations with
-that ``--function`` among their ``functions`` (TABS lists them: ``teaching``,
-the companies I taught at, and ``training-provider``, the training companies
-I taught for), and wants only the fields a card shows: the name, the logo path, the current status
+three geocoded place fields and logo provenance. Each tab of the site's
+organization pages is the organizations with one ``--function`` among their
+``functions`` (TABS lists them): the teaching data page (/training/data/)
+has ``teaching``, the companies I taught at, and ``training-provider``, the
+training companies I taught for, which exclude each other (EXCLUSIVE); the
+consulting data page (/training/consulting/) has ``consulting``, which an
+organization I also taught at may have too. A tab wants only the fields a
+card shows: the name, the logo path, the current status
 and what happened, where the company is and where its Israel office was,
 the one map point chosen for it, the static map image of that point, and
 the logo attribution. The app prints ``review`` under every card's
@@ -45,9 +48,13 @@ import yaml
 
 TEACHING = "teaching"
 TRAINING_PROVIDER = "training-provider"
-# The functions that get a tab, so a card and a map image (see
+CONSULTING = "consulting"
+# The functions that get a tab, so a card, an address and a map image (see
 # organizations_fetch_maps.py): every organization with one of them is shown.
-TABS = (TEACHING, TRAINING_PROVIDER)
+TABS = (TEACHING, TRAINING_PROVIDER, CONSULTING)
+# Tabs of one page that are different relationships to the same kind of
+# organization, so no organization may be on two of them.
+EXCLUSIVE = (TEACHING, TRAINING_PROVIDER)
 
 # Fields copied verbatim when present. The order is the order in the JSON.
 KEPT = (
@@ -93,7 +100,7 @@ def overlapping(data):
     would show such an organization twice.
     """
     return [item.get("name", "?") for item in data.get("items") or []
-            if sum(has_function(item, function) for function in TABS) > 1]
+            if sum(has_function(item, function) for function in EXCLUSIVE) > 1]
 
 
 def without_address(data):
@@ -164,7 +171,7 @@ def main():
         return 1
     both = overlapping(data)
     if both:
-        print(f"ERROR: {args.input}: on more than one tab ({', '.join(TABS)} are exclusive): {', '.join(both)}",
+        print(f"ERROR: {args.input}: on more than one tab ({', '.join(EXCLUSIVE)} are exclusive): {', '.join(both)}",
               file=sys.stderr)
         return 1
     missing = without_address(data)

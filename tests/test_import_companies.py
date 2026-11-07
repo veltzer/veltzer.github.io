@@ -66,9 +66,15 @@ class TestSelection:
         data = {"items": [organization(), organization(id=3, name="Both", functions=["teaching", "training-provider"])]}
         assert import_companies.overlapping(data) == ["Both"]
 
+    def test_consulting_tab_overlaps_teaching(self):
+        data = {"items": [organization(), organization(id=3, name="Advised", functions=["consulting"])]}
+        assert [item["name"] for item in import_companies.convert(data, "consulting")["items"]] == ["Amdocs", "Advised"]
+        assert import_companies.overlapping(data) == []
+
     def test_both_tabs_are_shown(self):
         assert import_companies.shown(organization(functions=["training-provider"]))
-        assert not import_companies.shown(organization(functions=["consulting"]))
+        assert import_companies.shown(organization(functions=["consulting"]))
+        assert not import_companies.shown(organization(functions=["certification"]))
 
 
 class TestFields:

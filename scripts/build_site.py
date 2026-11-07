@@ -9,8 +9,8 @@ becomes a cached product. What rssite does not produce is done here, each
 step declaring exactly what it reads and writes in rsconstruct.toml so
 rsconstruct can order, cache and restore it:
 
-  companies      _site/data/companies.json.gz, training_providers.json.gz
-                 and _site/logos/
+  companies      _site/data/companies.json.gz, training_providers.json.gz,
+                 consulting.json.gz and _site/logos/
 
 companies is an explicit processor: rsconstruct appends `--inputs ...
 --output-files ... --output-dirs ...`.
@@ -48,12 +48,13 @@ def die(message):
     sys.exit(1)
 
 
-def write_companies(companies_file, providers_file, logos_dir):
+def write_companies(companies_file, providers_file, consulting_file, logos_dir):
     """Build the organization tabs' data and logos straight into the output.
 
-    One JSON per tab of the teaching data page, from the same YAML:
-    the companies I taught at (function teaching) and the training
-    companies I taught for (function training-provider).
+    One JSON per tab, from the same YAML: on the teaching data page the
+    companies I taught at (function teaching) and the training companies I
+    taught for (function training-provider), on the consulting data page
+    the companies I consulted for (function consulting).
 
     The other media tabs read committed static/data/*.json.gz files that
     scripts/copy_data.py produces by hand, because half of their sources
@@ -64,7 +65,8 @@ def write_companies(companies_file, providers_file, logos_dir):
     to data/ (logos/<slug>.svg), and data/logos/ lands at /logos/, so the
     plugin can use them as they are.
     """
-    for output_file, function in ((companies_file, "teaching"), (providers_file, "training-provider")):
+    for output_file, function in ((companies_file, "teaching"), (providers_file, "training-provider"),
+                                  (consulting_file, "consulting")):
         output_file.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run(
             [sys.executable, str(COMPANIES_IMPORTER), str(ORGANIZATIONS_YAML), str(output_file),
@@ -85,7 +87,7 @@ def write_companies(companies_file, providers_file, logos_dir):
 
 # The steps, in the order the bare command lists them, each with its line.
 STEPS = {
-    "companies": "write _site/data/companies.json.gz, training_providers.json.gz and _site/logos/",
+    "companies": "write _site/data/companies.json.gz, training_providers.json.gz, consulting.json.gz and _site/logos/",
 }
 
 
