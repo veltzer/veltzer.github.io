@@ -43,7 +43,8 @@ window.mediaPlugins['videos'] = {
         {key: 'seasons', label: 'Seasons Seen', default: true},
         {key: 'date', label: 'Date Watched', default: true},
         {key: 'location', label: 'Location', default: true},
-        {key: 'imdb', label: 'IMDb Link', default: true}
+        {key: 'imdb', label: 'IMDb Link', default: true},
+        {key: 'wikidata', label: 'Wikidata Link', default: true}
     ],
     // Covers/posters are 2:3 portrait; see imageFit in media-app.js.
     imageFit: 'contain',
@@ -63,6 +64,9 @@ window.mediaPlugins['videos'] = {
         }
         if (item.imdb_id) {
             html += '<li class="py-2" data-toggle="imdb"><a href="https://www.imdb.com/title/tt' + window.escapeHtml(item.imdb_id) + '/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; View on IMDb</a></li>';
+        }
+        if (item.wikidata_id) {
+            html += '<li class="py-2" data-toggle="wikidata"><a href="https://www.wikidata.org/wiki/' + window.escapeHtml(item.wikidata_id) + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; View on Wikidata</a></li>';
         }
         return html;
     },
