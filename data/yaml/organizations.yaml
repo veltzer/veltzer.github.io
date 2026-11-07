@@ -616,7 +616,7 @@ items:
   - certification
   logo: logos/mysql.svg
   logo_original: raw/logos/mysql.jpg
-  logo_kind: traced from original bitmap (the MySQL AB logo; no vector of it found online)
+  logo_kind: traced from original bitmap (no vector logo found online)
   logo_note: the MySQL AB-era logo (dolphin, dark blue My, orange SQL, registered mark) from raw/logos/mysql.jpg, flattened to its two
     colours and traced with vtracer on 2026-11-08; the current Oracle-era logo differs
   old_url: http://www.mysql.com
