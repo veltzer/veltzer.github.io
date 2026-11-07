@@ -622,12 +622,12 @@ items:
   old_url: http://www.interbit.co.il
   status: active
   website: https://interbit.co.il
-  location: Ramat Gan, Israel
+  location: Ramat Gan, Israel (6 HaChilazon St., Diamond Exchange district)
   location_geo:
     place: Ramat Gan, Israel
     lat: 32.06869
     lon: 34.82468
-  israel_office: Ramat Gan
+  israel_office: Ramat Gan (6 HaChilazon St., Diamond Exchange district)
   israel_office_geo:
     place: Ramat Gan, Israel
     lat: 32.06869
@@ -640,6 +640,8 @@ items:
   sources:
   - https://interbit.co.il/
   - https://www.crunchbase.com/organization/interbit-t-c
+  - https://www.d.co.il/40171820/25800/
+  - https://www.ilimudim.co.il/i/inatrebet/m
 - id: 19
   name: Israeli Air Industry
   slug: israeli-air-industry
@@ -1056,12 +1058,12 @@ items:
   what_happened: Ness Technologies Inc. was taken private by Citi Venture Capital International in October 2011; the Israeli business (Ness Technologies Israel) was sold to Hilan Group in June 2014, while
     the rest became KKR-owned Ness Digital Engineering (2022).
   website: https://www.ness-tech.co.il
-  location: Ra'anana, Israel
+  location: Ra'anana, Israel (Infinity Park, 7 HaPnina St.)
   location_geo:
     place: Ra'anana, Israel
     lat: 32.18602
     lon: 34.86784
-  israel_office: Ra'anana, Israel
+  israel_office: Ra'anana, Israel (Infinity Park, 7 HaPnina St.)
   israel_office_geo:
     place: Ra'anana, Israel
     lat: 32.18602
@@ -1078,6 +1080,7 @@ items:
     lat: 32.18602
     lon: 34.86784
   sources:
+  - https://www.ness-tech.co.il/contactus
   - https://www.ness-tech.co.il/en
   - https://www.sec.gov/Archives/edgar/data/1089638/000114420411012902/v213173_10k.htm
 - id: 32
@@ -3400,12 +3403,12 @@ items:
   old_url: http://www.johnbryce.co.il
   status: active
   website: https://www.johnbryce.co.il/
-  location: Tel Aviv, Israel
+  location: Tel Aviv, Israel (29 Homa uMigdal St.)
   location_geo:
     place: Tel Aviv, Israel
     lat: 32.0853
     lon: 34.78181
-  israel_office: Tel Aviv, Israel
+  israel_office: Tel Aviv, Israel (29 Homa uMigdal St.); branches in Haifa (46 HaHistadrut St.) and Jerusalem (Technology Park, Tower building, 4th floor)
   israel_office_geo:
     place: Tel Aviv, Israel
     lat: 32.0853
@@ -3418,6 +3421,7 @@ items:
   sources:
   - https://www.johnbryce.co.il/content/john-bryce-training-college/
   - https://www.matrix-globalservices.com/subsidiaries/
+  - https://www.johnbryce.co.il/%d7%90%d7%95%d7%93%d7%95%d7%aa/branches/
 - id: 100
   name: Amazon Web Services Certified Instructor
   slug: aws
