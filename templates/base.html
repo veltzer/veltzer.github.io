@@ -201,9 +201,38 @@
         who opens an app keeps the Hebrew nav, switcher and way back. The app
         sections exist in Hebrew as stubs that take the English body
         (body_from = "en"), so /he/chess/ is a real page. -#}
+    {%- if item.children %}
+    {#- A menu: a native <details>, so it opens on click, tap and keyboard
+        with no script; the one below only closes it on an outside click or
+        Escape. The children are plain links like the top-level entries. -#}
+    <details class="nav-menu">
+      <summary>{{ trans(key=item.key) }}</summary>
+      <div class="nav-menu-items">
+        {%- for child in item.children %}
+        <a href="{{ language.url_prefix }}{{ child.path }}">{{ trans(key=child.key) }}</a>
+        {%- endfor %}
+      </div>
+    </details>
+    {%- else %}
     <a href="{{ language.url_prefix }}{{ item.path }}">{{ trans(key=item.key) }}</a>
+    {%- endif %}
     {%- endfor %}
   </nav>
+  <script>
+  // Close an open nav menu when the reader clicks outside it or presses Escape.
+  document.addEventListener('click', function (event) {
+    document.querySelectorAll('details.nav-menu[open]').forEach(function (menu) {
+      if (!menu.contains(event.target)) menu.removeAttribute('open');
+    });
+  });
+  document.addEventListener('keydown', function (event) {
+    if (event.key !== 'Escape') return;
+    document.querySelectorAll('details.nav-menu[open]').forEach(function (menu) {
+      menu.removeAttribute('open');
+      menu.querySelector('summary').focus();
+    });
+  });
+  </script>
 
   {#- Header controls: language and theme, both as <select> elements.
 

@@ -51,7 +51,7 @@ def die(message):
 def write_companies(companies_file, providers_file, logos_dir):
     """Build the organization tabs' data and logos straight into the output.
 
-    One JSON per tab of the teaching history page, from the same YAML:
+    One JSON per tab of the teaching data page, from the same YAML:
     the companies I taught at (function teaching) and the training
     companies I taught for (function training-provider).
 

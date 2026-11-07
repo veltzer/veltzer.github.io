@@ -41,7 +41,7 @@ plugins = ["audio", "audible", "books"]    # the first is the default view
 ```
 
 Today that is `content/media/` (the eight media plugins) and
-`content/training/history/` (`companies` and `providers`, two tabs over
+`content/training/data/` (`companies` and `providers`, two tabs over
 organizations.yaml). A single-plugin page shows no tab row.
 
 One script may register several keys: `plugin-companies.js` registers

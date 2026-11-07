@@ -4,7 +4,7 @@
  *
  * Entry points: every page using templates/data_collection.html -- the media
  * section (/en/media/, /he/media/) and the training section's teaching
- * history page (/en/training/history/, /he/training/history/). The template
+ * data page (/en/training/data/, /he/training/data/). The template
  * sets, BEFORE loading this script:
  *
  *   window.collectionBasePath   where plugins and data live ('/')

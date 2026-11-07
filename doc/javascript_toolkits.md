@@ -15,7 +15,7 @@ blog loads nothing at all.
 
 | Page | CSS | JS libraries |
 |------|-----|--------------|
-| `/en/media/`, `/en/training/history/` | Tailwind (compiled, vendored) | none -- plain JS in `static/data-collection-app.js` + nine plugins |
+| `/en/media/`, `/en/training/data/` | Tailwind (compiled, vendored) | none -- plain JS in `static/data-collection-app.js` + nine plugins |
 | `/en/chess/` | site stylesheet | chess.js, cm-chessboard -- both **vendored**, not CDN |
 | `/en/calendar/` | site stylesheet | FullCalendar 6.1.20 + its Google Calendar plugin -- **vendored** |
 | `/en/slides/`, `/en/syllabi/`, `/en/animations/` | site stylesheet | Material Web 2 (CDN) |

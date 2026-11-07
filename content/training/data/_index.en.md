@@ -1,5 +1,5 @@
 +++
-title = "Teaching History"
+title = "Teaching Data"
 description = "The clients Mark Veltzer has taught courses at, and the training companies he has taught courses for, with where they are and what became of them."
 template = "data_collection.html"
 

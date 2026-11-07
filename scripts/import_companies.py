@@ -4,8 +4,8 @@
 
 organizations.yaml records every organization I dealt with -- taught at,
 taught for, consulted for, was certified by -- with research notes, sources,
-three geocoded place fields and logo provenance. The teaching history page
-(/training/history/) has a tab per relationship, each the organizations with
+three geocoded place fields and logo provenance. The teaching data page
+(/training/data/) has a tab per relationship, each the organizations with
 that ``--function`` among their ``functions`` (TABS lists them: ``teaching``,
 the companies I taught at, and ``training-provider``, the training companies
 I taught for), and wants only the fields a card shows: the name, the logo path, the current status
