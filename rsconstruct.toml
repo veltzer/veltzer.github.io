@@ -147,6 +147,14 @@ src_extensions = [".jpg", ".jpeg", ".png", ".gif", ".webp"]
 [processor.checker.ixmllint]
 src_dirs = ["static", "data/logos"]
 src_exclude_dirs = ["vendor"]
+# Every post is <date>-<slug>.<lang>.md with a short `slug` (at most four
+# words) in its front matter; see the script and CLAUDE.md, "Blog Posts".
+[processor.checker.script.post_names]
+command = "scripts/check_post_names.py"
+src_dirs = ["content/blog"]
+src_extensions = [".md"]
+src_exclude_paths = ["content/blog/_index.en.md", "content/blog/_index.he.md"]
+batch = true
 [processor.generator.generic.aspell_he_dict]
 command = "scripts/build_he_dict.sh"
 src_files = [".aspell.he.txt"]

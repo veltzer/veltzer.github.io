@@ -72,7 +72,7 @@ which records the traps that outlived the migration.
   (locally vendored JS libraries); the apps themselves live in `content/<app>/`
 - `shared/shared-themes/` — git submodule providing the design tokens. **Run
   `git submodule update --init --recursive` on a fresh clone or the build fails.**
-- `scripts/` — `build_site.py` (the companies build step), `check_redirects.py` (checks the
+- `scripts/` — `build_site.py` (the companies build step), `check_post_names.py` (post file names against their `date` and `slug`), `check_redirects.py` (checks the
   live site's host redirects and sitemap), `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
   the sibling teaching repos), image fetchers, data importers, the `data/yaml/`
   maintenance scripts (`podcasts_*.py`, `books_fetch_ids.py`, `great_courses_*.py`,
@@ -152,16 +152,16 @@ sitemap) needs 0.1.25.
 
 ## Blog Posts
 
-- One file per post in `content/blog/`, flat, named `<base>.en.md`. The base name
-  becomes the URL slug: `euthyphro_dilemma.en.md` → `/en/blog/euthyphro-dilemma/`.
-  **rssite slugifies the filename, not the title** — worth remembering when hunting for a
-  built page.
-- **The file name always matches the English title**: the title, lowercased, with
-  punctuation dropped and words joined by `_` ("The media thinks that you are an
-  idiot, then they are right" → `the_media_thinks_that_you_are_an_idiot_then_they_are_right.en.md`).
-  Retitling a post means renaming both its `.en.md` and `.he.md` with `git mv`, in
-  the same commit, and fixing every `@/blog/<old>.md` link to it. The old URL then
-  404s, which is accepted (no legacy redirects, see *Important Notes*).
+- One file per post in `content/blog/`, flat, named **`<date>-<slug>.<lang>.md`**:
+  `2026-04-28-euthyphro-dilemma.en.md` → `/en/blog/euthyphro-dilemma/`. The date
+  prefix makes the folder sort by date; the URL is the `slug` key alone.
+- **Every post carries a `slug`**: its short name, at most four lowercase ASCII words
+  joined by `-`, chosen by hand (not derived mechanically from the title). The title is
+  free to change and touches neither the URL nor the file name. The file name must be
+  exactly `<date>-<slug>`; `scripts/check_post_names.py` (the `post_names` processor)
+  fails the build otherwise. Changing a slug or a date means `git mv` of both language
+  files in one commit plus fixing every `@/blog/<old>.md` link; the old URL then 404s,
+  which is accepted for now (no redirects, see *Important Notes*).
 - Front matter is TOML between `+++` lines:
 
 ```toml
@@ -169,6 +169,7 @@ sitemap) needs 0.1.25.
 title = "The Euthyphro Dilemma: Why Morality Cannot Come From God"
 description = "Is something good because God commands it, or commanded because it is good? Either morality is arbitrary or it is independent of God; there is no third option."
 date = 2026-04-28
+slug = "euthyphro-dilemma"
 
 [taxonomies]
 tags = ["religion", "philosophy", "ethics"]
@@ -180,17 +181,17 @@ tags = ["religion", "philosophy", "ethics"]
   `og:description` and the search snippet; without it they fall back to the
   opening text. Posts carry no `updated` key and are not grouped into series,
   both by decision (`doc/DECISIONS.md`).
-- **Translations**: add `content/blog/<same-base-name>.he.md`. Copy `date` verbatim
-  from the English file — it is a shared key, and a mismatch splits the pair.
+- **Translations**: add `content/blog/<date>-<slug>.he.md`, the same name as the
+  English file. Copy `date` and `slug` verbatim from the English file — they are
+  shared keys, and the name check fails on a mismatch.
   Translate the `title`, the `description` and the `tags` (see below). Do not add a `lang` key;
   rssite reads it from the suffix (`.en` / `.he`; a file with neither is an error).
   The language switcher renders itself from the `translations` rssite hands every
   template, so never hand-write cross-links between a post and its translation.
 - **Post slugs are shared between languages, deliberately.** `/en/blog/foo/` and
-  `/he/blog/foo/` use the same English slug, because rssite derives it from the
-  filename and the filename is what pairs the two files. Do not "fix" this by
-  renaming the Hebrew file or adding a `slug =` key — see
-  `doc/DECISIONS.md` for why. Tag slugs *are* translated; posts are the exception.
+  `/he/blog/foo/` use the same English slug, because the filename is what pairs the
+  two files and the `slug` is a shared key. Do not give a Hebrew post its own slug
+  or rename the Hebrew file — see `doc/DECISIONS.md` for why. Tag slugs *are* translated; posts are the exception.
 - **Tags are translated, and are NOT a shared key.** A Hebrew post carries Hebrew
   tags (`דת`, not `religion`), so `/en/tags/` and `/he/tags/` are disjoint term
   sets. This is safe precisely because the pairing is by filename, not by tag.
@@ -201,7 +202,7 @@ tags = ["religion", "philosophy", "ethics"]
   language. A pair whose lists differ in length, or a tag that lines up with two
   different counterparts, fails the build.
 - Links between posts use the `@/` syntax, resolved against the content root:
-  `[text](@/blog/other_post.md)`.
+  `[text](@/blog/2026-04-28-euthyphro-dilemma.md)`.
 - Every post exists in both English and Hebrew, and the build enforces it:
   `require_translations` in `content/blog/_index.{en,he}.md` makes rssite fail
   on any `.en.md` without its `.he.md` (or the reverse). An unpaired post would otherwise lose its language switcher

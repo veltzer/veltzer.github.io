@@ -898,5 +898,5 @@ full-text search, feeds and a share card per language.
   `test-procedures-for-new-memory-installations` read "ubiqitous" (which
   had been whitelisted in `.aspell.en.txt`, now removed) and "the memory
   with will". The Fatar post's title said "StdioLogic" for StudioLogic in
-  both languages (the slug keeps the typo: changing it would change the
-  URL).
+  both languages (the slug kept the typo until 2026-11-07, when the post
+  got the short slug `fatar-sl880-surgery`).

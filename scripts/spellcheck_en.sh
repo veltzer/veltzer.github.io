@@ -27,10 +27,14 @@ for file in "$@"; do
 	# words aspell is incapable of judging, not words it judged wrong.
 	# `|| true` on the grep: under pipefail, a grep that filters out every
 	# line exits 1 and would fail the whole check with no output at all.
-	misspelled=$(aspell --lang=en --encoding=utf-8 \
+	# The front matter's `slug = "..."` line is skipped: a slug is an
+	# identifier (lowercase, no apostrophes), not prose, so "christianity"
+	# there is not a misspelling. Titles and descriptions are still checked.
+	misspelled=$(grep -v '^slug = ' "${file}" |
+		aspell --lang=en --encoding=utf-8 \
 		--dict-dir="${dict_dir}" \
 		--add-extra-dicts=.aspell.en.rws \
-		list <"${file}" |
+		list |
 		{ grep -Pv '[^\x00-\xFF]' || true; } |
 		LC_ALL=C sort -u)
 	if [ -n "${misspelled}" ]; then

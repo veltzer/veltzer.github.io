@@ -27,10 +27,14 @@ fi
 status=0
 for file in "$@"; do
 	# aspell appends .rws itself, but the compiled name already carries it.
-	misspelled=$(aspell --lang=he --encoding=utf-8 \
+	# The front matter's `slug = "..."` line is skipped: a slug is an
+	# identifier (lowercase, no apostrophes), not prose, so "christianity"
+	# there is not a misspelling. Titles and descriptions are still checked.
+	misspelled=$(grep -v '^slug = ' "${file}" |
+		aspell --lang=he --encoding=utf-8 \
 		--dict-dir="${dict_dir}" \
 		--add-extra-dicts=.aspell.he.rws \
-		list <"${file}" | LC_ALL=C sort -u)
+		list | LC_ALL=C sort -u)
 	if [ -n "${misspelled}" ]; then
 		echo "Misspelled words in ${file}:"
 		echo "${misspelled}"

@@ -24,8 +24,8 @@ Draws the share card (`og:image`, 1200x630) of every blog post: the author
 line, the post's title at the largest size that fits four lines, its tags,
 and `veltzer.org`, right to left for Hebrew. Run by rsconstruct as
 `processor.generator.generic.post_cards`, in batch mode with
-`<post.md> <card.jpg>` pairs: `content/blog/foo.en.md` becomes
-`_site/images/og/foo.en.jpg`, which `templates/base.html` names. The cards
+`<post.md> <card.jpg>` pairs: `content/blog/2026-04-28-euthyphro-dilemma.en.md` becomes
+`_site/images/og/2026-04-28-euthyphro-dilemma.en.jpg`, which `templates/base.html` names. The cards
 are build output, not committed, so each is redrawn when its post changes.
 Needs Pillow (whose wheel bundles libraqm), the system's libfribidi and
 Liberation Sans (`fonts-liberation`), all declared in `rsconstruct.toml`.
@@ -246,6 +246,16 @@ dictionary itself if it is missing, because rsconstruct does not order
 generators before checkers.
 
 ## Validation Scripts
+
+### `scripts/check_post_names.py`
+
+Checks that every blog post is named `<date>-<slug>.<lang>.md` after its own
+front matter, and that its `slug` is at most four lowercase ASCII words
+joined by `-`. Run by rsconstruct as `processor.checker.script.post_names`
+over `content/blog/` (the two `_index` files excluded). Because rssite pairs
+translations by file name, checking each file alone also keeps the two
+languages' `date` and `slug` equal. The rule is in `CLAUDE.md` under "Blog
+Posts".
 
 ### `scripts/check_images.py`
 

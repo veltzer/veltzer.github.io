@@ -252,7 +252,10 @@ Giving Hebrew posts Hebrew URLs therefore means one of:
   preserves the pairing but adds one hand-maintained key per post that must not
   drift.
 
-Neither buys much. Three further points settled it:
+Neither buys much. (Since 2026-11-07 every post *does* carry a `slug` key,
+but as a shared key with the same value in both languages; see "Posts are
+named date plus short slug" below. Hebrew URLs remain declined.) Three
+further points settled it:
 
 1. The English URLs are already published. Changing them creates a dead URL
    per post unless redirects are left behind for each.
@@ -441,3 +444,34 @@ Nothing was erased: `extra.analytics` in `rssite.toml` selects the provider,
 and the GA4 measurement ID stays in the file next to the GoatCounter code, so
 going back is a one-word change. The full notes, including the author's
 reasoning and how the two providers are wired, are in `doc/ANALYTICS.md`.
+
+## Posts are named date plus short slug (2026-11-07)
+
+Every post's front matter carries a `slug`: a short name of at most four
+lowercase ASCII words, chosen by hand. The file is `<date>-<slug>.<lang>.md`,
+in both languages, and `scripts/check_post_names.py` fails the build when a
+name, slug or date disagree or a slug is too long.
+
+What the other tools do, and what was taken from each:
+
+- Static generators (Jekyll, Hugo, Zola, Eleventy) take the URL from the file
+  name, with a `slug` front-matter override. Nothing keeps the file name and
+  the title in step, so they drift apart (394 of 421 posts here no longer
+  matched their titles).
+- CMSs (WordPress, Ghost) make the slug from the title once and then keep it
+  fixed, so a retitle never moves the URL.
+- Jekyll and Docusaurus put the date in the file name so the folder sorts
+  chronologically.
+
+The result: the title changes freely, the URL is short (the usual SEO advice
+is three to five words), and `content/blog/` lists in date order. The slug
+sits in the metadata instead of only in the file name so that it is an
+explicit, checked choice, not a side effect of whatever a file happened to be
+called.
+
+The migration changed 208 URLs: 207 posts whose names were longer than four
+words got short slugs, and the post renamed earlier that day got one too. The
+author accepted the dead links (few readers so far), so no redirects were
+added, in line with "No legacy-URL redirects" above. A slug that later
+changes breaks its URL the same way. That stays acceptable while readership is
+small, and is the point to revisit if it is not.
