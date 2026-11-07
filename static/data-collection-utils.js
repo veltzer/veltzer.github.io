@@ -1,4 +1,31 @@
-// Shared utilities for media plugins
+// Shared utilities for the data collection app and its plugins
+
+/**
+ * The UI string ``app_<key>`` in the page's language.
+ *
+ * templates/data_collection.html writes every app_* key of i18n/<lang>.toml
+ * into window.collectionStrings, so the strings live in the site's own
+ * translation files and a key missing from a language fails the build there.
+ * ``{name}`` placeholders are filled from ``vars``. A key the page does not
+ * have is a bug: it is logged and its name shown, never silently English.
+ * @param {string} key - the key without its app_ prefix
+ * @param {Object} [vars] - values for {placeholders}
+ * @returns {string}
+ */
+function t(key, vars) {
+    const strings = window.collectionStrings || {};
+    let text = strings['app_' + key];
+    if (text === undefined) {
+        console.error('Missing UI string app_' + key + ' (add it to i18n/en.toml and i18n/he.toml)');
+        text = key;
+    }
+    if (vars) {
+        text = text.replace(/\{(\w+)\}/g, function(match, name) {
+            return Object.hasOwn(vars, name) ? String(vars[name]) : match;
+        });
+    }
+    return text;
+}
 
 const CHART_COLORS = ['#2563eb', '#7c3aed', '#db2777', '#ea580c', '#16a34a', '#dc2626', '#ca8a04'];
 
@@ -25,7 +52,7 @@ const COLOR_CLASS_MAP = {
  */
 function renderBarChart(title, counts, options) {
     const opts = options || {};
-    const unit = opts.unit || 'items';
+    const unit = opts.unit || t('ui_items');
     const barClass = opts.barClass || null;
     const sort = opts.sort || 'alpha';
     const limit = opts.limit || 0;
@@ -95,6 +122,7 @@ function mediaFormatDate(dateString) {
 
 // Published as globals: the media plugins are loaded as classic scripts and
 // call these by name (see the /* global */ header in each plugin-*.js).
+window.t = t;
 window.renderBarChart = renderBarChart;
 window.renderStatCard = renderStatCard;
 window.mediaFormatDate = mediaFormatDate;

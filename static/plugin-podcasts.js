@@ -1,4 +1,4 @@
-/* global renderBarChart, renderStatCard, mediaFormatDate */
+/* global t, renderBarChart, renderStatCard, mediaFormatDate */
 window.collectionPlugins = window.collectionPlugins || {};
 
 (function() {
@@ -26,16 +26,16 @@ window.collectionPlugins = window.collectionPlugins || {};
 
 window.collectionPlugins['podcasts'] = {
     file: 'data/podcasts.json.gz',
-    navTitle: 'Podcasts',
-    title: 'Listened Podcasts',
-    subtitle: "A searchable list of podcasts I've listened to.",
+    navTitle: t('podcasts_nav_title'),
+    title: t('podcasts_title'),
+    subtitle: t('podcasts_subtitle'),
     ratingScale: 10,
-    searchPlaceholder: 'Search by name, review, chapter...',
+    searchPlaceholder: t('podcasts_search_placeholder'),
     searchFields: ['name', 'review', 'url'],
     fields: [
-        {field: 'name', label: 'Name', type: 'string', filterable: false},
-        {field: 'rating', label: 'Rating', type: 'number', filterType: 'select'},
-        {field: 'chapter_count', label: 'Chapters Listened', type: 'number', value: getChapterCount,
+        {field: 'name', label: t('podcasts_name'), type: 'string', filterable: false},
+        {field: 'rating', label: t('podcasts_rating'), type: 'number', filterType: 'select'},
+        {field: 'chapter_count', label: t('podcasts_chapters_listened'), type: 'number', value: getChapterCount,
             filterType: 'range', ranges: [
                 {label: '1\u20135', min: 1, max: 6},
                 {label: '6\u201320', min: 6, max: 21},
@@ -43,22 +43,22 @@ window.collectionPlugins['podcasts'] = {
                 {label: '51+', min: 51, max: null}
             ]
         },
-        {field: 'first_listened', label: 'First Listened', type: 'string', value: getFirstListened, filterType: 'year'},
-        {field: 'last_listened', label: 'Last Listened', type: 'string', value: getLastListened, filterType: 'year'},
-        {field: 'has_chapters', label: 'Has Chapters', type: 'string', sortable: false,
+        {field: 'first_listened', label: t('podcasts_first_listened'), type: 'string', value: getFirstListened, filterType: 'year'},
+        {field: 'last_listened', label: t('podcasts_last_listened'), type: 'string', value: getLastListened, filterType: 'year'},
+        {field: 'has_chapters', label: t('podcasts_has_chapters'), type: 'string', sortable: false,
             filterType: 'boolean', value: function(item) { return item.chapters && item.chapters.length > 0; }
         },
-        {field: 'has_review', label: 'Has Review', type: 'string', sortable: false,
+        {field: 'has_review', label: t('podcasts_has_review'), type: 'string', sortable: false,
             filterType: 'boolean', value: function(item) { return item.review && item.review.trim() !== ''; }
         },
-        {field: 'has_url', label: 'Has URL', type: 'string', sortable: false,
+        {field: 'has_url', label: t('podcasts_has_url'), type: 'string', sortable: false,
             filterType: 'boolean', value: function(item) { return item.url && item.url.trim() !== ''; }
         }
     ],
     defaultSort: {field: 'name', order: 'asc'},
     toggleFields: [
-        {key: 'link', label: 'Podcast Link', default: true},
-        {key: 'chapters', label: 'Chapters Info', default: true}
+        {key: 'link', label: t('podcasts_toggle_link'), default: true},
+        {key: 'chapters', label: t('podcasts_toggle_chapters'), default: true}
     ],
     renderImage: function(item) {
         if (!item.internal_id) return '';
@@ -67,14 +67,14 @@ window.collectionPlugins['podcasts'] = {
     renderDetails: function(item) {
         let html = '';
         if (item.url) {
-            html += '<li class="py-2" data-toggle="link"><a href="' + window.escapeHtml(item.url) + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; Visit Podcast</a></li>';
+            html += '<li class="py-2" data-toggle="link"><a href="' + window.escapeHtml(item.url) + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; ' + t('podcasts_visit') + '</a></li>';
         }
         if (item.chapters && item.chapters.length > 0) {
-            html += '<li class="py-2" data-toggle="chapters"><strong>Chapters Listened:</strong> ' + item.chapters.length + '</li>';
+            html += '<li class="py-2" data-toggle="chapters"><strong>' + t('podcasts_d_chapters') + '</strong> ' + item.chapters.length + '</li>';
             const dates = getChapterDates(item);
             if (dates.length > 0) {
-                html += '<li class="py-2" data-toggle="chapters"><strong>First Listened:</strong> ' + dates[0].substring(0, 10) + '</li>';
-                html += '<li class="py-2" data-toggle="chapters"><strong>Last Listened:</strong> ' + dates[dates.length - 1].substring(0, 10) + '</li>';
+                html += '<li class="py-2" data-toggle="chapters"><strong>' + t('podcasts_d_first') + '</strong> ' + dates[0].substring(0, 10) + '</li>';
+                html += '<li class="py-2" data-toggle="chapters"><strong>' + t('podcasts_d_last') + '</strong> ' + dates[dates.length - 1].substring(0, 10) + '</li>';
             }
         }
         return html;
@@ -99,11 +99,11 @@ window.collectionPlugins['podcasts'] = {
         });
 
         let html = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">';
-        html += '<div>' + renderStatCard(items.length, 'Total Podcasts') + '</div>';
-        html += '<div>' + renderStatCard(totalChapters, 'Total Chapters Listened') + '</div>';
+        html += '<div>' + renderStatCard(items.length, t('podcasts_total')) + '</div>';
+        html += '<div>' + renderStatCard(totalChapters, t('podcasts_total_chapters')) + '</div>';
         html += '</div>';
-        html += renderBarChart('Device Distribution', deviceCounts, {unit: 'chapters'});
-        html += renderBarChart('Listening Location', locationCounts, {unit: 'chapters', sort: 'desc', barClass: 'bg-success', last: true});
+        html += renderBarChart(t('podcasts_devices'), deviceCounts, {unit: t('podcasts_unit_chapters')});
+        html += renderBarChart(t('podcasts_locations'), locationCounts, {unit: t('podcasts_unit_chapters'), sort: 'desc', barClass: 'bg-success', last: true});
         return html;
     },
     formatDate: mediaFormatDate

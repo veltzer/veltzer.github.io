@@ -246,6 +246,33 @@ The media page automatically handles these item fields if present:
 - `rating` - displayed if `ratingScale` is set
 - `device` - displayed as "Device: ..." on the card
 
+## Translation
+
+The app is bilingual (English and Hebrew), and no plugin may contain a user
+visible English string. Every label, title, unit, link text and fixed
+enumeration a plugin shows is a key in the site's own translation files,
+`i18n/en.toml` and `i18n/he.toml`, named `app_<plugin>_<name>`, and the
+plugin reads it with the global `t()` from `data-collection-utils.js`,
+without the `app_` prefix:
+
+```javascript
+navTitle: t('books_nav_title'),
+html += renderBarChart(t('books_per_year', {undated: undated}), counts, {unit: t('books_unit')});
+```
+
+`{name}` placeholders are filled from the second argument; a sentence with a
+number in it is one string with a placeholder, never fragments glued around
+the number. `templates/data_collection.html` writes every `app_*` key of
+`i18n/en.toml` into the page, looking each up in the page's language with
+rssite's `trans()`, so a key added to `en.toml` but not `he.toml` fails the
+build. The strings are ready before any plugin script loads, so `t()` may be
+called while the plugin object is built.
+
+The data itself (titles, names, reviews, genres) is not translated. In a
+Hebrew page the app runs right to left: use logical Tailwind spacing
+(`ms-*`/`me-*`, not `ml-*`/`mr-*`) and rerun `scripts/build_collection_css.sh`
+after adding a class.
+
 ## Available Globals
 
 Inside plugin methods you can use:

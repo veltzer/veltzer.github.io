@@ -1,4 +1,4 @@
-/* global renderBarChart, renderStatCard */
+/* global renderBarChart, renderStatCard, t */
 window.collectionPlugins = window.collectionPlugins || {};
 
 // The one map point per company, chosen by hand in organizations.yaml (see
@@ -36,51 +36,70 @@ function capitalize(text) {
     return text ? text.charAt(0).toUpperCase() + text.substring(1) : '';
 }
 
-// The functions as a reader should see them; the YAML values are identifiers.
-const FUNCTION_LABELS = {'training-provider': 'Taught for'};
+// The YAML values for status, function and logo kind are identifiers: each is
+// shown through its own translated string, and a value with no string yet
+// falls back to the capitalized code rather than logging a missing key.
+function enumLabel(prefix, code) {
+    const key = 'companies_' + prefix + '_' + String(code).replace(/[^a-z0-9]+/g, '_');
+    const strings = window.collectionStrings || {};
+    return strings['app_' + key] !== undefined ? t(key) : capitalize(code);
+}
+
+function statusLabel(status) {
+    return enumLabel('status', status);
+}
 
 function functionLabel(fn) {
-    return FUNCTION_LABELS[fn] || capitalize(fn);
+    return enumLabel('function', fn);
+}
+
+// The logo kinds are sentences in the YAML; matched on their leading words.
+function logoKindLabel(kind) {
+    if (kind.indexOf('official vector') === 0) return t('companies_logo_kind_official');
+    if (kind.indexOf('traced from original bitmap') === 0) return t('companies_logo_kind_traced');
+    if (kind.indexOf('wordmark') === 0) return t('companies_logo_kind_wordmark');
+    return capitalize(kind);
 }
 
 window.collectionPlugins['companies'] = {
     file: 'data/companies.json.gz',
-    navTitle: 'Clients',
-    title: 'Clients I Taught At',
-    subtitle: 'The companies that hired me to teach their people, with where they are and what became of them.',
+    navTitle: t('companies_nav_title'),
+    title: t('companies_title'),
+    subtitle: t('companies_subtitle'),
     ratingScale: null,
-    searchPlaceholder: 'Search by name, place, status...',
-    searchFields: ['name', 'location', 'israel_office', 'status', 'review', 'remark'],
+    searchPlaceholder: t('companies_search_placeholder'),
+    searchFields: ['name', 'location', 'israel_office', 'address', 'status', 'review', 'remark'],
     fields: [
-        {field: 'name', label: 'Name', type: 'string', filterable: false},
-        {field: 'status', label: 'Status', type: 'string', filterType: 'select',
-            value: function(item) { return capitalize(item.status || ''); }
+        {field: 'name', label: t('companies_field_name'), type: 'string', filterable: false},
+        {field: 'status', label: t('companies_field_status'), type: 'string', filterType: 'select',
+            value: function(item) { return item.status ? statusLabel(item.status) : ''; }
         },
-        {field: 'functions', label: 'Function', type: 'string', sortable: false,
+        {field: 'functions', label: t('companies_field_function'), type: 'string', sortable: false,
             filterType: 'custom',
             extractValues: function(item) { return (item.functions || []).map(functionLabel); },
             match: function(item, val) { return (item.functions || []).map(functionLabel).indexOf(val) !== -1; }
         },
-        {field: 'place', label: 'Place', type: 'string', filterType: 'select', value: companyPlace},
-        {field: 'country', label: 'Country', type: 'string', filterType: 'select', value: companyCountry},
-        {field: 'has_website', label: 'Has Website', type: 'string', sortable: false,
+        {field: 'place', label: t('companies_field_place'), type: 'string', filterType: 'select', value: companyPlace},
+        {field: 'country', label: t('companies_field_country'), type: 'string', filterType: 'select', value: companyCountry},
+        {field: 'has_website', label: t('companies_field_has_website'), type: 'string', sortable: false,
             filterType: 'boolean', value: function(item) { return item.website && item.website.trim() !== ''; }
         },
-        {field: 'still_around', label: 'Still Around', type: 'string', sortable: false,
+        {field: 'still_around', label: t('companies_field_still_around'), type: 'string', sortable: false,
             filterType: 'boolean', value: function(item) { return item.status === 'active'; }
         }
     ],
     defaultSort: {field: 'name', order: 'asc'},
     toggleFields: [
-        {key: 'status', label: 'Status', default: true},
-        {key: 'functions', label: 'Functions', default: true},
-        {key: 'location', label: 'Headquarters', default: true},
-        {key: 'israel_office', label: 'Israel Office', default: true},
-        {key: 'map', label: 'Map', default: true},
-        {key: 'website', label: 'Website Link', default: true},
-        {key: 'since', label: 'Since', default: true},
-        {key: 'remark', label: 'Remark', default: false},
-        {key: 'logo_credit', label: 'Logo Credit', default: false}
+        {key: 'status', label: t('companies_toggle_status'), default: true},
+        {key: 'functions', label: t('companies_toggle_functions'), default: true},
+        {key: 'location', label: t('companies_toggle_headquarters'), default: true},
+        {key: 'israel_office', label: t('companies_toggle_israel_office'), default: true},
+        {key: 'address', label: t('companies_toggle_address'), default: true},
+        {key: 'map', label: t('companies_toggle_map'), default: true},
+        {key: 'website', label: t('companies_toggle_website'), default: true},
+        {key: 'since', label: t('companies_toggle_since'), default: true},
+        {key: 'remark', label: t('companies_toggle_remark'), default: false},
+        {key: 'logo_credit', label: t('companies_toggle_logo_credit'), default: false}
     ],
     // Every logo sits on the same square transparent canvas, so it is shown
     // whole ('contain') on a light box: most of them are dark marks drawn for
@@ -93,20 +112,24 @@ window.collectionPlugins['companies'] = {
     renderDetails: function(item) {
         let html = '';
         if (item.status) {
-            html += '<li class="py-2" data-toggle="status"><strong>Status:</strong> ' +
-                window.escapeHtml(capitalize(item.status)) + '</li>';
+            html += '<li class="py-2" data-toggle="status"><strong>' + t('companies_detail_status') + '</strong> ' +
+                window.escapeHtml(statusLabel(item.status)) + '</li>';
         }
         if (item.functions && item.functions.length > 0) {
-            html += '<li class="py-2" data-toggle="functions"><strong>Functions:</strong> ' +
+            html += '<li class="py-2" data-toggle="functions"><strong>' + t('companies_detail_functions') + '</strong> ' +
                 window.escapeHtml(item.functions.map(functionLabel).join(', ')) + '</li>';
         }
         if (item.location) {
-            html += '<li class="py-2" data-toggle="location"><strong>Headquarters:</strong> ' +
+            html += '<li class="py-2" data-toggle="location"><strong>' + t('companies_detail_headquarters') + '</strong> ' +
                 window.escapeHtml(item.location) + '</li>';
         }
         if (item.israel_office) {
-            html += '<li class="py-2" data-toggle="israel_office"><strong>Israel office:</strong> ' +
+            html += '<li class="py-2" data-toggle="israel_office"><strong>' + t('companies_detail_israel_office') + '</strong> ' +
                 window.escapeHtml(item.israel_office) + '</li>';
+        }
+        if (item.address) {
+            html += '<li class="py-2" data-toggle="address"><strong>' + t('companies_detail_address') + '</strong> ' +
+                window.escapeHtml(item.address) + '</li>';
         }
         const mapUrl = companyMapUrl(item);
         if (mapUrl) {
@@ -115,40 +138,41 @@ window.collectionPlugins['companies'] = {
             if (mapImage) {
                 html += '<a href="' + window.escapeHtml(mapUrl) + '" target="_blank" rel="noopener noreferrer">' +
                     '<img class="collection-card-map" src="' + window.escapeHtml(mapImage) +
-                    '" alt="Map of ' + window.escapeHtml(companyPlace(item)) + '" loading="lazy"></a>';
+                    '" alt="' + window.escapeHtml(t('companies_map_alt', {place: companyPlace(item)})) + '" loading="lazy"></a>';
             }
             html += '<a href="' + window.escapeHtml(mapUrl) +
                 '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">' +
-                '&#x1F4CD; ' + window.escapeHtml(companyPlace(item)) + ' on Google Maps</a>';
+                '&#x1F4CD; ' + window.escapeHtml(t('companies_on_google_maps', {place: companyPlace(item)})) + '</a>';
             if (mapImage) {
-                html += '<span class="collection-card-map-credit">Map &copy; <a href="https://www.openstreetmap.org/copyright"' +
-                    ' target="_blank" rel="noopener noreferrer" class="underline">OpenStreetMap</a> contributors</span>';
+                html += '<span class="collection-card-map-credit">' + t('companies_map_credit', {
+                    osm: '<a href="https://www.openstreetmap.org/copyright" target="_blank"' +
+                        ' rel="noopener noreferrer" class="underline">OpenStreetMap</a>'}) + '</span>';
             }
             html += '</li>';
         }
         if (item.website) {
             html += '<li class="py-2" data-toggle="website"><a href="' + window.escapeHtml(item.website) +
                 '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">' +
-                '&#x1F517; Visit Website</a></li>';
+                '&#x1F517; ' + window.escapeHtml(t('companies_visit_website')) + '</a></li>';
         }
         if (item.from_date) {
-            html += '<li class="py-2" data-toggle="since"><strong>Since:</strong> ' +
+            html += '<li class="py-2" data-toggle="since"><strong>' + t('companies_detail_since') + '</strong> ' +
                 window.escapeHtml(item.from_date) + '</li>';
         }
         if (item.remark) {
-            html += '<li class="py-2" data-toggle="remark"><strong>Remark:</strong> ' +
+            html += '<li class="py-2" data-toggle="remark"><strong>' + t('companies_detail_remark') + '</strong> ' +
                 window.escapeHtml(item.remark) + '</li>';
         }
         if (item.logo_kind) {
-            let credit = window.escapeHtml(capitalize(item.logo_kind));
+            let credit = window.escapeHtml(logoKindLabel(item.logo_kind));
             if (item.logo_source) {
                 credit += ' (<a href="' + window.escapeHtml(item.logo_source) +
-                    '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">source</a>)';
+                    '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">' + window.escapeHtml(t('companies_logo_source')) + '</a>)';
             }
             if (item.logo_license) {
                 credit += ', ' + window.escapeHtml(item.logo_license);
             }
-            html += '<li class="py-2 text-sm text-gray-500" data-toggle="logo_credit"><strong>Logo:</strong> ' + credit + '</li>';
+            html += '<li class="py-2 text-sm text-gray-500" data-toggle="logo_credit"><strong>' + t('companies_detail_logo') + '</strong> ' + credit + '</li>';
         }
         return html;
     },
@@ -159,7 +183,7 @@ window.collectionPlugins['companies'] = {
         let stillAround = 0;
 
         items.forEach(function(item) {
-            const status = capitalize(item.status || 'unknown');
+            const status = statusLabel(item.status || 'unknown');
             statusCounts[status] = (statusCounts[status] || 0) + 1;
             if (item.status === 'active') stillAround += 1;
             (item.functions || []).forEach(function(fn) {
@@ -173,12 +197,12 @@ window.collectionPlugins['companies'] = {
         });
 
         let html = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">';
-        html += '<div>' + renderStatCard(items.length, 'Organizations') + '</div>';
-        html += '<div>' + renderStatCard(stillAround, 'Still Active') + '</div>';
+        html += '<div>' + renderStatCard(items.length, t('companies_stat_organizations')) + '</div>';
+        html += '<div>' + renderStatCard(stillAround, t('companies_stat_still_active')) + '</div>';
         html += '</div>';
-        html += renderBarChart('By Status', statusCounts, {unit: 'companies', sort: 'desc'});
-        html += renderBarChart('By Function', functionCounts, {unit: 'companies', sort: 'desc', barClass: 'bg-success'});
-        html += renderBarChart('By Place', placeCounts, {unit: 'companies', sort: 'desc', limit: 25, last: true});
+        html += renderBarChart(t('companies_chart_by_status'), statusCounts, {unit: t('companies_unit'), sort: 'desc'});
+        html += renderBarChart(t('companies_chart_by_function'), functionCounts, {unit: t('companies_unit'), sort: 'desc', barClass: 'bg-success'});
+        html += renderBarChart(t('companies_chart_by_place'), placeCounts, {unit: t('companies_unit'), sort: 'desc', limit: 25, last: true});
         return html;
     }
 };
@@ -191,7 +215,7 @@ window.collectionPlugins['companies'] = {
 // Both keys map to this file in the app's registry, which loads it once.
 window.collectionPlugins['providers'] = Object.assign({}, window.collectionPlugins['companies'], {
     file: 'data/training_providers.json.gz',
-    navTitle: 'Training Companies',
-    title: 'Training Companies I Taught For',
-    subtitle: 'The training companies that hired me to teach their courses, with where they are and what became of them.'
+    navTitle: t('companies_providers_nav_title'),
+    title: t('companies_providers_title'),
+    subtitle: t('companies_providers_subtitle')
 });

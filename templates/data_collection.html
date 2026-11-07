@@ -9,9 +9,17 @@
      [extra]
      plugins = ["companies", "providers"]   # plugin keys, the first is the default view
 
-   The Hebrew page of each section repeats [extra] (front matter is per file);
-   the app itself is English only, so in a dir="rtl" page it is wrapped as
-   English, left to right, as app_body.html does for the other apps.
+   The Hebrew page of each section repeats [extra] (front matter is per file).
+
+   Every string the app shows is an i18n/<lang>.toml key starting with app_
+   (the site's own translation files, beside the nav and date strings). The
+   template writes them into the page as window.collectionStrings: it walks
+   the keys of i18n/en.toml and looks each one up with trans(), so a key
+   missing from another language fails the build exactly as it does for the
+   rest of the site, and the app and plugins read them through t('<key>')
+   (data-collection-utils.js). The data itself (titles, reviews, names) is
+   not translated. In a Hebrew page the app runs right to left like the rest
+   of it, so its markup uses logical spacing (ms-*, not ml-*).
 
    The wide container: the app needs it rather than the 42rem reading column
    the prose templates use, so it gets its own template instead of the shared
@@ -21,7 +29,6 @@
 {% block main_class %}embed-main{% endblock %}
 {% block content %}
 {# No <h1> here: the app renders its own heading from the active plugin. #}
-{%- if lang != "en" %}<div dir="ltr" lang="en">{% endif %}
 <!-- The Tailwind utilities the collection app uses, compiled ahead of time
      with the theme-token palette in config/tailwind.collection.config.js;
      rebuild with scripts/build_collection_css.sh after adding a class. -->
@@ -112,13 +119,13 @@ font-family: Inter, Heebo, sans-serif;
 <nav id="main-nav" class="flex flex-wrap justify-center gap-2 mb-10"></nav>
 
 <div id="search-container" class="mb-10 mx-auto max-w-xl">
-<input type="text" id="search-input" placeholder="Search..." aria-label="Search the collection"
+<input type="text" id="search-input" aria-label="{{ trans(key="app_ui_search_label") }}"
 class="w-full px-5 py-3 text-lg border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500">
 <div class="flex justify-center items-center gap-2 mt-3">
-<label for="sort-field" class="text-sm text-gray-500">Sort by:</label>
+<label for="sort-field" class="text-sm text-gray-500">{{ trans(key="app_ui_sort_by") }}</label>
 <select id="sort-field" class="text-sm border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"></select>
-<button id="sort-order-btn" class="text-sm px-3 py-1 border border-gray-300 rounded hover:bg-gray-100" title="Toggle sort order" aria-label="Toggle sort order"></button>
-<button id="filters-toggle-btn" class="text-sm px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 ml-2" aria-label="Toggle filters and options" aria-expanded="false"></button>
+<button id="sort-order-btn" class="text-sm px-3 py-1 border border-gray-300 rounded hover:bg-gray-100" title="{{ trans(key="app_ui_sort_order") }}" aria-label="{{ trans(key="app_ui_sort_order") }}"></button>
+<button id="filters-toggle-btn" class="text-sm px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 ms-2" aria-label="{{ trans(key="app_ui_filters_toggle") }}" aria-expanded="false"></button>
 </div>
 <div id="filters-panel" class="hidden mt-3 p-4 bg-gray-50 border border-gray-200 rounded-lg">
 <div id="filters-container" class="flex flex-wrap justify-center gap-2"></div>
@@ -142,6 +149,14 @@ class="w-full px-5 py-3 text-lg border border-gray-300 rounded-full focus:outlin
 window.collectionFeatureFlags = {
 showPeople: false,
 };
+// The app's strings in the page's language: every app_* key of i18n/en.toml,
+// looked up in this language with trans() (see the comment at the top).
+window.collectionStrings = {
+{%- set app_keys = load_data(path="i18n/en.toml") %}
+{%- for key, value in app_keys %}{% if key is starting_with("app_") %}
+{{ key | json_encode | safe }}: {{ trans(key=key) | json_encode | safe }},
+{%- endif %}{% endfor %}
+};
 // Which plugins this page shows, in order; the first is the default view.
 window.collectionPluginKeys = {{ section.extra.plugins | json_encode | safe }};
 // Absolute, not '../': the plugins and data live at the site root, and a
@@ -150,5 +165,4 @@ window.collectionBasePath = '/';
 </script>
 <script src="/data-collection-utils.js"></script>
 <script src="/data-collection-app.js"></script>
-{%- if lang != "en" %}</div>{% endif %}
 {% endblock %}

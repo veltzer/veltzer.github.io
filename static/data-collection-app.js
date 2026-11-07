@@ -202,7 +202,7 @@
         }
 
         function updateSortOrderBtn() {
-            sortOrderBtn.textContent = currentSortOrder === 'asc' ? '\u2191 Asc' : '\u2193 Desc';
+            sortOrderBtn.textContent = currentSortOrder === 'asc' ? t('ui_sort_asc') : t('ui_sort_desc');
         }
 
         function findSortFieldConfig(fieldName) {
@@ -283,19 +283,21 @@
 
                 const select = document.createElement('select');
                 select.className = 'text-sm border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500';
-                select.setAttribute('aria-label', 'Filter by ' + filter.label);
+                select.setAttribute('aria-label', t('ui_filter_by', {label: filter.label}));
                 select.dataset.filterField = filter.field;
                 select.dataset.filterType = filter.type;
 
                 const defaultOpt = document.createElement('option');
                 defaultOpt.value = '';
-                defaultOpt.textContent = filter.label + ': All';
+                defaultOpt.textContent = t('ui_filter_all', {label: filter.label});
                 select.appendChild(defaultOpt);
 
                 values.forEach(function(val) {
                     const opt = document.createElement('option');
                     opt.value = val;
-                    opt.textContent = val;
+                    // Boolean filters keep 'Yes'/'No' as their values (applyFilters
+                    // compares them) and show them translated.
+                    opt.textContent = filter.type === 'boolean' ? t(val === 'Yes' ? 'ui_yes' : 'ui_no') : val;
                     select.appendChild(opt);
                 });
 
@@ -449,7 +451,7 @@
             activeToggles = {};
             var fields = (activeConfig.toggleFields || []).slice();
             if (activeConfig.renderImage) {
-                fields.unshift({key: '_images', label: 'Images', default: true});
+                fields.unshift({key: '_images', label: t('ui_images'), default: true});
             }
             if (fields.length === 0) {
                 togglesContainer.style.display = 'none';
@@ -488,7 +490,7 @@
         // --- Filters Panel Toggle ---
         function updateFiltersBtnText() {
             const activeCount = Object.keys(activeFilters).length;
-            const label = activeCount > 0 ? 'Filters (' + activeCount + ')' : 'Filters';
+            const label = activeCount > 0 ? t('ui_filters_count', {count: activeCount}) : t('ui_filters');
             const arrow = filtersPanel.classList.contains('hidden') ? '\u25BC' : '\u25B2';
             filtersToggleBtn.textContent = label + ' ' + arrow;
             filtersToggleBtn.setAttribute('aria-expanded', !filtersPanel.classList.contains('hidden'));
@@ -536,10 +538,10 @@
             }
 
             const statsToggle = document.createElement('a');
-            statsToggle.className = 'px-4 py-2 rounded-full text-sm font-medium no-underline border border-gray-300 transition-colors' + (tabKeys.length ? ' ml-4' : '');
+            statsToggle.className = 'px-4 py-2 rounded-full text-sm font-medium no-underline border border-gray-300 transition-colors' + (tabKeys.length ? ' ms-4' : '');
 
             if (showStatsOnly) {
-                statsToggle.textContent = '\u2190 Back to Full View';
+                statsToggle.textContent = t('ui_back_to_full_view');
                 statsToggle.classList.add('text-gray-700', 'hover:bg-gray-100');
                 statsToggle.href = '?data=' + activeDataType;
                 statsToggle.addEventListener('click', function(e) {
@@ -547,7 +549,7 @@
                     switchView(activeDataType, false);
                 });
             } else {
-                statsToggle.textContent = 'View Statistics';
+                statsToggle.textContent = t('ui_view_statistics');
                 statsToggle.classList.add('text-gray-700', 'hover:bg-gray-100');
                 statsToggle.href = '?data=' + activeDataType + '&stats=true';
                 statsToggle.addEventListener('click', function(e) {
@@ -591,7 +593,7 @@
             searchInput.value = '';
             currentPage = 1;
             pageTitle.textContent = activeConfig.title;
-            pageSubtitle.textContent = showStatsOnly ? 'Statistics Overview' : activeConfig.subtitle;
+            pageSubtitle.textContent = showStatsOnly ? t('ui_statistics_overview') : activeConfig.subtitle;
             searchInput.placeholder = activeConfig.searchPlaceholder;
             document.title = activeConfig.title;
 
@@ -607,7 +609,7 @@
             }
 
             try {
-                statusMessage.textContent = 'Loading ' + activeConfig.title + '...';
+                statusMessage.textContent = t('ui_loading', {title: activeConfig.title});
                 const response = await fetch(BASE_PATH + activeConfig.file);
                 if (isStale()) return;
 
@@ -669,7 +671,7 @@
             itemsContainer.innerHTML = '';
 
             if (itemList.length === 0) {
-                statusMessage.textContent = 'No items found matching your search.';
+                statusMessage.textContent = t('ui_no_items');
                 paginationContainer.style.cssText = 'display:none!important';
                 return;
             }
@@ -723,8 +725,10 @@
                     '<div class="bg-white rounded-lg shadow-sm border border-gray-200 h-full flex flex-col overflow-hidden">' +
                         imgHtml +
                         '<div class="p-4 flex flex-col flex-1">' +
-                            '<h5 class="text-lg font-bold mb-2">' + escapeHtml(item.name || 'No Title') + '</h5>' +
-                            '<p class="text-gray-600 mb-4">' + escapeHtml(item.review || item.subtitle || 'No description.') + '</p>' +
+                            // dir="auto": the data is mostly English and the page may be Hebrew;
+                            // each text takes its direction from its own first letters.
+                            '<h5 class="text-lg font-bold mb-2" dir="auto">' + escapeHtml(item.name || t('ui_no_title')) + '</h5>' +
+                            '<p class="text-gray-600 mb-4" dir="auto">' + escapeHtml(item.review || item.subtitle || t('ui_no_description')) + '</p>' +
                             '<ul class="mt-auto divide-y divide-gray-200">' +
                                 (activeConfig.ratingScale ? '<li class="py-2"><strong>Rating:</strong> <span class="inline-block bg-blue-600 text-white text-sm font-semibold px-2.5 py-0.5 rounded-full">' + escapeHtml(item.rating || '?') + ' / ' + activeConfig.ratingScale + '</span></li>' : '') +
                                 (item.device ? '<li class="py-2"><strong>Device:</strong> ' + escapeHtml(item.device) + '</li>' : '') +
@@ -756,14 +760,14 @@
             const end = Math.min(currentPage * PAGE_SIZE, totalItems);
 
             paginationContainer.innerHTML =
-                '<button id="btnPrevPage" aria-label="Previous page" class="px-4 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-50">&laquo; Previous</button>' +
-                '<span class="text-gray-500">Showing ' + start + '–' + end + ' of ' + totalItems + '</span>' +
+                '<button id="btnPrevPage" aria-label="' + escapeHtml(t('ui_previous_page')) + '" class="px-4 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-50">' + escapeHtml(t('ui_previous')) + '</button>' +
+                '<span class="text-gray-500">' + escapeHtml(t('ui_showing', {start: start, end: end, total: totalItems})) + '</span>' +
                 '<div class="flex items-center gap-2">' +
-                    '<label for="jumpToPage" class="text-sm text-gray-500">Page</label>' +
-                    '<input type="number" id="jumpToPage" aria-label="Jump to page" class="w-20 text-sm border border-gray-300 rounded px-2 py-1" min="1" max="' + totalPages + '" value="' + currentPage + '">' +
+                    '<label for="jumpToPage" class="text-sm text-gray-500">' + escapeHtml(t('ui_page')) + '</label>' +
+                    '<input type="number" id="jumpToPage" aria-label="' + escapeHtml(t('ui_jump_to_page')) + '" class="w-20 text-sm border border-gray-300 rounded px-2 py-1" min="1" max="' + totalPages + '" value="' + currentPage + '">' +
                     '<span class="text-gray-500">/ ' + totalPages + '</span>' +
                 '</div>' +
-                '<button id="btnNextPage" aria-label="Next page" class="px-4 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-50">Next &raquo;</button>';
+                '<button id="btnNextPage" aria-label="' + escapeHtml(t('ui_next_page')) + '" class="px-4 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-50">' + escapeHtml(t('ui_next')) + '</button>';
 
             document.getElementById('btnPrevPage').disabled = currentPage <= 1;
             document.getElementById('btnNextPage').disabled = currentPage >= totalPages;

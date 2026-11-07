@@ -1,4 +1,4 @@
-/* global renderBarChart, renderStatCard, mediaFormatDate */
+/* global t, renderBarChart, renderStatCard, mediaFormatDate */
 window.collectionPlugins = window.collectionPlugins || {};
 
 (function() {
@@ -8,48 +8,48 @@ window.collectionPlugins = window.collectionPlugins || {};
 
 window.collectionPlugins['audio'] = {
     file: 'data/audio_courses.json.gz',
-    navTitle: 'Audio Courses',
-    title: 'Listened to Audio Courses',
-    subtitle: "A searchable list of audio courses I've listened to.",
+    navTitle: t('audio_nav_title'),
+    title: t('audio_title'),
+    subtitle: t('audio_subtitle'),
     ratingScale: 10,
-    searchPlaceholder: 'Search by name, review, lecturer...',
+    searchPlaceholder: t('audio_search_placeholder'),
     searchFields: ['name', 'review', 'lecturers', 'location'],
     fields: [
-        {field: 'name', label: 'Name', type: 'string', filterable: false},
-        {field: 'rating', label: 'Rating', type: 'number', filterType: 'select'},
-        {field: 'location', label: 'Location', type: 'string', filterType: 'select'},
-        {field: 'date', label: 'Date', type: 'string', value: getDate, filterType: 'year'},
-        {field: 'device', label: 'Device', type: 'string', filterType: 'select'},
-        {field: 'progress', label: 'Progress', type: 'string', filterType: 'select'},
-        {field: 'lecturers', label: 'Lecturer', type: 'string', sortable: false,
+        {field: 'name', label: t('audio_f_name'), type: 'string', filterable: false},
+        {field: 'rating', label: t('audio_f_rating'), type: 'number', filterType: 'select'},
+        {field: 'location', label: t('audio_f_location'), type: 'string', filterType: 'select'},
+        {field: 'date', label: t('audio_f_date'), type: 'string', value: getDate, filterType: 'year'},
+        {field: 'device', label: t('audio_f_device'), type: 'string', filterType: 'select'},
+        {field: 'progress', label: t('audio_f_progress'), type: 'string', filterType: 'select'},
+        {field: 'lecturers', label: t('audio_f_lecturer'), type: 'string', sortable: false,
             filterType: 'custom',
             extractValues: function(item) { return item.lecturers || []; },
             match: function(item, val) { return item.lecturers && item.lecturers.some(function(l) { return l === val; }); }
         },
-        {field: 'has_review', label: 'Has Review', type: 'string', sortable: false,
+        {field: 'has_review', label: t('audio_f_has_review'), type: 'string', sortable: false,
             filterType: 'boolean', value: function(item) { return item.review && item.review.trim() !== ''; }
         },
-        {field: 'source', label: 'Source', type: 'string', sortable: false,
+        {field: 'source', label: t('audio_f_source'), type: 'string', sortable: false,
             filterType: 'custom',
             value: function(item) {
-                if (item.great_courses_id) return 'Great Courses';
-                if (item.audible_asin) return 'Audible';
-                return 'Other';
+                if (item.great_courses_id) return t('audio_source_great_courses');
+                if (item.audible_asin) return t('audio_source_audible');
+                return t('audio_source_other');
             },
             match: function(item, val) {
-                if (val === 'Great Courses') return !!item.great_courses_id;
-                if (val === 'Audible') return !!item.audible_asin;
+                if (val === t('audio_source_great_courses')) return !!item.great_courses_id;
+                if (val === t('audio_source_audible')) return !!item.audible_asin;
                 return !item.great_courses_id && !item.audible_asin;
             }
         }
     ],
     defaultSort: {field: 'name', order: 'asc'},
     toggleFields: [
-        {key: 'lecturers', label: 'Lecturers', default: true},
-        {key: 'date', label: 'Date', default: true},
-        {key: 'location', label: 'Location', default: true},
-        {key: 'progress', label: 'Progress', default: true},
-        {key: 'links', label: 'Links', default: true}
+        {key: 'lecturers', label: t('audio_tg_lecturers'), default: true},
+        {key: 'date', label: t('audio_tg_date'), default: true},
+        {key: 'location', label: t('audio_tg_location'), default: true},
+        {key: 'progress', label: t('audio_tg_progress'), default: true},
+        {key: 'links', label: t('audio_tg_links'), default: true}
     ],
     // Shown when a course has no id to name an image by, and by data-collection-app.js
     // when the named file turns out not to exist (a course added to the YAML
@@ -68,23 +68,23 @@ window.collectionPlugins['audio'] = {
         return this.placeholderImage;
     },
     renderDetails: function(item) {
-        const lecturers = item.lecturers ? item.lecturers.join(', ') : 'N/A';
-        let html = '<li class="py-2" data-toggle="lecturers"><strong>Lecturer(s):</strong> ' + window.escapeHtml(lecturers) + '</li>';
+        const lecturers = item.lecturers ? item.lecturers.join(', ') : t('audio_na');
+        let html = '<li class="py-2" data-toggle="lecturers"><strong>' + t('audio_d_lecturers') + '</strong> ' + window.escapeHtml(lecturers) + '</li>';
         const date = this.formatDate(item.date_utcz || item.date_ended_utcz || item.date_started_utcz);
         if (date) {
-            html += '<li class="py-2" data-toggle="date"><strong>Date:</strong> ' + window.escapeHtml(date) + '</li>';
+            html += '<li class="py-2" data-toggle="date"><strong>' + t('audio_d_date') + '</strong> ' + window.escapeHtml(date) + '</li>';
         }
         if (item.location) {
-            html += '<li class="py-2" data-toggle="location"><strong>Location:</strong> ' + window.escapeHtml(item.location) + '</li>';
+            html += '<li class="py-2" data-toggle="location"><strong>' + t('audio_d_location') + '</strong> ' + window.escapeHtml(item.location) + '</li>';
         }
         if (item.progress) {
-            html += '<li class="py-2" data-toggle="progress"><strong>Progress:</strong> ' + window.escapeHtml(item.progress) + '</li>';
+            html += '<li class="py-2" data-toggle="progress"><strong>' + t('audio_d_progress') + '</strong> ' + window.escapeHtml(item.progress) + '</li>';
         }
         if (item.great_courses_slug) {
-            html += '<li class="py-2" data-toggle="links"><a href="https://shop.thegreatcourses.com/' + window.escapeHtml(item.great_courses_slug) + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; View on The Great Courses</a></li>';
+            html += '<li class="py-2" data-toggle="links"><a href="https://shop.thegreatcourses.com/' + window.escapeHtml(item.great_courses_slug) + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; ' + t('audio_view_great_courses') + '</a></li>';
         }
         if (item.audible_asin) {
-            html += '<li class="py-2" data-toggle="links"><a href="https://www.audible.com/pd/' + window.escapeHtml(item.audible_asin) + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; View on Audible</a></li>';
+            html += '<li class="py-2" data-toggle="links"><a href="https://www.audible.com/pd/' + window.escapeHtml(item.audible_asin) + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; ' + t('audio_view_audible') + '</a></li>';
         }
         return html;
     },
@@ -109,11 +109,11 @@ window.collectionPlugins['audio'] = {
         }.bind(this));
 
         let html = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">';
-        html += '<div>' + renderStatCard(items.length, 'Total Courses') + '</div>';
-        html += '<div>' + renderStatCard(lecturerSet.size, 'Unique Lecturers') + '</div>';
+        html += '<div>' + renderStatCard(items.length, t('audio_total_courses')) + '</div>';
+        html += '<div>' + renderStatCard(lecturerSet.size, t('audio_unique_lecturers')) + '</div>';
         html += '</div>';
-        html += renderBarChart('Device Distribution', deviceCounts);
-        html += renderBarChart('Items per Year', yearCounts, {sort: 'reverse', barClass: 'bg-success', last: true});
+        html += renderBarChart(t('audio_device_distribution'), deviceCounts);
+        html += renderBarChart(t('audio_items_per_year'), yearCounts, {sort: 'reverse', barClass: 'bg-success', last: true});
         return html;
     },
     formatDate: mediaFormatDate
