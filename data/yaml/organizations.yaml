@@ -616,10 +616,9 @@ items:
   - certification
   logo: logos/mysql.svg
   logo_original: raw/logos/mysql.jpg
-  logo_kind: official vector
-  logo_source: https://labs.mysql.com/common/logos/mysql-logo.svg
-  logo_license: company brand asset (Oracle/MySQL trademark, used for identification)
-  logo_note: Official MySQL dolphin logo SVG served from mysql.com (same file at www.mysql.com/common/logos/mysql-logo.svg). Commons File:MySQL_textlogo.svg was rate-limited (HTTP 429) throughout.
+  logo_kind: traced from original bitmap (the MySQL AB logo; no vector of it found online)
+  logo_note: the MySQL AB-era logo (dolphin, dark blue My, orange SQL, registered mark) from raw/logos/mysql.jpg, flattened to its two
+    colours and traced with vtracer on 2026-11-08; the current Oracle-era logo differs
   old_url: http://www.mysql.com
   status: acquired
   what_happened: Acquired by Sun Microsystems in February 2008 for about $1 billion; Sun was acquired by Oracle in January 2010, so MySQL is now an Oracle product.
@@ -635,13 +634,13 @@ items:
     place: Uppsala, Sweden
     lat: 59.85861
     lon: 17.63874
-  address: 2300 Oracle Way, Austin, TX 78741, USA
-  address_source: https://www.oracle.com/hk/corporate/contact/field-offices/
+  address: Bangårdsgatan 8, 753 20 Uppsala, Sweden
+  address_source: https://vakanser.se/jobb/network+engineer
   geo:
-    from: location
-    place: Austin, Texas, USA
-    lat: 30.27113
-    lon: -97.7437
+    from: former_location
+    place: Uppsala, Sweden
+    lat: 59.85861
+    lon: 17.63874
   sources:
   - https://en.wikipedia.org/wiki/MySQL_AB
 - id: 18
@@ -1534,13 +1533,13 @@ items:
     place: Santa Clara, California, USA
     lat: 37.35411
     lon: -121.95517
-  address: Aharon Bart St 18 (Building B), Petah Tikva 4951448, Israel
-  address_source: https://www.oracle.com/il-en/corporate/contact/field-offices/
+  address: 4150 Network Circle, Santa Clara, CA 95054, USA
+  address_source: https://www.sec.gov/Archives/edgar/data/0000709519/000118143107006432/rrd144413.htm
   geo:
-    from: israel_office
-    place: Petah Tikva, Israel
-    lat: 32.08776
-    lon: 34.886
+    from: former_location
+    place: Santa Clara, California, USA
+    lat: 37.35411
+    lon: -121.95517
   sources:
   - https://en.wikipedia.org/wiki/Acquisition_of_Sun_Microsystems_by_Oracle_Corporation
   - https://www.oracle.com/il-en/corporate/contact/field-offices/
