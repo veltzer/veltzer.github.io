@@ -62,6 +62,7 @@ KEPT = (
     "status",
     "location",
     "israel_office",
+    "address",
     "from_date",
     "remark",
 )
@@ -93,6 +94,11 @@ def overlapping(data):
     """
     return [item.get("name", "?") for item in data.get("items") or []
             if sum(has_function(item, function) for function in TABS) > 1]
+
+
+def without_address(data):
+    """The names of shown organizations with no street address; every card needs one."""
+    return [item.get("name", "?") for item in data.get("items") or [] if shown(item) and not item.get("address")]
 
 
 def blurb(item):
@@ -159,6 +165,11 @@ def main():
     both = overlapping(data)
     if both:
         print(f"ERROR: {args.input}: on more than one tab ({', '.join(TABS)} are exclusive): {', '.join(both)}",
+              file=sys.stderr)
+        return 1
+    missing = without_address(data)
+    if missing:
+        print(f"ERROR: {args.input}: {len(missing)} organization(s) on the page have no address: {', '.join(missing)}",
               file=sys.stderr)
         return 1
     converted = convert(data, args.function)

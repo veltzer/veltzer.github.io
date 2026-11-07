@@ -31,6 +31,7 @@ def organization(**overrides):
         "location_geo": {"place": "Chesterfield, Missouri, USA", "lat": 38.65818, "lon": -90.56806},
         "israel_office": "Ra'anana, Israel (main R&D centre and largest site)",
         "israel_office_geo": {"place": "Ra'anana, Israel", "lat": 32.18602, "lon": 34.86784},
+        "address": "Amdocs Building, 8 HaPnina St., Ra'anana, Israel",
         "geo": {"from": "israel_office", "place": "Ra'anana, Israel", "lat": 32.18602, "lon": 34.86784},
         "sources": ["https://en.wikipedia.org/wiki/Amdocs"],
     }
@@ -55,6 +56,11 @@ class TestSelection:
         data = {"items": [organization(), organization(id=3, name="Logtel", functions=["training-provider"])]}
         assert [item["name"] for item in import_companies.convert(data, "training-provider")["items"]] == ["Logtel"]
         assert [item["name"] for item in import_companies.convert(data)["items"]] == ["Amdocs"]
+
+    def test_a_shown_organization_without_an_address_is_reported(self):
+        data = {"items": [organization(), organization(id=3, name="Nowhere", address=None),
+                          organization(id=4, name="Publisher", functions=[], address=None)]}
+        assert import_companies.without_address(data) == ["Nowhere"]
 
     def test_an_organization_on_both_tabs_is_reported(self):
         data = {"items": [organization(), organization(id=3, name="Both", functions=["teaching", "training-provider"])]}

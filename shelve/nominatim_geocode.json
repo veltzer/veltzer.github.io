@@ -208,6 +208,14 @@
   "osm_type": "relation",
   "type": "administrative"
  },
+ "Givat Hen, Israel": {
+  "display_name": "Givat Hen, Drom HaSharon Regional Council, Petah Tikva Subdistrict, Center District, Israel",
+  "lat": 32.1685932,
+  "lon": 34.876063,
+  "osm_id": 91039154,
+  "osm_type": "way",
+  "type": "village"
+ },
  "Grand Haven, Michigan, USA": {
   "display_name": "Grand Haven, Ottawa County, Michigan, United States",
   "lat": 43.0630734,
@@ -312,6 +320,22 @@
   "osm_type": "relation",
   "type": "administrative"
  },
+ "Kiryat Yam, Israel": {
+  "display_name": "Kiryat Yam, Haifa Subdistrict, Haifa District, Israel",
+  "lat": 32.8502229,
+  "lon": 35.0703245,
+  "osm_id": 1387931,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Lafayette, Colorado, USA": {
+  "display_name": "Lafayette, Boulder County, Colorado, 80026, United States",
+  "lat": 39.9935959,
+  "lon": -105.089705,
+  "osm_id": 112288,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
  "Landover, Maryland, USA": {
   "display_name": "Landover, Prince George's County, Maryland, 20785, United States",
   "lat": 38.925313,
@@ -383,6 +407,14 @@
   "osm_id": 112134,
   "osm_type": "relation",
   "type": "administrative"
+ },
+ "Modi'in Illit, Israel": {
+  "display_name": "Modi'in Illit, Mateh Binyamin Regional Council, Area C, Judea and Samaria, Palestinian Territories",
+  "lat": 31.9324487,
+  "lon": 35.0433428,
+  "osm_id": 220261637,
+  "osm_type": "way",
+  "type": "city"
  },
  "Morristown, New Jersey, USA": {
   "display_name": "Morristown, Morris County, New Jersey, United States",
@@ -493,6 +525,14 @@
   "lat": 32.0686867,
   "lon": 34.8246812,
   "osm_id": 1382493,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Ramat HaSharon, Israel": {
+  "display_name": "Ramat HaSharon, Tel Aviv Subdistrict, Tel-Aviv District, Israel",
+  "lat": 32.1431276,
+  "lon": 34.8380853,
+  "osm_id": 1382821,
   "osm_type": "relation",
   "type": "administrative"
  },
