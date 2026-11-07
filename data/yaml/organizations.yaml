@@ -3107,7 +3107,7 @@ items:
   - https://en.globes.co.il/en/article-verint-acquires-utx-for-83m-1000929349
   - https://en.wikipedia.org/wiki/Cognyte
 - id: 84
-  name: Hebrew University
+  name: Hebrew University of Jerusalem
   slug: hebrew-university
   functions: []
   logo: logos/hebrew-university.svg
@@ -3135,7 +3135,7 @@ items:
     place: Jerusalem, Israel
     lat: 31.77885
     lon: 35.22579
-  sources: &id002
+  sources:
   - https://en.wikipedia.org/wiki/Hebrew_University_of_Jerusalem
   - https://www.huji.ac.il
 - id: 85
@@ -3950,35 +3950,6 @@ items:
   sources:
   - https://en.wikipedia.org/wiki/Pimsleur_Language_Programs
   - https://www.pimsleur.com/pimsleur-about-us/
-- id: 112
-  name: Hebrew University of Jerusalem
-  slug: hebrew-university-of-jerusalem
-  functions: []
-  logo: logos/verifone.svg
-  logo_original: raw/logos/verifone.jpg
-  logo_kind: official vector
-  logo_source: https://www.verifone.com/
-  logo_license: company brand asset (inline header SVG on verifone.com)
-  logo_note: Current Verifone logo extracted from the site header inline <svg> (nav_logo_wrap); paths use fill=currentColor
-  old_url: http://new.huji.ac.il
-  status: active
-  website: https://www.huji.ac.il
-  location: Jerusalem, Israel
-  location_geo:
-    place: Jerusalem, Israel
-    lat: 31.77885
-    lon: 35.22579
-  israel_office: Jerusalem, Israel (Mount Scopus, Givat Ram, Ein Kerem; also Rehovot)
-  israel_office_geo:
-    place: Jerusalem, Israel
-    lat: 31.77885
-    lon: 35.22579
-  geo:
-    from: israel_office
-    place: Jerusalem, Israel
-    lat: 31.77885
-    lon: 35.22579
-  sources: *id002
 - id: 113
   name: BBC Radio
   slug: bbc-radio
