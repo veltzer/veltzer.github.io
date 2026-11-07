@@ -7,6 +7,7 @@
   "osm_type": "way",
   "type": "commercial"
  },
+ "Airport City, Lod, Israel": null,
  "Arlington, Virginia, USA": {
   "display_name": "Arlington County, Virginia, United States",
   "lat": 38.8769326,
@@ -132,6 +133,14 @@
   "lat": 42.4605189,
   "lon": -71.3488963,
   "osm_id": 1840166,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
+ "Culver City, California, USA": {
+  "display_name": "Culver City, Los Angeles County, California, 90232, United States",
+  "lat": 34.0211224,
+  "lon": -118.396466,
+  "osm_id": 3492137,
   "osm_type": "relation",
   "type": "administrative"
  },
@@ -511,6 +520,14 @@
   "osm_type": "relation",
   "type": "administrative"
  },
+ "Rishon LeZion, Israel": {
+  "display_name": "Rishon LeZion, Rehovot Subdistrict, Center District, Israel",
+  "lat": 31.9635712,
+  "lon": 34.8101149,
+  "osm_id": 1382177,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
  "Rosh HaAyin, Israel": {
   "display_name": "Rosh HaAyin, Petah Tikva Subdistrict, Center District, Israel",
   "lat": 32.0952929,
@@ -606,6 +623,14 @@
   "osm_id": 1382494,
   "osm_type": "relation",
   "type": "administrative"
+ },
+ "Tirat Carmel, Israel": {
+  "display_name": "Tirat Karmel, Tirat HaCarmel, Haifa Subdistrict, Haifa District, 3955022, Israel",
+  "lat": 32.7613834,
+  "lon": 34.9715506,
+  "osm_id": 278474505,
+  "osm_type": "node",
+  "type": "town"
  },
  "Uppsala, Sweden": {
   "display_name": "Uppsala, Uppsala kommun, Uppsala County, 753 20, Sweden",

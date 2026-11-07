@@ -3,6 +3,8 @@
 # yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/organizations.json
 # Organizations I taught at, consulted for, was certified by, or consumed media from.
 # Extracted from the myworld MySQL database (TbOrganization, backup of 2019-05-11);
+# ids 116-121 were added on 2026-11-07 from companies_i_taught.txt in the private ../data repo, so they
+# have no old_url, and the three with no bitmap behind their logo have no logo_original.
 # status/location/website fields researched on the web on 2026-09-19.
 # logos/<slug>.svg (paths relative to data/): genuine vector logos fetched 2026-09-20 where one exists
 # (logo_kind/logo_source say which); the rest are colour traces of the original bitmaps in raw/logos/.
@@ -3851,3 +3853,189 @@ items:
   sources:
   - https://en.wikipedia.org/wiki/Allot_Ltd.
   - https://panjiva.com/Allot-Communications-Ltd/5887161
+- id: 116
+  name: AudioCodes
+  slug: audiocodes
+  functions:
+  - teaching
+  logo: logos/audiocodes.svg
+  logo_kind: official vector
+  logo_source: https://www.audiocodes.com/images/logo-footer.svg
+  logo_license: company brand asset (site footer logo)
+  logo_note: Current AudioCodes logo, the dark-on-light footer variant from the official site (the header one is light-on-dark)
+  status: active
+  website: https://www.audiocodes.com/
+  location: Or Yehuda, Israel
+  location_geo:
+    place: Or Yehuda, Israel
+    lat: 32.027
+    lon: 34.86299
+  israel_office: Or Yehuda, Israel (HQ and R&D, 6 Ofra Haza St.)
+  israel_office_geo:
+    place: Or Yehuda, Israel
+    lat: 32.027
+    lon: 34.86299
+  former_location: Airport City, Israel (HQ and R&D at 1 Hayarden St. until May 2024)
+  former_location_geo:
+    place: Airport City, Israel
+    lat: 31.98894
+    lon: 34.91283
+  geo:
+    from: former_location
+    place: Airport City, Israel
+    lat: 31.98894
+    lon: 34.91283
+  sources:
+  - https://m.marketscreener.com/quote/stock/AUDIOCODES-LTD-8492/news/AudioCodes-Ltd-Relocates-Principal-Executive-Office-46651197/
+  - https://sec.gov/Archives/edgar/data/1086434/000110465921055099/audc-20201231x20f.htm
+  - https://audiocodes.com/investor-relations/investors-faqs
+- id: 117
+  name: RISCO Group
+  slug: risco-group
+  functions:
+  - teaching
+  logo: logos/risco-group.svg
+  logo_original: raw/logos/risco-group.png
+  logo_kind: traced from original bitmap (no vector logo found online)
+  logo_license: company brand asset (site header logo)
+  logo_note: trace of the white header logo from https://riscogroup.com/wp-content/uploads/2023/12/logo-inverted.png, recoloured dark for light backgrounds
+  status: active
+  website: https://www.riscogroup.com/
+  location: Rishon LeZion, Israel
+  location_geo:
+    place: Rishon LeZion, Israel
+    lat: 31.96357
+    lon: 34.81011
+  israel_office: Rishon LeZion, Israel (HQ, 14 HaHoma St., in the industrial area)
+  israel_office_geo:
+    place: Rishon LeZion, Israel
+    lat: 31.96357
+    lon: 34.81011
+  geo:
+    from: israel_office
+    place: Rishon LeZion, Israel
+    lat: 31.96357
+    lon: 34.81011
+  sources:
+  - https://www.riscogroup.com/israel/content/company-profile-6
+  - https://www.zoominfo.com/c/risco-group/82133581
+- id: 118
+  name: Incapsula
+  slug: incapsula
+  functions:
+  - teaching
+  logo: logos/incapsula.svg
+  logo_original: raw/logos/incapsula.png
+  logo_kind: traced from original bitmap (no vector logo found online)
+  logo_license: CC BY-SA 4.0 (Wikimedia Commons)
+  logo_note: trace of the co-branded "Imperva Incapsula" bitmap from https://commons.wikimedia.org/wiki/File:Imperva_incapsula.png; no standalone Incapsula logo survives
+  status: acquired
+  what_happened: Incubated by Imperva, which held about 80% of it; Imperva bought out the remaining shares in February 2014 and made it a
+    wholly owned subsidiary, and the product lived on as Imperva Incapsula and later Imperva Cloud WAF. Imperva was taken private by
+    Thoma Bravo in 2019 and acquired by Thales in December 2023.
+  website: https://www.imperva.com/
+  israel_office: Rehovot, Israel (the Incapsula team, now Imperva's Rehovot site)
+  israel_office_geo:
+    place: Rehovot, Israel
+    lat: 31.89525
+    lon: 34.81056
+  former_website: http://www.incapsula.com
+  geo:
+    from: israel_office
+    place: Rehovot, Israel
+    lat: 31.89525
+    lon: 34.81056
+  sources:
+  - https://www.sec.gov/Archives/edgar/data/0001364962/000119312514045774/d674919d8k.htm
+  - https://www.sec.gov/Archives/edgar/data/0001364962/000156459018003043/impv-10k_20171231.htm
+  - https://www.thalesgroup.com/en/news-centre/press-releases/thales-completes-acquisition-imperva-creating-global-leader
+- id: 119
+  name: Tufin
+  slug: tufin
+  functions:
+  - teaching
+  logo: logos/tufin.svg
+  logo_kind: official vector
+  logo_source: https://commons.wikimedia.org/wiki/File:Tufin_logo.svg
+  logo_license: Public domain (Wikimedia Commons)
+  logo_note: Tufin orange wordmark
+  status: acquired
+  what_happened: Listed on the NYSE in 2019; taken private by Turn/River Capital for about $570 million, a deal announced in April 2022 and completed on August 25, 2022. The brand continues.
+  website: https://www.tufin.com/
+  location: Boston, Massachusetts, USA
+  location_geo:
+    place: Boston, Massachusetts, USA
+    lat: 42.35883
+    lon: -71.05783
+  israel_office: Tel Aviv, Israel (founding HQ and R&D)
+  israel_office_geo:
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  geo:
+    from: israel_office
+    place: Tel Aviv, Israel
+    lat: 32.0853
+    lon: 34.78181
+  sources:
+  - https://en.wikipedia.org/wiki/Tufin
+  - https://nocamels.com/2022/04/tufin-security-investment-network/
+  - https://mergr.com/transaction/turn-river-acquires-tufin
+- id: 120
+  name: NantMobile
+  slug: nantmobile
+  functions:
+  - teaching
+  logo: logos/nantmobile.svg
+  logo_original: raw/logos/nantmobile.png
+  logo_kind: traced from original bitmap (no vector logo found online)
+  logo_note: trace of the 2014 site logo, archived at http://web.archive.org/web/20141218035425im_/http://nantmobile.com/wp-content/uploads/2014/01/nantmobile-logo2.png
+  status: unknown
+  what_happened: A NantWorks subsidiary (image recognition, the iD Browser app). Its Israeli unit in Tirat Carmel came from the Alcatel-Lucent
+    Digital Multimedia Solutions business (the former Mobilitec) that NantWorks bought in 2013, and ceased operating in December 2016.
+    nantmobile.com no longer answers, and nothing later was found about the parent.
+  israel_office: Tirat Carmel, Israel (5 Nahum Het St.; closed December 2016)
+  israel_office_geo:
+    place: Tirat Carmel, Israel
+    lat: 32.76138
+    lon: 34.97155
+  former_website: http://nantmobile.com
+  former_location: Culver City, California, USA
+  former_location_geo:
+    place: Culver City, California, USA
+    lat: 34.02112
+    lon: -118.39647
+  geo:
+    from: israel_office
+    place: Tirat Carmel, Israel
+    lat: 32.76138
+    lon: 34.97155
+  sources:
+  - https://finder.startupnationcentral.org/mnc_page/nantworks
+  - https://www.builtinla.com/company/nantmobile
+  - https://www.builtinla.com/articles/nantmobile-raises-30-million-make-physical-world-browsable
+- id: 121
+  name: NovoTech
+  slug: novotech
+  remark: Linux kernel course through John Bryce, January 2016 (Google Calendar, "novotech - linux kernel")
+  functions:
+  - teaching
+  logo: logos/novotech.svg
+  logo_kind: wordmark set from the company's own styled name (no logo image survives)
+  logo_note: The site's NovoTechRedLogo.jpg was never archived; this sets the name as the site styled it in text (bold Arial, red N and T)
+  status: unknown
+  what_happened: NovoTech Ltd., an Israeli software house founded in 1986 (business systems on M/Mumps and Cache, paging and communication
+    systems for customers such as Motorola and Beeper). Its Tripod site was last archived in June 2019 and is gone; no later trace was found.
+  israel_office: Kfar Saba, Israel (11 Herzl St.)
+  israel_office_geo:
+    place: Kfar Saba, Israel
+    lat: 32.17735
+    lon: 34.90746
+  former_website: http://levj.tripod.com
+  geo:
+    from: israel_office
+    place: Kfar Saba, Israel
+    lat: 32.17735
+    lon: 34.90746
+  sources:
+  - http://web.archive.org/web/20190608002059/http://levj.tripod.com/

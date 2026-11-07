@@ -65,6 +65,8 @@ OVERRIDES: dict[str, str | dict[str, str]] = {
     # The free-text query lands on the county centroid, ~20 km from the city.
     "Santa Clara, California, USA": {"city": "Santa Clara", "state": "California", "country": "USA"},
     "San Mateo, California, USA": {"city": "San Mateo", "state": "California", "country": "USA"},
+    # The business park near Ben Gurion airport (Hevel Modi'in), not a city; the free-text query finds nothing.
+    "Airport City, Israel": "Airport City, Hevel Modi'in Regional Council, Israel",
 }
 
 # Prose that names no place worth a point on a map.
