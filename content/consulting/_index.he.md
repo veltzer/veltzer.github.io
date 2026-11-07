@@ -1,5 +1,5 @@
 +++
-title = "נתוני ייעוץ"
+title = "ייעוץ"
 description = "החברות שמארק ולצר ייעץ להן, איפה הן נמצאות ומה עלה בגורלן."
 template = "data_collection.html"
 

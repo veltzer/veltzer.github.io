@@ -1,5 +1,5 @@
 +++
-title = "Consulting Data"
+title = "Consulting"
 description = "The companies Mark Veltzer has consulted for, with where they are and what became of them."
 template = "data_collection.html"
 

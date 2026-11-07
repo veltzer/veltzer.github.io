@@ -9,7 +9,7 @@ organization pages is the organizations with one ``--function`` among their
 ``functions`` (TABS lists them): the teaching data page (/training/data/)
 has ``teaching``, the companies I taught at, and ``training-provider``, the
 training companies I taught for, which exclude each other (EXCLUSIVE); the
-consulting data page (/training/consulting/) has ``consulting``, which an
+consulting page (/consulting/) has ``consulting``, which an
 organization I also taught at may have too; the media page (/media/) has
 ``publisher``, the publishers of the audiobooks, courses and radio I consumed. A tab wants only the fields a
 card shows: the name, the logo path, the current status

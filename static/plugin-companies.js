@@ -223,7 +223,7 @@ window.collectionPlugins['providers'] = Object.assign({}, window.collectionPlugi
     subtitle: t('companies_providers_subtitle')
 });
 
-// The companies I consulted for, on their own page (/training/consulting/):
+// The companies I consulted for, on their own page (/consulting/):
 // the same cards over the organizations whose functions include consulting.
 // Unlike the two teaching tabs this one may share organizations with them,
 // since I taught at some of the companies I consulted for.
