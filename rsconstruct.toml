@@ -92,14 +92,16 @@ args = ["check_videos"]
 batch = true
 
 # Each wikidata_id in the video yaml must be the Wikidata item whose IMDb id
-# (P345) is the entry's imdb_id, and each rotten_tomatoes_id the Rotten
-# Tomatoes path (P1258) on that item, as recorded in shelve/wikidata_imdb.json
-# by scripts/videos_fetch_wikidata.py; the check reads only that cache.
+# (P345) is the entry's imdb_id, and every entry's rotten_tomatoes_id the
+# Rotten Tomatoes path (P1258) on that item, as recorded in
+# shelve/wikidata_imdb.json by scripts/videos_fetch_wikidata.py, or, when
+# Wikidata has none, the hand-verified one in data/rotten_tomatoes_manual.json.
+# The check reads only those two files.
 [processor.checker.script.wikidata_ids]
 src_files = ["data/yaml/video_series.yaml", "data/yaml/video_features.yaml"]
 command = "scripts/check_wikidata_ids.py"
 batch = true
-dep_inputs = ["shelve/wikidata_imdb.json", "scripts/check_wikidata_ids.py"]
+dep_inputs = ["shelve/wikidata_imdb.json", "data/rotten_tomatoes_manual.json", "scripts/check_wikidata_ids.py"]
 
 [processor.checker.script.check_books]
 src_files = ["data/yaml/books_read.yaml"]

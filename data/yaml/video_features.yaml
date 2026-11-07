@@ -6,6 +6,7 @@ items:
   - name: "HyperNormalisation"
     imdb_id: "6156350"
     wikidata_id: "Q27518177"
+    rotten_tomatoes_id: "m/hypernormalisation"
     date_utcz: "2017-10-13T08:19:22Z"
     date_timezone: "Asia/Jerusalem"
     location: "Airbnb, Chishinau"
@@ -456,6 +457,7 @@ items:
   - name: "Marco Polo: One Hundred Eyes"
     imdb_id: "5235348"
     wikidata_id: "Q21716434"
+    rotten_tomatoes_id: "m/marco_polo_one_hundred_eyes"
     date_utcz: "2022-03-19T12:40:29Z"
     date_timezone: "Asia/Jerusalem"
     location: "Home"
@@ -674,6 +676,7 @@ items:
     with: []
   - name: "Jim Jefferies: Two Limb Policy"
     imdb_id: "37649515"
+    rotten_tomatoes_id: "m/jim_jefferies_two_limb_policy"
     date_utcz: "2025-08-12T13:50:43Z"
     date_timezone: "Asia/Jerusalem"
     location: "Home"

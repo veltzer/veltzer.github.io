@@ -7,7 +7,9 @@ an ``imdb_id``. Wikidata records the IMDb id of a work as property P345
 (``tt0306414``), so the Wikidata item of each entry can be found by asking
 the Wikidata Query Service which item has that P345. The same item records
 the work's Rotten Tomatoes path as property P1258 (``tv/the-wire``). Both
-are written after the ``imdb_id`` line::
+are written after the ``imdb_id`` line, the Rotten Tomatoes path taken from
+data/rotten_tomatoes_manual.json when Wikidata has none (hand-verified
+paths, or null for a work Rotten Tomatoes does not list)::
 
     - name: "The Wire"
       imdb_id: "0306414"
@@ -55,6 +57,7 @@ from pathlib import Path
 
 YAML_PATHS = [Path("data/yaml/video_series.yaml"), Path("data/yaml/video_features.yaml")]
 CACHE_PATH = Path("shelve/wikidata_imdb.json")
+MANUAL_PATH = Path("data/rotten_tomatoes_manual.json")
 ENDPOINT = "https://query.wikidata.org/sparql"
 USER_AGENT = "veltzer.org-media-tracker/1.0 (https://github.com/veltzer/veltzer.github.io)"
 BATCH = 100
@@ -137,7 +140,7 @@ def imdb_ids_in(path: Path) -> list[str]:
     return [m.group(1) for line in path.read_text(encoding="utf-8").splitlines() if (m := IMDB_RE.match(line))]
 
 
-def write_ids(path: Path, cache: dict) -> tuple[int, int]:
+def write_ids(path: Path, cache: dict, manual: dict) -> tuple[int, int]:
     """Insert missing wikidata_id / rotten_tomatoes_id lines after each imdb_id; return the counts added."""
     lines = path.read_text(encoding="utf-8").split("\n")
     out: list[str] = []
@@ -161,7 +164,11 @@ def write_ids(path: Path, cache: dict) -> tuple[int, int]:
         if index < len(lines) and ROTTEN_RE.match(lines[index]):
             continue
         rotten = entry.get("rotten_tomatoes") if usable else None
-        if isinstance(rotten, str):
+        if not isinstance(rotten, str) and m.group(1) in manual:
+            rotten = manual[m.group(1)]["rotten_tomatoes_id"]
+            out.append(f'    rotten_tomatoes_id: "{rotten}"' if rotten else "    rotten_tomatoes_id: null")
+            added_rotten += 1
+        elif isinstance(rotten, str):
             out.append(f'    rotten_tomatoes_id: "{rotten}"')
             added_rotten += 1
     path.write_text("\n".join(out), encoding="utf-8")
@@ -174,6 +181,7 @@ def main() -> int:
     args = parser.parse_args()
 
     cache = load_cache()
+    manual = json.loads(MANUAL_PATH.read_text(encoding="utf-8"))["entries"]
     wanted = sorted({i for path in YAML_PATHS for i in imdb_ids_in(path)})
 
     missing = [i for i in wanted if i not in cache]
@@ -206,13 +214,17 @@ def main() -> int:
             print(f"  no Wikidata item for tt{imdb}")
         elif "ambiguous" in entry:
             print(f"  tt{imdb} matches several items, left out: {', '.join(entry['ambiguous'])}")
-        elif entry.get("rotten_tomatoes") is None:
-            print(f"  no Rotten Tomatoes id on {entry['item']} ({entry['label']})")
+        elif entry.get("rotten_tomatoes") is None and imdb not in manual:
+            print(f"  no Rotten Tomatoes id on {entry['item']} ({entry['label']}) and none in {MANUAL_PATH}")
         elif isinstance(entry["rotten_tomatoes"], dict):
             print(f"  {entry['item']} has several Rotten Tomatoes ids, left out: {', '.join(entry['rotten_tomatoes']['ambiguous'])}")
+    for imdb, hand in manual.items():
+        entry = cache.get(imdb)
+        if isinstance(entry, dict) and isinstance(entry.get("rotten_tomatoes"), str):
+            print(f"  {MANUAL_PATH}: Wikidata now has {entry['rotten_tomatoes']} for tt{imdb} ({hand['name']}); drop the hand entry")
     if not args.dry_run:
         for path in YAML_PATHS:
-            wikidata, rotten = write_ids(path, cache)
+            wikidata, rotten = write_ids(path, cache, manual)
             print(f"{path}: {wikidata} wikidata_id and {rotten} rotten_tomatoes_id lines added")
     return 0
 

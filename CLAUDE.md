@@ -25,8 +25,9 @@ calendar integration.
   the word lists in `.aspell.{en,he}.txt`), and over `data/yaml/` a schema check
   (`iyamlschema`), a parse check (`yaml2json`) and pydatacheck's `check_videos` /
   `check_books` cross-checks against imdb, goodreads and simania, plus a `wikidata_ids` check that every
-  `wikidata_id` in the video yaml is the Wikidata item of its `imdb_id` and every `rotten_tomatoes_id` the
-  Rotten Tomatoes path on that item (offline, against `shelve/wikidata_imdb.json`)
+  `wikidata_id` in the video yaml is the Wikidata item of its `imdb_id` and every entry's (required) `rotten_tomatoes_id`
+  the Rotten Tomatoes path on that item, or the hand-verified one in `data/rotten_tomatoes_manual.json`
+  when Wikidata has none (`null` there and in the yaml = Rotten Tomatoes has no page; offline, against `shelve/wikidata_imdb.json`)
 - **Data**: YAML/JSON for media content, PGN for chess games, Markdown for blog posts
 
 The site used to be built with MkDocs. It is not any more — see *Migration notes* below,
