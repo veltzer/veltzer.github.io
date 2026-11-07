@@ -156,6 +156,12 @@ sitemap) needs 0.1.25.
   becomes the URL slug: `euthyphro_dilemma.en.md` → `/en/blog/euthyphro-dilemma/`.
   **rssite slugifies the filename, not the title** — worth remembering when hunting for a
   built page.
+- **The file name always matches the English title**: the title, lowercased, with
+  punctuation dropped and words joined by `_` ("The media thinks that you are an
+  idiot, then they are right" → `the_media_thinks_that_you_are_an_idiot_then_they_are_right.en.md`).
+  Retitling a post means renaming both its `.en.md` and `.he.md` with `git mv`, in
+  the same commit, and fixing every `@/blog/<old>.md` link to it. The old URL then
+  404s, which is accepted (no legacy redirects, see *Important Notes*).
 - Front matter is TOML between `+++` lines:
 
 ```toml
