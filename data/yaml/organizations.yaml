@@ -3,6 +3,7 @@
 # yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/organizations.json
 # Organizations I taught at, taught for (training companies that hired me to teach: function training-provider),
 # consulted for, was certified by, or consumed media from (function publisher).
+# id 125 (Tel Aviv University) was added on 2026-11-07 with no function yet.
 # ids 122-124 (AgileSparks, DevelopIntelligence, Logtel) were added on 2026-11-07 as training providers, and Hinbit,
 # Interbit, John Bryce and Ness moved from teaching to training-provider the same day.
 # Extracted from the myworld MySQL database (TbOrganization, backup of 2019-05-11);
@@ -634,6 +635,8 @@ items:
     place: Uppsala, Sweden
     lat: 59.85861
     lon: 17.63874
+  address: 2300 Oracle Way, Austin, TX 78741, USA
+  address_source: https://www.oracle.com/hk/corporate/contact/field-offices/
   geo:
     from: location
     place: Austin, Texas, USA
@@ -1531,6 +1534,8 @@ items:
     place: Santa Clara, California, USA
     lat: 37.35411
     lon: -121.95517
+  address: Aharon Bart St 18 (Building B), Petah Tikva 4951448, Israel
+  address_source: https://www.oracle.com/il-en/corporate/contact/field-offices/
   geo:
     from: israel_office
     place: Petah Tikva, Israel
@@ -3130,6 +3135,8 @@ items:
     place: Jerusalem, Israel
     lat: 31.77885
     lon: 35.22579
+  address: Mount Scopus, Jerusalem 9190501, Israel
+  address_source: https://en.hebrewlaw.huji.ac.il/contact
   geo:
     from: israel_office
     place: Jerusalem, Israel
@@ -3237,6 +3244,8 @@ items:
     place: Ra'anana, Israel
     lat: 32.18602
     lon: 34.86784
+  address: 'The Dorothy de Rothschild Campus, 1 University Road, Ra''anana 4353701, Israel'
+  address_source: https://www-e.openu.ac.il/geninfor/write-us.html
   geo:
     from: israel_office
     place: Ra'anana, Israel
@@ -3637,6 +3646,8 @@ items:
     place: Tel Aviv, Israel
     lat: 32.0853
     lon: 34.78181
+  address: Azrieli Sarona Tower, 121 Menachem Begin Rd, Tel Aviv 6701203, Israel
+  address_source: https://www.whoprofits.org/companies/company/7401
   geo:
     from: israel_office
     place: Tel Aviv, Israel
@@ -3774,6 +3785,8 @@ items:
     place: Tel Aviv, Israel
     lat: 32.0853
     lon: 34.78181
+  address: Azrieli Sarona Tower, 121 Menachem Begin Rd, Tel Aviv 6701203, Israel
+  address_source: https://www.whoprofits.org/companies/company/7401
   geo:
     from: israel_office
     place: Tel Aviv, Israel
@@ -4347,3 +4360,29 @@ items:
   sources:
   - https://www.logtel.com/
   - https://www.zoominfo.com/c/logtel/22970916
+- id: 125
+  name: Tel Aviv University
+  slug: tel-aviv-university
+  functions: []
+  logo: logos/tel-aviv-university.svg
+  logo_kind: official vector
+  logo_source: https://en.wikipedia.org/wiki/File:Tel_Aviv_university_logo.svg
+  logo_license: Fair use (English Wikipedia local file; university trademark, used for identification)
+  logo_note: English-language TAU logo; refitted onto the shared 1000x1000 canvas on 2026-11-07
+  status: active
+  website: https://www.tau.ac.il
+  location: Tel Aviv, Israel (Ramat Aviv)
+  location_geo:
+    place: Tel Aviv, Israel
+    lat: 32.11312
+    lon: 34.80437
+  address: 30 Haim Levanon St, Ramat Aviv, Tel Aviv 6997801, Israel
+  address_source: https://roichmanlab.sites.tau.ac.il/contact
+  geo:
+    from: location
+    place: Tel Aviv, Israel
+    lat: 32.11312
+    lon: 34.80437
+  sources:
+  - https://en.wikipedia.org/wiki/Tel_Aviv_University
+  - https://www.tau.ac.il
