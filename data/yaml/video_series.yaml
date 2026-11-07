@@ -28,7 +28,7 @@ items:
     date_timezone: "Asia/Jerusalem"
     location: "Home"
     seasons_seen: [1]
-    rating: 8
+    rating: 7
     review: "Not bad"
   - name: "Westworld"
     imdb_id: "0475784"
@@ -161,12 +161,12 @@ items:
   - name: "Fauda"
     imdb_id: "4565380"
     device: "Netflix"
-    date_utcz: "2022-03-19T12:40:29Z"
+    date_utcz: "2021-10-22T20:13:21Z"
     date_timezone: "Asia/Jerusalem"
     location: "Home"
     seasons_seen: [1, 2, 3]
     seasons_not_seen: [4]
-    rating: 6
+    rating: 4
     review: "Very unrealistic"
   - name: "Better Call Saul"
     imdb_id: "3032476"
@@ -180,11 +180,11 @@ items:
   - name: "Another Life"
     imdb_id: "8369840"
     device: "Netflix"
-    date_utcz: "2022-03-19T12:40:29Z"
+    date_utcz: "2021-10-18T21:03:21Z"
     date_timezone: "Asia/Jerusalem"
     location: "Home"
     seasons_seen: [1, 2]
-    rating: 7
+    rating: 4
     review: "Not an interesting plot"
   - name: "Roman Empire"
     imdb_id: "6233538"
@@ -203,7 +203,7 @@ items:
     location: "Home"
     seasons_seen: [1, 2, 3, 4]
     rating: 8
-    review: "Did find it credible, but it was well made."
+    review: "Didn't find it credible, but it was well made."
   - name: "Friends"
     imdb_id: "0108778"
     device: "Netflix"
@@ -319,7 +319,7 @@ items:
     date_timezone: "Asia/Jerusalem"
     location: "Home"
     seasons_seen: [1]
-    rating: 6
+    rating: 5
     review: "bullshit"
   - name: "Emily in Paris"
     imdb_id: "8962124"
@@ -337,7 +337,7 @@ items:
     date_timezone: "Asia/Jerusalem"
     location: "Home"
     seasons_seen: [1, 2, 3]
-    rating: 6
+    rating: 7
     review: "nice"
   - name: "November 13: Attack on Paris"
     imdb_id: "8194716"
@@ -437,7 +437,7 @@ items:
     location: "Home"
     seasons_seen: [1]
     seasons_not_seen: [2, 3, 4, 5, 6, 7, 8, 9]
-    rating: 7
+    rating: 8
     review: "Very good series"
   - name: "Trapped"
     imdb_id: "3561180"
@@ -619,7 +619,7 @@ items:
     date_timezone: "Asia/Jerusalem"
     location: "Home"
     seasons_seen: [1]
-    rating: 8
+    rating: 7
     review: "Not Bad"
   - name: "Madoff: The Monster of Wall Street"
     imdb_id: "23732458"
@@ -628,7 +628,7 @@ items:
     date_timezone: "Asia/Jerusalem"
     location: "Home"
     seasons_seen: [1]
-    rating: 8
+    rating: 7
     review: "Not Bad"
   - name: "Churchill at War"
     imdb_id: "34379135"
@@ -639,3 +639,71 @@ items:
     seasons_seen: [1]
     rating: 8
     review: "Not Bad"
+  - name: "Turn: Washington's Spies"
+    imdb_id: "2543328"
+    device: "Netflix"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    rating: 7
+    review: "Not bad"
+  - name: "The Wire"
+    imdb_id: "0306414"
+    device: "Desktop"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    seasons_seen: [1, 2, 3, 4, 5]
+    rating: 8
+    review: "Very good series"
+  - name: "The Wire: The Chronicles"
+    imdb_id: "1168599"
+    device: "Desktop"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    seasons_seen: [1]
+    rating: 8
+    review: "Nice extra for fans"
+  - name: "Yes Minister"
+    imdb_id: "0080306"
+    device: "Laptop"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    rating: 8
+    review: "Brilliant political satire"
+  - name: "Yes, Prime Minister"
+    imdb_id: "0086831"
+    device: "Laptop"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    rating: 9
+    review: "Brilliant political satire"
+  - name: "The Widow"
+    imdb_id: "7459986"
+    device: "Prime TV"
+    date_utcz: "2021-07-06T10:23:57Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    seasons_seen: [1]
+    rating: 6
+    review: "Not bad"
+  - name: "Marco Polo"
+    imdb_id: "2189461"
+    device: "Netflix"
+    date_utcz: "2021-09-01T08:15:43Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    seasons_seen: [1, 2]
+    rating: 6
+    review: "Not bad"
+  - name: "Mr. Robot"
+    imdb_id: "4158110"
+    device: "Prime TV"
+    date_utcz: "2022-03-19T12:40:29Z"
+    date_timezone: "Asia/Jerusalem"
+    location: "Home"
+    rating: 6
+    review: "Started strong, lost me later"
