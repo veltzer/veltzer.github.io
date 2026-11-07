@@ -1,5 +1,5 @@
 /* global renderBarChart, renderStatCard, mediaFormatDate */
-window.mediaPlugins = window.mediaPlugins || {};
+window.collectionPlugins = window.collectionPlugins || {};
 
 // Data comes flattened by scripts/import_books.py: one item per book with
 // string fields for the card and search box (name, authors, review) and the
@@ -25,7 +25,7 @@ function bookReadingLine(reading) {
     return line;
 }
 
-window.mediaPlugins['books'] = {
+window.collectionPlugins['books'] = {
     file: 'data/books.json.gz',
     navTitle: 'Books',
     title: 'Books Read',
@@ -72,7 +72,7 @@ window.mediaPlugins['books'] = {
         {key: 'remark', label: 'Remark', default: true},
         {key: 'link', label: 'Link', default: true}
     ],
-    // Covers/posters are 2:3 portrait; see imageFit in media-app.js.
+    // Covers/posters are 2:3 portrait; see imageFit in data-collection-app.js.
     imageFit: 'contain',
     renderImage: function(item) {
         // No cover key means neither goodreads nor simania has an image for

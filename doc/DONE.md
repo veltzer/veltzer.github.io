@@ -27,11 +27,11 @@ became moot when both were vendored into `static/vendor/`.
 ## Media Page
 
 - Extracted inline CSS to an external stylesheet (now `blog/shared.css`)
-- Lazy-load plugin scripts via `mediaPluginFiles` registry
+- Lazy-load plugin scripts via `collectionPluginFiles` registry
 - Sort preferences saved per data type in localStorage
 - Created plugin development guide at `doc/PLUGIN_GUIDE.md`
 - Standardized all plugins to `const`/`let` (no more `var`)
-- Extracted shared `media-utils.js` with `renderBarChart()` and `renderStatCard()`
+- Extracted shared `data-collection-utils.js` with `renderBarChart()` and `renderStatCard()`
 - All plugins now use `window.escapeHtml()` consistently in renderStats
 - Added `DecompressionStream` fallback for older browsers (tries uncompressed file)
 - Added source file validation to `scripts/copy_data.sh`

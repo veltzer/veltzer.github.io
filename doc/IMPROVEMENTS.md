@@ -15,7 +15,7 @@ being re-reported, or to record that something is deliberately not a problem.
 ## Media Collection UX
 
 These were written against an earlier version of the media app and most had
-already shipped without being marked. Audited against `static/media-app.js`, the
+already shipped without being marked. Audited against `static/data-collection-app.js`, the
 seven `static/plugin-*.js` files of the time (there are eight now; `plugin-books.js`
 came later) and the built page.
 
@@ -25,7 +25,7 @@ came later) and the built page.
   Courses", "Watched YouTube Videos".
 
 - ~~**Show thumbnails or cards instead of only a plain list.** — DONE.~~
-  `media-app.js` renders a card per item — `media-card-image`, rounded, shadowed,
+  `data-collection-app.js` renders a card per item — `collection-card-image`, rounded, shadowed,
   bordered — with the image lazy-loaded and an `alt` from the item name.
 
 - ~~**Include richer metadata like type, date, tags, and file size.** — DONE.~~
@@ -34,7 +34,7 @@ came later) and the built page.
 
 - ~~**Add search plus filters for category/date to make browsing easier.** — DONE.~~
   Search box plus per-topic filters. The filters are *derived* rather than
-  hand-declared: `deriveFieldsConfig` in `media-app.js` builds them from each plugin's
+  hand-declared: `deriveFieldsConfig` in `data-collection-app.js` builds them from each plugin's
   `fields` registry, where `filterable` defaults to true, and supports
   select/boolean/year/range/custom types. Each topic exposes 7–10 filter dropdowns —
   every plugin marks exactly one field `filterable: false` (the title, which the search
@@ -50,7 +50,7 @@ came later) and the built page.
 
   One observation from looking at it, which is a *separate* item if anyone wants it:
   the media page renders no server-side text at all — everything is drawn by
-  `media-app.js` after load — so search engines and social previews get an empty page.
+  `data-collection-app.js` after load — so search engines and social previews get an empty page.
   That is an SEO question, not a privacy one, and declining the note does not settle it.
 
 - **NOT ACTIONABLE AS WRITTEN: "add more structure and discoverability".**
@@ -148,7 +148,7 @@ came later) and the built page.
 - **NOT A PROBLEM: cross-file naming inconsistency (`name` vs `title`).**
   Some datasets use `name` (podcasts, museums, video_features, video_series,
   audio_courses), others use `title` (audible, youtube). The frontend already handles it:
-  `media-app.js` copies `title` onto `name` at load time when `name` is absent, so
+  `data-collection-app.js` copies `title` onto `name` at load time when `name` is absent, so
   everything downstream sees one field. Verified across all seven datasets — 29,346 items,
   every one resolves to a label, no gaps.
 
@@ -255,9 +255,9 @@ came later) and the built page.
 ## JavaScript
 
 - ~~**Two media plugins are registered under keys they never use.** — DONE.~~
-  `media-app.js` registered `'audio_courses'` and `'series'` while the plugins register
+  `data-collection-app.js` registered `'audio_courses'` and `'series'` while the plugins register
   themselves as `'audio'` and `'videos'`. Renamed the two registry keys to match the
-  plugins, since `getDataSources()` returns `window.mediaPlugins` — the plugin-side names
+  plugins, since `getDataSources()` returns `window.collectionPlugins` — the plugin-side names
   are what drive live `?data=...` URLs, so changing those instead would have broken
   existing links. All seven keys now match (verified programmatically). Added a comment
   above the registry recording the constraint.
@@ -293,9 +293,9 @@ came later) and the built page.
   `date_dmy` code used. Fixed both. The museums year chart counted 9 of 23 visits before;
   it now counts all 23 (verified against the real data).
 
-- ~~**Dead `formatDate` in `media-app.js`.** — DONE.~~
+- ~~**Dead `formatDate` in `data-collection-app.js`.** — DONE.~~
   A private `formatDate` that was never called — the plugins all use `mediaFormatDate`
-  from `media-utils.js` instead. Removed.
+  from `data-collection-utils.js` instead. Removed.
 
 - ~~**`calendar_list_view.html` double-fires `init()`.** — DONE.~~
   The `visibilitychange` handler called `init()` on every return to visibility, on top of
@@ -316,7 +316,7 @@ came later) and the built page.
   courses have no `progress` field. The correlation is perfect across all 52. Ratings are
   assigned on completion, so an absent rating means "not yet rated", not lost data.
 
-  The frontend already handles it: `media-app.js` renders `item.rating || '?'`, so an
+  The frontend already handles it: `data-collection-app.js` renders `item.rating || '?'`, so an
   unfinished course shows "? / 10". And no plugin computes an average anywhere — no
   `toFixed`, no `reduce`, no division by `items.length` — so the `NaN` this item warns
   about cannot occur. Worth revisiting only if averages are ever added, at which point
@@ -776,7 +776,7 @@ open unless struck through. Ordered roughly by how visible the fault is.
   showed only the middle third — "Surely You're Joking, Mr. Feynman!" lost its title
   line. Fixed with a per-plugin `imageFit` property (documented in
   `doc/PLUGIN_GUIDE.md`): books, movies and series declare `'contain'`, and
-  `media-app.js` then renders the whole image over a blurred, enlarged copy of itself so
+  `data-collection-app.js` then renders the whole image over a blurred, enlarged copy of itself so
   the bands either side are not flat colour. Landscape plugins (Audible, audio courses,
   museums, podcasts) are unchanged. The two placeholders still fit: they were drawn at
   800x384, which `contain` shows whole in the same box. Verified in a browser on the

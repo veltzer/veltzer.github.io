@@ -1,5 +1,5 @@
 /* global renderBarChart, renderStatCard, mediaFormatDate */
-window.mediaPlugins = window.mediaPlugins || {};
+window.collectionPlugins = window.collectionPlugins || {};
 
 (function() {
     function getChapterDates(item) {
@@ -24,7 +24,7 @@ window.mediaPlugins = window.mediaPlugins || {};
         return item.chapters ? item.chapters.length : 0;
     }
 
-window.mediaPlugins['podcasts'] = {
+window.collectionPlugins['podcasts'] = {
     file: 'data/podcasts.json.gz',
     navTitle: 'Podcasts',
     title: 'Listened Podcasts',

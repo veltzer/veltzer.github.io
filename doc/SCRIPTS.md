@@ -215,7 +215,7 @@ and OMDB poster lookup with fallback.
 One place that decides how large an image in `static/images/` may be
 (`800x384>`, JPEG, EXIF stripped) and the `normalise()` function the fetchers
 call on save. The numbers are derived from the card geometry in
-`media-app.js`; the module docstring explains the arithmetic.
+`data-collection-app.js`; the module docstring explains the arithmetic.
 
 ### `scripts/normalise_images.py`
 

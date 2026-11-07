@@ -84,7 +84,7 @@ the real `https://veltzer.org` origin in a browser, not read off documentation.
 
 ## The blocker: CORS
 
-`media-app.js` uses `fetch()` and writes the result into a `<span>`. That requires the
+`data-collection-app.js` uses `fetch()` and writes the result into a `<span>`. That requires the
 service to send an `Access-Control-Allow-Origin` header. Most free counters are **SVG
 badges** built for `<img>` tags in GitHub READMEs, and they send no CORS headers at all —
 so `fetch()` fails even though the same URL works fine as an image.
@@ -147,7 +147,7 @@ These are not exclusive; GoatCounter for real analytics plus a badge for the vis
 is a coherent combination.
 
 See the "Visitor Counter" entry in `doc/IMPROVEMENTS.md`: the counter was removed
-entirely on 2026-08-19, and the `COUNTER_*` hook is gone from `media-app.js`.
+entirely on 2026-08-19, and the `COUNTER_*` hook is gone from `data-collection-app.js`.
 
 ## Decision: GA4, wired in 2026-08-18
 

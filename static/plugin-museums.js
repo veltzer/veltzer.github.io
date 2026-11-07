@@ -1,5 +1,5 @@
 /* global renderBarChart, renderStatCard, mediaFormatDate */
-window.mediaPlugins = window.mediaPlugins || {};
+window.collectionPlugins = window.collectionPlugins || {};
 
 // Museum dates come in two shapes: date_utcz is a full ISO timestamp, date_ymd
 // is date-only. Both start YYYY-MM-DD, so one accessor serves the detail line,
@@ -14,7 +14,7 @@ function museumDate(item) {
 // visit has an image file on disk; repeat visits resolve to it here rather than
 // duplicating the image once per visit.
 // Populated lazily from the full item list the first time an image is rendered:
-// there is no load hook in media-app.js to build it up front, and renderImage is
+// there is no load hook in data-collection-app.js to build it up front, and renderImage is
 // only ever called after the data is in memory.
 const museumImageIds = new Map();
 
@@ -33,14 +33,14 @@ function canonicalMuseumImageId(item, allItems) {
     return canonical === undefined ? item.internal_id : canonical;
 }
 
-window.mediaPlugins['museums'] = {
+window.collectionPlugins['museums'] = {
     file: 'data/museums.json.gz',
     navTitle: 'Museums',
     title: 'Visited Museums',
     subtitle: "A list of museums and exhibitions I've visited over the years.",
     ratingScale: 10,
     searchPlaceholder: 'Search by name, city, review...',
-    searchFields: (window.mediaFeatureFlags && window.mediaFeatureFlags.showPeople) ? ['name', 'city', 'review', 'with'] : ['name', 'city', 'review'],
+    searchFields: (window.collectionFeatureFlags && window.collectionFeatureFlags.showPeople) ? ['name', 'city', 'review', 'with'] : ['name', 'city', 'review'],
     fields: [
         {field: 'name', label: 'Name', type: 'string', filterable: false},
         {field: 'rating', label: 'Rating', type: 'number', filterType: 'select'},

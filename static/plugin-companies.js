@@ -1,5 +1,5 @@
 /* global renderBarChart, renderStatCard */
-window.mediaPlugins = window.mediaPlugins || {};
+window.collectionPlugins = window.collectionPlugins || {};
 
 // The one map point per company, chosen by hand in organizations.yaml (see
 // scripts/organizations_pick_geo.py). Its place string ends in the country,
@@ -29,14 +29,14 @@ function companyMapUrl(item) {
 // that is rarely clicked; doc/DECISIONS.md has the comparison. OSM's tile
 // policy asks for visible attribution, hence the credit line under it.
 function companyMapImage(item) {
-    return item.map ? (window.mediaBasePath || './') + item.map : '';
+    return item.map ? (window.collectionBasePath || './') + item.map : '';
 }
 
 function capitalize(text) {
     return text ? text.charAt(0).toUpperCase() + text.substring(1) : '';
 }
 
-window.mediaPlugins['companies'] = {
+window.collectionPlugins['companies'] = {
     file: 'data/companies.json.gz',
     navTitle: 'Companies',
     title: 'Companies I Taught At',
@@ -107,14 +107,14 @@ window.mediaPlugins['companies'] = {
             html += '<li class="py-2" data-toggle="map">';
             if (mapImage) {
                 html += '<a href="' + window.escapeHtml(mapUrl) + '" target="_blank" rel="noopener noreferrer">' +
-                    '<img class="media-card-map" src="' + window.escapeHtml(mapImage) +
+                    '<img class="collection-card-map" src="' + window.escapeHtml(mapImage) +
                     '" alt="Map of ' + window.escapeHtml(companyPlace(item)) + '" loading="lazy"></a>';
             }
             html += '<a href="' + window.escapeHtml(mapUrl) +
                 '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">' +
                 '&#x1F4CD; ' + window.escapeHtml(companyPlace(item)) + ' on Google Maps</a>';
             if (mapImage) {
-                html += '<span class="media-card-map-credit">Map &copy; <a href="https://www.openstreetmap.org/copyright"' +
+                html += '<span class="collection-card-map-credit">Map &copy; <a href="https://www.openstreetmap.org/copyright"' +
                     ' target="_blank" rel="noopener noreferrer" class="underline">OpenStreetMap</a> contributors</span>';
             }
             html += '</li>';

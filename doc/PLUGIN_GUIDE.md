@@ -1,36 +1,54 @@
-# Media Plugin Development Guide
+# Data Collection Plugin Development Guide
 
-This guide explains how to create a new media plugin for the media page.
+This guide explains how to create a new plugin for the data collection app
+(`static/data-collection-app.js`), which runs the media page and the training
+clients page.
 
 ## Overview
 
 Each plugin is a standalone JavaScript file that registers itself into
-`window.mediaPlugins`. The media page loads all plugins and renders their
-data based on a shared interface.
+`window.collectionPlugins`. A page loads the plugins it lists and renders
+their data based on a shared interface.
 
 ## File Location
 
 Plugin files go in `static/` and are named `plugin-<name>.js`.
 
-After creating a new plugin, register it in `static/media-app.js` in the
-`window.mediaPluginFiles` object:
+After creating a new plugin, register it in `static/data-collection-app.js` in the
+`ALL_PLUGIN_FILES` object:
 
 ```javascript
-window.mediaPluginFiles = {
+const ALL_PLUGIN_FILES = {
     // ... existing plugins ...
-    'mykey': MEDIA_BASE + 'plugin-myname.js'
+    'mykey': BASE_PATH + 'plugin-myname.js'
 };
 ```
 
-The key must match the key used in `window.mediaPlugins['mykey']` inside
+The key must match the key used in `window.collectionPlugins['mykey']` inside
 the plugin file. It is also the value of the `?data=` URL parameter that
-selects the tab. The first entry in the registry is the tab shown when the
-URL names none; the nav tabs themselves are sorted by `navTitle`, not by
-registry order.
+selects the tab.
 
-The page that hosts the app is `content/media/_index.en.md` (served at
-`/en/media/` and `/he/media/`). It sets `window.mediaBasePath` and loads
-`media-utils.js` and `media-app.js`; it does not list the plugins itself.
+Then add the key to the `plugins` list in the front matter of the page that
+should show it. Every page using `templates/data_collection.html` hosts the
+app, and the template holds the markup and scripts; a page only names its
+plugins:
+
+```toml
+template = "data_collection.html"
+
+[extra]
+plugins = ["audio", "audible", "books"]    # the first is the default view
+moved = { companies = "training/clients/" }  # optional, see below
+```
+
+Today that is `content/media/` (the eight media plugins) and
+`content/training/clients/` (`companies` alone; a single-plugin page shows no
+tab row). The Hebrew `_index.he.md` repeats `[extra]`, since front matter is
+per file. The nav tabs are sorted by `navTitle`, not by list order.
+
+`moved` maps a key that used to be on this page to the path (under the
+language root) of the page that has it now; the app redirects old
+`?data=<key>` links there.
 
 ## Data Files
 
@@ -53,14 +71,14 @@ items:
 
 ## Plugin Interface
 
-Every plugin must register itself on `window.mediaPlugins` with the
+Every plugin must register itself on `window.collectionPlugins` with the
 following structure:
 
 ```javascript
 /* global renderBarChart, renderStatCard, mediaFormatDate */
-window.mediaPlugins = window.mediaPlugins || {};
+window.collectionPlugins = window.collectionPlugins || {};
 
-window.mediaPlugins['mykey'] = {
+window.collectionPlugins['mykey'] = {
     // --- Required Properties ---
 
     file: 'data/mydata.json.gz',       // Path to JSON data file (relative to the site root)
@@ -141,7 +159,7 @@ window.mediaPlugins['mykey'] = {
 
     // renderStats(items) -> HTML string
     // Returns full HTML for the statistics view.
-    // Use renderBarChart() and renderStatCard() helpers from media-utils.js.
+    // Use renderBarChart() and renderStatCard() helpers from data-collection-utils.js.
     renderStats: function(items) {
         var counts = {};
         items.forEach(function(item) {
@@ -195,7 +213,7 @@ window.mediaPlugins['mykey'] = {
     // directly for an item that has nothing to name an image by.
     placeholderImage: 'images/thing-no-cover.jpg',
 
-    // formatDate — a per-plugin convention, not a framework hook: media-app.js
+    // formatDate — a per-plugin convention, not a framework hook: data-collection-app.js
     // never reads it. Plugins keep it here so renderDetails/renderStats can
     // call this.formatDate; the shared mediaFormatDate utility is the usual value.
     formatDate: mediaFormatDate
@@ -232,7 +250,7 @@ The media page automatically handles these item fields if present:
 Inside plugin methods you can use:
 
 - `window.escapeHtml(str)` - HTML-escape a string (always use for user data)
-- `window.mediaFeatureFlags.showPeople` - whether to show "With:" people info
+- `window.collectionFeatureFlags.showPeople` - whether to show "With:" people info
 - `mediaFormatDate(str)` - shared date formatter (returns `YYYY-MM-DD` or null)
 - `renderBarChart(title, counts, options)` - render a bar chart card
 - `renderStatCard(value, label)` - render a stat summary card
@@ -240,7 +258,7 @@ Inside plugin methods you can use:
 
 ## Statistics Helpers
 
-For `renderStats`, use the shared helpers from `media-utils.js`:
+For `renderStats`, use the shared helpers from `data-collection-utils.js`:
 
 ```javascript
 // Bar chart with options

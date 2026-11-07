@@ -1,7 +1,7 @@
 /* global renderBarChart, renderStatCard, mediaFormatDate */
-window.mediaPlugins = window.mediaPlugins || {};
+window.collectionPlugins = window.collectionPlugins || {};
 
-window.mediaPlugins['youtube'] = {
+window.collectionPlugins['youtube'] = {
     file: 'data/youtube.json.gz',
     navTitle: 'YouTube',
     title: 'Watched YouTube Videos',

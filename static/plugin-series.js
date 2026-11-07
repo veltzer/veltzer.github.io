@@ -1,7 +1,7 @@
 /* global renderBarChart, renderStatCard, mediaFormatDate */
-window.mediaPlugins = window.mediaPlugins || {};
+window.collectionPlugins = window.collectionPlugins || {};
 
-window.mediaPlugins['videos'] = {
+window.collectionPlugins['videos'] = {
     file: 'data/video_series.json.gz',
     navTitle: 'Video Series',
     title: 'Watched TV Series',
@@ -47,7 +47,7 @@ window.mediaPlugins['videos'] = {
         {key: 'wikidata', label: 'Wikidata Link', default: true},
         {key: 'rottentomatoes', label: 'Rotten Tomatoes Link', default: true}
     ],
-    // Covers/posters are 2:3 portrait; see imageFit in media-app.js.
+    // Covers/posters are 2:3 portrait; see imageFit in data-collection-app.js.
     imageFit: 'contain',
     renderImage: function(item) {
         if (!item.imdb_id) return '';

@@ -4,8 +4,8 @@
 
 The source is nested -- a book has a list of names (one per language, carrying
 the goodreads or simania id), a list of authors each with names per language,
-a list of ownings and a list of readings -- and the media app searches, sorts
-and filters on flat item fields (media-app.js has no per-plugin load hook to
+a list of ownings and a list of readings -- and the data collection app searches, sorts
+and filters on flat item fields (data-collection-app.js has no per-plugin load hook to
 reshape data in the browser). So each book becomes one item with string fields
 for the card and the search box, plus the small lists the plugin needs for
 filters and stats.

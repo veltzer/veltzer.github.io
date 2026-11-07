@@ -366,7 +366,7 @@ th { background: var(--bg-surface); }
 
 // Application pages (media / calendar / slides / syllabi / animations / chess).
 // These host a whole application rather than prose, so their templates
-// (embed.html, app.html, chess.html) swap the narrow reading column for this
+// (data_collection.html, app.html, chess.html) swap the narrow reading column for this
 // wide container. The 42rem measure that suits an essay squeezes an
 // application. The class name dates from when the teaching sites were framed in
 // an iframe; nothing is framed any more, the markup is imported into the page.

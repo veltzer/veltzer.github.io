@@ -1,9 +1,9 @@
-// Tailwind 3 configuration for the media tracker (content/media/), compiled
-// by scripts/build_media_css.sh into static/vendor/tailwind-media.css. It
+// Tailwind 3 configuration for the data collection app (templates/data_collection.html), compiled
+// by scripts/build_collection_css.sh into static/vendor/tailwind-collection.css. It
 // used to run in the browser through Tailwind's CDN compiler; the palette and
 // options below are what that page set as `tailwind.config`, unchanged.
 //
-// The media tracker's markup uses Tailwind colour utilities (bg-white,
+// The data collection app's markup uses Tailwind colour utilities (bg-white,
 // text-gray-500, text-blue-600 and so on), which are fixed colours and so
 // ignored the site theme. Rather than rewrite two dozen classes across the
 // plugins, the palette itself is redefined in terms of the theme tokens: every
@@ -14,12 +14,12 @@
 // a dark theme instead of inverting.
 module.exports = {
 content: [
-  "content/media/_index.en.md",
-  "static/media-app.js",
-  "static/media-utils.js",
+  "templates/data_collection.html",
+  "static/data-collection-app.js",
+  "static/data-collection-utils.js",
   "static/plugin-*.js",
 ],
-important: '#media-root',
+important: '#collection-root',
 corePlugins: { preflight: false },
 theme: {
   extend: {

@@ -15,7 +15,7 @@ blog loads nothing at all.
 
 | Page | CSS | JS libraries |
 |------|-----|--------------|
-| `/en/media/` | Tailwind (compiled, vendored) | none -- plain JS in `static/media-app.js` + eight plugins |
+| `/en/media/`, `/en/training/clients/` | Tailwind (compiled, vendored) | none -- plain JS in `static/data-collection-app.js` + nine plugins |
 | `/en/chess/` | site stylesheet | chess.js, cm-chessboard -- both **vendored**, not CDN |
 | `/en/calendar/` | site stylesheet | FullCalendar 6.1.20 + its Google Calendar plugin -- **vendored** |
 | `/en/slides/`, `/en/syllabi/`, `/en/animations/` | site stylesheet | Material Web 2 (CDN) |
@@ -23,18 +23,18 @@ blog loads nothing at all.
 
 ## CSS
 
-### Tailwind, on one page only
+### Tailwind, in the data collection app only
 
-`content/media/_index.en.md` links `static/vendor/tailwind-media.css`: the
-utilities the media app uses, compiled with Tailwind 3 by
-`scripts/build_media_css.sh` from `config/tailwind.media.config.js` (the
+`templates/data_collection.html` links `static/vendor/tailwind-collection.css`: the
+utilities the data collection app uses, compiled with Tailwind 3 by
+`scripts/build_collection_css.sh` from `config/tailwind.collection.config.js` (the
 theme-token palette) and committed. Until 2026-10-29 the page loaded Tailwind's
 in-browser compiler from `https://cdn.tailwindcss.com`, which Tailwind says is
 not for production: a render-blocking third-party script that compiled the CSS
 on every visit.
 
 Tailwind finds classes by scanning the files the config lists for whole class
-names. A class added to the media app or a plugin has no rule until the script
+names. A class added to the data collection app or a plugin has no rule until the script
 is rerun, and a class assembled at run time (`'bg-' + colour`) is never found;
 write class names out in full.
 
@@ -43,7 +43,7 @@ Tailwind was "the sole CSS framework for all custom standalone pages"; that was
 true when there were seven standalone pages, and is not true now. Everything
 else uses the site's own stylesheet, compiled from `sass/style.scss`.
 
-Keeping Tailwind for the media app is deliberate. The card grid, filter row and
+Keeping Tailwind for the data collection app is deliberate. The card grid, filter row and
 stat tiles are utility-class layouts that would have to be rewritten to move
 off it, and the compiled file holds only the classes the app uses (about 9 KB).
 
@@ -99,9 +99,9 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
 
 ### What is no longer used
 
-- **js-yaml** -- removed. The media app reads JSON, not YAML: parsing the 6.5 MB
+- **js-yaml** -- removed. The data collection app reads JSON, not YAML: parsing the 6.5 MB
   YouTube file with js-yaml took ~399 ms in the browser. The only mention left in
-  `static/media-app.js` is the comment recording that decision.
+  `static/data-collection-app.js` is the comment recording that decision.
 - **Bootstrap** -- removed before the zola migration, in favour of Tailwind on the
   media page.
 - **elasticlunr / `search_index.en.js`** -- gone. Under zola it was switched off
@@ -122,7 +122,7 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
 ## Media plugin filter system
 
 Each plugin in `static/plugin-*.js` declares a `fields` registry. Filters are
-*derived* from it by `deriveFieldsConfig` in `static/media-app.js` rather than
+*derived* from it by `deriveFieldsConfig` in `static/data-collection-app.js` rather than
 hand-declared, so adding a field to a plugin gives you its filter for free.
 
 `filterable` defaults to true; every plugin marks exactly one field

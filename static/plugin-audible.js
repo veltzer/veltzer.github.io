@@ -1,7 +1,7 @@
 /* global renderBarChart, renderStatCard, mediaFormatDate */
-window.mediaPlugins = window.mediaPlugins || {};
+window.collectionPlugins = window.collectionPlugins || {};
 
-window.mediaPlugins['audible'] = {
+window.collectionPlugins['audible'] = {
     file: 'data/audible.json.gz',
     navTitle: 'Audible',
     title: 'Audible Library',

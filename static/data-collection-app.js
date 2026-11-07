@@ -1,52 +1,79 @@
 /*
- * Shared media application.
+ * The data collection app: a searchable, sortable, filterable card grid over
+ * one JSON file per plugin (static/plugin-*.js).
  *
- * One entry point now: content/media/_index.en.md, served at /en/media/ and
- * /he/media/. It sets window.mediaBasePath BEFORE loading this script.
+ * Entry points: every page using templates/data_collection.html -- the media
+ * section (/en/media/, /he/media/) and the training clients page
+ * (/en/training/clients/, /he/training/clients/). The template sets, BEFORE
+ * loading this script:
  *
- * There used to be a second -- a standalone static/media_app.html carrying its
+ *   window.collectionBasePath   where plugins and data live ('/')
+ *   window.collectionPluginKeys the plugins this page shows, in order
+ *   window.collectionMoved      {key: url} for views that moved to another page
+ *
+ * There used to be a second copy -- a standalone static/media_app.html carrying its
  * own copy of the page. It was replaced with a redirect on 2026-08-18 (since removed): bypassing
  * templates/base.html meant it silently missed whatever the templates added, and
  * the analytics snippet was the case that surfaced it.
  *
  * Do not fork this file: divergent copies are exactly how the stats count
- * silently drifted before.
+ * silently drifted before. A new page is a new plugin list, not a new app.
  */
 (function () {
     'use strict';
 
-    const MEDIA_BASE = window.mediaBasePath || './';
+    const BASE_PATH = window.collectionBasePath || './';
 
 
     // --- Plugin Registry ---
     // Maps plugin key to its script file. Scripts are loaded on demand.
     // Keys MUST match the key each plugin registers itself under in
-    // window.mediaPlugins — getDataSources() returns that object, so those keys
+    // window.collectionPlugins — getDataSources() returns that object, so those keys
     // are what drive the ?data=... URLs and the load-once guard in loadPlugin.
     //
-    // The first entry is the view shown when the URL names none. The nav tabs
+    // The registry knows every plugin; window.collectionPluginKeys picks the
+    // ones this page shows. The first key is the view shown when the URL names
+    // none. The nav tabs
     // are sorted by their label (see generateNav), not by this order or by
     // these keys: the keys are URL and preference identifiers and three of
     // them differ from their label (audio -> Audio Courses, features ->
     // Movies, videos -> Video Series). Nothing may derive any order from
-    // window.mediaPlugins: the scripts load in parallel and register in
+    // window.collectionPlugins: the scripts load in parallel and register in
     // whatever order they finish, so the tabs used to reshuffle between loads.
-    window.mediaPluginFiles = {
-        'audio': MEDIA_BASE + 'plugin-audio-courses.js',
-        'audible': MEDIA_BASE + 'plugin-audible.js',
-        'books': MEDIA_BASE + 'plugin-books.js',
-        'companies': MEDIA_BASE + 'plugin-companies.js',
-        'features': MEDIA_BASE + 'plugin-movies.js',
-        'museums': MEDIA_BASE + 'plugin-museums.js',
-        'podcasts': MEDIA_BASE + 'plugin-podcasts.js',
-        'videos': MEDIA_BASE + 'plugin-series.js',
-        'youtube': MEDIA_BASE + 'plugin-youtube.js'
+    const ALL_PLUGIN_FILES = {
+        'audio': BASE_PATH + 'plugin-audio-courses.js',
+        'audible': BASE_PATH + 'plugin-audible.js',
+        'books': BASE_PATH + 'plugin-books.js',
+        'companies': BASE_PATH + 'plugin-companies.js',
+        'features': BASE_PATH + 'plugin-movies.js',
+        'museums': BASE_PATH + 'plugin-museums.js',
+        'podcasts': BASE_PATH + 'plugin-podcasts.js',
+        'videos': BASE_PATH + 'plugin-series.js',
+        'youtube': BASE_PATH + 'plugin-youtube.js'
     };
-    window.mediaPlugins = window.mediaPlugins || {};
+    const pageKeys = window.collectionPluginKeys || Object.keys(ALL_PLUGIN_FILES);
+    window.collectionPluginFiles = {};
+    pageKeys.forEach(function(key) {
+        if (ALL_PLUGIN_FILES[key]) window.collectionPluginFiles[key] = ALL_PLUGIN_FILES[key];
+        else console.error('Unknown plugin in collectionPluginKeys: ' + key);
+    });
+
+    // A ?data=<key> link to a view that now lives on another page (the
+    // companies moved from the media page to /training/clients/): send the
+    // reader there, keeping the rest of the query, before anything loads.
+    const movedTo = (window.collectionMoved || {})[new URLSearchParams(window.location.search).get('data')];
+    if (movedTo) {
+        const params = new URLSearchParams(window.location.search);
+        params.delete('data');
+        const rest = params.toString();
+        window.location.replace(movedTo + (rest ? '?' + rest : '') + window.location.hash);
+        return;
+    }
+    window.collectionPlugins = window.collectionPlugins || {};
 
     function loadPlugin(key) {
-        if (window.mediaPlugins[key]) return Promise.resolve();
-        const src = window.mediaPluginFiles[key];
+        if (window.collectionPlugins[key]) return Promise.resolve();
+        const src = window.collectionPluginFiles[key];
         if (!src) return Promise.reject(new Error('Unknown plugin: ' + key));
         return new Promise(function(resolve, reject) {
             const script = document.createElement('script');
@@ -58,17 +85,17 @@
     }
 
     function loadAllPlugins() {
-        return Promise.all(Object.keys(window.mediaPluginFiles).map(loadPlugin));
+        return Promise.all(Object.keys(window.collectionPluginFiles).map(loadPlugin));
     }
 
     // Plugin keys in registry order; the first is the default view.
     function pluginKeys() {
-        return Object.keys(window.mediaPluginFiles);
+        return Object.keys(window.collectionPluginFiles);
     }
 
     // Plugin keys sorted by the label the reader sees on the tab.
     function pluginKeysByLabel() {
-        const sources = window.mediaPlugins || {};
+        const sources = window.collectionPlugins || {};
         return pluginKeys()
             .filter(function(key) { return sources[key]; })
             .sort(function(a, b) { return sources[a].navTitle.localeCompare(sources[b].navTitle); });
@@ -198,7 +225,7 @@
         }
 
         function getSortPrefKey(dataType) {
-            return 'mediaSortPref_' + dataType;
+            // The 'media' prefix predates the rename to the data collection\n            // app; kept so readers' saved sort orders survive it.\n            return 'mediaSortPref_' + dataType;
         }
 
         function saveSortPref(dataType) {
@@ -391,7 +418,7 @@
 
         // --- Toggle Functions ---
         function getTogglePrefKey(dataType) {
-            return 'mediaTogglePref_' + dataType;
+            // Prefix kept from before the rename, like the sort preference.\n            return 'mediaTogglePref_' + dataType;
         }
 
         function loadTogglePref(dataType) {
@@ -412,7 +439,7 @@
             Object.keys(activeToggles).forEach(function(key) {
                 if (key === '_images') {
                     if (!activeToggles[key]) {
-                        css += '.media-card-image { display: none; }\n';
+                        css += '.collection-card-image { display: none; }\n';
                     }
                 } else if (!activeToggles[key]) {
                     css += 'li[data-toggle="' + key + '"] { display: none; }\n';
@@ -477,21 +504,24 @@
         });
 
         // --- Master Configuration Object (populated by plugins) ---
-        // Read through to window.mediaPlugins on every access rather than
+        // Read through to window.collectionPlugins on every access rather than
         // snapshotting it: each plugin script begins with
-        //   window.mediaPlugins = window.mediaPlugins || {};
+        //   window.collectionPlugins = window.collectionPlugins || {};
         // so a plugin that lands before this line would leave us holding a
         // stale, empty object -- loadData() would then bail on its
         // !activeConfig guard and the nav (including the statistics button)
         // would never render.
         function getDataSources() {
-            return window.mediaPlugins || {};
+            return window.collectionPlugins || {};
         }
 
         // --- Dynamically Generate Navigation ---
         function generateNav(activeDataType, showStatsOnly) {
             mainNav.innerHTML = ''; // Clear existing nav
-            for (const key of pluginKeysByLabel()) {
+            // A page with a single plugin (the clients page) gets no tab row:
+            // one tab that is always selected is not navigation.
+            const tabKeys = pluginKeys().length > 1 ? pluginKeysByLabel() : [];
+            for (const key of tabKeys) {
                 const config = getDataSources()[key];
                 const navLink = document.createElement('a');
                 navLink.href = '?data=' + key;
@@ -510,7 +540,7 @@
             }
 
             const statsToggle = document.createElement('a');
-            statsToggle.className = 'px-4 py-2 rounded-full text-sm font-medium no-underline border border-gray-300 ml-4 transition-colors';
+            statsToggle.className = 'px-4 py-2 rounded-full text-sm font-medium no-underline border border-gray-300 transition-colors' + (tabKeys.length ? ' ml-4' : '');
 
             if (showStatsOnly) {
                 statsToggle.textContent = '\u2190 Back to Full View';
@@ -582,7 +612,7 @@
 
             try {
                 statusMessage.textContent = 'Loading ' + activeConfig.title + '...';
-                const response = await fetch(MEDIA_BASE + activeConfig.file);
+                const response = await fetch(BASE_PATH + activeConfig.file);
                 if (isStale()) return;
 
                 if (!response.ok) {
@@ -663,7 +693,7 @@
                 // resolve an item against the whole set -- museums use it to
                 // map repeat visits onto the one image kept for that museum.
                 const rawImgUrl = activeConfig.renderImage ? activeConfig.renderImage(item, allItems) : '';
-                const imgUrl = rawImgUrl && !/^https?:\/\//.test(rawImgUrl) ? MEDIA_BASE + rawImgUrl : rawImgUrl;
+                const imgUrl = rawImgUrl && !/^https?:\/\//.test(rawImgUrl) ? BASE_PATH + rawImgUrl : rawImgUrl;
                 // The image box is a fixed 2:1 landscape. Landscape sources
                 // (Audible banners, course art, museum photos) fill it with
                 // object-fit: cover. Portrait posters and book covers would
@@ -677,13 +707,13 @@
                 // for a white page, and the blurred backdrop is dropped
                 // because a blurred logo behind a crisp one reads as a
                 // printing error. Styles for the classes live in
-                // content/media/_index.en.md next to the other #media-root rules.
+                // content/media/_index.en.md next to the other #collection-root rules.
                 const contain = activeConfig.imageFit === 'contain';
                 const light = activeConfig.imageBackground === 'light';
                 const imgHtml = imgUrl
-                    ? '<div class="media-card-image' + (contain ? ' media-card-image--contain' : '') + (light ? ' media-card-image--light' : '') + '">' +
-                        (contain && !light ? '<img class="media-card-backdrop" src="' + escapeHtml(imgUrl) + '" alt="" aria-hidden="true" loading="lazy">' : '') +
-                        '<img class="media-card-img" src="' + escapeHtml(imgUrl) + '" alt="' + escapeHtml(item.name || '') + '" loading="lazy">' +
+                    ? '<div class="collection-card-image' + (contain ? ' collection-card-image--contain' : '') + (light ? ' collection-card-image--light' : '') + '">' +
+                        (contain && !light ? '<img class="collection-card-backdrop" src="' + escapeHtml(imgUrl) + '" alt="" aria-hidden="true" loading="lazy">' : '') +
+                        '<img class="collection-card-img" src="' + escapeHtml(imgUrl) + '" alt="' + escapeHtml(item.name || '') + '" loading="lazy">' +
                       '</div>'
                     : '';
                 // A plugin may name a placeholder to swap in when the image
@@ -691,7 +721,7 @@
                 // image has not been fetched yet shows that instead of the
                 // broken-image icon. Bound after innerHTML below, since error
                 // events do not bubble.
-                const placeholderUrl = activeConfig.placeholderImage ? MEDIA_BASE + activeConfig.placeholderImage : '';
+                const placeholderUrl = activeConfig.placeholderImage ? BASE_PATH + activeConfig.placeholderImage : '';
 
                 col.innerHTML =
                     '<div class="bg-white rounded-lg shadow-sm border border-gray-200 h-full flex flex-col overflow-hidden">' +
@@ -706,10 +736,10 @@
                             '</ul>' +
                         '</div>' +
                     '</div>';
-                const cardImg = col.querySelector('img.media-card-img');
+                const cardImg = col.querySelector('img.collection-card-img');
                 if (cardImg && placeholderUrl && imgUrl !== placeholderUrl) {
                     cardImg.addEventListener('error', function() {
-                        col.querySelectorAll('.media-card-image img').forEach(function(img) { img.src = placeholderUrl; });
+                        col.querySelectorAll('.collection-card-image img').forEach(function(img) { img.src = placeholderUrl; });
                     }, {once: true});
                 }
                 itemsContainer.appendChild(col);
@@ -811,7 +841,7 @@
             // Without this, a single failing plugin script rejects the Promise.all
             // in loadAllPlugins, loadData never runs, and the page stays blank with
             // nothing but an uncaught rejection in the console.
-            console.error('Error loading media plugins:', error);
+            console.error('Error loading collection plugins:', error);
             statusMessage.innerHTML = '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"><strong>Loading Failed:</strong> ' + escapeHtml(error.message) + '</div>';
         });
     });

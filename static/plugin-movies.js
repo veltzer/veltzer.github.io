@@ -1,7 +1,7 @@
 /* global renderBarChart, renderStatCard, mediaFormatDate */
-window.mediaPlugins = window.mediaPlugins || {};
+window.collectionPlugins = window.collectionPlugins || {};
 
-window.mediaPlugins['features'] = {
+window.collectionPlugins['features'] = {
     file: 'data/video_features.json.gz',
     navTitle: 'Movies',
     title: 'Watched Movies',
@@ -31,7 +31,7 @@ window.mediaPlugins['features'] = {
         {key: 'wikidata', label: 'Wikidata Link', default: true},
         {key: 'rottentomatoes', label: 'Rotten Tomatoes Link', default: true}
     ],
-    // Covers/posters are 2:3 portrait; see imageFit in media-app.js.
+    // Covers/posters are 2:3 portrait; see imageFit in data-collection-app.js.
     imageFit: 'contain',
     renderImage: function(item) {
         if (!item.imdb_id) return '';
@@ -68,7 +68,7 @@ window.mediaPlugins['features'] = {
             if (item.device) {
                 deviceCounts[item.device] = (deviceCounts[item.device] || 0) + 1;
             }
-            if (window.mediaFeatureFlags && window.mediaFeatureFlags.showPeople && item.with && item.with.length > 0) {
+            if (window.collectionFeatureFlags && window.collectionFeatureFlags.showPeople && item.with && item.with.length > 0) {
                 withCount++;
             }
             const date = this.formatDate(item.date_utcz);
@@ -80,7 +80,7 @@ window.mediaPlugins['features'] = {
 
         let html = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">';
         html += '<div>' + renderStatCard(items.length, 'Total Movies') + '</div>';
-        if (window.mediaFeatureFlags && window.mediaFeatureFlags.showPeople) {
+        if (window.collectionFeatureFlags && window.collectionFeatureFlags.showPeople) {
             html += '<div>' + renderStatCard(withCount, 'Movies Watched with Others') + '</div>';
         }
         html += '</div>';

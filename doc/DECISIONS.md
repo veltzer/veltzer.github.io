@@ -294,7 +294,7 @@ from then; the conclusion still holds, and zola's output is served gzipped by
 GitHub Pages the same way.
 
 Investigated adding minification (terser, html-minifier) for custom plugin
-JS files (`plugin-*.js`, `media-utils.js`) and HTML files. Decided against
+JS files (`plugin-*.js`, `data-collection-utils.js`) and HTML files. Decided against
 it because:
 
 - GitHub Pages CDN already serves gzip-compressed responses automatically.

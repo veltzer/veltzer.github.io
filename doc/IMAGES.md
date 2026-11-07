@@ -29,7 +29,7 @@ verbatim to `/images/` in the built site.
 ## Uniform Display
 
 Card images sit in a fixed 2:1 landscape box (the `<img>` markup is built in
-`static/media-app.js`), so card heights are consistent regardless of the
+`static/data-collection-app.js`), so card heights are consistent regardless of the
 source dimensions. Landscape sources are cropped with `object-cover`; the
 books, movies and series plugins declare `imageFit: 'contain'` so their
 portrait covers are shown whole over a blurred backdrop instead (see

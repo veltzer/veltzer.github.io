@@ -1,12 +1,12 @@
 /* global renderBarChart, renderStatCard, mediaFormatDate */
-window.mediaPlugins = window.mediaPlugins || {};
+window.collectionPlugins = window.collectionPlugins || {};
 
 (function() {
     function getDate(item) {
         return item.date_utcz || item.date_ended_utcz || item.date_started_utcz || '';
     }
 
-window.mediaPlugins['audio'] = {
+window.collectionPlugins['audio'] = {
     file: 'data/audio_courses.json.gz',
     navTitle: 'Audio Courses',
     title: 'Listened to Audio Courses',
@@ -51,7 +51,7 @@ window.mediaPlugins['audio'] = {
         {key: 'progress', label: 'Progress', default: true},
         {key: 'links', label: 'Links', default: true}
     ],
-    // Shown when a course has no id to name an image by, and by media-app.js
+    // Shown when a course has no id to name an image by, and by data-collection-app.js
     // when the named file turns out not to exist (a course added to the YAML
     // before scripts/fetch_audiocourse_images.py has been run for it).
     placeholderImage: 'images/audiocourse-no-cover.jpg',

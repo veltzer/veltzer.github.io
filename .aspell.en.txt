@@ -1178,10 +1178,10 @@ mb
 mc
 md
 mday
-mediafeatureflags
+collectionfeatureflags
 mediaformatdate
-mediapluginfiles
-mediaplugins
+collectionpluginfiles
+collectionplugins
 mediasortpref
 mediatogglepref
 meditators
