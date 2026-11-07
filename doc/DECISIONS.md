@@ -237,7 +237,8 @@ That asymmetry is deliberate.
 
 ### Why posts keep a shared slug
 
-Zola derives a post's URL from its filename, and **the filename is also what
+When this was decided, Zola derived a post's URL from its filename (rssite
+now takes it from the shared `slug` key), and **the filename is also what
 pairs a post with its translation**: `foo.en.md` and `foo.he.md` are one post
 in two languages precisely because they share a base name. `page.translations`
 -- which renders the language switcher on every post page (the current count

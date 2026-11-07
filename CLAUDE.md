@@ -41,11 +41,12 @@ which records the traps that outlived the migration.
 - `i18n/` — `en.toml` and `he.toml`, the strings `trans()` returns plus the Hebrew
   month names the `date` filter uses
 - `content/` — all page and post source
-    - `content/blog/*.en.md` — blog posts, flat (no `YYYY/MM/` nesting). TOML front
-  matter between `+++` lines: `title`, `date`, and a `[taxonomies]` block with `tags`.
-  A bare `*.md` without a language suffix is an error
-    - `content/blog/*.he.md` — Hebrew translations. The shared base name is how rssite
-  pairs a post with its translation; nothing else is needed
+    - `content/blog/<date>-<slug>.en.md` — blog posts, flat (no `YYYY/MM/` nesting),
+  sorted by their date prefix. TOML front matter between `+++` lines: `title`,
+  `description`, `date`, `slug` and a `[taxonomies]` block with `tags` (see *Blog
+  Posts*). A bare `*.md` without a language suffix is an error
+    - `content/blog/<date>-<slug>.he.md` — Hebrew translations. The shared file name is
+  how rssite pairs a post with its translation; nothing else is needed
     - `content/<page>/_index.{en,he}.md` — the standalone nav pages (about, media, calendar, …)
 - `data/yaml/` — the source of truth for the media tracker (podcasts, museums, courses,
   books, audible, video features and series) and for the profile block
