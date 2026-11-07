@@ -2,7 +2,7 @@
 # next line is neccessary for vscode which does not read the $schema attribute
 # yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/organizations.json
 # Organizations I taught at, taught for (training companies that hired me to teach: function training-provider),
-# consulted for, was certified by, or consumed media from.
+# consulted for, was certified by, or consumed media from (function publisher).
 # ids 122-124 (AgileSparks, DevelopIntelligence, Logtel) were added on 2026-11-07 as training providers, and Hinbit,
 # Interbit, John Bryce and Ness moved from teaching to training-provider the same day.
 # Extracted from the myworld MySQL database (TbOrganization, backup of 2019-05-11);
@@ -2185,7 +2185,8 @@ items:
 - id: 59
   name: TTC
   slug: ttc
-  functions: []
+  functions:
+  - publisher
   logo: logos/ttc.svg
   logo_original: raw/logos/ttc.jpg
   logo_kind: official vector
@@ -2208,6 +2209,8 @@ items:
     place: Chantilly, Virginia, USA
     lat: 38.88522
     lon: -77.44868
+  address: 4840 Westfields Blvd., Suite 400, Chantilly, Virginia 20151-2299, USA
+  address_source: https://www.thegreatcourses.com/support/terms-conditions
   geo:
     from: location
     place: Chantilly, Virginia, USA
@@ -3031,7 +3034,8 @@ items:
   name: Audible
   slug: audible
   remark: Audio book company
-  functions: []
+  functions:
+  - publisher
   logo: logos/audible.svg
   logo_original: raw/logos/audible.jpg
   logo_kind: official vector
@@ -3053,6 +3057,8 @@ items:
     place: Wayne, New Jersey, USA
     lat: 40.94917
     lon: -74.23768
+  address: One Washington Park, Newark, New Jersey 07102, USA
+  address_source: https://www.audible.com/
   geo:
     from: location
     place: Newark, New Jersey, USA
@@ -3641,7 +3647,8 @@ items:
 - id: 102
   name: Naxus Audio Books
   slug: nab
-  functions: []
+  functions:
+  - publisher
   logo: logos/nab.svg
   logo_original: raw/logos/nab.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
@@ -3653,6 +3660,8 @@ items:
     place: Redhill, United Kingdom
     lat: 51.24047
     lon: -0.16828
+  address: 3rd Floor, Forum House, 41-51 Brighton Road, Redhill, Surrey RH1 6YS, United Kingdom
+  address_source: https://naxosaudiobooks.com/contact-us/
   geo:
     from: location
     place: Redhill, United Kingdom
@@ -3810,13 +3819,13 @@ items:
 - id: 108
   name: Brilliance Audio
   slug: brilliance-audio
-  functions: []
-  logo: logos/verifone.svg
-  logo_original: raw/logos/verifone.jpg
+  functions:
+  - publisher
+  logo: logos/brilliance-audio.svg
   logo_kind: official vector
-  logo_source: https://www.verifone.com/
-  logo_license: company brand asset (inline header SVG on verifone.com)
-  logo_note: Current Verifone logo extracted from the site header inline <svg> (nav_logo_wrap); paths use fill=currentColor
+  logo_source: https://www.brilliancepublishing.com/images/branding/logo-standard.svg
+  logo_license: company brand asset (site header logo)
+  logo_note: current Brilliance Publishing logo from the official site (the Amazon imprint that Brilliance Audio became)
   old_url: https://www.brillianceaudio.com
   status: acquired
   what_happened: Acquired by Amazon in May 2007; continues as the Brilliance Audio imprint of Amazon's Brilliance Publishing.
@@ -3832,6 +3841,8 @@ items:
     place: Grand Haven, Michigan, USA
     lat: 43.06307
     lon: -86.22839
+  address: 1704 Eaton Drive, Grand Haven, Michigan 49417, USA
+  address_source: https://jacketflap.com/cd-unabridged-publisher-590
   geo:
     from: location
     place: Grand Haven, Michigan, USA
@@ -3843,13 +3854,14 @@ items:
 - id: 109
   name: Gildan Media
   slug: gildan-media
-  functions: []
-  logo: logos/verifone.svg
-  logo_original: raw/logos/verifone.jpg
-  logo_kind: official vector
-  logo_source: https://www.verifone.com/
-  logo_license: company brand asset (inline header SVG on verifone.com)
-  logo_note: Current Verifone logo extracted from the site header inline <svg> (nav_logo_wrap); paths use fill=currentColor
+  functions:
+  - publisher
+  logo: logos/gildan-media.svg
+  logo_original: raw/logos/gildan-media.png
+  logo_kind: traced from original bitmap (no vector logo found online)
+  logo_source: https://rbmediaglobal.com/wp-content/uploads/2026/08/rbmedia-black-logo-352x133.png
+  logo_license: company brand asset (site header logo)
+  logo_note: trace of the RBmedia logo, the successor that replaced the Gildan Media brand in 2017; no Gildan Media logo was retrievable
   old_url: http://www.gildanmedia.com
   status: acquired
   what_happened: Acquired by RBmedia in September 2017; the Gildan Media brand was replaced by RBmedia's Ascent Audio in August 2021.
@@ -3865,6 +3877,8 @@ items:
     place: New York, New York, USA
     lat: 40.71273
     lon: -74.00602
+  address: 8400 Corporate Drive, Landover, Maryland 20785, USA
+  address_source: https://rbmediaglobal.com/contact/
   geo:
     from: location
     place: Landover, Maryland, USA
@@ -3876,13 +3890,13 @@ items:
 - id: 110
   name: Penguin Audio
   slug: penguin-audio
-  functions: []
-  logo: logos/verifone.svg
-  logo_original: raw/logos/verifone.jpg
+  functions:
+  - publisher
+  logo: logos/penguin-audio.svg
   logo_kind: official vector
-  logo_source: https://www.verifone.com/
-  logo_license: company brand asset (inline header SVG on verifone.com)
-  logo_note: Current Verifone logo extracted from the site header inline <svg> (nav_logo_wrap); paths use fill=currentColor
+  logo_source: https://commons.wikimedia.org/wiki/File:Penguin_Random_House.svg
+  logo_license: public domain (Wikimedia Commons; trademark applies)
+  logo_note: the Penguin Random House logo; Penguin Audio has been its imprint since the 2013 merger
   old_url: http://www.penguin.com/static/html/audio
   status: merged
   what_happened: Penguin merged with Random House on 1 July 2013; Penguin Audio is now an imprint of Penguin Random House Audio.
@@ -3898,6 +3912,8 @@ items:
     place: New York, New York, USA
     lat: 40.71273
     lon: -74.00602
+  address: 1745 Broadway, New York, New York 10019, USA
+  address_source: https://www.penguinrandomhouse.biz/about/contact
   geo:
     from: location
     place: New York, New York, USA
@@ -3909,13 +3925,13 @@ items:
 - id: 111
   name: Pimsleur
   slug: pimsleur
-  functions: []
-  logo: logos/amobee.svg
-  logo_original: raw/logos/amobee.gif
+  functions:
+  - publisher
+  logo: logos/pimsleur.svg
   logo_kind: official vector
-  logo_source: https://web.archive.org/web/20210625144910id_/https://www.amobee.com/wp-content/themes/amobee/assets/images/black-logo.svg
-  logo_license: company brand asset (site header logo, archived by the Wayback Machine 2021-06-25)
-  logo_note: AMOBEE wordmark from the company's own site while still independent (pre Tremor/Nexxen acquisition); no Commons or logo-library SVG exists
+  logo_source: https://d1enwirvb3djmg.cloudfront.net/pimsleur_logo_ea0dc1e19d_72277dd7b3_ecc4a6a2c1.svg
+  logo_license: company brand asset (site header logo on pimsleur.com)
+  logo_note: current Pimsleur logo from the official site header
   old_url: http://www.pimsleur.com
   status: active
   website: https://www.pimsleur.com/
@@ -3924,6 +3940,8 @@ items:
     place: Concord, Massachusetts, USA
     lat: 42.46052
     lon: -71.3489
+  address: 9 Pond Lane, Suite 6B, Damonmill Square, Concord, Massachusetts 01742-2864, USA
+  address_source: https://www.pimsleur.com/pimsleur-media-information/
   geo:
     from: location
     place: Concord, Massachusetts, USA
@@ -3964,13 +3982,13 @@ items:
 - id: 113
   name: BBC Radio
   slug: bbc-radio
-  functions: []
-  logo: logos/verifone.svg
-  logo_original: raw/logos/verifone.jpg
+  functions:
+  - publisher
+  logo: logos/bbc-radio.svg
   logo_kind: official vector
-  logo_source: https://www.verifone.com/
-  logo_license: company brand asset (inline header SVG on verifone.com)
-  logo_note: Current Verifone logo extracted from the site header inline <svg> (nav_logo_wrap); paths use fill=currentColor
+  logo_source: https://commons.wikimedia.org/wiki/File:BBC_Logo_2021.svg
+  logo_license: public domain (Wikimedia Commons; trademark applies)
+  logo_note: the BBC's own logo (2021); BBC Radio is a BBC service
   old_url: http://www.bbc.co.uk/radio
   status: active
   website: https://www.bbc.co.uk/sounds
@@ -3979,6 +3997,8 @@ items:
     place: London, United Kingdom
     lat: 51.50745
     lon: -0.12777
+  address: Broadcasting House, Portland Place, London W1A 1AA, United Kingdom
+  address_source: https://find-and-update.company-information.service.gov.uk/company/03699797
   geo:
     from: location
     place: London, United Kingdom

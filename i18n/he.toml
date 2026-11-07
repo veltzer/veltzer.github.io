@@ -373,6 +373,7 @@ app_companies_function_teaching = "הוראה"
 app_companies_function_training_provider = "לימדתי עבורה"
 app_companies_function_consulting = "ייעוץ"
 app_companies_function_certification = "הסמכה"
+app_companies_function_publisher = "הוצאה לאור"
 app_companies_logo_kind_official = "וקטור רשמי"
 app_companies_logo_kind_traced = "שוחזר מהתמונה המקורית (לא נמצא לוגו וקטורי ברשת)"
 app_companies_logo_kind_wordmark = "כיתוב בעיצוב שם החברה עצמה (לא נותר קובץ לוגו)"
@@ -422,6 +423,9 @@ app_companies_providers_subtitle = "חברות ההדרכה ששכרו אותי 
 app_companies_consulting_nav_title = "לקוחות ייעוץ"
 app_companies_consulting_title = "חברות שייעצתי להן"
 app_companies_consulting_subtitle = "החברות ששכרו אותי כיועץ, איפה הן נמצאות ומה עלה בגורלן."
+app_companies_publishers_nav_title = "מו\"לים"
+app_companies_publishers_title = "מו\"לים"
+app_companies_publishers_subtitle = "המו\"לים של ספרי השמע, הקורסים והרדיו שאני מאזין להם, איפה הם נמצאים ומה עלה בגורלם."
 
 [dates]
 months = ["ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"]

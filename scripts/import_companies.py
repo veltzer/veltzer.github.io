@@ -10,7 +10,8 @@ organization pages is the organizations with one ``--function`` among their
 has ``teaching``, the companies I taught at, and ``training-provider``, the
 training companies I taught for, which exclude each other (EXCLUSIVE); the
 consulting data page (/training/consulting/) has ``consulting``, which an
-organization I also taught at may have too. A tab wants only the fields a
+organization I also taught at may have too; the media page (/media/) has
+``publisher``, the publishers of the audiobooks, courses and radio I consumed. A tab wants only the fields a
 card shows: the name, the logo path, the current status
 and what happened, where the company is and where its Israel office was,
 the one map point chosen for it, the static map image of that point, and
@@ -49,9 +50,10 @@ import yaml
 TEACHING = "teaching"
 TRAINING_PROVIDER = "training-provider"
 CONSULTING = "consulting"
+PUBLISHER = "publisher"
 # The functions that get a tab, so a card, an address and a map image (see
 # organizations_fetch_maps.py): every organization with one of them is shown.
-TABS = (TEACHING, TRAINING_PROVIDER, CONSULTING)
+TABS = (TEACHING, TRAINING_PROVIDER, CONSULTING, PUBLISHER)
 # Tabs of one page that are different relationships to the same kind of
 # organization, so no organization may be on two of them.
 EXCLUSIVE = (TEACHING, TRAINING_PROVIDER)

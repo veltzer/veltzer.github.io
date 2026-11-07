@@ -46,6 +46,7 @@
         'companies': BASE_PATH + 'plugin-companies.js',
         'providers': BASE_PATH + 'plugin-companies.js',
         'consulting': BASE_PATH + 'plugin-companies.js',
+        'publishers': BASE_PATH + 'plugin-companies.js',
         'features': BASE_PATH + 'plugin-movies.js',
         'museums': BASE_PATH + 'plugin-museums.js',
         'podcasts': BASE_PATH + 'plugin-podcasts.js',

@@ -71,6 +71,11 @@ class TestSelection:
         assert [item["name"] for item in import_companies.convert(data, "consulting")["items"]] == ["Amdocs", "Advised"]
         assert import_companies.overlapping(data) == []
 
+    def test_publishers_tab(self):
+        data = {"items": [organization(), organization(id=3, name="Audible", functions=["publisher"])]}
+        assert [item["name"] for item in import_companies.convert(data, "publisher")["items"]] == ["Audible"]
+        assert import_companies.shown(data["items"][1])
+
     def test_both_tabs_are_shown(self):
         assert import_companies.shown(organization(functions=["training-provider"]))
         assert import_companies.shown(organization(functions=["consulting"]))

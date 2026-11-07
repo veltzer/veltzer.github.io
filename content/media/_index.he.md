@@ -6,5 +6,5 @@ template = "data_collection.html"
 # The same app as the English page (templates/data_collection.html); front
 # matter is per file, so the plugin list is repeated here.
 [extra]
-plugins = ["audio", "audible", "books", "features", "museums", "podcasts", "videos", "youtube"]
+plugins = ["audio", "audible", "books", "features", "museums", "podcasts", "publishers", "videos", "youtube"]
 +++

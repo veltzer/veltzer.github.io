@@ -6,5 +6,5 @@ template = "data_collection.html"
 # The page is the data collection app; templates/data_collection.html holds
 # the markup and reads this list.
 [extra]
-plugins = ["audio", "audible", "books", "features", "museums", "podcasts", "videos", "youtube"]
+plugins = ["audio", "audible", "books", "features", "museums", "podcasts", "publishers", "videos", "youtube"]
 +++

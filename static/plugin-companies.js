@@ -109,6 +109,9 @@ window.collectionPlugins['companies'] = {
     },
     imageFit: 'contain',
     imageBackground: 'light',
+    // Data values are wrapped in <bdi>: on a Hebrew page an English address
+    // such as "1704 Eaton Drive, Grand Haven" would otherwise be reordered
+    // around the Hebrew label.
     renderDetails: function(item) {
         let html = '';
         if (item.status) {
@@ -121,15 +124,15 @@ window.collectionPlugins['companies'] = {
         }
         if (item.location) {
             html += '<li class="py-2" data-toggle="location"><strong>' + t('companies_detail_headquarters') + '</strong> ' +
-                window.escapeHtml(item.location) + '</li>';
+                '<bdi>' + window.escapeHtml(item.location) + '</bdi></li>';
         }
         if (item.israel_office) {
             html += '<li class="py-2" data-toggle="israel_office"><strong>' + t('companies_detail_israel_office') + '</strong> ' +
-                window.escapeHtml(item.israel_office) + '</li>';
+                '<bdi>' + window.escapeHtml(item.israel_office) + '</bdi></li>';
         }
         if (item.address) {
             html += '<li class="py-2" data-toggle="address"><strong>' + t('companies_detail_address') + '</strong> ' +
-                window.escapeHtml(item.address) + '</li>';
+                '<bdi>' + window.escapeHtml(item.address) + '</bdi></li>';
         }
         const mapUrl = companyMapUrl(item);
         if (mapUrl) {
@@ -142,7 +145,7 @@ window.collectionPlugins['companies'] = {
             }
             html += '<a href="' + window.escapeHtml(mapUrl) +
                 '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">' +
-                '&#x1F4CD; ' + window.escapeHtml(t('companies_on_google_maps', {place: companyPlace(item)})) + '</a>';
+                '&#x1F4CD; ' + window.escapeHtml(t('companies_on_google_maps', {place: '\u2068' + companyPlace(item) + '\u2069'})) + '</a>';
             if (mapImage) {
                 html += '<span class="collection-card-map-credit">' + t('companies_map_credit', {
                     osm: '<a href="https://www.openstreetmap.org/copyright" target="_blank"' +
@@ -157,11 +160,11 @@ window.collectionPlugins['companies'] = {
         }
         if (item.from_date) {
             html += '<li class="py-2" data-toggle="since"><strong>' + t('companies_detail_since') + '</strong> ' +
-                window.escapeHtml(item.from_date) + '</li>';
+                '<bdi>' + window.escapeHtml(item.from_date) + '</bdi></li>';
         }
         if (item.remark) {
             html += '<li class="py-2" data-toggle="remark"><strong>' + t('companies_detail_remark') + '</strong> ' +
-                window.escapeHtml(item.remark) + '</li>';
+                '<bdi>' + window.escapeHtml(item.remark) + '</bdi></li>';
         }
         if (item.logo_kind) {
             let credit = window.escapeHtml(logoKindLabel(item.logo_kind));
@@ -229,4 +232,14 @@ window.collectionPlugins['consulting'] = Object.assign({}, window.collectionPlug
     navTitle: t('companies_consulting_nav_title'),
     title: t('companies_consulting_title'),
     subtitle: t('companies_consulting_subtitle')
+});
+
+// The publishers of the audiobooks, courses and radio I consumed, as a tab of
+// the media page: the same cards over the organizations whose functions
+// include publisher.
+window.collectionPlugins['publishers'] = Object.assign({}, window.collectionPlugins['companies'], {
+    file: 'data/publishers.json.gz',
+    navTitle: t('companies_publishers_nav_title'),
+    title: t('companies_publishers_title'),
+    subtitle: t('companies_publishers_subtitle')
 });
