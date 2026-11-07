@@ -44,7 +44,8 @@ window.mediaPlugins['videos'] = {
         {key: 'date', label: 'Date Watched', default: true},
         {key: 'location', label: 'Location', default: true},
         {key: 'imdb', label: 'IMDb Link', default: true},
-        {key: 'wikidata', label: 'Wikidata Link', default: true}
+        {key: 'wikidata', label: 'Wikidata Link', default: true},
+        {key: 'rottentomatoes', label: 'Rotten Tomatoes Link', default: true}
     ],
     // Covers/posters are 2:3 portrait; see imageFit in media-app.js.
     imageFit: 'contain',
@@ -67,6 +68,9 @@ window.mediaPlugins['videos'] = {
         }
         if (item.wikidata_id) {
             html += '<li class="py-2" data-toggle="wikidata"><a href="https://www.wikidata.org/wiki/' + window.escapeHtml(item.wikidata_id) + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; View on Wikidata</a></li>';
+        }
+        if (item.rotten_tomatoes_id) {
+            html += '<li class="py-2" data-toggle="rottentomatoes"><a href="https://www.rottentomatoes.com/' + window.escapeHtml(item.rotten_tomatoes_id) + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; View on Rotten Tomatoes</a></li>';
         }
         return html;
     },

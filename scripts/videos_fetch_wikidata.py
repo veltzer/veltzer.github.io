@@ -1,33 +1,42 @@
 #!/usr/bin/env python
 """
-Add Wikidata ids to data/yaml/video_series.yaml and video_features.yaml.
+Add Wikidata and Rotten Tomatoes ids to the video yaml files.
 
-Every entry carries an ``imdb_id``. Wikidata records the IMDb id of a work
-as property P345 (``tt0306414``), so the Wikidata item of each entry can be
-found by asking the Wikidata Query Service which item has that P345. The
-answer is written as a ``wikidata_id`` line right after the ``imdb_id`` line::
+Every entry in data/yaml/video_series.yaml and video_features.yaml carries
+an ``imdb_id``. Wikidata records the IMDb id of a work as property P345
+(``tt0306414``), so the Wikidata item of each entry can be found by asking
+the Wikidata Query Service which item has that P345. The same item records
+the work's Rotten Tomatoes path as property P1258 (``tv/the-wire``). Both
+are written after the ``imdb_id`` line::
 
     - name: "The Wire"
       imdb_id: "0306414"
       wikidata_id: "Q478360"
+      rotten_tomatoes_id: "tv/the-wire"
 
-The Wikidata id is the hub for the other sites a card may link to: the same
-item carries the Rotten Tomatoes (P1258), Metacritic (P1712) and TMDB ids
-and the Wikipedia articles, so later links can be derived from it.
+The item also carries the Metacritic (P1712) and TMDB ids and the Wikipedia
+articles, so more links can be derived from it the same way.
+
+P1258 statements can be ranked: a deprecated value (typically an old slug
+spelling) is ignored, a single preferred value wins, otherwise the one
+remaining value is taken. An item with several equally ranked values is
+reported and gets no ``rotten_tomatoes_id``.
 
 Lookups are cached in ``shelve/wikidata_imdb.json`` (committed, like the
-other lookup caches), mapping each IMDb id to its item and label, or to
-null when Wikidata has no item for it. A re-run only queries ids that are
-not cached yet, and the build's check (scripts/check_wikidata_ids.py) reads
-only that cache, so CI never touches the network. An IMDb id that matches
-more than one item is reported and left without a ``wikidata_id``.
+other lookup caches), keyed by IMDb id: the item, its label and its
+Rotten Tomatoes path (null when it has none), or null when Wikidata has no
+item for the IMDb id. A re-run only queries what is not cached yet, and
+the build's check (scripts/check_wikidata_ids.py) reads only that cache,
+so CI never touches the network. An IMDb id that matches more than one
+item is reported and left without either id.
 
 Reading Wikidata needs no account or key. The query service asks for a
 descriptive User-Agent and modest request rates: ids go out in batches of
 100, one batch per second.
 
 The yaml is edited textually, not re-dumped, so nothing else in the hand
-formatted files moves. An existing ``wikidata_id`` line is left alone.
+formatted files moves. Existing ``wikidata_id`` and ``rotten_tomatoes_id``
+lines are left alone.
 
 Run from the repo root:
 
@@ -50,9 +59,9 @@ ENDPOINT = "https://query.wikidata.org/sparql"
 USER_AGENT = "veltzer.org-media-tracker/1.0 (https://github.com/veltzer/veltzer.github.io)"
 BATCH = 100
 
-NAME_RE = re.compile(r'^  - name: (.*)$')
 IMDB_RE = re.compile(r'^    imdb_id: "(\d+)"$')
 WIKIDATA_RE = re.compile(r'^    wikidata_id: ')
+ROTTEN_RE = re.compile(r'^    rotten_tomatoes_id: ')
 
 
 def load_cache() -> dict:
@@ -65,19 +74,22 @@ def save_cache(cache: dict) -> None:
     CACHE_PATH.write_text(json.dumps(cache, indent=1, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
-def query(imdb_ids: list[str]) -> dict[str, list[tuple[str, str]]]:
+def sparql(query_text: str) -> list[dict]:
+    url = ENDPOINT + "?" + urllib.parse.urlencode({"query": query_text, "format": "json"})
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/sparql-results+json"})
+    with urllib.request.urlopen(req, timeout=60) as resp:
+        return json.load(resp)["results"]["bindings"]
+
+
+def items_for_imdb(imdb_ids: list[str]) -> dict[str, list[tuple[str, str]]]:
     """Map each IMDb id (without tt) to the (item, label) pairs whose P345 is that id."""
     values = " ".join(f'"tt{i}"' for i in imdb_ids)
-    sparql = f"""
+    rows = sparql(f"""
 SELECT ?imdb ?item ?itemLabel WHERE {{
   VALUES ?imdb {{ {values} }}
   ?item wdt:P345 ?imdb .
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en,mul". }}
-}}"""
-    url = ENDPOINT + "?" + urllib.parse.urlencode({"query": sparql, "format": "json"})
-    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/sparql-results+json"})
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        rows = json.load(resp)["results"]["bindings"]
+}}""")
     found: dict[str, list[tuple[str, str]]] = {}
     for row in rows:
         imdb = row["imdb"]["value"].removeprefix("tt")
@@ -86,28 +98,74 @@ SELECT ?imdb ?item ?itemLabel WHERE {{
     return found
 
 
+def rotten_for_items(items: list[str]) -> dict[str, list[tuple[str, str]]]:
+    """Map each item to its (Rotten Tomatoes path, rank) statements."""
+    values = " ".join(f"wd:{q}" for q in items)
+    rows = sparql(f"""
+SELECT ?item ?rt ?rank WHERE {{
+  VALUES ?item {{ {values} }}
+  ?item p:P1258 ?st .
+  ?st ps:P1258 ?rt ; wikibase:rank ?rank .
+}}""")
+    found: dict[str, list[tuple[str, str]]] = {}
+    for row in rows:
+        item = row["item"]["value"].rsplit("/", 1)[-1]
+        found.setdefault(item, []).append((row["rt"]["value"], row["rank"]["value"].rsplit("#", 1)[-1]))
+    return found
+
+
+def pick_rotten(statements: list[tuple[str, str]]) -> str | dict | None:
+    """The one path to use, None when there is none, or {"ambiguous": [...]}."""
+    preferred = [rt for rt, rank in statements if rank == "PreferredRank"]
+    live = [rt for rt, rank in statements if rank != "DeprecatedRank"]
+    choice = preferred if len(preferred) == 1 else live
+    if not choice:
+        return None
+    if len(choice) == 1:
+        return choice[0]
+    return {"ambiguous": sorted(choice)}
+
+
+def batches(seq: list[str]):
+    for start in range(0, len(seq), BATCH):
+        if start:
+            time.sleep(1)
+        yield seq[start:start + BATCH]
+
+
 def imdb_ids_in(path: Path) -> list[str]:
     return [m.group(1) for line in path.read_text(encoding="utf-8").splitlines() if (m := IMDB_RE.match(line))]
 
 
-def write_ids(path: Path, cache: dict) -> int:
-    """Insert a wikidata_id line after every imdb_id line that lacks one; return how many were added."""
+def write_ids(path: Path, cache: dict) -> tuple[int, int]:
+    """Insert missing wikidata_id / rotten_tomatoes_id lines after each imdb_id; return the counts added."""
     lines = path.read_text(encoding="utf-8").split("\n")
     out: list[str] = []
-    added = 0
-    for index, line in enumerate(lines):
+    added_wikidata = added_rotten = 0
+    index = 0
+    while index < len(lines):
+        line = lines[index]
         out.append(line)
+        index += 1
         m = IMDB_RE.match(line)
         if not m:
             continue
-        nxt = lines[index + 1] if index + 1 < len(lines) else ""
-        entry = cache.get(m.group(1))
-        if WIKIDATA_RE.match(nxt) or not entry or "ambiguous" in entry:
+        entry: dict = cache.get(m.group(1)) or {}
+        usable = "item" in entry
+        if index < len(lines) and WIKIDATA_RE.match(lines[index]):
+            out.append(lines[index])
+            index += 1
+        elif usable:
+            out.append(f'    wikidata_id: "{entry["item"]}"')
+            added_wikidata += 1
+        if index < len(lines) and ROTTEN_RE.match(lines[index]):
             continue
-        out.append(f'    wikidata_id: "{entry["item"]}"')
-        added += 1
+        rotten = entry.get("rotten_tomatoes") if usable else None
+        if isinstance(rotten, str):
+            out.append(f'    rotten_tomatoes_id: "{rotten}"')
+            added_rotten += 1
     path.write_text("\n".join(out), encoding="utf-8")
-    return added
+    return added_wikidata, added_rotten
 
 
 def main() -> int:
@@ -117,10 +175,10 @@ def main() -> int:
 
     cache = load_cache()
     wanted = sorted({i for path in YAML_PATHS for i in imdb_ids_in(path)})
+
     missing = [i for i in wanted if i not in cache]
-    for start in range(0, len(missing), BATCH):
-        batch = missing[start:start + BATCH]
-        found = query(batch)
+    for batch in batches(missing):
+        found = items_for_imdb(batch)
         for imdb in batch:
             hits = found.get(imdb, [])
             if len(hits) == 1:
@@ -130,18 +188,32 @@ def main() -> int:
             else:
                 cache[imdb] = None
         save_cache(cache)
-        if start + BATCH < len(missing):
-            time.sleep(1)
-    print(f"{len(wanted)} imdb ids, {len(missing)} looked up, {len(wanted) - len(missing)} from the cache")
+
+    no_rotten = sorted({cache[i]["item"] for i in wanted
+                        if isinstance(cache[i], dict) and "item" in cache[i] and "rotten_tomatoes" not in cache[i]})
+    for batch in batches(no_rotten):
+        found = rotten_for_items(batch)
+        for imdb in wanted:
+            entry = cache[imdb]
+            if isinstance(entry, dict) and entry.get("item") in batch:
+                entry["rotten_tomatoes"] = pick_rotten(found.get(entry["item"], []))
+        save_cache(cache)
+
+    print(f"{len(wanted)} imdb ids: {len(missing)} items and {len(no_rotten)} Rotten Tomatoes ids looked up, the rest from the cache")
     for imdb in wanted:
         entry = cache[imdb]
         if entry is None:
             print(f"  no Wikidata item for tt{imdb}")
         elif "ambiguous" in entry:
             print(f"  tt{imdb} matches several items, left out: {', '.join(entry['ambiguous'])}")
+        elif entry.get("rotten_tomatoes") is None:
+            print(f"  no Rotten Tomatoes id on {entry['item']} ({entry['label']})")
+        elif isinstance(entry["rotten_tomatoes"], dict):
+            print(f"  {entry['item']} has several Rotten Tomatoes ids, left out: {', '.join(entry['rotten_tomatoes']['ambiguous'])}")
     if not args.dry_run:
         for path in YAML_PATHS:
-            print(f"{path}: {write_ids(path, cache)} wikidata_id lines added")
+            wikidata, rotten = write_ids(path, cache)
+            print(f"{path}: {wikidata} wikidata_id and {rotten} rotten_tomatoes_id lines added")
     return 0
 
 

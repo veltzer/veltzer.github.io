@@ -25,7 +25,8 @@ calendar integration.
   the word lists in `.aspell.{en,he}.txt`), and over `data/yaml/` a schema check
   (`iyamlschema`), a parse check (`yaml2json`) and pydatacheck's `check_videos` /
   `check_books` cross-checks against imdb, goodreads and simania, plus a `wikidata_ids` check that every
-  `wikidata_id` in the video yaml is the Wikidata item of its `imdb_id` (offline, against `shelve/wikidata_imdb.json`)
+  `wikidata_id` in the video yaml is the Wikidata item of its `imdb_id` and every `rotten_tomatoes_id` the
+  Rotten Tomatoes path on that item (offline, against `shelve/wikidata_imdb.json`)
 - **Data**: YAML/JSON for media content, PGN for chess games, Markdown for blog posts
 
 The site used to be built with MkDocs. It is not any more — see *Migration notes* below,
@@ -78,7 +79,7 @@ which records the traps that outlived the migration.
   live site's host redirects and sitemap), `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
   the sibling teaching repos), image fetchers, data importers, the `data/yaml/`
   maintenance scripts (`podcasts_*.py`, `books_fetch_ids.py`, `great_courses_*.py`,
-  `audio_courses_check_*.py`, `youtube_add_names.py`, `videos_fetch_wikidata.py` (fills `wikidata_id` from each `imdb_id`), `organizations_geocode.py`,
+  `audio_courses_check_*.py`, `youtube_add_names.py`, `videos_fetch_wikidata.py` (fills `wikidata_id` and `rotten_tomatoes_id` from each `imdb_id`), `organizations_geocode.py`,
   `organizations_pick_geo.py`, `organizations_fetch_maps.py` — all run from the
   repo root),
   `serve.py`, `make_logo.py` (the logo and the favicon/touch icons drawn from it), `make_word_vectors.py` (the blog search's word vectors), `export_posts_for_ai.py` (mirrors the posts to `~/insync/for_ai/blog` for AI agents
