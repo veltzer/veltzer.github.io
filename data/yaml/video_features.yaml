@@ -676,6 +676,7 @@ items:
     with: []
   - name: "Jim Jefferies: Two Limb Policy"
     imdb_id: "37649515"
+    wikidata_id: "Q142076080"
     rotten_tomatoes_id: "m/jim_jefferies_two_limb_policy"
     date_utcz: "2025-08-12T13:50:43Z"
     date_timezone: "Asia/Jerusalem"

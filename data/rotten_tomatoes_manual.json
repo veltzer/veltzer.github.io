@@ -1,18 +1,11 @@
 {
  "_comment": "Hand-verified Rotten Tomatoes paths for video entries whose Wikidata item has none (or which have no Wikidata item). Keyed by imdb_id. A null rotten_tomatoes_id records that Rotten Tomatoes has no page for the work. Each was checked against the page title on rottentomatoes.com on the verified date. scripts/videos_fetch_wikidata.py writes these into the yaml and reports any that Wikidata has since caught up with (drop those here); scripts/check_wikidata_ids.py checks the yaml against them. See CLAUDE.md.",
  "entries": {
-  "1168599": {"name": "The Wire: The Chronicles", "rotten_tomatoes_id": null, "verified": "2026-11-07", "note": "three short 2007 HBO prequel clips; not listed on Rotten Tomatoes (site search and web search)"},
-  "16477402": {"name": "WWII in Color: Road to Victory", "rotten_tomatoes_id": "tv/wwii_in_color_road_to_victory", "verified": "2026-11-07", "page_title": "WWII in Color: Road to Victory"},
-  "19757508": {"name": "Meltdown: Three Mile Island", "rotten_tomatoes_id": "tv/meltdown_three_mile_island", "verified": "2026-11-07", "page_title": "Meltdown: Three Mile Island"},
-  "2069688": {"name": "World War II in Colour", "rotten_tomatoes_id": "tv/world_war_ii_in_hd_colour", "verified": "2026-11-07", "page_title": "World War II in HD Colour", "note": "the 2009 series' alternate title; the page names its narrator Robert Powell (its 2000 start date is wrong on Rotten Tomatoes)"},
-  "21964626": {"name": "Entrapped", "rotten_tomatoes_id": "tv/trapped/s03", "verified": "2026-11-07", "page_title": "Trapped: Season 3", "note": "Entrapped is season 3 of the Icelandic series Trapped"},
-  "34379135": {"name": "Churchill at War", "rotten_tomatoes_id": "tv/churchill_at_war", "verified": "2026-11-07", "page_title": "Churchill at War"},
-  "36242714": {"name": "Turning Point: The Vietnam War", "rotten_tomatoes_id": "tv/turning_point_the_vietnam_war", "verified": "2026-11-07", "page_title": "Turning Point: The Vietnam War"},
-  "37649515": {"name": "Jim Jefferies: Two Limb Policy", "rotten_tomatoes_id": "m/jim_jefferies_two_limb_policy", "verified": "2026-11-07", "page_title": "Jim Jefferies: Two Limb Policy"},
-  "5235348": {"name": "Marco Polo: One Hundred Eyes", "rotten_tomatoes_id": "m/marco_polo_one_hundred_eyes", "verified": "2026-11-07", "page_title": "Marco Polo: One Hundred Eyes"},
-  "6156350": {"name": "HyperNormalisation", "rotten_tomatoes_id": "m/hypernormalisation", "verified": "2026-11-07", "page_title": "HyperNormalisation"},
-  "6596634": {"name": "The Royal House of Windsor", "rotten_tomatoes_id": "tv/the_royal_house_of_windsor", "verified": "2026-11-07", "page_title": "The Royal House of Windsor"},
-  "8285216": {"name": "Better Than Us", "rotten_tomatoes_id": "tv/better_than_us", "verified": "2026-11-07", "page_title": "Better Than Us"},
-  "9103932": {"name": "Greatest Events of WWII in Colour", "rotten_tomatoes_id": "tv/greatest_events_of_wwii_in_colour", "verified": "2026-11-07", "page_title": "The Greatest Events of WW II in Colour"}
+  "1168599": {
+   "name": "The Wire: The Chronicles",
+   "rotten_tomatoes_id": null,
+   "verified": "2026-11-07",
+   "note": "three short 2007 HBO prequel clips; not listed on Rotten Tomatoes (site search and web search)"
+  }
  }
 }

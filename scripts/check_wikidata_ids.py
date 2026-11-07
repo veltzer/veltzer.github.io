@@ -7,8 +7,9 @@ files as arguments:
 
   check_wikidata_ids.py <video_series.yaml> [<video_features.yaml> ...]
 
-A ``wikidata_id`` is right when the Wikidata item's IMDb id (P345) is the
-entry's ``imdb_id``. Every entry must have a ``rotten_tomatoes_id``, and it
+Every entry must have a ``wikidata_id``, and it is right when the Wikidata
+item's IMDb id (P345) is the entry's ``imdb_id``; a work with no item gets
+one created on Wikidata. Every entry must have a ``rotten_tomatoes_id``, and it
 is right when it is the Rotten Tomatoes path (P1258) on that item, or, when
 Wikidata has none, the hand-verified path in data/rotten_tomatoes_manual.json
 (where null records that Rotten Tomatoes has no page for the work).
@@ -39,7 +40,10 @@ def check_item(name: str, item: dict, cache: dict, manual: dict) -> list[str]:
     entry = cache[imdb_id] or {}
     errors = []
     wikidata_id = item.get("wikidata_id")
-    if wikidata_id is not None and wikidata_id != entry.get("item"):
+    if wikidata_id is None:
+        errors.append(f"{where}: no wikidata_id" + (f" (tt{imdb_id} is {entry['item']}; run scripts/videos_fetch_wikidata.py)" if entry.get("item")
+                      else f"; tt{imdb_id} has no Wikidata item: create one with its IMDb id (P345), then run scripts/videos_fetch_wikidata.py"))
+    elif wikidata_id != entry.get("item"):
         errors.append(f"{where}: wikidata_id {wikidata_id} but tt{imdb_id} is {entry.get('item') or 'not on Wikidata'}")
     if "item" in entry and "rotten_tomatoes" not in entry:
         return [*errors, f"{where}: no Rotten Tomatoes lookup for {entry['item']} in {CACHE_PATH}; run scripts/videos_fetch_wikidata.py"]
