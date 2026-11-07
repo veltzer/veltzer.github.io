@@ -36,11 +36,18 @@ function capitalize(text) {
     return text ? text.charAt(0).toUpperCase() + text.substring(1) : '';
 }
 
+// The functions as a reader should see them; the YAML values are identifiers.
+const FUNCTION_LABELS = {'training-provider': 'Taught for'};
+
+function functionLabel(fn) {
+    return FUNCTION_LABELS[fn] || capitalize(fn);
+}
+
 window.collectionPlugins['companies'] = {
     file: 'data/companies.json.gz',
-    navTitle: 'Companies',
-    title: 'Companies I Taught At',
-    subtitle: 'The organizations I have taught courses at, with where they are and what became of them.',
+    navTitle: 'Clients',
+    title: 'Clients I Taught At',
+    subtitle: 'The companies that hired me to teach their people, with where they are and what became of them.',
     ratingScale: null,
     searchPlaceholder: 'Search by name, place, status...',
     searchFields: ['name', 'location', 'israel_office', 'status', 'review', 'remark'],
@@ -51,8 +58,8 @@ window.collectionPlugins['companies'] = {
         },
         {field: 'functions', label: 'Function', type: 'string', sortable: false,
             filterType: 'custom',
-            extractValues: function(item) { return (item.functions || []).map(capitalize); },
-            match: function(item, val) { return (item.functions || []).map(capitalize).indexOf(val) !== -1; }
+            extractValues: function(item) { return (item.functions || []).map(functionLabel); },
+            match: function(item, val) { return (item.functions || []).map(functionLabel).indexOf(val) !== -1; }
         },
         {field: 'place', label: 'Place', type: 'string', filterType: 'select', value: companyPlace},
         {field: 'country', label: 'Country', type: 'string', filterType: 'select', value: companyCountry},
@@ -91,7 +98,7 @@ window.collectionPlugins['companies'] = {
         }
         if (item.functions && item.functions.length > 0) {
             html += '<li class="py-2" data-toggle="functions"><strong>Functions:</strong> ' +
-                window.escapeHtml(item.functions.map(capitalize).join(', ')) + '</li>';
+                window.escapeHtml(item.functions.map(functionLabel).join(', ')) + '</li>';
         }
         if (item.location) {
             html += '<li class="py-2" data-toggle="location"><strong>Headquarters:</strong> ' +
@@ -156,7 +163,7 @@ window.collectionPlugins['companies'] = {
             statusCounts[status] = (statusCounts[status] || 0) + 1;
             if (item.status === 'active') stillAround += 1;
             (item.functions || []).forEach(function(fn) {
-                const label = capitalize(fn);
+                const label = functionLabel(fn);
                 functionCounts[label] = (functionCounts[label] || 0) + 1;
             });
             const place = companyPlace(item);
@@ -166,7 +173,7 @@ window.collectionPlugins['companies'] = {
         });
 
         let html = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">';
-        html += '<div>' + renderStatCard(items.length, 'Companies') + '</div>';
+        html += '<div>' + renderStatCard(items.length, 'Organizations') + '</div>';
         html += '<div>' + renderStatCard(stillAround, 'Still Active') + '</div>';
         html += '</div>';
         html += renderBarChart('By Status', statusCounts, {unit: 'companies', sort: 'desc'});
@@ -175,3 +182,16 @@ window.collectionPlugins['companies'] = {
         return html;
     }
 };
+
+// The training companies I taught FOR (not clients: they hired me to teach
+// their courses to their own customers): the same cards over the organizations
+// whose functions include training-provider (scripts/import_companies.py
+// writes one JSON per tab). The app derives sortFields and filters onto each
+// plugin object, so this is a copy, not the same object under a second key.
+// Both keys map to this file in the app's registry, which loads it once.
+window.collectionPlugins['providers'] = Object.assign({}, window.collectionPlugins['companies'], {
+    file: 'data/training_providers.json.gz',
+    navTitle: 'Training Companies',
+    title: 'Training Companies I Taught For',
+    subtitle: 'The training companies that hired me to teach their courses, with where they are and what became of them.'
+});

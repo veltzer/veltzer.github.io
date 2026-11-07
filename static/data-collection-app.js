@@ -3,13 +3,12 @@
  * one JSON file per plugin (static/plugin-*.js).
  *
  * Entry points: every page using templates/data_collection.html -- the media
- * section (/en/media/, /he/media/) and the training clients page
- * (/en/training/clients/, /he/training/clients/). The template sets, BEFORE
- * loading this script:
+ * section (/en/media/, /he/media/) and the training section's teaching
+ * history page (/en/training/history/, /he/training/history/). The template
+ * sets, BEFORE loading this script:
  *
  *   window.collectionBasePath   where plugins and data live ('/')
  *   window.collectionPluginKeys the plugins this page shows, in order
- *   window.collectionMoved      {key: url} for views that moved to another page
  *
  * There used to be a second copy -- a standalone static/media_app.html carrying its
  * own copy of the page. It was replaced with a redirect on 2026-08-18 (since removed): bypassing
@@ -45,6 +44,7 @@
         'audible': BASE_PATH + 'plugin-audible.js',
         'books': BASE_PATH + 'plugin-books.js',
         'companies': BASE_PATH + 'plugin-companies.js',
+        'providers': BASE_PATH + 'plugin-companies.js',
         'features': BASE_PATH + 'plugin-movies.js',
         'museums': BASE_PATH + 'plugin-museums.js',
         'podcasts': BASE_PATH + 'plugin-podcasts.js',
@@ -58,30 +58,26 @@
         else console.error('Unknown plugin in collectionPluginKeys: ' + key);
     });
 
-    // A ?data=<key> link to a view that now lives on another page (the
-    // companies moved from the media page to /training/clients/): send the
-    // reader there, keeping the rest of the query, before anything loads.
-    const movedTo = (window.collectionMoved || {})[new URLSearchParams(window.location.search).get('data')];
-    if (movedTo) {
-        const params = new URLSearchParams(window.location.search);
-        params.delete('data');
-        const rest = params.toString();
-        window.location.replace(movedTo + (rest ? '?' + rest : '') + window.location.hash);
-        return;
-    }
     window.collectionPlugins = window.collectionPlugins || {};
+
+    // One load per script file: a file may register several keys (the
+    // companies plugin registers companies and providers), and loading all
+    // plugins in parallel would otherwise insert it once per key.
+    const scriptLoads = {};
 
     function loadPlugin(key) {
         if (window.collectionPlugins[key]) return Promise.resolve();
         const src = window.collectionPluginFiles[key];
         if (!src) return Promise.reject(new Error('Unknown plugin: ' + key));
-        return new Promise(function(resolve, reject) {
+        if (scriptLoads[src]) return scriptLoads[src];
+        scriptLoads[src] = new Promise(function(resolve, reject) {
             const script = document.createElement('script');
             script.src = src;
             script.onload = resolve;
             script.onerror = function() { reject(new Error('Failed to load ' + src)); };
             document.head.appendChild(script);
         });
+        return scriptLoads[src];
     }
 
     function loadAllPlugins() {
@@ -225,7 +221,7 @@
         }
 
         function getSortPrefKey(dataType) {
-            // The 'media' prefix predates the rename to the data collection\n            // app; kept so readers' saved sort orders survive it.\n            return 'mediaSortPref_' + dataType;
+            return 'collectionSortPref_' + dataType;
         }
 
         function saveSortPref(dataType) {
@@ -418,7 +414,7 @@
 
         // --- Toggle Functions ---
         function getTogglePrefKey(dataType) {
-            // Prefix kept from before the rename, like the sort preference.\n            return 'mediaTogglePref_' + dataType;
+            return 'collectionTogglePref_' + dataType;
         }
 
         function loadTogglePref(dataType) {

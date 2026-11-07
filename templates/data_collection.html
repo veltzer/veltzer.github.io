@@ -1,16 +1,13 @@
 {# A page whose whole body is the data collection app (static/data-collection-app.js).
 
    Used by the media section (/media/: books, series, podcasts...) and by the
-   clients page under training (/training/clients/: the companies I taught
-   at). Both run the same app; each page names the plugins it shows in its
-   front matter, so the markup, styles and scripts live here once instead of
-   in a copy per page:
+   teaching history page under training (/training/history/: the clients I
+   taught at and the training companies I taught for). Both run the same app; each
+   page names the plugins it shows in its front matter, so the markup, styles
+   and scripts live here once instead of in a copy per page:
 
      [extra]
-     plugins = ["companies"]           # plugin keys, the first is the default view
-     moved = { companies = "training/clients/" }   # optional: ?data=<key> links
-                                       # that now live on another page, by path
-                                       # under the language root
+     plugins = ["companies", "providers"]   # plugin keys, the first is the default view
 
    The Hebrew page of each section repeats [extra] (front matter is per file);
    the app itself is English only, so in a dir="rtl" page it is wrapped as
@@ -147,13 +144,6 @@ showPeople: false,
 };
 // Which plugins this page shows, in order; the first is the default view.
 window.collectionPluginKeys = {{ section.extra.plugins | json_encode | safe }};
-// ?data=<key> links to a view that moved to another page; the app redirects.
-window.collectionMoved = {
-{%- if section.extra.moved %}{% for key, path in section.extra.moved %}
-{%- set url = "/" ~ lang ~ "/" ~ path %}
-{{ key | json_encode | safe }}: {{ url | json_encode | safe }},
-{%- endfor %}{% endif %}
-};
 // Absolute, not '../': the plugins and data live at the site root, and a
 // relative path would resolve under /en/ or /he/.
 window.collectionBasePath = '/';

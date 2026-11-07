@@ -344,6 +344,14 @@
   "osm_type": "relation",
   "type": "administrative"
  },
+ "Louisville, Colorado, USA": {
+  "display_name": "Louisville, Boulder County, Colorado, 80027, United States",
+  "lat": 39.977763,
+  "lon": -105.1319296,
+  "osm_id": 112284,
+  "osm_type": "relation",
+  "type": "administrative"
+ },
  "Maidenhead, UK": {
   "display_name": "Maidenhead, Royal Borough of Windsor and Maidenhead, England, SL6 1QB, United Kingdom",
   "lat": 51.522743,

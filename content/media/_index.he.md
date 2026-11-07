@@ -7,5 +7,4 @@ template = "data_collection.html"
 # matter is per file, so the plugin list is repeated here.
 [extra]
 plugins = ["audio", "audible", "books", "features", "museums", "podcasts", "videos", "youtube"]
-moved = { companies = "training/clients/" }
 +++

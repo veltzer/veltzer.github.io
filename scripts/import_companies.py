@@ -1,15 +1,17 @@
 #!/usr/bin/env python
 
-"""Import the organizations I taught at from data/yaml/organizations.yaml.
+"""Import one tab of organizations from data/yaml/organizations.yaml.
 
 organizations.yaml records every organization I dealt with -- taught at,
-consulted for, was certified by -- with research notes, sources, three
-geocoded place fields and logo provenance. The companies tab of the media
-page wants only the ones with ``teaching`` among their ``functions``, and
-only the fields a card shows: the name, the logo path, the current status
+taught for, consulted for, was certified by -- with research notes, sources,
+three geocoded place fields and logo provenance. The teaching history page
+(/training/history/) has a tab per relationship, each the organizations with
+that ``--function`` among their ``functions`` (TABS lists them: ``teaching``,
+the companies I taught at, and ``training-provider``, the training companies
+I taught for), and wants only the fields a card shows: the name, the logo path, the current status
 and what happened, where the company is and where its Israel office was,
 the one map point chosen for it, the static map image of that point, and
-the logo attribution. The media page prints ``review`` under every card's
+the logo attribution. The app prints ``review`` under every card's
 name, so each company gets one: what happened to it, or a word on its status
 when nothing did.
 
@@ -42,6 +44,10 @@ from pathlib import Path
 import yaml
 
 TEACHING = "teaching"
+TRAINING_PROVIDER = "training-provider"
+# The functions that get a tab, so a card and a map image (see
+# organizations_fetch_maps.py): every organization with one of them is shown.
+TABS = (TEACHING, TRAINING_PROVIDER)
 
 # Fields copied verbatim when present. The order is the order in the JSON.
 KEPT = (
@@ -68,9 +74,14 @@ STATUS_BLURB = {
 }
 
 
-def taught_at(item):
-    """True when the organization's functions include teaching."""
-    return TEACHING in (item.get("functions") or [])
+def has_function(item, function):
+    """True when the organization's functions include ``function``."""
+    return function in (item.get("functions") or [])
+
+
+def shown(item):
+    """True when the organization appears on some tab."""
+    return any(has_function(item, function) for function in TABS)
 
 
 def blurb(item):
@@ -107,10 +118,10 @@ def missing_maps(items, images_dir):
     return sorted({item["map"] for item in items if "map" in item and not (images_dir / item["map"].rsplit("/", 1)[-1]).is_file()})
 
 
-def convert(data):
-    """Filter to the teaching organizations and trim each to its card fields."""
+def convert(data, function=TEACHING):
+    """Filter to the organizations with ``function`` and trim each to its card fields."""
     items = data.get("items") or []
-    return {"items": [convert_item(item) for item in items if taught_at(item)]}
+    return {"items": [convert_item(item) for item in items if has_function(item, function)]}
 
 
 def write_json_gz(path, data):
@@ -124,6 +135,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("input", help="path to data/yaml/organizations.yaml")
     parser.add_argument("output", help="path of the .json.gz to write")
+    parser.add_argument("--function", choices=TABS, default=TEACHING,
+                        help="the relationship this tab shows (default: %(default)s)")
     parser.add_argument("--images-dir", type=Path,
                         help="static/images/; when given, fail if any company's map image is missing")
     args = parser.parse_args()
@@ -132,9 +145,9 @@ def main():
     if not data or "items" not in data:
         print(f"ERROR: {args.input} has no items", file=sys.stderr)
         return 1
-    converted = convert(data)
+    converted = convert(data, args.function)
     if not converted["items"]:
-        print(f"ERROR: {args.input} has no organization with '{TEACHING}' among its functions", file=sys.stderr)
+        print(f"ERROR: {args.input} has no organization with '{args.function}' among its functions", file=sys.stderr)
         return 1
     if args.images_dir is not None:
         missing = missing_maps(converted["items"], args.images_dir)
@@ -145,7 +158,7 @@ def main():
                 print(f"  {path}", file=sys.stderr)
             return 1
     write_json_gz(args.output, converted)
-    print(f"Imported {len(converted['items'])} companies to {args.output}")
+    print(f"Imported {len(converted['items'])} {args.function} organizations to {args.output}")
     return 0
 
 

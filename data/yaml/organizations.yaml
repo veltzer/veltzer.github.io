@@ -1,7 +1,10 @@
 ---
 # next line is neccessary for vscode which does not read the $schema attribute
 # yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/organizations.json
-# Organizations I taught at, consulted for, was certified by, or consumed media from.
+# Organizations I taught at, taught for (training companies that hired me to teach: function training-provider),
+# consulted for, was certified by, or consumed media from.
+# ids 122-124 (AgileSparks, DevelopIntelligence, Logtel) were added on 2026-11-07 as training providers, and Hinbit,
+# Interbit and John Bryce moved from teaching to training-provider the same day.
 # Extracted from the myworld MySQL database (TbOrganization, backup of 2019-05-11);
 # ids 116-121 were added on 2026-11-07 from companies_i_taught.txt in the private ../data repo, so they
 # have no old_url, and the three with no bitmap behind their logo have no logo_original.
@@ -474,7 +477,7 @@ items:
   slug: hinbit
   remark: public courses
   functions:
-  - teaching
+  - training-provider
   logo: logos/hinbit.svg
   logo_original: raw/logos/hinbit.gif
   logo_kind: traced from original bitmap (no vector logo found online)
@@ -610,7 +613,7 @@ items:
   remark: public courses
   from_date: '2004-11-20'
   functions:
-  - teaching
+  - training-provider
   - consulting
   - certification
   logo: logos/interbit.svg
@@ -3388,7 +3391,7 @@ items:
   slug: johnbryce
   from_date: '2013-06-01'
   functions:
-  - teaching
+  - training-provider
   - consulting
   - certification
   logo: logos/johnbryce.svg
@@ -4039,3 +4042,101 @@ items:
     lon: 34.90746
   sources:
   - http://web.archive.org/web/20190608002059/http://levj.tripod.com/
+- id: 122
+  name: AgileSparks
+  slug: agilesparks
+  remark: agile training and coaching company I taught courses for
+  functions:
+  - training-provider
+  logo: logos/agilesparks.svg
+  logo_kind: official vector
+  logo_source: https://agilesparks.com/wp-content/uploads/2022/06/AS-LOGO.svg
+  logo_license: company brand asset (site header logo)
+  logo_note: the white header logo from the official site, recoloured dark (#333333) for light backgrounds
+  status: acquired
+  what_happened: Agile and lean training and consulting firm founded in 2008; in March 2025 the SQLink group bought control of it in a deal
+    valuing it at about NIS 10 million, with founder and CEO Erez Tatcher keeping about a quarter and staying on.
+  website: https://agilesparks.com/
+  location: Herzliya, Israel
+  location_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
+  israel_office: Herzliya, Israel (business directories; also listed in Kfar Hasidim), with offices in Boston and India
+  israel_office_geo:
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
+  geo:
+    from: israel_office
+    place: Herzliya, Israel
+    lat: 32.16768
+    lon: 34.83083
+  sources:
+  - https://finance.walla.co.il/item/3734830
+  - https://www.ice.co.il/digital-140/news/article/1055333
+  - https://enterpriseleague.com/company/agilesparks
+  - https://partnerdirectory.atlassian.com/agilesparks
+- id: 123
+  name: DevelopIntelligence
+  slug: developintelligence
+  remark: US developer training company I taught courses for
+  functions:
+  - training-provider
+  logo: logos/developintelligence.svg
+  logo_original: raw/logos/developintelligence.png
+  logo_kind: traced from original bitmap (no vector logo found online)
+  logo_license: company brand asset (site header logo)
+  logo_note: trace of the 2019 header logo archived at http://web.archive.org/web/20200831220820/https://www.developintelligence.com/
+  status: acquired
+  what_happened: Acquired by Pluralsight in October 2020 (terms not disclosed); developintelligence.com now redirects to Pluralsight's
+    professional services pages.
+  website: https://www.pluralsight.com/product/professional-services
+  location: Louisville, Colorado, USA
+  location_geo:
+    place: Louisville, Colorado, USA
+    lat: 39.97776
+    lon: -105.13193
+  former_website: https://www.developintelligence.com (now redirects to pluralsight.com)
+  geo:
+    from: location
+    place: Louisville, Colorado, USA
+    lat: 39.97776
+    lon: -105.13193
+  sources:
+  - https://www.pluralsight.com/newsroom/press-releases/pluralsight-acquires-developintelligence-to-broaden-upskilling-e
+  - https://trainingindustry.com/press-release/it-and-technical-training/pluralsight-acquires-developintelligence-to-broaden-upskilling-experiences-for-enterprises-and-enable-businesses-to-accelerate-digital-transformation/
+  - https://pitchbook.com/profiles/company/83578-06
+- id: 124
+  name: Logtel
+  slug: logtel
+  remark: technology training and conference company I taught courses for
+  functions:
+  - training-provider
+  logo: logos/logtel.svg
+  logo_original: raw/logos/logtel.png
+  logo_kind: traced from original bitmap (no vector logo found online)
+  logo_license: company brand asset (site header logo)
+  logo_note: trace of the white header logo from https://www.logtel.com/wp-content/uploads/2022/12/whitelogtelnew.png, recoloured in the
+    dark blue (#1d4274) of the site icon
+  status: active
+  what_happened: Training company established in 1984; authorized training provider for AMD Xilinx in Israel.
+  website: https://www.logtel.com/
+  location: Petah Tikva, Israel
+  location_geo:
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
+  israel_office: Petah Tikva, Israel (Global Towers, 1 Derech Yitzhak Rabin)
+  israel_office_geo:
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
+  geo:
+    from: israel_office
+    place: Petah Tikva, Israel
+    lat: 32.08776
+    lon: 34.886
+  sources:
+  - https://www.logtel.com/
+  - https://www.zoominfo.com/c/logtel/22970916

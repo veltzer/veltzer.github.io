@@ -48,8 +48,17 @@ class TestSelection:
         assert out["items"] == []
 
     def test_missing_functions_means_not_taught(self):
-        assert not import_companies.taught_at(organization(functions=None))
-        assert not import_companies.taught_at({"name": "x"})
+        assert not import_companies.has_function(organization(functions=None), "teaching")
+        assert not import_companies.shown({"name": "x"})
+
+    def test_training_providers_tab(self):
+        data = {"items": [organization(), organization(id=3, name="Logtel", functions=["training-provider"])]}
+        assert [item["name"] for item in import_companies.convert(data, "training-provider")["items"]] == ["Logtel"]
+        assert [item["name"] for item in import_companies.convert(data)["items"]] == ["Amdocs"]
+
+    def test_both_tabs_are_shown(self):
+        assert import_companies.shown(organization(functions=["training-provider"]))
+        assert not import_companies.shown(organization(functions=["consulting"]))
 
 
 class TestFields:

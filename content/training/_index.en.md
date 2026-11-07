@@ -18,8 +18,9 @@ for many of them is published on this site under [Syllabi](/en/syllabi/) and
 * Algorithms, optimization, data science, machine learning and AI
 
 Courses can be tailored to your team's needs and delivered on site or online.
-The [companies I have taught at](/en/training/clients/) range from startups
-to multinationals.
+The [clients I have taught at](/en/training/history/) range from startups to
+multinationals, and I have also taught courses for
+[training companies](/en/training/history/?data=providers) in Israel and the US.
 
 ## Contact
 

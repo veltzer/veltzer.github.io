@@ -1182,8 +1182,8 @@ collectionfeatureflags
 mediaformatdate
 collectionpluginfiles
 collectionplugins
-mediasortpref
-mediatogglepref
+collectionsortpref
+collectiontogglepref
 meditators
 memtest
 memtester

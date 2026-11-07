@@ -10,8 +10,8 @@ JPEG served from the site and no third-party request at all. The "on Google
 Maps" link under it still opens the real map. doc/DECISIONS.md has the
 comparison with the Maps Static API and Leaflet.
 
-For every organization the companies tab shows (``teaching`` among its
-``functions``) the ``geo`` point chosen in organizations.yaml is rendered
+For every organization a tab shows (one of ``import_companies.TABS``
+among its ``functions``) the ``geo`` point chosen in organizations.yaml is rendered
 at zoom 13 (city level) into ``static/images/map-<lat>_<lon>.jpg``, the
 name ``import_companies.map_path`` gives it. The file is keyed by the
 coordinates, not the slug: Nominatim puts every company in a city on that
@@ -43,7 +43,7 @@ from pathlib import Path
 
 import requests
 import yaml
-from import_companies import map_path, taught_at
+from import_companies import map_path, shown
 from PIL import Image, ImageDraw
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -135,7 +135,7 @@ def main() -> int:
         data = yaml.safe_load(handle)
     points: dict[str, tuple[float, float]] = {}
     for item in data.get("items") or []:
-        if taught_at(item) and item.get("geo"):
+        if shown(item) and item.get("geo"):
             points[map_path(item["geo"])] = (item["geo"]["lat"], item["geo"]["lon"])
     tiles = Tiles()
     rendered = 0

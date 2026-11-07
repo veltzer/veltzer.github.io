@@ -38,17 +38,18 @@ template = "data_collection.html"
 
 [extra]
 plugins = ["audio", "audible", "books"]    # the first is the default view
-moved = { companies = "training/clients/" }  # optional, see below
 ```
 
 Today that is `content/media/` (the eight media plugins) and
-`content/training/clients/` (`companies` alone; a single-plugin page shows no
-tab row). The Hebrew `_index.he.md` repeats `[extra]`, since front matter is
-per file. The nav tabs are sorted by `navTitle`, not by list order.
+`content/training/history/` (`companies` and `providers`, two tabs over
+organizations.yaml). A single-plugin page shows no tab row.
 
-`moved` maps a key that used to be on this page to the path (under the
-language root) of the page that has it now; the app redirects old
-`?data=<key>` links there.
+One script may register several keys: `plugin-companies.js` registers
+`companies` and `providers` (a copy with another `file` and titles), both
+keys map to it in `ALL_PLUGIN_FILES`, and the app loads each file once.
+
+The Hebrew `_index.he.md` repeats `[extra]`, since front matter is per file.
+The nav tabs are sorted by `navTitle`, not by list order.
 
 ## Data Files
 
