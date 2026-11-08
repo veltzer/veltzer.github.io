@@ -19,7 +19,7 @@
 * { box-sizing: border-box; }
 
 // One corner for everything: the site is square. Every box, button, chip,
-// badge, input and image takes the small --radius-xs, so the larger shared
+// badge, switch, input and image takes the small --radius-xs, so the larger shared
 // radius tokens are pointed at it here rather than in each rule. This
 // stylesheet loads after themes.css, so these win over its :root values; the
 // imported teaching apps (templates/app.html) define their own copies of the
@@ -31,6 +31,14 @@ body #app-animations {
   --radius-sm: var(--radius-xs);
   --radius: var(--radius-xs);
   --radius-pill: var(--radius-xs);
+  // The teaching apps' Material Web components (switches, chips, selects)
+  // draw their corners from these, inside their shadow DOM.
+  --md-sys-shape-corner-extra-small: var(--radius-xs);
+  --md-sys-shape-corner-small: var(--radius-xs);
+  --md-sys-shape-corner-medium: var(--radius-xs);
+  --md-sys-shape-corner-large: var(--radius-xs);
+  --md-sys-shape-corner-extra-large: var(--radius-xs);
+  --md-sys-shape-corner-full: var(--radius-xs);
 }
 
 body {
@@ -169,7 +177,7 @@ a:hover { text-decoration: underline; }
   cursor: pointer;
   transition: border-color var(--transition);
 }
-.control { padding: 0.25rem 0.6rem; }
+.control { padding: 0.25rem 0.6rem; white-space: nowrap; }
 .site-select:hover,
 .control:hover { border-color: var(--accent); }
 .site-select:focus-visible,

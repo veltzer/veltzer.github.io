@@ -135,7 +135,7 @@ window.collectionPlugins['audible'] = {
         html += '<div>' + renderStatCard(authorSet.size, t('audible_stat_unique_authors')) + '</div>';
         html += '</div>';
 
-        html += '<div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-4"><div class="px-4 py-3 border-b border-gray-200 font-semibold">' + t('audible_completion_status') + '</div><div class="p-4">';
+        html += '<div class="bg-gray-50 rounded-lg border border-gray-200 mb-4"><div class="px-4 py-3 border-b border-gray-200 font-semibold">' + t('audible_completion_status') + '</div><div class="p-4">';
         html += '<div class="mb-3"><p class="mb-1"><strong>' + t('audible_finished') + ':</strong> ' + t(finishedCount === 1 ? 'audible_books_count_one' : 'audible_books_count_other', {count: finishedCount}) + '</p>';
         html += '<div class="w-full bg-gray-200 rounded-full h-5"><div class="bg-green-600 h-5 rounded-full text-xs text-white text-center leading-5" style="width: ' + finishedPct + '%;">' + Math.round(finishedPct) + '%</div></div></div>';
         html += '<div><p class="mb-1"><strong>' + t('audible_in_progress_unfinished') + ':</strong> ' + t(inProgressCount === 1 ? 'audible_books_count_one' : 'audible_books_count_other', {count: inProgressCount}) + '</p>';

@@ -728,7 +728,7 @@
                 const placeholderUrl = activeConfig.placeholderImage ? BASE_PATH + activeConfig.placeholderImage : '';
 
                 col.innerHTML =
-                    '<div class="bg-white rounded-lg shadow-sm border border-gray-200 h-full flex flex-col overflow-hidden">' +
+                    '<div class="bg-gray-50 rounded-lg border border-gray-200 h-full flex flex-col overflow-hidden">' +
                         imgHtml +
                         '<div class="p-4 flex flex-col flex-1">' +
                             // dir="auto": the data is mostly English and the page may be Hebrew;

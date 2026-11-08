@@ -76,7 +76,7 @@ function renderBarChart(title, counts, options) {
     const maxCount = keys.reduce(function(max, k) { return Math.max(max, counts[k]); }, 0);
     let colorIndex = 0;
 
-    let html = '<div class="bg-white rounded-lg shadow-sm border border-gray-200' + (last ? '' : ' mb-4') + '">' +
+    let html = '<div class="bg-gray-50 rounded-lg border border-gray-200' + (last ? '' : ' mb-4') + '">' +
         '<div class="px-4 py-3 border-b border-gray-200 font-semibold">' + window.escapeHtml(title) + '</div>' +
         '<div class="p-4">';
 
@@ -107,7 +107,7 @@ function renderBarChart(title, counts, options) {
  * @returns {string} HTML string for one stat card column
  */
 function renderStatCard(value, label) {
-    return '<div class="bg-white rounded-lg shadow-sm border border-gray-200 stat-card h-full"><div class="p-4">' +
+    return '<div class="bg-gray-50 rounded-lg border border-gray-200 stat-card h-full"><div class="p-4">' +
         '<span class="stat-value">' + window.escapeHtml(String(value)) + '</span>' +
         '<span class="stat-label block">' + window.escapeHtml(label) + '</span>' +
         '</div></div>';

@@ -92,9 +92,9 @@ document.addEventListener('DOMContentLoaded', function() {
     --fc-neutral-text-color: var(--text-secondary);
     --fc-border-color: var(--border);
     --fc-button-text-color: var(--text-primary);
-    --fc-button-bg-color: var(--bg-elevated);
+    --fc-button-bg-color: var(--bg);
     --fc-button-border-color: var(--border);
-    --fc-button-hover-bg-color: var(--bg-hover);
+    --fc-button-hover-bg-color: var(--bg);
     --fc-button-hover-border-color: var(--accent);
     --fc-button-active-bg-color: var(--accent);
     --fc-button-active-border-color: var(--accent);
@@ -110,6 +110,30 @@ document.addEventListener('DOMContentLoaded', function() {
    so its label needs the contrasting tone rather than the normal text colour. */
 #calendar .fc-button-active { color: var(--bg); }
 
+/* The buttons drawn like the site's .control (sass/style.scss): its font,
+   size, padding, corner and focus outline, rather than FullCalendar's own. */
+#calendar .fc-button {
+    font: inherit;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-xs);
+    box-shadow: none;
+    transition: border-color var(--transition);
+}
+#calendar .fc-button:focus,
+#calendar .fc-button:active { box-shadow: none; }
+#calendar .fc-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+#calendar .fc-button-group > .fc-button { border-radius: 0; }
+#calendar .fc-button-group > .fc-button:first-child { border-start-start-radius: var(--radius-xs); border-end-start-radius: var(--radius-xs); }
+#calendar .fc-button-group > .fc-button:last-child { border-start-end-radius: var(--radius-xs); border-end-end-radius: var(--radius-xs); }
+#calendar .fc-toolbar-title { font-size: 1.35rem; }
+/* Phones: the toolbar's three groups wrap onto their own lines instead of
+   pushing the view buttons past the edge of the screen. */
+@media (max-width: 40rem) {
+    #calendar .fc-header-toolbar { flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+    #calendar .fc-toolbar-title { font-size: 1.1rem; }
+}
+
 .fc-event {
     cursor: pointer;
     transition: transform 0.2s;
@@ -119,12 +143,13 @@ document.addEventListener('DOMContentLoaded', function() {
     box-shadow: var(--shadow);
 }
 
+/* The site's .notice-error look (sass/style.scss), hidden until a load fails. */
 .calendar-error {
     display: none;
-    background: var(--bg-surface);
-    color: var(--danger, #dc2626);
-    border: 1px solid var(--border);
-    padding: 1rem;
+    background: var(--danger-dim);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    padding: 0.75rem 1rem;
     border-radius: var(--radius-sm);
     margin-bottom: 1.25rem;
 }
