@@ -59,8 +59,7 @@ which records the traps that outlived the migration.
   the private `../data` repo in 2026-09; the chess archives and the youtube CSV are
   still there (see `scripts/copy_data.py`)
 - `data/logos/` — one SVG per organization in `organizations.yaml` (which refers to
-  them by paths relative to `data/`), linted by xmllint; `data/raw/logos/`
-  holds the bitmaps the traced ones were made from. The companies tab of the media
+  them by paths relative to `data/`), linted by xmllint. The companies tab of the media
   page is built from these at build time: the `companies` step of `build_site.py`
   writes `_site/data/companies.json.gz` via `scripts/import_companies.py` and copies
   the SVGs to `_site/logos/`. Neither is committed, unlike the rest of `static/data/`.

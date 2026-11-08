@@ -12,10 +12,11 @@
 # Interbit, John Bryce and Ness moved from teaching to training-provider the same day.
 # Extracted from the myworld MySQL database (TbOrganization, backup of 2019-05-11);
 # ids 116-121 were added on 2026-11-07 from companies_i_taught.txt in the private ../data repo, so they
-# have no old_url, and the three with no bitmap behind their logo have no logo_original.
+# have no old_url.
 # status/location/website fields researched on the web on 2026-09-19.
 # logos/<slug>.svg (paths relative to data/): genuine vector logos fetched 2026-09-20 where one exists
-# (logo_kind/logo_source say which); the rest are colour traces of the original bitmaps in raw/logos/.
+# (logo_kind/logo_source say which); the rest are colour traces of the original bitmaps (removed 2026-11-08,
+# still in git history under data/raw/logos/).
 # Every logo sits on the same 1000x1000 canvas (content fitted with a 6% margin, centred) on a transparent
 # background; the traces have the bitmap's white/black surround keyed out before tracing (2026-09-20).
 # <field>_geo blocks (place, lat, lon) are written by scripts/organizations_geocode.py from Nominatim (2026-09-25); place is
@@ -34,7 +35,6 @@ items:
   functions:
   - teaching
   logo: logos/alcatel-lucent.svg
-  logo_original: raw/logos/alcatel-lucent.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/a/a9/Alcatel-Lucent_logo.svg
   logo_license: PD-textlogo (public domain, trademark applies)
@@ -77,7 +77,6 @@ items:
   - teaching
   - consulting
   logo: logos/amdocs.svg
-  logo_original: raw/logos/amdocs.gif
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/1/18/Amdocs_Logo.svg
   logo_license: PD-textlogo (public domain, trademark applies)
@@ -110,7 +109,6 @@ items:
   functions:
   - teaching
   logo: logos/amobee.svg
-  logo_original: raw/logos/amobee.gif
   logo_kind: official vector
   logo_source: https://web.archive.org/web/20210625144910id_/https://www.amobee.com/wp-content/themes/amobee/assets/images/black-logo.svg
   logo_license: company brand asset (site header logo, archived by the Wayback Machine 2021-06-25)
@@ -152,7 +150,6 @@ items:
   - teaching
   - consulting
   logo: logos/answers.svg
-  logo_original: raw/logos/answers.gif
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/d/d6/Answers_dot_com_logo.svg
   logo_license: PD-textlogo (public domain, trademark applies)
@@ -194,7 +191,6 @@ items:
   functions:
   - teaching
   logo: logos/avaya.svg
-  logo_original: raw/logos/avaya.gif
   logo_kind: official vector
   logo_source: https://www.avaya.com/content/dam/aem-avaya-portal/decorative/AVAYA-LogoRed.svg
   logo_license: company brand asset (avaya.com header/footer logo)
@@ -228,7 +224,6 @@ items:
   functions:
   - teaching
   logo: logos/bank-hapoalim.svg
-  logo_original: raw/logos/bank-hapoalim.gif
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/6/66/Bank_happoalim_2018_logo.svg
   logo_license: PD-textlogo (public domain, trademark applies)
@@ -261,7 +256,6 @@ items:
   functions:
   - teaching
   logo: logos/bmc.svg
-  logo_original: raw/logos/bmc.gif
   logo_kind: official vector
   logo_source: https://www.bmc.com/content/dam/bmc/graphics/bmc-logo.svg
   logo_license: company brand asset (bmc.com header logo)
@@ -296,7 +290,6 @@ items:
   - teaching
   - consulting
   logo: logos/cadence.svg
-  logo_original: raw/logos/cadence.gif
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/4/48/Cadence-Logo.svg
   logo_license: PD-textlogo (public domain, trademark applies)
@@ -330,7 +323,6 @@ items:
   functions:
   - teaching
   logo: logos/cellcom.svg
-  logo_original: raw/logos/cellcom.png
   logo_kind: official vector
   logo_source: https://cellcom.co.il/Spa/Assets/cellcomLogo.1d12f9b71274521e587d0b164f6c6da1.svg
   logo_license: company brand asset (cellcom.co.il header logo)
@@ -363,7 +355,6 @@ items:
   functions:
   - teaching
   logo: logos/cisco.svg
-  logo_original: raw/logos/cisco.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg
   logo_license: PD-textlogo (public domain, trademark applies)
@@ -397,7 +388,6 @@ items:
   functions:
   - teaching
   logo: logos/comverse.svg
-  logo_original: raw/logos/comverse.jpg
   logo_kind: official vector
   logo_source: https://cdn.worldvectorlogo.com/logos/comverse-1.svg
   logo_license: worldvectorlogo library copy; non-free logo used for identification
@@ -439,7 +429,6 @@ items:
   functions:
   - teaching
   logo: logos/eci.svg
-  logo_original: raw/logos/eci.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.ecitele.com
   status: acquired
@@ -477,7 +466,6 @@ items:
   functions:
   - consulting
   logo: logos/wellsphere.svg
-  logo_original: raw/logos/wellsphere.gif
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.wellsphere.com
   status: acquired
@@ -512,7 +500,6 @@ items:
   functions:
   - training-provider
   logo: logos/hinbit.svg
-  logo_original: raw/logos/hinbit.gif
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://hinbit.com
   status: active
@@ -544,7 +531,6 @@ items:
   functions:
   - teaching
   logo: logos/ibm.svg
-  logo_original: raw/logos/ibm.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg
   logo_license: PD-textlogo (public domain, trademarked)
@@ -579,7 +565,6 @@ items:
   functions:
   - teaching
   logo: logos/ids.svg
-  logo_original: raw/logos/ids.gif
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/a/a1/RSA_Security_logo.svg
   logo_license: PD-textlogo (public domain, trademarked)
@@ -619,9 +604,8 @@ items:
   functions:
   - certification
   logo: logos/mysql.svg
-  logo_original: raw/logos/mysql.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
-  logo_note: the MySQL AB-era logo (dolphin, dark blue My, orange SQL, registered mark) from raw/logos/mysql.jpg, flattened to its two
+  logo_note: the MySQL AB-era logo (dolphin, dark blue My, orange SQL, registered mark) from the original bitmap, flattened to its two
     colours and traced with vtracer on 2026-11-08; the current Oracle-era logo differs
   old_url: http://www.mysql.com
   status: acquired
@@ -656,7 +640,6 @@ items:
   - training-provider
   - consulting
   logo: logos/interbit.svg
-  logo_original: raw/logos/interbit.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.interbit.co.il
   status: active
@@ -689,7 +672,6 @@ items:
   functions:
   - teaching
   logo: logos/israeli-air-industry.svg
-  logo_original: raw/logos/israeli-air-industry.jpg
   logo_kind: official vector
   logo_source: https://www.iai.co.il/wp-content/themes/generatepress_child/assets/images/iai-logo-dots.svg
   logo_license: company brand asset (IAI trademark, used for identification)
@@ -722,7 +704,6 @@ items:
   functions:
   - teaching
   logo: logos/israeli-defence-ministry.svg
-  logo_original: raw/logos/israeli-defence-ministry.gif
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/5/54/MisradHabitahonSymbol.svg
   logo_license: Public domain (Commons; Israeli state symbol)
@@ -755,7 +736,6 @@ items:
   functions:
   - teaching
   logo: logos/jacada.svg
-  logo_original: raw/logos/jacada.jpg
   logo_kind: official vector
   logo_source: https://web.archive.org/web/20220309184055id_/https://www.jacada.com/wp-content/uploads/2020/05/Jacada-Autonomous-Logo-outlined-1.svg
   logo_license: company brand asset (Jacada trademark, used for identification)
@@ -796,7 +776,6 @@ items:
   functions:
   - teaching
   logo: logos/keshet-tv.svg
-  logo_original: raw/logos/keshet-tv.gif
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/f/f3/Logo_Keshet_Media_Group.svg
   logo_license: PD-textlogo / PD-shape (Commons)
@@ -829,7 +808,6 @@ items:
   functions:
   - teaching
   logo: logos/mcafee.svg
-  logo_original: raw/logos/mcafee.gif
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/c/cf/McAfee_logo.svg
   logo_license: PD-textlogo (public domain, trademarked)
@@ -867,7 +845,6 @@ items:
   functions:
   - teaching
   logo: logos/hp.svg
-  logo_original: raw/logos/hp.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg
   logo_license: PD-textlogo (public domain, trademarked)
@@ -903,7 +880,6 @@ items:
   functions:
   - teaching
   logo: logos/metacafe.svg
-  logo_original: raw/logos/metacafe.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/en/1/17/Metacafe_new.svg
   logo_license: non-free logo used for identification (enwiki fair use)
@@ -938,7 +914,6 @@ items:
   functions:
   - teaching
   logo: logos/mifal-hapayis.svg
-  logo_original: raw/logos/mifal-hapayis.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/he/9/9c/Mifaal_hapais_2018.svg
   logo_license: non-free logo used for identification (hewiki fair use)
@@ -971,7 +946,6 @@ items:
   functions:
   - teaching
   logo: logos/mind-cti.svg
-  logo_original: raw/logos/mind-cti.gif
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.mindcti.com
   status: active
@@ -1002,7 +976,6 @@ items:
   functions:
   - teaching
   logo: logos/mocospace.svg
-  logo_original: raw/logos/mocospace.png
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.mocospace.com
   status: active
@@ -1028,7 +1001,6 @@ items:
   functions:
   - teaching
   logo: logos/motorola.svg
-  logo_original: raw/logos/motorola.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/1/13/Motorola-Logo.svg
   logo_license: PD-textlogo (Wikimedia Commons)
@@ -1070,7 +1042,6 @@ items:
   functions:
   - teaching
   logo: logos/nds.svg
-  logo_original: raw/logos/nds.jpg
   logo_kind: official vector
   logo_source: https://cdn.worldvectorlogo.com/logos/nds-1.svg
   logo_license: company trademark, used for identification (worldvectorlogo library copy)
@@ -1113,7 +1084,6 @@ items:
   functions:
   - training-provider
   logo: logos/ness.svg
-  logo_original: raw/logos/ness.jpg
   logo_kind: official vector
   logo_source: https://cdn-ilemfgf.nitrocdn.com/gSGyNWAzytVlaJPhAbboIpFZKApqAsZn/assets/images/optimized/rev-db441ee/www.ness.com/wp-content/uploads/2026/03/Frame-1000005902.svg
   logo_license: company brand asset (site header logo of Ness Digital Engineering)
@@ -1156,7 +1126,6 @@ items:
   functions:
   - teaching
   logo: logos/orbotech.svg
-  logo_original: raw/logos/orbotech.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/a/a1/Logo_Orbotech.svg
   logo_license: PD-textlogo (Wikimedia Commons)
@@ -1197,7 +1166,6 @@ items:
   functions:
   - teaching
   logo: logos/precise.svg
-  logo_original: raw/logos/precise.gif
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.precise.com
   status: acquired
@@ -1236,7 +1204,6 @@ items:
   - teaching
   - consulting
   logo: logos/rafael.svg
-  logo_original: raw/logos/rafael.png
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/a/a1/Rafael_Advanced_Defense_Systems_Logo.svg
   logo_license: PD-textlogo (Wikimedia Commons)
@@ -1269,7 +1236,6 @@ items:
   functions:
   - teaching
   logo: logos/random-logic.svg
-  logo_original: raw/logos/random-logic.gif
   logo_kind: official vector
   logo_source: https://www.logo.wine/a/logo/888_Holdings/888_Holdings-Logo.wine.svg
   logo_license: company trademark, used for identification (logo.wine library copy)
@@ -1311,7 +1277,6 @@ items:
   functions:
   - teaching
   logo: logos/rsa.svg
-  logo_original: raw/logos/rsa.gif
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/2/2a/RSA_Security_logo2.svg
   logo_license: PD-textlogo (Wikimedia Commons)
@@ -1354,7 +1319,6 @@ items:
   functions:
   - teaching
   logo: logos/the-automation-company.svg
-  logo_original: raw/logos/the-automation-company.png
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.ladpc.co.il
   status: renamed
@@ -1392,7 +1356,6 @@ items:
   functions:
   - teaching
   logo: logos/veraz-networks.svg
-  logo_original: raw/logos/veraz-networks.gif
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.veraznetworks.com
   status: merged
@@ -1431,7 +1394,6 @@ items:
   functions:
   - teaching
   logo: logos/voltaire.svg
-  logo_original: raw/logos/voltaire.png
   logo_kind: official vector
   logo_source: https://cdn.worldvectorlogo.com/logos/voltaire.svg
   logo_license: company trademark, used for identification (worldvectorlogo library copy)
@@ -1472,7 +1434,6 @@ items:
   functions:
   - teaching
   logo: logos/websense.svg
-  logo_original: raw/logos/websense.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.websense.com
   status: renamed
@@ -1511,7 +1472,6 @@ items:
   functions:
   - certification
   logo: logos/sun-microsystems.svg
-  logo_original: raw/logos/sun-microsystems.png
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/8/8b/Sun-Logo.svg
   logo_license: Public domain (Commons)
@@ -1553,7 +1513,6 @@ items:
   functions:
   - consulting
   logo: logos/xacct.svg
-  logo_original: raw/logos/xacct.gif
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.xacct.biz
   status: acquired
@@ -1592,7 +1551,6 @@ items:
   functions:
   - consulting
   logo: logos/regard.svg
-  logo_original: raw/logos/regard.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.moit.gov.il/CmsTamat/CompanyProfile.aspx?CompanyType=1&Companyid=69391
   status: defunct
@@ -1627,7 +1585,6 @@ items:
   functions:
   - consulting
   logo: logos/telmap.svg
-  logo_original: raw/logos/telmap.gif
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://global.telmap.com
   status: acquired
@@ -1666,7 +1623,6 @@ items:
   - teaching
   - consulting
   logo: logos/intel.svg
-  logo_original: raw/logos/intel.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/0/0e/Intel_logo_%282020%2C_light_blue%29.svg
   logo_license: Public domain (text logo, Commons)
@@ -1700,7 +1656,6 @@ items:
   functions:
   - teaching
   logo: logos/flash-networks.svg
-  logo_original: raw/logos/flash-networks.png
   logo_kind: official vector
   logo_source: https://www.flashnetworks.com/hubfs/Flash%20Networks%202022.svg
   logo_license: Company trademark (official site header asset)
@@ -1742,7 +1697,6 @@ items:
   - teaching
   - consulting
   logo: logos/sap.svg
-  logo_original: raw/logos/sap.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg
   logo_license: Public domain (Commons)
@@ -1777,7 +1731,6 @@ items:
   functions:
   - consulting
   logo: logos/yahoo.svg
-  logo_original: raw/logos/yahoo.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/3/3a/Yahoo%21_%282019%29.svg
   logo_license: Public domain (text logo, Commons)
@@ -1812,7 +1765,6 @@ items:
   functions:
   - teaching
   logo: logos/cloverleaf.svg
-  logo_original: raw/logos/cloverleaf.gif
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.cloverleafcomm.com
   status: acquired
@@ -1852,7 +1804,6 @@ items:
   functions:
   - teaching
   logo: logos/bank-of-israel.svg
-  logo_original: raw/logos/bank-of-israel.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/en/8/8d/Bank_of_Israel_Seal.svg
   logo_license: Non-free / fair use (enwiki); official emblem of the Bank of Israel
@@ -1886,7 +1837,6 @@ items:
   functions:
   - teaching
   logo: logos/helios-software-development.svg
-  logo_original: raw/logos/helios-software-development.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.helios-sd.co.il
   status: defunct
@@ -1920,7 +1870,6 @@ items:
   functions:
   - teaching
   logo: logos/imagine-communications.svg
-  logo_original: raw/logos/imagine-communications.jpg
   logo_kind: official vector
   logo_source: https://imaginecommunications.com/ (inline <svg class="c-logo"> in page header)
   logo_license: Company trademark (official site header asset)
@@ -1964,7 +1913,6 @@ items:
   functions:
   - teaching
   logo: logos/fundtech.svg
-  logo_original: raw/logos/fundtech.gif
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.fundtech.com
   status: acquired
@@ -2002,7 +1950,6 @@ items:
   functions:
   - teaching
   logo: logos/final.svg
-  logo_original: raw/logos/final.jpg
   logo_kind: official vector
   logo_source: https://web.archive.org/web/20200304050541id_/https://www.final.co.il/images/footer-logo.svg
   logo_license: company brand asset (own site, 2020 archived footer logo)
@@ -2036,7 +1983,6 @@ items:
   functions:
   - consulting
   logo: logos/finjan.svg
-  logo_original: raw/logos/finjan.jpg
   logo_kind: official vector
   logo_source: https://content.equisolve.net/_0d60e0c812cac097933e2e32620609ff/finjan/files/theme/images/logo-blue.svg
   logo_license: company brand asset (finjan.com site logo)
@@ -2078,7 +2024,6 @@ items:
   functions:
   - teaching
   logo: logos/emc.svg
-  logo_original: raw/logos/emc.jpg
   logo_kind: official vector
   logo_source: https://cdn.worldvectorlogo.com/logos/emc-corporation-logo.svg
   logo_license: PD-textlogo-style wordmark (EMC² text logo); trademark of Dell Technologies
@@ -2119,7 +2064,6 @@ items:
   functions:
   - teaching
   logo: logos/teleweb.svg
-  logo_original: raw/logos/teleweb.png
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.teleweb.co.il
   status: defunct
@@ -2152,7 +2096,6 @@ items:
   functions:
   - teaching
   logo: logos/mercycorps.svg
-  logo_original: raw/logos/mercycorps.jpg
   logo_kind: official vector
   logo_source: https://www.prosperglobal.org/themes/custom/gesso/dist/images/mc-logo.svg
   logo_license: company brand asset (old mercycorps.org 'gesso' theme asset still served by prosperglobal.org)
@@ -2195,7 +2138,6 @@ items:
   functions:
   - publisher
   logo: logos/ttc.svg
-  logo_original: raw/logos/ttc.jpg
   logo_kind: official vector
   logo_source: https://en.wikipedia.org/wiki/Special:FilePath/The_Great_Courses_logo.svg
   logo_license: non-free logo used for identification (enwiki)
@@ -2232,7 +2174,6 @@ items:
   functions:
   - teaching
   logo: logos/qualcomm.svg
-  logo_original: raw/logos/qualcomm.jpg
   logo_kind: official vector
   logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/Qualcomm-Logo.svg
   logo_license: PD-textlogo (trademarked)
@@ -2266,7 +2207,6 @@ items:
   functions:
   - teaching
   logo: logos/broadcom.svg
-  logo_original: raw/logos/broadcom.jpg
   logo_kind: official vector
   logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/Broadcom_logo_(2016-present).svg
   logo_license: PD-textlogo (trademarked)
@@ -2300,7 +2240,6 @@ items:
   functions:
   - teaching
   logo: logos/ca.svg
-  logo_original: raw/logos/ca.gif
   logo_kind: official vector
   logo_source: https://cdn.worldvectorlogo.com/logos/computer-associates.svg
   logo_license: company logo used for identification; trademark of Broadcom Inc.
@@ -2343,7 +2282,6 @@ items:
   functions:
   - teaching
   logo: logos/verint.svg
-  logo_original: raw/logos/verint.jpg
   logo_kind: official vector
   logo_source: https://www.verint.com/wp-content/themes/verint/assets/svg/symbols.svg
   logo_license: company brand asset (verint.com site header logo)
@@ -2384,7 +2322,6 @@ items:
   functions:
   - teaching
   logo: logos/liveperson.svg
-  logo_original: raw/logos/liveperson.jpg
   logo_kind: official vector
   logo_source: https://logotyp.us/file/liveperson.svg
   logo_license: company logo used for identification (logotyp.us redraw of official mark)
@@ -2419,7 +2356,6 @@ items:
   functions:
   - consulting
   logo: logos/sentrigo.svg
-  logo_original: raw/logos/sentrigo.png
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.sentrigo.com
   status: acquired
@@ -2458,7 +2394,6 @@ items:
   functions:
   - teaching
   logo: logos/gigaspaces.svg
-  logo_original: raw/logos/gigaspaces.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.gigaspaces.com
   status: active
@@ -2489,7 +2424,6 @@ items:
   functions:
   - teaching
   logo: logos/att.svg
-  logo_original: raw/logos/att.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/3/31/AT%26T_logo_2016.svg
   logo_license: Public domain (PD-textlogo)
@@ -2523,7 +2457,6 @@ items:
   functions:
   - teaching
   logo: logos/marvell.svg
-  logo_original: raw/logos/marvell.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/8/83/Marvell_Logo.svg
   logo_license: Public domain (PD-textlogo)
@@ -2557,7 +2490,6 @@ items:
   functions:
   - teaching
   logo: logos/bituachleumi.svg
-  logo_original: raw/logos/bituachleumi.png
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/he/4/46/BituachLeumiLogo.svg
   logo_license: non-free logo used for identification (hewiki fair use)
@@ -2591,7 +2523,6 @@ items:
   functions:
   - teaching
   logo: logos/sigmadesigns.svg
-  logo_original: raw/logos/sigmadesigns.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/f/f0/Sigma_Designs_logo.svg
   logo_license: Public domain (PD-textlogo)
@@ -2628,7 +2559,6 @@ items:
   functions:
   - teaching
   logo: logos/radware.svg
-  logo_original: raw/logos/radware.gif
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/c/cd/Radware_logo.svg
   logo_license: Public domain (PD-textlogo)
@@ -2662,7 +2592,6 @@ items:
   functions:
   - consulting
   logo: logos/bituach-yashir.svg
-  logo_original: raw/logos/bituach-yashir.jpg
   logo_kind: official vector
   logo_source: https://www.555.co.il/sites/default/files/logo1.svg
   logo_license: company brand asset
@@ -2696,7 +2625,6 @@ items:
   functions:
   - teaching
   logo: logos/mprest.svg
-  logo_original: raw/logos/mprest.jpg
   logo_kind: official vector
   logo_source: https://mprest-landing.pages.dev/mprest-logo.svg
   logo_license: company brand asset
@@ -2732,7 +2660,6 @@ items:
   - teaching
   - consulting
   logo: logos/william-hill.svg
-  logo_original: raw/logos/william-hill.jpg
   logo_kind: official vector
   logo_source: https://www.williamhill.com/
   logo_license: company brand asset
@@ -2775,7 +2702,6 @@ items:
   functions:
   - teaching
   logo: logos/pmo.svg
-  logo_original: raw/logos/pmo.gif
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/8/8f/Emblem_of_Israel.svg
   logo_license: Public domain
@@ -2811,7 +2737,6 @@ items:
   functions:
   - teaching
   logo: logos/appliedmaterials.svg
-  logo_original: raw/logos/appliedmaterials.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/0/03/Applied_Materials_Logo.svg
   logo_license: Public domain (PD-textlogo)
@@ -2845,7 +2770,6 @@ items:
   functions:
   - teaching
   logo: logos/entropic.svg
-  logo_original: raw/logos/entropic.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.entropic.com
   status: acquired
@@ -2886,7 +2810,6 @@ items:
   functions:
   - teaching
   logo: logos/mellanox.svg
-  logo_original: raw/logos/mellanox.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/en/a/ab/Mellanox_Technologies_logo.svg
   logo_license: non-free logo used for identification (enwiki fair use)
@@ -2927,7 +2850,6 @@ items:
   functions:
   - teaching
   logo: logos/elta.svg
-  logo_original: raw/logos/elta.jpg
   logo_kind: official vector
   logo_source: https://en.wikipedia.org/wiki/Special:FilePath/ELTA_Systems_logo.svg
   logo_license: non-free logo used for identification (enwiki File:ELTA Systems logo.svg)
@@ -2961,7 +2883,6 @@ items:
   functions:
   - teaching
   logo: logos/redhat.svg
-  logo_original: raw/logos/redhat.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/wiki/Special:FilePath/Red_Hat_Logo_2019.svg
   logo_license: PD-textlogo / trademarked (Commons)
@@ -3002,7 +2923,6 @@ items:
   functions:
   - teaching
   logo: logos/panaya.svg
-  logo_original: raw/logos/panaya.jpg
   logo_kind: official vector
   logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/Panaya_Logo.svg
   logo_license: PD-textlogo / trademarked (Commons)
@@ -3044,7 +2964,6 @@ items:
   functions:
   - publisher
   logo: logos/audible.svg
-  logo_original: raw/logos/audible.jpg
   logo_kind: official vector
   logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/Audible_logo.svg
   logo_license: PD-textlogo / trademarked (Commons)
@@ -3081,7 +3000,6 @@ items:
   - teaching
   - consulting
   logo: logos/utx.svg
-  logo_original: raw/logos/utx.png
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.u-tx.com
   status: acquired
@@ -3119,7 +3037,6 @@ items:
   functions:
   - education
   logo: logos/hebrew-university.svg
-  logo_original: raw/logos/hebrew-university.jpg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/4/4d/Hebrew_University_Logo.svg
   logo_license: Public domain (PD-textlogo/simple) per Commons
@@ -3154,7 +3071,6 @@ items:
   functions:
   - teaching
   logo: logos/mediamind.svg
-  logo_original: raw/logos/mediamind.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.mediamind.com
   status: acquired
@@ -3194,7 +3110,6 @@ items:
   - teaching
   - consulting
   logo: logos/earlysense.svg
-  logo_original: raw/logos/earlysense.jpg
   logo_kind: official vector
   logo_source: https://web.archive.org/web/2020id_/https://www.earlysense.com/wp-content/themes/earlysense/assets/images/logo-earlysense.svg
   logo_license: company brand asset (EarlySense site header logo, archived copy)
@@ -3230,7 +3145,6 @@ items:
   functions:
   - education
   logo: logos/open-university.svg
-  logo_original: raw/logos/open-university.jpg
   logo_kind: official vector
   logo_source: https://www.openu.ac.il/_layouts/15/OpenU_WWW/Theming/Global/images/LOGO_OU_BLACK.svg?v=8
   logo_license: company brand asset (Open University site header logo)
@@ -3263,7 +3177,6 @@ items:
   functions:
   - teaching
   logo: logos/sandisk.svg
-  logo_original: raw/logos/sandisk.jpg
   logo_kind: official vector
   logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/SanDisk_2024_logo.svg
   logo_license: Public domain / PD-textlogo per Commons
@@ -3299,7 +3212,6 @@ items:
   functions:
   - teaching
   logo: logos/mercury-interactive.svg
-  logo_original: raw/logos/mercury-interactive.gif
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/1/11/Mercury_Interactive_logo.svg
   logo_license: Public domain (PD-textlogo) per Commons
@@ -3342,7 +3254,6 @@ items:
   functions:
   - teaching
   logo: logos/nice.svg
-  logo_original: raw/logos/nice.jpg
   logo_kind: official vector
   logo_source: https://resources.nice.com/wp-content/uploads/2025/05/nice-new-logo.svg
   logo_license: company brand asset (NiCE site header logo)
@@ -3376,7 +3287,6 @@ items:
   functions:
   - teaching
   logo: logos/matrix.svg
-  logo_original: raw/logos/matrix.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.matrix.co.il/Pages/default.aspx
   status: active
@@ -3408,7 +3318,6 @@ items:
   functions:
   - teaching
   logo: logos/vmware.svg
-  logo_original: raw/logos/vmware.jpg
   logo_kind: official vector
   logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/VMware_logo.svg
   logo_license: PD-textlogo (Wikimedia Commons)
@@ -3450,7 +3359,6 @@ items:
   - teaching
   - consulting
   logo: logos/checkpoint.svg
-  logo_original: raw/logos/checkpoint.png
   logo_kind: official vector
   logo_source: https://en.wikipedia.org/wiki/Special:FilePath/Check-Point-2024-logo-color.svg
   logo_license: non-free logo used for identification (enwiki)
@@ -3484,7 +3392,6 @@ items:
   functions:
   - teaching
   logo: logos/mythings.svg
-  logo_original: raw/logos/mythings.gif
   logo_kind: official vector
   logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/MyThings_Logo.svg
   logo_license: PD-textlogo (Wikimedia Commons)
@@ -3520,7 +3427,6 @@ items:
   functions:
   - teaching
   logo: logos/arris.svg
-  logo_original: raw/logos/arris.jpg
   logo_kind: official vector
   logo_source: https://en.wikipedia.org/wiki/Special:FilePath/Logo_of_Arris_Group,_Inc.svg
   logo_license: non-free logo used for identification (enwiki)
@@ -3562,7 +3468,6 @@ items:
   functions:
   - teaching
   logo: logos/basmach.svg
-  logo_original: raw/logos/basmach.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.tikshuv.idf.il/894-he/tikshuv.aspx
   status: active
@@ -3598,7 +3503,6 @@ items:
   - training-provider
   - consulting
   logo: logos/johnbryce.svg
-  logo_original: raw/logos/johnbryce.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.johnbryce.co.il
   status: active
@@ -3631,7 +3535,6 @@ items:
   functions:
   - certification
   logo: logos/aws.svg
-  logo_original: raw/logos/aws.png
   logo_kind: official vector
   logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/Amazon_Web_Services_Logo.svg
   logo_license: PD-textlogo (Wikimedia Commons)
@@ -3664,7 +3567,6 @@ items:
   functions:
   - publisher
   logo: logos/nab.svg
-  logo_original: raw/logos/nab.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.naxosaudiobooks.com
   status: active
@@ -3690,7 +3592,6 @@ items:
   functions:
   - teaching
   logo: logos/freescale.svg
-  logo_original: raw/logos/freescale.jpg
   logo_kind: official vector
   logo_source: https://en.wikipedia.org/wiki/Special:FilePath/Freescale_(2).svg
   logo_license: non-free logo used for identification (enwiki)
@@ -3731,7 +3632,6 @@ items:
   functions:
   - teaching
   logo: logos/radvision.svg
-  logo_original: raw/logos/radvision.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.radvision.com
   status: acquired
@@ -3769,7 +3669,6 @@ items:
   functions:
   - teaching
   logo: logos/verifone.svg
-  logo_original: raw/logos/verifone.jpg
   logo_kind: official vector
   logo_source: https://www.verifone.com/
   logo_license: company brand asset (inline header SVG on verifone.com)
@@ -3840,7 +3739,6 @@ items:
   functions:
   - publisher
   logo: logos/gildan-media.svg
-  logo_original: raw/logos/gildan-media.png
   logo_kind: traced from original bitmap (no vector logo found online)
   logo_source: https://rbmediaglobal.com/wp-content/uploads/2026/08/rbmedia-black-logo-352x133.png
   logo_license: company brand asset (site header logo)
@@ -3966,7 +3864,6 @@ items:
   functions:
   - teaching
   logo: logos/apple.svg
-  logo_original: raw/logos/apple.png
   logo_kind: official vector
   logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/Apple_logo_black.svg
   logo_license: PD-shape / trademarked (Wikimedia Commons)
@@ -4000,7 +3897,6 @@ items:
   functions:
   - teaching
   logo: logos/allot.svg
-  logo_original: raw/logos/allot.png
   logo_kind: official vector
   logo_source: https://www.allot.com/wp-content/themes/allot/assets/new-homepage/img/site-header/logo.svg
   logo_license: company brand asset (site header logo)
@@ -4072,7 +3968,6 @@ items:
   functions:
   - teaching
   logo: logos/risco-group.svg
-  logo_original: raw/logos/risco-group.png
   logo_kind: traced from original bitmap (no vector logo found online)
   logo_license: company brand asset (site header logo)
   logo_note: trace of the white header logo from https://riscogroup.com/wp-content/uploads/2023/12/logo-inverted.png, recoloured dark for light backgrounds
@@ -4104,7 +3999,6 @@ items:
   functions:
   - teaching
   logo: logos/incapsula.svg
-  logo_original: raw/logos/incapsula.png
   logo_kind: traced from original bitmap (no vector logo found online)
   logo_license: CC BY-SA 4.0 (Wikimedia Commons)
   logo_note: trace of the co-branded "Imperva Incapsula" bitmap from https://commons.wikimedia.org/wiki/File:Imperva_incapsula.png; no standalone Incapsula logo survives
@@ -4170,7 +4064,6 @@ items:
   functions:
   - teaching
   logo: logos/nantmobile.svg
-  logo_original: raw/logos/nantmobile.png
   logo_kind: traced from original bitmap (no vector logo found online)
   logo_note: trace of the 2014 site logo, archived at http://web.archive.org/web/20141218035425im_/http://nantmobile.com/wp-content/uploads/2014/01/nantmobile-logo2.png
   status: unknown
@@ -4270,7 +4163,6 @@ items:
   functions:
   - training-provider
   logo: logos/developintelligence.svg
-  logo_original: raw/logos/developintelligence.png
   logo_kind: traced from original bitmap (no vector logo found online)
   logo_license: company brand asset (site header logo)
   logo_note: trace of the 2019 header logo archived at http://web.archive.org/web/20200831220820/https://www.developintelligence.com/
@@ -4302,7 +4194,6 @@ items:
   functions:
   - training-provider
   logo: logos/logtel.svg
-  logo_original: raw/logos/logtel.png
   logo_kind: traced from original bitmap (no vector logo found online)
   logo_license: company brand asset (site header logo)
   logo_note: trace of the white header logo from https://www.logtel.com/wp-content/uploads/2022/12/whitelogtelnew.png, recoloured in the
@@ -4363,7 +4254,6 @@ items:
   functions:
   - education
   logo: logos/rimon-school-of-music.svg
-  logo_original: raw/logos/rimon-school-of-music.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
   logo_source: https://www.rimonschool.co.il/
   logo_license: school brand asset (logo on its site, used for identification)

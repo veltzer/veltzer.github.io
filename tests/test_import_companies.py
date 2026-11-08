@@ -19,7 +19,6 @@ def organization(**overrides):
         "slug": "amdocs",
         "functions": ["teaching", "consulting"],
         "logo": "logos/amdocs.svg",
-        "logo_original": "raw/logos/amdocs.gif",
         "logo_kind": "official vector",
         "logo_source": "https://upload.wikimedia.org/wikipedia/commons/1/18/Amdocs_Logo.svg",
         "logo_license": "PD-textlogo (public domain, trademark applies)",
@@ -103,7 +102,7 @@ class TestFields:
 
     def test_research_and_provenance_fields_are_dropped(self):
         out = import_companies.convert_item(organization())
-        for key in ("id", "sources", "old_url", "logo_original", "logo_note", "location_geo", "israel_office_geo"):
+        for key in ("id", "sources", "old_url", "logo_note", "location_geo", "israel_office_geo"):
             assert key not in out
 
     def test_only_the_chosen_geo_point_survives_without_its_from(self):
