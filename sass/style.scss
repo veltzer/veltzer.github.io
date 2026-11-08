@@ -268,8 +268,8 @@ h3 { font-size: 1.1rem; margin: 1.8rem 0 0.5rem; }
 }
 .chip:hover { background: var(--bg-hover); color: var(--accent); }
 .chip.current { background: var(--accent); color: var(--bg); }
-.chip.outline { background: transparent; border-color: var(--border); }
-.chip.outline:hover { border-color: var(--accent); }
+.chip-outline { background: transparent; border-color: var(--border); }
+.chip-outline:hover { border-color: var(--accent); }
 
 // A small filled label for a value, such as a rating.
 .badge {

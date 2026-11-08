@@ -540,7 +540,7 @@
             }
 
             const statsToggle = document.createElement('a');
-            statsToggle.className = 'chip outline' + (tabKeys.length ? ' ms-4' : '');
+            statsToggle.className = 'chip chip-outline' + (tabKeys.length ? ' ms-4' : '');
 
             if (showStatsOnly) {
                 statsToggle.textContent = t('ui_back_to_full_view');
