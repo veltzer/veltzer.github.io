@@ -90,7 +90,9 @@ which records the traps that outlived the migration.
 - `.aspell.{en,he}.txt` — the spellcheck word lists; `out/aspell/` holds the compiled
   dictionaries (gitignored build output)
 - `_site/` — generated output (gitignored, never edit)
-- `doc/` — project notes, decisions and the improvements backlog
+- `doc/` — project notes, decisions and the improvements backlog;
+  `doc/TRANSLATION.md` is the state of the Hebrew translation (what is
+  translated, how, and what stays English by decision)
 
 ## Build Commands
 
