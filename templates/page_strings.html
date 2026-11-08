@@ -1,0 +1,13 @@
+{#- The strings of a translated application, in the page's language: every
+    i18n/en.toml key starting with `strings_prefix` (set by the including
+    template, e.g. "chess_"), looked up with trans(). A key missing from
+    another language fails the build like any other trans(). The app reads
+    them as window.pageStrings[key]. -#}
+<script>
+window.pageStrings = {
+{%- set page_string_keys = load_data(path="i18n/en.toml") %}
+{%- for key, value in page_string_keys %}{% if key is starting_with(strings_prefix) %}
+{{ key | json_encode | safe }}: {{ trans(key=key) | json_encode | safe }},
+{%- endif %}{% endfor %}
+};
+</script>
