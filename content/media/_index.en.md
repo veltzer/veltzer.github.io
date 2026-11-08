@@ -1,10 +1,10 @@
 +++
 title = "Media Collection"
-description = "What Mark Veltzer has read, watched and listened to: books, audiobooks, audio courses, movies, series, podcasts, museums and YouTube, with ratings and notes."
+description = "What Mark Veltzer has read, watched and listened to: books, audiobooks, audio courses, movies, series, podcasts, concerts, museums and YouTube, with ratings and notes."
 template = "data_collection.html"
 
 # The page is the data collection app; templates/data_collection.html holds
 # the markup and reads this list.
 [extra]
-plugins = ["audio", "audible", "books", "features", "museums", "podcasts", "publishers", "videos", "youtube"]
+plugins = ["audio", "audible", "books", "concerts", "features", "museums", "podcasts", "publishers", "videos", "youtube"]
 +++

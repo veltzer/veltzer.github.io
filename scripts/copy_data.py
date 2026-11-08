@@ -39,6 +39,7 @@ DEST = REPO_ROOT / "static" / "data"
 PLAIN_YAML = [
     "podcasts.yaml",
     "museums.yaml",
+    "concerts.yaml",
     "video_features.yaml",
     "audio_courses.yaml",
     "video_series.yaml",

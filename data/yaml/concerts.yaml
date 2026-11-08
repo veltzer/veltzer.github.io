@@ -1,0 +1,1380 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/concerts.json
+$schema: "https://veltzer.github.io/web-schemas/json/concerts.json"
+# Concerts and live shows I saw, the Concerts tab of the media page (/media/).
+# Converted 2026-11-08 from raw/done/music_shows.txt in the data repo: its
+# structured <show> records and the shows it kept as free text in a comment.
+#
+# Dates: date_utcz where the source had a full timestamp (written in Israeli
+# time, usually just after the show, so often a few hours after it), otherwise
+# date_ymd, date_my (MM-YYYY) or date_y, as precisely as the source knew it.
+# performers is free text; with names people in people.yaml (and the
+# person enum of the shared schema). broadcast marks a show seen on TV.
+items:
+  - name: "Danny Sanderson"
+    performers: ["Danny Sanderson"]
+    event: "High school show"
+    genre: "rock"
+    date_y: "1989"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Beit HaChayal"
+    country: "Israel"
+    with: []
+    remark: "With the entire high school"
+  - name: "Caveret"
+    performers: ["Caveret"]
+    event: "Reunion concert, Arad festival"
+    genre: "rock"
+    date_y: "1989"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Arad football stadium"
+    city: "Arad"
+    country: "Israel"
+    with: ["Eran Rom", "Saar from high school"]
+  - name: "Gerry Ekshtein"
+    performers: ["Gerry Ekshtein"]
+    event: "Arad festival"
+    genre: "rock"
+    date_y: "1989"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Arad boardwalk"
+    city: "Arad"
+    country: "Israel"
+    with: ["Eran Rom", "Saar from high school"]
+  - name: "Tislam"
+    performers: ["Tislam"]
+    event: "Arad festival"
+    genre: "rock"
+    date_y: "1989"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Arad football stadium"
+    city: "Arad"
+    country: "Israel"
+    with: ["Eran Rom", "Saar from high school"]
+  - name: "Nurit Galron and Ilan Virtzberg"
+    performers: ["Nurit Galron", "Ilan Virtzberg"]
+    event: "Batzir Meshutaf concert"
+    genre: "rock"
+    venue: "Tzavta, big hall"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ory Amitay"]
+    remark: "During my army service"
+  - name: "Jazz with a red-headed guitarist"
+    performers: ["A red-headed guitarist"]
+    genre: "jazz"
+    date_y: "1991"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Zoom pub, Hashmonaim street (now closed)"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Guy Livneh", "Ofir Zwebner", "Ira Livneh", "Orit Wasserman"]
+  - name: "Avner Shtraus"
+    performers: ["Avner Shtraus"]
+    genre: "rock"
+    date_y: "1991"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Logus pub, Nahalat Binyamin"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ory Amitay", "Ory Amitays cousin"]
+  - name: "Choir rehearsal with Chaim Tzinovitch"
+    performers: ["Chaim Tzinovitch"]
+    genre: "rehearsal"
+    date_y: "1991"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Kfar Vitkin music center"
+    city: "Kfar Vitkin"
+    country: "Israel"
+    with: ["Vered Shavit", "Maya Shavit", "Eli Shavit"]
+    remark: "Year uncertain. Vered's mother was at the helm of the choir"
+  - name: "Shmulik Kraus and Ilan Virtzberg"
+    performers: ["Shmulik Kraus", "Ilan Virtzberg"]
+    event: "Student day"
+    genre: "rock"
+    date_y: "1992"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tel Aviv University, small lawn"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: []
+  - name: "Jethro Tull"
+    performers: ["Jethro Tull"]
+    genre: "rock"
+    venue: "Caesarea amphitheatre"
+    city: "Caesarea"
+    country: "Israel"
+    with: ["Ory Amitay", "David Alexander", "Guy Livneh", "Ira Livneh", "Guy Livnehs little brother", "Ofir Zwebner", "Eran Rom", "Shmulik Ben-Lilit"]
+    remark: "Early 1990s"
+  - name: "Ehud Banai"
+    performers: ["Ehud Banai"]
+    genre: "rock"
+    date_my: "09-1993"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tzavta, big hall"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Eran Rom", "Ory Amitay", "Ory Amitays sister", "Vered Shavit", "Vered Shavits boyfriend"]
+  - name: "Peter Gabriel"
+    performers: ["Peter Gabriel", "Lou Reed"]
+    genre: "rock"
+    date_ymd: "1994-06-19"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Ganei Yehoshua park"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ory Amitay", "Ofir Zwebner", "Guy Livneh"]
+    tickets: 1
+    remark: "Lou Reed played the warm-up"
+  - name: "Sting"
+    performers: ["Sting"]
+    genre: "rock"
+    date_ymd: "1994-09-20"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rishon LeZion amphitheatre"
+    city: "Rishon LeZion"
+    country: "Israel"
+    with: ["Doron Veltzer"]
+    tickets: 1
+  - name: "Al Di Meola"
+    performers: ["Al Di Meola"]
+    genre: "jazz"
+    date_ymd: "1994-12-07"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Heichal HaTarbut"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: []
+    tickets: 1
+    remark: "With a Brazilian-style band, playing pieces by Piazzolla. That time I came from the army without a ticket"
+  - name: "Egberto Gismonti"
+    performers: ["Egberto Gismonti"]
+    genre: "jazz"
+    date_ymd: "1995-03-15"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Mishkan Omanuyot HaBama"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ofir Zwebner"]
+    tickets: 1
+    remark: "With a trio ensemble"
+  - name: "Gidi Gov"
+    performers: ["Gidi Gov"]
+    event: "MAFAT/Mashabat show day"
+    genre: "rock"
+    date_y: "1995"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Beit HaChayal"
+    country: "Israel"
+    with: ["Moshe Vered", "Tzachi Altman", "Oded from MAFAT", "Ido Kerlzon", "Harel Eilat"]
+  - name: "Korin Allal"
+    performers: ["Korin Allal"]
+    genre: "rock"
+    date_y: "1995"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Logus pub, Nahalat Binyamin"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ory Amitay"]
+  - name: "Meir Ariel and Zirei Kayitz reunion"
+    performers: ["Meir Ariel", "Zirei Kayitz", "Yoav Kutner", "Miki Shaviv", "Yehuda Eder"]
+    event: "Reunion"
+    genre: "rock"
+    date_y: "1995"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Hard Rock Cafe, Dizengoff Center"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Shay Sarid", "Ory Amitay"]
+  - name: "Ehud Banai and Oded Efrat"
+    performers: ["Ehud Banai", "Oded Efrat"]
+    genre: "rock"
+    date_ymd: "1996-02-15"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tzavta, small hall"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ory Amitay", "Effie Amitay"]
+    tickets: 1
+    review: "Quiet and intimate show"
+  - name: "Peter Hammill"
+    performers: ["Peter Hammill"]
+    genre: "rock"
+    date_ymd: "1996-05-10"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Suzanne Dellal Centre"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ofir Zwebner"]
+    tickets: 1
+    remark: "Live, alone on stage. That time I skipped army guard duty in Bat-Yam"
+  - name: "Yoni Rechter"
+    performers: ["Yoni Rechter"]
+    event: "Recording of the Mahshavon and Efsharuyot video"
+    genre: "rock"
+    date_y: "1996"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Neve Ilan television studios"
+    city: "Neve Ilan"
+    country: "Israel"
+    with: ["Vered Shavit", "Eran Rom"]
+  - name: "Bustan Avraham"
+    performers: ["Bustan Avraham"]
+    genre: "ethnic"
+    date_ymd: "1997-01-09"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Camelot"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ory Amitay"]
+  - name: "Meir Ariel"
+    performers: ["Meir Ariel"]
+    genre: "rock"
+    date_ymd: "1997-03-06"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Logus pub, Nahalat Binyamin"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ory Amitay"]
+  - name: "Narat Haemtza"
+    performers: ["Narat Haemtza"]
+    genre: "rock"
+    date_ymd: "1997-03-06"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Logus pub, Nahalat Binyamin"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ory Amitay"]
+  - name: "Ravi Shankar with Israeli artists"
+    performers: ["Ravi Shankar", "Eti Ankri"]
+    genre: "ethnic"
+    date_ymd: "1997-03-28"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Mishkan Omanuyot HaBama"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Orit Wasserman", "Sarit Goldenberg"]
+  - name: "Bustan Avraham"
+    performers: ["Bustan Avraham"]
+    event: "Student day"
+    genre: "rock"
+    date_ymd: "1997-05-28"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tel Aviv University, small lawn"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: []
+  - name: "Ehud Banai"
+    performers: ["Ehud Banai"]
+    event: "Student day"
+    genre: "rock"
+    date_ymd: "1997-05-28"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tel Aviv University, big lawn"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Galit Masa", "Ory Amitay"]
+  - name: "Suede"
+    performers: ["Suede"]
+    genre: "rock"
+    date_ymd: "1997-06-08"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Hangar 11, Tel-Aviv port"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Hadas Lahav"]
+  - name: "Amos Tanay"
+    performers: ["Amos Tanay"]
+    genre: "rock"
+    date_ymd: "1997-07-01"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Logus pub, Nahalat Binyamin"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Shay Sarid"]
+  - name: "Meir Ariel and Lea Shabat"
+    performers: ["Meir Ariel", "Lea Shabat"]
+    event: "Bernard and Louise tour"
+    genre: "rock"
+    date_ymd: "1997-07-09"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Camelot"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ory Amitay", "Ofir Zwebner"]
+  - name: "Meir Ariel and Moshe Levi"
+    performers: ["Meir Ariel", "Moshe Levi"]
+    event: "Bernard and Louise tour"
+    genre: "rock"
+    date_ymd: "1997-08-29"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Camelot"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ofir Zwebner"]
+  - name: "Restaurant jazz"
+    event: "Restaurant jazz performance"
+    genre: "jazz"
+    date_y: "1997"
+    date_timezone: "Asia/Jerusalem"
+    with: ["Orit Wasserman"]
+    remark: "A small band at a Nahalat Binyamin pub whose name I don't remember"
+  - name: "Miki Gavrielov"
+    performers: ["Miki Gavrielov"]
+    event: "Unit evening"
+    genre: "rock"
+    date_y: "1997"
+    date_timezone: "Asia/Jerusalem"
+    with: ["Moshe Vered", "Harel Eilat", "Ido Kerlzon", "Tzachi Altman"]
+    remark: "Somewhere in Rishon LeZion, I don't remember where exactly"
+  - name: "Meir Ariel"
+    performers: ["Meir Ariel"]
+    event: "Single show"
+    genre: "rock"
+    venue: "Camelot"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ory Amitay", "Ofir Zwebner"]
+  - name: "Jazz drummer from abroad"
+    performers: ["Barak (bass)"]
+    genre: "jazz"
+    venue: "Camelot"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ory Amitay"]
+    review: "A very good jazz drummer from abroad"
+    remark: "Barak, a very good double bass player from Rimon, played too"
+  - name: "Lock and R.O.B"
+    performers: ["Lock and R.O.B"]
+    event: "Street show"
+    genre: "rnb"
+    date_ymd: "1998-10-10"
+    date_timezone: "America/New_York"
+    venue: "Times Square"
+    city: "New York"
+    country: "United States of America"
+    with: ["Yoram Avidan"]
+  - name: "Paul deLay"
+    performers: ["Paul deLay", "Shlomo Mizrahi"]
+    genre: "blues"
+    date_ymd: "1999-02-24"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Camelot"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Adam Dunski", "Yoram Avidan", "Efrat Nakibly", "Rica Gonen", "Amos Tanay"]
+    remark: "Paul deLay from Chicago played a mean harmonica, with Shlomo Mizrahi on guitar"
+  - name: "Sunny Freedom Quartet"
+    performers: ["Sunny Freedom Quartet"]
+    genre: "jazz"
+    date_y: "1999"
+    date_timezone: "America/New_York"
+    venue: "Sweet Basil"
+    city: "New York"
+    country: "United States of America"
+    with: ["Adam Dunski", "Amos Tanay"]
+  - name: "John Griffin Quartet"
+    performers: ["John Griffin Quartet"]
+    genre: "jazz"
+    date_ymd: "1999-04-10"
+    date_timezone: "America/New_York"
+    venue: "Village Vanguard"
+    city: "New York"
+    country: "United States of America"
+    with: []
+  - name: "Alon Olearchik"
+    performers: ["Alon Olearchik", "Barak Hanoch", "Avi Yifrach", "Asher Padi"]
+    genre: "rock"
+    date_ymd: "1999-05-05"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Logus pub, Nahalat Binyamin"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ofir Zwebner", "Ofir Zwebners boyfriend Gidi"]
+  - name: "John McLaughlin and Zakir Hussain"
+    performers: ["John McLaughlin", "Zakir Hussain"]
+    genre: "ethnojazz"
+    date_ymd: "1999-06-17"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Heichal HaTarbut"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Orit Wasserman"]
+    tickets: 2
+  - name: "Joshua Redman and Branford Marsalis"
+    performers: ["Joshua Redman", "Branford Marsalis"]
+    genre: "jazz"
+    date_ymd: "1999-07-14"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Heichal HaTarbut"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Yoram Avidan", "Amos Tanay", "Adam Dunski", "Noa Neria"]
+    tickets: 1
+  - name: "30 days to the death of Meir Ariel"
+    performers: ["Yehudit Ravitz", "Shalom Hanoch", "Moshe Levi", "David Broza", "Hanan Yovel", "Udi Ariel", "Tirza Ariel", "Ariel Zilber", "Tamuz", "Yehuda Eder", "HaMishmaron"]
+    event: "30 days to the death of Meir Ariel"
+    genre: "rock"
+    date_ymd: "1999-08-16"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Agadat Deshe, Kibbutz Mishmarot"
+    city: "Mishmarot"
+    country: "Israel"
+    with: ["Ofir Zwebner"]
+    remark: "Also Udi Ariel's brother, Hanan Yovel's daughter and the original members of HaMishmaron, the Kibbutz Mishmarot band. Tamuz played without Meir Israel"
+  - name: "Mads Vinding Trio"
+    performers: ["Mads Vinding Trio"]
+    event: "The Danish Wave Festival"
+    genre: "jazz"
+    date_ymd: "1999-09-09"
+    date_timezone: "America/New_York"
+    venue: "Sweet Basil"
+    city: "New York"
+    country: "United States of America"
+    with: ["Doron Veltzer"]
+  - name: "Elvin Jones Jazz Machine"
+    performers: ["Elvin Jones Jazz Machine", "Michael Brecker"]
+    event: "Elvin Jones's 72nd birthday celebration"
+    genre: "jazz"
+    date_ymd: "1999-09-11"
+    date_timezone: "America/New_York"
+    venue: "Blue Note"
+    city: "New York"
+    country: "United States of America"
+    with: ["Doron Veltzer"]
+  - name: "Dan Dan show"
+    performers: ["Dan Dan"]
+    genre: "rock"
+    date_y: "1999"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Dan Dan's house"
+    city: "Beit Zayit"
+    country: "Israel"
+    with: ["Shay Sarid"]
+    remark: "Me going like crazy on the piano inside the house"
+  - name: "Eric Alexander"
+    performers: ["Eric Alexander"]
+    genre: "jazz"
+    date_ymd: "2000-02-04"
+    date_timezone: "America/New_York"
+    venue: "Sweet Basil"
+    city: "New York"
+    country: "United States of America"
+    with: []
+  - name: "Charles McPherson Quartet"
+    performers: ["Charles McPherson", "Ronnie Mathews", "Earl May", "Albert \"Tootie\" Heath"]
+    genre: "jazz"
+    date_ymd: "2000-02-13"
+    date_timezone: "America/New_York"
+    venue: "Village Vanguard"
+    city: "New York"
+    country: "United States of America"
+    with: ["Efrat Nakibly", "Ziv from Cellcom"]
+  - name: "Roy Hargrove Quintet"
+    performers: ["Roy Hargrove Quintet"]
+    genre: "jazz"
+    date_ymd: "2000-02-20"
+    date_timezone: "America/New_York"
+    venue: "Village Vanguard"
+    city: "New York"
+    country: "United States of America"
+    with: ["Amos Tanay", "Adam Dunski", "Adam Dunskis friend Barak"]
+    remark: "50 years of the Village Vanguard"
+  - name: "Herbie Hancock"
+    performers: ["Herbie Hancock", "Eli Djibri"]
+    genre: "jazz"
+    date_ymd: "2000-04-04"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Hangar 11, Tel-Aviv port"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Adam Dunski", "Amos Tanay", "Orit Wasserman", "Shlomi Noach"]
+    tickets: 1
+  - name: "Yosuke Yamashita New York Trio"
+    performers: ["Yosuke Yamashita", "Cecil McBee", "Pheeroan akLaff"]
+    genre: "jazz"
+    date_ymd: "2000-05-12"
+    date_timezone: "America/New_York"
+    venue: "Sweet Basil"
+    city: "New York"
+    country: "United States of America"
+    with: []
+  - name: "Al Di Meola"
+    performers: ["Al Di Meola"]
+    genre: "jazz"
+    date_ymd: "2000-07-05"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Hangar 11, Tel-Aviv port"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Shlomi Noach", "Ofir Zwebner", "Orit Wasserman"]
+    tickets: 1
+  - name: "Im Hagav Layam"
+    performers: ["Many Israeli artists"]
+    event: "'Im Hagav Layam', the farewell concert a year after the death of Meir Ariel"
+    genre: "rock"
+    date_ymd: "2000-07-18"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Caesarea amphitheatre"
+    city: "Caesarea"
+    country: "Israel"
+    with: ["Doron Veltzer", "Doron Veltzers ex-girlfriend Sharon"]
+    tickets: 2
+  - name: "Alon Olearchik"
+    performers: ["Alon Olearchik", "Asher Padi", "Barak Hanoch", "Avi Yifrach"]
+    genre: "rock"
+    date_ymd: "2000-08-04"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tmuna Theater"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ofir Zwebner", "Shay Sarid"]
+    remark: "With the rock ensemble"
+  - name: "Alon Olearchik"
+    performers: ["Alon Olearchik", "Barak Hanoch", "Nitzan Ein Habar"]
+    event: "Besheket show"
+    genre: "rock"
+    date_ymd: "2000-10-06"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tmuna Theater"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ofir Zwebner"]
+  - name: "Matti Caspi"
+    performers: ["Matti Caspi"]
+    genre: "rock"
+    date_ymd: "2000-10-18"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Museum courtyard near the promenade"
+    city: "Rishon LeZion"
+    country: "Israel"
+    with: ["Miriam Veltzer"]
+    tickets: 2
+  - name: "Jethro Tull"
+    performers: ["Jethro Tull", "Uri from Tipex"]
+    genre: "rock"
+    date_ymd: "2000-11-10"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Cinerama"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Guy Livneh", "Ofir Zwebner"]
+    tickets: 1
+    remark: "Uri from Tipex played the warm-up"
+  - name: "Jethro Tull"
+    performers: ["Jethro Tull", "Uri from Tipex"]
+    genre: "rock"
+    date_ymd: "2000-11-12"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Cinerama"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Doron Veltzer"]
+    tickets: 2
+    remark: "Uri from Tipex played the warm-up"
+  - name: "Dan Dan show"
+    performers: ["Dan Dan"]
+    genre: "rock"
+    date_y: "2000"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Dan Dan's house"
+    city: "Beit Zayit"
+    country: "Israel"
+    with: ["Shay Sarid", "Ory Amitays friend Uri", "Dan Dan"]
+    remark: "Me singing 'Don Quixote' by Danny Sanderson with a singer, with more people I know there"
+  - name: "Al Di Meola"
+    performers: ["Al Di Meola"]
+    genre: "rock"
+    date_ymd: "2001-02-14"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Camelot"
+    city: "Herzliya"
+    country: "Israel"
+    with: ["Doron Veltzer", "Doron Veltzers ex-girlfriend Sharon"]
+    remark: "No warm-up"
+  - name: "Alon Olearchik"
+    performers: ["Alon Olearchik"]
+    genre: "rock"
+    date_ymd: "2001-05-11"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tmuna Theater"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ofir Zwebner"]
+    remark: "With his regular band"
+  - name: "Dan Dan show"
+    performers: ["Dan Dan"]
+    genre: "rock"
+    date_ymd: "2001-09-08"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Dan Dan's house"
+    city: "Beit Zayit"
+    country: "Israel"
+    with: ["Galit Masa", "Yaniv Michaeli", "Yaron Ben-Ami", "Shir Ben-Ami"]
+    remark: "Me singing 'Love Over Gold' and 'Romeo and Juliet' by Dire Straits"
+  - name: "Yaron Ben-Ami"
+    performers: ["Yaron Ben-Ami"]
+    genre: "blues"
+    date_y: "2001"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rosh Pina pub, Ramat Aviv"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ofir Zwebner", "Ory Amitay", "Effie Amitay", "Shir Ben-Ami"]
+    remark: "First time, with many more people I don't remember"
+  - name: "Yaron Ben-Ami"
+    performers: ["Yaron Ben-Ami"]
+    genre: "blues"
+    date_y: "2001"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rosh Pina pub, Ramat Aviv"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ofir Zwebner", "Ory Amitay", "Effie Amitay", "Shir Ben-Ami"]
+    remark: "Second time, with many more people I don't remember"
+  - name: "Yehudit Ravitz and Sarit Hadad"
+    performers: ["Yehudit Ravitz", "Sarit Hadad"]
+    event: "Tnuva Yoplait product launch"
+    genre: "rock"
+    date_ymd: "2001-12-25"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Heichal HaTarbut"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Miriam Veltzer"]
+  - name: "Alon Olearchik"
+    performers: ["Alon Olearchik", "Asher Padi", "Barak Hanoch", "Avi Yifrach"]
+    genre: "rock"
+    date_utcz: "2002-03-12T20:25:14Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tmuna Theater"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ofir Zwebner"]
+    remark: "With the rock ensemble. The drummer was missing at the beginning, so it started acoustic"
+  - name: "Matti Caspi and Shlomo Gronich"
+    performers: ["Matti Caspi", "Shlomo Gronich"]
+    event: "Meahorei Hatzlilim (Behind the Sounds)"
+    genre: "rock"
+    date_utcz: "2002-03-22T07:30:00Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tzavta, big hall"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Doron Veltzer"]
+    tickets: 2
+    review: "Excellent Excellent Excellent"
+  - name: "Yaron Ben-Ami"
+    performers: ["Yaron Ben-Ami"]
+    event: "Blues Be'eretz Kna'an"
+    genre: "blues"
+    date_utcz: "2002-07-08T19:27:57Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Mike's Place, Tel-Aviv promenade"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ory Amitay", "Shay Sarid", "Shir Ben-Ami"]
+    remark: "Third time for the show, first time at Mike's Place"
+  - name: "Alon Olearchik"
+    performers: ["Alon Olearchik", "Barak Hanoch", "Avi Yifrach", "Nitzan Ein Habar"]
+    genre: "jazz"
+    date_utcz: "2002-10-09T01:02:56Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Camelot"
+    city: "Herzliya"
+    country: "Israel"
+    with: ["Ofir Zwebner"]
+    review: "Great instrumental show (no lyrics). Just jazz"
+    remark: "With the jazz ensemble, a drummer and another sax player"
+  - name: "Open stage"
+    performers: ["Open stage"]
+    genre: "variety"
+    date_utcz: "2002-11-17T20:39:01Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Balconi pub, Nahalat Binyamin"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Shmulik Ben-Lilit"]
+    tickets: 2
+    remark: "Comedy, music and drama open night"
+  - name: "Yaron Ben-Ami: The Undertakers"
+    performers: ["Yaron Ben-Ami"]
+    event: "The Undertakers show"
+    genre: "blues"
+    venue: "Mike's Place, Tel-Aviv promenade"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ory Amitay", "Shay Sarid", "Shir Ben-Ami"]
+    remark: "Second time at Mike's Place, this time with a bassist"
+  - name: "Yaron Ben-Ami: The Undertakers"
+    performers: ["Yaron Ben-Ami"]
+    event: "The Undertakers show"
+    genre: "blues"
+    date_utcz: "2003-02-11T01:00:44Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Mike's Place, Tel-Aviv promenade"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ory Amitay", "Shir Ben-Ami", "Yaron Ben-Amis friend Boaz"]
+    remark: "Third time at Mike's Place (second time with a bassist)"
+  - name: "Yaron Ben-Ami: The Undertakers"
+    performers: ["Yaron Ben-Ami"]
+    event: "The Undertakers show"
+    genre: "blues"
+    date_utcz: "2003-02-18T00:49:45Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Mike's Place, Tel-Aviv promenade"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Yaron Ben-Amis friend Boaz", "Shir Ben-Ami", "Shay Sarids friend Tomer", "Shay Sarid"]
+    remark: "Fourth time at Mike's Place (third time with a bassist)"
+  - name: "Alon Olearchik"
+    performers: ["Alon Olearchik", "Barak Hanoch", "Avi Yifrach", "Asher Padi"]
+    genre: "rock"
+    date_utcz: "2003-03-08T20:17:27Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Ja-Pan club"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ofir Zwebner", "Yaron Ben-Ami", "Shir Ben-Ami"]
+    tickets: 1
+    review: "Standard Alon rock show. Great"
+  - name: "Meir Ariel memorial, 4 years"
+    performers: ["Gidi Gov", "Alon Hilel", "Shalom Hanoch", "Gali Atari", "Udi Ariel", "Tamuz", "Rami Kleinstein", "The Blues Messengers", "Meir Banai", "Ehud Banai", "Yehudit Ravitz", "Alona Daniel"]
+    event: "Meir Ariel memorial, 4 years"
+    genre: "rock"
+    date_utcz: "2003-07-20T19:31:07Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Kibbutz Mishmarot, big lawn"
+    city: "Mishmarot"
+    country: "Israel"
+    with: ["Shay Sarid", "Adva Schecter"]
+    review: "OK. Quite a long show"
+    remark: "Also Alex the guitarist, Adam Madder and many more. Tamuz played without Meir Israel"
+  - name: "Ehud Banai"
+    performers: ["Ehud Banai"]
+    event: "End of summer shows"
+    genre: "rock"
+    date_utcz: "2003-08-02T19:36:44Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Wohl Amphitheatre, Ganei HaTaarucha"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Galit Masa"]
+    tickets: 2
+    review: "Quite a good show. My first at the Wohl"
+  - name: "Yaron Ben-Ami"
+    performers: ["Yaron Ben-Ami"]
+    event: "Yaron's first appearance with his own songs"
+    genre: "blues"
+    date_utcz: "2003-08-02T19:36:44Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Barometer pub, Dizengoff street"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Galit Masa", "Shay Sarid", "Ory Amitay", "Effie Amitay", "Shir Ben-Ami", "Yaron Ben-Amis friend Boaz", "Shay Sarids friend Tomer"]
+    remark: "Galit brought two of her friends"
+  - name: "Susita"
+    performers: ["Susita"]
+    date_utcz: "2004-01-15T23:38:48Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rimon School of Music"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: ["Ofir Zwebner"]
+  - name: "Rimon jazz player competition"
+    event: "Rimon jazz player competition"
+    genre: "jazz"
+    date_utcz: "2004-01-15T23:38:48Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rimon School of Music"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: []
+  - name: "Airto Moreira"
+    performers: ["Airto Moreira"]
+    genre: "jazz"
+    date_utcz: "2004-01-27T12:48:07Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rimon School of Music"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: []
+  - name: "Airto Moreira"
+    performers: ["Airto Moreira", "Ilan Salem", "Avi Adrian", "Arye Volinitz"]
+    genre: "jazz"
+    date_utcz: "2004-01-29T11:10:12Z"
+    date_timezone: "Asia/Jerusalem"
+    with: []
+    review: "Excellent!!!"
+  - name: "Alon Olearchik"
+    performers: ["Alon Olearchik"]
+    genre: "rock"
+    date_utcz: "2004-02-07T23:17:12Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tmuna Theater"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ofir Zwebner"]
+    remark: "With the regular band"
+  - name: "Rimon jazz player competition"
+    event: "Rimon jazz player competition"
+    genre: "jazz"
+    date_utcz: "2004-02-08T06:30:00Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tmuna Theater"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Yaron Dorman"]
+    review: "Excellent!!!"
+  - name: "Jazz trumpet show"
+    performers: ["Jarmo Hoogendijk", "Philip Harper", "Niv Toar", "Omri Mor", "Gilad Abro", "Shay Zalman"]
+    genre: "jazz"
+    date_utcz: "2004-02-25T20:14:20Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tel Aviv Cinematheque"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Zippi Weiner"]
+    remark: "Three trumpets (Jarmo Hoogendijk, Philip Harper, Niv Toar), Omri Mor on piano, Gilad Abro on bass, Shay Zalman on drums"
+  - name: "Rimon open day"
+    performers: ["Ofer Portugali", "Tami Shefer", "Steve Paskoff", "Oren Balban", "Avi Adrian", "Shay Maoz", "Ilan Salem"]
+    event: "Rimon open day"
+    genre: "jazz"
+    date_utcz: "2004-06-17T13:00:00Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rimon School of Music"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: []
+    remark: "Kolot Rimon (Ofer Portugali, Tami Shefer), James Taylor Ensemble (Steve Paskoff), Afro Pop Ensemble (Oren Balban), Weather Report Ensemble (Avi Adrian, with Shay Maoz), Swing Ensemble (Ilan Salem)"
+  - name: "BogRimon"
+    event: "BogRimon"
+    genre: "jazz"
+    date_utcz: "2004-08-03T23:48:25Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tzavta, big hall"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Yaron Dorman"]
+    tickets: 1
+    remark: "Many musicians"
+  - name: "Memorial to Rabin"
+    performers: ["Amit Golan", "Gilad Abro", "Doron Tirosh", "Yonatan Volchok", "Slide Hampton", "Avi Leibovich", "Shevhaya Bat Israel"]
+    event: "A memorial to Rabin"
+    genre: "jazz"
+    date_utcz: "2004-11-03T22:28:16Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Mishkan Omanuyot HaBama"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: []
+    tickets: 1
+    review: "Excellent!!!"
+  - name: "Avi Adrian and Nahum Perkopofitch"
+    performers: ["Avi Adrian", "Nahum Perkopofitch"]
+    genre: "jazz"
+    date_utcz: "2004-11-11T14:10:15Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rimon School of Music"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: []
+    review: "Great!"
+    remark: "Two pianos"
+  - name: "Tiltan ensemble"
+    performers: ["Oren Sela", "Lee Gaon", "Tami Shefer"]
+    event: "Tiltan ensemble"
+    date_utcz: "2004-11-18T23:08:49Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rimon School of Music"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: []
+    review: "Pretty good"
+    remark: "Israeli songs in a different arrangement"
+  - name: "Amit Golan and Organix"
+    performers: ["Amit Golan", "Erez Bar-Noy", "Asaf Yuria", "Doron Tirosh", "Yotam Zilbershtein"]
+    genre: "jazz"
+    date_utcz: "2004-12-19T23:19:32Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "The Fusion club, HaMasger"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: []
+  - name: "Amikam Kimelman and friends"
+    performers: ["Amikam Kimelman", "Ilan Salem", "Oren Balban", "Yurai Oron", "Ronen Raban"]
+    genre: "jazz"
+    date_utcz: "2005-02-04T23:34:35Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Givatayim Theater"
+    city: "Givatayim"
+    country: "Israel"
+    with: ["David Alexander"]
+    remark: "Amikam Kimelman on saxes, Ilan Salem on flute, Oren Balban on drums, Yurai Oron on bass, Ronen Raban on guitar, and a pianist I don't remember"
+  - name: "Nagan HaJazz, first stage"
+    event: "Rimon Nagan HaJazz competition, first stage"
+    genre: "jazz"
+    date_utcz: "2005-02-07T22:45:08Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rimon School of Music"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: []
+    remark: "Many performers"
+  - name: "Nagan HaJazz, final stage"
+    event: "Rimon Nagan HaJazz competition, final stage"
+    genre: "jazz"
+    date_utcz: "2005-03-14T23:11:22Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "The Fusion club, HaMasger"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ofra Rosen"]
+  - name: "Michal Lotan"
+    performers: ["Michal Lotan"]
+    date_utcz: "2005-04-19T19:05:25Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Ja-Pan club"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ofra Rosen"]
+    remark: "In concert with friends"
+  - name: "Rimon composition contest"
+    performers: ["Ofir Zwebner"]
+    event: "Rimon composition contest"
+    date_utcz: "2005-05-25T21:54:47Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Beit Yad LaBanim"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: ["Ofra Rosen", "Yaron Ben-Ami"]
+    remark: "Ofir Zwebner took second place"
+  - name: "Rimon open day"
+    performers: ["Gil Ladin", "Yurai Oron", "Ilan Salem", "Eli Benakot"]
+    event: "Rimon open day"
+    genre: "jazz"
+    date_utcz: "2005-06-16T17:52:48Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rimon School of Music"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: []
+    remark: "Gil Ladin's world music ensemble, Yurai Oron's modern jazz ensemble, Ilan Salem's swing ensemble, and a film composition presentation by Eli Benakot"
+  - name: "Lew Soloff with the Rimon student band"
+    performers: ["Lew Soloff"]
+    genre: "jazz"
+    date_utcz: "2005-06-23T23:21:07Z"
+    date_timezone: "Asia/Jerusalem"
+    broadcast: true
+    with: []
+    remark: "On TV, Channel 2 on HOT, at my parents' house"
+  - name: "Pink Floyd reunion at Live 8"
+    performers: ["Pink Floyd"]
+    event: "Live 8"
+    genre: "rock"
+    date_utcz: "2005-07-02T22:47:28Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Hyde Park"
+    city: "London"
+    country: "United Kingdom"
+    broadcast: true
+    with: []
+    remark: "Watched live on TV, YES cable, at my place"
+  - name: "Amit Golan"
+    performers: ["Amit Golan", "Yotam Zilbershtein", "Doron Tirosh"]
+    genre: "jazz"
+    date_utcz: "2005-07-15T00:59:17Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Shablul, Tel-Aviv port"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: []
+    remark: "A vibraphonist and a flutist joined in"
+  - name: "6 years to the death of Meir Ariel"
+    performers: ["Yehudit Ravitz", "David Broza", "Shalom Hanoch", "Dudi Levi", "Ronit Shahar", "Hemi Rodner",
+                 "The Blues Messengers", "Lea Shabat", "Shlomi Shabat", "Shlomi Shaban", "Mika Karni", "Moshe Levi", "Yehuda Eder", "Miki Shaviv", "Shachar Ariel", "Udi Ariel", "Muki"]
+    event: "6 year memorial to Meir Ariel"
+    genre: "rock"
+    date_utcz: "2005-07-18T22:55:55Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Agadat Deshe, Kibbutz Mishmarot"
+    city: "Mishmarot"
+    country: "Israel"
+    with: ["Shay Sarid", "Shay Sarids wife"]
+    tickets: 2
+  - name: "BogRimon"
+    performers: ["Ofir Zwebner", "Shay Maoz", "Roee Uliel", "Dani Uri", "Guy Bar Tor"]
+    event: "Rimon BogRimon"
+    genre: "jazz"
+    date_utcz: "2005-08-03T22:59:07Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Givatayim Theater"
+    city: "Givatayim"
+    country: "Israel"
+    with: ["Galit Masa", "Orit Wasserman", "Orit Wassermans friend Michal", "Ofir Zwebner"]
+    tickets: 2
+    remark: "Ofir Zwebner and more from film scoring, and two jazz ensembles"
+  - name: "Amikam Kimelman quartet"
+    performers: ["Amikam Kimelman", "Eilon Turgeman", "Avi Adrian", "Eitan Itzkovich"]
+    genre: "jazz"
+    date_utcz: "2005-11-03T13:12:20Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rimon School of Music"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: []
+    remark: "Amikam Kimelman on sax, Eilon Turgeman on double bass, Avi Adrian on piano, Eitan Itzkovich on drums"
+  - name: "Junior Mance"
+    performers: ["Junior Mance", "Yonatan Volchok"]
+    genre: "jazz"
+    date_utcz: "2006-01-12T15:21:50Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rimon School of Music"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: []
+    remark: "A jazz session"
+  - name: "Avi Adrian Trio"
+    performers: ["Avi Adrian", "Roni Holan", "Eli Magen"]
+    genre: "jazz"
+    date_utcz: "2006-01-26T13:38:15Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rimon School of Music"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: []
+    review: "Excellent show!!!"
+    remark: "Jazz standards and some compositions"
+  - name: "Avi Adrian with Frank Gambale"
+    performers: ["Avi Adrian", "Roni Holan", "Arye Volinitz", "Frank Gambale"]
+    genre: "jazz"
+    date_utcz: "2006-02-02T13:48:12Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rimon School of Music"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: []
+    review: "Excellent show!!!"
+    remark: "Jazz standards"
+  - name: "Nagan HaJazz"
+    performers: ["Asaf Gleizner", "Nitzan Gavrieli", "Asaf Kahati", "Tom Lev", "Leonid Dezelman", "Itay Viseman"]
+    event: "Rimon Nagan HaJazz competition"
+    genre: "jazz"
+    date_utcz: "2006-02-19T22:24:48Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tmuna Theater"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["David Alexander"]
+    review: "Very good show!!!"
+  - name: "Rimon composition contest"
+    performers: ["Ofir Zwebner"]
+    event: "Rimon composition contest"
+    date_utcz: "2006-05-29T01:13:29Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Beit Yad LaBanim"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: ["Galit Masa", "Galit Masas friend Udi"]
+    remark: "Ofir Zwebner took part"
+  - name: "Dwayne Clemons and the Shay Zalman Trio"
+    performers: ["Dwayne Clemons", "Shay Zalman Trio"]
+    event: "Rimon weekly jazz concert"
+    genre: "jazz"
+    date_utcz: "2006-11-02T11:03:10Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rimon School of Music"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: []
+    review: "Good, but without a lot of energy in my opinion"
+    remark: "Jazz standards"
+  - name: "Young jazz players"
+    event: "Jazz over dinner"
+    genre: "jazz"
+    date_utcz: "2006-11-21T21:15:23Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "A cafe near Bialik cafe"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["David Alexander"]
+    remark: "Young players back from the army who had studied jazz at Ironi Alef or Thelma Yellin"
+  - name: "Nagan HaJazz 2007, first stage"
+    performers: ["Sagit Silberman", "Sergei Checkin", "Ziv Moran", "Sharon Glick", "Daniel Sapir", "Dan Cohen", "Eyal Hai", "Omer Rizi"]
+    event: "Rimon Nagan HaJazz 2007, first stage, part 1"
+    genre: "jazz"
+    date_utcz: "2007-01-28T21:13:10Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rimon School of Music"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: []
+    remark: "Judges: Roni Holan, Guri Agmon, Ronen Raban. Amikam Kimelman and Yossi Levi were there"
+  - name: "Nagan HaJazz 2007, last stage"
+    performers: ["Yonatan Grinshtein", "Hila Kolik", "Daniel Dor", "Daniel Meiron", "Yogev Shitrit", "Eyal Hai"]
+    event: "Rimon Nagan HaJazz 2007, last stage"
+    genre: "jazz"
+    date_utcz: "2007-03-05T23:56:11Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tmuna Theater"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: []
+  - name: "7/4: Seven composers writing for a string quartet"
+    performers: ["Trio Arto", "Natasha Sher", "Yael Fetish", "Anat Algalmeyir", "Carmella Liman", "Yishay Lentner"]
+    event: "7/4: Seven composers writing for a string quartet"
+    genre: "classical"
+    date_utcz: "2007-03-19T00:26:19Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Felicja Blumental Music Center"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Halit Lichtenzon", "Halit Lichtenzons friend", "Ofir Zwebner"]
+    tickets: 1
+    remark: "Composers: Ofir Zwebner, Aviv Kamai, Alberto Schwarts, Kobi Lilian, Avihai Cohen, Tali Asa, Eyal Vishnitzer"
+  - name: "Jazz double bill"
+    performers: ["Shay Zalman", "Gilad Abro", "Amit Golan", "Erez Bar-Noy", "Joe Magnarelli", "The Israeli Jazz Band"]
+    genre: "jazz"
+    date_utcz: "2007-04-17T18:53:25Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Shtriker Conservatory"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: []
+    tickets: 1
+    remark: "The Israeli Jazz Band conducted by Danny Rosenfeld"
+  - name: "Fusion and funk at the Shablul"
+    performers: ["Tevet Sela", "Adam Golitzky", "Shay Hamani", "Michael Abagil"]
+    genre: "fusion"
+    date_utcz: "2007-05-25T22:38:29Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Shablul, Tel-Aviv port"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Galit Masa"]
+    remark: "Tevet Sela on saxophones, Adam Golitzky on grand piano, Shay Hamani on electric bass, Michael Abagil on drums"
+  - name: "The Dabashot play Camel"
+    performers: ["The Dabashot"]
+    genre: "prog"
+    date_utcz: "2007-07-18T23:38:33Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Kultura club, Jaffa"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ofir Zwebner"]
+    review: "These guys are pretty good"
+    remark: "Cover versions of Camel songs"
+  - name: "Amit Golan recording"
+    performers: ["Amit Golan", "Gilad Abro", "Doron Tirosh", "Asaf Yuria", "Oded Bareket", "Joe Magnarelli"]
+    genre: "jazz"
+    date_utcz: "2007-07-21T22:47:16Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Shtriker Conservatory"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ofir Zwebner"]
+    tickets: 2
+    remark: "Show and recording of his own standards for a record. Another drummer played too"
+  - name: "Jazz at the Ajax Hotel"
+    genre: "jazz"
+    date_utcz: "2007-08-23T21:13:40Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Ajax Hotel"
+    city: "Limassol"
+    country: "Cyprus"
+    with: []
+    review: "OK"
+    remark: "A four-man band: tenor sax, keyboard, double bass and drums, playing jazz standards"
+  - name: "Mel Keller memorial"
+    performers: ["Dani Gotfried", "Amikam Kimelman", "Jess Koren", "Mamelo", "Peter Wertheimer", "Guri Agmon", "Nahum Perkopofitch"]
+    event: "A show in memory of Mel Keller"
+    genre: "jazz"
+    date_utcz: "2007-09-30T01:11:33Z"
+    date_timezone: "Asia/Jerusalem"
+    broadcast: true
+    with: []
+    remark: "On TV, YES cable, at my place. Many more players"
+  - name: "Shirimon 2005"
+    event: "Shirimon 2005, part A"
+    date_utcz: "2007-10-06T01:04:54Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tzavta, big hall"
+    city: "Tel-Aviv"
+    country: "Israel"
+    broadcast: true
+    with: []
+    remark: "On TV, Channel 2, at my place. Many people from Rimon"
+  - name: "Red Sea Jazz Festival"
+    performers: ["Amikam Kimelman", "Yossi Levi", "Ilan Salem", "Eitan Itzkovich"]
+    event: "Red Sea Jazz Festival"
+    genre: "jazz"
+    date_utcz: "2007-10-27T22:48:21Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Red Sea Jazz Festival"
+    city: "Eilat"
+    country: "Israel"
+    broadcast: true
+    with: []
+    review: "Pretty nice"
+    remark: "On TV, Channel 1, at my place. With more players from abroad"
+  - name: "Omer Avital Trio"
+    performers: ["Omer Avital", "Omer Klein", "Ziv Ravitz"]
+    event: "Rimon On Campus series"
+    genre: "jazz"
+    date_utcz: "2007-12-06T15:24:29Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rimon School of Music"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: []
+    review: "Great show and master class"
+    remark: "Omer Avital on double bass and oud, Omer Klein on piano, Ziv Ravitz on drums"
+  - name: "Amit Golan: I Decided"
+    performers: ["Amit Golan", "Doron Tirosh", "Gilad Abro", "Arad Yeini", "Asaf Yuria"]
+    genre: "jazz"
+    date_utcz: "2008-01-11T22:54:54Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Shablul, Tel-Aviv port"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: []
+    review: "Very good show"
+  - name: "Rimon jazz workshop closing concert"
+    performers: ["Jeff \"Tain\" Watts", "Ronen Raban", "Ofer Portugali", "Yurai Oron", "Amikam Kimelman"]
+    event: "Rimon jazz workshop series closing concert"
+    genre: "jazz"
+    date_utcz: "2008-01-17T14:10:34Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rimon School of Music"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: []
+    review: "Very good show"
+    remark: "Amikam Kimelman sang (yes, sang)"
+  - name: "Rimon jazz player competition"
+    event: "Rimon jazz player competition, first phase, second session"
+    genre: "jazz"
+    date_utcz: "2008-01-29T21:44:30Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Rimon School of Music"
+    city: "Ramat Hasharon"
+    country: "Israel"
+    with: []
+    review: "Pretty good"
+    remark: "Many student performers"
+  - name: "Rimon jazz player competition, finals"
+    event: "Rimon jazz player competition, finals"
+    genre: "jazz"
+    date_utcz: "2008-03-05T00:02:02Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Camelot, Herzliya Pituach"
+    city: "Herzliya"
+    country: "Israel"
+    with: []
+    review: "Pretty good"
+    remark: "8 competitors"
+  - name: "Alon Olearchik"
+    performers: ["Alon Olearchik"]
+    genre: "rock"
+    date_utcz: "2009-05-08T21:58:49Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Ozen Bar"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Ofir Zwebner"]
+    review: "Pretty good"
+    remark: "With the regular band, in the regular show"
+  - name: "Sug Machol (סוג מחול)"
+    performers: ["Maya Levy", "Hanan Ananda Mars", "Ori Shafir", "Noa Peran", "May Lev"]
+    genre: "dance"
+    date_utcz: "2010-11-06T19:00:00Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Hangar 6, Jaffa port"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Galit Masa"]
+    review: "Quite OK"
+    remark: "Choreography and direction by Maya Levy and Hanan Ananda Mars, dancers Ori Shafir and Noa Peran, original music by May Lev. A show with a trampoline"
+  - name: "Yaron Dorman"
+    performers: ["Yaron Dorman"]
+    date_utcz: "2010-12-26T08:17:23Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Salona bar, Jaffa"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: []
+    remark: "With a band he plays in"
+  - name: "Einav Jackson Cohen"
+    performers: ["Einav Jackson Cohen", "Shlomi Shaban", "Gil Lewis"]
+    event: "Release of her first album"
+    date_utcz: "2011-03-15T23:27:20Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tmuna Theater"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Galit Masa"]
+    review: "Pretty good show"
+  - name: "Brad Mehldau"
+    performers: ["Brad Mehldau"]
+    genre: "jazz"
+    date_utcz: "2011-07-19T00:20:45Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Mivtzar Shuni"
+    city: "Binyamina"
+    country: "Israel"
+    with: ["Shlomi Noach", "Orit Wasserman", "Shelly Shticks ex-husband"]
+    review: "Pretty good show"
+    remark: "Solo show"
+  - name: "Rushes"
+    performers: ["Inbal Pinto", "Avshalom Pollak"]
+    genre: "dance"
+    date_utcz: "2011-09-16T21:06:09Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Suzanne Dellal Centre"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Galit Masa"]
+    review: "It's OK, but you know me and dance shows"
+  - name: "Korin Allal"
+    performers: ["Korin Allal", "The Witches", "Einav Jackson Cohen"]
+    genre: "rock"
+    date_utcz: "2012-10-06T19:00:00Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Haifa public park"
+    city: "Haifa"
+    country: "Israel"
+    with: []
+  - name: "Yaron Dorman and Shultz the Terrible"
+    performers: ["Yaron Dorman", "Shultz the Terrible"]
+    date_utcz: "2014-05-16T23:31:21Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Tel Aviv Museum of Art"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: []
+    tickets: 1
+    review: "Good show (for that style)"
+    remark: "Yaron's family was there"
+  - name: "Yaron Dorman at Tomer Kling's birthday"
+    performers: ["Yaron Dorman"]
+    event: "Tomer Kling's 41st birthday"
+    date_utcz: "2017-03-24T21:55:21Z"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Bascula, HaRakevet 72"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: []
+    review: "Pretty good show for a birthday"
+    remark: "Yaron Dorman on keyboards. Yaron's family was there"
+  - name: "Avishai Cohen Trio"
+    performers: ["Avishai Cohen"]
+    genre: "jazz"
+    date_ymd: "2019-04-20"
+    date_timezone: "Asia/Jerusalem"
+    venue: "Zappa Ramat HaChayal"
+    city: "Tel-Aviv"
+    country: "Israel"
+    with: ["Doron Veltzer", "Reut Shaer"]
+    review: "Pretty good show"

@@ -50,6 +50,7 @@
         'education': BASE_PATH + 'plugin-companies.js',
         'certifiers': BASE_PATH + 'plugin-companies.js',
         'certifications': BASE_PATH + 'plugin-certifications.js',
+        'concerts': BASE_PATH + 'plugin-concerts.js',
         'features': BASE_PATH + 'plugin-movies.js',
         'museums': BASE_PATH + 'plugin-museums.js',
         'podcasts': BASE_PATH + 'plugin-podcasts.js',
