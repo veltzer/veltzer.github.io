@@ -665,7 +665,7 @@
                 console.error('Error loading or parsing data file:', error);
                 itemsContainer.innerHTML = '';
                 statsContainer.innerHTML = '';
-                statusMessage.innerHTML = '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"><strong>Loading Failed:</strong> ' + escapeHtml(error.message) + '</div>';
+                statusMessage.innerHTML = '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"><strong>' + t('ui_loading_failed') + '</strong> ' + escapeHtml(error.message) + '</div>';
             }
         }
 
@@ -734,8 +734,8 @@
                             '<h5 class="text-lg font-bold mb-2" dir="auto">' + escapeHtml(item.name || t('ui_no_title')) + '</h5>' +
                             '<p class="text-gray-600 mb-4" dir="auto">' + escapeHtml(item.review || item.subtitle || t('ui_no_description')) + '</p>' +
                             '<ul class="mt-auto divide-y divide-gray-200">' +
-                                (activeConfig.ratingScale ? '<li class="py-2"><strong>Rating:</strong> <span class="inline-block bg-blue-600 text-white text-sm font-semibold px-2.5 py-0.5 rounded-full">' + escapeHtml(item.rating || '?') + ' / ' + activeConfig.ratingScale + '</span></li>' : '') +
-                                (item.device ? '<li class="py-2"><strong>Device:</strong> ' + escapeHtml(item.device) + '</li>' : '') +
+                                (activeConfig.ratingScale ? '<li class="py-2"><strong>' + t('ui_rating') + '</strong> <span dir="ltr" class="inline-block bg-blue-600 text-white text-sm font-semibold px-2.5 py-0.5 rounded-full">' + escapeHtml(item.rating || '?') + ' / ' + activeConfig.ratingScale + '</span></li>' : '') +
+                                (item.device ? '<li class="py-2"><strong>' + t('ui_device') + '</strong> <bdi>' + escapeHtml(item.device) + '</bdi>' + '</li>' : '') +
                                 specificDetails +
                             '</ul>' +
                         '</div>' +
@@ -846,7 +846,7 @@
             // in loadAllPlugins, loadData never runs, and the page stays blank with
             // nothing but an uncaught rejection in the console.
             console.error('Error loading collection plugins:', error);
-            statusMessage.innerHTML = '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"><strong>Loading Failed:</strong> ' + escapeHtml(error.message) + '</div>';
+            statusMessage.innerHTML = '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"><strong>' + t('ui_loading_failed') + '</strong> ' + escapeHtml(error.message) + '</div>';
         });
     });
 }());

@@ -83,6 +83,9 @@ app_ui_next_page = "Next page"
 app_ui_page = "Page"
 app_ui_jump_to_page = "Jump to page"
 app_ui_showing = "Showing {start}–{end} of {total}"
+app_ui_rating = "Rating:"
+app_ui_device = "Device:"
+app_ui_loading_failed = "Loading failed:"
 
 # static/plugin-books.js
 app_books_date_unknown = "date unknown"

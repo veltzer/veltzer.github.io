@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{ term.name }} &middot; {{ config.title }}{% endblock %}
+{% block title %}{{ term.name }} &middot; {{ language.title }}{% endblock %}
 {% block content %}
 <h1>{{ trans(key="tagged_with") }} &ldquo;{{ term.name }}&rdquo;</h1>
 {#- paginate_by = 20 on the taxonomy: this pager's slice, with the pager

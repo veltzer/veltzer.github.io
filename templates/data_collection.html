@@ -25,7 +25,7 @@
    the prose templates use, so it gets its own template instead of the shared
    section.html plus CSS overrides. #}
 {% extends "base.html" %}
-{% block title %}{{ section.title }} &middot; {{ config.title }}{% endblock %}
+{% block title %}{{ section.title }} &middot; {{ language.title }}{% endblock %}
 {% block main_class %}embed-main{% endblock %}
 {% block content %}
 {# No <h1> here: the app renders its own heading from the active plugin. #}

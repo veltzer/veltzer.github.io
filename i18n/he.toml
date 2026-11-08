@@ -85,6 +85,9 @@ app_ui_next_page = "העמוד הבא"
 app_ui_page = "עמוד"
 app_ui_jump_to_page = "מעבר לעמוד"
 app_ui_showing = "מציג {start}–{end} מתוך {total}"
+app_ui_rating = "דירוג:"
+app_ui_device = "מכשיר:"
+app_ui_loading_failed = "הטעינה נכשלה:"
 
 # static/plugin-books.js
 app_books_date_unknown = "תאריך לא ידוע"

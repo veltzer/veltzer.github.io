@@ -25,7 +25,7 @@
     Inlined from the shared-themes submodule (load_data records the file as a
     source of every page), ahead of the stylesheets. -#}
 <script>{{ load_data(path="shared/shared-themes/theme-onload.js") | safe }}</script>
-<title>{% block title %}{{ config.title }}{% endblock %}</title>
+<title>{% block title %}{{ language.title }}{% endblock %}</title>
 <meta name="description" content="{% block description %}{{ meta_description }}{% endblock %}">
 
 {#- Canonical, alternates and Open Graph.
@@ -54,11 +54,11 @@
 <link rel="alternate" hreflang="x-default" href="{{ x_default }}">
 {%- endif %}
 <meta property="og:type" content="{% if page %}article{% else %}website{% endif %}">
-<meta property="og:site_name" content="{{ config.title }}">
+<meta property="og:site_name" content="{{ language.title }}">
 <meta property="og:locale" content="{{ language.locale }}">
 {#- `term` is set on a single tag's page, `terms` on the tag list; without
     those branches every tag page shared the site title as its og:title. -#}
-<meta property="og:title" content="{% block og_title %}{% if page %}{{ page.title }}{% elif section %}{{ section.title }}{% elif term %}{{ term.name }}{% elif terms %}{{ trans(key="tags_title") }}{% else %}{{ config.title }}{% endif %}{% endblock %}">
+<meta property="og:title" content="{% block og_title %}{% if page %}{{ page.title }}{% elif section %}{{ section.title }}{% elif term %}{{ term.name }}{% elif terms %}{{ trans(key="tags_title") }}{% else %}{{ language.title }}{% endif %}{% endblock %}">
 <meta property="og:description" content="{{ meta_description }}">
 {#- The share card, 1200x630, the size every network's large preview
     expects; without it a shared link gets a text-only card. A blog post
@@ -151,7 +151,7 @@
 <link rel="stylesheet" href="{{ get_url(path='style.css') }}{{ v }}">
 <link rel="stylesheet" href="{{ get_url(path='highlight.css') }}{{ v }}">
 {#- The feed of this language: /en/atom.xml or /he/atom.xml. -#}
-<link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path=lang ~ '/atom.xml') }}">
+<link rel="alternate" type="application/atom+xml" title="{{ language.title }}" href="{{ get_url(path=lang ~ '/atom.xml') }}">
 {%- block extra_head %}{% endblock %}
 
 {#- Analytics. config.extra.analytics picks the provider: "goatcounter"
@@ -193,7 +193,7 @@
         size, for a page whose stylesheet has not loaded. The geometry is
         scripts/make_logo.py's; tests/test_logo.py keeps this copy in step. -#}
     <svg class="site-logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#4051b5"/><path d="M15 19 L31 32 L15 45 M35 45 H50" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    {{- config.title -}}
+    {{- language.title -}}
   </a>
   <nav class="site-nav">
     {%- for item in config.extra.nav %}

@@ -4,7 +4,7 @@
     every year with posts (year_archives in content/blog/_index.*.md), and
     hands it the same year in the other language as its translation, so the
     language switcher and the hreflang alternates work here too. -#}
-{% block title %}{{ trans(key="posts_of_year") }} {{ year }} &middot; {{ config.title }}{% endblock %}
+{% block title %}{{ trans(key="posts_of_year") }} {{ year }} &middot; {{ language.title }}{% endblock %}
 {% block og_title %}{{ trans(key="posts_of_year") }} {{ year }}{% endblock %}
 {% block content %}
 <h1>{{ trans(key="posts_of_year") }} {{ year }}</h1>
