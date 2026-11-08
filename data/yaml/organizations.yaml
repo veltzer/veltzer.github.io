@@ -3,6 +3,8 @@
 # yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/organizations.json
 # Organizations I taught at, taught for (training companies that hired me to teach: function training-provider),
 # consulted for, was certified by, or consumed media from (function publisher).
+# id 105 (AWS Solutions Architect) was merged into id 100 (Amazon Web Services) on 2026-11-08: the certification
+# tab lists the companies that certified me, and the two AWS certifications are in id 100's remark.
 # id 125 (Tel Aviv University) was added on 2026-11-07, and id 126 (Rimon School of Music) on 2026-11-08; with the
 # Hebrew and Open universities they have function education (a school I studied at).
 # ids 122-124 (AgileSparks, DevelopIntelligence, Logtel) were added on 2026-11-07 as training providers, and Hinbit,
@@ -652,7 +654,6 @@ items:
   functions:
   - training-provider
   - consulting
-  - certification
   logo: logos/interbit.svg
   logo_original: raw/logos/interbit.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
@@ -3595,7 +3596,6 @@ items:
   functions:
   - training-provider
   - consulting
-  - certification
   logo: logos/johnbryce.svg
   logo_original: raw/logos/johnbryce.jpg
   logo_kind: traced from original bitmap (no vector logo found online)
@@ -3624,8 +3624,9 @@ items:
   - https://www.matrix-globalservices.com/subsidiaries/
   - https://www.johnbryce.co.il/%d7%90%d7%95%d7%93%d7%95%d7%aa/branches/
 - id: 100
-  name: Amazon Web Services Certified Instructor
+  name: Amazon Web Services
   slug: aws
+  remark: 'Certified as AWS Certified Instructor (2014-02-02) and AWS Solutions Architect - Associate (2014-05-15)'
   from_date: '2014-02-02'
   functions:
   - certification
@@ -3634,7 +3635,7 @@ items:
   logo_kind: official vector
   logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/Amazon_Web_Services_Logo.svg
   logo_license: PD-textlogo (Wikimedia Commons)
-  logo_note: Current AWS logo (used for the AWS Certified Instructor entry)
+  logo_note: Current AWS logo
   old_url: http://aws.amazon.com
   status: active
   website: https://aws.amazon.com/
@@ -3762,39 +3763,6 @@ items:
   sources:
   - https://en.wikipedia.org/wiki/Radvision
   - https://investors.avaya.com/investor-news/press-release-details/2012/Avaya-Completes-Radvision-Acquisition/default.aspx
-- id: 105
-  name: AWS Solutions Architect - Associate Level
-  slug: aws-sol-arch-assoc
-  from_date: '2014-05-15'
-  functions:
-  - certification
-  logo: logos/aws.svg
-  logo_original: raw/logos/aws.png
-  logo_kind: official vector
-  logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/Amazon_Web_Services_Logo.svg
-  logo_license: PD-textlogo (Wikimedia Commons)
-  logo_note: Current AWS logo (used for the AWS Certified Instructor entry)
-  old_url: http://aws.amazon.com
-  status: active
-  website: https://aws.amazon.com/
-  location: Seattle, Washington, USA
-  location_geo:
-    place: Seattle, Washington, USA
-    lat: 47.60383
-    lon: -122.33006
-  israel_office: Tel Aviv, Israel
-  israel_office_geo:
-    place: Tel Aviv, Israel
-    lat: 32.0853
-    lon: 34.78181
-  address: Azrieli Sarona Tower, 121 Menachem Begin Rd, Tel Aviv 6701203, Israel
-  address_source: https://www.whoprofits.org/companies/company/7401
-  geo:
-    from: israel_office
-    place: Tel Aviv, Israel
-    lat: 32.0853
-    lon: 34.78181
-  sources: *id001
 - id: 106
   name: VeriFone
   slug: verifone
