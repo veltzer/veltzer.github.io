@@ -71,8 +71,15 @@ window.collectionPlugins['concerts'] = {
         {key: 'genre', label: t('concerts_toggle_genre'), default: true},
         {key: 'date', label: t('concerts_toggle_date'), default: true},
         {key: 'review', label: t('concerts_toggle_review'), default: true},
-        {key: 'remark', label: t('concerts_toggle_remark'), default: true}
+        {key: 'remark', label: t('concerts_toggle_remark'), default: true},
+        {key: 'credit', label: t('concerts_toggle_credit'), default: true}
     ],
+    // One image per show, static/images/concert-<internal_id>.jpg: the
+    // performer where Wikipedia has a free photo of them, otherwise the venue
+    // or the instrument. image_source/license/author credit it below.
+    renderImage: function(item) {
+        return item.internal_id ? 'images/concert-' + encodeURIComponent(item.internal_id) + '.jpg' : '';
+    },
     // Data values are English, so they sit in <bdi> on a Hebrew page.
     renderDetails: function(item) {
         const bdi = function(text) { return '<bdi>' + window.escapeHtml(text) + '</bdi>'; };
@@ -94,6 +101,12 @@ window.collectionPlugins['concerts'] = {
         }
         if (item.review) html += line('review', t('concerts_detail_review'), bdi(item.review));
         if (item.remark) html += line('remark', t('concerts_detail_remark'), bdi(item.remark));
+        if (item.image_source) {
+            const credit = [item.image_author, item.image_license].filter(Boolean).join(', ');
+            html += '<li class="py-2 text-sm" data-toggle="credit">' + window.escapeHtml(t('concerts_image_credit')) + ' ' +
+                '<a href="' + window.escapeHtml(item.image_source) + '" target="_blank" rel="noopener noreferrer"' +
+                ' class="text-blue-600 hover:text-blue-800 underline">' + bdi(credit || t('concerts_image_source')) + '</a></li>';
+        }
         return html;
     },
     renderStats: function(items) {

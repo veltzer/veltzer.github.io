@@ -13,6 +13,7 @@ Checks:
                  or audiocourse-internal-{internal_id}.jpg
 - Museums: static/images/museum-{internal_id}.jpg
 - Podcasts: static/images/podcast-{internal_id}.jpg
+- Concerts: static/images/concert-{internal_id}.jpg
 - Books: static/images/book-simania-{simania_id}.jpg
          or book-goodreads-{goodreads_id}.jpg (simania wins when both exist)
 - YouTube: skipped (uses external thumbnails)
@@ -173,6 +174,23 @@ def check_podcasts():
     return len(podcast_entries), errors
 
 
+def check_concerts():
+    """Check concert images: one per show, named by its internal_id."""
+    entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "concerts.yaml"))
+    errors = 0
+    for entry in entries:
+        internal_id = entry.get("internal_id")
+        if not internal_id:
+            print(f"  NO ID: {entry.get('name', '?')}")
+            errors += 1
+            continue
+        path = os.path.join(str(IMAGE_DIR), f"concert-{internal_id}.jpg")
+        if not os.path.exists(path):
+            print(f"  MISSING: {path} ({entry.get('name', '?')})")
+            errors += 1
+    return len(entries), errors
+
+
 def check_books():
     """Check book covers.
 
@@ -208,6 +226,7 @@ def main():
         ("Audio Courses", check_audio_courses),
         ("Museums", check_museums),
         ("Podcasts", check_podcasts),
+        ("Concerts", check_concerts),
         ("Books", check_books),
     ]
 

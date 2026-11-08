@@ -371,6 +371,9 @@ app_concerts_chart_by_performer = "מבצעים שראיתי יותר מפעם �
 app_concerts_chart_by_city = "הופעות לפי עיר"
 app_concerts_chart_by_year = "הופעות לפי שנה"
 app_concerts_unit = "הופעות"
+app_concerts_toggle_credit = "קרדיט לתמונה"
+app_concerts_image_credit = "תמונה:"
+app_concerts_image_source = "מקור"
 
 # static/plugin-youtube.js
 app_youtube_nav_title = "יוטיוב"

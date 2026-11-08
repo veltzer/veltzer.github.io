@@ -369,6 +369,9 @@ app_concerts_chart_by_performer = "Performers Seen More Than Once"
 app_concerts_chart_by_city = "Shows per City"
 app_concerts_chart_by_year = "Shows per Year"
 app_concerts_unit = "shows"
+app_concerts_toggle_credit = "Image Credit"
+app_concerts_image_credit = "Image:"
+app_concerts_image_source = "source"
 
 # static/plugin-youtube.js
 app_youtube_nav_title = "YouTube"
