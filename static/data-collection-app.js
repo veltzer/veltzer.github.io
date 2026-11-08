@@ -644,6 +644,12 @@
                     if (item.title && typeof item.name === 'undefined') {
                         item.name = item.title;
                     }
+                    // A plugin may derive fields in the page's language
+                    // (the data itself is language-neutral) before search,
+                    // sort and render see the item.
+                    if (activeConfig.prepareItem) {
+                        activeConfig.prepareItem(item);
+                    }
                     return item;
                 });
                 setupSortUI();

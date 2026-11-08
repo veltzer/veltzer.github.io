@@ -18,9 +18,10 @@ me. A tab wants only the fields a
 card shows: the name, the logo path, the current status
 and what happened, where the company is and where its Israel office was,
 the one map point chosen for it, the static map image of that point, and
-the logo attribution. The app prints ``review`` under every card's
-name, so each company gets one: what happened to it, or a word on its status
-when nothing did.
+the logo attribution, and ``what_happened``. The app prints a line under
+every card's name -- what happened to the company, or a word on its status
+when nothing did -- and plugin-companies.js builds it, so that the status
+word is in the page's language.
 
 The map image is ``static/images/map-<lat>_<lon>.jpg``, rendered by
 scripts/organizations_fetch_maps.py and committed. It is named after the
@@ -77,17 +78,13 @@ KEPT = (
     "location",
     "israel_office",
     "address",
+    "what_happened",
     "from_date",
     "remark",
 )
 GEO_KEYS = ("place", "lat", "lon")
 MAP_PREFIX = "images/map-"
 MAP_SUFFIX = ".jpg"
-STATUS_BLURB = {
-    "active": "Still active.",
-    "unknown": "Whereabouts unknown.",
-}
-
 
 def has_function(item, function):
     """True when the organization's functions include ``function``."""
@@ -115,14 +112,6 @@ def without_address(data):
     return [item.get("name", "?") for item in data.get("items") or [] if shown(item) and not item.get("address")]
 
 
-def blurb(item):
-    """The line under the name: what happened, or the status when nothing did."""
-    if item.get("what_happened"):
-        return item["what_happened"]
-    status = item.get("status") or "unknown"
-    return STATUS_BLURB.get(status, status.capitalize() + ".")
-
-
 def map_path(geo):
     """The site-relative path of the static map image for a geo point."""
     return f"{MAP_PREFIX}{geo['lat']}_{geo['lon']}{MAP_SUFFIX}"
@@ -136,7 +125,6 @@ def convert_item(item):
         if value is None or value == "":
             continue
         out[key] = value
-    out["review"] = blurb(item)
     geo = item.get("geo")
     if geo and all(key in geo for key in GEO_KEYS):
         out["geo"] = {key: geo[key] for key in GEO_KEYS}

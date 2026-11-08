@@ -12,6 +12,11 @@
 // The scale is mapped by role, not by lightness -- 50/100/200 are the surface
 // steps, 500+ are text -- so the same class means the same thing in a light or
 // a dark theme instead of inverting.
+//
+// The same goes for shape: the corner radii and shadows are the theme's
+// --radius-* and --shadow tokens, and the gray-200/300 border colours are the
+// site's --border-subtle/--border, so a card or a pill here is drawn like the
+// boxes and tags on the rest of the site.
 module.exports = {
 content: [
   "templates/data_collection.html",
@@ -23,6 +28,26 @@ important: '#collection-root',
 corePlugins: { preflight: false },
 theme: {
   extend: {
+    borderRadius: {
+      sm: 'var(--radius-xs)',
+      DEFAULT: 'var(--radius-xs)',
+      md: 'var(--radius-sm)',
+      lg: 'var(--radius-sm)',
+      xl: 'var(--radius)',
+      full: 'var(--radius-pill)'
+    },
+    boxShadow: {
+      sm: 'none',
+      DEFAULT: 'var(--shadow)',
+      md: 'var(--shadow)',
+      lg: 'var(--shadow)'
+    },
+    borderColor: {
+      gray: {
+        200: 'var(--border-subtle)',
+        300: 'var(--border)'
+      }
+    },
     colors: {
       white: 'var(--bg)',
       black: 'var(--text-primary)',

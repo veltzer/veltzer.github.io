@@ -3,7 +3,7 @@
 organizations.yaml carries every organization with research notes, three
 geocoded fields and logo provenance; the companies tab wants the teaching
 ones with only their card fields. These pin the selection rule, what is
-dropped, the one map point that survives, and the blurb the card prints.
+dropped, the one map point that survives, and what_happened, which the card line is built from.
 """
 
 import gzip
@@ -126,16 +126,12 @@ class TestFields:
 
 
 class TestBlurb:
-    def test_what_happened_is_the_blurb(self):
+    def test_what_happened_is_kept_for_the_card_line(self):
         item = organization(status="acquired", what_happened="Acquired by Nokia in 2016.")
-        assert import_companies.convert_item(item)["review"] == "Acquired by Nokia in 2016."
-        assert "what_happened" not in import_companies.convert_item(item)
-
-    def test_active_company_says_so(self):
-        assert import_companies.blurb(organization(status="active")) == "Still active."
-
-    def test_other_status_without_a_story_is_capitalized(self):
-        assert import_companies.blurb(organization(status="defunct")) == "Defunct."
+        out = import_companies.convert_item(item)
+        assert out["what_happened"] == "Acquired by Nokia in 2016."
+        # The line itself is built in the page's language by plugin-companies.js.
+        assert "review" not in out
 
 
 class TestMissingMaps:

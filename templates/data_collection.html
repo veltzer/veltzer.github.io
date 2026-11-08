@@ -35,9 +35,8 @@
 <link rel="stylesheet" href="/vendor/tailwind-collection.css">
 
 <style>
-#collection-root {
-font-family: Inter, Heebo, sans-serif;
-}
+/* The app is set in the site's own type: no font of its own, so it inherits
+   --font-sans (and the base size and line height) from body like any page. */
 #collection-root .stat-card { text-align: center; }
 #collection-root .stat-value { font-size: 1.875rem; font-weight: 700; color: var(--accent); }
 #collection-root .stat-label { font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.25rem; }
@@ -108,12 +107,12 @@ font-family: Inter, Heebo, sans-serif;
 </style>
 <style id="toggle-styles"></style>
 
-<div id="collection-root" class="antialiased" style="font-family: Inter, Heebo, sans-serif;">
+<div id="collection-root">
 <div class="max-w-6xl mx-auto px-4 my-12">
 
 <header class="text-center mb-10">
-<h1 id="page-title" class="text-4xl font-bold"></h1>
-<p id="page-subtitle" class="text-lg text-gray-500 mt-2"></p>
+<h1 id="page-title"></h1>
+<p id="page-subtitle" class="text-gray-500 mt-2"></p>
 </header>
 
 <nav id="main-nav" class="flex flex-wrap justify-center gap-2 mb-10"></nav>

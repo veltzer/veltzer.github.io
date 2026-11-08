@@ -53,6 +53,21 @@ function functionLabel(fn) {
     return enumLabel('function', fn);
 }
 
+// The line under a company's name: what happened to it (research notes in
+// the data, English like the rest of it), or, when nothing did, a word on its
+// status in the page's language.
+function companyBlurb(item) {
+    if (item.what_happened) {
+        return item.what_happened;
+    }
+    const status = item.status || 'unknown';
+    const strings = window.collectionStrings || {};
+    if (strings['app_companies_blurb_' + status] !== undefined) {
+        return t('companies_blurb_' + status);
+    }
+    return statusLabel(status) + '.';
+}
+
 // The logo kinds are sentences in the YAML; matched on their leading words.
 function logoKindLabel(kind) {
     if (kind.indexOf('official vector') === 0) return t('companies_logo_kind_official');
@@ -69,6 +84,9 @@ window.collectionPlugins['companies'] = {
     ratingScale: null,
     searchPlaceholder: t('companies_search_placeholder'),
     searchFields: ['name', 'location', 'israel_office', 'address', 'status', 'review', 'remark'],
+    prepareItem: function(item) {
+        item.review = companyBlurb(item);
+    },
     fields: [
         {field: 'name', label: t('companies_field_name'), type: 'string', filterable: false},
         {field: 'status', label: t('companies_field_status'), type: 'string', filterType: 'select',
