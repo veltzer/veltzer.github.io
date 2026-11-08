@@ -262,12 +262,20 @@ window.collectionPlugins['publishers'] = Object.assign({}, window.collectionPlug
     subtitle: t('companies_publishers_subtitle')
 });
 
-// The schools and universities I studied at, the first tab of the education
-// page (/training/education/). Its other tab is the certifications themselves,
-// one card per certification (plugin-certifications.js).
+// The schools and universities I studied at, and the companies that certified
+// me, two of the tabs of the education page (/training/education/). Its third
+// tab is the certifications themselves, one card per certification
+// (plugin-certifications.js).
 window.collectionPlugins['education'] = Object.assign({}, window.collectionPlugins['companies'], {
     file: 'data/education.json.gz',
     navTitle: t('companies_education_nav_title'),
     title: t('companies_education_title'),
     subtitle: t('companies_education_subtitle')
+});
+
+window.collectionPlugins['certifiers'] = Object.assign({}, window.collectionPlugins['companies'], {
+    file: 'data/certifiers.json.gz',
+    navTitle: t('companies_certifiers_nav_title'),
+    title: t('companies_certifiers_title'),
+    subtitle: t('companies_certifiers_subtitle')
 });

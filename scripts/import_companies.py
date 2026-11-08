@@ -13,10 +13,9 @@ consulting page (/consulting/) has ``consulting``, which an
 organization I also taught at may have too; the media page (/media/) has
 ``publisher``, the publishers of the audiobooks, courses and radio I consumed;
 the education page (/training/education/) has ``education``, the schools and
-universities I studied at. The companies that certified me (``certification``)
-are not a tab of their own: they appear as the issuers on the Certifications
-tab, which import_certifications.py builds from certifications.yaml. A tab
-wants only the fields a
+universities I studied at, and ``certification``, the companies that certified
+me; its third tab, the certifications themselves, is built from
+certifications.yaml by import_certifications.py. A tab wants only the fields a
 card shows: the name, the logo path, the current status
 and what happened, where the company is and where its Israel office was,
 the one map point chosen for it, the static map image of that point, and
@@ -59,9 +58,8 @@ CONSULTING = "consulting"
 PUBLISHER = "publisher"
 EDUCATION = "education"
 CERTIFICATION = "certification"
-# The functions whose organizations are shown, so need an address and a map
-# image (see organizations_fetch_maps.py). Each is a tab, except certification,
-# whose organizations are shown as issuers on the certifications tab.
+# The functions that get a tab, so a card, an address and a map image (see
+# organizations_fetch_maps.py): every organization with one of them is shown.
 TABS = (TEACHING, TRAINING_PROVIDER, CONSULTING, PUBLISHER, EDUCATION, CERTIFICATION)
 # Tabs of one page that are different relationships to the same kind of
 # organization, so no organization may be on two of them.

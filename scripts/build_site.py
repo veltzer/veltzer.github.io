@@ -52,7 +52,7 @@ def die(message):
 
 
 def write_companies(companies_file, providers_file, consulting_file, publishers_file, education_file,
-                    certifications_file, logos_dir):
+                    certifiers_file, certifications_file, logos_dir):
     """Build the organization tabs' data and logos straight into the output.
 
     One JSON per tab, from the same YAML: on the teaching data page the
@@ -60,10 +60,11 @@ def write_companies(companies_file, providers_file, consulting_file, publishers_
     taught for (function training-provider), on the consulting data page
     the companies I consulted for (function consulting), and on the media
     page the publishers of what I listened to (function publisher), and on
-    the education page the schools I studied at (function education). The
-    education page's other tab is the certifications I hold, one per
-    certification rather than per company: certifications.yaml joined with
-    the issuing organizations by import_certifications.py.
+    the education page the schools I studied at (function education) and the
+    companies that certified me (function certification). The education
+    page's third tab is the certifications I hold, one per certification
+    rather than per company: certifications.yaml joined with the issuing
+    organizations by import_certifications.py.
 
     The other media tabs read committed static/data/*.json.gz files that
     scripts/copy_data.py produces by hand, because half of their sources
@@ -76,7 +77,7 @@ def write_companies(companies_file, providers_file, consulting_file, publishers_
     """
     for output_file, function in ((companies_file, "teaching"), (providers_file, "training-provider"),
                                   (consulting_file, "consulting"), (publishers_file, "publisher"),
-                                  (education_file, "education")):
+                                  (education_file, "education"), (certifiers_file, "certification")):
         output_file.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run(
             [sys.executable, str(COMPANIES_IMPORTER), str(ORGANIZATIONS_YAML), str(output_file),
@@ -104,7 +105,7 @@ def write_companies(companies_file, providers_file, consulting_file, publishers_
 # The steps, in the order the bare command lists them, each with its line.
 STEPS = {
     "companies": "write _site/data/companies.json.gz, training_providers.json.gz, consulting.json.gz, publishers.json.gz,"
-                 " education.json.gz, certifications.json.gz and _site/logos/",
+                 " education.json.gz, certifiers.json.gz, certifications.json.gz and _site/logos/",
 }
 
 
