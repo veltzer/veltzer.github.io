@@ -248,6 +248,14 @@ dir = "_site"
 [build]
 parallel = 0
 
+# The schemas data/yaml validates against are fetched from
+# veltzer.github.io/web-schemas and kept in the web cache, which CI restores
+# with the rest of .rsconstruct. At the 7-day default a schema change was not
+# seen for a week unless the cache was cleared by hand; an hour covers the usual
+# push-the-schema-then-the-data sequence and still saves the refetch per build.
+[cache]
+webcache_ttl_secs = 3600
+
 # lint the GitHub Actions workflow files with actionlint
 [processor.checker.iactionlint]
 src_dirs = [".github/workflows"]
