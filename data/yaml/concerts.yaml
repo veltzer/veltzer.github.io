@@ -25,7 +25,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Danny_Sanderson.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "Shai Franco"
-    internal_id: 1
+    image: "concert-danny-sanderson.jpg"
   - name: "Caveret"
     performers: ["Caveret"]
     event: "Reunion concert, Arad festival"
@@ -39,7 +39,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Kaveret,_The_Last_Reunion,_7_August_2013_-_40.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "Little Savage"
-    internal_id: 2
+    image: "concert-kaveret.jpg"
   - name: "Gerry Ekshtein"
     performers: ["Gerry Ekshtein"]
     event: "Arad festival"
@@ -53,7 +53,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:WikiAir_IL-13-06_015_-_Arad.JPG"
     image_license: "CC BY-SA 3.0"
     image_author: "Neukoln"
-    internal_id: 3
+    image: "concert-arad-festival.jpg"
   - name: "Tislam"
     performers: ["Tislam"]
     event: "Arad festival"
@@ -67,7 +67,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Tislam.JPG"
     image_license: "CC BY-SA 3.0"
     image_author: "Noa Cafri"
-    internal_id: 4
+    image: "concert-t-slam.jpg"
   - name: "Nurit Galron and Ilan Virtzberg"
     performers: ["Nurit Galron", "Ilan Virtzberg"]
     event: "Batzir Meshutaf concert"
@@ -80,7 +80,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Flickr_-_Government_Press_Office_(GPO)_-_SINGER_NURIT_GALRON_PERFORMING_AT_A_MEMORIAL_SERVICE_HELD_FOR_PM_YITZHAK_RABIN.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "https://www.flickr.com/people/69061470@N05"
-    internal_id: 5
+    image: "concert-nurit-galron.jpg"
   - name: "Jazz with a red-headed guitarist"
     performers: ["A red-headed guitarist"]
     genre: "jazz"
@@ -93,7 +93,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:GuitareClassique5.png"
     image_license: "CC BY-SA 2.0 de"
     image_author: "User:Martin Möller Talk"
-    internal_id: 6
+    image: "concert-guitar.jpg"
   - name: "Avner Shtraus"
     performers: ["Avner Shtraus"]
     genre: "rock"
@@ -106,7 +106,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:AVNER_STRAUSS.jpg"
     image_license: "Public domain"
     image_author: "אבנר שטראוס Avner Strauss"
-    internal_id: 7
+    image: "concert-avner-strauss.jpg"
   - name: "Choir rehearsal with Chaim Tzinovitch"
     performers: ["Chaim Tzinovitch"]
     genre: "rehearsal"
@@ -120,7 +120,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:KfarVitkin005.jpg"
     image_license: "Attribution"
     image_author: "Ori~"
-    internal_id: 8
+    image: "concert-kfar-vitkin.jpg"
   - name: "Shmulik Kraus and Ilan Virtzberg"
     performers: ["Shmulik Kraus", "Ilan Virtzberg"]
     event: "Student day"
@@ -134,7 +134,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Ilan_Virtzberg.jpg"
     image_license: "Copyrighted free use"
     image_author: "Eli Hakim &amp; Ohad Perach"
-    internal_id: 9
+    image: "concert-ilan-virtzberg.jpg"
   - name: "Jethro Tull"
     performers: ["Jethro Tull"]
     genre: "rock"
@@ -146,7 +146,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Jethro_Tull_070373_003.jpg"
     image_license: "CC BY-SA 2.0"
     image_author: "Heinrich Klaffs"
-    internal_id: 10
+    image: "concert-jethro-tull.jpg"
   - name: "Ehud Banai"
     performers: ["Ehud Banai"]
     genre: "rock"
@@ -159,7 +159,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:%D7%90%D7%94%D7%95%D7%93_%D7%91%D7%A0%D7%90%D7%99.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "אודי אבן חיים לדיאגו מיטלברג"
-    internal_id: 11
+    image: "concert-ehud-banai.jpg"
   - name: "Peter Gabriel"
     performers: ["Peter Gabriel", "Lou Reed"]
     genre: "rock"
@@ -174,7 +174,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:PeterGabrielO2190623_(70_of_86)_(52987432346)_(cropped).jpg"
     image_license: "CC BY 2.0"
     image_author: "Raph_PH"
-    internal_id: 12
+    image: "concert-peter-gabriel.jpg"
   - name: "Sting"
     performers: ["Sting"]
     genre: "rock"
@@ -188,7 +188,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Sting_at_2026_Montreux_Jazz_Festival-12-CA_(cropped).jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "CamilaAlves.raf"
-    internal_id: 13
+    image: "concert-sting.jpg"
   - name: "Al Di Meola"
     performers: ["Al Di Meola"]
     genre: "jazz"
@@ -203,7 +203,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Al_Di_Meola_2006_1.jpg"
     image_license: "CC BY 2.0"
     image_author: "chascar"
-    internal_id: 14
+    image: "concert-al-di-meola.jpg"
   - name: "Egberto Gismonti"
     performers: ["Egberto Gismonti"]
     genre: "jazz"
@@ -218,7 +218,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Egberto_Gismonti_y_la_Orquesta_Nacional_de_M%C3%BAsica_Argentina_%E2%80%9CJuan_de_Dios_Filiberto%E2%80%9D_-_35208410112.jpg"
     image_license: "CC BY-SA 2.0"
     image_author: "Ministerio de Cultura de la Nación"
-    internal_id: 15
+    image: "concert-egberto-gismonti.jpg"
   - name: "Gidi Gov"
     performers: ["Gidi Gov"]
     event: "MAFAT/Mashabat show day"
@@ -231,7 +231,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Gidi_Gov_1.jpg"
     image_license: "CC BY 3.0"
     image_author: "Vardi Kahana"
-    internal_id: 16
+    image: "concert-gidi-gov.jpg"
   - name: "Korin Allal"
     performers: ["Korin Allal"]
     genre: "rock"
@@ -244,7 +244,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:KorinAllal.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "Original uploader was חי at he.wikipedia"
-    internal_id: 17
+    image: "concert-corinne-allal.jpg"
   - name: "Meir Ariel and Zirei Kayitz reunion"
     performers: ["Meir Ariel", "Zirei Kayitz", "Yoav Kutner", "Miki Shaviv", "Yehuda Eder"]
     event: "Reunion"
@@ -258,7 +258,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Meir_Ariel.jpg"
     image_license: "Attribution"
     image_author: "The original uploader was סקרלט at Hebrew Wikipedia."
-    internal_id: 18
+    image: "concert-meir-ariel.jpg"
   - name: "Ehud Banai and Oded Efrat"
     performers: ["Ehud Banai", "Oded Efrat"]
     genre: "rock"
@@ -273,7 +273,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:%D7%90%D7%94%D7%95%D7%93_%D7%91%D7%A0%D7%90%D7%99.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "אודי אבן חיים לדיאגו מיטלברג"
-    internal_id: 19
+    image: "concert-ehud-banai.jpg"
   - name: "Peter Hammill"
     performers: ["Peter Hammill"]
     genre: "rock"
@@ -288,7 +288,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:PHammill08.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "Lrheath"
-    internal_id: 20
+    image: "concert-peter-hammill.jpg"
   - name: "Yoni Rechter"
     performers: ["Yoni Rechter"]
     event: "Recording of the Mahshavon and Efsharuyot video"
@@ -302,7 +302,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Yoni_Rechter_(Zappa_Herzliya_2010).jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "Gilad Avidan"
-    internal_id: 21
+    image: "concert-yoni-rechter.jpg"
   - name: "Bustan Avraham"
     performers: ["Bustan Avraham"]
     genre: "ethnic"
@@ -315,7 +315,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Zohar_Fresco_aux_Nuits_du_Labyrinthe_(Gen%C3%A8ve,_Suisse)_(38465904662).jpg"
     image_license: "CC BY 2.0"
     image_author: "Jean-Pierre Dalbéra from Paris, France"
-    internal_id: 22
+    image: "concert-bustan-abraham.jpg"
   - name: "Meir Ariel"
     performers: ["Meir Ariel"]
     genre: "rock"
@@ -328,7 +328,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Meir_Ariel.jpg"
     image_license: "Attribution"
     image_author: "The original uploader was סקרלט at Hebrew Wikipedia."
-    internal_id: 23
+    image: "concert-meir-ariel.jpg"
   - name: "Narat Haemtza"
     performers: ["Narat Haemtza"]
     genre: "rock"
@@ -341,7 +341,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:%D7%9E%D7%93%D7%A8%D7%97%D7%95%D7%91_%D7%A0%D7%97%D7%9C%D7%AA_%D7%91%D7%A0%D7%99%D7%9E%D7%99%D7%9F.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "NataliaSil"
-    internal_id: 24
+    image: "concert-nahalat-binyamin.jpg"
   - name: "Ravi Shankar with Israeli artists"
     performers: ["Ravi Shankar", "Eti Ankri"]
     genre: "ethnic"
@@ -354,7 +354,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Ravi_Shankar.jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "Markgoff2972"
-    internal_id: 25
+    image: "concert-ravi-shankar.jpg"
   - name: "Bustan Avraham"
     performers: ["Bustan Avraham"]
     event: "Student day"
@@ -368,7 +368,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Zohar_Fresco_aux_Nuits_du_Labyrinthe_(Gen%C3%A8ve,_Suisse)_(38465904662).jpg"
     image_license: "CC BY 2.0"
     image_author: "Jean-Pierre Dalbéra from Paris, France"
-    internal_id: 26
+    image: "concert-bustan-abraham.jpg"
   - name: "Ehud Banai"
     performers: ["Ehud Banai"]
     event: "Student day"
@@ -382,7 +382,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:%D7%90%D7%94%D7%95%D7%93_%D7%91%D7%A0%D7%90%D7%99.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "אודי אבן חיים לדיאגו מיטלברג"
-    internal_id: 27
+    image: "concert-ehud-banai.jpg"
   - name: "Suede"
     performers: ["Suede"]
     genre: "rock"
@@ -395,7 +395,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Suede,_royal_albert_hall_2010.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "paul khera"
-    internal_id: 28
+    image: "concert-suede.jpg"
   - name: "Amos Tanay"
     performers: ["Amos Tanay"]
     genre: "rock"
@@ -408,7 +408,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:%D7%9E%D7%93%D7%A8%D7%97%D7%95%D7%91_%D7%A0%D7%97%D7%9C%D7%AA_%D7%91%D7%A0%D7%99%D7%9E%D7%99%D7%9F.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "NataliaSil"
-    internal_id: 29
+    image: "concert-nahalat-binyamin.jpg"
   - name: "Meir Ariel and Lea Shabat"
     performers: ["Meir Ariel", "Lea Shabat"]
     event: "Bernard and Louise tour"
@@ -422,7 +422,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Meir_Ariel.jpg"
     image_license: "Attribution"
     image_author: "The original uploader was סקרלט at Hebrew Wikipedia."
-    internal_id: 30
+    image: "concert-meir-ariel.jpg"
   - name: "Meir Ariel and Moshe Levi"
     performers: ["Meir Ariel", "Moshe Levi"]
     event: "Bernard and Louise tour"
@@ -436,7 +436,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Meir_Ariel.jpg"
     image_license: "Attribution"
     image_author: "The original uploader was סקרלט at Hebrew Wikipedia."
-    internal_id: 31
+    image: "concert-meir-ariel.jpg"
   - name: "Restaurant jazz"
     event: "Restaurant jazz performance"
     genre: "jazz"
@@ -447,7 +447,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:%D7%9E%D7%93%D7%A8%D7%97%D7%95%D7%91_%D7%A0%D7%97%D7%9C%D7%AA_%D7%91%D7%A0%D7%99%D7%9E%D7%99%D7%9F.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "NataliaSil"
-    internal_id: 32
+    image: "concert-nahalat-binyamin.jpg"
   - name: "Miki Gavrielov"
     performers: ["Miki Gavrielov"]
     event: "Unit evening"
@@ -459,7 +459,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Miki_Gavrielov.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "Reuven Frizi"
-    internal_id: 33
+    image: "concert-miki-gavrielov.jpg"
   - name: "Meir Ariel"
     performers: ["Meir Ariel"]
     event: "Single show"
@@ -471,7 +471,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Meir_Ariel.jpg"
     image_license: "Attribution"
     image_author: "The original uploader was סקרלט at Hebrew Wikipedia."
-    internal_id: 34
+    image: "concert-meir-ariel.jpg"
   - name: "Jazz drummer from abroad"
     performers: ["Barak (bass)"]
     genre: "jazz"
@@ -484,7 +484,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Drums_schematic.svg"
     image_license: "CC BY-SA 3.0"
     image_author: "Syed Wamiq Ahmed Hashmi"
-    internal_id: 35
+    image: "concert-drum-kit.jpg"
   - name: "Lock and R.O.B"
     performers: ["Lock and R.O.B"]
     event: "Street show"
@@ -498,7 +498,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:New_york_times_square-terabass.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "Terabass"
-    internal_id: 36
+    image: "concert-times-square.jpg"
   - name: "Paul deLay"
     performers: ["Paul deLay", "Shlomo Mizrahi"]
     genre: "blues"
@@ -512,7 +512,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:16-hole_chrom_10-hole_diatonic.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "George Leung"
-    internal_id: 37
+    image: "concert-harmonica.jpg"
   - name: "Sunny Freedom Quartet"
     performers: ["Sunny Freedom Quartet"]
     genre: "jazz"
@@ -525,7 +525,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Eight_saxophone_sizes_smaller.png"
     image_license: "CC BY 4.0"
     image_author: "Jonathanischoice"
-    internal_id: 38
+    image: "concert-saxophone.jpg"
   - name: "John Griffin Quartet"
     performers: ["John Griffin Quartet"]
     genre: "jazz"
@@ -538,7 +538,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Village_Vanguard_2018.jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "Alwin Tong"
-    internal_id: 39
+    image: "concert-village-vanguard.jpg"
   - name: "Alon Olearchik"
     performers: ["Alon Olearchik", "Barak Hanoch", "Avi Yifrach", "Asher Padi"]
     genre: "rock"
@@ -551,7 +551,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Alon_Oleartchik.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "אילן בשור"
-    internal_id: 40
+    image: "concert-alon-olearchik.jpg"
   - name: "John McLaughlin and Zakir Hussain"
     performers: ["John McLaughlin", "Zakir Hussain"]
     genre: "ethnojazz"
@@ -565,7 +565,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:John_McLaughlin_Blue_Note_2016.JPG"
     image_license: "CC0"
     image_author: "Hantsheroes"
-    internal_id: 41
+    image: "concert-john-mclaughlin.jpg"
   - name: "Joshua Redman and Branford Marsalis"
     performers: ["Joshua Redman", "Branford Marsalis"]
     genre: "jazz"
@@ -579,7 +579,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Joshua_Redman_Kongsberg_Jazzfestival_2017_(234336).jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "Tore Sætre"
-    internal_id: 42
+    image: "concert-joshua-redman.jpg"
   - name: "30 days to the death of Meir Ariel"
     performers: ["Yehudit Ravitz", "Shalom Hanoch", "Moshe Levi", "David Broza", "Hanan Yovel", "Udi Ariel", "Tirza Ariel", "Ariel Zilber", "Tamuz", "Yehuda Eder", "HaMishmaron"]
     event: "30 days to the death of Meir Ariel"
@@ -594,7 +594,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Meir_Ariel.jpg"
     image_license: "Attribution"
     image_author: "The original uploader was סקרלט at Hebrew Wikipedia."
-    internal_id: 43
+    image: "concert-meir-ariel.jpg"
   - name: "Mads Vinding Trio"
     performers: ["Mads Vinding Trio"]
     event: "The Danish Wave Festival"
@@ -608,7 +608,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Mads-vinding.jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "Hreinn Gudlaugsson"
-    internal_id: 44
+    image: "concert-mads-vinding.jpg"
   - name: "Elvin Jones Jazz Machine"
     performers: ["Elvin Jones Jazz Machine", "Michael Brecker"]
     event: "Elvin Jones's 72nd birthday celebration"
@@ -622,7 +622,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Elvin_Jones_1979_1.jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "Thomas Huther"
-    internal_id: 45
+    image: "concert-elvin-jones.jpg"
   - name: "Dan Dan show"
     performers: ["Dan Dan"]
     genre: "rock"
@@ -636,7 +636,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:BetZaitMar042023_03.jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "Hagai Agmon-Snir حچاي اچمون-سنير חגי אגמון-שניר"
-    internal_id: 46
+    image: "concert-beit-zayit.jpg"
   - name: "Eric Alexander"
     performers: ["Eric Alexander"]
     genre: "jazz"
@@ -649,7 +649,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:TenorSopranoSax_(1).jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "Nabokov (talk) . Required citation is: \"Photo by Tom Oates, 2008\"."
-    internal_id: 47
+    image: "concert-tenor-saxophone.jpg"
   - name: "Charles McPherson Quartet"
     performers: ["Charles McPherson", "Ronnie Mathews", "Earl May", "Albert \"Tootie\" Heath"]
     genre: "jazz"
@@ -662,7 +662,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Charles_McPherson.jpg"
     image_license: "CC BY 2.0"
     image_author: "Ed Newman"
-    internal_id: 48
+    image: "concert-charles-mcpherson.jpg"
   - name: "Roy Hargrove Quintet"
     performers: ["Roy Hargrove Quintet"]
     genre: "jazz"
@@ -676,7 +676,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Roy_Hargrove_Quintet_(ZMF_2018)_IMGP7150.jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "Ice Boy Tell"
-    internal_id: 49
+    image: "concert-roy-hargrove.jpg"
   - name: "Herbie Hancock"
     performers: ["Herbie Hancock", "Eli Djibri"]
     genre: "jazz"
@@ -690,7 +690,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Herbie_Hancock_2023.jpg"
     image_license: "CC0"
     image_author: "Library of Congress Life"
-    internal_id: 50
+    image: "concert-herbie-hancock.jpg"
   - name: "Yosuke Yamashita New York Trio"
     performers: ["Yosuke Yamashita", "Cecil McBee", "Pheeroan akLaff"]
     genre: "jazz"
@@ -703,7 +703,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Yosuke_Yamashita.jpg"
     image_license: "CC BY-SA 2.0"
     image_author: "Daniel Shen Taipei, Taiwan"
-    internal_id: 51
+    image: "concert-yosuke-yamashita.jpg"
   - name: "Al Di Meola"
     performers: ["Al Di Meola"]
     genre: "jazz"
@@ -717,7 +717,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Al_Di_Meola_2006_1.jpg"
     image_license: "CC BY 2.0"
     image_author: "chascar"
-    internal_id: 52
+    image: "concert-al-di-meola.jpg"
   - name: "Im Hagav Layam"
     performers: ["Many Israeli artists"]
     event: "'Im Hagav Layam', the farewell concert a year after the death of Meir Ariel"
@@ -732,7 +732,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Meir_Ariel.jpg"
     image_license: "Attribution"
     image_author: "The original uploader was סקרלט at Hebrew Wikipedia."
-    internal_id: 53
+    image: "concert-meir-ariel.jpg"
   - name: "Alon Olearchik"
     performers: ["Alon Olearchik", "Asher Padi", "Barak Hanoch", "Avi Yifrach"]
     genre: "rock"
@@ -746,7 +746,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Alon_Oleartchik.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "אילן בשור"
-    internal_id: 54
+    image: "concert-alon-olearchik.jpg"
   - name: "Alon Olearchik"
     performers: ["Alon Olearchik", "Barak Hanoch", "Nitzan Ein Habar"]
     event: "Besheket show"
@@ -760,7 +760,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Alon_Oleartchik.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "אילן בשור"
-    internal_id: 55
+    image: "concert-alon-olearchik.jpg"
   - name: "Matti Caspi"
     performers: ["Matti Caspi"]
     genre: "rock"
@@ -774,7 +774,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Matti_Caspi_portrait.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "Gilad Avidan"
-    internal_id: 56
+    image: "concert-matti-caspi.jpg"
   - name: "Jethro Tull"
     performers: ["Jethro Tull", "Uri from Tipex"]
     genre: "rock"
@@ -789,7 +789,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Jethro_Tull_070373_003.jpg"
     image_license: "CC BY-SA 2.0"
     image_author: "Heinrich Klaffs"
-    internal_id: 57
+    image: "concert-jethro-tull.jpg"
   - name: "Jethro Tull"
     performers: ["Jethro Tull", "Uri from Tipex"]
     genre: "rock"
@@ -804,7 +804,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Ian_Anderson_-_Jethro_Tull_live_in_Cambridge_23rd_April_2024_(53688414617).jpg"
     image_license: "CC BY 2.0"
     image_author: "Steve Knight from Halstead, United Kingdom"
-    internal_id: 58
+    image: "concert-ian-anderson.jpg"
   - name: "Dan Dan show"
     performers: ["Dan Dan"]
     genre: "rock"
@@ -818,7 +818,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:BetZaitMar042023_03.jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "Hagai Agmon-Snir حچاي اچمون-سنير חגי אגמון-שניר"
-    internal_id: 59
+    image: "concert-beit-zayit.jpg"
   - name: "Al Di Meola"
     performers: ["Al Di Meola"]
     genre: "rock"
@@ -832,7 +832,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Al_Di_Meola_2006_1.jpg"
     image_license: "CC BY 2.0"
     image_author: "chascar"
-    internal_id: 60
+    image: "concert-al-di-meola.jpg"
   - name: "Alon Olearchik"
     performers: ["Alon Olearchik"]
     genre: "rock"
@@ -846,7 +846,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Alon_Oleartchik.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "אילן בשור"
-    internal_id: 61
+    image: "concert-alon-olearchik.jpg"
   - name: "Dan Dan show"
     performers: ["Dan Dan"]
     genre: "rock"
@@ -860,7 +860,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:BetZaitMar042023_03.jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "Hagai Agmon-Snir حچاي اچمون-سنير חגי אגמון-שניר"
-    internal_id: 62
+    image: "concert-beit-zayit.jpg"
   - name: "Yaron Ben-Ami"
     performers: ["Yaron Ben-Ami"]
     genre: "blues"
@@ -874,7 +874,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:GuitareClassique5.png"
     image_license: "CC BY-SA 2.0 de"
     image_author: "User:Martin Möller Talk"
-    internal_id: 63
+    image: "concert-guitar.jpg"
   - name: "Yaron Ben-Ami"
     performers: ["Yaron Ben-Ami"]
     genre: "blues"
@@ -888,7 +888,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:GuitareClassique5.png"
     image_license: "CC BY-SA 2.0 de"
     image_author: "User:Martin Möller Talk"
-    internal_id: 64
+    image: "concert-guitar.jpg"
   - name: "Yehudit Ravitz and Sarit Hadad"
     performers: ["Yehudit Ravitz", "Sarit Hadad"]
     event: "Tnuva Yoplait product launch"
@@ -902,7 +902,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Yehudit_Ravitz_1997_cropped.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "Ilan Besor"
-    internal_id: 65
+    image: "concert-yehudit-ravitz.jpg"
   - name: "Alon Olearchik"
     performers: ["Alon Olearchik", "Asher Padi", "Barak Hanoch", "Avi Yifrach"]
     genre: "rock"
@@ -916,7 +916,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Alon_Oleartchik.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "אילן בשור"
-    internal_id: 66
+    image: "concert-alon-olearchik.jpg"
   - name: "Matti Caspi and Shlomo Gronich"
     performers: ["Matti Caspi", "Shlomo Gronich"]
     event: "Meahorei Hatzlilim (Behind the Sounds)"
@@ -932,7 +932,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Matti_Caspi_portrait.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "Gilad Avidan"
-    internal_id: 67
+    image: "concert-matti-caspi.jpg"
   - name: "Yaron Ben-Ami"
     performers: ["Yaron Ben-Ami"]
     event: "Blues Be'eretz Kna'an"
@@ -947,7 +947,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:GuitareClassique5.png"
     image_license: "CC BY-SA 2.0 de"
     image_author: "User:Martin Möller Talk"
-    internal_id: 68
+    image: "concert-guitar.jpg"
   - name: "Alon Olearchik"
     performers: ["Alon Olearchik", "Barak Hanoch", "Avi Yifrach", "Nitzan Ein Habar"]
     genre: "jazz"
@@ -962,7 +962,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Alon_Oleartchik.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "אילן בשור"
-    internal_id: 69
+    image: "concert-alon-olearchik.jpg"
   - name: "Open stage"
     performers: ["Open stage"]
     genre: "variety"
@@ -977,7 +977,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Open_Mic_No_Name_Bar_Sausalito_CA_July_2008.jpg"
     image_license: "CC BY-SA 2.0"
     image_author: "Tracy Ruggles from San Rafael, CA, USA"
-    internal_id: 70
+    image: "concert-open-mic.jpg"
   - name: "Yaron Ben-Ami: The Undertakers"
     performers: ["Yaron Ben-Ami"]
     event: "The Undertakers show"
@@ -990,7 +990,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:GuitareClassique5.png"
     image_license: "CC BY-SA 2.0 de"
     image_author: "User:Martin Möller Talk"
-    internal_id: 71
+    image: "concert-guitar.jpg"
   - name: "Yaron Ben-Ami: The Undertakers"
     performers: ["Yaron Ben-Ami"]
     event: "The Undertakers show"
@@ -1005,7 +1005,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:GuitareClassique5.png"
     image_license: "CC BY-SA 2.0 de"
     image_author: "User:Martin Möller Talk"
-    internal_id: 72
+    image: "concert-guitar.jpg"
   - name: "Yaron Ben-Ami: The Undertakers"
     performers: ["Yaron Ben-Ami"]
     event: "The Undertakers show"
@@ -1020,7 +1020,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:GuitareClassique5.png"
     image_license: "CC BY-SA 2.0 de"
     image_author: "User:Martin Möller Talk"
-    internal_id: 73
+    image: "concert-guitar.jpg"
   - name: "Alon Olearchik"
     performers: ["Alon Olearchik", "Barak Hanoch", "Avi Yifrach", "Asher Padi"]
     genre: "rock"
@@ -1035,7 +1035,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Alon_Oleartchik.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "אילן בשור"
-    internal_id: 74
+    image: "concert-alon-olearchik.jpg"
   - name: "Meir Ariel memorial, 4 years"
     performers: ["Gidi Gov", "Alon Hilel", "Shalom Hanoch", "Gali Atari", "Udi Ariel", "Tamuz", "Rami Kleinstein", "The Blues Messengers", "Meir Banai", "Ehud Banai", "Yehudit Ravitz", "Alona Daniel"]
     event: "Meir Ariel memorial, 4 years"
@@ -1051,7 +1051,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Gidi_Gov_1.jpg"
     image_license: "CC BY 3.0"
     image_author: "Vardi Kahana"
-    internal_id: 75
+    image: "concert-gidi-gov.jpg"
   - name: "Ehud Banai"
     performers: ["Ehud Banai"]
     event: "End of summer shows"
@@ -1067,7 +1067,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:%D7%90%D7%94%D7%95%D7%93_%D7%91%D7%A0%D7%90%D7%99.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "אודי אבן חיים לדיאגו מיטלברג"
-    internal_id: 76
+    image: "concert-ehud-banai.jpg"
   - name: "Yaron Ben-Ami"
     performers: ["Yaron Ben-Ami"]
     event: "Yaron's first appearance with his own songs"
@@ -1082,7 +1082,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:GuitareClassique5.png"
     image_license: "CC BY-SA 2.0 de"
     image_author: "User:Martin Möller Talk"
-    internal_id: 77
+    image: "concert-guitar.jpg"
   - name: "Susita"
     performers: ["Susita"]
     date_utcz: "2004-01-15T23:38:48Z"
@@ -1094,7 +1094,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Rimon1111.png"
     image_license: "CC BY-SA 4.0"
     image_author: "Talgraf777"
-    internal_id: 78
+    image: "concert-rimon-school.jpg"
   - name: "Rimon jazz player competition"
     event: "Rimon jazz player competition"
     genre: "jazz"
@@ -1107,7 +1107,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Rimon1111.png"
     image_license: "CC BY-SA 4.0"
     image_author: "Talgraf777"
-    internal_id: 79
+    image: "concert-rimon-school.jpg"
   - name: "Airto Moreira"
     performers: ["Airto Moreira"]
     genre: "jazz"
@@ -1120,7 +1120,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Airto_Moreira.jpg"
     image_license: "CC BY-SA 2.0"
     image_author: "Daniel Shen Taipei, Taiwan"
-    internal_id: 80
+    image: "concert-airto-moreira.jpg"
   - name: "Airto Moreira"
     performers: ["Airto Moreira", "Ilan Salem", "Avi Adrian", "Arye Volinitz"]
     genre: "jazz"
@@ -1131,7 +1131,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Airto_Moreira.jpg"
     image_license: "CC BY-SA 2.0"
     image_author: "Daniel Shen Taipei, Taiwan"
-    internal_id: 81
+    image: "concert-airto-moreira.jpg"
   - name: "Alon Olearchik"
     performers: ["Alon Olearchik"]
     genre: "rock"
@@ -1145,7 +1145,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Alon_Oleartchik.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "אילן בשור"
-    internal_id: 82
+    image: "concert-alon-olearchik.jpg"
   - name: "Rimon jazz player competition"
     event: "Rimon jazz player competition"
     genre: "jazz"
@@ -1159,7 +1159,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Trmona_001.jpg"
     image_license: "CC BY 3.0"
     image_author: "Talmoryair"
-    internal_id: 83
+    image: "concert-tmuna-theater.jpg"
   - name: "Jazz trumpet show"
     performers: ["Jarmo Hoogendijk", "Philip Harper", "Niv Toar", "Omri Mor", "Gilad Abro", "Shay Zalman"]
     genre: "jazz"
@@ -1173,7 +1173,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Yamaha_Trumpet_YTR-8335LA_crop.jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "Yamaha Corporation"
-    internal_id: 84
+    image: "concert-trumpet.jpg"
   - name: "Rimon open day"
     performers: ["Ofer Portugali", "Tami Shefer", "Steve Paskoff", "Oren Balban", "Avi Adrian", "Shay Maoz", "Ilan Salem"]
     event: "Rimon open day"
@@ -1188,7 +1188,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Rimon1111.png"
     image_license: "CC BY-SA 4.0"
     image_author: "Talgraf777"
-    internal_id: 85
+    image: "concert-rimon-school.jpg"
   - name: "BogRimon"
     event: "BogRimon"
     genre: "jazz"
@@ -1203,7 +1203,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_980_Tzavta_Lobby_%D7%94%D7%9C%D7%95%D7%91%D7%99_%D7%91%D7%A6%D7%95%D7%95%D7%AA%D7%90.JPG"
     image_license: "CC BY 2.5"
     image_author: "זאב זמיר"
-    internal_id: 86
+    image: "concert-tzavta.jpg"
   - name: "Memorial to Rabin"
     performers: ["Amit Golan", "Gilad Abro", "Doron Tirosh", "Yonatan Volchok", "Slide Hampton", "Avi Leibovich", "Shevhaya Bat Israel"]
     event: "A memorial to Rabin"
@@ -1219,7 +1219,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Slide_Hampton_-_August_1978_(cropped).jpg"
     image_license: "CC BY-SA 2.0"
     image_author: "Tom Marcello"
-    internal_id: 87
+    image: "concert-slide-hampton.jpg"
   - name: "Avi Adrian and Nahum Perkopofitch"
     performers: ["Avi Adrian", "Nahum Perkopofitch"]
     genre: "jazz"
@@ -1234,7 +1234,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Rimon1111.png"
     image_license: "CC BY-SA 4.0"
     image_author: "Talgraf777"
-    internal_id: 88
+    image: "concert-rimon-school.jpg"
   - name: "Tiltan ensemble"
     performers: ["Oren Sela", "Lee Gaon", "Tami Shefer"]
     event: "Tiltan ensemble"
@@ -1249,7 +1249,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Rimon1111.png"
     image_license: "CC BY-SA 4.0"
     image_author: "Talgraf777"
-    internal_id: 89
+    image: "concert-rimon-school.jpg"
   - name: "Amit Golan and Organix"
     performers: ["Amit Golan", "Erez Bar-Noy", "Asaf Yuria", "Doron Tirosh", "Yotam Zilbershtein"]
     genre: "jazz"
@@ -1262,7 +1262,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Steinway_Vienna_002.JPG"
     image_license: "CC BY-SA 3.0"
     image_author: "Gryffindor"
-    internal_id: 90
+    image: "concert-grand-piano.jpg"
   - name: "Amikam Kimelman and friends"
     performers: ["Amikam Kimelman", "Ilan Salem", "Oren Balban", "Yurai Oron", "Ronen Raban"]
     genre: "jazz"
@@ -1276,7 +1276,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Amikam_Kimelman.jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "דוד שי"
-    internal_id: 91
+    image: "concert-amikam-kimelman.jpg"
   - name: "Nagan HaJazz, first stage"
     event: "Rimon Nagan HaJazz competition, first stage"
     genre: "jazz"
@@ -1290,7 +1290,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Rimon1111.png"
     image_license: "CC BY-SA 4.0"
     image_author: "Talgraf777"
-    internal_id: 92
+    image: "concert-rimon-school.jpg"
   - name: "Nagan HaJazz, final stage"
     event: "Rimon Nagan HaJazz competition, final stage"
     genre: "jazz"
@@ -1303,7 +1303,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:AGK_bass1_full.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "User:AndrewKepert"
-    internal_id: 93
+    image: "concert-double-bass.jpg"
   - name: "Michal Lotan"
     performers: ["Michal Lotan"]
     date_utcz: "2005-04-19T19:05:25Z"
@@ -1316,7 +1316,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Shure_mikrofon_55S.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "Holger.Ellgaard"
-    internal_id: 94
+    image: "concert-microphone.jpg"
   - name: "Rimon composition contest"
     performers: ["Ofir Zwebner"]
     event: "Rimon composition contest"
@@ -1330,7 +1330,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Rimon1111.png"
     image_license: "CC BY-SA 4.0"
     image_author: "Talgraf777"
-    internal_id: 95
+    image: "concert-rimon-school.jpg"
   - name: "Rimon open day"
     performers: ["Gil Ladin", "Yurai Oron", "Ilan Salem", "Eli Benakot"]
     event: "Rimon open day"
@@ -1345,7 +1345,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Rimon1111.png"
     image_license: "CC BY-SA 4.0"
     image_author: "Talgraf777"
-    internal_id: 96
+    image: "concert-rimon-school.jpg"
   - name: "Lew Soloff with the Rimon student band"
     performers: ["Lew Soloff"]
     genre: "jazz"
@@ -1357,7 +1357,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Lew_Soloff.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "The original uploader was Allenstone at English Wikipedia."
-    internal_id: 97
+    image: "concert-lew-soloff.jpg"
   - name: "Pink Floyd reunion at Live 8"
     performers: ["Pink Floyd"]
     event: "Live 8"
@@ -1373,7 +1373,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:DGilmourRAH111024_(21_of_63)_(cropped).jpg"
     image_license: "CC BY 2.0"
     image_author: "Raph_PH"
-    internal_id: 98
+    image: "concert-david-gilmour.jpg"
   - name: "Amit Golan"
     performers: ["Amit Golan", "Yotam Zilbershtein", "Doron Tirosh"]
     genre: "jazz"
@@ -1387,7 +1387,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Steinway_Vienna_002.JPG"
     image_license: "CC BY-SA 3.0"
     image_author: "Gryffindor"
-    internal_id: 99
+    image: "concert-grand-piano.jpg"
   - name: "6 years to the death of Meir Ariel"
     performers: ["Yehudit Ravitz", "David Broza", "Shalom Hanoch", "Dudi Levi", "Ronit Shahar", "Hemi Rodner",
                  "The Blues Messengers", "Lea Shabat", "Shlomi Shabat", "Shlomi Shaban", "Mika Karni", "Moshe Levi", "Yehuda Eder", "Miki Shaviv", "Shachar Ariel", "Udi Ariel", "Muki"]
@@ -1403,7 +1403,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Meir_Ariel.jpg"
     image_license: "Attribution"
     image_author: "The original uploader was סקרלט at Hebrew Wikipedia."
-    internal_id: 100
+    image: "concert-meir-ariel.jpg"
   - name: "BogRimon"
     performers: ["Ofir Zwebner", "Shay Maoz", "Roee Uliel", "Dani Uri", "Guy Bar Tor"]
     event: "Rimon BogRimon"
@@ -1419,7 +1419,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_54255_givatayim_theater.jpg"
     image_license: "CC BY 2.5"
     image_author: "דר' אבישי טייכר"
-    internal_id: 101
+    image: "concert-givatayim-theater.jpg"
   - name: "Amikam Kimelman quartet"
     performers: ["Amikam Kimelman", "Eilon Turgeman", "Avi Adrian", "Eitan Itzkovich"]
     genre: "jazz"
@@ -1433,7 +1433,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Amikam_Kimelman.jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "דוד שי"
-    internal_id: 102
+    image: "concert-amikam-kimelman.jpg"
   - name: "Junior Mance"
     performers: ["Junior Mance", "Yonatan Volchok"]
     genre: "jazz"
@@ -1447,7 +1447,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Junior_Mance.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "Lionel decoster"
-    internal_id: 103
+    image: "concert-junior-mance.jpg"
   - name: "Avi Adrian Trio"
     performers: ["Avi Adrian", "Roni Holan", "Eli Magen"]
     genre: "jazz"
@@ -1462,7 +1462,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Rimon1111.png"
     image_license: "CC BY-SA 4.0"
     image_author: "Talgraf777"
-    internal_id: 104
+    image: "concert-rimon-school.jpg"
   - name: "Avi Adrian with Frank Gambale"
     performers: ["Avi Adrian", "Roni Holan", "Arye Volinitz", "Frank Gambale"]
     genre: "jazz"
@@ -1477,7 +1477,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Frank_Gambale_in_Montr%C3%A9al.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "Philippe Frenette-Roy"
-    internal_id: 105
+    image: "concert-frank-gambale.jpg"
   - name: "Nagan HaJazz"
     performers: ["Asaf Gleizner", "Nitzan Gavrieli", "Asaf Kahati", "Tom Lev", "Leonid Dezelman", "Itay Viseman"]
     event: "Rimon Nagan HaJazz competition"
@@ -1492,7 +1492,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Trmona_001.jpg"
     image_license: "CC BY 3.0"
     image_author: "Talmoryair"
-    internal_id: 106
+    image: "concert-tmuna-theater.jpg"
   - name: "Rimon composition contest"
     performers: ["Ofir Zwebner"]
     event: "Rimon composition contest"
@@ -1506,7 +1506,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Rimon1111.png"
     image_license: "CC BY-SA 4.0"
     image_author: "Talgraf777"
-    internal_id: 107
+    image: "concert-rimon-school.jpg"
   - name: "Dwayne Clemons and the Shay Zalman Trio"
     performers: ["Dwayne Clemons", "Shay Zalman Trio"]
     event: "Rimon weekly jazz concert"
@@ -1522,7 +1522,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Rimon1111.png"
     image_license: "CC BY-SA 4.0"
     image_author: "Talgraf777"
-    internal_id: 108
+    image: "concert-rimon-school.jpg"
   - name: "Young jazz players"
     event: "Jazz over dinner"
     genre: "jazz"
@@ -1536,7 +1536,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Sarona_CBD_01_(cropped).jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "Ynhockey"
-    internal_id: 109
+    image: "concert-tel-aviv.jpg"
   - name: "Nagan HaJazz 2007, first stage"
     performers: ["Sagit Silberman", "Sergei Checkin", "Ziv Moran", "Sharon Glick", "Daniel Sapir", "Dan Cohen", "Eyal Hai", "Omer Rizi"]
     event: "Rimon Nagan HaJazz 2007, first stage, part 1"
@@ -1551,7 +1551,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Rimon1111.png"
     image_license: "CC BY-SA 4.0"
     image_author: "Talgraf777"
-    internal_id: 110
+    image: "concert-rimon-school.jpg"
   - name: "Nagan HaJazz 2007, last stage"
     performers: ["Yonatan Grinshtein", "Hila Kolik", "Daniel Dor", "Daniel Meiron", "Yogev Shitrit", "Eyal Hai"]
     event: "Rimon Nagan HaJazz 2007, last stage"
@@ -1565,7 +1565,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Trmona_001.jpg"
     image_license: "CC BY 3.0"
     image_author: "Talmoryair"
-    internal_id: 111
+    image: "concert-tmuna-theater.jpg"
   - name: "7/4: Seven composers writing for a string quartet"
     performers: ["Trio Arto", "Natasha Sher", "Yael Fetish", "Anat Algalmeyir", "Carmella Liman", "Yishay Lentner"]
     event: "7/4: Seven composers writing for a string quartet"
@@ -1581,7 +1581,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Fitzwilliam_Quartet.jpg"
     image_license: "CC BY 3.0"
     image_author: "Surreybirder"
-    internal_id: 112
+    image: "concert-string-quartet.jpg"
   - name: "Jazz double bill"
     performers: ["Shay Zalman", "Gilad Abro", "Amit Golan", "Erez Bar-Noy", "Joe Magnarelli", "The Israeli Jazz Band"]
     genre: "jazz"
@@ -1595,7 +1595,7 @@ items:
     remark: "The Israeli Jazz Band conducted by Danny Rosenfeld"
     image_source: "https://commons.wikimedia.org/wiki/File:Whitemanband1921.jpg"
     image_license: "Public domain"
-    internal_id: 113
+    image: "concert-big-band.jpg"
   - name: "Fusion and funk at the Shablul"
     performers: ["Tevet Sela", "Adam Golitzky", "Shay Hamani", "Michael Abagil"]
     genre: "fusion"
@@ -1609,7 +1609,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Eight_saxophone_sizes_smaller.png"
     image_license: "CC BY 4.0"
     image_author: "Jonathanischoice"
-    internal_id: 114
+    image: "concert-saxophone.jpg"
   - name: "The Dabashot play Camel"
     performers: ["The Dabashot"]
     genre: "prog"
@@ -1624,7 +1624,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Camel_headlining_Saturday_night_at_Ramblin_Man_2015_-_19475294134.jpg"
     image_license: "CC BY 2.0"
     image_author: "kitmasterbloke"
-    internal_id: 115
+    image: "concert-camel.jpg"
   - name: "Amit Golan recording"
     performers: ["Amit Golan", "Gilad Abro", "Doron Tirosh", "Asaf Yuria", "Oded Bareket", "Joe Magnarelli"]
     genre: "jazz"
@@ -1639,7 +1639,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Steinway_Vienna_002.JPG"
     image_license: "CC BY-SA 3.0"
     image_author: "Gryffindor"
-    internal_id: 116
+    image: "concert-grand-piano.jpg"
   - name: "Jazz at the Ajax Hotel"
     genre: "jazz"
     date_utcz: "2007-08-23T21:13:40Z"
@@ -1653,7 +1653,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Skyscrapers_in_Limassol.jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "Στέφανος Νικολάου"
-    internal_id: 117
+    image: "concert-limassol.jpg"
   - name: "Mel Keller memorial"
     performers: ["Dani Gotfried", "Amikam Kimelman", "Jess Koren", "Mamelo", "Peter Wertheimer", "Guri Agmon", "Nahum Perkopofitch"]
     event: "A show in memory of Mel Keller"
@@ -1666,7 +1666,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Steinway_Vienna_002.JPG"
     image_license: "CC BY-SA 3.0"
     image_author: "Gryffindor"
-    internal_id: 118
+    image: "concert-grand-piano.jpg"
   - name: "Shirimon 2005"
     event: "Shirimon 2005, part A"
     date_utcz: "2007-10-06T01:04:54Z"
@@ -1680,7 +1680,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_980_Tzavta_Lobby_%D7%94%D7%9C%D7%95%D7%91%D7%99_%D7%91%D7%A6%D7%95%D7%95%D7%AA%D7%90.JPG"
     image_license: "CC BY 2.5"
     image_author: "זאב זמיר"
-    internal_id: 119
+    image: "concert-tzavta.jpg"
   - name: "Red Sea Jazz Festival"
     performers: ["Amikam Kimelman", "Yossi Levi", "Ilan Salem", "Eitan Itzkovich"]
     event: "Red Sea Jazz Festival"
@@ -1697,7 +1697,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Eilat_night_hotels_2016.jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "Yigal Dekel"
-    internal_id: 120
+    image: "concert-eilat.jpg"
   - name: "Omer Avital Trio"
     performers: ["Omer Avital", "Omer Klein", "Ziv Ravitz"]
     event: "Rimon On Campus series"
@@ -1713,7 +1713,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Omer_Avital_Olympia_Paris_2012.jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "Jesse1960"
-    internal_id: 121
+    image: "concert-omer-avital.jpg"
   - name: "Amit Golan: I Decided"
     performers: ["Amit Golan", "Doron Tirosh", "Gilad Abro", "Arad Yeini", "Asaf Yuria"]
     genre: "jazz"
@@ -1727,7 +1727,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Steinway_Vienna_002.JPG"
     image_license: "CC BY-SA 3.0"
     image_author: "Gryffindor"
-    internal_id: 122
+    image: "concert-grand-piano.jpg"
   - name: "Rimon jazz workshop closing concert"
     performers: ["Jeff \"Tain\" Watts", "Ronen Raban", "Ofer Portugali", "Yurai Oron", "Amikam Kimelman"]
     event: "Rimon jazz workshop series closing concert"
@@ -1743,7 +1743,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Jeff_Tain_Watts.jpg"
     image_license: "CC BY-SA 2.0"
     image_author: "Ronald Weinstock, Ronald Weinstock Falls Church, VA]"
-    internal_id: 123
+    image: "concert-jeff-tain-watts.jpg"
   - name: "Rimon jazz player competition"
     event: "Rimon jazz player competition, first phase, second session"
     genre: "jazz"
@@ -1758,7 +1758,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Rimon1111.png"
     image_license: "CC BY-SA 4.0"
     image_author: "Talgraf777"
-    internal_id: 124
+    image: "concert-rimon-school.jpg"
   - name: "Rimon jazz player competition, finals"
     event: "Rimon jazz player competition, finals"
     genre: "jazz"
@@ -1773,7 +1773,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:%D7%A6%D7%99%D7%9C%D7%95%D7%9D_%D7%9E%D7%94%D7%90%D7%95%D7%99%D7%A8_%D7%A9%D7%9C_%D7%94%D7%A8%D7%A6%D7%9C%D7%99%D7%94_%D7%A4%D7%99%D7%AA%D7%95%D7%97.jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "Lev.Tsimbler"
-    internal_id: 125
+    image: "concert-herzliya-pituah.jpg"
   - name: "Alon Olearchik"
     performers: ["Alon Olearchik"]
     genre: "rock"
@@ -1788,7 +1788,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Alon_Oleartchik.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "אילן בשור"
-    internal_id: 126
+    image: "concert-alon-olearchik.jpg"
   - name: "Sug Machol (סוג מחול)"
     performers: ["Maya Levy", "Hanan Ananda Mars", "Ori Shafir", "Noa Peran", "May Lev"]
     genre: "dance"
@@ -1803,7 +1803,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Hometrampoline.jpg"
     image_license: "Public domain"
     image_author: "Ludraman"
-    internal_id: 127
+    image: "concert-trampoline.jpg"
   - name: "Yaron Dorman"
     performers: ["Yaron Dorman"]
     date_utcz: "2010-12-26T08:17:23Z"
@@ -1816,7 +1816,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:ISR-2013-Aerial-Jaffa-Port_of_Jaffa.jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "Godot13"
-    internal_id: 128
+    image: "concert-jaffa.jpg"
   - name: "Einav Jackson Cohen"
     performers: ["Einav Jackson Cohen", "Shlomi Shaban", "Gil Lewis"]
     event: "Release of her first album"
@@ -1830,7 +1830,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:%D7%A2%D7%99%D7%A0%D7%91_%D7%92%27%D7%A7%D7%A1%D7%95%D7%9F_%D7%9B%D7%94%D7%9F.jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "צילום:אלה ברק"
-    internal_id: 129
+    image: "concert-einav-jackson-cohen.jpg"
   - name: "Brad Mehldau"
     performers: ["Brad Mehldau"]
     genre: "jazz"
@@ -1845,7 +1845,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Brad_Mehldau-9035.jpg"
     image_license: "CC BY 3.0"
     image_author: "Harald Krichel"
-    internal_id: 130
+    image: "concert-brad-mehldau.jpg"
   - name: "Rushes"
     performers: ["Inbal Pinto", "Avshalom Pollak"]
     genre: "dance"
@@ -1859,7 +1859,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Inbal_Pinto.JPG"
     image_license: "CC BY-SA 4.0"
     image_author: "Zebrabear"
-    internal_id: 131
+    image: "concert-inbal-pinto.jpg"
   - name: "Korin Allal"
     performers: ["Korin Allal", "The Witches", "Einav Jackson Cohen"]
     genre: "rock"
@@ -1872,7 +1872,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:KorinAllal.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "Original uploader was חי at he.wikipedia"
-    internal_id: 132
+    image: "concert-corinne-allal.jpg"
   - name: "Yaron Dorman and Shultz the Terrible"
     performers: ["Yaron Dorman", "Shultz the Terrible"]
     date_utcz: "2014-05-16T23:31:21Z"
@@ -1887,7 +1887,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:TelAM.jpg"
     image_license: "Public domain"
     image_author: "Itayba at Hebrew Wikipedia"
-    internal_id: 133
+    image: "concert-tel-aviv-museum-of-art.jpg"
   - name: "Yaron Dorman at Tomer Kling's birthday"
     performers: ["Yaron Dorman"]
     event: "Tomer Kling's 41st birthday"
@@ -1902,7 +1902,7 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:D274.jpg"
     image_license: "CC BY-SA 3.0"
     image_author: "KarlKunde"
-    internal_id: 134
+    image: "concert-keyboard-instrument.jpg"
   - name: "Avishai Cohen Trio"
     performers: ["Avishai Cohen"]
     genre: "jazz"
@@ -1916,4 +1916,4 @@ items:
     image_source: "https://commons.wikimedia.org/wiki/File:Avishai_Cohen_(ph._Andreas_Terlaak).jpg"
     image_license: "CC BY-SA 4.0"
     image_author: "Andreas Terlaak"
-    internal_id: 135
+    image: "concert-avishai-cohen.jpg"

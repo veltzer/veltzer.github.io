@@ -485,7 +485,13 @@ no longer builds their JSON, and the committed `static/data/concerts.json.gz`
 and `static/data/museums.json.gz` are gone. The data, `plugin-concerts.js`,
 `plugin-museums.js` and their i18n strings stay, so either can come back
 under a page of its own by reversing those three steps. The museum images in
-`static/images/museum-*.jpg` are still copied to the site, unlinked.
+`static/images/museum-*.jpg` are still copied to the site, unlinked, and so
+are the concert images in `static/images/concert-*.jpg` (added 2026-11-08:
+every show names its image in an `image` field, from Wikimedia Commons, the
+performer where a free photo exists and otherwise the venue or an instrument;
+shows with the same subject share one file, since the build rejects duplicate
+images; each show's image_source, image_license and image_author give the
+credit the licenses ask for, and `plugin-concerts.js` shows it under the card).
 
 Private data types: the files in `data/yaml/` that no page publishes.
 

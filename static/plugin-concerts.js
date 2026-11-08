@@ -74,11 +74,12 @@ window.collectionPlugins['concerts'] = {
         {key: 'remark', label: t('concerts_toggle_remark'), default: true},
         {key: 'credit', label: t('concerts_toggle_credit'), default: true}
     ],
-    // One image per show, static/images/concert-<internal_id>.jpg: the
-    // performer where Wikipedia has a free photo of them, otherwise the venue
-    // or the instrument. image_source/license/author credit it below.
+    // Every show names its image, static/images/<image>: the performer where
+    // Wikimedia has a free photo of them, otherwise the venue or an instrument;
+    // shows with the same subject share the file. image_source/license/author
+    // credit it below.
     renderImage: function(item) {
-        return item.internal_id ? 'images/concert-' + encodeURIComponent(item.internal_id) + '.jpg' : '';
+        return item.image ? 'images/' + encodeURIComponent(item.image) : '';
     },
     // Data values are English, so they sit in <bdi> on a Hebrew page.
     renderDetails: function(item) {

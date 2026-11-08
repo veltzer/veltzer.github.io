@@ -13,7 +13,7 @@ Checks:
                  or audiocourse-internal-{internal_id}.jpg
 - Museums: static/images/museum-{internal_id}.jpg
 - Podcasts: static/images/podcast-{internal_id}.jpg
-- Concerts: static/images/concert-{internal_id}.jpg
+- Concerts: static/images/{image}, the file each show names
 - Books: static/images/book-simania-{simania_id}.jpg
          or book-goodreads-{goodreads_id}.jpg (simania wins when both exist)
 - YouTube: skipped (uses external thumbnails)
@@ -175,16 +175,16 @@ def check_podcasts():
 
 
 def check_concerts():
-    """Check concert images: one per show, named by its internal_id."""
+    """Check concert images: every show names one; shows may share a file."""
     entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "concerts.yaml"))
     errors = 0
     for entry in entries:
-        internal_id = entry.get("internal_id")
-        if not internal_id:
-            print(f"  NO ID: {entry.get('name', '?')}")
+        image = entry.get("image")
+        if not image:
+            print(f"  NO IMAGE: {entry.get('name', '?')}")
             errors += 1
             continue
-        path = os.path.join(str(IMAGE_DIR), f"concert-{internal_id}.jpg")
+        path = os.path.join(str(IMAGE_DIR), image)
         if not os.path.exists(path):
             print(f"  MISSING: {path} ({entry.get('name', '?')})")
             errors += 1
