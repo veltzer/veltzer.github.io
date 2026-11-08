@@ -51,10 +51,10 @@ which records the traps that outlived the migration.
     - `content/blog/<date>-<slug>.he.md` — Hebrew translations. The shared file name is
   how rssite pairs a post with its translation; nothing else is needed
     - `content/<page>/_index.{en,he}.md` — the standalone nav pages (about, media, calendar, …)
-- `data/yaml/` — the source of truth for the media tracker (podcasts, museums, courses,
+- `data/yaml/` — the source of truth for the media tracker (podcasts, courses,
   books, audible, video features and series) and for the profile block
-  (`profiles.yaml`), plus the personal lists that no page renders yet (cv, trips,
-  lectures, organizations, …). Every file names its schema in `$schema`, which the
+  (`profiles.yaml`), plus the private lists that no page publishes (concerts,
+  museums, cv, trips, lectures, …; the full list is in `doc/DECISIONS.md`). Every file names its schema in `$schema`, which the
   build validates against `veltzer.github.io/web-schemas`. This directory came out of
   the private `../data` repo in 2026-09; the chess archives and the youtube CSV are
   still there (see `scripts/copy_data.py`)

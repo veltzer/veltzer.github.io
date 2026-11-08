@@ -476,3 +476,40 @@ author accepted the dead links (few readers so far), so no redirects were
 added, in line with "No legacy-URL redirects" above. A slug that later
 changes breaks its URL the same way. That stays acceptable while readership is
 small, and is the point to revisit if it is not.
+
+## Concerts and museums are private, and which data is (2026-11-08)
+
+Concerts and museums are not media, so they left the media page: their
+plugins are off in `content/media/_index.{en,he}.md`, `scripts/copy_data.py`
+no longer builds their JSON, and the committed `static/data/concerts.json.gz`
+and `static/data/museums.json.gz` are gone. The data, `plugin-concerts.js`,
+`plugin-museums.js` and their i18n strings stay, so either can come back
+under a page of its own by reversing those three steps. The museum images in
+`static/images/museum-*.jpg` are still copied to the site, unlinked.
+
+Private data types: the files in `data/yaml/` that no page publishes.
+
+- `audio_books.yaml`
+- `books_loans.yaml`
+- `concerts.yaml`
+- `courses.yaml`
+- `cv.yaml`
+- `lectures.yaml`
+- `loans.yaml`
+- `museums.yaml`
+- `people.yaml`
+- `political_rallies.yaml`
+- `study_sites.yaml`
+- `text_articles.yaml`
+- `text_books.yaml`
+- `trips.yaml`
+- `video_courses.yaml`
+- `video_youtube.yaml`
+
+Published: `audible.yaml`, `audio_courses.yaml`, `books_read.yaml`,
+`podcasts.yaml`, `video_features.yaml` and `video_series.yaml` on the media
+page; `organizations.yaml` and `certifications.yaml` on the training,
+consulting and education pages; `profiles.yaml` in the profile block. The
+YouTube tab comes from the CSV in the private `../data` repo, not from
+`video_youtube.yaml`. Publishing a private file is a decision to record
+here, not a side effect of adding a plugin.

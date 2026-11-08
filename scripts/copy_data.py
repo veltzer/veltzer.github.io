@@ -35,11 +35,11 @@ YAML_DIR = REPO_ROOT / "data" / "yaml"
 DATA_REPO = REPO_ROOT.parent / "data"
 DEST = REPO_ROOT / "static" / "data"
 
-# Plain YAML files copied verbatim from data/yaml.
+# Plain YAML files copied verbatim from data/yaml. Only published data goes
+# here: concerts.yaml and museums.yaml are private for now (doc/DECISIONS.md
+# lists every private data file).
 PLAIN_YAML = [
     "podcasts.yaml",
-    "museums.yaml",
-    "concerts.yaml",
     "video_features.yaml",
     "audio_courses.yaml",
     "video_series.yaml",

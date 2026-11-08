@@ -311,7 +311,8 @@ renderStatCard(42, 'Total Items');
 | `books` | `plugin-books.js` | `data/books.json.gz` (flattened from `books_read.yaml` by `scripts/import_books.py`) |
 | `companies` | `plugin-companies.js` | `data/companies.json.gz` (the `teaching` organizations of `organizations.yaml`, written into `_site/` at build time by `scripts/import_companies.py`; their logos are copied from `data/logos/` to `/logos/` the same way) |
 | `features` | `plugin-movies.js` | `data/video_features.json.gz` |
-| `museums` | `plugin-museums.js` | `data/museums.json.gz` |
+| `concerts` | `plugin-concerts.js` | `data/concerts.json.gz` (disabled: private for now, see `DECISIONS.md`) |
+| `museums` | `plugin-museums.js` | `data/museums.json.gz` (disabled: private for now, see `DECISIONS.md`) |
 | `podcasts` | `plugin-podcasts.js` | `data/podcasts.json.gz` |
 | `videos` | `plugin-series.js` | `data/video_series.json.gz` |
 | `youtube` | `plugin-youtube.js` | `data/youtube.json.gz` |
