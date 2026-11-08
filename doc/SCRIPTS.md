@@ -262,7 +262,8 @@ Posts".
 Verifies every media item has a corresponding image in `static/images/`.
 Checks movies, series, audible, audio courses, museums, podcasts, concerts
 and books. Skips YouTube (uses external CDN thumbnails). Part of the build
-(`[processor.checker.script.check_images]` in `rsconstruct.toml`): a media
+(`[processor.explicit.generic.check_images]` in `rsconstruct.toml`, which
+reruns when any image is added, changed or deleted): a media
 item added without its image fails it, so run the matching `fetch_*.py`.
 
 ### `scripts/import_companies.py`

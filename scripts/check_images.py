@@ -19,9 +19,14 @@ Checks:
 - YouTube: skipped (uses external thumbnails)
 
 Usage:
-  scripts/check_images.py
+  scripts/check_images.py [--output-files STAMP]
+
+The build runs it as an explicit step (rsconstruct.toml), which appends
+--inputs and --output-files: the inputs are only there so the build reruns it
+when one changes, and the stamp is written empty when every image is present.
 """
 
+import argparse
 import os
 import sys
 from pathlib import Path
@@ -218,6 +223,10 @@ def check_books():
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__.strip().splitlines()[0])
+    parser.add_argument("--inputs", nargs="*", default=[])
+    parser.add_argument("--output-files", nargs="*", type=Path, default=[])
+    args = parser.parse_args()
     total_errors = 0
     checks = [
         ("Movies", check_movies),
@@ -243,8 +252,10 @@ def main():
     if total_errors:
         print(f"FAILED: {total_errors} missing image(s)")
         sys.exit(1)
-    else:
-        print("All images present.")
+    print("All images present.")
+    for stamp in args.output_files:
+        stamp.parent.mkdir(parents=True, exist_ok=True)
+        stamp.write_text("")
 
 
 if __name__ == "__main__":

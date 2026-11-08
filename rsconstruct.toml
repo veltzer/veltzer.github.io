@@ -137,10 +137,16 @@ dep_inputs = ["shelve/wikidata_imdb.json", "data/rotten_tomatoes_manual.json", "
 
 # Every media item has its card image in static/images/: a series added to the
 # YAML without running its fetch_*.py used to ship with a broken card (eight
-# series in 2026-11 did) because this check was manual. It reruns when a data
-# file or the script changes; an image deleted later is caught by a cold build.
-[processor.checker.script.check_images]
-src_files = [
+# series in 2026-11 did) because this check was manual. An explicit step rather
+# than a script checker: a checker caches per file, so a deleted image just
+# drops out of its list, while here the matched glob is one input set and
+# adding, deleting or changing an image reruns the check. It writes an empty
+# stamp file on success, the output the step needs.
+[processor.explicit.generic.check_images]
+command = "scripts/check_images.py"
+inputs = [
+    "scripts/check_images.py",
+    "scripts/import_books.py",
     "data/yaml/audible.yaml",
     "data/yaml/audio_courses.yaml",
     "data/yaml/books_read.yaml",
@@ -150,9 +156,8 @@ src_files = [
     "data/yaml/video_features.yaml",
     "data/yaml/video_series.yaml",
 ]
-command = "scripts/check_images.py"
-batch = true
-dep_inputs = ["scripts/check_images.py", "scripts/import_books.py"]
+input_globs = ["static/images/*.jpg"]
+output_files = ["out/check_images/ok"]
 
 [processor.checker.script.check_books]
 src_files = ["data/yaml/books_read.yaml"]
