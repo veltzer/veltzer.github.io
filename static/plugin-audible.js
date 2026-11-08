@@ -139,7 +139,7 @@ window.collectionPlugins['audible'] = {
         html += '<div class="mb-3"><p class="mb-1"><strong>' + t('audible_finished') + ':</strong> ' + t(finishedCount === 1 ? 'audible_books_count_one' : 'audible_books_count_other', {count: finishedCount}) + '</p>';
         html += '<div class="w-full bg-gray-200 rounded-full h-5"><div class="bg-green-600 h-5 rounded-full text-xs text-white text-center leading-5" style="width: ' + finishedPct + '%;">' + Math.round(finishedPct) + '%</div></div></div>';
         html += '<div><p class="mb-1"><strong>' + t('audible_in_progress_unfinished') + ':</strong> ' + t(inProgressCount === 1 ? 'audible_books_count_one' : 'audible_books_count_other', {count: inProgressCount}) + '</p>';
-        html += '<div class="w-full bg-gray-200 rounded-full h-5"><div class="bg-cyan-500 h-5 rounded-full text-xs text-white text-center leading-5" style="width: ' + inProgressPct + '%;">' + Math.round(inProgressPct) + '%</div></div></div>';
+        html += '<div class="w-full bg-gray-200 rounded-full h-5"><div class="bg-blue-500 h-5 rounded-full text-xs text-white text-center leading-5" style="width: ' + inProgressPct + '%;">' + Math.round(inProgressPct) + '%</div></div></div>';
         html += '</div></div>';
 
         html += renderBarChart(t('audible_books_per_year'), yearCounts, {unit: t('audible_unit_books'), sort: 'reverse', barClass: 'bg-primary', last: true});

@@ -86,6 +86,7 @@ app_ui_showing = "Showing {start}–{end} of {total}"
 app_ui_rating = "Rating:"
 app_ui_device = "Device:"
 app_ui_loading_failed = "Loading failed:"
+app_ui_invalid_data_type = "Error: invalid data type in the URL, or the plugins did not load."
 
 # static/plugin-books.js
 app_books_date_unknown = "date unknown"

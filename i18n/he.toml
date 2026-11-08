@@ -88,6 +88,7 @@ app_ui_showing = "מציג {start}–{end} מתוך {total}"
 app_ui_rating = "דירוג:"
 app_ui_device = "מכשיר:"
 app_ui_loading_failed = "הטעינה נכשלה:"
+app_ui_invalid_data_type = "שגיאה: סוג נתונים לא תקין בכתובת, או שהתוספים לא נטענו."
 
 # static/plugin-books.js
 app_books_date_unknown = "תאריך לא ידוע"

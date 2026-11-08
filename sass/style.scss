@@ -18,6 +18,21 @@
 
 * { box-sizing: border-box; }
 
+// One corner for everything: the site is square. Every box, button, chip,
+// badge, input and image takes the small --radius-xs, so the larger shared
+// radius tokens are pointed at it here rather than in each rule. This
+// stylesheet loads after themes.css, so these win over its :root values; the
+// imported teaching apps (templates/app.html) define their own copies of the
+// tokens on their root element, so they are overridden there too.
+:root,
+body #app-syllabi,
+body #app-slides,
+body #app-animations {
+  --radius-sm: var(--radius-xs);
+  --radius: var(--radius-xs);
+  --radius-pill: var(--radius-xs);
+}
+
 body {
   margin: 0;
   background: var(--bg);
@@ -102,7 +117,7 @@ a:hover { text-decoration: underline; }
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-xs);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow);
 }
 .site-nav .nav-menu-items a { padding: 0.35rem 0.75rem; white-space: nowrap; }
 .site-nav .nav-menu-items a:hover { background: var(--bg-surface); }
@@ -140,7 +155,10 @@ a:hover { text-decoration: underline; }
   align-items: center;
 }
 
-.site-select {
+// Controls: the header's language and theme selects and every button, select
+// and number field of the data collection app (.control) share one look.
+.site-select,
+.control {
   background: var(--bg);
   color: var(--text-primary);
   border: 1px solid var(--border);
@@ -151,8 +169,13 @@ a:hover { text-decoration: underline; }
   cursor: pointer;
   transition: border-color var(--transition);
 }
-.site-select:hover { border-color: var(--accent); }
-.site-select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.control { padding: 0.25rem 0.6rem; }
+.site-select:hover,
+.control:hover { border-color: var(--accent); }
+.site-select:focus-visible,
+.control:focus-visible,
+.chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+input[type="checkbox"] { accent-color: var(--accent); }
 
 // Labels the selects for screen readers without showing them.
 .visually-hidden {
@@ -227,6 +250,46 @@ h3 { font-size: 1.1rem; margin: 1.8rem 0 0.5rem; }
   transition: background var(--transition), color var(--transition);
 }
 .tag:hover { background: var(--bg-hover); color: var(--accent); }
+
+// Chips: the view tabs of the data collection app. A larger .tag; the
+// current one is filled with the accent, like the current language.
+.chip {
+  display: inline-block;
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+.chip:hover { background: var(--bg-hover); color: var(--accent); }
+.chip.current { background: var(--accent); color: var(--bg); }
+.chip.outline { background: transparent; border-color: var(--border); }
+.chip.outline:hover { border-color: var(--accent); }
+
+// A small filled label for a value, such as a rating.
+.badge {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: var(--radius-pill);
+  padding: 0.05rem 0.55rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+// An error message box.
+.notice-error {
+  background: var(--danger-dim);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+}
 
 // The per-post language switcher (templates/page.html). The site-level one in
 // the header is a <select class="site-select">, styled further down.

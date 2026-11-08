@@ -28,6 +28,14 @@ important: '#collection-root',
 corePlugins: { preflight: false },
 theme: {
   extend: {
+    // The type scale is the site's: the small sizes match its tags (0.8rem)
+    // and meta lines (0.9rem), base is its body size, lg its h3.
+    fontSize: {
+      xs: '0.8rem',
+      sm: '0.9rem',
+      base: '1.05rem',
+      lg: '1.1rem'
+    },
     borderRadius: {
       sm: 'var(--radius-xs)',
       DEFAULT: 'var(--radius-xs)',
@@ -77,6 +85,9 @@ theme: {
         400: 'var(--danger, #dc2626)',
         600: 'var(--danger, #dc2626)',
         700: 'var(--danger, #dc2626)'
+      },
+      yellow: {
+        500: 'var(--warning, #ca8a04)'
       },
       green: {
         100: 'var(--bg-surface)',

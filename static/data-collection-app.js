@@ -286,7 +286,7 @@
                 if (values.length === 0) return;
 
                 const select = document.createElement('select');
-                select.className = 'text-sm border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500';
+                select.className = 'control';
                 select.setAttribute('aria-label', t('ui_filter_by', {label: filter.label}));
                 select.dataset.filterField = filter.field;
                 select.dataset.filterType = filter.type;
@@ -477,7 +477,7 @@
                 var cb = document.createElement('input');
                 cb.type = 'checkbox';
                 cb.checked = isOn;
-                cb.className = 'rounded border-gray-300 text-blue-600 focus:ring-blue-500';
+                cb.className = '';
                 cb.addEventListener('change', function() {
                     activeToggles[tf.key] = cb.checked;
                     saveTogglePref(dataType);
@@ -528,11 +528,9 @@
                 const navLink = document.createElement('a');
                 navLink.href = '?data=' + key;
                 navLink.textContent = config.navTitle;
-                navLink.className = 'px-4 py-2 rounded-full text-sm font-medium no-underline transition-colors';
+                navLink.className = 'chip';
                 if (key === activeDataType) {
-                    navLink.classList.add('bg-blue-600', 'text-white');
-                } else {
-                    navLink.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+                    navLink.classList.add('current');
                 }
                 navLink.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -542,11 +540,10 @@
             }
 
             const statsToggle = document.createElement('a');
-            statsToggle.className = 'px-4 py-2 rounded-full text-sm font-medium no-underline border border-gray-300 transition-colors' + (tabKeys.length ? ' ms-4' : '');
+            statsToggle.className = 'chip outline' + (tabKeys.length ? ' ms-4' : '');
 
             if (showStatsOnly) {
                 statsToggle.textContent = t('ui_back_to_full_view');
-                statsToggle.classList.add('text-gray-700', 'hover:bg-gray-100');
                 statsToggle.href = '?data=' + activeDataType;
                 statsToggle.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -554,7 +551,6 @@
                 });
             } else {
                 statsToggle.textContent = t('ui_view_statistics');
-                statsToggle.classList.add('text-gray-700', 'hover:bg-gray-100');
                 statsToggle.href = '?data=' + activeDataType + '&stats=true';
                 statsToggle.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -588,7 +584,7 @@
             if (activeConfig) deriveFieldsConfig(activeConfig);
 
             if (!activeConfig) {
-                statusMessage.innerHTML = '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">Error: Invalid data type in URL or plugins not loaded.</div>';
+                statusMessage.innerHTML = '<div class="notice-error">' + escapeHtml(t('ui_invalid_data_type')) + '</div>';
                 return;
             }
 
@@ -671,7 +667,7 @@
                 console.error('Error loading or parsing data file:', error);
                 itemsContainer.innerHTML = '';
                 statsContainer.innerHTML = '';
-                statusMessage.innerHTML = '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"><strong>' + t('ui_loading_failed') + '</strong> ' + escapeHtml(error.message) + '</div>';
+                statusMessage.innerHTML = '<div class="notice-error"><strong>' + t('ui_loading_failed') + '</strong> ' + escapeHtml(error.message) + '</div>';
             }
         }
 
@@ -740,7 +736,7 @@
                             '<h5 class="text-lg font-bold mb-2" dir="auto">' + escapeHtml(item.name || t('ui_no_title')) + '</h5>' +
                             '<p class="text-gray-600 mb-4" dir="auto">' + escapeHtml(item.review || item.subtitle || t('ui_no_description')) + '</p>' +
                             '<ul class="mt-auto divide-y divide-gray-200">' +
-                                (activeConfig.ratingScale ? '<li class="py-2"><strong>' + t('ui_rating') + '</strong> <span dir="ltr" class="inline-block bg-blue-600 text-white text-sm font-semibold px-2.5 py-0.5 rounded-full">' + escapeHtml(item.rating || '?') + ' / ' + activeConfig.ratingScale + '</span></li>' : '') +
+                                (activeConfig.ratingScale ? '<li class="py-2"><strong>' + t('ui_rating') + '</strong> <span dir="ltr" class="badge">' + escapeHtml(item.rating || '?') + ' / ' + activeConfig.ratingScale + '</span></li>' : '') +
                                 (item.device ? '<li class="py-2"><strong>' + t('ui_device') + '</strong> <bdi>' + escapeHtml(item.device) + '</bdi>' + '</li>' : '') +
                                 specificDetails +
                             '</ul>' +
@@ -770,14 +766,14 @@
             const end = Math.min(currentPage * PAGE_SIZE, totalItems);
 
             paginationContainer.innerHTML =
-                '<button id="btnPrevPage" aria-label="' + escapeHtml(t('ui_previous_page')) + '" class="px-4 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-50">' + escapeHtml(t('ui_previous')) + '</button>' +
+                '<button id="btnPrevPage" aria-label="' + escapeHtml(t('ui_previous_page')) + '" class="control">' + escapeHtml(t('ui_previous')) + '</button>' +
                 '<span class="text-gray-500">' + escapeHtml(t('ui_showing', {start: start, end: end, total: totalItems})) + '</span>' +
                 '<div class="flex items-center gap-2">' +
                     '<label for="jumpToPage" class="text-sm text-gray-500">' + escapeHtml(t('ui_page')) + '</label>' +
-                    '<input type="number" id="jumpToPage" aria-label="' + escapeHtml(t('ui_jump_to_page')) + '" class="w-20 text-sm border border-gray-300 rounded px-2 py-1" min="1" max="' + totalPages + '" value="' + currentPage + '">' +
+                    '<input type="number" id="jumpToPage" aria-label="' + escapeHtml(t('ui_jump_to_page')) + '" class="control w-20" min="1" max="' + totalPages + '" value="' + currentPage + '">' +
                     '<span class="text-gray-500">/ ' + totalPages + '</span>' +
                 '</div>' +
-                '<button id="btnNextPage" aria-label="' + escapeHtml(t('ui_next_page')) + '" class="px-4 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-50">' + escapeHtml(t('ui_next')) + '</button>';
+                '<button id="btnNextPage" aria-label="' + escapeHtml(t('ui_next_page')) + '" class="control">' + escapeHtml(t('ui_next')) + '</button>';
 
             document.getElementById('btnPrevPage').disabled = currentPage <= 1;
             document.getElementById('btnNextPage').disabled = currentPage >= totalPages;
@@ -852,7 +848,7 @@
             // in loadAllPlugins, loadData never runs, and the page stays blank with
             // nothing but an uncaught rejection in the console.
             console.error('Error loading collection plugins:', error);
-            statusMessage.innerHTML = '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"><strong>' + t('ui_loading_failed') + '</strong> ' + escapeHtml(error.message) + '</div>';
+            statusMessage.innerHTML = '<div class="notice-error"><strong>' + t('ui_loading_failed') + '</strong> ' + escapeHtml(error.message) + '</div>';
         });
     });
 }());

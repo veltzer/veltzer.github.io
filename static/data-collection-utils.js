@@ -27,13 +27,16 @@ function t(key, vars) {
     return text;
 }
 
-const CHART_COLORS = ['#2563eb', '#7c3aed', '#db2777', '#ea580c', '#16a34a', '#dc2626', '#ca8a04'];
+// Bar colours from the theme, so a chart follows the theme switcher like the
+// rest of the site: the accent, the four entity colours, then the status ones.
+const CHART_COLORS = ['var(--accent)', 'var(--entity-1)', 'var(--entity-2)', 'var(--entity-3)',
+    'var(--entity-4)', 'var(--success)', 'var(--warning)'];
 
 // Map color keys to Tailwind background classes
 const COLOR_CLASS_MAP = {
     'bg-primary': 'bg-blue-600',
     'bg-success': 'bg-green-600',
-    'bg-info': 'bg-cyan-500',
+    'bg-info': 'bg-blue-500',
     'bg-danger': 'bg-red-600',
     'bg-warning': 'bg-yellow-500'
 };
