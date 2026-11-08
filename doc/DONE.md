@@ -4,8 +4,8 @@
 and its standalone HTML pages, and the file names are the ones of that time
 (`manage_api_key.sh`, `copy_data.sh`, `build_docs.sh`, `blog/shared.css`,
 `calendar_*.html`, `mkdocs.yml`); most no longer exist. Two entries were later
-reversed: `check_images.py` is no longer run by the build (it is a manual check,
-see `doc/SCRIPTS.md`), and the CDN SRI hashes for cm-chessboard and chess.js
+reversed: `check_images.py` was dropped from the build for a while (it is back
+since 2026-11-08, see `doc/SCRIPTS.md`), and the CDN SRI hashes for cm-chessboard and chess.js
 became moot when both were vendored into `static/vendor/`.
 
 ## Calendar Pages

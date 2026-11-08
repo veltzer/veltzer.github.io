@@ -135,6 +135,25 @@ command = "scripts/check_wikidata_ids.py"
 batch = true
 dep_inputs = ["shelve/wikidata_imdb.json", "data/rotten_tomatoes_manual.json", "scripts/check_wikidata_ids.py"]
 
+# Every media item has its card image in static/images/: a series added to the
+# YAML without running its fetch_*.py used to ship with a broken card (eight
+# series in 2026-11 did) because this check was manual. It reruns when a data
+# file or the script changes; an image deleted later is caught by a cold build.
+[processor.checker.script.check_images]
+src_files = [
+    "data/yaml/audible.yaml",
+    "data/yaml/audio_courses.yaml",
+    "data/yaml/books_read.yaml",
+    "data/yaml/concerts.yaml",
+    "data/yaml/museums.yaml",
+    "data/yaml/podcasts.yaml",
+    "data/yaml/video_features.yaml",
+    "data/yaml/video_series.yaml",
+]
+command = "scripts/check_images.py"
+batch = true
+dep_inputs = ["scripts/check_images.py", "scripts/import_books.py"]
+
 [processor.checker.script.check_books]
 src_files = ["data/yaml/books_read.yaml"]
 command = "pydatacheck"

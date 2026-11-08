@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Fetch movie poster images from TMDB (with OMDB fallback) by IMDB ID.
 
