@@ -9,5 +9,6 @@
 {% block main_class %}embed-main{% endblock %}
 {% block content %}
 <h1 class="embed-title">{{ section.title }}</h1>
+{%- if section.extra.strings_prefix %}{% set strings_prefix = section.extra.strings_prefix %}{% include "page_strings.html" %}{% endif %}
 {% include "app_body.html" %}
 {% endblock %}

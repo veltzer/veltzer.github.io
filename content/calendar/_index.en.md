@@ -2,6 +2,9 @@
 title = "My Public Calendar"
 description = "Mark Veltzer's public Google calendar, with month, week and day views."
 template = "app.html"
+
+[extra]
+strings_prefix = "calendar_"
 +++
 
 <div id="calendar-error" class="calendar-error"></div>
@@ -18,8 +21,31 @@ function themeToken(name, fallback) {
     return value || fallback;
 }
 
+// The calendar in the page's language and direction. The strings are the
+// calendar_* keys of i18n/<lang>.toml (templates/page_strings.html), handed
+// to FullCalendar as a locale object rather than vendoring its locale files;
+// month and day names come from Intl under the same code.
+function pageLocale() {
+    var s = window.pageStrings || {};
+    var html = document.documentElement;
+    return {
+        code: html.lang || 'en',
+        direction: getComputedStyle(html).direction === 'rtl' ? 'rtl' : 'ltr',
+        buttonText: {
+            prev: s.calendar_prev, next: s.calendar_next, today: s.calendar_today,
+            month: s.calendar_month, week: s.calendar_week, day: s.calendar_day,
+            list: s.calendar_list
+        },
+        weekText: s.calendar_week,
+        allDayText: s.calendar_all_day,
+        moreLinkText: s.calendar_more,
+        noEventsText: s.calendar_no_events
+    };
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
+    var locale = pageLocale();
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         headerToolbar: {
@@ -27,7 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
         },
-        locale: 'en',
+        locales: [locale],
+        locale: locale.code,
         timeZone: 'Asia/Jerusalem',
         height: 'auto',
         googleCalendarApiKey: API_KEY,
@@ -51,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         eventSourceFailure: function() {
             var errorEl = document.getElementById('calendar-error');
-            errorEl.textContent = 'Failed to load calendar events. Please check your Calendar ID and API key.';
+            errorEl.textContent = (window.pageStrings || {}).calendar_error;
             errorEl.style.display = 'block';
         }
     });

@@ -7,39 +7,39 @@ template = "chess.html"
 <script src="/vendor/chess.min.js"></script>
 
 <div class="chess-viewer">
-  <p id="gamePlayers" class="chess-players">Loading games…</p>
+  <p id="gamePlayers" class="chess-players" data-text="chess_loading"></p>
   <progress id="loadProgress" class="chess-progress" max="1" aria-labelledby="gamePlayers"></progress>
   <p id="gameCounter" class="chess-counter">&nbsp;</p>
 
   <div id="chessStats" class="chess-stats"></div>
 
   <div class="chess-picker">
-    <label class="visually-hidden" for="gameSearch">Search games</label>
+    <label class="visually-hidden" for="gameSearch" data-text="chess_search_label"></label>
     <input type="search" id="gameSearch" class="chess-search"
-           placeholder="Search by player, event or year…" autocomplete="off">
-    <label class="visually-hidden" for="yearSelect">Year</label>
+           data-placeholder="chess_search_placeholder" autocomplete="off">
+    <label class="visually-hidden" for="yearSelect" data-text="chess_year"></label>
     <select id="yearSelect" class="chess-select chess-select--year"></select>
-    <label class="visually-hidden" for="gameSelect">Game</label>
+    <label class="visually-hidden" for="gameSelect" data-text="chess_game"></label>
     <select id="gameSelect" class="chess-select"></select>
   </div>
 
   <div class="chess-picker">
-    <label class="chess-jump-label" for="gameJump">Go to game</label>
+    <label class="chess-jump-label" for="gameJump" data-text="chess_go_to_game"></label>
     <input type="number" id="gameJump" class="chess-jump" min="1" step="1"
            inputmode="numeric" autocomplete="off">
     <span id="jumpRange" class="chess-jump-range"></span>
   </div>
 
-  <div id="gameBoard" class="chess-board"></div>
+  <div id="gameBoard" class="chess-board" dir="ltr"></div>
 
   <div class="chess-controls">
-    <button id="btnPrev" class="chess-btn" aria-label="Go to previous move">&larr; Move</button>
-    <button id="btnNext" class="chess-btn" aria-label="Go to next move">Move &rarr;</button>
+    <button id="btnPrev" class="chess-btn" data-label="chess_prev_move"></button>
+    <button id="btnNext" class="chess-btn" data-label="chess_next_move"></button>
   </div>
 
   <div class="chess-controls">
-    <button id="btnPrevGame" class="chess-btn chess-btn--game" aria-label="Go to previous game">&laquo; Game</button>
-    <button id="btnNextGame" class="chess-btn chess-btn--game" aria-label="Go to next game">Game &raquo;</button>
+    <button id="btnPrevGame" class="chess-btn chess-btn--game" data-label="chess_prev_game"></button>
+    <button id="btnNextGame" class="chess-btn chess-btn--game" data-label="chess_next_game"></button>
   </div>
 
   <div id="status" class="chess-status"></div>
@@ -64,6 +64,38 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
     // archives disagree on the name -- the ICS games say "veltzer", chess.com
     // says "mark_veltzer" -- so every alias has to count as me.
     const ME = new Set(['veltzer', 'mark_veltzer']);
+
+    // The page's strings, in its language: the chess_* keys of i18n/<lang>.toml,
+    // written into the page by templates/page_strings.html. {name} slots are
+    // filled from `values`.
+    function t(key, values) {
+        const strings = window.pageStrings || {};
+        let text = strings[key] || key;
+        for (const name in values || {}) text = text.split('{' + name + '}').join(values[name]);
+        return text;
+    }
+    const lang = document.documentElement.lang || 'en';
+    function num(n) { return n.toLocaleString(lang); }
+    // A number range ("1996–2026") isolated as left to right: inside a
+    // right-to-left sentence the bidi algorithm would otherwise show it
+    // reversed, 2026–1996.
+    function range(from, to) { return '\u2066' + from + '\u2013' + to + '\u2069'; }
+    document.querySelectorAll('[data-text]').forEach(function (el) { el.textContent = t(el.dataset.text); });
+    document.querySelectorAll('[data-placeholder]').forEach(function (el) { el.placeholder = t(el.dataset.placeholder); });
+    document.querySelectorAll('[data-label]').forEach(function (el) { el.setAttribute('aria-label', t(el.dataset.label)); });
+    // The step buttons: the arrow sits at the reading start of "previous" and
+    // the reading end of "next", and points the way the page reads, so in
+    // Hebrew "previous" is on the right and points right.
+    const rtl = getComputedStyle(document.documentElement).direction === 'rtl';
+    // Arrows have no mirrored form, so they are swapped here; the guillemets
+    // are Bidi_Mirrored, so the browser already draws \u00ab as \u00bb in
+    // right-to-left text and they must not be swapped as well.
+    const back = rtl ? '\u2192' : '\u2190', fwd = rtl ? '\u2190' : '\u2192';
+    const backGame = '\u00ab', fwdGame = '\u00bb';
+    document.getElementById('btnPrev').textContent = back + ' ' + t('chess_move');
+    document.getElementById('btnNext').textContent = t('chess_move') + ' ' + fwd;
+    document.getElementById('btnPrevGame').textContent = backGame + ' ' + t('chess_game');
+    document.getElementById('btnNextGame').textContent = t('chess_game') + ' ' + fwdGame;
 
     const titleEl = document.getElementById('gameTitle');
     const playersEl = document.getElementById('gamePlayers');
@@ -106,9 +138,9 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
             if (!text.startsWith('[Event ')) continue;
             const date = headerValue(text, 'Date');
             out.push({
-                white: headerValue(text, 'White') || 'White',
-                black: headerValue(text, 'Black') || 'Black',
-                event: headerValue(text, 'Event') || 'Game',
+                white: headerValue(text, 'White') || t('chess_white'),
+                black: headerValue(text, 'Black') || t('chess_black'),
+                event: headerValue(text, 'Event') || t('chess_game'),
                 result: headerValue(text, 'Result'),
                 // Lower-cased once here so the win/loss tally does not have to
                 // case-fold 16,000 names on every render.
@@ -141,14 +173,14 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
         const decided = wins + losses + draws;
         const score = decided ? Math.round(((wins + draws / 2) / decided) * 100) : 0;
         const cells = [
-            ['Games', list.length.toLocaleString()],
-            ['Won', wins.toLocaleString()],
-            ['Lost', losses.toLocaleString()],
-            ['Drawn', draws.toLocaleString()],
-            ['Score', score + '%'],
-            ['As white', asWhite.toLocaleString()],
-            ['Opponents', opponents.size.toLocaleString()],
-            ['Years', earliest && latest ? (earliest === latest ? earliest : earliest + '\u2013' + latest) : '\u2013']
+            [t('chess_stat_games'), num(list.length)],
+            [t('chess_stat_won'), num(wins)],
+            [t('chess_stat_lost'), num(losses)],
+            [t('chess_stat_drawn'), num(draws)],
+            [t('chess_stat_score'), score + '%'],
+            [t('chess_stat_as_white'), num(asWhite)],
+            [t('chess_stat_opponents'), num(opponents.size)],
+            [t('chess_stat_years'), earliest && latest ? (earliest === latest ? earliest : range(earliest, latest)) : '\u2013']
         ];
         statsEl.innerHTML = cells.map(function (cell) {
             return '<div class="chess-stat"><span class="chess-stat-value">' + cell[1] +
@@ -158,7 +190,7 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
 
     function label(game, index) {
         const year = game.year ? ' (' + game.year + ')' : '';
-        return (index + 1) + '. ' + game.white + ' vs ' + game.black + year;
+        return (index + 1) + '. ' + game.white + ' ' + t('chess_vs') + ' ' + game.black + year;
     }
 
     // The player and event names come from the archive's PGN headers, i.e.
@@ -211,14 +243,13 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
                    escapeHtml(label(games[gameIndex], windowStart + position)) + '</option>';
         }).join('');
         const hidden = filtered.length - shown.length;
-        counterEl.textContent = filtered.length.toLocaleString() + ' games' +
+        counterEl.textContent = t('chess_games_count', {n: num(filtered.length)}) +
             (hidden > 0
-                ? ' (showing ' + (windowStart + 1).toLocaleString() + '–' +
-                  (windowStart + shown.length).toLocaleString() + ')'
+                ? ' (' + t('chess_showing', {range: range(num(windowStart + 1), num(windowStart + shown.length))}) + ')'
                 : '');
         jumpEl.max = String(filtered.length);
         jumpRangeEl.textContent = filtered.length
-            ? 'of ' + filtered.length.toLocaleString()
+            ? t('chess_of_total', {n: num(filtered.length)})
             : '';
     }
 
@@ -227,7 +258,7 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
     function renderYears() {
         const years = Array.from(new Set(games.map(function (g) { return g.year; })))
             .filter(Boolean).sort().reverse();
-        yearEl.innerHTML = '<option value="">All years</option>' +
+        yearEl.innerHTML = '<option value="">' + escapeHtml(t('chess_all_years')) + '</option>' +
             years.map(function (y) {
                 return '<option value="' + escapeHtml(y) + '">' + escapeHtml(y) + '</option>';
             }).join('');
@@ -240,14 +271,14 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
         const move = moves[currentMove - 1];
 
         titleEl.textContent = game.event + (game.year ? ' (' + game.year + ')' : '');
-        playersEl.textContent = game.white + ' vs. ' + game.black +
+        playersEl.textContent = game.white + ' ' + t('chess_vs') + ' ' + game.black +
             (game.result ? ' ' + game.result : '');
         selectEl.value = String(currentGame);
         jumpEl.value = String(currentGame + 1);
 
         statusEl.textContent = moves.length
-            ? 'Move ' + currentMove + ': ' + (move ? move.san : 'Start')
-            : 'This game has no readable moves.';
+            ? t('chess_move_status', {n: num(currentMove), san: move ? move.san : t('chess_start')})
+            : t('chess_no_moves');
 
         // Replay from the start rather than tracking incremental state: it
         // cannot drift out of sync with the move index.
@@ -293,7 +324,7 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
         renderStats(filtered.map(function (i) { return games[i]; }));
         renderOptions();
         if (filtered.length) selectGame(0);
-        else statusEl.textContent = 'No games match that search.';
+        else statusEl.textContent = t('chess_no_match');
     }
 
     function formatMb(bytes) {
@@ -310,10 +341,10 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
     function showProgress(received, total) {
         if (total && received <= total) {
             progressEl.value = received / total;
-            playersEl.textContent = 'Loading games… ' + formatMb(received) + ' of ' + formatMb(total);
+            playersEl.textContent = t('chess_loading') + ' ' + formatMb(received) + ' ' + t('chess_loading_of') + ' ' + formatMb(total);
         } else {
             progressEl.removeAttribute('value');
-            playersEl.textContent = 'Loading games… ' + formatMb(received);
+            playersEl.textContent = t('chess_loading') + ' ' + formatMb(received);
         }
     }
 
@@ -347,13 +378,13 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
         // Splitting ~100 MB of PGN is synchronous and takes a noticeable
         // moment; yield once so the "Indexing" text actually paints first.
         progressEl.removeAttribute('value');
-        playersEl.textContent = 'Indexing games…';
+        playersEl.textContent = t('chess_indexing');
         return new Promise(function (resolve) { setTimeout(resolve, 0); }).then(function () { return pgn; });
     }).then(function (pgn) {
         progressEl.hidden = true;
         games = splitGames(pgn);
         if (!games.length) {
-            playersEl.textContent = 'No games found in the archive.';
+            playersEl.textContent = t('chess_none_found');
             return;
         }
         renderYears();
@@ -361,7 +392,7 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
     }).catch(function (error) {
         console.error('Could not load games:', error);
         progressEl.hidden = true;
-        playersEl.textContent = 'Could not load the game archive.';
+        playersEl.textContent = t('chess_load_failed');
     });
 
     searchEl.addEventListener('input', function () { applyFilter(searchEl.value); });

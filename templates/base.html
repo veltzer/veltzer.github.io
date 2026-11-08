@@ -311,10 +311,12 @@
       (`build`, UTC, to the minute). The commit's files are sources of every
       page, so a new commit rebuilds the site; the time is the one part that
       changes on every build of the same sources. Outside git (a tarball)
-      the commit is left out. -#}
-  <p class="site-inscription" dir="ltr">Built with <a href="{{ rssite.url }}">{{ rssite.name }}</a> version {{ rssite.version }}, a static site generator by Mark Veltzer &lt;<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>&gt;</p>
+      the commit is left out. The wording is i18n footer_* keys, so the
+      Hebrew pages carry it in Hebrew; names, the version and the address
+      sit in <bdi> so they do not reorder the right-to-left sentence. -#}
+  <p class="site-inscription">{{ trans(key="footer_built_with") }} <a href="{{ rssite.url }}">{{ rssite.name }}</a> {{ trans(key="footer_version") }} <bdi>{{ rssite.version }}</bdi>, {{ trans(key="footer_generator_by") }} {{ trans(key="footer_author") }} <bdi>&lt;<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>&gt;</bdi></p>
   {%- if git or build %}
-  <p class="site-inscription" dir="ltr">Built{% if git %} from <a href="https://github.com/veltzer/veltzer.github.io">veltzer/veltzer.github.io</a> commit <a href="https://github.com/veltzer/veltzer.github.io/commit/{{ git.commit }}"><code>{{ git.short }}</code></a>{% if git.dirty %} (with uncommitted changes){% endif %}{% endif %}{% if build %} on <time datetime="{{ build.time }}">{{ build.time | truncate(length=16, end="") | replace(from="T", to=" ") }} UTC</time>{% endif %}</p>
+  <p class="site-inscription">{{ trans(key="footer_built") }}{% if git %} {{ trans(key="footer_from") }} <bdi><a href="https://github.com/veltzer/veltzer.github.io">veltzer/veltzer.github.io</a></bdi> {{ trans(key="footer_commit") }} <a href="https://github.com/veltzer/veltzer.github.io/commit/{{ git.commit }}"><code>{{ git.short }}</code></a>{% if git.dirty %} {{ trans(key="footer_uncommitted") }}{% endif %}{% endif %}{% if build %} {{ trans(key="footer_on") }} <time datetime="{{ build.time }}" dir="ltr">{{ build.time | truncate(length=16, end="") | replace(from="T", to=" ") }} UTC</time>{% endif %}</p>
   {%- endif %}
 </footer>
 

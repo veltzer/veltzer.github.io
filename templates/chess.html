@@ -10,5 +10,6 @@
 {% endblock %}
 {% block content %}
 <h1 class="embed-title" id="gameTitle">{{ section.title }}</h1>
+{% set strings_prefix = "chess_" %}{% include "page_strings.html" %}
 {% include "app_body.html" %}
 {% endblock %}
