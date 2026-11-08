@@ -29,7 +29,8 @@ output_dirs = ["_site"]
 
 # The organization tabs: organizations.yaml becomes _site/data/companies.json.gz
 # (taught at), training_providers.json.gz (taught for) and consulting.json.gz
-# (consulted for) and publishers.json.gz (the media page's publishers), and
+# (consulted for), publishers.json.gz (the media page's publishers),
+# education.json.gz (studied at) and certifications.json.gz (certified by), and
 # data/logos/ is copied to _site/logos/. The importer checks every map
 # image the YAML names exists under static/images/.
 [processor.explicit.generic.companies]
@@ -37,7 +38,7 @@ command = "scripts/build_site.py"
 args = ["companies"]
 inputs = ["data/yaml/organizations.yaml", "scripts/import_companies.py"]
 input_globs = ["data/logos/*.svg", "static/images/map-*.jpg"]
-output_files = ["_site/data/companies.json.gz", "_site/data/training_providers.json.gz", "_site/data/consulting.json.gz", "_site/data/publishers.json.gz"]
+output_files = ["_site/data/companies.json.gz", "_site/data/training_providers.json.gz", "_site/data/consulting.json.gz", "_site/data/publishers.json.gz", "_site/data/education.json.gz", "_site/data/certifications.json.gz"]
 output_dirs = ["_site/logos"]
 
 # A share card (og:image) per blog post: content/blog/foo.en.md becomes

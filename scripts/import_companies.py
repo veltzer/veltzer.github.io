@@ -11,7 +11,10 @@ has ``teaching``, the companies I taught at, and ``training-provider``, the
 training companies I taught for, which exclude each other (EXCLUSIVE); the
 consulting page (/consulting/) has ``consulting``, which an
 organization I also taught at may have too; the media page (/media/) has
-``publisher``, the publishers of the audiobooks, courses and radio I consumed. A tab wants only the fields a
+``publisher``, the publishers of the audiobooks, courses and radio I consumed;
+the education page (/training/education/) has ``education``, the schools and
+universities I studied at, and ``certification``, the companies that certified
+me. A tab wants only the fields a
 card shows: the name, the logo path, the current status
 and what happened, where the company is and where its Israel office was,
 the one map point chosen for it, the static map image of that point, and
@@ -51,9 +54,11 @@ TEACHING = "teaching"
 TRAINING_PROVIDER = "training-provider"
 CONSULTING = "consulting"
 PUBLISHER = "publisher"
+EDUCATION = "education"
+CERTIFICATION = "certification"
 # The functions that get a tab, so a card, an address and a map image (see
 # organizations_fetch_maps.py): every organization with one of them is shown.
-TABS = (TEACHING, TRAINING_PROVIDER, CONSULTING, PUBLISHER)
+TABS = (TEACHING, TRAINING_PROVIDER, CONSULTING, PUBLISHER, EDUCATION, CERTIFICATION)
 # Tabs of one page that are different relationships to the same kind of
 # organization, so no organization may be on two of them.
 EXCLUSIVE = (TEACHING, TRAINING_PROVIDER)

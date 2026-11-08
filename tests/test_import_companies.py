@@ -71,15 +71,23 @@ class TestSelection:
         assert [item["name"] for item in import_companies.convert(data, "consulting")["items"]] == ["Amdocs", "Advised"]
         assert import_companies.overlapping(data) == []
 
+    def test_education_and_certification_tabs(self):
+        data = {"items": [organization(), organization(id=4, name="Rimon", functions=["education"]),
+                          organization(id=5, name="MySQL", functions=["certification"])]}
+        assert [item["name"] for item in import_companies.convert(data, "education")["items"]] == ["Rimon"]
+        assert [item["name"] for item in import_companies.convert(data, "certification")["items"]] == ["MySQL"]
+
     def test_publishers_tab(self):
         data = {"items": [organization(), organization(id=3, name="Audible", functions=["publisher"])]}
         assert [item["name"] for item in import_companies.convert(data, "publisher")["items"]] == ["Audible"]
         assert import_companies.shown(data["items"][1])
 
-    def test_both_tabs_are_shown(self):
+    def test_every_tab_function_is_shown(self):
         assert import_companies.shown(organization(functions=["training-provider"]))
         assert import_companies.shown(organization(functions=["consulting"]))
-        assert not import_companies.shown(organization(functions=["certification"]))
+        assert import_companies.shown(organization(functions=["certification"]))
+        assert import_companies.shown(organization(functions=["education"]))
+        assert not import_companies.shown(organization(functions=[]))
 
 
 class TestFields:

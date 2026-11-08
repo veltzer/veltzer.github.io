@@ -3,7 +3,8 @@
 # yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/organizations.json
 # Organizations I taught at, taught for (training companies that hired me to teach: function training-provider),
 # consulted for, was certified by, or consumed media from (function publisher).
-# id 125 (Tel Aviv University) was added on 2026-11-07 with no function yet.
+# id 125 (Tel Aviv University) was added on 2026-11-07, and id 126 (Rimon School of Music) on 2026-11-08; with the
+# Hebrew and Open universities they have function education (a school I studied at).
 # ids 122-124 (AgileSparks, DevelopIntelligence, Logtel) were added on 2026-11-07 as training providers, and Hinbit,
 # Interbit, John Bryce and Ness moved from teaching to training-provider the same day.
 # Extracted from the myworld MySQL database (TbOrganization, backup of 2019-05-11);
@@ -3113,7 +3114,8 @@ items:
 - id: 84
   name: Hebrew University of Jerusalem
   slug: hebrew-university
-  functions: []
+  functions:
+  - education
   logo: logos/hebrew-university.svg
   logo_original: raw/logos/hebrew-university.jpg
   logo_kind: official vector
@@ -3223,7 +3225,8 @@ items:
 - id: 89
   name: Open University of Israel
   slug: openuniversityil
-  functions: []
+  functions:
+  - education
   logo: logos/open-university.svg
   logo_original: raw/logos/open-university.jpg
   logo_kind: official vector
@@ -4362,7 +4365,8 @@ items:
 - id: 125
   name: Tel Aviv University
   slug: tel-aviv-university
-  functions: []
+  functions:
+  - education
   logo: logos/tel-aviv-university.svg
   logo_kind: official vector
   logo_source: https://en.wikipedia.org/wiki/File:Tel_Aviv_university_logo.svg
@@ -4385,3 +4389,32 @@ items:
   sources:
   - https://en.wikipedia.org/wiki/Tel_Aviv_University
   - https://www.tau.ac.il
+- id: 126
+  name: Rimon School of Music
+  slug: rimon-school-of-music
+  functions:
+  - education
+  logo: logos/rimon-school-of-music.svg
+  logo_original: raw/logos/rimon-school-of-music.jpg
+  logo_kind: traced from original bitmap (no vector logo found online)
+  logo_source: https://www.rimonschool.co.il/
+  logo_license: school brand asset (logo on its site, used for identification)
+  logo_note: the school's yellow square logo (Hebrew wordmark and treble clef) from its site, flattened to its two colours and
+    traced with vtracer on 2026-11-08
+  status: active
+  website: https://www.rimonschool.co.il/
+  location: Ramat HaSharon, Israel
+  location_geo:
+    place: Ramat HaSharon, Israel
+    lat: 32.14313
+    lon: 34.83809
+  address: 46 Shmuel HaNagid St, Ramat HaSharon 47295, Israel
+  address_source: https://www.rimonschool.co.il/en/
+  geo:
+    from: location
+    place: Ramat HaSharon, Israel
+    lat: 32.14313
+    lon: 34.83809
+  sources:
+  - https://en.wikipedia.org/wiki/Rimon_School_of_Jazz_and_Contemporary_Music
+  - https://www.rimonschool.co.il/en/

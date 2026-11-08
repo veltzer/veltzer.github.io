@@ -243,3 +243,19 @@ window.collectionPlugins['publishers'] = Object.assign({}, window.collectionPlug
     title: t('companies_publishers_title'),
     subtitle: t('companies_publishers_subtitle')
 });
+
+// The schools and universities I studied at, and the companies that
+// certified me, as the two tabs of the education page (/training/education/).
+window.collectionPlugins['education'] = Object.assign({}, window.collectionPlugins['companies'], {
+    file: 'data/education.json.gz',
+    navTitle: t('companies_education_nav_title'),
+    title: t('companies_education_title'),
+    subtitle: t('companies_education_subtitle')
+});
+
+window.collectionPlugins['certifications'] = Object.assign({}, window.collectionPlugins['companies'], {
+    file: 'data/certifications.json.gz',
+    navTitle: t('companies_certifications_nav_title'),
+    title: t('companies_certifications_title'),
+    subtitle: t('companies_certifications_subtitle')
+});
