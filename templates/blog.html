@@ -36,7 +36,7 @@
       data-error="{{ trans(key='search_error') }}">
   <div class="blog-search-row">
   <label class="visually-hidden" for="blog-search-input">{{ trans(key="search_label") }}</label>
-  <input type="search" id="blog-search-input" class="blog-search-input"
+  <input type="search" id="blog-search-input" class="search-input"
          placeholder="{{ trans(key='search_placeholder') }}" autocomplete="off">
   <label class="visually-hidden" for="blog-search-mode">{{ trans(key="search_mode_label") }}</label>
   <select id="blog-search-mode" class="blog-search-mode"{% if search_modes | length < 2 %} hidden{% endif %}>

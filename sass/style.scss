@@ -314,11 +314,11 @@ h3 { font-size: 1.1rem; margin: 1.8rem 0 0.5rem; }
   margin-bottom: 2rem;
 }
 
-// Blog search (static/blog-search.js): the box above the post list, and the
-// opening text each result carries so a match outside the title shows why.
-.blog-search { margin-bottom: 0.5rem; }
-.blog-search-row { display: flex; gap: 0.5rem; }
-.blog-search-input,
+// Search boxes: one look for every search field on the site -- the blog's
+// (static/blog-search.js) and the data collection app's
+// (templates/data_collection.html) -- so they cannot drift apart again.
+// The blog's mode <select> beside it shares the rule.
+.search-input,
 .blog-search-mode {
   box-sizing: border-box;
   background: var(--bg);
@@ -328,10 +328,15 @@ h3 { font-size: 1.1rem; margin: 1.8rem 0 0.5rem; }
   padding: 0.5rem 0.7rem;
   font: inherit;
 }
-.blog-search-input { flex: 1; min-width: 0; }
-.blog-search-mode[hidden] { display: none; }
-.blog-search-input:focus-visible,
+.search-input:focus-visible,
 .blog-search-mode:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+// Blog search: the box above the post list, and the opening text each result
+// carries so a match outside the title shows why.
+.blog-search { margin-bottom: 0.5rem; }
+.blog-search-row { display: flex; gap: 0.5rem; }
+.blog-search-row .search-input { flex: 1; min-width: 0; }
+.blog-search-mode[hidden] { display: none; }
 .blog-search-status { margin: 0.4rem 0 0; color: var(--text-muted); font-size: 0.85rem; }
 .blog-search-status:empty { display: none; }
 .post-summary { margin: 0.3rem 0 0; color: var(--text-secondary); font-size: 0.9rem; }
