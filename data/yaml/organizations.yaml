@@ -3,8 +3,9 @@
 # yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/organizations.json
 # Organizations I taught at, taught for (training companies that hired me to teach: function training-provider),
 # consulted for, was certified by, or consumed media from (function publisher).
-# id 105 (AWS Solutions Architect) was merged into id 100 (Amazon Web Services) on 2026-11-08: the certification
-# tab lists the companies that certified me, and the two AWS certifications are in id 100's remark.
+# id 105 (AWS Solutions Architect) was merged into id 100 (Amazon Web Services) on 2026-11-08: an organization
+# is the company that certified me, and the certifications themselves are in certifications.yaml, which points
+# at the issuer by id.
 # id 125 (Tel Aviv University) was added on 2026-11-07, and id 126 (Rimon School of Music) on 2026-11-08; with the
 # Hebrew and Open universities they have function education (a school I studied at).
 # ids 122-124 (AgileSparks, DevelopIntelligence, Logtel) were added on 2026-11-07 as training providers, and Hinbit,
@@ -3626,7 +3627,6 @@ items:
 - id: 100
   name: Amazon Web Services
   slug: aws
-  remark: 'Certified as AWS Certified Instructor (2014-02-02) and AWS Solutions Architect - Associate (2014-05-15)'
   from_date: '2014-02-02'
   functions:
   - certification

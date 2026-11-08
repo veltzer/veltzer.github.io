@@ -1,0 +1,53 @@
+---
+# next line is neccessary for vscode which does not read the $schema attribute
+# yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/certifications.json
+$schema: "https://veltzer.github.io/web-schemas/json/certifications.json"
+# The certifications I hold, shown on the Certifications tab of
+# Training -> Education & Certifications (/training/education/).
+# Each names the organization that issued it by its id in organizations.yaml,
+# where that organization's functions include certification; the card takes
+# the issuer's name, logo and website from there (scripts/import_certifications.py).
+#
+# Gathered 2026-11-08 from data/yaml/cv.yaml (certifications), data/yaml/courses.yaml
+# and the dates organizations.yaml carried from the myworld database (2019
+# backup): MySQL 2008-03-21, Sun 2008-05-02, AWS instructor 2014-02-02 and AWS
+# Solutions Architect - Associate 2014-05-15. The other two AWS certifications
+# have no recorded date. The Coursera course certificates listed in cv.yaml are
+# courses, not certifications, and are left out.
+items:
+  - id: 1
+    name: "Sun Certified Instructor: Solaris"
+    organization: 41
+    kind: instructor
+    date: '2008-05-02'
+    remark: "myworld records one Sun certification date, 2008-05-02, for both Sun certifications"
+  - id: 2
+    name: "Sun Certified Instructor: Advanced Java"
+    organization: 41
+    kind: instructor
+    date: '2008-05-02'
+    remark: "myworld records one Sun certification date, 2008-05-02, for both Sun certifications"
+  - id: 3
+    name: "MySQL Certified Instructor"
+    organization: 17
+    kind: instructor
+    date: '2008-03-21'
+  - id: 4
+    name: "AWS Certified Instructor: Architecting on AWS"
+    organization: 100
+    kind: instructor
+    date: '2014-02-02'
+    remark: "I was the first associate AWS instructor in Israel"
+  - id: 5
+    name: "AWS Certified Solutions Architect - Associate"
+    organization: 100
+    kind: professional
+    date: '2014-05-15'
+  - id: 6
+    name: "AWS Associate Advanced Architect"
+    organization: 100
+    kind: professional
+  - id: 7
+    name: "AWS Certified Instructor: Architecting, professional level"
+    organization: 100
+    kind: instructor

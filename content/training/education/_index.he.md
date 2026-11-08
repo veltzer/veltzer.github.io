@@ -1,6 +1,6 @@
 +++
 title = "השכלה והסמכות"
-description = "האוניברסיטאות ובתי הספר שמארק ולצר למד בהם, והחברות שהסמיכו אותו."
+description = "האוניברסיטאות ובתי הספר שמארק ולצר למד בהם, וההסמכות שלו."
 template = "data_collection.html"
 
 # The same app as the English page (templates/data_collection.html); front

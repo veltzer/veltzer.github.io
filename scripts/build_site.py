@@ -39,7 +39,9 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 COMPANIES_IMPORTER = REPO_ROOT / "scripts" / "import_companies.py"
+CERTIFICATIONS_IMPORTER = REPO_ROOT / "scripts" / "import_certifications.py"
 ORGANIZATIONS_YAML = REPO_ROOT / "data" / "yaml" / "organizations.yaml"
+CERTIFICATIONS_YAML = REPO_ROOT / "data" / "yaml" / "certifications.yaml"
 LOGOS_SRC = REPO_ROOT / "data" / "logos"
 IMAGES_DIR = REPO_ROOT / "static" / "images"
 
@@ -58,8 +60,10 @@ def write_companies(companies_file, providers_file, consulting_file, publishers_
     taught for (function training-provider), on the consulting data page
     the companies I consulted for (function consulting), and on the media
     page the publishers of what I listened to (function publisher), and on
-    the education page the schools I studied at (function education) and the
-    companies that certified me (function certification).
+    the education page the schools I studied at (function education). The
+    education page's other tab is the certifications I hold, one per
+    certification rather than per company: certifications.yaml joined with
+    the issuing organizations by import_certifications.py.
 
     The other media tabs read committed static/data/*.json.gz files that
     scripts/copy_data.py produces by hand, because half of their sources
@@ -72,7 +76,7 @@ def write_companies(companies_file, providers_file, consulting_file, publishers_
     """
     for output_file, function in ((companies_file, "teaching"), (providers_file, "training-provider"),
                                   (consulting_file, "consulting"), (publishers_file, "publisher"),
-                                  (education_file, "education"), (certifications_file, "certification")):
+                                  (education_file, "education")):
         output_file.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run(
             [sys.executable, str(COMPANIES_IMPORTER), str(ORGANIZATIONS_YAML), str(output_file),
@@ -80,6 +84,12 @@ def write_companies(companies_file, providers_file, consulting_file, publishers_
             check=True,
             cwd=REPO_ROOT,
         )
+    subprocess.run(
+        [sys.executable, str(CERTIFICATIONS_IMPORTER), str(CERTIFICATIONS_YAML), str(ORGANIZATIONS_YAML),
+         str(certifications_file)],
+        check=True,
+        cwd=REPO_ROOT,
+    )
     if not LOGOS_SRC.is_dir():
         die(f"{LOGOS_SRC} missing")
     logos_dir.mkdir(parents=True, exist_ok=True)
