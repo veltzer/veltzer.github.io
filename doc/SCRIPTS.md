@@ -67,8 +67,11 @@ Mirrors every blog post (`content/blog/*.{en,he}.md`, front matter included,
 the section's `_index` files left out) into `~/insync/for_ai/blog`, which Insync
 syncs to Google Drive, so AI agents with access to the Drive can read them.
 Only changed posts are copied again, and a `.md` there with no post behind it
-(renamed or deleted) is removed; other files are never touched. `--dest`
-picks another directory. Not part of the build: run it after adding posts.
+(renamed or deleted) is removed; other files are never touched, except the
+temporary files a killed run leaves behind. Because it deletes, it only works in
+a directory holding its `.export_posts_for_ai` marker; one without it is adopted
+only if it is empty or holds nothing but post files, and refused otherwise.
+`--dest` picks another directory. Not part of the build: run it after adding posts.
 
 ### `scripts/import_teaching.py`
 

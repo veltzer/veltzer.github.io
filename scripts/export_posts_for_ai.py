@@ -14,7 +14,13 @@ uploads only what changed), and a .md file there with no post behind it,
 a post since renamed or deleted, is removed. Files of any other kind are
 never touched. So the script is idempotent: a second run right after the
 first writes and removes nothing, and an interrupted run is finished by the
-next one.
+next one, including the temporary file a killed run can leave behind.
+
+Since it deletes .md files, it only works in a directory it owns: one that
+holds its marker file (MARKER). A directory without the marker is adopted,
+and the marker written, only when it is empty or holds nothing but files
+named like current posts; anything else is refused, so a mistaken --dest
+pointing at a folder of someone's notes deletes nothing.
 
 Not part of the build. Run it from the repo root after adding posts.
 """
@@ -28,6 +34,9 @@ from pathlib import Path
 
 BLOG = Path(__file__).resolve().parent.parent / "content" / "blog"
 DEFAULT_DEST = Path.home() / "insync" / "for_ai" / "blog"
+MARKER = ".export_posts_for_ai"
+# write_atomically names its temporary files .<post>.<random>.tmp
+TEMP_GLOB = ".*.md.*.tmp"
 
 
 def posts():
@@ -36,6 +45,27 @@ def posts():
         for path in BLOG.glob("*.md")
         if not path.name.startswith("_")
     )
+
+
+def claim(dest, names):
+    """Make sure dest is ours to mirror into, writing the marker when it is
+    safe to adopt, and exit otherwise."""
+    marker = dest / MARKER
+    if marker.is_file():
+        return
+    foreign = sorted(
+        entry.name for entry in dest.iterdir()
+        if entry.name not in names and not entry.match(TEMP_GLOB)
+    )
+    if foreign:
+        shown = ", ".join(foreign[:5]) + (", ..." if len(foreign) > 5 else "")
+        sys.exit(
+            f"{dest} is not a posts mirror (no {MARKER}, and it holds {shown}); "
+            f"refusing to delete anything there. If it really is the mirror, "
+            f"create {marker} and run again."
+        )
+    marker.write_text("This directory is a mirror written by scripts/export_posts_for_ai.py "
+                      "in veltzer.github.io. Its .md files are deleted when their post goes.\n")
 
 
 def write_atomically(source, target, data):
@@ -66,6 +96,7 @@ def main():
 
     sources = posts()
     names = {path.name for path in sources}
+    claim(dest, names)
     copied = 0
     for source in sources:
         data = source.read_bytes()
@@ -80,6 +111,9 @@ def main():
         if stale.name not in names and stale.is_file():
             stale.unlink()
             removed += 1
+    for temp in dest.glob(TEMP_GLOB):
+        if temp.is_file():
+            temp.unlink()
 
     print(f"{len(sources)} posts in {dest}: {copied} copied, {removed} removed")
 
