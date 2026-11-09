@@ -4,6 +4,8 @@ description = "מארק ולצר הוא מהנדס תוכנה מישראל הע�
 template = "section.html"
 +++
 
+<img class="portrait" src="/images/mark-veltzer.jpg" width="480" height="480" alt="ציור של מארק ולצר">
+
 שמי מארק ולצר ואני מהנדס תוכנה מישראל.
 
 אני עובד בעיקר סביב לינוקס – C, C++, פייתון, ראסט ושכבת המערכת שמתחתיהם –

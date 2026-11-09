@@ -4,6 +4,8 @@ description = "Mark Veltzer is a software engineer from Israel working in Linux,
 template = "section.html"
 +++
 
+<img class="portrait" src="/images/mark-veltzer.jpg" width="480" height="480" alt="A drawing of Mark Veltzer">
+
 My name is Mark Veltzer and I am a software engineer from Israel.
 
 I work mostly in and around Linux – C, C++, Python, Rust and the systems layer

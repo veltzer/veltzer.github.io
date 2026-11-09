@@ -418,6 +418,25 @@ h3 { font-size: 1.1rem; margin: 1.8rem 0 0.5rem; }
 .post-list time { color: var(--text-muted); font-size: 0.85rem; margin-inline-start: 0.5rem; }
 
 .post-body img { max-width: 100%; height: auto; border-radius: var(--radius-sm); }
+
+// The portrait beside the About page's opening prose. It floats to the
+// inline end, so it sits on the right in English and on the left in Hebrew,
+// and the text wraps around it; on a phone it drops above the text, centred.
+// The circle crops the drawing's light-grey paper, which would otherwise show
+// as a square against the darker themes.
+.portrait {
+  float: inline-end;
+  width: 13rem;
+  height: auto;
+  margin-block: 0.25rem 1rem;
+  margin-inline: 1.5rem 0;
+  border-radius: 50%;
+  border: 3px solid var(--border);
+  box-shadow: var(--shadow);
+}
+@media (max-width: 40rem) {
+  .portrait { float: none; display: block; width: 10rem; margin: 0 auto 1rem; }
+}
 .post-body blockquote {
   margin-inline: 0;
   padding-inline-start: 1rem;
