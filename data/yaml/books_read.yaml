@@ -32,17 +32,31 @@ items:
       - language: "english"
         name: "Arsène Lupin, Gentleman-Thief"
         goodreads_id: "141270"
-    authors: []
+    authors:
+      - - language: "english"
+          name: "Maurice Leblanc"
     language: "french"
     readings:
       - language: "hebrew"
         undated: true
-    remark: "author unknown; was named: Arsan Lupan the Shining Burgler"
+    remark: "was named: Arsan Lupan the Shining Burgler"
   - names:
       - language: "english"
         name: "Monty Python's Big Red Book"
         goodreads_id: "140535"
-    authors: []
+    authors:
+      - - language: "english"
+          name: "Graham Chapman"
+      - - language: "english"
+          name: "John Cleese"
+      - - language: "english"
+          name: "Terry Gilliam"
+      - - language: "english"
+          name: "Eric Idle"
+      - - language: "english"
+          name: "Terry Jones"
+      - - language: "english"
+          name: "Michael Palin"
     language: "english"
     readings:
       - language: "english"
@@ -2131,7 +2145,9 @@ items:
           Accidental Revolutionary"
         goodreads_id: "134825"
     publisher: "Hitorrerut"
-    authors: []
+    authors:
+      - - language: "english"
+          name: "Eric S. Raymond"
     language: "hebrew"
     ownings:
       - language: "hebrew"
