@@ -3,6 +3,7 @@ ABI
 ABSPATH
 ACLs
 AES
+Antiochus
 APCs
 APIs
 ATTR
@@ -71,6 +72,8 @@ Buehler
 Buildroot
 Busybox
 CBO
+chayah
+chayim
 CLASSPATH
 CLIs
 CMake
@@ -103,6 +106,7 @@ Counterevidence
 Cramton
 Culmus
 DCT
+disproven
 DKIM
 DMT
 DOCTYPE
@@ -353,7 +357,10 @@ Mustafa
 Mutuals
 Muxing
 NBER
+nefesh
+neshama
 NGINX
+nishmat
 NOPASSWD
 NOTA
 NSS
@@ -463,6 +470,7 @@ Rodion
 Rosen
 Rothbard
 Rozman
+ruach
 Ruehl
 SCO
 SIGSEGV
