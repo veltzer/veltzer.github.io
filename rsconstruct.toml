@@ -159,6 +159,22 @@ inputs = [
 input_globs = ["static/images/*.jpg"]
 output_files = ["out/check_images/ok"]
 
+# Mirror every post to ~/insync/for_ai/blog, which Insync syncs to Google
+# Drive for AI agents that read it. Runs only on a machine with that folder
+# (enabled_if_dir_exists): on CI and other clones it is skipped and the build
+# says so. The stamp marks the last successful mirror; the script and the
+# posts are inputs, so it reruns when either changes, a post is deleted
+# included. Known gap: posts that return to a state built before (an edit
+# reverted) match the old cache entry and do not rerun it; run the script by
+# hand then.
+[processor.explicit.generic.export_posts_for_ai]
+command = "scripts/export_posts_for_ai.py"
+args = ["--dest", "~/insync/for_ai/blog"]
+enabled_if_dir_exists = "~/insync/for_ai/blog"
+inputs = ["scripts/export_posts_for_ai.py"]
+input_globs = ["content/blog/*.md"]
+output_files = ["out/export_posts_for_ai/ok"]
+
 [processor.checker.script.check_books]
 src_files = ["data/yaml/books_read.yaml"]
 command = "pydatacheck"

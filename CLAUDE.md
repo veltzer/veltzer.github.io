@@ -83,7 +83,8 @@ which records the traps that outlived the migration.
   `organizations_pick_geo.py`, `organizations_fetch_maps.py` — all run from the
   repo root),
   `serve.py`, `make_logo.py` (the logo and the favicon/touch icons drawn from it), `make_word_vectors.py` (the blog search's word vectors), `export_posts_for_ai.py` (mirrors the posts to `~/insync/for_ai/blog` for AI agents
-  reading Google Drive), and the `build_*_dict.sh` / `spellcheck_*.sh` pair behind the aspell
+  reading Google Drive; a build step that runs only where that folder exists, via
+  `enabled_if_dir_exists`), and the `build_*_dict.sh` / `spellcheck_*.sh` pair behind the aspell
   processors
 - `tests/` — pytest suite for the data import scripts
 - `.aspell.{en,he}.txt` — the spellcheck word lists; `out/aspell/` holds the compiled

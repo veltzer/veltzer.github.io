@@ -22,7 +22,14 @@ and the marker written, only when it is empty or holds nothing but files
 named like current posts; anything else is refused, so a mistaken --dest
 pointing at a folder of someone's notes deletes nothing.
 
-Not part of the build. Run it from the repo root after adding posts.
+It is part of the build, but only on a machine with the mirror: the
+export_posts_for_ai stanza in rsconstruct.toml runs it whenever a post (or
+this script) changes, with `enabled_if_dir_exists` naming the destination, so
+on CI and on any machine without Insync the processor is skipped. The build
+passes --dest from the stanza's args, plus --inputs (only there so the build
+reruns it; the posts are read from content/blog/ either way) and
+--output-files, a stamp the script writes after a successful mirror. Run by
+hand from the repo root it works the same without those.
 """
 
 import argparse
@@ -89,6 +96,8 @@ def main():
         "--dest", type=Path, default=DEFAULT_DEST,
         help=f"directory to mirror the posts into (default: {DEFAULT_DEST})",
     )
+    parser.add_argument("--inputs", nargs="*", default=[], help=argparse.SUPPRESS)
+    parser.add_argument("--output-files", nargs="*", type=Path, default=[], help=argparse.SUPPRESS)
     args = parser.parse_args()
     dest = args.dest.expanduser()
     if not dest.is_dir():
@@ -116,6 +125,9 @@ def main():
             temp.unlink()
 
     print(f"{len(sources)} posts in {dest}: {copied} copied, {removed} removed")
+    for stamp in args.output_files:
+        stamp.parent.mkdir(parents=True, exist_ok=True)
+        stamp.write_text(f"{len(sources)} posts mirrored\n")
 
 
 if __name__ == "__main__":

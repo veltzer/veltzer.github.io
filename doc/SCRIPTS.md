@@ -71,7 +71,11 @@ Only changed posts are copied again, and a `.md` there with no post behind it
 temporary files a killed run leaves behind. Because it deletes, it only works in
 a directory holding its `.export_posts_for_ai` marker; one without it is adopted
 only if it is empty or holds nothing but post files, and refused otherwise.
-`--dest` picks another directory. Not part of the build: run it after adding posts.
+`--dest` picks another directory. The build runs it (the `export_posts_for_ai`
+stanza) whenever a post changes, but only on a machine where the destination
+exists (`enabled_if_dir_exists`); elsewhere the build reports it as skipped.
+One gap: reverting a post to a state already built does not rerun it (the
+cache matches the old state), so run the script by hand after a revert.
 
 ### `scripts/import_teaching.py`
 
