@@ -42,7 +42,7 @@ Academia doesn't help. "Epistemology" sounds pompous, like something reserved fo
 
 ## Universities don't fix it either
 
-I hold a graduate degree in mathematics, and I was never taught epistemology. You can become an acclaimed physicist or an accomplished chemist without knowing one thing about it. Universities require courses in English as a second language and in physical education. They do not require epistemology.
+You can become an acclaimed physicist or an accomplished chemist without knowing one thing about it. Universities require courses in English as a second language and in physical education. They do not require epistemology.
 
 Universities do teach it where a field cannot function without it. History students take courses in historical method, learning to criticize sources and weigh conflicting accounts. But epistemology as a general skill, the skill every citizen needs to understand a politician's speech or a health claim, is required of no one.
 
