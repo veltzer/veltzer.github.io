@@ -16,14 +16,25 @@ actually hold the same view. They just won't admit it.
 ## How do you know something is wrong?
 
 Every round of this debate comes down to the same question: how do you know
-that something is immoral?
+whether something is moral or immoral?
 
-The absolutist usually points to a deity. That runs into an immediate practical
-problem. Even if you believe in a divine moral law, God doesn't tell you what to
-do in each specific situation. Morality is situational. So the believer, just
-like everyone else, ends up having to decide what is moral and what isn't, case
-by case. (There's also the small matter that many of the laws in the Bible are
-plainly evil, but that's not my main point here.)
+The absolutist usually points to a deity. That runs into a host of problems.
+Which deity? Which commandments? The same deity can issue different
+commandments at different times and contradict itself. Even people who worship
+the same deity split into denominations and factions that read its commandments
+differently, so believing in the same god doesn't mean believing in the same
+morality. And the commandments have no awareness of the situation. "Do not
+murder" sounds absolute, but in some horrible situations killing may even be
+morally justified. Morality is situational. So the believer, just like everyone
+else, ends up having to decide what is moral and what isn't, case by case.
+
+Many of the laws in the Bible are plainly evil by today's standards, and even
+believers quietly reject some of them. That means they are judging scripture by
+something outside the text: a mix of social influences and biological
+dispositions. Interpreting one text through another (the Talmud, the church
+fathers, the New Testament read over the Hebrew Bible) doesn't escape this. It
+just moves the judgment to other texts, written by people shaped by their own
+times.
 
 ## How society actually decides
 
@@ -37,10 +48,16 @@ That sounds like pure relativism, and in a sense it is. Different societies can
 reach different definitions of morality, and sometimes they do.
 
 But it turns out that societies are not that different in what they consider
-moral. So what keeps them all roughly in sync? Human nature. Every society is
-made of the same animal, with the same genetic makeup and the same basic
-self-interest. Nobody wants to be murdered, robbed or lied to, so every society
-that wants to last ends up with roughly the same core rules.
+moral. So what keeps them all roughly in sync? Human nature, and the reality
+that shaped it. Humans are physically weak, so reality forced us to cooperate,
+and over time that pressure shaped our genes to value cooperation and return it.
+That is where morals come from. Our nature and our social situation were shaped
+together and can't be pulled apart. Every society is made of the same animal,
+with the same genetic makeup and the same basic self-interest. Nobody wants to
+be murdered, robbed or lied to, so every society that wants to last ends up with
+roughly the same core rules. The golden rule shows up independently in
+Confucius, Hillel and the Gospels, and the code of Hammurabi, written nearly
+4,000 years ago, already punished murder, theft and false testimony.
 
 So morality is relative, but relative with very low variance. And relative with
 very low variance is, for all practical purposes, absolute.
@@ -60,13 +77,24 @@ some things are absolutely wrong but have no god to ground it in. They aren't
 confused. They're rounding up. The number is so close to one that it's
 practically the same thing.
 
+There's a mirror image: absolutists who insist their morals are eternal, yet
+update them now and then, mostly at the margins, rarely at the core, as with
+slavery. That is exactly what 99.9999% looks like, and it's close enough.
+
+The core barely moves. The fights happen at the margins: abortion, euthanasia,
+the death penalty, gay marriage. Those margins have changed a lot, and many of
+them aren't old morals shifting at all. They are new questions raised by
+technology. Safe abortion, humane euthanasia and IVF simply weren't options
+before modern medicine. So the claim that morality doesn't change radically
+holds up.
+
 ## Both camps have dissenters
 
 Neither framework gets everyone on board.
 
 If I'm a relativist and I say parliament decides what's moral, there will always
 be people who object to what parliament decides, including people who think
-murder is perfectly fine. And I'm not even talking about psychopaths.
+murder is perfectly fine.
 
 The absolutist has the same problem. To buy into the framework you have to
 believe in God and believe the commandments are divine. Many people don't. And
@@ -102,7 +130,7 @@ Why hold on to the label, then? Partly because of that need for a backbone, the
 comfort of saying "it was always wrong." And partly because absolute laws do
 have a small practical advantage. People are a little less likely to break a law
 they believe is enforced by God and punished by eternal damnation than one they
-believe is just a social agreement. I think the effect is small. Most people
+believe is just a social agreement. The effect is small. Most people
 keep the rules either way. But it's real enough to make the absolutist label
 useful.
 
@@ -118,6 +146,13 @@ depends on the fact that we share a common core and actually want to live
 together. If that ever broke down, the absolutist would be right that society
 collapses, but the reason would be that humans no longer wanted a society, not
 that they had stopped believing in absolutes.
+
+We depend on the fact that our core is moral and wants to cooperate. Change that
+core, and we would no longer be human. Relying on it is perfectly safe; it's a
+solid core, short of genetic engineering. Yes, some people are psychopaths who
+are fine with murder. That doesn't show that deciding morality by consensus is a
+bad idea. It only shows that if most people were psychopaths, there would be no
+social human species to have morals at all.
 
 ## Not the final version
 
