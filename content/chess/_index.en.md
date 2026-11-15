@@ -42,7 +42,7 @@ template = "chess.html"
     <button id="btnNextGame" class="chess-btn chess-btn--game" data-label="chess_next_game"></button>
   </div>
 
-  <div id="status" class="chess-status"></div>
+  <div id="status" class="chess-status" role="status"></div>
 </div>
 
 <script type="module">
@@ -267,6 +267,8 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
     function render() {
         const game = games[filtered[currentGame]];
         if (!game) return;
+        jumpEl.disabled = false;
+        selectEl.disabled = false;
         const moves = movesOf(game);
         const move = moves[currentMove - 1];
 
@@ -324,11 +326,27 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
         renderStats(filtered.map(function (i) { return games[i]; }));
         renderOptions();
         if (filtered.length) selectGame(0);
-        else statusEl.textContent = t('chess_no_match');
+        else showNoMatch();
+    }
+
+    // Nothing matches: leave no stale game on screen and nothing clickable
+    // that would reach for games[undefined]. render() re-enables the controls
+    // when matches return.
+    function showNoMatch() {
+        currentGame = 0;
+        currentMove = 0;
+        titleEl.textContent = '';
+        playersEl.textContent = '';
+        jumpEl.value = '';
+        jumpEl.disabled = true;
+        selectEl.disabled = true;
+        [btnPrev, btnNext, btnPrevGame, btnNextGame].forEach(function (button) { button.disabled = true; });
+        board.setPosition(FEN.start, true);
+        statusEl.textContent = t('chess_no_match');
     }
 
     function formatMb(bytes) {
-        return (bytes / 1048576).toFixed(1) + ' MB';
+        return t('chess_megabytes', {n: (bytes / 1048576).toFixed(1)});
     }
 
     // The archive is ~21 MB compressed, which is long enough on a slow link
@@ -419,7 +437,8 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
         if (currentMove > 0) { currentMove--; render(); }
     });
     btnNext.addEventListener('click', function () {
-        if (currentMove < movesOf(games[filtered[currentGame]]).length) { currentMove++; render(); }
+        const game = games[filtered[currentGame]];
+        if (game && currentMove < movesOf(game).length) { currentMove++; render(); }
     });
     btnPrevGame.addEventListener('click', function () {
         if (currentGame > 0) selectGame(currentGame - 1);
@@ -431,16 +450,19 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
         if (currentGame < filtered.length - 1) selectGame(currentGame + 1);
     });
 
-    // Arrow keys: left/right step moves, up/down step games. Ignored while the
-    // search box has focus so typing still works.
+    // Arrow keys: left/right step moves, up/down step games. Ignored with any
+    // modifier (Alt+Left is the browser's Back), while any form control or
+    // editable element has focus (typing, and the arrows that operate a
+    // <select> or a number input), and when the key would do nothing. In a
+    // right-to-left page the arrows are swapped like the buttons' arrows are.
     document.addEventListener('keydown', function (event) {
-        // Also ignored in the year and jump controls: up/down are how a number
-        // input and a <select> are meant to be operated, and stealing them
-        // would make both unusable from the keyboard.
+        if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
         const active = document.activeElement;
-        if (active === searchEl || active === jumpEl || active === yearEl) return;
+        if (active && (active.isContentEditable || /^(INPUT|SELECT|TEXTAREA|BUTTON)$/.test(active.tagName))) return;
+        const rtlPage = document.documentElement.dir === 'rtl';
         const actions = {
-            ArrowLeft: btnPrev, ArrowRight: btnNext,
+            ArrowLeft: rtlPage ? btnNext : btnPrev,
+            ArrowRight: rtlPage ? btnPrev : btnNext,
             ArrowUp: btnPrevGame, ArrowDown: btnNextGame
         };
         const button = actions[event.key];

@@ -5,7 +5,7 @@
 Search Console reports an indexing problem weeks after it appears, so this
 answers the smaller question that does not need Google: is the deployment
 sound? Every non-canonical host (http, www) must 301 straight to
-https://veltzer.org/, and the sitemap must list real pages only.
+the canonical host (base_url in rssite.toml), and the sitemap must list real pages only.
 
 What it deliberately does not do is read a validation verdict. That lives
 behind a Google login, there is no API key for this property, and inventing
@@ -18,6 +18,7 @@ Exits non-zero if anything fails, so it can gate a deploy or run from cron.
 import sys
 import tomllib
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -29,12 +30,15 @@ CONFIG = tomllib.loads(
 def base_url():
     return CONFIG["base_url"]
 
-# Hosts that must each collapse to the canonical one in a single hop. A chain
-# or a 200 here splits ranking across hostnames.
+# The canonical site root, derived from base_url, and the hosts that must each
+# collapse to it in a single hop. A chain or a 200 here splits ranking across
+# hostnames.
+CANONICAL = base_url().rstrip("/") + "/"
+HOSTNAME = urllib.parse.urlparse(CANONICAL).hostname
 ALTERNATE_HOSTS = [
-    "http://veltzer.org/",
-    "http://www.veltzer.org/",
-    "https://www.veltzer.org/",
+    f"http://{HOSTNAME}/",
+    f"http://www.{HOSTNAME}/",
+    f"https://www.{HOSTNAME}/",
 ]
 
 TIMEOUT = 30
@@ -66,8 +70,8 @@ def check_hosts():
         status, location = fetch_status(url, follow=False)
         if status != 301:
             failures.append(f"{status} (want 301) {url}")
-        elif location != "https://veltzer.org/":
-            failures.append(f"301 -> {location} (want https://veltzer.org/) {url}")
+        elif location != CANONICAL:
+            failures.append(f"301 -> {location} (want {CANONICAL}) {url}")
     return failures
 
 
@@ -76,8 +80,11 @@ def check_sitemap(site):
     status, _ = fetch_status(site + "/sitemap.xml", follow=True)
     if status != 200:
         return [f"{status} {site}/sitemap.xml"], 0
-    with urllib.request.urlopen(site + "/sitemap.xml", timeout=TIMEOUT) as response:
-        body = response.read().decode("utf-8")
+    try:
+        with urllib.request.urlopen(site + "/sitemap.xml", timeout=TIMEOUT) as response:
+            body = response.read().decode("utf-8")
+    except (urllib.error.URLError, TimeoutError) as error:
+        return [f"sitemap fetch failed: {error} {site}/sitemap.xml"], 0
     entries = body.count("<loc>")
     stubs = body.count("/page/1/</loc>")
     failures = []

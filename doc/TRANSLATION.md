@@ -7,7 +7,7 @@ unless something changes: the remaining gaps are decided, not pending.
 
 ## Translated
 
-- **Every page.** All 436 pages under `content/` have a Hebrew file
+- **Every page.** All 443 pages under `content/` have a Hebrew file
   (`*.he.md` beside each `*.en.md`), and none of the Hebrew files has English
   body text. That covers the blog posts, training, consulting, education,
   about and the section pages.

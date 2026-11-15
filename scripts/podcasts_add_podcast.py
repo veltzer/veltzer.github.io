@@ -9,7 +9,7 @@ import argparse
 import sys
 
 import requests
-from ruamel.yaml import YAML
+from podcast_utils import make_yaml, save_yaml
 from ruamel.yaml.scalarstring import DoubleQuotedScalarString as DQ
 
 SEARCH_URL = "https://itunes.apple.com/search"
@@ -67,8 +67,7 @@ def get_next_internal_id(data):
 
 def add_podcast_to_yaml(file_path, podcast_info):
     """Append a new podcast entry to the YAML file."""
-    yaml = YAML(typ="rt")
-    yaml.preserve_quotes = True
+    yaml = make_yaml()
 
     with open(file_path, encoding="UTF8") as f:
         data = yaml.load(f)
@@ -94,8 +93,7 @@ def add_podcast_to_yaml(file_path, podcast_info):
 
     data["items"].append(new_entry)
 
-    with open(file_path, "w", encoding="UTF8") as f:
-        yaml.dump(data, f)
+    save_yaml(yaml, data, file_path)
 
     print(f"\nAdded \"{name}\" to {file_path} (internal_id: {next_id}).")
     return True

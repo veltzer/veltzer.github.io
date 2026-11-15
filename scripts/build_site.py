@@ -11,7 +11,7 @@ rsconstruct can order, cache and restore it:
 
   companies      _site/data/companies.json.gz, training_providers.json.gz,
                  consulting.json.gz, publishers.json.gz, education.json.gz,
-                 certifications.json.gz and _site/logos/
+                 certifiers.json.gz, certifications.json.gz and _site/logos/
 
 companies is an explicit processor: rsconstruct appends `--inputs ...
 --output-files ... --output-dirs ...`.

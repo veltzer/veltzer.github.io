@@ -197,6 +197,21 @@ input[type="checkbox"] { accent-color: var(--accent); }
   white-space: nowrap;
 }
 
+// The skip link (base.html): off screen until it takes focus, then pinned to
+// the top corner at the start of the line.
+.skip-link {
+  position: absolute;
+  inset-block-start: -10rem;
+  inset-inline-start: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  z-index: 100;
+}
+.skip-link:focus { inset-block-start: 0.5rem; }
+
 .site-main { max-width: 42rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
 
 .site-footer {
@@ -409,7 +424,6 @@ h3 { font-size: 1.1rem; margin: 1.8rem 0 0.5rem; }
 .blog-search-row .search-input { flex: 1; min-width: 0; }
 .blog-search-mode[hidden] { display: none; }
 .blog-search-status { margin: 0.4rem 0 0; color: var(--text-muted); font-size: 0.85rem; }
-.blog-search-status:empty { display: none; }
 .post-summary { margin: 0.3rem 0 0; color: var(--text-secondary); font-size: 0.9rem; }
 
 .post-list { list-style: none; padding: 0; }
@@ -485,14 +499,14 @@ th { background: var(--bg-surface); }
 // on its own.
 
 [lang="he"] .post-body,
-[lang="he"] .post-header { text-align: right; }
+[lang="he"] .post-header { text-align: start; }
 
 [lang="he"] code,
 [lang="he"] pre,
 [lang="he"] kbd,
 [lang="he"] samp {
   direction: ltr;
-  text-align: left;
+  text-align: start;
   unicode-bidi: isolate;
 }
 

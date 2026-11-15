@@ -91,9 +91,10 @@
   {#- Neighbours in the section's order (newest first): `previous` is the
       post listed before this one, `next` the one after, the same two links
       the zola site had. -#}
-  <nav class="post-nav">
-    {%- if page.previous %}<a class="prev" href="{{ page.previous.permalink }}">&larr; {{ page.previous.title }}</a>{% endif %}
-    {%- if page.next %}<a class="next" href="{{ page.next.permalink }}">{{ page.next.title }} &rarr;</a>{% endif %}
+  {%- if language.direction == "rtl" %}{% set arrow_back = "&rarr;" %}{% set arrow_fwd = "&larr;" %}{% else %}{% set arrow_back = "&larr;" %}{% set arrow_fwd = "&rarr;" %}{% endif %}
+  <nav class="post-nav" aria-label="{{ trans(key="nav_label_posts") }}">
+    {%- if page.previous %}<a class="prev" href="{{ page.previous.permalink }}">{{ arrow_back | safe }} {{ page.previous.title }}</a>{% endif %}
+    {%- if page.next %}<a class="next" href="{{ page.next.permalink }}">{{ page.next.title }} {{ arrow_fwd | safe }}</a>{% endif %}
   </nav>
 
 </article>

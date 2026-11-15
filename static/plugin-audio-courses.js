@@ -1,4 +1,4 @@
-/* global t, renderBarChart, renderStatCard, mediaFormatDate */
+/* global t, renderBarChart, renderStatCard, mediaFormatDate, countByYear, deviceCounts, hasReviewField, linkLine, toggleLine */
 window.collectionPlugins = window.collectionPlugins || {};
 
 (function() {
@@ -26,9 +26,7 @@ window.collectionPlugins['audio'] = {
             extractValues: function(item) { return item.lecturers || []; },
             match: function(item, val) { return item.lecturers && item.lecturers.some(function(l) { return l === val; }); }
         },
-        {field: 'has_review', label: t('audio_f_has_review'), type: 'string', sortable: false,
-            filterType: 'boolean', value: function(item) { return item.review && item.review.trim() !== ''; }
-        },
+        hasReviewField(t('audio_f_has_review')),
         {field: 'source', label: t('audio_f_source'), type: 'string', sortable: false,
             filterType: 'custom',
             value: function(item) {
@@ -69,51 +67,41 @@ window.collectionPlugins['audio'] = {
     },
     renderDetails: function(item) {
         const lecturers = item.lecturers ? item.lecturers.join(', ') : t('audio_na');
-        let html = '<li class="py-2" data-toggle="lecturers"><strong>' + t('audio_d_lecturers') + '</strong> ' + window.escapeHtml(lecturers) + '</li>';
+        let html = toggleLine('lecturers', t('audio_d_lecturers'), window.escapeHtml(lecturers));
         const date = this.formatDate(item.date_utcz || item.date_ended_utcz || item.date_started_utcz);
         if (date) {
-            html += '<li class="py-2" data-toggle="date"><strong>' + t('audio_d_date') + '</strong> ' + window.escapeHtml(date) + '</li>';
+            html += toggleLine('date', t('audio_d_date'), window.escapeHtml(date));
         }
         if (item.location) {
-            html += '<li class="py-2" data-toggle="location"><strong>' + t('audio_d_location') + '</strong> ' + window.escapeHtml(item.location) + '</li>';
+            html += toggleLine('location', t('audio_d_location'), window.escapeHtml(item.location));
         }
         if (item.progress) {
-            html += '<li class="py-2" data-toggle="progress"><strong>' + t('audio_d_progress') + '</strong> ' + window.escapeHtml(item.progress) + '</li>';
+            html += toggleLine('progress', t('audio_d_progress'), window.escapeHtml(item.progress));
         }
         if (item.great_courses_slug) {
-            html += '<li class="py-2" data-toggle="links"><a href="https://shop.thegreatcourses.com/' + window.escapeHtml(item.great_courses_slug) + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; ' + t('audio_view_great_courses') + '</a></li>';
+            html += linkLine('links', 'https://shop.thegreatcourses.com/' + item.great_courses_slug, t('audio_view_great_courses'));
         }
         if (item.audible_asin) {
-            html += '<li class="py-2" data-toggle="links"><a href="https://www.audible.com/pd/' + window.escapeHtml(item.audible_asin) + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; ' + t('audio_view_audible') + '</a></li>';
+            html += linkLine('links', 'https://www.audible.com/pd/' + item.audible_asin, t('audio_view_audible'));
         }
         return html;
     },
     renderStats: function(items) {
-        const deviceCounts = {};
-        const yearCounts = {};
         const lecturerSet = new Set();
         items.forEach(function(item) {
-            if (item.device) {
-                deviceCounts[item.device] = (deviceCounts[item.device] || 0) + 1;
-            }
             if (item.lecturers) {
                 item.lecturers.forEach(function(lecturer) {
                     lecturerSet.add(lecturer);
                 });
             }
-            const date = this.formatDate(item.date_utcz || item.date_ended_utcz || item.date_started_utcz);
-            if (date) {
-                const year = date.substring(0, 4);
-                yearCounts[year] = (yearCounts[year] || 0) + 1;
-            }
-        }.bind(this));
+        });
 
         let html = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">';
         html += '<div>' + renderStatCard(items.length, t('audio_total_courses')) + '</div>';
         html += '<div>' + renderStatCard(lecturerSet.size, t('audio_unique_lecturers')) + '</div>';
         html += '</div>';
-        html += renderBarChart(t('audio_device_distribution'), deviceCounts);
-        html += renderBarChart(t('audio_items_per_year'), yearCounts, {sort: 'reverse', barClass: 'bg-success', last: true});
+        html += renderBarChart(t('audio_device_distribution'), deviceCounts(items));
+        html += renderBarChart(t('audio_items_per_year'), countByYear(items, getDate), {sort: 'reverse', barClass: 'bg-success', last: true});
         return html;
     },
     formatDate: mediaFormatDate

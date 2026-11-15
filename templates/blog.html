@@ -6,7 +6,7 @@
    extra width costs nothing because the column is capped there anyway. #}
 {% block main_class %}blog-main{% endblock %}
 {% block extra_head %}
-<script src="{{ get_url(path='blog-search.js') }}" defer></script>
+<script src="{{ get_url(path='blog-search.js') }}{{ v }}" defer></script>
 {% endblock %}
 {% block content %}
 <h1>{{ section.title }}</h1>
@@ -66,10 +66,13 @@
 </ul>
 
 {%- if paginator %}
-<nav class="pagination">
-  {%- if paginator.previous %}<a href="{{ paginator.previous }}">&larr; {{ trans(key="newer") }}</a>{% endif %}
+{#- The arrows follow the reading direction: "newer" points back toward the
+    start of the line, which is the right-hand side in Hebrew. -#}
+{%- if language.direction == "rtl" %}{% set arrow_back = "&rarr;" %}{% set arrow_fwd = "&larr;" %}{% else %}{% set arrow_back = "&larr;" %}{% set arrow_fwd = "&rarr;" %}{% endif %}
+<nav class="pagination" aria-label="{{ trans(key="nav_label_pages") }}">
+  {%- if paginator.previous %}<a href="{{ paginator.previous }}">{{ arrow_back | safe }} {{ trans(key="newer") }}</a>{% endif %}
   <span>{{ paginator.current_index }} / {{ paginator.number_pagers }}</span>
-  {%- if paginator.next %}<a href="{{ paginator.next }}">{{ trans(key="older") }} &rarr;</a>{% endif %}
+  {%- if paginator.next %}<a href="{{ paginator.next }}">{{ trans(key="older") }} {{ arrow_fwd | safe }}</a>{% endif %}
 </nav>
 {%- endif %}
 </div>

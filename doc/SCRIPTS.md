@@ -10,8 +10,17 @@ The one build step around rssite, run by `rsconstruct build` as a processor
 `processor.mass_generator.generic.site`: `rssite plan` lists every file a
 build writes with its sources, and each is cached separately.
 
-- `companies` runs `scripts/import_companies.py` into
-  `_site/data/companies.json.gz` and copies `data/logos/*.svg` to `_site/logos/`.
+- `companies` writes the organization tabs' data, seven files in
+  `_site/data/`, and copies `data/logos/*.svg` to `_site/logos/`.
+  `scripts/import_companies.py`, once per `--function` of
+  `organizations.yaml`, writes `companies.json.gz` (taught at),
+  `training_providers.json.gz` (taught for), `consulting.json.gz`
+  (consulted for), `publishers.json.gz` (the media page's publishers),
+  `education.json.gz` (studied at) and `certifiers.json.gz` (certified by);
+  `scripts/import_certifications.py` joins `certifications.yaml` with the
+  issuers into `certifications.json.gz` (one entry per certification). The
+  stanza in `rsconstruct.toml` names all seven outputs; every map image the
+  YAML names must exist under `static/images/`.
 
 Everything else that used to be a step here is the generator's own now: the
 commit every footer names is the `git` context variable; the root language
@@ -131,6 +140,11 @@ viewer fetches that one merged file.
 All image scripts are incremental — they skip images that already exist.
 Use `--force` to re-download.
 
+The poster fetchers (`fetch_movie_posters.py`, `fetch_series_posters.py`) read
+the built `static/data/video_features.json.gz` and `video_series.json.gz`, not
+the YAML. A video added to `data/yaml/` is therefore skipped until
+`scripts/copy_data.py` has rebuilt those files: run `copy_data.py` first.
+
 ### `scripts/fetch_movie_posters.py`
 
 Downloads movie poster images from TMDB (with OMDB fallback) by IMDB ID.
@@ -231,6 +245,15 @@ files that predate `image_standard.py` or were added by hand. Reports what
 would change by default; `--apply` does it. Idempotent: images already within
 the box are skipped.
 
+### `scripts/podcast_utils.py`
+
+Shared module of the `podcasts_*` scripts: RSS parsing, the matching of a
+chapter to its feed episode, and the ruamel.yaml configuration they share
+(`make_yaml()`, also used by `youtube_add_names.py`). Import-only. A rewrite
+with no edit keeps indentation, quoting and key order; the hand-wrapped long
+strings are re-wrapped (94 lines of `podcasts.yaml` as of 2026-11-15), which
+no dumper setting reproduces.
+
 ## Spellcheck Scripts
 
 ### `scripts/build_en_dict.sh`, `scripts/build_he_dict.sh`
@@ -275,17 +298,38 @@ item added without its image fails it, so run the matching `fetch_*.py`.
 
 ### `scripts/import_companies.py`
 
-Picks the organizations with `teaching` among their `functions` out of
+Picks the organizations with one `--function` (`teaching`,
+`training-provider`, `consulting`, `publisher`, `education` or
+`certification`; `TABS` in the script) among their `functions` out of
 `data/yaml/organizations.yaml`, trims each to the fields the companies tab
 shows (name, logo, status, headquarters, Israel office, the one `geo` map
 point and the path of its static map image, website, logo attribution) and
 gives each a `review` line: what happened to it, or its status when nothing
 did. Writes gzipped JSON with a fixed mtime. Unlike the other importers this
-is a build step: `build_site.py companies` runs it and writes
-`_site/data/companies.json.gz`, and copies `data/logos/*.svg` to
+is a build step: `build_site.py companies` runs it once per tab and writes
+the `_site/data/*.json.gz` named under `build_site.py` above, and copies `data/logos/*.svg` to
 `_site/logos/` next to it. Nothing is committed. With `--images-dir` (the
 build passes `static/images/`) it fails when a company's map image has not
 been rendered by `organizations_fetch_maps.py`.
+
+### `scripts/check_wikidata_ids.py`
+
+Run by rsconstruct as `processor.checker.script.wikidata_ids` over the video
+yaml files. Fails when an entry has no `wikidata_id` or `rotten_tomatoes_id`,
+or when the Wikidata id is not the item whose IMDb id is the entry's
+`imdb_id`, or the Rotten Tomatoes id is neither the item's nor the
+hand-verified one. Reads only `shelve/wikidata_imdb.json` and
+`data/rotten_tomatoes_manual.json`, so it never uses the network; the fix for
+a new entry is to run `videos_fetch_wikidata.py`.
+
+### `scripts/import_certifications.py`
+
+Builds the certifications tab of the education page: one card per
+certification in `data/yaml/certifications.yaml`, joined with the issuing
+organization's name, logo, website and status from `organizations.yaml`.
+Fails when a certification names an organization that does not exist or one
+whose `functions` lack `certification`. Run by `build_site.py companies`, which
+writes `_site/data/certifications.json.gz`.
 
 ### `scripts/check_profile_links.py`
 
@@ -309,6 +353,17 @@ reported as **blocked** rather than **broken**, so the report stays worth
 reading; without that split it would be mostly false positives. The checker
 sends a browser User-Agent and retries with GET when HEAD fails, since a number
 of hosts do not implement HEAD properly.
+
+## Tailwind
+
+### `scripts/build_collection_css.sh`
+
+Compiles the data collection app's Tailwind stylesheet:
+`config/tailwind.collection.config.js` and `config/tailwind.collection.css`
+become `static/vendor/tailwind-collection.css` (minified), through
+`npx tailwindcss@3`. It is run by hand, needs node, and its output is
+committed, so the build itself needs no node. Run it after adding a Tailwind
+class to the app or to a plugin: a class the scan has not seen has no rule.
 
 ## Local Preview
 
@@ -376,7 +431,9 @@ it (`place`, the prose reduced to one city; `lat`/`lon` in WGS84 decimal
 degrees), resolved through Nominatim (OpenStreetMap) at one request per
 second. Lookups are cached in `shelve/nominatim_geocode.json`, so a re-run
 after adding an organization only resolves the new places; existing `_geo`
-blocks survive unless `--force`. Edits the yaml textually (the file is
+blocks survive unless `--force`, which also reports a block whose place no
+longer resolves. An entry in the script's `OVERRIDES` wins over the cache, so
+adding one fixes a place that was cached as unresolved. Edits the yaml textually (the file is
 hand-wrapped, no dumper round-trips it), so the diff is only the new blocks.
 Places with no city (`unknown, Israel`) get no block.
 
@@ -392,8 +449,9 @@ next run resumes. `--auto` takes every suggestion, `--force` asks again.
 
 ### `scripts/organizations_fetch_maps.py`
 
-Renders the static map image each company card shows: for every teaching
-organization's `geo` point, an 800x320 JPEG of OpenStreetMap tiles at zoom
+Renders the static map image each company card shows: for every
+organization shown on any tab (not only the teaching ones; `import_companies.shown`)
+its `geo` point, an 800x320 JPEG of OpenStreetMap tiles at zoom
 13 with a pin on the point, written to `static/images/map-<lat>_<lon>.jpg`
 (one file per distinct point, named by `import_companies.map_path`, so
 companies on the same city centroid share one image and the duplicate-image
@@ -404,6 +462,18 @@ it after adding an organization or changing its point: the build fails
 (`import_companies.py --images-dir`) when an image is missing. The images
 are committed. Why a static image and not a Google Maps iframe is in
 `doc/DECISIONS.md`.
+
+### `scripts/videos_fetch_wikidata.py`
+
+Fills `wikidata_id` and `rotten_tomatoes_id` into `video_series.yaml` and
+`video_features.yaml` from each entry's `imdb_id`. Asks the Wikidata Query
+Service which item has that IMDb id (P345) and takes the item's Rotten
+Tomatoes path (P1258), or the hand-verified path in
+`data/rotten_tomatoes_manual.json` when Wikidata has none (`null` there means
+Rotten Tomatoes has no page). Lookups are cached in
+`shelve/wikidata_imdb.json` (committed); only what is not cached is queried.
+The yaml is edited textually so its hand formatting survives. `--dry-run`
+reports without writing.
 
 ### `scripts/podcasts_add_podcast.py`
 
@@ -418,12 +488,16 @@ the RSS feed, continuing from where the last run stopped.
 ### `scripts/podcasts_backfill_rss.py`
 
 Fills in missing `rss_feed` URLs in `podcasts.yaml` by looking each podcast
-up on the iTunes Search API.
+up on the iTunes Search API. A hit is taken only when its name matches the
+podcast's; anything else is reported and skipped. Saves after each podcast.
 
 ### `scripts/podcasts_backfill_rss_data.py`
 
 Backfills RSS metadata (description, pubDate, duration, enclosure, …) into
-existing chapters by matching titles against the feed.
+existing chapters. A chapter is matched to a feed episode by guid, then by
+title, and by position (chapter `i` is episode `i`) only when its title is
+numeric or absent. A feed that fails is reported and skipped, and the file
+is saved after each podcast.
 
 ### `scripts/podcasts_fill_chapter_names.py`
 
@@ -433,4 +507,5 @@ non-numeric titles are left alone.
 ### `scripts/youtube_add_names.py`
 
 Fetches the title for every item without a `name` in a YouTube YAML file
-(`video_youtube.yaml`) and writes it back in place.
+(`video_youtube.yaml`) and writes it back in place. The title of a consent
+or interstitial page is refused rather than recorded.

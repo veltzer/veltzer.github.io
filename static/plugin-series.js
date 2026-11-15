@@ -1,4 +1,4 @@
-/* global renderBarChart, renderStatCard, mediaFormatDate, t */
+/* global renderBarChart, renderStatCard, mediaFormatDate, t, countByYear, deviceCounts, hasReviewField, toggleLine, mediaLinkLines */
 window.collectionPlugins = window.collectionPlugins || {};
 
 window.collectionPlugins['videos'] = {
@@ -34,9 +34,7 @@ window.collectionPlugins['videos'] = {
                 return val === t('series_fully_watched') ? !hasUnwatched : hasUnwatched;
             }
         },
-        {field: 'has_review', label: t('series_f_has_review'), type: 'string', sortable: false,
-            filterType: 'boolean', value: function(item) { return item.review && item.review.trim() !== ''; }
-        }
+        hasReviewField(t('series_f_has_review'))
     ],
     defaultSort: {field: 'name', order: 'asc'},
     toggleFields: [
@@ -55,49 +53,28 @@ window.collectionPlugins['videos'] = {
     },
     renderDetails: function(item) {
         const seasons = item.seasons_seen ? item.seasons_seen.join(', ') : t('series_na');
-        let html = '<li class="py-2" data-toggle="seasons"><strong>' + t('series_f_seasons_seen') + ':</strong> ' + window.escapeHtml(seasons) + '</li>';
+        let html = toggleLine('seasons', t('series_f_seasons_seen') + ':', window.escapeHtml(seasons));
         const date = this.formatDate(item.date_utcz);
         if (date) {
-            html += '<li class="py-2" data-toggle="date"><strong>' + t('series_f_date') + ':</strong> ' + window.escapeHtml(date) + '</li>';
+            html += toggleLine('date', t('series_f_date') + ':', window.escapeHtml(date));
         }
         if (item.location) {
-            html += '<li class="py-2" data-toggle="location"><strong>' + t('series_f_location') + ':</strong> ' + window.escapeHtml(item.location) + '</li>';
+            html += toggleLine('location', t('series_f_location') + ':', window.escapeHtml(item.location));
         }
-        if (item.imdb_id) {
-            html += '<li class="py-2" data-toggle="imdb"><a href="https://www.imdb.com/title/tt' + window.escapeHtml(item.imdb_id) + '/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; ' + t('series_view_imdb') + '</a></li>';
-        }
-        if (item.wikidata_id) {
-            html += '<li class="py-2" data-toggle="wikidata"><a href="https://www.wikidata.org/wiki/' + window.escapeHtml(item.wikidata_id) + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; ' + t('series_view_wikidata') + '</a></li>';
-        }
-        if (item.rotten_tomatoes_id) {
-            html += '<li class="py-2" data-toggle="rottentomatoes"><a href="https://www.rottentomatoes.com/' + window.escapeHtml(item.rotten_tomatoes_id) + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; ' + t('series_view_rt') + '</a></li>';
-        }
-        return html;
+        return html + mediaLinkLines(item, 'series');
     },
     renderStats: function(items) {
-        const deviceCounts = {};
-        const yearCounts = {};
-        let totalSeasons = 0;
-        items.forEach(function(item) {
-            if (item.device) {
-                deviceCounts[item.device] = (deviceCounts[item.device] || 0) + 1;
-            }
-            if (item.seasons_seen) {
-                totalSeasons += item.seasons_seen.length;
-            }
-            const date = this.formatDate(item.date_utcz);
-            if (date) {
-                const year = date.substring(0, 4);
-                yearCounts[year] = (yearCounts[year] || 0) + 1;
-            }
-        }.bind(this));
+        const totalSeasons = items.reduce(function(sum, item) {
+            return sum + (item.seasons_seen ? item.seasons_seen.length : 0);
+        }, 0);
 
         let html = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">';
         html += '<div>' + renderStatCard(items.length, t('series_total_series')) + '</div>';
         html += '<div>' + renderStatCard(totalSeasons, t('series_total_seasons')) + '</div>';
         html += '</div>';
-        html += renderBarChart(t('series_device_dist'), deviceCounts);
-        html += renderBarChart(t('series_per_year'), yearCounts, {sort: 'reverse', barClass: 'bg-success', last: true});
+        html += renderBarChart(t('series_device_dist'), deviceCounts(items));
+        html += renderBarChart(t('series_per_year'), countByYear(items, function(item) { return item.date_utcz; }),
+            {sort: 'reverse', barClass: 'bg-success', last: true});
         return html;
     },
     formatDate: mediaFormatDate

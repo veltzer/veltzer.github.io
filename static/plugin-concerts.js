@@ -1,4 +1,4 @@
-/* global t, renderBarChart, renderStatCard */
+/* global t, renderBarChart, renderStatCard, countBy, countByYear, hasReviewField, showPeople, tally, toggleLine */
 window.collectionPlugins = window.collectionPlugins || {};
 
 // Concerts and live shows I saw, the Concerts tab of the media page (/media/),
@@ -14,17 +14,9 @@ function concertDate(item) {
     return item.date_y || '';
 }
 
-function concertYear(item) {
-    return concertDate(item).substring(0, 4);
-}
-
 // genre is an identifier (jazz, rock, ...), shown through its string.
 function concertGenre(item) {
     return item.genre ? t('concerts_genre_' + item.genre) : '';
-}
-
-function showPeople() {
-    return Boolean(window.collectionFeatureFlags && window.collectionFeatureFlags.showPeople);
 }
 
 window.collectionPlugins['concerts'] = {
@@ -60,9 +52,7 @@ window.collectionPlugins['concerts'] = {
         {field: 'broadcast', label: t('concerts_field_broadcast'), type: 'string', sortable: false,
             filterType: 'boolean', value: function(item) { return Boolean(item.broadcast); }
         },
-        {field: 'has_review', label: t('concerts_field_has_review'), type: 'string', sortable: false,
-            filterType: 'boolean', value: function(item) { return Boolean(item.review); }
-        }
+        hasReviewField(t('concerts_field_has_review'))
     ],
     defaultSort: {field: 'date', order: 'asc'},
     toggleFields: [
@@ -84,9 +74,7 @@ window.collectionPlugins['concerts'] = {
     // Data values are English, so they sit in <bdi> on a Hebrew page.
     renderDetails: function(item) {
         const bdi = function(text) { return '<bdi>' + window.escapeHtml(text) + '</bdi>'; };
-        const line = function(toggle, label, html) {
-            return '<li class="py-2" data-toggle="' + toggle + '"><strong>' + label + '</strong> ' + html + '</li>';
-        };
+        const line = toggleLine;
         let html = '';
         if (item.performers && item.performers.length) {
             html += line('performers', t('concerts_detail_performers'), item.performers.map(bdi).join(', '));
@@ -104,26 +92,19 @@ window.collectionPlugins['concerts'] = {
         if (item.remark) html += line('remark', t('concerts_detail_remark'), bdi(item.remark));
         if (item.image_source) {
             const credit = [item.image_author, item.image_license].filter(Boolean).join(', ');
-            html += '<li class="py-2 text-sm" data-toggle="credit">' + window.escapeHtml(t('concerts_image_credit')) + ' ' +
+            html += toggleLine('credit', '', window.escapeHtml(t('concerts_image_credit')) + ' ' +
                 '<a href="' + window.escapeHtml(item.image_source) + '" target="_blank" rel="noopener noreferrer"' +
-                ' class="text-blue-600 hover:text-blue-800 underline">' + bdi(credit || t('concerts_image_source')) + '</a></li>';
+                ' class="text-blue-600 hover:text-blue-800 underline">' + bdi(credit || t('concerts_image_source')) + '</a>', 'text-sm');
         }
         return html;
     },
     renderStats: function(items) {
-        const genreCounts = {};
-        const cityCounts = {};
-        const yearCounts = {};
+        const genreCounts = countBy(items, concertGenre);
+        const cityCounts = countBy(items, function(item) { return item.city; });
+        const yearCounts = countByYear(items, concertDate);
         const performerCounts = {};
         items.forEach(function(item) {
-            const genre = concertGenre(item);
-            if (genre) genreCounts[genre] = (genreCounts[genre] || 0) + 1;
-            if (item.city) cityCounts[item.city] = (cityCounts[item.city] || 0) + 1;
-            const year = concertYear(item);
-            if (year) yearCounts[year] = (yearCounts[year] || 0) + 1;
-            (item.performers || []).forEach(function(name) {
-                performerCounts[name] = (performerCounts[name] || 0) + 1;
-            });
+            (item.performers || []).forEach(function(name) { tally(performerCounts, name); });
         });
         // Only performers seen more than once: the rest is a long tail of ones.
         const repeated = {};

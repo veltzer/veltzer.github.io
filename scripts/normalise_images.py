@@ -21,7 +21,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from image_standard import MAX_EDGE, normalise
+from image_standard import MAX_EDGE, ImageError, normalise
 from PIL import Image
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -62,14 +62,19 @@ def main():
         print("\nRe-run with --apply to rewrite them.")
         return 0
 
+    failed = 0
     for path in targets:
-        if not normalise(path):
-            print("ImageMagick not found; nothing changed.", file=sys.stderr)
-            return 1
+        try:
+            if not normalise(path):
+                print("ImageMagick not found; nothing changed.", file=sys.stderr)
+                return 1
+        except ImageError as e:
+            print(f"  Failed {path.name}: {e}", file=sys.stderr)
+            failed += 1
     after = sum(p.stat().st_size for p in targets)
     print(f"\n{before / 1024 / 1024:.1f} MB -> {after / 1024 / 1024:.1f} MB "
           f"(-{100 * (1 - after / before):.0f}%)")
-    return 0
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":

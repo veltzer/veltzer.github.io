@@ -27,13 +27,16 @@
 {% extends "base.html" %}
 {% block title %}{{ section.title }} &middot; {{ language.title }}{% endblock %}
 {% block main_class %}embed-main{% endblock %}
-{% block content %}
-{# No <h1> here: the app renders its own heading from the active plugin. #}
+{#- The app's stylesheets go in <head>, where a <style> belongs: the compiled
+    Tailwind utilities ahead of the site stylesheet (vendor_css), the app's own
+    few rules after it. -#}
+{% block vendor_css %}
 <!-- The Tailwind utilities the collection app uses, compiled ahead of time
      with the theme-token palette in config/tailwind.collection.config.js;
      rebuild with scripts/build_collection_css.sh after adding a class. -->
-<link rel="stylesheet" href="/vendor/tailwind-collection.css">
-
+<link rel="stylesheet" href="/vendor/tailwind-collection.css{{ v }}">
+{% endblock %}
+{% block extra_head %}
 <style>
 /* The app is set in the site's own type: no font of its own, so it inherits
    --font-sans (and the base size and line height) from body like any page. */
@@ -52,6 +55,8 @@
     border-color: var(--border);
 }
 #collection-root input::placeholder { color: var(--text-muted); }
+/* The pager is a flex row, and a display utility beats the hidden attribute. */
+#collection-root [hidden] { display: none !important; }
 
 /* Card image box, rendered by data-collection-app.js. A fixed 2:1 landscape box; the
    image inside covers it unless the plugin asked for contain, in which case
@@ -106,7 +111,9 @@
 }
 </style>
 <style id="toggle-styles"></style>
-
+{% endblock %}
+{% block content %}
+{# No <h1> here: the app renders its own heading from the active plugin. #}
 <div id="collection-root">
 <div class="max-w-6xl mx-auto px-4 my-12">
 
@@ -115,7 +122,7 @@
 <p id="page-subtitle" class="text-gray-500 mt-2"></p>
 </header>
 
-<nav id="main-nav" class="flex flex-wrap justify-center gap-2 mb-10"></nav>
+<nav id="main-nav" aria-label="{{ trans(key="app_ui_views_label") }}" class="flex flex-wrap justify-center gap-2 mb-10"></nav>
 
 <div id="search-container" class="mb-10 mx-auto max-w-xl">
 <input type="text" id="search-input" aria-label="{{ trans(key="app_ui_search_label") }}"
@@ -123,8 +130,8 @@ class="search-input w-full">
 <div class="flex flex-wrap justify-center items-center gap-2 mt-3">
 <label for="sort-field" class="text-sm text-gray-500 whitespace-nowrap">{{ trans(key="app_ui_sort_by") }}</label>
 <select id="sort-field" class="control"></select>
-<button id="sort-order-btn" class="control" title="{{ trans(key="app_ui_sort_order") }}" aria-label="{{ trans(key="app_ui_sort_order") }}"></button>
-<button id="filters-toggle-btn" class="control ms-2" aria-label="{{ trans(key="app_ui_filters_toggle") }}" aria-expanded="false"></button>
+<button id="sort-order-btn" class="control" title="{{ trans(key="app_ui_sort_order") }}"></button>
+<button id="filters-toggle-btn" class="control ms-2" aria-expanded="false"></button>
 </div>
 <div id="filters-panel" class="hidden mt-3 p-4 bg-gray-50 border border-gray-200 rounded-lg">
 <div id="filters-container" class="flex flex-wrap justify-center gap-2"></div>
@@ -132,13 +139,14 @@ class="search-input w-full">
 </div>
 </div>
 
-<div id="status-message" class="text-center text-gray-500 text-lg"></div>
+<div id="status-message" role="status" class="text-center text-gray-500 text-lg"></div>
 
-<main id="content-container">
+{#- A <div>, not a second <main>: base.html already wraps the page in one. -#}
+<div id="content-container">
 <section id="stats-container" class="mb-10"></section>
 <section id="items-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></section>
-<nav id="pagination-container" class="flex justify-center items-center gap-3 mt-4 mb-3" style="display:none!important;"></nav>
-</main>
+<nav id="pagination-container" class="flex justify-center items-center gap-3 mt-4 mb-3" aria-label="{{ trans(key="nav_label_pages") }}" hidden></nav>
+</div>
 
 </div>
 
@@ -161,7 +169,10 @@ window.collectionPluginKeys = {{ section.extra.plugins | json_encode | safe }};
 // Absolute, not '../': the plugins and data live at the site root, and a
 // relative path would resolve under /en/ or /he/.
 window.collectionBasePath = '/';
+// The deploy's ?v= (base.html), which the app appends to the plugin scripts
+// it inserts, so new HTML is never paired with a cached old script.
+window.collectionAssetVersion = {{ v | json_encode | safe }};
 </script>
-<script src="/data-collection-utils.js"></script>
-<script src="/data-collection-app.js"></script>
+<script src="/data-collection-utils.js{{ v }}"></script>
+<script src="/data-collection-app.js{{ v }}"></script>
 {% endblock %}

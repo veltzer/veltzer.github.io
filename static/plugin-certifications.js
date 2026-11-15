@@ -1,4 +1,4 @@
-/* global t, renderBarChart, renderStatCard, mediaFormatDate */
+/* global t, renderBarChart, renderStatCard, mediaFormatDate, countBy, countByYear */
 window.collectionPlugins = window.collectionPlugins || {};
 
 // The certifications I hold, the Certifications tab of the education page
@@ -6,10 +6,6 @@ window.collectionPlugins = window.collectionPlugins || {};
 // scripts/import_certifications.py joins certifications.yaml with the issuing
 // organization in organizations.yaml, so each item carries the issuer's name,
 // logo and website as issuer_* fields beside its own name, kind, date and remark.
-
-function certificationYear(item) {
-    return item.date && /^\d{4}/.test(item.date) ? item.date.substring(0, 4) : '';
-}
 
 // kind is an identifier (instructor / professional), shown through its string.
 function certificationKind(item) {
@@ -93,16 +89,9 @@ window.collectionPlugins['certifications'] = {
     },
     formatDate: mediaFormatDate,
     renderStats: function(items) {
-        const issuerCounts = {};
-        const kindCounts = {};
-        const yearCounts = {};
-        items.forEach(function(item) {
-            if (item.issuer_name) issuerCounts[item.issuer_name] = (issuerCounts[item.issuer_name] || 0) + 1;
-            const kind = certificationKind(item);
-            if (kind) kindCounts[kind] = (kindCounts[kind] || 0) + 1;
-            const year = certificationYear(item);
-            if (year) yearCounts[year] = (yearCounts[year] || 0) + 1;
-        });
+        const issuerCounts = countBy(items, function(item) { return item.issuer_name; });
+        const kindCounts = countBy(items, certificationKind);
+        const yearCounts = countByYear(items, function(item) { return item.date; });
         let html = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">';
         html += '<div>' + renderStatCard(items.length, t('certifications_stat_certifications')) + '</div>';
         html += '<div>' + renderStatCard(Object.keys(issuerCounts).length, t('certifications_stat_issuers')) + '</div>';

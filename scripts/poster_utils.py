@@ -12,13 +12,15 @@ import urllib.error
 import urllib.request
 
 import yaml
-from image_standard import normalise
+from image_standard import download_image as _download_image
 
 TMDB_FIND_URL = "https://api.themoviedb.org/3/find/tt{imdb_id}?external_source=imdb_id"
 TMDB_IMAGE_URL = "https://image.tmdb.org/t/p/w300{poster_path}"
-OMDB_URL = "http://www.omdbapi.com/?i=tt{imdb_id}&apikey={api_key}"
+OMDB_URL = "https://www.omdbapi.com/?i=tt{imdb_id}&apikey={api_key}"
 TMDB_PASS_ENTRY = "keys/themoviedb.org.read"
 OMDB_PASS_ENTRY = "keys/omdbapi.com.key"
+# Seconds; a stalled connection costs one poster, not the run.
+HTTP_TIMEOUT = 15
 
 
 def get_pass_entry(entry):
@@ -65,8 +67,11 @@ def fetch_poster_tmdb(imdb_id, token, result_key="movie_results"):
     req.add_header("Authorization", f"Bearer {token}")
     req.add_header("Accept", "application/json")
     try:
-        with urllib.request.urlopen(req) as resp:
+        with urllib.request.urlopen(req, timeout=HTTP_TIMEOUT) as resp:
             data = json.loads(resp.read())
+    except json.JSONDecodeError as e:
+        print(f"  TMDB returned invalid JSON for tt{imdb_id}: {e}", file=sys.stderr)
+        return None
     except urllib.error.HTTPError as e:
         print(f"  TMDB API error for tt{imdb_id}: {e.code}", file=sys.stderr)
         return None
@@ -90,8 +95,11 @@ def fetch_poster_omdb(imdb_id, api_key):
     """Fetch poster URL from OMDB as fallback. Returns image URL or None."""
     url = OMDB_URL.format(imdb_id=imdb_id, api_key=api_key)
     try:
-        with urllib.request.urlopen(url) as resp:
+        with urllib.request.urlopen(url, timeout=HTTP_TIMEOUT) as resp:
             data = json.loads(resp.read())
+    except json.JSONDecodeError as e:
+        print(f"  OMDB returned invalid JSON for tt{imdb_id}: {e}", file=sys.stderr)
+        return None
     except urllib.error.HTTPError as e:
         print(f"  OMDB API error for tt{imdb_id}: {e.code}", file=sys.stderr)
         return None
@@ -107,10 +115,9 @@ def fetch_poster_omdb(imdb_id, api_key):
 
 def download_image(url, dest):
     """Download an image from a URL, shrunk to the site standard."""
-    urllib.request.urlretrieve(url, dest)
-    # TMDB serves posters far larger than the card needs.
-    # See scripts/image_standard.py.
-    normalise(dest)
+    # Temp file, verification and normalisation (TMDB serves posters far larger
+    # than the card needs) all live in scripts/image_standard.py.
+    _download_image(url, dest, timeout=HTTP_TIMEOUT)
 
 
 def fetch_posters(yaml_path, image_dir, prefix, tmdb_result_key, force=False):
@@ -162,7 +169,7 @@ def fetch_posters(yaml_path, image_dir, prefix, tmdb_result_key, force=False):
             download_image(image_url, dest)
             downloaded += 1
             print(f"  Downloaded poster for tt{imdb_id}")
-        except (urllib.error.HTTPError, urllib.error.URLError, OSError) as e:
+        except OSError as e:  # URLError, HTTPError and ImageError are all OSError
             print(f"  Failed to download poster for tt{imdb_id}: {e}", file=sys.stderr)
             failed += 1
 

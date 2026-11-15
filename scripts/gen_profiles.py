@@ -20,8 +20,8 @@ markers is left exactly as it was, so the hand-written prose above them
 survives regeneration.
 
 Run it by hand after editing profiles.yaml; the generated content is
-committed. profiles.yaml lives in this repo now, so this could become a build
-step the way gen_stats.py is -- that is a separate change.
+committed. profiles.yaml lives in this repo now, so this could become a
+check-plus-fix build step -- that is a separate change.
 """
 
 import sys
@@ -44,6 +44,7 @@ IDENTITY = REPO_ROOT / "static" / "identity.toml"
 # and dilute the signal. The typing group is absent for a milder reason -- the
 # keybr children are per-email throwaway profiles, not a public identity.
 SAMEAS_GROUPS = ("development", "learning", "trove")
+IMAGE_SUFFIXES = (".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp")
 
 # Everything between these two lines is replaced; everything outside is kept.
 # They are HTML comments so they stay invisible in rendered markdown on both
@@ -136,13 +137,18 @@ def render_identity(data):
     from static/identity.toml.
 
     Only SAMEAS_GROUPS contribute, and only top-level items -- see the comment
-    on that constant. Nested children (the per-email keybr profiles) are skipped.
+    on that constant. Nested children (the per-email keybr profiles) are skipped,
+    and so is a link to an image (the Project Euler badge, the only public
+    thing that site offers): sameAs names pages about the person, and a
+    picture is not one.
     """
     urls = []
     for group in data["groups"]:
         if group["id"] not in SAMEAS_GROUPS:
             continue
         for item in group["items"]:
+            if item["url"].lower().endswith(IMAGE_SUFFIXES):
+                continue
             if item["url"] not in urls:
                 urls.append(item["url"])
     if not urls:

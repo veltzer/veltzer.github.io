@@ -36,10 +36,145 @@ const CHART_COLORS = ['var(--accent)', 'var(--entity-1)', 'var(--entity-2)', 'va
 const COLOR_CLASS_MAP = {
     'bg-primary': 'bg-blue-600',
     'bg-success': 'bg-green-600',
-    'bg-info': 'bg-blue-500',
-    'bg-danger': 'bg-red-600',
-    'bg-warning': 'bg-yellow-500'
+    'bg-danger': 'bg-red-600'
 };
+
+/**
+ * Sort chart keys: numerically when every key is a number (ratings 2 and 10
+ * must not come out 10 before 2), as text otherwise.
+ * @param {string[]} keys - sorted in place
+ * @returns {string[]} the same array, ascending
+ */
+function sortKeys(keys) {
+    const numeric = keys.length > 0 && keys.every(function(k) { return k !== '' && Number.isFinite(Number(k)); });
+    return numeric
+        ? keys.sort(function(a, b) { return Number(a) - Number(b); })
+        : keys.sort();
+}
+
+/**
+ * Count one occurrence of key in counts. A missing key (undefined, null or '')
+ * is not counted; 0 is a key.
+ * @param {Object} counts - {key: count}, mutated
+ * @param {*} key
+ * @returns {Object} counts
+ */
+function tally(counts, key) {
+    if (key !== undefined && key !== null && key !== '') {
+        counts[key] = (counts[key] || 0) + 1;
+    }
+    return counts;
+}
+
+/**
+ * Count items by a key function (see tally).
+ * @param {Array} items
+ * @param {function(Object): *} keyFn
+ * @returns {Object} {key: count}
+ */
+function countBy(items, keyFn) {
+    const counts = {};
+    items.forEach(function(item) { tally(counts, keyFn(item)); });
+    return counts;
+}
+
+/**
+ * The four-digit year a date string starts with, or '' when it has none.
+ * @param {string} date - ISO date or timestamp
+ * @returns {string}
+ */
+function yearOf(date) {
+    const year = date ? String(date).substring(0, 4) : '';
+    return /^\d{4}$/.test(year) ? year : '';
+}
+
+/**
+ * Count items per year; dateFn returns the item's date string.
+ * @param {Array} items
+ * @param {function(Object): string} dateFn
+ * @returns {Object} {year: count}
+ */
+function countByYear(items, dateFn) {
+    return countBy(items, function(item) { return yearOf(dateFn(item)); });
+}
+
+/**
+ * The device distribution of items, for renderBarChart.
+ * @param {Array} items
+ * @returns {Object} {device: count}
+ */
+function deviceCounts(items) {
+    return countBy(items, function(item) { return item.device; });
+}
+
+/**
+ * Whether the page publishes the names of the people an item was shared with
+ * (window.collectionFeatureFlags.showPeople, set by the page template).
+ * Plugins must not offer a filter, toggle, card line or search on `with`
+ * unless this is true. Read it when the plugin is built or rendered.
+ * @returns {boolean}
+ */
+function showPeople() {
+    return Boolean(window.collectionFeatureFlags && window.collectionFeatureFlags.showPeople);
+}
+
+/**
+ * The shared "has a review" boolean filter field.
+ * @param {string} label - the translated label
+ * @returns {Object} an entry for a plugin's fields array
+ */
+function hasReviewField(label) {
+    return {field: 'has_review', label: label, type: 'string', sortable: false,
+        filterType: 'boolean', value: function(item) { return Boolean(item.review && item.review.trim() !== ''); }
+    };
+}
+
+/**
+ * One <li data-toggle> detail line of a card.
+ * @param {string} toggle - the toggleFields key that shows and hides it
+ * @param {string} label - label markup, already translated (shown bold; '' for none)
+ * @param {string} html - the value, already escaped
+ * @param {string} [extraClass] - classes added after py-2
+ * @returns {string} HTML string
+ */
+function toggleLine(toggle, label, html, extraClass) {
+    return '<li class="py-2' + (extraClass ? ' ' + extraClass : '') + '" data-toggle="' + window.escapeHtml(toggle) + '">' +
+        (label ? '<strong>' + label + '</strong> ' : '') + html + '</li>';
+}
+
+/**
+ * An <li data-toggle> holding one external link.
+ * @param {string} toggle - the toggleFields key
+ * @param {string} href - the URL (escaped here)
+ * @param {string} text - link text, already translated
+ * @returns {string} HTML string
+ */
+function linkLine(toggle, href, text) {
+    return toggleLine(toggle, '', '<a href="' + window.escapeHtml(href) +
+        '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; ' +
+        text + '</a>');
+}
+
+/**
+ * The IMDb / Wikidata / Rotten Tomatoes link lines a film or series card ends
+ * with (toggle keys imdb, wikidata, rottentomatoes).
+ * @param {Object} item - with imdb_id, wikidata_id, rotten_tomatoes_id
+ * @param {string} prefix - string key prefix: <prefix>_view_imdb, _view_wikidata, _view_rt
+ * @returns {string} HTML string
+ */
+function mediaLinkLines(item, prefix) {
+    let html = '';
+    if (item.imdb_id) {
+        html += linkLine('imdb', 'https://www.imdb.com/title/tt' + item.imdb_id + '/', t(prefix + '_view_imdb'));
+    }
+    if (item.wikidata_id) {
+        html += linkLine('wikidata', 'https://www.wikidata.org/wiki/' + item.wikidata_id, t(prefix + '_view_wikidata'));
+    }
+    if (item.rotten_tomatoes_id) {
+        html += linkLine('rottentomatoes', 'https://www.rottentomatoes.com/' + item.rotten_tomatoes_id, t(prefix + '_view_rt'));
+    }
+    return html;
+}
 
 /**
  * Render a horizontal bar chart card.
@@ -65,9 +200,9 @@ function renderBarChart(title, counts, options) {
     if (sort === 'desc') {
         keys.sort(function(a, b) { return counts[b] - counts[a]; });
     } else if (sort === 'reverse') {
-        keys.sort().reverse();
+        sortKeys(keys).reverse();
     } else {
-        keys.sort();
+        sortKeys(keys);
     }
     if (limit > 0) {
         keys = keys.slice(0, limit);
@@ -129,3 +264,14 @@ window.t = t;
 window.renderBarChart = renderBarChart;
 window.renderStatCard = renderStatCard;
 window.mediaFormatDate = mediaFormatDate;
+window.showPeople = showPeople;
+window.tally = tally;
+window.countBy = countBy;
+window.yearOf = yearOf;
+window.countByYear = countByYear;
+window.deviceCounts = deviceCounts;
+window.hasReviewField = hasReviewField;
+window.toggleLine = toggleLine;
+window.linkLine = linkLine;
+window.mediaLinkLines = mediaLinkLines;
+window.sortKeys = sortKeys;

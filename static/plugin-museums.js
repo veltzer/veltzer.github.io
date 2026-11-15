@@ -1,4 +1,4 @@
-/* global t, renderBarChart, renderStatCard, mediaFormatDate */
+/* global t, renderBarChart, renderStatCard, mediaFormatDate, countBy, countByYear, hasReviewField, showPeople, toggleLine, linkLine */
 window.collectionPlugins = window.collectionPlugins || {};
 
 // Museum dates come in two shapes: date_utcz is a full ISO timestamp, date_ymd
@@ -40,7 +40,7 @@ window.collectionPlugins['museums'] = {
     subtitle: t('museums_subtitle'),
     ratingScale: 10,
     searchPlaceholder: t('museums_search_placeholder'),
-    searchFields: (window.collectionFeatureFlags && window.collectionFeatureFlags.showPeople) ? ['name', 'city', 'review', 'with'] : ['name', 'city', 'review'],
+    searchFields: showPeople() ? ['name', 'city', 'review', 'with'] : ['name', 'city', 'review'],
     fields: [
         {field: 'name', label: t('museums_name'), type: 'string', filterable: false},
         {field: 'rating', label: t('museums_rating'), type: 'number', filterType: 'select'},
@@ -55,16 +55,15 @@ window.collectionPlugins['museums'] = {
         {field: 'date_utcz', label: t('museums_date_visited'), type: 'string', filterType: 'year',
             value: museumDate
         },
-        {field: 'has_review', label: t('museums_has_review'), type: 'string', sortable: false,
-            filterType: 'boolean', value: function(item) { return item.review && item.review.trim() !== ''; }
-        },
+        hasReviewField(t('museums_has_review')),
         {field: 'has_url', label: t('museums_has_website'), type: 'string', sortable: false,
             filterType: 'boolean', value: function(item) { return item.url && item.url.trim() !== ''; }
         },
+    ].concat(showPeople() ? [
         {field: 'with_others', label: t('museums_visited_with_others'), type: 'string', sortable: false,
-            filterType: 'boolean', value: function(item) { return item.with && item.with.length > 0; }
+            filterType: 'boolean', value: function(item) { return Boolean(item.with && item.with.length > 0); }
         }
-    ],
+    ] : []),
     defaultSort: {field: 'name', order: 'asc'},
     toggleFields: [
         {key: 'date', label: t('museums_date'), default: true},
@@ -72,7 +71,7 @@ window.collectionPlugins['museums'] = {
         {key: 'with', label: t('museums_with'), default: false},
         {key: 'remark', label: t('museums_remark'), default: true},
         {key: 'website', label: t('museums_website_link'), default: true}
-    ],
+    ].filter(function(toggle) { return showPeople() || toggle.key !== 'with'; }),
     renderImage: function(item, allItems) {
         if (!item.internal_id) return '';
         const imageId = canonicalMuseumImageId(item, allItems);
@@ -82,40 +81,25 @@ window.collectionPlugins['museums'] = {
         let html = '';
         const date = this.formatDate(museumDate(item));
         if (date) {
-            html += '<li class="py-2" data-toggle="date"><strong>' + t('museums_date_label') + '</strong> ' + window.escapeHtml(date) + '</li>';
+            html += toggleLine('date', t('museums_date_label'), window.escapeHtml(date));
         }
         if (item.city) {
-            html += '<li class="py-2" data-toggle="city"><strong>' + t('museums_city_label') + '</strong> ' + window.escapeHtml(item.city) + '</li>';
+            html += toggleLine('city', t('museums_city_label'), window.escapeHtml(item.city));
         }
-        if (item.with && item.with.length > 0) {
-            html += '<li class="py-2" data-toggle="with"><strong>' + t('museums_with_label') + '</strong> ' + window.escapeHtml(item.with.join(', ')) + '</li>';
+        if (showPeople() && item.with && item.with.length > 0) {
+            html += toggleLine('with', t('museums_with_label'), window.escapeHtml(item.with.join(', ')));
         }
         if (item.remark) {
-            html += '<li class="py-2" data-toggle="remark"><strong>' + t('museums_remark_label') + '</strong> ' + window.escapeHtml(item.remark) + '</li>';
+            html += toggleLine('remark', t('museums_remark_label'), window.escapeHtml(item.remark));
         }
         if (item.url) {
-            html += '<li class="py-2" data-toggle="website"><a href="' + window.escapeHtml(item.url) + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; ' + t('museums_visit_website') + '</a></li>';
+            html += linkLine('website', item.url, t('museums_visit_website'));
         }
         return html;
     },
     renderStats: function(items) {
-        const cityCounts = {};
-        const yearCounts = {};
-
-        const getYear = (item) => {
-            const raw = museumDate(item);
-            return /^\d{4}/.test(raw) ? raw.substring(0, 4) : null;
-        };
-
-        items.forEach(function(item) {
-            if (item.city) {
-                cityCounts[item.city] = (cityCounts[item.city] || 0) + 1;
-            }
-            const year = getYear(item);
-            if (year) {
-                yearCounts[year] = (yearCounts[year] || 0) + 1;
-            }
-        });
+        const cityCounts = countBy(items, function(item) { return item.city; });
+        const yearCounts = countByYear(items, museumDate);
 
         let html = '<div class="grid grid-cols-1 gap-4 mb-4">';
         html += '<div>' + renderStatCard(items.length, t('museums_total_visits')) + '</div>';

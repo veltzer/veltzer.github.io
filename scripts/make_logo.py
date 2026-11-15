@@ -16,9 +16,11 @@ comes from that:
                                itself and ignores SVG icons)
 
 The site header draws the same paths inline in templates/base.html, so its
-colours follow the theme; tests/test_logo.py fails if that copy drifts from
-the geometry here. The share cards (make_og_images.py, make_post_cards.py)
-paste mark() into their JPEGs.
+colours follow the theme (sass/style.scss overrides the fill and stroke
+that the markup carries as the default-theme fallback); tests/test_logo.py
+fails if that copy's viewBox, rx, path or stroke width drifts from the
+geometry here. The share cards (make_og_images.py, and make_post_cards.py
+through its draw_mark) paste mark() into their JPEGs.
 
 Run by hand after changing the mark, then run make_og_images.py; the icon
 files and the site-wide cards are committed, the post cards are build

@@ -15,10 +15,14 @@ Usage:
 """
 
 import argparse
+import contextlib
+import html
 import json
+import os
 import re
 import subprocess
 import sys
+import tempfile
 import time
 import urllib.error
 import urllib.parse
@@ -72,20 +76,20 @@ def fetch_course_page(slug, cache):
     if cache_key in cache:
         return cache[cache_key]
 
-    html = fetch_page(COURSE_PAGE_URL.format(slug=slug))
-    if not html:
+    page = fetch_page(COURSE_PAGE_URL.format(slug=slug))
+    if not page:
         return None
 
-    sku_match = PAGE_IMAGE_ID_RE.search(html)
-    prof_match = PROF_RE.search(html)
-    title_match = re.search(r"<h1[^>]*>([^<]+)</h1>", html)
-    desc_match = re.search(r'<meta\s+name="description"\s+content="([^"]+)"', html)
+    sku_match = PAGE_IMAGE_ID_RE.search(page)
+    prof_match = PROF_RE.search(page)
+    title_match = re.search(r"<h1[^>]*>([^<]+)</h1>", page)
+    desc_match = re.search(r'<meta\s+name="description"\s+content="([^"]+)"', page)
 
     result = {
         "id": sku_match.group(1) if sku_match else None,
-        "title": title_match.group(1).strip() if title_match else None,
-        "professor": prof_match.group(1).strip() if prof_match else None,
-        "description": desc_match.group(1).strip()[:200] if desc_match else None,
+        "title": html.unescape(title_match.group(1)).strip() if title_match else None,
+        "professor": html.unescape(prof_match.group(1)).strip() if prof_match else None,
+        "description": html.unescape(desc_match.group(1)).strip()[:200] if desc_match else None,
         "slug": slug,
     }
     cache[cache_key] = result
@@ -101,12 +105,12 @@ def search_course(title, cache):
 
     query = urllib.parse.quote_plus(title)
     url = SEARCH_URL.format(query=query)
-    html = fetch_page(url)
-    if not html:
+    page = fetch_page(url)
+    if not page:
         print(f"  Search failed for: {title}", file=sys.stderr)
         return None
 
-    m = RESULT_RE.search(html)
+    m = RESULT_RE.search(page)
     if not m:
         cache[cache_key] = None
         save_cache(cache)
@@ -119,9 +123,9 @@ def search_course(title, cache):
 
     result = {
         "id": m.group(1),
-        "title": t.group(1).strip() if t else "(unknown)",
+        "title": html.unescape(t.group(1)).strip() if t else "(unknown)",
         "slug": s.group(1) if s else None,
-        "description": d.group(1).strip()[:200] if d else None,
+        "description": html.unescape(d.group(1)).strip()[:200] if d else None,
     }
     cache[cache_key] = result
     save_cache(cache)
@@ -129,32 +133,43 @@ def search_course(title, cache):
 
 
 _image_proc = None
+_image_path = None
 
 
 def show_image(course_id):
     """Open the course image in an external viewer window."""
-    global _image_proc  # pylint: disable=global-statement
+    global _image_proc, _image_path  # pylint: disable=global-statement
     close_image()
     url = f"{IMAGE_BASE}/{course_id}/{course_id}.jpg"
-    import tempfile  # pylint: disable=import-outside-toplevel
     try:
-        with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as tmp:
-            tmp_path = tmp.name
-            urllib.request.urlretrieve(url, tmp_path)
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=15) as resp, tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as tmp:
+            _image_path = tmp.name
+            tmp.write(resp.read())
         _image_proc = subprocess.Popen(  # pylint: disable=consider-using-with
-            ["eog", tmp_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+            ["eog", _image_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
         )
-    except (FileNotFoundError, OSError):
-        pass
+    except OSError:  # includes URLError, timeouts and a missing eog
+        remove_image_file()
+
+
+def remove_image_file():
+    """Delete the temporary image file, if any."""
+    global _image_path  # pylint: disable=global-statement
+    if _image_path is not None:
+        with contextlib.suppress(OSError):
+            os.unlink(_image_path)
+        _image_path = None
 
 
 def close_image():
-    """Close the image viewer if open."""
+    """Close the image viewer if open and delete its temporary file."""
     global _image_proc  # pylint: disable=global-statement
     if _image_proc is not None:
         _image_proc.terminate()
         _image_proc.wait()
         _image_proc = None
+    remove_image_file()
 
 
 def read_yaml():
@@ -273,7 +288,9 @@ def rename_course(old_name, new_name):
     if idx is None:
         print("  WARNING: Could not find entry to rename.\n")
         return False
-    lines[idx] = lines[idx].replace(old_name, new_name, 1)
+    prefix = re.match(r"^\s*- name:\s*", lines[idx]).group(0)
+    # A JSON string is a valid YAML double-quoted scalar: quotes and backslashes are escaped.
+    lines[idx] = f"{prefix}{json.dumps(new_name, ensure_ascii=False)}\n"
     write_yaml(lines)
     print(f"  Renamed to: {new_name}")
     return True

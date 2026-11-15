@@ -3,8 +3,8 @@
 Comparison of static site generators suitable for blogging on GitHub Pages.
 
 **Historical.** This was written while the site was built with MkDocs and the
-Material theme. The site has since moved to zola (see `CLAUDE.md` and
-`doc/DECISIONS.md`); the comparison is kept as the record of what was
+Material theme. The site has since moved to zola and then, on 2026-10-16, to rssite (see
+`CLAUDE.md` and `doc/DECISIONS.md`); the comparison is kept as the record of what was
 weighed, not as a description of the current setup.
 
 ---

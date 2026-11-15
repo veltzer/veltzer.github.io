@@ -1,4 +1,4 @@
-/* global renderBarChart, renderStatCard, mediaFormatDate, t */
+/* global renderBarChart, renderStatCard, mediaFormatDate, t, countBy, countByYear, linkLine, toggleLine */
 window.collectionPlugins = window.collectionPlugins || {};
 
 window.collectionPlugins['youtube'] = {
@@ -62,33 +62,32 @@ window.collectionPlugins['youtube'] = {
             html += '<li class="py-2 text-gray-500"><em>' + t('youtube_metadata_unavailable') + '</em></li>';
         }
         if (item.channel) {
-            html += '<li class="py-2" data-toggle="channel"><strong>' + t('youtube_detail_channel') + '</strong> ' + window.escapeHtml(item.channel) + '</li>';
+            html += toggleLine('channel', t('youtube_detail_channel'), window.escapeHtml(item.channel));
         }
         if (item.categories) {
-            html += '<li class="py-2" data-toggle="category"><strong>' + t('youtube_detail_category') + '</strong> ' + window.escapeHtml(item.categories) + '</li>';
+            html += toggleLine('category', t('youtube_detail_category'), window.escapeHtml(item.categories));
         }
         const date = this.formatDate(item.upload_date);
         if (date) {
-            html += '<li class="py-2" data-toggle="uploaded"><strong>' + t('youtube_detail_uploaded') + '</strong> ' + window.escapeHtml(date) + '</li>';
+            html += toggleLine('uploaded', t('youtube_detail_uploaded'), window.escapeHtml(date));
         }
         if (item.duration) {
             const mins = Math.floor(item.duration / 60);
             const secs = item.duration % 60;
             const durationStr = mins + ':' + (secs < 10 ? '0' : '') + secs;
-            html += '<li class="py-2" data-toggle="duration"><strong>' + t('youtube_detail_duration') + '</strong> ' + window.escapeHtml(durationStr) + '</li>';
+            html += toggleLine('duration', t('youtube_detail_duration'), window.escapeHtml(durationStr));
         }
         if (item.view_count) {
-            html += '<li class="py-2" data-toggle="views"><strong>' + t('youtube_detail_views') + '</strong> ' + window.escapeHtml(item.view_count.toLocaleString()) + '</li>';
+            html += toggleLine('views', t('youtube_detail_views'), window.escapeHtml(item.view_count.toLocaleString()));
         }
         if (item.webpage_url) {
-            html += '<li class="py-2" data-toggle="link"><a href="' + window.escapeHtml(item.webpage_url) + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; ' + t('youtube_watch') + '</a></li>';
+            html += linkLine('link', item.webpage_url, t('youtube_watch'));
         }
         return html;
     },
     renderStats: function(items) {
-        const channelCounts = {};
-        const categoryCounts = {};
-        const yearCounts = {};
+        const channelCounts = countBy(items, function(item) { return item.channel; });
+        const categoryCounts = countBy(items, function(item) { return item.categories; });
         let totalDuration = 0;
         let missingCount = 0;
 
@@ -96,33 +95,22 @@ window.collectionPlugins['youtube'] = {
             if (item.status === 'missing') {
                 missingCount++;
             }
-            if (item.channel) {
-                channelCounts[item.channel] = (channelCounts[item.channel] || 0) + 1;
-            }
-            if (item.categories) {
-                categoryCounts[item.categories] = (categoryCounts[item.categories] || 0) + 1;
-            }
             if (item.duration) {
                 totalDuration += item.duration;
             }
-            const date = this.formatDate(item.upload_date);
-            if (date) {
-                const year = date.substring(0, 4);
-                yearCounts[year] = (yearCounts[year] || 0) + 1;
-            }
-        }.bind(this));
+        });
 
         const totalHours = Math.round(totalDuration / 3600);
 
         let html = '<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">';
         html += '<div>' + renderStatCard(items.length, t('youtube_stat_total')) + '</div>';
         html += '<div>' + renderStatCard(Object.keys(channelCounts).length, t('youtube_stat_channels')) + '</div>';
-        html += '<div>' + renderStatCard(totalHours.toLocaleString() + 'h', t('youtube_stat_watch_time')) + '</div>';
+        html += '<div>' + renderStatCard(t('youtube_hours', {hours: totalHours.toLocaleString()}), t('youtube_stat_watch_time')) + '</div>';
         html += '<div>' + renderStatCard(missingCount, t('youtube_stat_missing')) + '</div>';
         html += '</div>';
         html += renderBarChart(t('youtube_chart_categories'), categoryCounts, {unit: t('youtube_unit_videos'), sort: 'desc'});
         html += renderBarChart(t('youtube_chart_top_channels'), channelCounts, {unit: t('youtube_unit_videos'), sort: 'desc', limit: 20});
-        html += renderBarChart(t('youtube_chart_per_year'), yearCounts, {unit: t('youtube_unit_videos'), sort: 'reverse', barClass: 'bg-danger', last: true});
+        html += renderBarChart(t('youtube_chart_per_year'), countByYear(items, function(item) { return item.upload_date; }), {unit: t('youtube_unit_videos'), sort: 'reverse', barClass: 'bg-danger', last: true});
         return html;
     },
     formatDate: mediaFormatDate

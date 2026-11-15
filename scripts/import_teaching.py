@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
 """
-Import the teaching-* sites into content/ as native Zola pages.
+Import the teaching-* sites into content/ as native pages.
 
 Each of the sibling repos (../teaching-slides, ../teaching-syllabi,
 ../teaching-animations) builds a single self-contained `_site/index.html`:
 inline <style>, one or two <script> blocks, and its data inline as `const DATA`.
-That shape ports directly into a Zola page -- strip the document wrapper and
+That shape ports directly into a page -- strip the document wrapper and
 keep the style, markup and script -- so the browsers become part of this site
 rather than being framed inside it.
 
@@ -207,15 +207,45 @@ def scope_selector(selector, wrapper):
     if selector in (":root", "html", "body"):
         # Rules on the document itself become rules on the wrapper.
         return f"#{wrapper}"
-    if selector.startswith("[data-theme="):
-        # data-theme lives on <html>, an ANCESTOR of the wrapper, so this must
-        # stay a descendant combinator in that direction -- scoping it as
-        # `#wrapper [data-theme=...]` would look for the attribute *inside*
-        # the app and never match, leaving the imported page on its default
-        # palette while the rest of the site changed theme.
-        close = selector.index("]") + 1
-        return f"{selector[:close]} #{wrapper} {selector[close:].strip()}".strip()
+    # data-theme lives on <html>, an ANCESTOR of the wrapper, so a selector
+    # that starts with attributes (`[data-theme=dark]`, `html[data-theme=dark]`,
+    # `:root[data-theme=dark]`) must stay a descendant combinator in that
+    # direction -- scoping it as `#wrapper [data-theme=...]` would look for the
+    # attribute *inside* the app and never match, leaving the imported page on
+    # its default palette while the rest of the site changed theme.
+    match = HTML_ATTR_PREFIX.match(selector)
+    if match and (match.group(1) or "data-theme" in match.group(2)):
+        prefix = (match.group(1) or "") + match.group(2)
+        return f"{prefix} #{wrapper} {match.group(3).strip()}".strip()
     return f"#{wrapper} {selector}"
+
+
+# An optional `html` / `:root`, one or more [attr] groups, then the rest.
+HTML_ATTR_PREFIX = re.compile(r"^(html|:root)?((?:\[[^\]]*\])+)\s*(.*)$", re.DOTALL)
+
+
+def split_selectors(prelude):
+    """Split a selector list on its top-level commas only.
+
+    A comma inside parentheses (`:is(a, b)`, `:not(.x, .y)`), brackets or a
+    quoted string belongs to one selector and must not split it.
+    """
+    parts, depth, quote, start = [], 0, None, 0
+    for i, ch in enumerate(prelude):
+        if quote:
+            if ch == quote:
+                quote = None
+        elif ch in "'\"":
+            quote = ch
+        elif ch in "([":
+            depth += 1
+        elif ch in ")]":
+            depth = max(depth - 1, 0)
+        elif ch == "," and depth == 0:
+            parts.append(prelude[start:i])
+            start = i + 1
+    parts.append(prelude[start:])
+    return [p.strip() for p in parts if p.strip()]
 
 
 def scope_css(css, wrapper):
@@ -229,8 +259,7 @@ def scope_css(css, wrapper):
         elif prelude.startswith("@"):
             out.append(f"{prelude} {{{body}}}")
         else:
-            selectors = [scope_selector(s.strip(), wrapper)
-                         for s in prelude.split(",") if s.strip()]
+            selectors = [scope_selector(s, wrapper) for s in split_selectors(prelude)]
             out.append(", ".join(selectors) + " {" + body + "}")
     return "\n".join(out)
 

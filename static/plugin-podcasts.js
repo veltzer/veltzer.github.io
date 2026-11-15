@@ -1,4 +1,4 @@
-/* global t, renderBarChart, renderStatCard, mediaFormatDate */
+/* global t, renderBarChart, renderStatCard, mediaFormatDate, hasReviewField, linkLine, tally, toggleLine */
 window.collectionPlugins = window.collectionPlugins || {};
 
 (function() {
@@ -40,7 +40,7 @@ window.collectionPlugins['podcasts'] = {
                 {label: '1\u20135', min: 1, max: 6},
                 {label: '6\u201320', min: 6, max: 21},
                 {label: '21\u201350', min: 21, max: 51},
-                {label: '51+', min: 51, max: null}
+                {label: t('podcasts_range_51_plus'), min: 51, max: null}
             ]
         },
         {field: 'first_listened', label: t('podcasts_first_listened'), type: 'string', value: getFirstListened, filterType: 'year'},
@@ -48,9 +48,7 @@ window.collectionPlugins['podcasts'] = {
         {field: 'has_chapters', label: t('podcasts_has_chapters'), type: 'string', sortable: false,
             filterType: 'boolean', value: function(item) { return item.chapters && item.chapters.length > 0; }
         },
-        {field: 'has_review', label: t('podcasts_has_review'), type: 'string', sortable: false,
-            filterType: 'boolean', value: function(item) { return item.review && item.review.trim() !== ''; }
-        },
+        hasReviewField(t('podcasts_has_review')),
         {field: 'has_url', label: t('podcasts_has_url'), type: 'string', sortable: false,
             filterType: 'boolean', value: function(item) { return item.url && item.url.trim() !== ''; }
         }
@@ -67,14 +65,14 @@ window.collectionPlugins['podcasts'] = {
     renderDetails: function(item) {
         let html = '';
         if (item.url) {
-            html += '<li class="py-2" data-toggle="link"><a href="' + window.escapeHtml(item.url) + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; ' + t('podcasts_visit') + '</a></li>';
+            html += linkLine('link', item.url, t('podcasts_visit'));
         }
         if (item.chapters && item.chapters.length > 0) {
-            html += '<li class="py-2" data-toggle="chapters"><strong>' + t('podcasts_d_chapters') + '</strong> ' + item.chapters.length + '</li>';
+            html += toggleLine('chapters', t('podcasts_d_chapters'), item.chapters.length);
             const dates = getChapterDates(item);
             if (dates.length > 0) {
-                html += '<li class="py-2" data-toggle="chapters"><strong>' + t('podcasts_d_first') + '</strong> ' + dates[0].substring(0, 10) + '</li>';
-                html += '<li class="py-2" data-toggle="chapters"><strong>' + t('podcasts_d_last') + '</strong> ' + dates[dates.length - 1].substring(0, 10) + '</li>';
+                html += toggleLine('chapters', t('podcasts_d_first'), dates[0].substring(0, 10));
+                html += toggleLine('chapters', t('podcasts_d_last'), dates[dates.length - 1].substring(0, 10));
             }
         }
         return html;
@@ -88,12 +86,8 @@ window.collectionPlugins['podcasts'] = {
             if (item.chapters) {
                 totalChapters += item.chapters.length;
                 item.chapters.forEach(function(ch) {
-                    if (ch.device) {
-                        deviceCounts[ch.device] = (deviceCounts[ch.device] || 0) + 1;
-                    }
-                    if (ch.location) {
-                        locationCounts[ch.location] = (locationCounts[ch.location] || 0) + 1;
-                    }
+                    tally(deviceCounts, ch.device);
+                    tally(locationCounts, ch.location);
                 });
             }
         });

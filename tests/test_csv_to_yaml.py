@@ -4,10 +4,15 @@ This script processes ~29,000 records with no other coverage, so the cases here
 target the transformations whose silent failure would corrupt the media
 database rather than raise: the YYYYMMDD date rewrite and integer coercion.
 The METADATA_NOT_FOUND handling that keeps unfetchable videos linkable lives
-inside main() rather than convert_row(), so it is not covered here.
+inside main() rather than convert_row(), so TestMainMetadataNotFound drives
+main() against a temporary CSV.
 """
 
+import csv
+import sys
+
 import csv_to_yaml
+import yaml
 
 
 class TestParseInt:
@@ -83,3 +88,40 @@ class TestConvertRow:
         # empty dict, not merely something falsy.
         # pylint: disable=use-implicit-booleaness-not-comparison
         assert csv_to_yaml.convert_row({}) == {}
+
+
+class TestMainMetadataNotFound:
+    def run_main(self, tmp_path, monkeypatch, rows):
+        source = tmp_path / "in.csv"
+        target = tmp_path / "out.yaml"
+        with open(source, "w", newline="", encoding="utf-8") as handle:
+            writer = csv.DictWriter(handle, fieldnames=["video_id", "title", "view_count"])
+            writer.writeheader()
+            writer.writerows(rows)
+        monkeypatch.setattr(sys, "argv", ["csv_to_yaml.py", str(source), str(target)])
+        csv_to_yaml.main()
+        return yaml.safe_load(target.read_text(encoding="utf-8"))["items"]
+
+    def test_unfetchable_video_stays_linkable(self, tmp_path, monkeypatch):
+        items = self.run_main(tmp_path, monkeypatch, [
+            {"video_id": "abc123", "title": "METADATA_NOT_FOUND", "view_count": ""},
+        ])
+        assert items == [{
+            "title": "Metadata unavailable",
+            "status": "missing",
+            "video_id": "abc123",
+            "webpage_url": "https://www.youtube.com/watch?v=abc123",
+        }]
+
+    def test_unfetchable_video_without_an_id_is_dropped(self, tmp_path, monkeypatch):
+        items = self.run_main(tmp_path, monkeypatch, [
+            {"video_id": "", "title": "METADATA_NOT_FOUND", "view_count": ""},
+        ])
+        assert items == []
+
+    def test_rows_without_a_title_are_dropped_and_real_ones_kept(self, tmp_path, monkeypatch):
+        items = self.run_main(tmp_path, monkeypatch, [
+            {"video_id": "a", "title": "", "view_count": "5"},
+            {"video_id": "b", "title": "Real", "view_count": "7"},
+        ])
+        assert items == [{"title": "Real", "view_count": 7}]

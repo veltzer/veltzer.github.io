@@ -29,9 +29,11 @@ DONE: make that script not hardcode any details about this project.
 
 DONE: maybe use a better tool than mkdocs?
 
-    Migrated to zola (single Rust binary, pinned to v0.23.3 in rsconstruct's
-    tool registry, from which CI installs it; the workflow itself never names
-    zola).
+    Migrated to zola (single Rust binary), and on 2026-10-16 from zola to
+    rssite, the fleet's own generator (crates.io; declared under
+    [dependencies].cargo in rsconstruct.toml and pinned in rsconstruct.lock,
+    from which CI installs it; the workflow itself never names it). See
+    doc/DECISIONS.md, "The site is built by rssite, not zola".
 
     This was not cosmetic. MkDocs' blog plugin generates its post, archive and
     pagination pages virtually, and every i18n plugin works by rewriting the
@@ -39,7 +41,7 @@ DONE: maybe use a better tool than mkdocs?
     build exited 0 while emitting ZERO post pages. That is what blocked the
     Hebrew translation, and it is why the migration happened.
 
-    Zola gave us: per-language URLs (/he/...), per-language feeds and tag
+    Zola gave us (and rssite keeps): per-language URLs (/he/...), per-language feeds and tag
     pages, and a language switcher generated from page.translations rather than
     hand-maintained cross-links. Adding a sixth language costs one file per
     post and no template change.
@@ -47,9 +49,9 @@ DONE: maybe use a better tool than mkdocs?
     See the "Internationalization" entry in doc/IMPROVEMENTS.md for the full
     write-up, including why mkdocs-static-i18n must not be retried.
 
-    Confirmed: no mkdocs.yml in the repo, and `rsconstruct tool
-    list-configured` shows zola pinned to v0.23.3 (the workflow only runs
-    `rsconstruct tool install`, which is what fetches it).
+    Confirmed: no mkdocs.yml in the repo, and rsconstruct.lock pins rssite
+    (the workflow only runs `rsconstruct tool install`, which is what
+    fetches it).
 
 
 DROPPED: Find a way to count number of visitors on each page of the

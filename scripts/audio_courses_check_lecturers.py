@@ -8,11 +8,14 @@ Usage:
   scripts/audio_courses_check_lecturers.py
 """
 
+import html
 import re
 import sys
 import time
 import urllib.error
 import urllib.request
+
+import yaml
 
 YAML_PATH = "data/yaml/audio_courses.yaml"
 COURSE_PAGE_URL = "https://shop.thegreatcourses.com/{slug}"
@@ -26,12 +29,12 @@ def fetch_professor(slug):
     req.add_header("User-Agent", "Mozilla/5.0")
     try:
         with urllib.request.urlopen(req, timeout=15) as resp:
-            html = resp.read().decode("utf-8", errors="replace")
+            page = resp.read().decode("utf-8", errors="replace")
     except (urllib.error.HTTPError, urllib.error.URLError, OSError) as e:
         print(f"  Could not fetch {slug}: {e}", file=sys.stderr)
         return None
-    m = PROF_RE.search(html)
-    return m.group(1).strip() if m else None
+    m = PROF_RE.search(page)
+    return html.unescape(m.group(1)).strip() if m else None
 
 
 def normalize(name):
@@ -40,24 +43,19 @@ def normalize(name):
 
 
 def load_entries():
-    """Load entries with slug and lecturers from YAML."""
-    entries = []
-    current = None
-    fields = {}
+    """Load (name, fields) of the courses that have a slug, parsed with yaml.safe_load."""
     with open(YAML_PATH, encoding="utf-8") as f:
-        for line in f:
-            stripped = line.strip()
-            if stripped.startswith("- name:"):
-                if current and fields.get("great_courses_slug"):
-                    entries.append((current, dict(fields)))
-                current = stripped.split(":", 1)[1].strip().strip("'\"")
-                fields = {}
-            elif ":" in stripped and current:
-                key, val = stripped.split(":", 1)
-                fields[key.strip()] = val.strip().strip("'\"")
-    if current and fields.get("great_courses_slug"):
-        entries.append((current, dict(fields)))
-    return entries
+        data = yaml.safe_load(f)
+    return [(item.get("name"), item) for item in data["items"] if item.get("great_courses_slug")]
+
+
+def lecturer_names(raw):
+    """The lecturers of an entry as a list of strings (a string or a list in the YAML)."""
+    if raw is None:
+        return []
+    if isinstance(raw, str):
+        return [raw]
+    return [str(n) for n in raw]
 
 
 def main():
@@ -69,11 +67,7 @@ def main():
 
     for name, fields in entries:
         slug = fields["great_courses_slug"]
-        lecturers_raw = fields.get("lecturers", "")
-        # Parse lecturers list from YAML string like ["Name1", "Name2"]
-        yaml_names = re.findall(r'"([^"]+)"', lecturers_raw)
-        if not yaml_names:
-            yaml_names = [lecturers_raw.strip("[]")]
+        yaml_names = lecturer_names(fields.get("lecturers"))
 
         professor = fetch_professor(slug)
         time.sleep(0.3)
@@ -88,10 +82,10 @@ def main():
         matched = any(normalize(n) == normalized_prof for n in yaml_names)
 
         if not matched:
-            # Try partial match (last name)
+            # Try partial match (last name, as a whole word)
             prof_parts = normalized_prof.split()
             partial = any(
-                prof_parts[-1] in normalize(n)
+                prof_parts[-1] in normalize(n).split()
                 for n in yaml_names
             ) if prof_parts else False
 

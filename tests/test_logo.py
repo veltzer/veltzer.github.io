@@ -15,12 +15,13 @@ BASE_HTML = (make_logo.REPO_ROOT / "templates" / "base.html").read_text(encoding
 
 
 def test_header_logo_matches_the_geometry():
-    match = re.search(r'<svg class="site-logo"[^>]*>(.*?)</svg>', BASE_HTML)
+    match = re.search(r'<svg class="site-logo"[^>]*>(.*?)</svg>', BASE_HTML, re.DOTALL)
     assert match, "no inline logo in templates/base.html"
     inner = match.group(1)
     assert f'viewBox="0 0 {make_logo.GRID} {make_logo.GRID}"' in match.group(0)
     assert f'rx="{make_logo.RADIUS}"' in inner
     assert f'd="{make_logo.PATH}"' in inner
+    assert f'stroke-width="{make_logo.STROKE}"' in inner
 
 
 def test_path_data_matches_the_points():

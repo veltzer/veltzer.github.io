@@ -95,26 +95,46 @@ def geo_lines(choice: Candidate) -> list[str]:
     ]
 
 
-def splice(lines: list[str], item_id: int, block: list[str]) -> list[str]:
-    """Return ``lines`` with ``block`` as the ``geo`` of item ``item_id`` (replacing an existing one)."""
+def splice(lines: list[str], item_id: int, block: list[str]) -> tuple[list[str], bool]:
+    """Return ``lines`` with ``block`` as the ``geo`` of item ``item_id`` (replacing an existing one).
+
+    The block goes right before the item's ``sources`` key, or at the end of
+    the item when it has none. The flag is False when the item was not found
+    (nothing was written).
+    """
     out: list[str] = []
     current = 0
     skipping = False
+    inserted = False
+
+    def append_at_item_end() -> None:
+        nonlocal inserted
+        idx = len(out)
+        while idx > 0 and not out[idx - 1].strip():
+            idx -= 1
+        out[idx:idx] = block
+        inserted = True
+
     for line in lines:
         m_item = ITEM_RE.match(line)
         m_key = KEY_RE.match(line)
         if m_item or m_key or not line.startswith(" "):
             skipping = False
         if m_item:
+            if current == item_id and not inserted:
+                append_at_item_end()  # the item ended without a sources key
             current = int(m_item.group(1))
         elif m_key and current == item_id:
             if m_key.group(1) == "geo":
                 skipping = True
             elif m_key.group(1) == ANCHOR:
                 out.extend(block)
+                inserted = True
         if not skipping:
             out.append(line)
-    return out
+    if current == item_id and not inserted:
+        append_at_item_end()
+    return out, inserted
 
 
 def describe(item: dict[str, Any], cands: list[Candidate]) -> None:
@@ -179,7 +199,11 @@ def main() -> int:
             skipped += 1
             continue
         assert isinstance(choice, Candidate)
-        lines = splice(lines, item["id"], geo_lines(choice))
+        new_lines, ok = splice(lines, item["id"], geo_lines(choice))
+        if not ok:
+            print(f"[{item['id']}] {item['name']}: item not found in the text, nothing written, not counted as decided")
+            continue
+        lines = new_lines
         args.yaml.write_text("".join(lines), encoding="utf-8")
         decided += 1
 

@@ -25,6 +25,8 @@ for file in "$@"; do
 	# correctly spelled, so they are dropped from the results here rather
 	# than misreported. This filter is deliberately narrow: it only removes
 	# words aspell is incapable of judging, not words it judged wrong.
+	# LC_ALL=C.UTF-8 on that grep: under a plain C locale -P matches bytes, not
+	# code points, so the class would remove nothing (or the wrong words).
 	# `|| true` on the grep: under pipefail, a grep that filters out every
 	# line exits 1 and would fail the whole check with no output at all.
 	# The front matter's `slug = "..."` line is skipped: a slug is an
@@ -35,7 +37,7 @@ for file in "$@"; do
 		--dict-dir="${dict_dir}" \
 		--add-extra-dicts=.aspell.en.rws \
 		list |
-		{ grep -Pv '[^\x00-\xFF]' || true; } |
+		{ LC_ALL=C.UTF-8 grep -Pv '[^\x00-\xFF]' || true; } |
 		LC_ALL=C sort -u)
 	if [ -n "${misspelled}" ]; then
 		echo "Misspelled words in ${file}:"

@@ -1,35 +1,38 @@
 {#- The 404 page GitHub Pages serves for any unmatched URL.
 
     Without this template the generator's built-in 404 is a bare document: no
-    stylesheet, no nav, no way back. That is a dead end on a site where URLs have moved -- the
-    app sections went from /chess/ to /en/chess/ and the posts from /blog/ to
-    /en/blog/, so old links and bookmarks land here.
+    stylesheet, no nav, no way back.
 
     GitHub Pages serves the one /404.html for every unmatched URL, so that
-    page cannot know the reader's language: both languages are shown, English
-    first, rather than guessing wrong half the time. rssite renders it in the
-    fallback language (English), and a per-language copy under /en/ and /he/.
+    page cannot know the reader's language: every language is shown, the
+    page's own first, rather than guessing wrong half the time. rssite renders
+    it in the fallback language (English), and a per-language copy under /en/
+    and /he/. The wording is i18n not_found_* keys, read in each language with
+    trans(lang=...).
+
+    It says nothing about where a page may have moved to: URLs of earlier
+    generators 404 by decision (doc/DECISIONS.md) and nothing maps them.
 
     It extends base.html for the header, theme and styling, which is the whole
     point -- a reader who lands here gets the nav and can leave. -#}
 {% extends "base.html" %}
 
-{% block title %}404 &middot; {{ config.title }}{% endblock %}
-{% block description %}The requested page was not found.{% endblock %}
+{% block title %}404 &middot; {{ language.title }}{% endblock %}
+{% block description %}{{ trans(key="not_found_text") }}{% endblock %}
 
 {% block content %}
 <article class="post">
-<h1>404 &mdash; Not found</h1>
-
-<p>That page does not exist. It may have moved: the blog and the applications
-are now under a language prefix, so <code>/blog/…</code> is <code>/en/blog/…</code>
-and <code>/chess/</code> is <code>/en/chess/</code>.</p>
-
-<p lang="he" dir="rtl">הדף המבוקש לא נמצא. ייתכן שהכתובת השתנתה.</p>
-
-<ul>
-  <li><a href="/en/">English home</a> &middot; <a href="/en/blog/">Blog</a> &middot; <a href="/en/tags/">Tags</a></li>
-  <li><a href="/he/">דף הבית בעברית</a> &middot; <a href="/he/blog/">בלוג</a> &middot; <a href="/he/tags/">תגיות</a></li>
-</ul>
+<h1>404 &mdash; {{ trans(key="not_found_title") }}</h1>
+{#- The page's own language first, then the others. -#}
+{%- for own in [true, false] %}
+{%- for entry in languages %}
+{%- if (own and entry.code == lang) or (not own and entry.code != lang) %}
+<section lang="{{ entry.code }}" dir="{{ entry.direction }}">
+<p>{{ trans(key="not_found_text", lang=entry.code) }}</p>
+<p><a href="{{ entry.url_prefix }}">{{ trans(key="not_found_home", lang=entry.code) }}</a> &middot; <a href="{{ entry.url_prefix }}blog/">{{ trans(key="nav_blog", lang=entry.code) }}</a> &middot; <a href="{{ entry.url_prefix }}tags/">{{ trans(key="tags_title", lang=entry.code) }}</a></p>
+</section>
+{%- endif %}
+{%- endfor %}
+{%- endfor %}
 </article>
 {% endblock %}

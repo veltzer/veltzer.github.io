@@ -12,7 +12,8 @@ Subcommands:
   restrict  Set HTTP referrer + API restrictions on the existing key
   create    Create a new API key with restrictions, store it in pass
   delete    Delete the current API key from GCP and pass
-  rotate    Create a new key, then delete the old one (rebuild/deploy in between)
+  rotate    Create a new key, write it into static/keys.js, then (after you
+            rebuild and deploy) store it in pass and delete the old one
 
 Configuration (flag / env var / default):
   --project-id   API_KEY_PROJECT_ID    veltzer-calendar-id
@@ -24,9 +25,17 @@ Configuration (flag / env var / default):
 
 import argparse
 import os
+import re
 import shutil
 import subprocess
 import sys
+from pathlib import Path
+
+# static/keys.js carries the key in the clear, by design: it is referrer- and
+# API-restricted (doc/DECISIONS.md). pass stays the only store for the secret
+# itself; this file is the published copy the deployed site reads.
+KEYS_JS = Path(__file__).resolve().parent.parent / "static" / "keys.js"
+KEYS_JS_RE = re.compile(r"(const API_KEY = ')[^']*(')")
 
 DEFAULTS = {
     "project_id": "veltzer-calendar-id",
@@ -93,8 +102,22 @@ def find_key_name(cfg, api_key):
     return ""
 
 
-def create_key(cfg):
-    """Create a restricted key, store it in pass, return its resource name."""
+def write_keys_js(key_string, path=KEYS_JS):
+    """Replace the API_KEY constant in static/keys.js. Raises if it is not there."""
+    text = path.read_text(encoding="utf-8")
+    new_text, count = KEYS_JS_RE.subn(lambda m: f"{m.group(1)}{key_string}{m.group(2)}", text)
+    if count != 1:
+        raise ValueError(f"expected exactly one 'const API_KEY' in {path}, found {count}")
+    path.write_text(new_text, encoding="utf-8")
+
+
+def create_key(cfg, store=True):
+    """Create a restricted key; return (resource name, key string).
+
+    With store=True the key goes into pass as well. rotate passes store=False:
+    the old key must stay in pass until the new one is live and the old one
+    is about to be deleted.
+    """
     print(f"Creating new API key in project {cfg.project_id}...")
     key_name = run(
         [
@@ -112,9 +135,10 @@ def create_key(cfg):
         ["gcloud", "services", "api-keys", "get-key-string", key_name, f"--project={cfg.project_id}", "--format=value(keyString)"],
         capture=True,
     )
-    print(f"Storing key in pass at {cfg.pass_path}...")
-    pass_insert(cfg.pass_path, key_string)
-    return key_name
+    if store:
+        print(f"Storing key in pass at {cfg.pass_path}...")
+        pass_insert(cfg.pass_path, key_string)
+    return key_name, key_string
 
 
 def require_api_key(cfg):
@@ -157,7 +181,7 @@ def cmd_restrict(cfg):
 
 
 def cmd_create(cfg):
-    key_name = create_key(cfg)
+    key_name, _ = create_key(cfg)
     print("\n=== New API Key ===")
     print(f"Key stored in pass at: {cfg.pass_path}")
     print(f"Resource: {key_name}")
@@ -187,11 +211,27 @@ def cmd_rotate(cfg):
         print("WARNING: Could not find old key in GCP (may already be deleted)", file=sys.stderr)
 
     print("=== Creating new API key ===")
-    create_key(cfg)
-    print(f"New key stored in pass at {cfg.pass_path}\n")
-    input(">>> Rebuild and deploy the site now, then press Enter to delete the old key <<<")
+    new_key_name, new_key = create_key(cfg, store=False)
+    try:
+        write_keys_js(new_key)
+        print(f"New key written to {KEYS_JS}; pass still holds the OLD key.\n")
+        input(">>> Rebuild and deploy the site now, then press Enter to store the new key "
+              "in pass and delete the old one <<<")
+    except KeyboardInterrupt:
+        print(
+            "\nInterrupted. State: the new key "
+            f"({new_key_name}) exists in GCP and, if it got that far, in "
+            f"{KEYS_JS}; pass at {cfg.pass_path} still holds the OLD key, and the "
+            f"old key ({old_key_name or 'not found in GCP'}) is NOT deleted. Nothing "
+            "is orphaned: finish by hand (put the new key in pass, delete the old "
+            "key) or delete the new key and revert static/keys.js.",
+            file=sys.stderr,
+        )
+        sys.exit(130)
     print()
 
+    print(f"Storing the new key in pass at {cfg.pass_path}...")
+    pass_insert(cfg.pass_path, new_key)
     if old_key_name:
         print("=== Deleting old API key ===")
         run(["gcloud", "services", "api-keys", "delete", old_key_name, f"--project={cfg.project_id}"])

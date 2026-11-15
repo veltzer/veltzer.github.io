@@ -16,7 +16,9 @@ Hebrew letters Outfit lacks and the comma Noto Sans Hebrew lacks (Pillow
 does no font fallback), laid out right to left (Pillow needs libraqm).
 
 Run it by hand after changing home_title or the colours; the JPEGs are
-committed, so the build needs neither Pillow nor the fonts.
+committed, so building the site needs neither Pillow nor the fonts for them.
+The per-post cards (make_post_cards.py) are build output and do import this
+module's drawing code, so they need Pillow, libraqm and the fonts.
 """
 
 import sys

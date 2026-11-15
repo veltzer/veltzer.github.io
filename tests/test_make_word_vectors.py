@@ -26,6 +26,16 @@ def test_digits_and_punctuation_split_words():
     assert tokenize("in 2026, re-run it") == ["in", "re", "run", "it"]
 
 
+def test_quantize_all_zero_row_is_zeros_with_finite_scale():
+    vectors = np.array([[0.0, 0.0, 0.0], [0.5, -0.25, 0.1]], dtype=np.float32)
+    rows, scale = quantize(vectors)
+    assert np.isfinite(scale).all()
+    assert (scale > 0).all()
+    assert not rows[0].any()
+    assert np.array_equal(rows[1], np.round(vectors[1] / scale[1]).astype(np.int8))
+    assert np.allclose(rows * scale[:, None], vectors, atol=float(scale.max()) / 2)
+
+
 def test_quantize_round_trips_closely():
     vectors = np.array([[0.5, -0.25, 0.1], [-0.02, 0.01, 0.0]], dtype=np.float32)
     rows, scale = quantize(vectors)

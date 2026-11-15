@@ -8,11 +8,11 @@
 {% block og_title %}{{ trans(key="posts_of_year") }} {{ year }}{% endblock %}
 {% block content %}
 <h1>{{ trans(key="posts_of_year") }} {{ year }}</h1>
-<p class="archive-years-nav">
+<nav class="archive-years-nav" aria-label="{{ trans(key="nav_label_years") }}">
   {%- for y in years %}
-  {%- if y.year == year %}<span class="current">{{ y.year }}</span>{% else %}<a href="{{ y.permalink }}">{{ y.year }}</a>{% endif %}
+  {%- if y.year == year %}<span class="current" aria-current="page">{{ y.year }}</span>{% else %}<a href="{{ y.permalink }}">{{ y.year }}</a>{% endif %}
   {%- endfor %}
-</p>
+</nav>
 <ul class="post-list">
   {%- for post in pages %}
   <li>

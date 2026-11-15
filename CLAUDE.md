@@ -16,11 +16,11 @@ calendar integration.
   and `config/*.lua`)
 - **Frontend**: HTML5, SCSS, JavaScript (ES9+)
 - **Linting**: everything is a processor in `rsconstruct.toml` — oxlint
-  (`.oxlintrc.json`, JavaScript), tidy (HTML), biome (`.biome.jsonc`, the CSS
+  (`.oxlintrc.json`, JavaScript), biome (`.biome.jsonc`, the CSS
   compiled from `sass/`), ruff, pyrefly (`[tool.pyrefly]` in `pyproject.toml`),
   pytest (`tests/`), shellcheck,
   rumdl (`.rumdl.toml` for prose, `.rumdl.content.toml` for `content/`), taplo, yamllint,
-  actionlint, xmllint, an encoding check, a duplicate-image check, an aspell
+  actionlint, xmllint, a JSON lint of the committed `.json` files, an encoding check, a duplicate-image check, an aspell
   spellcheck of the blog in both languages (`scripts/spellcheck_{en,he}.sh` against
   the word lists in `.aspell.{en,he}.txt`), and over `data/yaml/` a schema check
   (`iyamlschema`), a parse check (`yaml2json`) and pydatacheck's `check_videos` /
@@ -76,7 +76,15 @@ which records the traps that outlived the migration.
 - `shared/shared-themes/` — git submodule providing the design tokens. **Run
   `git submodule update --init --recursive` on a fresh clone or the build fails.**
 - `scripts/` — `build_site.py` (the companies build step), `check_post_names.py` (post file names against their `date` and `slug`), `check_redirects.py` (checks the
-  live site's host redirects and sitemap), `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
+  live site's host redirects and sitemap), `check_images.py` (every media item has its
+  local image in `static/images/`; a build step), `check_profile_links.py` (the profile
+  URLs in `profiles.yaml` still resolve; network, run by hand, not part of the build),
+  `import_certifications.py` (the certifications tab data, run by the companies step),
+  `manage_api_key.py` (the Google Calendar API key's restrictions, stored in `pass`),
+  `build_collection_css.sh` (compiles the data collection app's Tailwind
+  stylesheet from `config/tailwind.collection.*` into `static/vendor/`; it runs
+  `npx tailwindcss` by hand and its output is committed, so the build needs no node),
+  `make_og_images.py` (the two site-wide share cards, drawn by hand, committed), `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
   the sibling teaching repos), image fetchers, data importers, the `data/yaml/`
   maintenance scripts (`podcasts_*.py`, `books_fetch_ids.py`, `great_courses_*.py`,
   `audio_courses_check_*.py`, `youtube_add_names.py`, `videos_fetch_wikidata.py` (fills `wikidata_id` and `rotten_tomatoes_id` from each `imdb_id`), `organizations_geocode.py`,
@@ -86,7 +94,9 @@ which records the traps that outlived the migration.
   reading Google Drive; a build step that runs only where that folder exists, via
   `enabled_if_dir_exists`), and the `build_*_dict.sh` / `spellcheck_*.sh` pair behind the aspell
   processors
-- `tests/` — pytest suite for the data import scripts
+- `tests/` — pytest suite: the data import scripts (csv, audible, books, certifications,
+  companies), the logo generator against the inline logo in `base.html`, the word-vector
+  trimmer, and `people.yaml` against every `with:` name in the data files
 - `.aspell.{en,he}.txt` — the spellcheck word lists; `out/aspell/` holds the compiled
   dictionaries (gitignored build output)
 - `_site/` — generated output (gitignored, never edit)
@@ -140,11 +150,16 @@ sitemap) needs 0.1.25.
   project`, build, status, deploy. Every tool and package the build needs is
   declared outside the workflow: apt packages under `[dependencies].system`
   in `rsconstruct.toml`; Python packages in `pyproject.toml` pinned by
-  `uv.lock` (the Python linters come from rsconstruct's tool registry); tools
+  `uv.lock` (ruff, pyrefly and pytest are in the `dev` dependency group, so
+  the lock pins them too; rsconstruct's registry only lists them as python
+  tools the processors need on PATH); tools
   a wrapper script shells out to via `required_tools` on the processor; Rust
   tools under `[dependencies].cargo` (that is how rssite is installed); and
-  the exact version of each in `rsconstruct.lock`. The site has no Node
-  packages: oxlint and biome are single binaries rsconstruct downloads. If
+  the exact version of the Rust and downloaded tools in `rsconstruct.lock`
+  (rssite, biome, oxlint, rumdl, taplo and uv; the Python tools are pinned by
+  `uv.lock` instead). The site has no Node packages at build time: oxlint and
+  biome are single binaries rsconstruct downloads. (Tailwind is the one
+  exception, by hand: see `build_collection_css.sh` below.) If
   something cannot be expressed there, the fix belongs in rsconstruct, not
   in the workflow.
 - **Do not add infrastructure workarounds (apt retries, timeouts) to the
@@ -231,7 +246,8 @@ tags = ["religion", "philosophy", "ethics"]
   greys, because cm-chessboard's own fills are hardcoded and a pure-token pairing hid the
   black pieces. Setting `data-theme` on `<html>` switches between the six themes; azure
   is the default.
-- `themes.css` is *copied* into `_site/shared-themes/` by `build_site.py shared-themes` and linked from `base.html`,
+- `themes.css` is published into `_site/shared-themes/` by the `[[publish]]` entry in `rssite.toml` (rssite
+  copies it, with the fonts and the switcher, from the submodule) and linked from `base.html`,
   not `@import`-ed from the SCSS: dart-sass leaves a plain `@import` of a `.css` file as a
   runtime import, and the relative path then resolves against `/style.css` and 404s.
 - Prefer external stylesheets over inline `<style>` blocks or `style=` attributes.

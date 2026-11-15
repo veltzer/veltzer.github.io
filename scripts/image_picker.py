@@ -13,7 +13,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-from image_standard import normalise
+from image_standard import ImageError, download_image, normalise
 from PIL import Image, ImageTk
 
 # Persistent rather than /tmp: downloaded search results survive a reboot, so
@@ -24,14 +24,6 @@ SEARCH_CACHE_DIR = os.path.join(
     "veltzer-site",
     "image-picker",
 )
-
-
-def download(url, dest):
-    """Download a URL to a file."""
-    req = urllib.request.Request(url)
-    req.add_header("User-Agent", "Mozilla/5.0")
-    with urllib.request.urlopen(req, timeout=15) as resp, open(dest, "wb") as f:
-        f.write(resp.read())
 
 
 def fetch_image_urls(query, max_results=20):
@@ -94,13 +86,13 @@ def download_candidates(query, cache_key, max_results=20):
     for i, url in enumerate(urls):
         dest_path = os.path.join(cache_dir, f"candidate_{i}.jpg")
         try:
-            download(url, dest_path)
-            if os.path.getsize(dest_path) > 1000:
-                candidates.append(dest_path)
-            else:
-                os.unlink(dest_path)
-        except (urllib.error.HTTPError, urllib.error.URLError, OSError):
+            download_image(url, dest_path)
+        except OSError:  # network errors and ImageError: skip this candidate
             continue
+        if os.path.getsize(dest_path) > 1000:
+            candidates.append(dest_path)
+        else:
+            os.unlink(dest_path)
     return candidates
 
 
@@ -215,9 +207,18 @@ def pick_image(title, info_lines, search_query, cache_key, dest_path):
     if selected is None:
         print("  No image selected.")
         return "skip"
-    shutil.copy2(selected, dest_path)
-    # Search results are whatever size the source served -- normalise before
-    # the file lands in the repo. See scripts/image_standard.py.
-    normalise(dest_path)
+    # Search results are whatever size the source served -- normalise a copy
+    # and rename it over dest, so a failure leaves no bad file at dest_path.
+    # See scripts/image_standard.py.
+    tmp_path = f"{dest_path}.tmp.jpg"
+    shutil.copy2(selected, tmp_path)
+    try:
+        normalise(tmp_path)
+        os.replace(tmp_path, dest_path)
+    except (ImageError, OSError) as e:
+        if os.path.exists(tmp_path):
+            os.unlink(tmp_path)
+        print(f"  Failed to save image: {e}")
+        return "skip"
     print(f"  Saved: {dest_path}")
     return "found"

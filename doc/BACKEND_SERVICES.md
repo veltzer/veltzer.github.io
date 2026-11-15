@@ -90,8 +90,8 @@ Free tier, all without an inactivity pause:
 - KV: 1 GB, 100k reads/day, but only **1,000 writes/day**
 - R2 (object storage): 10 GB-month, 1M class-A ops/month
 
-For per-page counters, D1 is the right primitive, not KV: at ~165 posts per
-language the 1,000 writes/day KV ceiling is a real constraint, while D1's
+For per-page counters, D1 is the right primitive, not KV: at 431 posts per
+language (as of 2026-11-15) the 1,000 writes/day KV ceiling is a real constraint, while D1's
 100k writes/day is not. A Worker owns the credentials server-side and sets its
 own CORS headers, which structurally avoids the problem that made counterapi
 unusable -- the browser never sends an `Authorization` header at all.
@@ -106,7 +106,7 @@ mistaken for an outstanding task.
 - **PocketBase** -- a single Go binary with embedded SQLite, auth, file storage,
   realtime and an admin UI. No vendor, no free-tier games, no pausing. The cost
   is that you supply and maintain a host. Fits the taste already visible in this
-  repo (zola, rsconstruct: single binaries, no runtime dependencies), and is
+  repo (rssite, rsconstruct: single binaries, no runtime dependencies), and is
   the best option if self-hosting is acceptable.
 - **Supabase** -- the most capable of the hosted BaaS options and plain Postgres
   underneath, so there is little lock-in. Reconsider it if the site ever needs
@@ -122,7 +122,7 @@ mistaken for an outstanding task.
 ## Things to weigh before adding any of this
 
 1. **A static site with a backend is no longer a static site.** Today the only
-   operational dependency is `zola build` plus GitHub Pages. Each service added
+   operational dependency is `rsconstruct build` (rssite) plus GitHub Pages. Each service added
    brings an account, an API key, a dashboard, and a thing that can be down
    while the site itself is up.
 2. **Third-party JavaScript has a privacy cost.** giscus loads scripts from

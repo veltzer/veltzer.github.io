@@ -15,7 +15,7 @@ blog loads nothing at all.
 
 | Page | CSS | JS libraries |
 |------|-----|--------------|
-| `/en/media/`, `/en/training/data/` | Tailwind (compiled, vendored) | none -- plain JS in `static/data-collection-app.js` + nine plugins |
+| `/en/media/`, `/en/training/data/` | Tailwind (compiled, vendored) | none -- plain JS in `static/data-collection-app.js` + eleven plugin files |
 | `/en/chess/` | site stylesheet | chess.js, cm-chessboard -- both **vendored**, not CDN |
 | `/en/calendar/` | site stylesheet | FullCalendar 6.1.20 + its Google Calendar plugin -- **vendored** |
 | `/en/slides/`, `/en/syllabi/`, `/en/animations/` | site stylesheet | Material Web 2 (CDN) |
@@ -53,9 +53,9 @@ classes.
 
 ### The site stylesheet
 
-`sass/style.scss`, compiled by zola. Colours come from the `shared-themes`
-submodule (`shared/shared-themes/`), copied to `_site/shared-themes/` at build
-time by `scripts/build_site.py shared-themes`. The submodule is the source of
+`sass/style.scss`, compiled by rssite. Colours come from the `shared-themes`
+submodule (`shared/shared-themes/`), published to `_site/shared-themes/` by the
+`[[publish]]` entry in `rssite.toml`. The submodule is the source of
 truth; the copy is build output.
 
 ## JavaScript libraries
@@ -104,7 +104,7 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
   `static/data-collection-app.js` is the comment recording that decision.
 - **Bootstrap** -- removed before the zola migration, in favour of Tailwind on the
   media page.
-- **elasticlunr / `search_index.en.js`** -- gone. Under zola it was switched off
+- **elasticlunr / `search_index.en.js`** -- gone. Under zola (the generator before rssite) it was switched off
   (the 4.1 MB index was generated and deployed on every build and nothing ever
   loaded it). The blog search replaced it: `[search]` in `rssite.toml` writes
   `<lang>/search.json` (title, opening text, tags and full text of every post,

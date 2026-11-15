@@ -1,4 +1,4 @@
-/* global t, renderBarChart, renderStatCard, mediaFormatDate */
+/* global t, renderBarChart, renderStatCard, mediaFormatDate, countByYear, toggleLine */
 window.collectionPlugins = window.collectionPlugins || {};
 
 window.collectionPlugins['audible'] = {
@@ -67,16 +67,16 @@ window.collectionPlugins['audible'] = {
     renderDetails: function(item) {
         let html = '';
         if (item.authors) {
-            html += '<li class="py-2" data-toggle="authors"><strong>' + t('audible_d_authors') + ':</strong> ' + window.escapeHtml(item.authors) + '</li>';
+            html += toggleLine('authors', t('audible_d_authors') + ':', window.escapeHtml(item.authors));
         }
         if (item.narrators) {
-            html += '<li class="py-2" data-toggle="narrators"><strong>' + t('audible_d_narrators') + ':</strong> ' + window.escapeHtml(item.narrators) + '</li>';
+            html += toggleLine('narrators', t('audible_d_narrators') + ':', window.escapeHtml(item.narrators));
         }
         if (item.runtime_length_min) {
             var hours = Math.floor(item.runtime_length_min / 60);
             var mins = item.runtime_length_min % 60;
             var runtime = hours > 0 ? t('audible_runtime_hm', {hours: hours, mins: mins}) : t('audible_runtime_m', {mins: mins});
-            html += '<li class="py-2" data-toggle="runtime"><strong>' + t('audible_d_runtime') + ':</strong> ' + window.escapeHtml(runtime) + '</li>';
+            html += toggleLine('runtime', t('audible_d_runtime') + ':', window.escapeHtml(runtime));
         }
         let status = t('audible_status_not_started');
         if (item.is_finished) {
@@ -84,22 +84,22 @@ window.collectionPlugins['audible'] = {
         } else if (item.percent_complete > 0) {
             status = window.escapeHtml(t('audible_status_in_progress_pct', {percent: String(item.percent_complete)}));
         }
-        html += '<li class="py-2" data-toggle="status"><strong>' + t('audible_d_status') + ':</strong> ' + status + '</li>';
+        html += toggleLine('status', t('audible_d_status') + ':', status);
         if (item.series_title) {
             var series = item.series_title;
             if (item.series_sequence) series += ' #' + item.series_sequence;
-            html += '<li class="py-2" data-toggle="series"><strong>' + t('audible_d_series') + ':</strong> ' + window.escapeHtml(series) + '</li>';
+            html += toggleLine('series', t('audible_d_series') + ':', window.escapeHtml(series));
         }
         if (item.genres && item.genres.length > 0) {
-            html += '<li class="py-2" data-toggle="genres"><strong>' + t('audible_d_genres') + ':</strong> ' + window.escapeHtml(item.genres.join(', ')) + '</li>';
+            html += toggleLine('genres', t('audible_d_genres') + ':', window.escapeHtml(item.genres.join(', ')));
         }
         var releaseDate = this.formatDate(item.release_date);
         if (releaseDate) {
-            html += '<li class="py-2" data-toggle="released"><strong>' + t('audible_d_released') + ':</strong> ' + window.escapeHtml(releaseDate) + '</li>';
+            html += toggleLine('released', t('audible_d_released') + ':', window.escapeHtml(releaseDate));
         }
         var addedDate = this.formatDate(item.date_added);
         if (addedDate) {
-            html += '<li class="py-2" data-toggle="date_added"><strong>' + t('audible_d_date_added') + ':</strong> ' + window.escapeHtml(addedDate) + '</li>';
+            html += toggleLine('date_added', t('audible_d_date_added') + ':', window.escapeHtml(addedDate));
         }
         return html;
     },
@@ -107,7 +107,6 @@ window.collectionPlugins['audible'] = {
         let finishedCount = 0;
         let inProgressCount = 0;
         const authorSet = new Set();
-        const yearCounts = {};
 
         items.forEach(function(item) {
             if (item.is_finished) {
@@ -119,12 +118,7 @@ window.collectionPlugins['audible'] = {
                 const authors = typeof item.authors === 'string' ? item.authors.split(',') : [item.authors];
                 authors.forEach(function(author) { authorSet.add(author.trim()); });
             }
-            const date = this.formatDate(item.date_added);
-            if (date) {
-                const year = date.substring(0, 4);
-                yearCounts[year] = (yearCounts[year] || 0) + 1;
-            }
-        }.bind(this));
+        });
 
         const totalBooks = items.length;
         const finishedPct = totalBooks > 0 ? (finishedCount / totalBooks) * 100 : 0;
@@ -142,7 +136,7 @@ window.collectionPlugins['audible'] = {
         html += '<div class="w-full bg-gray-200 rounded-full h-5"><div class="bg-blue-500 h-5 rounded-full text-xs text-white text-center leading-5" style="width: ' + inProgressPct + '%;">' + Math.round(inProgressPct) + '%</div></div></div>';
         html += '</div></div>';
 
-        html += renderBarChart(t('audible_books_per_year'), yearCounts, {unit: t('audible_unit_books'), sort: 'reverse', barClass: 'bg-primary', last: true});
+        html += renderBarChart(t('audible_books_per_year'), countByYear(items, function(item) { return item.date_added; }), {unit: t('audible_unit_books'), sort: 'reverse', barClass: 'bg-primary', last: true});
         return html;
     },
     formatDate: mediaFormatDate

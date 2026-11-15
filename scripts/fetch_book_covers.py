@@ -31,7 +31,8 @@ import urllib.request
 from pathlib import Path
 
 import yaml
-from image_standard import normalise
+from bs4 import BeautifulSoup
+from image_standard import download_image
 from import_books import convert_item
 
 # Resolved from this file rather than the cwd, so the script works from anywhere
@@ -45,9 +46,11 @@ PAGE_URLS = {
     "simania": "https://simania.co.il/bookdetails.php?item_id={book_id}",
 }
 USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) fetch_book_covers"
-# A regex rather than BeautifulSoup: a goodreads book page is ~800 KB and
-# html.parser took several seconds on each, which dominated the run.
-OG_IMAGE_RE = re.compile(rb'<meta\s+property="og:image"\s+content="([^"]+)"')
+# A goodreads book page is ~800 KB and html.parser over all of it took several
+# seconds, so a cheap regex only finds the <meta> tags; each tag alone (a few
+# dozen bytes) is then parsed properly, so attribute order and entities such
+# as &amp; in the url are handled by BeautifulSoup rather than by the pattern.
+META_TAG_RE = re.compile(rb"<meta\b[^>]*>", re.IGNORECASE)
 
 
 def fetch(url, timeout=30):
@@ -62,16 +65,13 @@ def cover_url(cover):
     """The og:image url of the book page behind a cover key, or None."""
     source, _, book_id = cover.partition("-")
     page = fetch(PAGE_URLS[source].format(book_id=book_id))
-    match = OG_IMAGE_RE.search(page)
-    return match.group(1).decode("utf-8") if match else None
-
-
-def download(url, dest):
-    """Download an image, shrunk to the site standard (see image_standard.py)."""
-    data = fetch(url)
-    with open(dest, "wb") as handle:
-        handle.write(data)
-    normalise(dest)
+    for raw in META_TAG_RE.findall(page):
+        tag = BeautifulSoup(raw.decode("utf-8", errors="replace"), "html.parser").find("meta")
+        if tag is None:
+            continue
+        if "og:image" in (tag.get("property"), tag.get("name")) and tag.get("content"):
+            return str(tag["content"])
+    return None
 
 
 def load_books():
@@ -108,10 +108,10 @@ def main():
                 print(f"  No cover on the page for {name} ({cover})")
                 failed += 1
                 continue
-            download(url, dest)
+            download_image(url, dest, user_agent=USER_AGENT)
             downloaded += 1
             print(f"  Downloaded: {name} -> {dest}")
-        except (urllib.error.HTTPError, urllib.error.URLError, OSError) as e:
+        except OSError as e:  # URLError, HTTPError and ImageError are all OSError
             print(f"  Failed {name} ({cover}): {e}", file=sys.stderr)
             failed += 1
         time.sleep(args.delay)

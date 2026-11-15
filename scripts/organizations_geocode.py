@@ -126,7 +126,7 @@ def nominatim(query: str) -> dict[str, Any] | None:
     if not hits:
         return None
     hit = hits[0]
-    return {
+    result = {
         "lat": float(hit["lat"]),
         "lon": float(hit["lon"]),
         "display_name": hit["display_name"],
@@ -134,10 +134,28 @@ def nominatim(query: str) -> dict[str, Any] | None:
         "osm_id": hit["osm_id"],
         "type": hit.get("type"),
     }
+    if query in OVERRIDES:
+        result["override"] = json.dumps(OVERRIDES[query], sort_keys=True)  # which override produced this hit
+    return result
+
+
+def cache_is_current(query: str, cache: dict[str, Any]) -> bool:
+    """True when the cached answer for ``query`` may be used.
+
+    An OVERRIDES entry wins over the cache: a cached null, or a hit that was
+    not produced by the current override (no ``override`` marker, or a
+    different one), is stale and is looked up again.
+    """
+    if query not in cache:
+        return False
+    if query not in OVERRIDES:
+        return True
+    cached = cache[query]
+    return cached is not None and cached.get("override") == json.dumps(OVERRIDES[query], sort_keys=True)
 
 
 def geocode(query: str, cache: dict[str, Any]) -> dict[str, Any] | None:
-    if query not in cache:
+    if not cache_is_current(query, cache):
         cache[query] = nominatim(query)
         save_cache(cache)
     return cache[query]
@@ -198,6 +216,7 @@ def main() -> int:
     cache = load_cache()
     blocks: dict[tuple[int, str], list[str]] = {}
     unresolved: list[str] = []
+    stale: list[str] = []
     for item in data["items"]:
         for field in PLACE_FIELDS:
             if field not in item:
@@ -210,6 +229,9 @@ def main() -> int:
                 continue
             hit = geocode(query, cache)
             if hit is None:
+                if f"{field}_geo" in item:
+                    # --force: the old block stays in the file because nothing replaces it
+                    stale.append(f"{item['id']} {item['name']} {field}_geo keeps its old value (place {item[f'{field}_geo'].get('place')!r})")
                 unresolved.append(f"{item['id']} {item['name']} {field}: {query!r} <- {item[field]!r}")
                 print(f"{item['id']:>4} {field:16} {query:45} !! NOT FOUND")
                 continue
@@ -219,6 +241,10 @@ def main() -> int:
     if unresolved:
         print("\nUnresolved places (add an OVERRIDES entry or fix the prose):", file=sys.stderr)
         for line in unresolved:
+            print(f"  {line}", file=sys.stderr)
+    if stale:
+        print("\nStale _geo blocks kept (the query no longer resolves):", file=sys.stderr)
+        for line in stale:
             print(f"  {line}", file=sys.stderr)
     if args.dry_run:
         print(f"\ndry run: {len(blocks)} _geo blocks would be written")

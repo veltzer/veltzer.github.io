@@ -7,7 +7,7 @@ template = "app.html"
 strings_prefix = "calendar_"
 +++
 
-<div id="calendar-error" class="calendar-error"></div>
+<div id="calendar-error" class="calendar-error" role="alert"></div>
 <div id="calendar" style="max-width:100%; margin:0 auto;"></div>
 
 <!-- FullCalendar 6.1.20 (MIT), vendored in static/vendor/fullcalendar/: the

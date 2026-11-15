@@ -7,16 +7,29 @@ Looks up each podcast by name on the iTunes Search API to find its RSS feed URL.
 
 import argparse
 import sys
+import time
 
 import requests
-from ruamel.yaml import YAML
+from podcast_utils import dump_to_string, make_yaml, normalise_title, save_yaml
 from ruamel.yaml.scalarstring import DoubleQuotedScalarString as DQ
 
 SEARCH_URL = "https://itunes.apple.com/search"
+# Seconds between iTunes requests; the API throttles bursts.
+REQUEST_DELAY = 3.0
+
+
+def _plausible(name, candidate):
+    """True when the iTunes result name equals or contains the wanted name (normalised), or the reverse."""
+    want = normalise_title(name)
+    got = normalise_title(candidate)
+    return bool(want) and bool(got) and (want == got or want in got or got in want)
 
 
 def find_rss_feed(podcast_name):
-    """Search iTunes for a podcast by name and return the feedUrl."""
+    """
+    Search iTunes for a podcast by name and return the feedUrl of the first
+    result whose name plausibly matches, or None (the caller reports it).
+    """
     params = {
         "term": podcast_name,
         "media": "podcast",
@@ -25,17 +38,17 @@ def find_rss_feed(podcast_name):
     }
     resp = requests.get(SEARCH_URL, params=params, timeout=15)
     resp.raise_for_status()
-    results = resp.json().get("results", [])
-    if not results:
-        return None
-    # Return the first result's feed URL
-    return results[0].get("feedUrl")
+    for result in resp.json().get("results", []):
+        candidate = result.get("trackName") or result.get("collectionName") or ""
+        if result.get("feedUrl") and _plausible(podcast_name, candidate):
+            return result["feedUrl"]
+        print(f"[skipped non-matching hit: {candidate!r}]", end=" ")
+    return None
 
 
 def backfill_rss(file_path, dry_run=False):
-    """Add rss_feed to podcasts that don't have one."""
-    yaml = YAML(typ="rt")
-    yaml.preserve_quotes = True
+    """Add rss_feed to podcasts that don't have one. Saves after each podcast found."""
+    yaml = make_yaml()
 
     with open(file_path, encoding="UTF8") as f:
         data = yaml.load(f)
@@ -45,14 +58,24 @@ def backfill_rss(file_path, dry_run=False):
         return
 
     updated = 0
+    failed = []
+    first = True
     for item in data["items"]:
         name = str(item.get("name", ""))
         if item.get("rss_feed"):
             print(f"  Already has rss_feed: {name}")
             continue
 
+        if not first:
+            time.sleep(REQUEST_DELAY)
+        first = False
         print(f"  Looking up: {name}...", end=" ")
-        feed_url = find_rss_feed(name)
+        try:
+            feed_url = find_rss_feed(name)
+        except (requests.exceptions.RequestException, ValueError) as e:
+            print(f"ERROR: {e}")
+            failed.append(name)
+            continue
         if feed_url:
             # Insert rss_feed right after url (or after name if no url)
             keys = list(item.keys())
@@ -65,19 +88,22 @@ def backfill_rss(file_path, dry_run=False):
             item.insert(insert_pos, "rss_feed", DQ(feed_url))
             print(f"found: {feed_url}")
             updated += 1
+            if not dry_run:
+                save_yaml(yaml, data, file_path)
         else:
             print("NOT FOUND")
+            failed.append(name)
 
+    if failed:
+        print(f"\nNo feed for {len(failed)} podcast(s): {', '.join(failed)}")
     if updated == 0:
         print("\nNo updates needed.")
         return
 
     if dry_run:
         print(f"\n--- Dry Run ({updated} would be updated) ---")
-        yaml.dump(data, sys.stdout)
+        sys.stdout.write(dump_to_string(yaml, data))
     else:
-        with open(file_path, "w", encoding="UTF8") as f:
-            yaml.dump(data, f)
         print(f"\nSaved. Updated {updated} podcast(s).")
 
 

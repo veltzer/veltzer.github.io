@@ -26,7 +26,7 @@ from pathlib import Path
 import image_picker
 import yaml
 from bs4 import BeautifulSoup
-from image_standard import normalise
+from image_standard import download_image
 
 # Resolved from this file rather than the cwd, so the script works from
 # anywhere instead of only from the repo root.
@@ -37,16 +37,6 @@ logger = logging.getLogger(__name__)
 GC_IMAGE_URL = "https://secureimages.teach12.com/tgc/images/m2/wondrium/courses/{cid}/{cid}.jpg"
 AUDIBLE_URL = "https://www.audible.com/pd/{asin}"
 YAML_PATH = str(REPO_ROOT / "data" / "yaml" / "audio_courses.yaml")
-
-def download(url, dest):
-    """Download a URL to a file."""
-    req = urllib.request.Request(url)
-    req.add_header("User-Agent", "Mozilla/5.0")
-    with urllib.request.urlopen(req, timeout=15) as resp, open(dest, "wb") as f:
-        f.write(resp.read())
-    # Normalise to the site standard; see scripts/image_standard.py.
-    normalise(dest)
-
 
 def fetch_audible_image_url(asin):
     """Fetch the og:image URL from an Audible page."""
@@ -145,7 +135,7 @@ def fetch_gc_image(name, gc_id, force):
         return "skipped"
     url = GC_IMAGE_URL.format(cid=gc_id)
     try:
-        download(url, dest)
+        download_image(url, dest)
         logger.info("  Downloaded (GC): %s -> %s", name, dest)
         return "downloaded"
     except (urllib.error.HTTPError, urllib.error.URLError, OSError) as e:
@@ -163,7 +153,7 @@ def fetch_audible_image(name, asin, force):
         logger.info("  No image found on Audible for: %s", name)
         return "failed"
     try:
-        download(image_url, dest)
+        download_image(image_url, dest)
         logger.info("  Downloaded (Audible): %s -> %s", name, dest)
         return "downloaded"
     except (urllib.error.HTTPError, urllib.error.URLError, OSError) as e:

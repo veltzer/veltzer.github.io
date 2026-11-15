@@ -180,26 +180,29 @@ returning-visitor tracking, at which point GoatCounter is the simpler choice.
 Everything rendered through `base.html` is tracked: blog posts in both languages, the
 section and tag pages, the app sections under `/en/` and `/he/`, and `404.html`.
 
-Four standalone files in `static/` are not tracked, and no longer need to be: they were
-replaced with redirects on 2026-08-18, which was the fix suggested here rather than
+Four standalone files in `static/` were not tracked, and no longer needed to be: they
+were replaced with redirects on 2026-08-18, which was the fix suggested here rather than
 copying the snippet into each and giving the measurement ID four more places to drift.
+**They were removed altogether on 2026-10-28** (the site keeps no legacy-URL redirects, see
+`CLAUDE.md`), so there are no `static/*.html` files any more and the old URLs 404. The
+table is history:
 
-  | file | now redirects to |
+  | file | redirected to (until 2026-10-28) |
   | --- | --- |
   | `media_app.html` | `/en/media/` |
   | `calendar_app.html` | `/en/calendar/` |
   | `chess.html` | `/en/chess/` (already did) |
   | `full_index.html` | `/` |
 
-A visitor following an old bookmark lands on the templated page and is counted there. The
-redirect stubs themselves carry `noindex, follow` so they do not compete in search.
+While they existed, a visitor following an old bookmark landed on the templated page and
+was counted there; the stubs carried `noindex, follow` so they did not compete in search.
 
 `full_index.html` is the one that does not map onto a content page: it was a
 hand-maintained index of the standalone pages, and it had rotted — it listed
 `calendar.html` and `media.html`, both of which 404. It is not being rebuilt because the
 site nav and `/sitemap.xml` already enumerate everything and are generated.
 
-That leaves nothing untracked. `calendar_google_embed.html` and
+That left nothing untracked. `calendar_google_embed.html` and
 `calendar_list_view.html` were the last two standalone pages outside the templates; they
 were deleted on 2026-08-18 as losing alternatives from a calendar comparison that has long
 since concluded in FullCalendar's favour. See `doc/DECISIONS.md`.

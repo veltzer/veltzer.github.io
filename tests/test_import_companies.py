@@ -158,3 +158,56 @@ class TestOutput:
         assert first.read_bytes() == second.read_bytes()
         with gzip.open(first, "rt", encoding="utf-8") as handle:
             assert json.load(handle) == data
+
+
+class TestMainFailurePaths:
+    """main() must exit 1 with a message, and write nothing, on bad input."""
+
+    def run_main(self, tmp_path, monkeypatch, capsys, data, *extra):
+        import sys
+
+        import yaml
+
+        source = tmp_path / "organizations.yaml"
+        source.write_text(yaml.safe_dump(data), encoding="utf-8")
+        target = tmp_path / "out.json.gz"
+        monkeypatch.setattr(sys, "argv", ["import_companies.py", str(source), str(target), *extra])
+        code = import_companies.main()
+        return code, capsys.readouterr().err, target
+
+    def test_no_items_key(self, tmp_path, monkeypatch, capsys):
+        code, err, target = self.run_main(tmp_path, monkeypatch, capsys, {"other": 1})
+        assert code == 1
+        assert "has no items" in err
+        assert not target.exists()
+
+    def test_shown_organization_without_address(self, tmp_path, monkeypatch, capsys):
+        item = organization()
+        del item["address"]
+        code, err, target = self.run_main(tmp_path, monkeypatch, capsys, {"items": [item]})
+        assert code == 1
+        assert "no address" in err
+        assert not target.exists()
+
+    def test_no_organization_with_the_function(self, tmp_path, monkeypatch, capsys):
+        item = organization(functions=["consulting"])
+        code, err, target = self.run_main(tmp_path, monkeypatch, capsys, {"items": [item]}, "--function", "publisher")
+        assert code == 1
+        assert "'publisher'" in err
+        assert not target.exists()
+
+    def test_missing_map_image_fails_when_images_dir_given(self, tmp_path, monkeypatch, capsys):
+        images = tmp_path / "images"
+        images.mkdir()
+        code, err, target = self.run_main(
+            tmp_path, monkeypatch, capsys, {"items": [organization()]}, "--images-dir", str(images))
+        assert code == 1
+        assert "map image(s) missing" in err
+        assert not target.exists()
+
+    def test_overlapping_tabs(self, tmp_path, monkeypatch, capsys):
+        item = organization(functions=["teaching", "training-provider"])
+        code, err, target = self.run_main(tmp_path, monkeypatch, capsys, {"items": [item]})
+        assert code == 1
+        assert "more than one tab" in err
+        assert not target.exists()

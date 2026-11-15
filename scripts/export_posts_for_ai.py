@@ -29,7 +29,8 @@ on CI and on any machine without Insync the processor is skipped. The build
 passes --dest from the stanza's args, plus --inputs (only there so the build
 reruns it; the posts are read from content/blog/ either way) and
 --output-files, a stamp the script writes after a successful mirror. Run by
-hand from the repo root it works the same without those.
+hand, from any directory (the posts are found relative to this file), it
+works the same without those.
 """
 
 import argparse

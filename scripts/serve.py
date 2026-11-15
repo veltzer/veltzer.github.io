@@ -32,7 +32,6 @@ import http.server
 import os
 import shutil
 import signal
-import socketserver
 import subprocess
 import sys
 import tempfile
@@ -51,19 +50,38 @@ def read_site_dir():
     return (REPO_ROOT / "_site").resolve()
 
 
+class PagesHandler(http.server.SimpleHTTPRequestHandler):
+    """Static handler that answers a missing path with the site's 404.html,
+    status 404, the way GitHub Pages does, instead of Python's own error page."""
+
+    def send_error(self, code, message=None, explain=None):
+        page = Path(self.directory or ".") / "404.html"
+        if code != 404 or not page.is_file():
+            super().send_error(code, message, explain)
+            return
+        body = page.read_bytes()
+        self.send_response(404)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        if self.command != "HEAD":
+            self.wfile.write(body)
+
+
 def start_server(port, docs_dir):
     def handler(*args, **kwargs):
-        return http.server.SimpleHTTPRequestHandler(
-            *args, directory=str(docs_dir), **kwargs
-        )
+        return PagesHandler(*args, directory=str(docs_dir), **kwargs)
 
-    class ReusableTCPServer(socketserver.TCPServer):
+    class ReusableServer(http.server.ThreadingHTTPServer):
+        # Threaded: one idle keep-alive browser connection must not stall
+        # every other request.
         allow_reuse_address = True
+        daemon_threads = True
 
     # Not a `with`: the server outlives this function by design and is closed in
     # main()'s finally block (httpd.shutdown() / httpd.server_close()).
     # pylint: disable=consider-using-with
-    httpd = ReusableTCPServer(("127.0.0.1", port), handler)
+    httpd = ReusableServer(("127.0.0.1", port), handler)
     thread = threading.Thread(target=httpd.serve_forever, daemon=True)
     thread.start()
     return httpd

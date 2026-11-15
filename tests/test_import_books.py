@@ -6,6 +6,9 @@ subtly wrong: which name and which id win, which reading supplies the rating,
 and that ids survive a YAML round trip as strings.
 """
 
+import datetime
+import sys
+
 import import_books
 import yaml
 
@@ -146,3 +149,30 @@ class TestConvert:
 
     def test_convert_handles_missing_items(self):
         assert import_books.convert({}) == {"items": []}
+
+
+class TestSortRobustness:
+    def test_mixed_date_and_string_readings_sort_without_raising(self):
+        out = import_books.convert_item(book(readings=[
+            {"language": "english", "date": datetime.date(2020, 1, 2)},
+            {"language": "english", "date": "2021-03-04"},
+            {"language": "english"},
+        ]))
+        assert [str(r.get("date", "")) for r in out["readings"]] == ["2021-03-04", "2020-01-02", ""]
+
+
+class TestMainFailurePaths:
+    def test_input_without_items_exits_1(self, tmp_path, monkeypatch, capsys):
+        source = tmp_path / "books.yaml"
+        source.write_text("other: 1\n", encoding="utf-8")
+        target = tmp_path / "out.yaml"
+        monkeypatch.setattr(sys, "argv", ["import_books.py", str(source), str(target)])
+        assert import_books.main() == 1
+        assert "has no items" in capsys.readouterr().err
+        assert not target.exists()
+
+    def test_empty_input_exits_1(self, tmp_path, monkeypatch):
+        source = tmp_path / "books.yaml"
+        source.write_text("", encoding="utf-8")
+        monkeypatch.setattr(sys, "argv", ["import_books.py", str(source), str(tmp_path / "o.yaml")])
+        assert import_books.main() == 1

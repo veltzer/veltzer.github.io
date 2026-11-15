@@ -1,4 +1,4 @@
-/* global renderBarChart, renderStatCard, t */
+/* global renderBarChart, renderStatCard, t, tally */
 window.collectionPlugins = window.collectionPlugins || {};
 
 // The one map point per company, chosen by hand in organizations.yaml (see
@@ -205,16 +205,14 @@ window.collectionPlugins['companies'] = {
 
         items.forEach(function(item) {
             const status = statusLabel(item.status || 'unknown');
-            statusCounts[status] = (statusCounts[status] || 0) + 1;
+            tally(statusCounts, status);
             if (item.status === 'active') stillAround += 1;
             (item.functions || []).forEach(function(fn) {
                 const label = functionLabel(fn);
-                functionCounts[label] = (functionCounts[label] || 0) + 1;
+                tally(functionCounts, label);
             });
             const place = companyPlace(item);
-            if (place) {
-                placeCounts[place] = (placeCounts[place] || 0) + 1;
-            }
+            tally(placeCounts, place);
         });
 
         let html = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">';

@@ -36,6 +36,7 @@ fi
 # Build to a temp file and rename into place -- see scripts/build_en_dict.sh for
 # why: under -j0 a checker can otherwise read a half-written dictionary.
 tmp="${out}.$$"
+trap 'rm -f "${tmp}"' EXIT
 LC_ALL=C sort -u "${src}" |
 	aspell --lang=he --encoding=utf-8 create master "${tmp}"
 mv -f "${tmp}" "${out}"

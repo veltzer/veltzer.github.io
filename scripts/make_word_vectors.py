@@ -118,7 +118,10 @@ def select(path: Path, common: int, wanted: set[str]) -> tuple[list[str], np.nda
 
 
 def quantize(vectors: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
-    scale = np.abs(vectors).max(axis=1) / 127
+    # An all-zero row would give scale 0 and 0/0 = NaN; give it scale 1/127 so
+    # it quantizes to zeros and dequantizes to zeros with a finite scale.
+    peak = np.abs(vectors).max(axis=1)
+    scale = np.where(peak == 0, 1.0, peak).astype(np.float64) / 127
     return np.round(vectors / scale[:, None]).astype(np.int8), scale.astype("<f4")
 
 

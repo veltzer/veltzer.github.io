@@ -111,8 +111,9 @@ Each card on the companies tab shows a small map of the company's one
 above the "on Google Maps" link. The map is a static JPEG rendered once
 from OpenStreetMap tiles by `scripts/organizations_fetch_maps.py` and
 committed under `static/images/map-<lat>_<lon>.jpg`, one file per distinct
-point (88 companies sit on 24 points, since Nominatim puts every company
-in a city on the city centroid). The card loads it with `loading="lazy"`
+point (when this was decided, 88 companies sat on 24 points; as of 2026-11-15
+every organization on any tab has a point, 120 of them on 45 points, since
+Nominatim puts every company in a city on the city centroid). The card loads it with `loading="lazy"`
 and prints the "© OpenStreetMap contributors" credit its licence asks
 for; the link under it still opens the point in Google Maps for the rare
 visitor who wants the real thing.
@@ -156,7 +157,7 @@ together for anyone who finds them noisy.
 ## MkDocs owns `docs/` — manual files go in `blog/`
 
 **Historical (MkDocs era).** There is no `docs/` or `blog/` directory any more:
-static files live in `static/`, posts in `content/blog/`, and zola writes to
+static files live in `static/`, posts in `content/blog/`, and rssite writes to
 `_site/`. Kept as a record of the earlier layout.
 
 All static files (HTML, JS, CSS, images, data) live in `blog/` alongside
@@ -274,7 +275,8 @@ a way an opaque post URL is not. Tags are also *not* a shared key -- nothing
 pairs on them -- so translating them costs nothing structurally.
 
 This needs `[slugify] taxonomies = "safe"` in `config.toml`, scoped to
-taxonomies only. Zola's default slugify transliterates rather than strips, so
+taxonomies only. Zola's default slugify (zola was the generator then) transliterates rather
+than strips, so
 ארכיאולוגיה would otherwise become `rky-vlvgyh`: unreadable in either language.
 `paths` and `anchors` stay on the default so post URLs do not move.
 
@@ -290,8 +292,8 @@ since) make that easy to miss.
 ## No custom JS/HTML minification
 
 **Written in the MkDocs era.** The numbers and the theme references below are
-from then; the conclusion still holds, and zola's output is served gzipped by
-GitHub Pages the same way.
+from then; the conclusion still holds, and the generated site (zola's then,
+rssite's now) is served gzipped by GitHub Pages the same way.
 
 Investigated adding minification (terser, html-minifier) for custom plugin
 JS files (`plugin-*.js`, `data-collection-utils.js`) and HTML files. Decided against
@@ -363,6 +365,10 @@ rather than a workaround here.
 - `config.toml` is `rssite.toml`; the translations moved from it to
   `i18n/{en,he}.toml`, with the Hebrew month names beside the strings; the
   tag translation table moved from `static/` to `i18n/tags.toml`.
+  (Correction 2026-11-15: `i18n/tags.toml` does not exist. The table is gone:
+  the tags of a post and of its translation are paired by position, through
+  `infer_translations` on the `tags` taxonomy in `rssite.toml`, see
+  `CLAUDE.md`.)
 - Every template gets `lang`, `language`, `languages`, `translations` and
   `alternates` from the generator, so `base.html` lost its alt-URL string
   juggling and the tag pages link to their counterpart with no template
@@ -373,9 +379,11 @@ rather than a workaround here.
 - The shared-themes files are published by `[[publish]]` in `rssite.toml`;
   the Python copy step is gone.
 - Every page's footer names the generator, its version and the commit it was
-  built from ("Made by rssite version ..."). The commit comes from
-  `out/build_info.toml`, which is therefore a source of every page: a new
-  commit rebuilds the site, which takes seconds.
+  built from ("Made by rssite version ..."). The commit came from
+  `out/build_info.toml`, which was therefore a source of every page: a new
+  commit rebuilt the site, which took seconds. (Correction 2026-11-15: that
+  file does not exist. The commit is rssite's `git` template context, which
+  the footer reads directly.)
 - The Hebrew app stubs declare `body_from = "en"` instead of the template
   fetching the English section.
 

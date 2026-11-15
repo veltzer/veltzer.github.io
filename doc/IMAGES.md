@@ -1,6 +1,6 @@
 # Image Management
 
-All media cover images are stored in `static/images/`, which zola copies
+All media cover images are stored in `static/images/`, which rssite copies
 verbatim to `/images/` in the built site.
 
 ## Naming Conventions

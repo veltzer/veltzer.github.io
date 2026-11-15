@@ -15,7 +15,7 @@ among its ``functions``) the ``geo`` point chosen in organizations.yaml is rende
 at zoom 13 (city level) into ``static/images/map-<lat>_<lon>.jpg``, the
 name ``import_companies.map_path`` gives it. The file is keyed by the
 coordinates, not the slug: Nominatim puts every company in a city on that
-city's centroid, so 88 companies share 24 points, and one image per point
+city's centroid, so many companies share one point, and one image per point
 keeps ``static/images/`` free of byte-identical copies (which the
 duplicate-image check would refuse anyway).
 
@@ -87,6 +87,9 @@ class Tiles:
         if not cached.exists():
             response = self.session.get(TILE_URL.format(z=zoom, x=x, y=y), timeout=30)
             response.raise_for_status()
+            # An error page served with 200 must not be cached for good:
+            # prove the body decodes as an image before it reaches the cache.
+            Image.open(io.BytesIO(response.content)).load()
             cached.parent.mkdir(parents=True, exist_ok=True)
             cached.write_bytes(response.content)
             self.fetched += 1

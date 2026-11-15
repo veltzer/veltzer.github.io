@@ -27,8 +27,9 @@ from pathlib import Path
 
 import yaml
 
-CACHE_PATH = Path("shelve/wikidata_imdb.json")
-MANUAL_PATH = Path("data/rotten_tomatoes_manual.json")
+REPO_ROOT = Path(__file__).resolve().parent.parent
+CACHE_PATH = REPO_ROOT / "shelve" / "wikidata_imdb.json"
+MANUAL_PATH = REPO_ROOT / "data" / "rotten_tomatoes_manual.json"
 MISSING = object()
 
 

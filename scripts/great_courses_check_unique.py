@@ -10,6 +10,8 @@ Usage:
 
 import sys
 
+import yaml
+
 YAML_PATH = "data/yaml/audio_courses.yaml"
 
 
@@ -19,29 +21,28 @@ def main():
     errors = 0
 
     with open(YAML_PATH, encoding="utf-8") as f:
-        current_name = None
-        for lineno, line in enumerate(f, 1):
-            stripped = line.strip()
-            if stripped.startswith("- name:"):
-                current_name = stripped.split(":", 1)[1].strip().strip("'\"")
-            elif stripped.startswith("great_courses_id:"):
-                value = stripped.split(":", 1)[1].strip()
-                if value in ids:
-                    print(f"Duplicate great_courses_id {value}:")
-                    print(f"  {ids[value]}")
-                    print(f"  {current_name} (line {lineno})")
-                    errors += 1
-                else:
-                    ids[value] = f"{current_name} (line {lineno})"
-            elif stripped.startswith("great_courses_slug:"):
-                value = stripped.split(":", 1)[1].strip().strip("'\"")
-                if value in slugs:
-                    print(f"Duplicate great_courses_slug \"{value}\":")
-                    print(f"  {slugs[value]}")
-                    print(f"  {current_name} (line {lineno})")
-                    errors += 1
-                else:
-                    slugs[value] = f"{current_name} (line {lineno})"
+        data = yaml.safe_load(f)
+
+    for n, item in enumerate(data["items"], 1):
+        name = f"{item.get('name')} (item {n})"
+        if "great_courses_id" in item:
+            value = item["great_courses_id"]
+            if value in ids:
+                print(f"Duplicate great_courses_id {value}:")
+                print(f"  {ids[value]}")
+                print(f"  {name}")
+                errors += 1
+            else:
+                ids[value] = name
+        if "great_courses_slug" in item:
+            value = item["great_courses_slug"]
+            if value in slugs:
+                print(f"Duplicate great_courses_slug \"{value}\":")
+                print(f"  {slugs[value]}")
+                print(f"  {name}")
+                errors += 1
+            else:
+                slugs[value] = name
 
     if errors:
         print(f"\n{errors} duplicate(s) found.")

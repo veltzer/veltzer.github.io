@@ -95,7 +95,9 @@ def _readings(item):
         if reading.get("undated"):
             entry["undated"] = True
         out.append(entry)
-    out.sort(key=lambda r: r.get("date", ""), reverse=True)
+    # str(): YAML turns an unquoted 2026-01-02 into a date and a quoted one stays
+    # a string; ISO text sorts the same either way and never raises on a mix.
+    out.sort(key=lambda r: str(r.get("date", "")), reverse=True)
     return out
 
 

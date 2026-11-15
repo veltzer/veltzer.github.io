@@ -10,7 +10,24 @@ import sys
 
 import requests
 from bs4 import BeautifulSoup
-from ruamel.yaml import YAML
+from podcast_utils import dump_to_string, make_yaml, save_yaml
+from ruamel.yaml.scalarstring import DoubleQuotedScalarString as DQ
+
+# Titles YouTube serves in place of the video (consent wall, bot check, ...):
+# never record one of these as a video name.
+BAD_TITLES = {
+    "youtube",
+    "before you continue to youtube",
+    "before you continue",
+    "consent",
+    "sign in",
+    "sign in to confirm you're not a bot",
+    "sign in to confirm you\u2019re not a bot",
+    "403 forbidden",
+    "404 not found",
+    "error 404 (not found)!!1",
+}
+SUFFIX = " - YouTube"
 
 
 def get_youtube_title(video_id):
@@ -24,10 +41,15 @@ def get_youtube_title(video_id):
         soup = BeautifulSoup(response.text, 'html.parser')
         # The video title is typically in the <title> tag of the page
         title_tag = soup.find('title')
-        if title_tag:
-            # Clean up the title string (e.g., remove "- YouTube")
-            return title_tag.string.replace("- YouTube", "").strip()
-        return None
+        if not title_tag or not title_tag.string:
+            return None
+        title = title_tag.string.strip()
+        # Strip only the trailing " - YouTube", not one inside the title
+        title = title.removesuffix(SUFFIX).strip()
+        if not title or title.casefold() in BAD_TITLES:
+            print(f"  - Warning: ID {video_id} returned an interstitial page ({title_tag.string.strip()!r}), skipping.")
+            return None
+        return title
     except requests.exceptions.RequestException as e:
         print(f"  - Warning: Could not fetch title for ID {video_id}: {e}")
         return None
@@ -39,8 +61,7 @@ def process_yaml_file(file_path, dry_run=False):
     """
     print(f"--- Processing '{file_path}' ---")
 
-    yaml = YAML(typ="rt")
-    yaml.preserve_quotes = True
+    yaml = make_yaml()
 
     with open(file_path, encoding="UTF8") as f:
         data = yaml.load(f)
@@ -68,17 +89,16 @@ def process_yaml_file(file_path, dry_run=False):
 
         if title:
             # Insert the 'name' key right after the 'id' key for consistency
-            item.insert(1, 'name', title)
+            item.insert(list(item.keys()).index("id") + 1, 'name', DQ(title))
             print(f"   + Added name: {title}")
 
     if dry_run:
         print("\n--- Dry Run Complete ---")
         print("The following YAML would be written:")
-        yaml.dump(data, sys.stdout)
+        sys.stdout.write(dump_to_string(yaml, data))
     else:
         print(f"\nSaving updated data to '{file_path}'...")
-        with open(file_path, "w", encoding="UTF8") as f:
-            yaml.dump(data, f)
+        save_yaml(yaml, data, file_path)
         print("Save complete.")
 
 
@@ -103,6 +123,5 @@ def main():
 
 
 if __name__ == "__main__":
-    # To run this script, you need to install the required libraries:
-    # pip install ruamel.yaml requests beautifulsoup4
+    # ruamel.yaml, requests and beautifulsoup4 are declared in pyproject.toml.
     main()

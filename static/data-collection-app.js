@@ -78,7 +78,9 @@
         if (scriptLoads[src]) return scriptLoads[src];
         scriptLoads[src] = new Promise(function(resolve, reject) {
             const script = document.createElement('script');
-            script.src = src;
+            // The deploy's ?v= (data_collection.html), so new HTML never runs
+            // against a cached old plugin.
+            script.src = src + (window.collectionAssetVersion || '');
             script.onload = resolve;
             script.onerror = function() { reject(new Error('Failed to load ' + src)); };
             document.head.appendChild(script);
@@ -207,8 +209,12 @@
             });
         }
 
+        // The accessible name carries the visible text (and so the state), not
+        // only the static "Toggle sort order" the template gives the button.
         function updateSortOrderBtn() {
-            sortOrderBtn.textContent = currentSortOrder === 'asc' ? t('ui_sort_asc') : t('ui_sort_desc');
+            const text = currentSortOrder === 'asc' ? t('ui_sort_asc') : t('ui_sort_desc');
+            sortOrderBtn.textContent = text;
+            sortOrderBtn.setAttribute('aria-label', t('ui_sort_order') + ': ' + text);
         }
 
         function findSortFieldConfig(fieldName) {
@@ -371,7 +377,8 @@
             if (filter.type === 'year') {
                 sorted.sort().reverse();
             } else {
-                sorted.sort();
+                // 2 before 10 when every value is a number (ratings, counts)
+                sortKeys(sorted);
             }
             return sorted;
         }
@@ -499,6 +506,8 @@
             const label = activeCount > 0 ? t('ui_filters_count', {count: activeCount}) : t('ui_filters');
             const arrow = filtersPanel.classList.contains('hidden') ? '\u25BC' : '\u25B2';
             filtersToggleBtn.textContent = label + ' ' + arrow;
+            // The name includes the visible state ("Filters (2)"), not only the template's static text.
+            filtersToggleBtn.setAttribute('aria-label', t('ui_filters_toggle') + ': ' + label);
             filtersToggleBtn.setAttribute('aria-expanded', !filtersPanel.classList.contains('hidden'));
         }
 
@@ -521,6 +530,9 @@
 
         // --- Dynamically Generate Navigation ---
         function generateNav(activeDataType, showStatsOnly) {
+            // The tabs are rebuilt on every click, which would drop keyboard
+            // focus to <body>: remember which link had it and refocus its twin.
+            const focused = mainNav.contains(document.activeElement) ? document.activeElement.dataset.nav : null;
             mainNav.innerHTML = ''; // Clear existing nav
             // A page with a single plugin (the clients page) gets no tab row:
             // one tab that is always selected is not navigation.
@@ -531,8 +543,10 @@
                 navLink.href = '?data=' + key;
                 navLink.textContent = config.navTitle;
                 navLink.className = 'chip';
+                navLink.dataset.nav = key;
                 if (key === activeDataType) {
                     navLink.classList.add('current');
+                    navLink.setAttribute('aria-current', 'page');
                 }
                 navLink.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -541,7 +555,11 @@
                 mainNav.appendChild(navLink);
             }
 
+            // An unknown ?data= key still gets its tabs, as the way out of the error.
+            if (!activeDataType) return;
+
             const statsToggle = document.createElement('a');
+            statsToggle.dataset.nav = 'stats';
             statsToggle.className = 'chip chip-outline' + (tabKeys.length ? ' ms-4' : '');
 
             if (showStatsOnly) {
@@ -560,6 +578,10 @@
                 });
             }
             mainNav.appendChild(statsToggle);
+            if (focused !== null) {
+                const again = Array.from(mainNav.children).find(function(el) { return el.dataset.nav === focused; });
+                if (again) again.focus({preventScroll: true});
+            }
         }
 
         function switchView(dataType, showStats) {
@@ -576,22 +598,71 @@
         });
 
         // --- Fetch and Parse JSON Data ---
+        // The parsed items per plugin key (see loadData).
+        const datasetCache = new Map();
+
+        async function fetchItems(config) {
+            const response = await fetch(BASE_PATH + config.file);
+            if (!response.ok) {
+                throw new Error('HTTP error! status: ' + response.status + ". Make sure '" + config.file + "' is accessible.");
+            }
+
+            let jsonText;
+            if (config.file.endsWith('.gz')) {
+                // Only the .json.gz is shipped (see scripts/copy_data.py), so
+                // a browser without DecompressionStream has nothing to fall
+                // back to; say so rather than fetching a file that is not there.
+                if (typeof DecompressionStream === 'undefined') {
+                    throw new Error('This browser cannot decompress the data file (no DecompressionStream support).');
+                }
+                const ds = new DecompressionStream('gzip');
+                const decompressed = response.body.pipeThrough(ds);
+                jsonText = await new Response(decompressed).text();
+            } else {
+                jsonText = await response.text();
+            }
+            // JSON rather than YAML: js-yaml took ~399ms on the 6.5MB youtube
+            // data against ~31ms for JSON.parse, all on the main thread.
+            const data = JSON.parse(jsonText);
+            // Rename 'title' to 'name' for consistency if it exists
+            return (data.items || []).map(item => {
+                if (item.title && typeof item.name === 'undefined') {
+                    item.name = item.title;
+                }
+                // A plugin may derive fields in the page's language
+                // (the data itself is language-neutral) before search,
+                // sort and render see the item.
+                if (config.prepareItem) {
+                    config.prepareItem(item);
+                }
+                return item;
+            });
+        }
+
         async function loadData() {
             const thisLoad = ++loadSequence;
             const isStale = () => thisLoad !== loadSequence;
             const urlParams = new URLSearchParams(window.location.search);
             const dataType = urlParams.get('data') || pluginKeys()[0];
             const showStatsOnly = urlParams.get('stats') === 'true';
-            activeConfig = getDataSources()[dataType];
-            if (activeConfig) deriveFieldsConfig(activeConfig);
+            // Object.hasOwn: ?data=constructor must not resolve to an inherited property.
+            const sources = getDataSources();
+            activeConfig = Object.hasOwn(sources, dataType) ? sources[dataType] : null;
 
             if (!activeConfig) {
+                // Draw the tabs first: they are the way out of the error.
+                generateNav(null, false);
+                itemsContainer.innerHTML = '';
+                statsContainer.innerHTML = '';
+                paginationContainer.hidden = true;
                 statusMessage.innerHTML = '<div class="notice-error">' + escapeHtml(t('ui_invalid_data_type')) + '</div>';
                 return;
             }
+            deriveFieldsConfig(activeConfig);
 
             generateNav(dataType, showStatsOnly);
 
+            clearTimeout(searchTimer);
             searchInput.value = '';
             currentPage = 1;
             pageTitle.textContent = activeConfig.title;
@@ -602,7 +673,7 @@
             if (showStatsOnly) {
                 searchContainer.style.display = 'none';
                 itemsContainer.style.display = 'none';
-                paginationContainer.style.cssText = 'display:none!important';
+                paginationContainer.hidden = true;
                 statsContainer.style.display = 'block';
             } else {
                 searchContainer.style.display = 'block';
@@ -611,58 +682,35 @@
             }
 
             try {
-                statusMessage.textContent = t('ui_loading', {title: activeConfig.title});
-                const response = await fetch(BASE_PATH + activeConfig.file);
-                if (isStale()) return;
-
-                if (!response.ok) {
-                    throw new Error('HTTP error! status: ' + response.status + ". Make sure '" + activeConfig.file + "' is accessible.");
+                // The parsed dataset is kept per plugin, so switching tab or
+                // view back and forth does not refetch and reparse it (the
+                // YouTube file is ~30,000 items).
+                let items = datasetCache.get(dataType);
+                if (!items) {
+                    statusMessage.textContent = t('ui_loading', {title: activeConfig.title});
+                    items = await fetchItems(activeConfig);
+                    if (isStale()) return;
+                    datasetCache.set(dataType, items);
                 }
-
-                let jsonText;
-                if (activeConfig.file.endsWith('.gz')) {
-                    // Only the .json.gz is shipped (see scripts/copy_data.py), so
-                    // a browser without DecompressionStream has nothing to fall
-                    // back to; say so rather than fetching a file that is not there.
-                    if (typeof DecompressionStream === 'undefined') {
-                        throw new Error('This browser cannot decompress the data file (no DecompressionStream support).');
-                    }
-                    const ds = new DecompressionStream('gzip');
-                    const decompressed = response.body.pipeThrough(ds);
-                    jsonText = await new Response(decompressed).text();
-                } else {
-                    jsonText = await response.text();
-                }
-                if (isStale()) return;
-                // JSON rather than YAML: js-yaml took ~399ms on the 6.5MB youtube
-                // data against ~31ms for JSON.parse, all on the main thread.
-                const data = JSON.parse(jsonText);
-                // Rename 'title' to 'name' for consistency if it exists
-                allItems = (data.items || []).map(item => {
-                    if (item.title && typeof item.name === 'undefined') {
-                        item.name = item.title;
-                    }
-                    // A plugin may derive fields in the page's language
-                    // (the data itself is language-neutral) before search,
-                    // sort and render see the item.
-                    if (activeConfig.prepareItem) {
-                        activeConfig.prepareItem(item);
-                    }
-                    return item;
-                });
+                allItems = items;
                 setupSortUI();
                 setupFilters();
                 setupToggles();
                 filtersPanel.classList.add('hidden');
                 updateFiltersBtnText();
+                // allItems stays sorted: filtering keeps the order, so only a
+                // change of sort field or direction sorts again.
                 sortItems(allItems);
 
                 if (showStatsOnly) {
                     statsContainer.innerHTML = activeConfig.renderStats(allItems);
+                    statusMessage.textContent = '';
                 } else {
-                    renderItems(allItems);
+                    // The same path as every later render, so a default
+                    // filter (YouTube: Available) applies to the first one too.
+                    currentPage = 1;
+                    renderItems(getFilteredItems());
                 }
-                statusMessage.textContent = '';
 
             } catch (error) {
                 if (isStale()) return;
@@ -680,7 +728,7 @@
 
             if (itemList.length === 0) {
                 statusMessage.textContent = t('ui_no_items');
-                paginationContainer.style.cssText = 'display:none!important';
+                paginationContainer.hidden = true;
                 return;
             }
 
@@ -735,10 +783,10 @@
                         '<div class="p-4 flex flex-col flex-1">' +
                             // dir="auto": the data is mostly English and the page may be Hebrew;
                             // each text takes its direction from its own first letters.
-                            '<h5 class="text-lg font-bold mb-2" dir="auto">' + escapeHtml(item.name || t('ui_no_title')) + '</h5>' +
+                            '<h2 class="text-lg font-bold mb-2" dir="auto">' + escapeHtml(item.name || t('ui_no_title')) + '</h2>' +
                             '<p class="text-gray-600 mb-4" dir="auto">' + escapeHtml(item.review || item.subtitle || t('ui_no_description')) + '</p>' +
                             '<ul class="mt-auto divide-y divide-gray-200">' +
-                                (activeConfig.ratingScale ? '<li class="py-2"><strong>' + t('ui_rating') + '</strong> <span dir="ltr" class="badge">' + escapeHtml(item.rating || '?') + ' / ' + activeConfig.ratingScale + '</span></li>' : '') +
+                                (activeConfig.ratingScale ? '<li class="py-2"><strong>' + t('ui_rating') + '</strong> <span dir="ltr" class="badge">' + escapeHtml(item.rating === null || item.rating === undefined || item.rating === '' ? '?' : item.rating) + ' / ' + activeConfig.ratingScale + '</span></li>' : '') +
                                 (item.device ? '<li class="py-2"><strong>' + t('ui_device') + '</strong> <bdi>' + escapeHtml(item.device) + '</bdi>' + '</li>' : '') +
                                 specificDetails +
                             '</ul>' +
@@ -758,11 +806,14 @@
 
         // --- Pagination Controls ---
         function renderPagination(totalPages, totalItems) {
+            // The pager is rebuilt on every click, which would drop keyboard
+            // focus to <body>: remember the control that had it.
+            const focusedId = paginationContainer.contains(document.activeElement) ? document.activeElement.id : '';
             if (totalPages <= 1) {
-                paginationContainer.style.cssText = 'display:none!important';
+                paginationContainer.hidden = true;
                 return;
             }
-            paginationContainer.style.cssText = '';
+            paginationContainer.hidden = false;
 
             const start = (currentPage - 1) * PAGE_SIZE + 1;
             const end = Math.min(currentPage * PAGE_SIZE, totalItems);
@@ -794,6 +845,16 @@
             document.getElementById('jumpToPage').addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') { e.target.dispatchEvent(new Event('change')); }
             });
+
+            if (focusedId) {
+                // A button that is now disabled (the last page reached) cannot
+                // take focus; the other button, or the page box, does.
+                const candidates = [focusedId, 'btnNextPage', 'btnPrevPage', 'jumpToPage'];
+                for (const id of candidates) {
+                    const el = document.getElementById(id);
+                    if (el && !el.disabled) { el.focus({preventScroll: true}); break; }
+                }
+            }
         }
 
         // --- Filter, Sort, and Render ---
@@ -815,15 +876,25 @@
             return items;
         }
 
+        // allItems is kept sorted (loadData and the sort controls sort it), and
+        // filtering and searching keep that order, so nothing re-sorts here.
         function applyFilterSortRender() {
-            const items = getFilteredItems();
-            sortItems(items);
             currentPage = 1;
-            renderItems(items);
+            renderItems(getFilteredItems());
+        }
+
+        function resortAndRender() {
+            sortItems(allItems);
+            applyFilterSortRender();
         }
 
         // --- Handle Search Input ---
-        searchInput.addEventListener('input', applyFilterSortRender);
+        // Debounced: the YouTube tab searches ~30,000 items per keystroke.
+        let searchTimer = null;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimer);
+            searchTimer = setTimeout(applyFilterSortRender, 150);
+        });
 
         // --- Handle Sort Changes ---
         function getCurrentDataType() {
@@ -834,14 +905,14 @@
         sortFieldSelect.addEventListener('change', function() {
             applySortFieldConfig(sortFieldSelect.value);
             saveSortPref(getCurrentDataType());
-            applyFilterSortRender();
+            resortAndRender();
         });
 
         sortOrderBtn.addEventListener('click', function() {
             currentSortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
             updateSortOrderBtn();
             saveSortPref(getCurrentDataType());
-            applyFilterSortRender();
+            resortAndRender();
         });
 
         // --- Initial Load ---

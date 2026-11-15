@@ -7,13 +7,19 @@
     permalink). Posts, sections, tag pages and the tag list all get them, so
     the hreflang alternates and the language switcher below are the same few
     lines for every kind of page, and a translated tag page links to the same
-    tag in the other language (i18n/tags.toml) rather than to that language's
-    home. -#}
+    tag in the other language (paired by infer_translations in rssite.toml)
+    rather than to that language's home. -#}
 {#- One description for <meta name="description"> and og:description, so the
     two never disagree: rssite's meta_description. Posts: their own
     description, else the opening text. Sections: the `description` in their
     front matter, which every nav section sets. Anything else (taxonomies,
-    404) gets the language's blurb. -#}
+    404) gets the language's blurb. A year archive says which year it is:
+    without that every year page carried the blog's description. `description`
+    is set here, outside any block, so both tags below read the same value. -#}
+{%- set description = meta_description %}
+{%- if year is defined and years is defined %}
+{%- set description = trans(key="posts_of_year") ~ " " ~ year ~ " · " ~ language.title %}
+{%- endif %}
 <!DOCTYPE html>
 <html lang="{{ lang }}" dir="{{ language.direction }}">
 <head>
@@ -26,7 +32,7 @@
     source of every page), ahead of the stylesheets. -#}
 <script>{{ load_data(path="shared/shared-themes/theme-onload.js") | safe }}</script>
 <title>{% block title %}{{ language.title }}{% endblock %}</title>
-<meta name="description" content="{% block description %}{{ meta_description }}{% endblock %}">
+<meta name="description" content="{% block description %}{{ description }}{% endblock %}">
 
 {#- Canonical, alternates and Open Graph.
 
@@ -59,7 +65,7 @@
 {#- `term` is set on a single tag's page, `terms` on the tag list; without
     those branches every tag page shared the site title as its og:title. -#}
 <meta property="og:title" content="{% block og_title %}{% if page %}{{ page.title }}{% elif section %}{{ section.title }}{% elif term %}{{ term.name }}{% elif terms %}{{ trans(key="tags_title") }}{% else %}{{ language.title }}{% endif %}{% endblock %}">
-<meta property="og:description" content="{{ meta_description }}">
+<meta property="og:description" content="{{ description }}">
 {#- The share card, 1200x630, the size every network's large preview
     expects; without it a shared link gets a text-only card. A blog post
     has its own, with its title and tags, drawn at build time by
@@ -107,6 +113,7 @@
 {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": "{{ config.base_url }}/#person",
   {%- if lang == "he" %}
   "name": "מארק ולצר",
   "alternateName": "Mark Veltzer",
@@ -132,7 +139,7 @@
 </script>
 {%- endif %}
 
-{#- `v` is appended to our own stylesheets and icons so that a deploy changes
+{#- `v` is appended to our own stylesheets, scripts and icons so that a deploy changes
     their URLs. GitHub Pages lets browsers cache them for ten minutes; without
     it a reader got new HTML with the old style.css (an unstyled logo) and
     kept the old favicon. -#}
@@ -187,6 +194,9 @@
 {%- endif %}
 </head>
 <body>
+{#- First in the tab order, visible only while focused: a keyboard reader
+    skips the header instead of tabbing through it on every page. -#}
+<a class="skip-link" href="#main">{{ trans(key="skip_to_content") }}</a>
 
 {#- Both languages are prefixed (/en/ and /he/), so every in-site link is built
     from the current language's root. -#}
@@ -199,7 +209,7 @@
     <svg class="site-logo" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#4051b5"/><path d="M15 19 L31 32 L15 45 M35 45 H50" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
     {{- language.title -}}
   </a>
-  <nav class="site-nav">
+  <nav class="site-nav" aria-label="{{ trans(key="nav_label_site") }}">
     {%- for item in config.extra.nav %}
     {#- Every entry takes the language prefix, apps included: a Hebrew reader
         who opens an app keeps the Hebrew nav, switcher and way back. The app
@@ -246,12 +256,13 @@
       falls back to the other language's home page, better than hiding the
       switcher and leaving /he/ unreachable. Navigation is a plain location
       change on `change`, so the options carry real URLs and work without JS
-      in that sense. -#}
+      in that sense. The language code rides in data-lang (hreflang is not
+      an attribute of <option>). -#}
   <div class="site-controls">
     <label class="visually-hidden" for="lang-select">{{ trans(key="label_language") }}</label>
     <select id="lang-select" class="site-select">
       {%- for entry in languages %}
-      <option value="{{ alternates | get(key=entry.code, default=entry.url_prefix) }}" hreflang="{{ entry.code }}"{% if entry.code == lang %} selected{% endif %}>{{ entry.name }}</option>
+      <option value="{{ alternates | get(key=entry.code, default=entry.url_prefix) }}" data-lang="{{ entry.code }}"{% if entry.code == lang %} selected{% endif %}>{{ entry.name }}</option>
       {%- endfor %}
     </select>
 
@@ -269,11 +280,11 @@
 
 {# main_class is a block so a template can opt out of the narrow reading
    column -- the application pages use a wide one. #}
-<main class="{% block main_class %}site-main{% endblock %}">
+<main id="main" class="{% block main_class %}site-main{% endblock %}">
 {% block content %}{% endblock %}
 </main>
 
-<script src="{{ get_url(path='shared-themes/theme-switcher.js') }}"></script>
+<script src="{{ get_url(path='shared-themes/theme-switcher.js') }}{{ v }}"></script>
 <script>
   // Theme: the shared helper wires #theme-select to data-theme on <html> and
   // persists the choice under a localStorage key shared with the teaching-*
@@ -286,7 +297,7 @@
     // their language next time. Written here rather than inferred from the URL
     // so it only records a deliberate switch.
     var option = event.target.selectedOptions[0];
-    try { localStorage.setItem('veltzer-site-lang', option.getAttribute('hreflang')); } catch (e) { /* storage blocked */ }
+    try { localStorage.setItem('veltzer-site-lang', option.dataset.lang); } catch (e) { /* storage blocked */ }
     window.location.href = event.target.value;
   });
 </script>

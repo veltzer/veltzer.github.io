@@ -1,4 +1,4 @@
-/* global t, renderBarChart, renderStatCard, mediaFormatDate */
+/* global t, renderBarChart, renderStatCard, mediaFormatDate, countBy, countByYear, hasReviewField, linkLine, tally, toggleLine, yearOf */
 window.collectionPlugins = window.collectionPlugins || {};
 
 // Data comes flattened by scripts/import_books.py: one item per book with
@@ -7,10 +7,6 @@ window.collectionPlugins = window.collectionPlugins || {};
 // languages_read, owned_languages). rating/last_read/review belong to the
 // most recent dated reading; books migrated from the old xml catalog only
 // carry `undated: true` readings and have none of the three.
-
-function bookYear(item) {
-    return item.last_read ? String(item.last_read).substring(0, 4) : null;
-}
 
 function bookReadingLine(reading) {
     let line = reading.language ? reading.language.charAt(0).toUpperCase() + reading.language.slice(1) : '?';
@@ -54,9 +50,7 @@ window.collectionPlugins['books'] = {
         {field: 'owned', label: t('books_f_owned'), type: 'string', sortable: false,
             filterType: 'boolean', value: function(item) { return item.owned_languages && item.owned_languages.length > 0; }
         },
-        {field: 'has_review', label: t('books_f_has_review'), type: 'string', sortable: false,
-            filterType: 'boolean', value: function(item) { return item.review && item.review.trim() !== ''; }
-        },
+        hasReviewField(t('books_f_has_review')),
         {field: 'dated', label: t('books_f_has_date'), type: 'string', sortable: false,
             filterType: 'boolean', value: function(item) { return !!item.last_read; }
         }
@@ -87,38 +81,38 @@ window.collectionPlugins['books'] = {
             html += '<li class="py-2" dir="rtl"><strong>' + window.escapeHtml(item.name_he) + '</strong></li>';
         }
         if (item.authors) {
-            html += '<li class="py-2" data-toggle="authors"><strong>' + t('books_d_authors') + '</strong> ' + window.escapeHtml(item.authors) + '</li>';
+            html += toggleLine('authors', t('books_d_authors'), window.escapeHtml(item.authors));
         }
         if (item.rating !== undefined && item.rating !== null) {
-            html += '<li class="py-2" data-toggle="rating"><strong>' + t('books_d_rating') + '</strong> <span class="inline-block bg-blue-600 text-white text-sm font-semibold px-2.5 py-0.5 rounded-full">' + window.escapeHtml(String(item.rating)) + ' / 10</span></li>';
+            html += toggleLine('rating', t('books_d_rating'), '<span class="inline-block bg-blue-600 text-white text-sm font-semibold px-2.5 py-0.5 rounded-full">' + window.escapeHtml(String(item.rating)) + ' / 10</span>');
         }
         if (item.language) {
-            html += '<li class="py-2" data-toggle="language"><strong>' + t('books_d_original_language') + '</strong> ' + window.escapeHtml(item.language) + '</li>';
+            html += toggleLine('language', t('books_d_original_language'), window.escapeHtml(item.language));
         }
         if (item.readings && item.readings.length > 0) {
-            html += '<li class="py-2" data-toggle="readings"><strong>' + t('books_d_read') + '</strong> ' +
-                item.readings.map(function(r) { return window.escapeHtml(bookReadingLine(r)); }).join('; ') + '</li>';
+            html += toggleLine('readings', t('books_d_read'),
+                item.readings.map(function(r) { return window.escapeHtml(bookReadingLine(r)); }).join('; '));
         }
         if (item.owned_languages && item.owned_languages.length > 0) {
-            html += '<li class="py-2" data-toggle="owned"><strong>' + t('books_d_owned_in') + '</strong> ' + window.escapeHtml(item.owned_languages.join(', ')) + '</li>';
+            html += toggleLine('owned', t('books_d_owned_in'), window.escapeHtml(item.owned_languages.join(', ')));
         }
         if (item.publisher) {
-            html += '<li class="py-2" data-toggle="publisher"><strong>' + t('books_d_publisher') + '</strong> ' + window.escapeHtml(item.publisher) + '</li>';
+            html += toggleLine('publisher', t('books_d_publisher'), window.escapeHtml(item.publisher));
         }
         if (item.remark) {
-            html += '<li class="py-2" data-toggle="remark"><strong>' + t('books_d_remark') + '</strong> ' + window.escapeHtml(item.remark) + '</li>';
+            html += toggleLine('remark', t('books_d_remark'), window.escapeHtml(item.remark));
         }
         if (item.url) {
             const site = item.simania_id ? 'simania' : 'goodreads';
-            html += '<li class="py-2" data-toggle="link"><a href="' + window.escapeHtml(item.url) + '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; ' + t('books_view_on', {site: site}) + '</a></li>';
+            html += linkLine('link', item.url, t('books_view_on', {site: site}));
         }
         return html;
     },
     renderStats: function(items) {
         const authorSet = new Set();
-        const yearCounts = {};
-        const languageCounts = {};
-        const ratingCounts = {};
+        const yearCounts = countByYear(items, function(item) { return item.last_read; });
+        const languageCounts = countBy(items, function(item) { return item.language; });
+        const ratingCounts = countBy(items, function(item) { return item.rating; });
         const authorCounts = {};
         let readings = 0;
         let undated = 0;
@@ -127,19 +121,10 @@ window.collectionPlugins['books'] = {
         items.forEach(function(item) {
             (item.author_list || []).forEach(function(author) {
                 authorSet.add(author);
-                authorCounts[author] = (authorCounts[author] || 0) + 1;
+                tally(authorCounts, author);
             });
-            const year = bookYear(item);
-            if (year) {
-                yearCounts[year] = (yearCounts[year] || 0) + 1;
-            } else if (item.read_count > 0) {
+            if (!yearOf(item.last_read) && item.read_count > 0) {
                 undated++;
-            }
-            if (item.language) {
-                languageCounts[item.language] = (languageCounts[item.language] || 0) + 1;
-            }
-            if (item.rating !== undefined && item.rating !== null) {
-                ratingCounts[item.rating] = (ratingCounts[item.rating] || 0) + 1;
             }
             readings += item.read_count || 0;
             if (item.owned_languages && item.owned_languages.length > 0) owned++;

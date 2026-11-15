@@ -14,11 +14,9 @@ Usage:
 import argparse
 import os
 import time
-import urllib.error
-import urllib.request
 from pathlib import Path
 
-from image_standard import normalise
+from image_standard import download_image
 
 # Resolved from this file rather than the cwd, so the script works from anywhere
 # instead of only from the repo root.
@@ -26,16 +24,6 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 IMAGE_DIR = str(REPO_ROOT / "static" / "images")
 YAML_PATH = str(REPO_ROOT / "data" / "yaml" / "audible.yaml")
-
-
-def download(url, dest):
-    """Download a URL to a file."""
-    req = urllib.request.Request(url)
-    req.add_header("User-Agent", "Mozilla/5.0")
-    with urllib.request.urlopen(req, timeout=15) as resp, open(dest, "wb") as f:
-        f.write(resp.read())
-    # Normalise to the site standard; see scripts/image_standard.py.
-    normalise(dest)
 
 
 def load_entries():
@@ -88,10 +76,10 @@ def main():
             continue
 
         try:
-            download(cover_url, dest)
+            download_image(cover_url, dest)
             downloaded += 1
             print(f"  Downloaded: {name} -> {dest}")
-        except (urllib.error.HTTPError, urllib.error.URLError, OSError) as e:
+        except OSError as e:  # ImageError and network errors: one item, not the run
             print(f"  Failed {name}: {e}")
             failed += 1
 

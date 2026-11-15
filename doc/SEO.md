@@ -7,7 +7,8 @@ the `veltzer.org` domain property.
 **2026-10-28: every legacy redirect described below has been removed** --
 the `[[redirects]]`, `pager_aliases`, the root `/atom.xml` and the static
 stubs. The site is built as if made today and old URLs 404 by decision; see
-`doc/DECISIONS.md`. What follows is the history as it was.
+`doc/DECISIONS.md`. What follows is the history as it was, written while
+the generator was zola; the site has been built by rssite since 2026-10-16.
 
 Search Console is at
 <https://search.google.com/search-console?resource_id=sc-domain:veltzer.org>.
@@ -105,8 +106,11 @@ indexes, that was **112 of 629 sitemap entries pointing at a redirect**.
 
 A sitemap is a statement about canonical, indexable URLs, so an entry that
 redirects contradicts it. Fixed by `drop_redirecting_urls()`, called from
-`fix_sitemap()`; since the move to rsconstruct's zola processor the same rule
-lives in `templates/sitemap.xml`, an override of zola's built-in sitemap.
+`fix_sitemap()`; later the same rule lived in
+`templates/sitemap.xml`, an override of zola's built-in sitemap; since rssite
+it is the `[sitemap] pagers = false` key in `rssite.toml` (no page 2, 3, ...
+of a listing in the sitemap), and neither the template nor the Python
+function exists.
 
 Only `/page/1/` is affected. `page/2` upward are real paginated pages and are
 left alone -- a filter broad enough to catch them would drop the archive tail
@@ -368,7 +372,7 @@ Google reaches them only by following each repo's GitHub `homepage` field
 inward, which is why crawl coverage is so uneven.
 
 **Considered and declined for this repo.** The books are not part of this site.
-Zola generates the sitemap from what it built out of `content/`, `templates/`
+rssite generates the sitemap from what it built out of `content/`, `templates/`
 and `static/`; the books are built by 21 other repositories' workflows and
 deployed to `veltzer.org/<repo>/` independently. Nothing in this build knows
 those paths exist, so covering them would mean hand-injecting a list of 21 repo

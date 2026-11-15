@@ -10,8 +10,11 @@ cargo = ["rssite"]
 src_dirs = ["static"]
 src_exclude_dirs = ["vendor"]
 args = ["-c", ".oxlintrc.json"]
-[processor.checker.itidy]
-src_dirs = ["static"]
+# No HTML check: static/ holds no .html any more (the standalone apps moved
+# into content/), so the tidy processor that used to sit here matched nothing.
+# Pointed at the rendered _site/ it is not usable as it stands: it warns on
+# every Hebrew tag URL, on data-* attributes and on the custom elements of the
+# imported teaching pages (6000+ warnings on a correct site, 2026-11-15).
 # rssite renders the site: `rssite plan` lists every file a build writes with
 # the sources each depends on, and rsconstruct makes each one a product, so an
 # edited post rebuilds only the files that list it and other processors can
@@ -38,7 +41,7 @@ output_dirs = ["_site"]
 [processor.explicit.generic.companies]
 command = "scripts/build_site.py"
 args = ["companies"]
-inputs = ["data/yaml/organizations.yaml", "data/yaml/certifications.yaml", "scripts/import_companies.py", "scripts/import_certifications.py"]
+inputs = ["data/yaml/organizations.yaml", "data/yaml/certifications.yaml", "scripts/build_site.py", "scripts/import_companies.py", "scripts/import_certifications.py"]
 input_globs = ["data/logos/*.svg", "static/images/map-*.jpg"]
 output_files = ["_site/data/companies.json.gz", "_site/data/training_providers.json.gz", "_site/data/consulting.json.gz", "_site/data/publishers.json.gz", "_site/data/education.json.gz", "_site/data/certifiers.json.gz", "_site/data/certifications.json.gz"]
 output_dirs = ["_site/logos"]
@@ -52,7 +55,9 @@ output_dirs = ["_site/logos"]
 command = "scripts/make_post_cards.py"
 src_dirs = ["content/blog"]
 src_extensions = [".md"]
-src_exclude_files = ["content/blog/_index.en.md", "content/blog/_index.he.md"]
+# src_exclude_paths, not src_exclude_files: the latter takes bare file names,
+# so with paths it excluded nothing and the two index files got cards.
+src_exclude_paths = ["content/blog/_index.en.md", "content/blog/_index.he.md"]
 output_dir = "_site/images/og"
 output_extension = "jpg"
 dep_inputs = ["scripts/make_og_images.py", "scripts/make_logo.py", "i18n/en.toml", "i18n/he.toml"]
@@ -71,7 +76,14 @@ dep_inputs = [
     "scripts/import_books.py",
     "scripts/import_certifications.py",
     "scripts/import_companies.py",
+    "scripts/import_teaching.py",
     "scripts/make_word_vectors.py",
+    "scripts/podcast_utils.py",
+    "scripts/podcasts_backfill_rss_data.py",
+    # test_logo.py compares make_logo.py with the two committed copies of the logo.
+    "scripts/make_logo.py",
+    "templates/base.html",
+    "static/favicon.svg",
     # test_people.py reads every data file's with: names.
     "data/yaml/audible.yaml",
     "data/yaml/audio_books.yaml",
@@ -182,6 +194,13 @@ args = ["check_books"]
 [processor.checker.taplo]
 src_files = ["rssite.toml", "rsconstruct.toml", ".rumdl.toml", ".rumdl.content.toml", "pyproject.toml", "static/identity.toml", "i18n/en.toml", "i18n/he.toml"]
 
+# The committed JSON: the lookup caches the data checks read and the search's
+# word lists. static/vendor is not ours, and .oxlintrc.json is JSON with
+# comments, which oxlint itself parses on every run.
+[processor.checker.ijsonlint]
+src_dirs = ["data", "shelve", "static"]
+src_exclude_dirs = ["vendor"]
+
 [processor.checker.encoding]
 src_dirs = ["scripts", "static", "templates", "sass", "i18n"]
 src_exclude_dirs = ["vendor"]
@@ -204,8 +223,7 @@ src_extensions = [".css"]
 # headings. They are build output, not authored markdown.
 [processor.checker.rumdl.prose]
 src_dirs = ["doc"]
-src_files = ["README.md", "CLAUDE.md"]
-src_exclude_dirs = ["content"]
+src_files = ["README.md", "CLAUDE.md", "TOFIX.md"]
 
 # content/ is rssite pages: the H1 comes from the frontmatter title via
 # templates/page.html, so they are linted with the content config.

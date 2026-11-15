@@ -3,8 +3,8 @@
 // The index is rssite's own: [search] in rssite.toml writes <lang>/search.json
 // with every post's title, opening text (description), tags and full text
 // (content), newest first.
-// It is fetched the first time the reader focuses or types in the box, so a
-// visit that never searches costs nothing.
+// It is fetched on the first non-empty query (typed, or arriving as a ?q=
+// link), never on focus, so a visit that never searches costs nothing.
 //
 // Three modes, search_mode and search_modes under [extra] in rssite.toml
 // choosing the one a reader starts in and the ones the selector offers:
@@ -18,8 +18,9 @@
 //   IDF-weighted average of its words' vectors, its title counting three
 //   times, a query is averaged the same way, and posts rank by cosine. So
 //   "does morality need god" finds the Euthyphro post without sharing a word
-//   with it. The vectors (~6 MB English, ~11 MB Hebrew) are fetched only once
-//   the box is used in this mode.
+//   with it. The vectors (~6 MB English, ~11 MB Hebrew) are fetched on the
+//   first non-empty query made in this mode; focusing the box, tabbing past
+//   it, or switching to the mode does not fetch them.
 //
 // The substring modes are case- and diacritic-insensitive (niqqud too), so
 // they need no stemmer and work the same in English and Hebrew.
@@ -276,7 +277,9 @@
             return;
         }
         const searchMode = mode;
-        if (searchMode === 'semantic' && !semantic) status.textContent = form.dataset.loading;
+        // While the data is on its way: it is the vectors (several MB) in
+        // semantic mode, the index otherwise.
+        if (searchMode === 'semantic' ? !semantic : !posts) status.textContent = form.dataset.loading;
         ready().then(function () {
             // A stale call, or the data failed to load: leave things as they are.
             if (input.value.trim() !== query || mode !== searchMode) return;
@@ -294,10 +297,8 @@
     }
 
     form.addEventListener('submit', function (event) { event.preventDefault(); });
-    input.addEventListener('focus', ready, { once: true });
     modeSelect.addEventListener('change', function () {
         mode = modeSelect.value;
-        ready();
         update();
     });
     input.addEventListener('input', update);

@@ -7,6 +7,10 @@ sections, "Site review, 2026-09-07" and "Blog review, 2026-10-30"**; the older `
 site review is closed. Where a closed verdict was later overtaken by the code, a
 dated correction sits under it rather than a rewrite.
 
+Entries that say zola describe the generator the site had from 2026-08 to
+2026-10-16; it is built by rssite now (`doc/DECISIONS.md`), so file names, commands
+and code paths named in a closed entry may no longer exist.
+
 Everything in this file is a record rather than a task. Keep it that way:
 when an item is finished, strike it through and say what was done, rather than
 deleting it -- several entries here exist specifically to stop a fixed thing
@@ -405,6 +409,11 @@ came later) and the built page.
   a warm cache. Fixed later the same day: `dep_inputs` now names `import_books.py` and
   every template (rsconstruct has no glob form for it).
 
+  Correction 2026-11-15: `tests/test_template_determinism.py` no longer exists
+  (the suite is now the files listed under `tests/`, none of which reads the
+  templates except `test_logo.py`, for the inline logo), and rsconstruct builds
+  the site with rssite rather than zola.
+
 ## Infrastructure
 
 - ~~**mkdocs-rss-plugin is not idempotent (non-deterministic builds).** — DONE.~~
@@ -538,6 +547,12 @@ came later) and the built page.
   seconds. The check is per-loop rather than per-file: `base.html` contains an unrelated
   `config.extra.languages` loop, so a file-level assertion passed even with the bug
   reintroduced — confirmed by reintroducing it.
+
+  Correction 2026-11-15: that test file was removed, along with the zola
+  build it was written for; nothing guards this ordering by test any more.
+  rssite hands every template `translations` already ordered, which is why
+  the templates no longer loop the config (see `doc/DECISIONS.md`, "The site
+  is built by rssite").
 
 - ~~**`doc/javascript_toolkits.md` predates the zola migration and its inventory is
   wrong.** — DONE 2026-08-19.~~ Rewritten against the working tree, and the stale-banner
