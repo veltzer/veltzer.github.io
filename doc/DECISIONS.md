@@ -501,6 +501,12 @@ shows with the same subject share one file, since the build rejects duplicate
 images; each show's image_source, image_license and image_author give the
 credit the licenses ask for, and `plugin-concerts.js` shows it under the card).
 
+Update 2026-11-15: `plugin-concerts.js`, `plugin-museums.js` and their i18n
+strings were deleted. They were on no page, and every collection page carried
+their strings. The data and the images stay; the plugins are in the git
+history (last present in the commit before this date's) if either list gets a
+page of its own.
+
 Private data types: the files in `data/yaml/` that no page publishes.
 
 - `audio_books.yaml`

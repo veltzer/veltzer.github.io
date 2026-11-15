@@ -10,11 +10,35 @@ cargo = ["rssite"]
 src_dirs = ["static"]
 src_exclude_dirs = ["vendor"]
 args = ["-c", ".oxlintrc.json"]
-# No HTML check: static/ holds no .html any more (the standalone apps moved
-# into content/), so the tidy processor that used to sit here matched nothing.
-# Pointed at the rendered _site/ it is not usable as it stands: it warns on
-# every Hebrew tag URL, on data-* attributes and on the custom elements of the
-# imported teaching pages (6000+ warnings on a correct site, 2026-11-15).
+# The rendered pages, checked the way `tidy -errors` does (in-process): a
+# stray or unclosed tag, an unknown element, a <style> in the body. It does
+# not know HTML5's content rules: a <main> nested in a <main> passes.
+# The options silence what is correct here and tidy 5.8 does not know:
+# Hebrew tag URLs are valid IRIs (fix-uri), data-* and loading/decoding
+# attributes are HTML5 (warn-proprietary-attributes), the imported teaching
+# pages use custom elements (custom-tags), and an empty element is a
+# placeholder a script fills (drop-empty-elements). fix-style-tags: no makes
+# a <style> in the body a warning instead of a silent move.
+[processor.checker.itidy]
+src_dirs = ["_site"]
+src_exclude_dirs = ["vendor"]
+# The three imported app pages (scripts/import_teaching.py) inline the
+# upstream sites' <style> in the body, by design; nothing here authors them.
+src_exclude_paths = [
+    "_site/en/animations/index.html",
+    "_site/en/slides/index.html",
+    "_site/en/syllabi/index.html",
+    "_site/he/animations/index.html",
+    "_site/he/slides/index.html",
+    "_site/he/syllabi/index.html",
+]
+options = [
+    "fix-uri: no",
+    "warn-proprietary-attributes: no",
+    "custom-tags: blocklevel",
+    "fix-style-tags: no",
+    "drop-empty-elements: no",
+]
 # rssite renders the site: `rssite plan` lists every file a build writes with
 # the sources each depends on, and rsconstruct makes each one a product, so an
 # edited post rebuilds only the files that list it and other processors can

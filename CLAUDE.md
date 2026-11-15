@@ -16,7 +16,7 @@ calendar integration.
   and `config/*.lua`)
 - **Frontend**: HTML5, SCSS, JavaScript (ES9+)
 - **Linting**: everything is a processor in `rsconstruct.toml` — oxlint
-  (`.oxlintrc.json`, JavaScript), biome (`.biome.jsonc`, the CSS
+  (`.oxlintrc.json`, JavaScript), tidy (the rendered HTML in `_site/`), biome (`.biome.jsonc`, the CSS
   compiled from `sass/`), ruff, pyrefly (`[tool.pyrefly]` in `pyproject.toml`),
   pytest (`tests/`), shellcheck,
   rumdl (`.rumdl.toml` for prose, `.rumdl.content.toml` for `content/`), taplo, yamllint,

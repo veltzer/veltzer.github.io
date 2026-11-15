@@ -212,11 +212,20 @@ def cmd_rotate(cfg):
 
     print("=== Creating new API key ===")
     new_key_name, new_key = create_key(cfg, store=False)
+    # static/keys.js carries the calendar key and no other: a rotation of any
+    # other pass entry leaves the file alone and says so.
+    is_site_key = cfg.pass_path == DEFAULTS["pass_path"]
     try:
-        write_keys_js(new_key)
-        print(f"New key written to {KEYS_JS}; pass still holds the OLD key.\n")
-        input(">>> Rebuild and deploy the site now, then press Enter to store the new key "
-              "in pass and delete the old one <<<")
+        if is_site_key:
+            write_keys_js(new_key)
+            print(f"New key written to {KEYS_JS}; pass still holds the OLD key.\n")
+            input(">>> Rebuild and deploy the site now, then press Enter to store the new key "
+                  "in pass and delete the old one <<<")
+        else:
+            print(f"{KEYS_JS} not touched: {cfg.pass_path} is not the site's calendar key "
+                  f"({DEFAULTS['pass_path']}).\n")
+            input(">>> Put the new key wherever the old one is used, then press Enter to "
+                  "store it in pass and delete the old one <<<")
     except KeyboardInterrupt:
         print(
             "\nInterrupted. State: the new key "

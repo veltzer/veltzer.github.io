@@ -6,6 +6,6 @@ template = "data_collection.html"
 # The page is the data collection app; templates/data_collection.html holds
 # the markup and reads this list.
 [extra]
-# Concerts and museums are private for now: see doc/DECISIONS.md.
+# Concerts and museums are private: see doc/DECISIONS.md.
 plugins = ["audio", "audible", "books", "features", "podcasts", "publishers", "videos", "youtube"]
 +++

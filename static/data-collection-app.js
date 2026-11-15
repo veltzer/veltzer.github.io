@@ -50,9 +50,7 @@
         'education': BASE_PATH + 'plugin-companies.js',
         'certifiers': BASE_PATH + 'plugin-companies.js',
         'certifications': BASE_PATH + 'plugin-certifications.js',
-        'concerts': BASE_PATH + 'plugin-concerts.js',
         'features': BASE_PATH + 'plugin-movies.js',
-        'museums': BASE_PATH + 'plugin-museums.js',
         'podcasts': BASE_PATH + 'plugin-podcasts.js',
         'videos': BASE_PATH + 'plugin-series.js',
         'youtube': BASE_PATH + 'plugin-youtube.js'
@@ -161,8 +159,8 @@
         let allItems = []; // To store the fetched data
         let activeConfig = {}; // To store the config of the current view
         // Bumped on every loadData() call. A load that finishes after a newer
-        // one started must not touch the page: clicking YouTube then Museums
-        // used to render the 29k YouTube items through the museums plugin
+        // one started must not touch the page: clicking YouTube then another tab
+        // used to render the 29k YouTube items through that tab's plugin
         // when the slower fetch landed second.
         let loadSequence = 0;
         let currentPage = 1;
@@ -744,8 +742,8 @@
                 const specificDetails = activeConfig.renderDetails(item);
 
                 // allItems is passed as a second argument so a plugin can
-                // resolve an item against the whole set -- museums use it to
-                // map repeat visits onto the one image kept for that museum.
+                // resolve an item against the whole set, for entries that
+                // share one image.
                 const rawImgUrl = activeConfig.renderImage ? activeConfig.renderImage(item, allItems) : '';
                 const imgUrl = rawImgUrl && !/^https?:\/\//.test(rawImgUrl) ? BASE_PATH + rawImgUrl : rawImgUrl;
                 // The image box is a fixed 2:1 landscape. Landscape sources

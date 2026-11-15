@@ -132,9 +132,8 @@ def check_museums():
     """Check museum images.
 
     One entry per visit, so a museum visited twice has two entries. Only the
-    lowest-numbered visit owns an image file -- repeat visits render that same
-    image via canonicalMuseumImageId() in plugin-museums.js -- so only the
-    first visit to each museum is checked here.
+    lowest-numbered visit owns an image file, which repeat visits share, so
+    only the first visit to each museum is checked here.
     """
     entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "museums.yaml"))
     errors = 0

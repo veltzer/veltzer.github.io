@@ -154,7 +154,7 @@ a:hover { text-decoration: underline; }
   .site-nav .nav-menu-items a { padding: 0.6rem 1rem; }
 }
 
-// Header controls (language + theme selects), pushed to the far end of the
+// Header controls (language links + theme select), pushed to the far end of the
 // header so they read as chrome rather than another nav item.
 .site-controls {
   display: flex;
@@ -163,7 +163,7 @@ a:hover { text-decoration: underline; }
   align-items: center;
 }
 
-// Controls: the header's language and theme selects and every button, select
+// Controls: the header's theme select and every button, select
 // and number field of the data collection app (.control) share one look.
 .site-select,
 .control {
@@ -315,8 +315,9 @@ h3 { font-size: 1.1rem; margin: 1.8rem 0 0.5rem; }
 }
 
 // The per-post language switcher (templates/page.html). The site-level one in
-// the header is a <select class="site-select">, styled further down.
+// the header (.site-langs in base.html) reuses the same .lang chips.
 .lang-switcher { display: flex; gap: 0.4rem; margin-top: 0.75rem; }
+.site-langs { display: flex; gap: 0.4rem; align-items: center; }
 .lang {
   text-transform: uppercase;
   font-size: 0.75rem;
@@ -723,3 +724,75 @@ th { background: var(--bg-surface); }
 .archive-years-nav .current { font-weight: 700; }
 .archive-years th a { text-decoration: none; }
 .archive-years th a:hover { text-decoration: underline; }
+
+/* The calendar page (content/calendar/_index.en.md). FullCalendar 6 exposes its palette as --fc-* custom properties, so mapping
+   them onto the site's theme tokens is all it takes for the calendar to follow
+   the theme switcher -- no per-theme overrides, and it keeps working if a new
+   theme is added to shared-themes. */
+#calendar {
+    --fc-page-bg-color: var(--bg);
+    --fc-neutral-bg-color: var(--bg-surface);
+    --fc-neutral-text-color: var(--text-secondary);
+    --fc-border-color: var(--border);
+    --fc-button-text-color: var(--text-primary);
+    --fc-button-bg-color: var(--bg);
+    --fc-button-border-color: var(--border);
+    --fc-button-hover-bg-color: var(--bg);
+    --fc-button-hover-border-color: var(--accent);
+    --fc-button-active-bg-color: var(--accent);
+    --fc-button-active-border-color: var(--accent);
+    --fc-today-bg-color: var(--bg-hover);
+    --fc-event-bg-color: var(--accent);
+    --fc-event-border-color: var(--accent);
+    --fc-event-text-color: var(--bg);
+    --fc-list-event-hover-bg-color: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+/* The active-view button uses --fc-button-active-bg-color, which is the accent,
+   so its label needs the contrasting tone rather than the normal text colour. */
+#calendar .fc-button-active { color: var(--bg); }
+
+/* The buttons drawn like the site's .control: its font,
+   size, padding, corner and focus outline, rather than FullCalendar's own. */
+#calendar .fc-button {
+    font: inherit;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-xs);
+    box-shadow: none;
+    transition: border-color var(--transition);
+}
+#calendar .fc-button:focus,
+#calendar .fc-button:active { box-shadow: none; }
+#calendar .fc-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+#calendar .fc-button-group > .fc-button { border-radius: 0; }
+#calendar .fc-button-group > .fc-button:first-child { border-start-start-radius: var(--radius-xs); border-end-start-radius: var(--radius-xs); }
+#calendar .fc-button-group > .fc-button:last-child { border-start-end-radius: var(--radius-xs); border-end-end-radius: var(--radius-xs); }
+#calendar .fc-toolbar-title { font-size: 1.35rem; }
+/* Phones: the toolbar's three groups wrap onto their own lines instead of
+   pushing the view buttons past the edge of the screen. */
+@media (max-width: 40rem) {
+    #calendar .fc-header-toolbar { flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+    #calendar .fc-toolbar-title { font-size: 1.1rem; }
+}
+
+.fc-event {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.fc-event:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/* The site's .notice-error look, hidden until a load fails. */
+.calendar-error {
+    display: none;
+    background: var(--danger-dim);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 1.25rem;
+}

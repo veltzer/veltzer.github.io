@@ -248,23 +248,26 @@
   });
   </script>
 
-  {#- Header controls: language and theme, both as <select> elements.
+  {#- Header controls: language as links, theme as a <select>.
 
-      Language: where the current document exists in the other language --
-      posts, sections and tag pages alike -- the option points straight at it
-      so the reader stays where they are. Anything without a counterpart
-      falls back to the other language's home page, better than hiding the
-      switcher and leaving /he/ unreachable. Navigation is a plain location
-      change on `change`, so the options carry real URLs and work without JS
-      in that sense. The language code rides in data-lang (hreflang is not
-      an attribute of <option>). -#}
+      Language: one link per language. Where the current document exists in
+      the other language -- posts, sections and tag pages alike -- the link
+      points straight at it so the reader stays where they are. Anything
+      without a counterpart falls back to the other language's home page,
+      better than hiding the switcher and leaving /he/ unreachable. Plain
+      links rather than a <select> that navigated on `change`: they work
+      without JavaScript, and a keyboard reader arrowing through a closed
+      select was sent away at the first option. -#}
   <div class="site-controls">
-    <label class="visually-hidden" for="lang-select">{{ trans(key="label_language") }}</label>
-    <select id="lang-select" class="site-select">
+    <nav class="site-langs" aria-label="{{ trans(key="label_language") }}">
       {%- for entry in languages %}
-      <option value="{{ alternates | get(key=entry.code, default=entry.url_prefix) }}" data-lang="{{ entry.code }}"{% if entry.code == lang %} selected{% endif %}>{{ entry.name }}</option>
+      {%- if entry.code == lang %}
+      <span class="lang current" lang="{{ entry.code }}" aria-current="page">{{ entry.name }}</span>
+      {%- else %}
+      <a class="lang" href="{{ alternates | get(key=entry.code, default=entry.url_prefix) }}" lang="{{ entry.code }}" hreflang="{{ entry.code }}">{{ entry.name }}</a>
+      {%- endif %}
       {%- endfor %}
-    </select>
+    </nav>
 
     <label class="visually-hidden" for="theme-select">{{ trans(key="label_theme") }}</label>
     {#- The theme list, its order and its labels come from the shared-themes
@@ -291,14 +294,14 @@
   // sites, so a reader's theme follows them across them.
   initThemeSwitcher();
 
-  // Language: each option carries the URL of this page in that language.
-  document.getElementById('lang-select').addEventListener('change', function (event) {
-    // Remember the choice so the root chooser can send this reader straight to
-    // their language next time. Written here rather than inferred from the URL
-    // so it only records a deliberate switch.
-    var option = event.target.selectedOptions[0];
-    try { localStorage.setItem('veltzer-site-lang', option.dataset.lang); } catch (e) { /* storage blocked */ }
-    window.location.href = event.target.value;
+  // Language: remember a deliberate switch so the root chooser can send this
+  // reader straight to their language next time. Written on the click rather
+  // than inferred from the URL, so only a choice is recorded. The link itself
+  // does the navigation.
+  document.querySelectorAll('.site-langs a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      try { localStorage.setItem('veltzer-site-lang', link.getAttribute('hreflang')); } catch (e) { /* storage blocked */ }
+    });
   });
 </script>
 

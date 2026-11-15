@@ -13,9 +13,10 @@ Every visit shows the same photo, so only the lowest-numbered visit gets an
 image file; later visits are skipped entirely rather than fetching a second
 copy of the same picture.
 
-plugin-museums.js resolves a repeat visit to that lowest id when it builds the
-image path, so each visit still renders an image. Keep the two in step: if this
-rule changes, canonicalMuseumImageId() there has to change with it.
+Whatever page shows the museums has to resolve a repeat visit to that lowest
+id when it builds the image path (the deleted plugin-museums.js did, with
+canonicalMuseumImageId(); see doc/DECISIONS.md), and scripts/check_images.py
+checks only the first visit for the same reason.
 
 Usage:
   scripts/fetch_museum_images.py [--force]

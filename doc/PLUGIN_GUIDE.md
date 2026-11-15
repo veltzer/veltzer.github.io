@@ -51,8 +51,7 @@ content/*/_index.en.md content/*/*/_index.en.md` lists them):
   `certifications`;
 - `content/consulting/`: `consulting`.
 
-A single-plugin page shows no tab row. `concerts` and `museums` are
-registered but listed on no page (private for now, see `DECISIONS.md`).
+A single-plugin page shows no tab row.
 
 One script may register several keys: `plugin-companies.js` registers
 `companies` and five copies of it (`providers`, `consulting`, `publishers`,
@@ -232,7 +231,7 @@ window.collectionPlugins['mykey'] = {
     // renderImage(item, allItems) -> URL string or ''
     // If provided, returns an image URL to display at the top of the card.
     // allItems is the whole loaded dataset, for plugins whose image name
-    // depends on other items (the museums plugin uses it).
+    // depends on other items (one image shared by several entries).
     renderImage: function(item) {
         return item.thumbnail_url || '';
     },
@@ -364,7 +363,7 @@ than writing the loop again:
 ## Existing Plugins
 
 The registry is `ALL_PLUGIN_FILES` in `static/data-collection-app.js`; as of
-2026-11-15 it holds these sixteen keys in eleven files.
+2026-11-15 it holds these fourteen keys in nine files.
 
 | Key | File | Data |
 |-----|------|------|
@@ -379,8 +378,6 @@ The registry is `ALL_PLUGIN_FILES` in `static/data-collection-app.js`; as of
 | `certifiers` | `plugin-companies.js` | `data/certifiers.json.gz` (function `certification`: who certified me; build-time) |
 | `certifications` | `plugin-certifications.js` | `data/certifications.json.gz` (one card per certification, `certifications.yaml` joined with the issuers by `scripts/import_certifications.py`; build-time) |
 | `features` | `plugin-movies.js` | `data/video_features.json.gz` |
-| `concerts` | `plugin-concerts.js` | `data/concerts.json.gz` (disabled: private for now, see `DECISIONS.md`) |
-| `museums` | `plugin-museums.js` | `data/museums.json.gz` (disabled: private for now, see `DECISIONS.md`) |
 | `podcasts` | `plugin-podcasts.js` | `data/podcasts.json.gz` |
 | `videos` | `plugin-series.js` | `data/video_series.json.gz` |
 | `youtube` | `plugin-youtube.js` | `data/youtube.json.gz` |
