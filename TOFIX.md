@@ -15,10 +15,14 @@ or was left alone on purpose.
   `{"@type": "Person", "name": ...}` author and no `image`
   (`page_json_ld` in rssite's `src/templates.rs`). It needs an author `@id`
   and an image option there.
-- **rsconstruct / tidy: a nested `<main>` is not caught.** The `itidy` check
-  now runs over the rendered `_site/`, but tidy 5.8's rules do not include
-  HTML5's content model, so the defect that prompted the check would still
-  pass. Catching it needs an HTML5 validator.
+- **A nested `<main>` is not caught yet.** The `itidy` check runs over the
+  rendered `_site/`, but tidy 5.8's rules do not include HTML5's content
+  model. rsconstruct gained `processor.checker.vnu` (the Nu Html Checker)
+  on 2026-11-16 for this; it catches the defect. Turning it on here waits
+  for an rsconstruct release that carries it, and adds a Java runtime to
+  the build. Over today's `_site/` it reports only the in-body `<style>`
+  blocks of the six imported teaching pages, which the tidy check already
+  excludes.
 - **`.luacheckrc` and `config/project.lua`** have no consumer in this
   repository; both are fleet files.
 
