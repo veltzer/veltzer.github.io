@@ -19,9 +19,6 @@ or was left alone on purpose.
   now runs over the rendered `_site/`, but tidy 5.8's rules do not include
   HTML5's content model, so the defect that prompted the check would still
   pass. Catching it needs an HTML5 validator.
-- **`.oxlintrc.json:7` names a schema under `./node_modules/`**, which does
-  not exist. The file is a fleet invariant (`oxlint-config` in
-  `~/.config/rsmultigit/config.toml`), so the fix is fleet-wide.
 - **`.luacheckrc` and `config/project.lua`** have no consumer in this
   repository; both are fleet files.
 
