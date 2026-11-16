@@ -16,7 +16,7 @@ calendar integration.
   and `config/*.lua`)
 - **Frontend**: HTML5, SCSS, JavaScript (ES9+)
 - **Linting**: everything is a processor in `rsconstruct.toml` — oxlint
-  (`.oxlintrc.json`, JavaScript), tidy (the rendered HTML in `_site/`), biome (`.biome.jsonc`, the CSS
+  (`.oxlintrc.json`, JavaScript), tidy and the Nu Html Checker (`vnu`; both over the rendered HTML in `_site/`, the second against the HTML standard's content rules), biome (`.biome.jsonc`, the CSS
   compiled from `sass/`), ruff, pyrefly (`[tool.pyrefly]` in `pyproject.toml`),
   pytest (`tests/`), shellcheck,
   rumdl (`.rumdl.toml` for prose, `.rumdl.content.toml` for `content/`), taplo, yamllint,
@@ -157,7 +157,9 @@ sitemap) needs 0.1.25.
   tools under `[dependencies].cargo` (that is how rssite is installed); and
   the exact version of the Rust and downloaded tools in `rsconstruct.lock`
   (rssite, biome, oxlint, rumdl, taplo and uv; the Python tools are pinned by
-  `uv.lock` instead). The site has no Node packages at build time: oxlint and
+  `uv.lock` instead; the lock also pins `vnu.jar`, the HTML checker, which is
+  the one tool that needs a runtime: `java`, installed by apt when the
+  machine has none). The site has no Node packages at build time: oxlint and
   biome are single binaries rsconstruct downloads. (Tailwind is the one
   exception, by hand: see `build_collection_css.sh` below.) If
   something cannot be expressed there, the fix belongs in rsconstruct, not

@@ -31,3 +31,8 @@ executable_sha256 = "dad2faf6377d2daa4f4fabf459fe7ccfb98a5448f0d4bca8270ca9acb04
 url = "https://github.com/astral-sh/uv/releases/download/0.13.6/uv-x86_64-unknown-linux-gnu.tar.gz"
 sha256 = "f29c3e94ffabd7e6f3ba521dba169a9b7ec12100bf3257087f0f24f6123f3645"
 executable_sha256 = "23803452c0fbe125033054cd9ff245f1d649fb65b4b73f68429f4abda432436d"
+
+[binary."vnu.jar"]
+url = "https://registry.npmjs.org/vnu-jar/-/vnu-jar-26.11.14.tgz"
+sha256 = "115cf1f0bd281c931a350b7642ff2614884d35bd2f3e2ce25a6763fea9083b00"
+executable_sha256 = "7673ca7aa7b0a306cbfabc6d7de3c963df9a289f1809d6b24fbc7d9511bfece5"
