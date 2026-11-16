@@ -23,8 +23,10 @@ or was left alone on purpose.
   the build. Over today's `_site/` it reports only the in-body `<style>`
   blocks of the six imported teaching pages, which the tidy check already
   excludes.
-- **`.luacheckrc` and `config/project.lua`** have no consumer in this
-  repository; both are fleet files.
+- **`.luacheckrc`** has no consumer in this repository (no luacheck
+  processor runs here); it is a fleet invariant. `config/project.lua` is
+  not in this list: `rsmultigit gh sync-metadata` reads it for the GitHub
+  description and topics.
 
 ## Left alone on purpose
 
