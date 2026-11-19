@@ -121,6 +121,7 @@ dep_inputs = [
     "scripts/import_companies.py",
     "scripts/import_teaching.py",
     "scripts/make_word_vectors.py",
+    "scripts/check_hebrew.py",
     "scripts/podcast_utils.py",
     "scripts/podcasts_backfill_rss_data.py",
     # test_logo.py compares make_logo.py with the two committed copies of the logo.
@@ -297,6 +298,27 @@ command = "scripts/check_post_names.py"
 src_dirs = ["content/blog"]
 src_extensions = [".md"]
 src_exclude_paths = ["content/blog/_index.en.md", "content/blog/_index.he.md"]
+batch = true
+# What a Hebrew reader is handed outside the pages is Hebrew: the feeds and
+# the share cards. Three instances of one script (see it for the rules): the
+# Hebrew posts' title, description and tags, which are the text of a post's
+# card and feed entry; the name on the cards, from i18n/he.toml; and the
+# built Hebrew feeds, where the generator or its configuration could slip an
+# English string in (tag feeds carried the English site title and every
+# entry an English author name until 2026-11-19).
+[processor.checker.script.hebrew_posts]
+command = "scripts/check_hebrew.py"
+src_dirs = ["content/blog"]
+src_extensions = [".he.md"]
+src_exclude_paths = ["content/blog/_index.he.md"]
+batch = true
+[processor.checker.script.hebrew_strings]
+command = "scripts/check_hebrew.py"
+src_files = ["i18n/he.toml"]
+[processor.checker.script.hebrew_feeds]
+command = "scripts/check_hebrew.py"
+src_dirs = ["_site/he"]
+src_extensions = [".xml"]
 batch = true
 [processor.generator.generic.aspell_he_dict]
 command = "scripts/build_he_dict.sh"

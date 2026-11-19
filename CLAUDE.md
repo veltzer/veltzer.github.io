@@ -75,7 +75,7 @@ which records the traps that outlived the migration.
   (locally vendored JS libraries); the apps themselves live in `content/<app>/`
 - `shared/shared-themes/` — git submodule providing the design tokens. **Run
   `git submodule update --init --recursive` on a fresh clone or the build fails.**
-- `scripts/` — `build_site.py` (the companies build step), `check_post_names.py` (post file names against their `date` and `slug`), `check_redirects.py` (checks the
+- `scripts/` — `build_site.py` (the companies build step), `check_post_names.py` (post file names against their `date` and `slug`), `check_hebrew.py` (the Hebrew feeds and share cards carry no untranslated text: the Hebrew posts' title, description and tags, and the built `_site/he/**/atom.xml`; a build step), `check_redirects.py` (checks the
   live site's host redirects and sitemap), `check_indexing.py` (which sitemap pages Google has indexed, through the Search
   Console API with the gcloud login; network, run by hand), `check_images.py` (every media item has its
   local image in `static/images/`; a build step), `check_profile_links.py` (the profile
@@ -143,7 +143,8 @@ templates and `rssite.toml` use `require_translations`,
 later; `[sitemap] pagers = false` (no page 2, 3, ... of a listing in the
 sitemap) needs 0.1.25; `author_id` in `rssite.toml` and the `image` key the
 blog's `[cascade]` sets (each post's share card, `page.image` in the
-templates and `image` in the post's JSON-LD) need 0.1.28.
+templates and `image` in the post's JSON-LD) need 0.1.28; the Hebrew
+`author` under `[[languages]]` and Hebrew titles on the tag feeds need 0.1.29.
 
 ## CI and the Workflow File
 
@@ -210,7 +211,8 @@ tags = ["religion", "philosophy", "ethics"]
 - **Translations**: add `content/blog/<date>-<slug>.he.md`, the same name as the
   English file. Copy `date` and `slug` verbatim from the English file — they are
   shared keys, and the name check fails on a mismatch.
-  Translate the `title`, the `description` and the `tags` (see below). Do not add a `lang` key;
+  Translate the `title`, the `description` and the `tags` (see below); `scripts/check_hebrew.py`
+  fails the build when one is left in English. Do not add a `lang` key;
   rssite reads it from the suffix (`.en` / `.he`; a file with neither is an error).
   The language switcher renders itself from the `translations` rssite hands every
   template, so never hand-write cross-links between a post and its translation.

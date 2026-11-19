@@ -301,6 +301,18 @@ generators before checkers.
 
 ## Validation Scripts
 
+### `scripts/check_hebrew.py`
+
+Checks that the Hebrew feeds and share cards carry no untranslated text. Run
+by rsconstruct as three instances: `hebrew_posts` over the `.he.md` posts
+(`title` and `description` contain Hebrew, and so does every tag not in the
+script's `LATIN_TAGS`, the technical names that stay as they are),
+`hebrew_strings` over `i18n/he.toml` (`home_title`, the name on the cards)
+and `hebrew_feeds` over every built `_site/he/**/atom.xml` (the feed's
+title, each entry's title and each author name). "Contains Hebrew" is one
+Hebrew letter, so a title that mixes in a product name passes. The bodies
+of the posts are not checked here.
+
 ### `scripts/check_post_names.py`
 
 Checks that every blog post is named `<date>-<slug>.<lang>.md` after its own

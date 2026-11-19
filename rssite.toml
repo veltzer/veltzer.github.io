@@ -40,6 +40,9 @@ locale = "he_IL"
 # form is the only one.
 date_format = "%-d ב%B %Y"
 title = "האתר האישי של מארק ולצר"
+# The name as Hebrew writes it: the author of every entry of the Hebrew
+# feeds and of the Hebrew posts' structured data.
+author = "מארק ולצר"
 description = "מארק ולצר – מהנדס תוכנה מישראל. בלוג על תכנות, לינוקס ופילוסופיה, לצד משחקי שחמט, המלצות מדיה וחומרי הוראה."
 generate_feeds = true
 

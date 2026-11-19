@@ -53,10 +53,17 @@ unless something changes: the remaining gaps are decided, not pending.
 - **The 404 page.** GitHub Pages serves one `/404.html` for every language, so
   it cannot know the reader's language. It shows both languages.
 
-## Not verified
+## Checked by the build
 
-- The Hebrew Atom feed (`/he/atom.xml`) and the social-sharing images of Hebrew
-  posts (`images/og/`) were not checked for English text.
+- **The Hebrew feeds and the share cards of Hebrew posts.** Read on
+  2026-11-19, which found two things: every tag feed under `/he/tags/` was
+  titled with the English site title, and every entry of every Hebrew feed
+  named the author in English. Both were rssite's (fixed in 0.1.29: a
+  section's or a term's feed uses the language's title, and a language can
+  set its own `author`, which `rssite.toml` now does). The cards were
+  clean: their text is the name from `home_title`, the post's title and its
+  tags. `scripts/check_hebrew.py` now checks all of it on every build
+  (`doc/SCRIPTS.md`), so neither needs reading by hand again.
 
 ## How it fits together
 
