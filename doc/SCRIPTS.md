@@ -68,7 +68,31 @@ Not part of the build -- it talks to the network and tests the deployment,
 not the tree. Run it after a deploy, or when Search Console reports an
 indexing problem, to tell a regression here from Google's own crawl timing.
 It deliberately cannot read a validation verdict: that is behind a Google
-login, and `doc/SEO.md` says where to read it by hand.
+login; `check_indexing.py` below reads the per-page state through the API.
+
+## check_indexing.py
+
+Compares what Google has indexed with what the live sitemap lists, and
+prints the pages that are not indexed, grouped by Google's reason
+(*Discovered - currently not indexed*, *Crawled - currently not indexed*,
+...). Google has no call that lists every indexed URL, so it works in two
+steps: one Search Analytics request for every page that appeared in a search
+result in the last `--days` days (shown means indexed), then one URL
+Inspection request for each page that step did not settle. Inspection is
+slow, about seven seconds a page against a quota of 2000 a day, so a page
+found indexed is remembered in `~/.cache/veltzer.github.io/indexed.json` for
+`--max-age` days and a later run inspects only new pages and the ones still
+waiting. `--no-inspect` runs the first step alone.
+
+It authenticates as the gcloud application-default login, which must carry
+the Search Console scope, and the Search Console API must be enabled on the
+quota project (`veltzer-calendar-id`). The one-time commands are in the
+script's docstring. No key is stored anywhere.
+
+Not part of the build -- it talks to the network and reports Google's state,
+not the tree's. It covers this site's sitemap only; the domain property's
+other reasons (404, redirect, the other repositories' pages) are still read
+in the Search Console UI, see `doc/SEO.md`.
 
 ### `scripts/export_posts_for_ai.py`
 

@@ -76,7 +76,8 @@ which records the traps that outlived the migration.
 - `shared/shared-themes/` — git submodule providing the design tokens. **Run
   `git submodule update --init --recursive` on a fresh clone or the build fails.**
 - `scripts/` — `build_site.py` (the companies build step), `check_post_names.py` (post file names against their `date` and `slug`), `check_redirects.py` (checks the
-  live site's host redirects and sitemap), `check_images.py` (every media item has its
+  live site's host redirects and sitemap), `check_indexing.py` (which sitemap pages Google has indexed, through the Search
+  Console API with the gcloud login; network, run by hand), `check_images.py` (every media item has its
   local image in `static/images/`; a build step), `check_profile_links.py` (the profile
   URLs in `profiles.yaml` still resolve; network, run by hand, not part of the build),
   `import_certifications.py` (the certifications tab data, run by the companies step),

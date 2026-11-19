@@ -7,10 +7,9 @@ answers the smaller question that does not need Google: is the deployment
 sound? Every non-canonical host (http, www) must 301 straight to
 the canonical host (base_url in rssite.toml), and the sitemap must list real pages only.
 
-What it deliberately does not do is read a validation verdict. That lives
-behind a Google login, there is no API key for this property, and inventing
-a verdict would be worse than not having one. See doc/SEO.md for where to
-read it by hand.
+What it deliberately does not do is ask Google anything. Which pages are
+indexed is check_indexing.py's question (it needs the gcloud login); a
+validation verdict is read in the Search Console UI, see doc/SEO.md.
 
 Exits non-zero if anything fails, so it can gate a deploy or run from cron.
 """
@@ -115,7 +114,8 @@ def main():
         return 1
 
     print("\nAll good.")
-    print("The validation verdict itself must be read while logged in:")
+    print("Which pages Google has indexed: scripts/check_indexing.py")
+    print("A validation verdict is read in the Search Console UI:")
     print("https://search.google.com/search-console/index?resource_id=sc-domain%3Aveltzer.org")
     return 0
 

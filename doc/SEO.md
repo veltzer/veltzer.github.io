@@ -499,3 +499,16 @@ The unfiltered numbers moved as expected: *Not found (404)* 47 -> 66 (the
 pre-2026-11-07 post URLs, which 404 by decision), *Crawled - currently not
 indexed* 716 -> 739 (the `.docx` syllabi), *Discovered* 143 -> 82,
 *Excluded by 'noindex'* 21 -> 22, *Google chose different canonical* 4 -> 5.
+
+**2026-11-19: `scripts/check_indexing.py` reads this through the API.** The
+per-page state of the sitemap no longer needs the UI: the script asks Search
+Analytics which pages were shown in search, inspects the rest with the URL
+Inspection API, and lists the pages that are not indexed by reason (see
+`doc/SCRIPTS.md`). Its first run: **970 of 1057 indexed, 87 not** -- 73
+*URL is unknown to Google*, 12 *Discovered - currently not indexed*, one
+*Crawled*, one *Google chose different canonical*. They are the same pages
+the UI listed above plus the posts published since (the API reports today's
+state, the UI report is days behind, and the API says *unknown* for most of
+what the report calls *Discovered*). The UI is still where the
+domain-wide reasons (404, redirect, other repositories' pages) and the
+validation verdicts are read.
