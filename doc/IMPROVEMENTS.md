@@ -1,8 +1,8 @@
 # Suggested Improvements
 
 Struck-through entries are done; the note under each records what was actually
-changed and how it was verified. **The open items are in the last two
-sections, "Site review, 2026-09-07" and "Blog review, 2026-10-30"**; the older `hebrew` language tag noted under
+changed and how it was verified. **The one item still open is the chess archive download under
+"Site review, 2026-09-07", parked on 2026-11-19 because the chess page is moving out**; the older `hebrew` language tag noted under
 "Right-to-left rendering" was resolved on 2026-10-29. Everything else above the
 site review is closed. Where a closed verdict was later overtaken by the code, a
 dated correction sits under it rather than a rewrite.
@@ -843,6 +843,9 @@ open unless struck through. Ordered roughly by how visible the fault is.
   movetext of a game on demand, or split the archive by year and load the selected year.
   Stats (61,636 games, win/loss) come from the headers, so the index alone can render
   the stat tiles.
+
+  **Parked, 2026-11-19:** the chess page is due to move out of this site, so this is
+  not to be fixed here. It goes with the page to wherever it lands.
 
 - ~~**No `og:image` / `twitter:image` anywhere.** — DONE, 2026-10-29.~~
   `scripts/make_og_images.py` draws a 1200x630 card per language (the logo, the
