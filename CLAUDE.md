@@ -141,7 +141,9 @@ templates and `rssite.toml` use `require_translations`,
 `locale`/`date_format`, and the `git`, `x_default`, `meta_description`,
 `json_ld` and `page.related` context, all of which need rssite 0.1.15 or
 later; `[sitemap] pagers = false` (no page 2, 3, ... of a listing in the
-sitemap) needs 0.1.25.
+sitemap) needs 0.1.25; `author_id` in `rssite.toml` and the `image` key the
+blog's `[cascade]` sets (each post's share card, `page.image` in the
+templates and `image` in the post's JSON-LD) need 0.1.28.
 
 ## CI and the Workflow File
 

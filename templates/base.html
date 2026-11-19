@@ -70,17 +70,15 @@
 {#- The share card, 1200x630, the size every network's large preview
     expects; without it a shared link gets a text-only card. A blog post
     has its own, with its title and tags, drawn at build time by
-    scripts/make_post_cards.py into images/og/<file stem>.jpg
-    (check=false: rsconstruct writes it, not rssite). Every other page
-    uses its language's card, drawn by scripts/make_og_images.py. -#}
-{%- if page and page.relative_path is starting_with("blog/") %}
-{%- set card_name = page.relative_path | split(pat="/") | last | replace(from=".md", to=".jpg") %}
-{%- set share_card = get_url(path="images/og/" ~ card_name, check=false) %}
-<meta property="og:image" content="{{ share_card }}">
+    scripts/make_post_cards.py into images/og/<file stem>.jpg; it is
+    page.image, set for every post by the [cascade] of
+    content/blog/_index.<lang>.md. Every other page uses its language's
+    card, drawn by scripts/make_og_images.py. -#}
+{%- if page and page.image %}
+<meta property="og:image" content="{{ page.image }}">
 <meta property="og:image:alt" content="{{ page.title }}">
 {%- else %}
-{%- set share_card = get_url(path="images/og/card-" ~ lang ~ ".jpg") %}
-<meta property="og:image" content="{{ share_card }}">
+<meta property="og:image" content="{{ get_url(path="images/og/card-" ~ lang ~ ".jpg") }}">
 <meta property="og:image:alt" content="{{ trans(key="home_title") }}">
 {%- endif %}
 <meta property="og:image:width" content="1200">
@@ -134,17 +132,13 @@
 </script>
 
 {#- The post itself as schema.org data (a BlogPosting: headline, dates,
-    author, tags as keywords, the translation as workTranslation), built by
-    rssite. rssite does not know the share card, and Google's article
-    results want an `image`, so it is spliced in here after the one line
-    every such document starts with: the same picture og:image names. When
-    rssite learns to emit `image` itself, this replace goes. -#}
+    tags as keywords, the translation as workTranslation), built by rssite.
+    Its author carries the @id of the Person above (`author_id` in
+    rssite.toml) and its `image` is page.image, the picture og:image
+    names. -#}
 {%- if page %}
-{%- set ld_context = '"@context": "https://schema.org",' %}
-{%- set ld_image = share_card | json_encode %}
-{%- set ld_with_image = ld_context ~ ' "image": ' ~ ld_image ~ "," %}
 <script type="application/ld+json">
-{{ json_ld | replace(from=ld_context, to=ld_with_image) | safe }}
+{{ json_ld | safe }}
 </script>
 {%- endif %}
 

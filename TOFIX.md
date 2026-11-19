@@ -9,12 +9,6 @@ or was left alone on purpose.
 
 ## Needs a change elsewhere
 
-- **rssite: link the post's JSON-LD to the Person.** `base.html` gives the
-  Person block an `@id` (`https://veltzer.org/#person`), but the
-  `BlogPosting` rssite builds carries its own bare
-  `{"@type": "Person", "name": ...}` author and no `image`
-  (`page_json_ld` in rssite's `src/templates.rs`). It needs an author `@id`
-  and an image option there.
 - **`config/project.lua`** is read by nothing in this repository, but it has
   a consumer outside it: `rsmultigit gh sync-metadata` reads it for the
   GitHub description and topics. (`.luacheckrc`, which only configured a

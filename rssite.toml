@@ -5,6 +5,10 @@
 base_url = "https://veltzer.org"
 title = "Mark Veltzer's personal site"
 author = "Mark Veltzer"
+# The @id of the Person block templates/base.html writes on every page:
+# with it the author of a post's JSON-LD is that same person, not a second,
+# nameless one.
+author_id = "https://veltzer.org/#person"
 description = "Mark Veltzer – software engineer from Israel. Blog on programming, Linux and philosophy, plus chess games, media notes and teaching material."
 
 # Both languages are explicit and symmetrical: every content file carries a

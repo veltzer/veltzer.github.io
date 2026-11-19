@@ -10,4 +10,9 @@ generate_feeds = true
 year_archives = true
 # Every post exists in both languages: a missing translation fails the build.
 require_translations = true
+
+# Every post's share card, drawn by scripts/make_post_cards.py: templates
+# read it as page.image and the post's structured data carries it.
+[cascade]
+image = "images/og/{stem}.{lang}.jpg"
 +++
