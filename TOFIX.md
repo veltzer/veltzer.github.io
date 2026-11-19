@@ -15,10 +15,10 @@ or was left alone on purpose.
   `{"@type": "Person", "name": ...}` author and no `image`
   (`page_json_ld` in rssite's `src/templates.rs`). It needs an author `@id`
   and an image option there.
-- **`.luacheckrc`** has no consumer in this repository (no luacheck
-  processor runs here); it is a fleet invariant. `config/project.lua` is
-  not in this list: `rsmultigit gh sync-metadata` reads it for the GitHub
-  description and topics.
+- **`config/project.lua`** is read by nothing in this repository, but it has
+  a consumer outside it: `rsmultigit gh sync-metadata` reads it for the
+  GitHub description and topics. (`.luacheckrc`, which only configured a
+  luacheck processor that does not run here, was removed on 2026-11-19.)
 
 ## Left alone on purpose
 
