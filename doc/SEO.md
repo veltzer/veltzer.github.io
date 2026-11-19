@@ -480,3 +480,22 @@ Google folded into a sibling listing; and 21 are *Excluded by 'noindex'*:
 (the drift predicted above), and 8 retired URLs of this site (`/slides/`,
 `/syllabi/`, `/calendar/`, `/jschess/`, `/page/2/`, `/page/4/` and three old
 posts) that were `noindex` redirect stubs when crawled and now 404.
+
+As of 2026-11-19 (report last updated 2026-11-13): 2.98K indexed, 938 not,
+for the whole domain property. Filtered to this site's sitemap (the
+*All submitted pages* filter; the sitemap was last read 2026-11-17, 1,053
+URLs): **959 indexed, 84 not**. Of the 84, 82 are *Discovered - currently
+not indexed*, one *Crawled*, one *Google chose different canonical*. The 82
+are 74 posts (38 English, 36 Hebrew) and eight listing or nav pages
+(`/en/consulting/`, `/he/calendar/`, `/en/training/education/`,
+`/he/training/data/`, three tag pages and the `/en/blog/2019/` archive).
+Nearly all of the posts are ones whose URL changed on 2026-11-07, when every
+post got a short hand-picked slug: Google knows the new address from the
+sitemap and has not fetched it yet. Every one is live (200) and
+`scripts/check_redirects.py` passes (three host variants, 1057 sitemap
+URLs). Nothing to fix; they are waiting their turn.
+
+The unfiltered numbers moved as expected: *Not found (404)* 47 -> 66 (the
+pre-2026-11-07 post URLs, which 404 by decision), *Crawled - currently not
+indexed* 716 -> 739 (the `.docx` syllabi), *Discovered* 143 -> 82,
+*Excluded by 'noindex'* 21 -> 22, *Google chose different canonical* 4 -> 5.
