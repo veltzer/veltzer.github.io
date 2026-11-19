@@ -470,6 +470,34 @@ code { padding: 0.1rem 0.3rem; font-size: 0.9em; }
 pre { padding: 0.9rem 1rem; overflow-x: auto; border: 1px solid var(--border-subtle); }
 pre code { background: none; padding: 0; border: 0; }
 
+// Syntax colours of the code blocks rssite highlights (<pre class="highlight">,
+// one <span> per syntect scope: "comment block c", "string quoted double").
+// They are theme tokens, so a block is readable on all six themes; the
+// generator's own highlight.css is one fixed light palette and is not linked
+// (templates/base.html). The roles follow that palette: strings in the
+// accent, keywords and types bold, names of functions and of tags apart.
+pre.highlight {
+  .comment { color: var(--text-secondary); font-style: italic; }
+  .string { color: var(--accent); }
+  .constant,
+  .support.type,
+  .support.class,
+  .entity.name.class,
+  .entity.other.inherited-class { color: var(--entity-1); }
+  .keyword,
+  .storage { color: var(--entity-4); font-weight: bold; }
+  .entity.name.function,
+  .entity.other.attribute-name { color: var(--entity-2); }
+  .entity.name.tag,
+  .support.function { color: var(--entity-3); }
+  .invalid { color: var(--danger); }
+  .markup.inserted { color: var(--success); background: var(--success-dim); }
+  .markup.deleted { color: var(--danger); background: var(--danger-dim); }
+  .markup.heading,
+  .markup.bold { font-weight: bold; }
+  .markup.italic { font-style: italic; }
+}
+
 table { border-collapse: collapse; width: 100%; }
 th, td { border: 1px solid var(--border); padding: 0.4rem 0.6rem; text-align: start; }
 th { background: var(--bg-surface); }
@@ -824,6 +852,14 @@ th { background: var(--bg-surface); }
         --border-subtle: GrayText;
         --accent: CanvasText;
         --accent-dim: Canvas;
+        --entity-1: CanvasText;
+        --entity-2: CanvasText;
+        --entity-3: CanvasText;
+        --entity-4: CanvasText;
+        --success: CanvasText;
+        --success-dim: Canvas;
+        --danger: CanvasText;
+        --danger-dim: Canvas;
         --shadow: none;
     }
 

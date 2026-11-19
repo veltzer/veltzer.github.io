@@ -4,8 +4,9 @@ The full code review of 2026-11-15 (every script, test, template, stylesheet,
 frontend file, config file and document; not the blog posts or the vendored
 libraries) was fixed the same day, and so were the items that needed a
 decision. The findings and their fixes are in the git history of this file and
-in that day's commits. What is left needs a change outside this repository,
-or was left alone on purpose.
+in that day's commits. A second scan on 2026-11-20 was fixed the same way.
+What is left needs a change outside this repository, or was left alone on
+purpose.
 
 ## Needs a change elsewhere
 
@@ -13,6 +14,14 @@ or was left alone on purpose.
   a consumer outside it: `rsmultigit gh sync-metadata` reads it for the
   GitHub description and topics. (`.luacheckrc`, which only configured a
   luacheck processor that does not run here, was removed on 2026-11-19.)
+
+- **The three imported app pages are behind their upstream sites.**
+  `import_teaching.py` now scopes a selector that starts at `body`
+  (`body > div` became `#app-slides body > div`, which matches nothing;
+  fixed 2026-11-20), but the committed pages were not re-imported: the
+  sibling sites have since added `@font-face` rules with relative
+  `fonts/...` URLs, which would 404 here. The importer has to handle those
+  before the next import.
 
 ## Left alone on purpose
 

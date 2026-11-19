@@ -14,8 +14,8 @@ not. Run it on demand:
 
     scripts/check_profile_links.py
 
-Exit status is 1 if anything is reported, so it can still gate a release script
-if that is ever wanted.
+Exit status is 1 if a link is broken, so it can still gate a release script
+if that is ever wanted. Blocked links (below) are listed but do not fail it.
 
 On what counts as a failure: only connection errors and 4xx are reported as
 broken. Several of these hosts answer a bare HEAD or an unknown client with 403

@@ -103,7 +103,15 @@ src_extensions = [".md"]
 src_exclude_paths = ["content/blog/_index.en.md", "content/blog/_index.he.md"]
 output_dir = "_site/images/og"
 output_extension = "jpg"
-dep_inputs = ["scripts/make_og_images.py", "scripts/make_logo.py", "i18n/en.toml", "i18n/he.toml"]
+# The two Outfit files are the fonts the cards are set in (make_og_images.py).
+dep_inputs = [
+    "scripts/make_og_images.py",
+    "scripts/make_logo.py",
+    "i18n/en.toml",
+    "i18n/he.toml",
+    "shared/shared-themes/fonts/Outfit-Bold.ttf",
+    "shared/shared-themes/fonts/Outfit-Light.ttf",
+]
 
 [processor.checker.ruff]
 src_dirs = ["scripts", "tests"]

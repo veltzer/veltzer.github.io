@@ -15,6 +15,23 @@
     source of every page), ahead of the stylesheets. -#}
 <script>{{ load_data(path="shared/shared-themes/theme-onload.js") | safe }}</script>
 <title>{{ config.title }}</title>
+{#- What base.html gives every other page: a description, the canonical
+    address, a share card and who the site is about. Without them a search
+    result or a shared link to the bare domain had a title and nothing else. -#}
+<meta name="description" content="{{ language.description }}">
+<link rel="canonical" href="{{ config.base_url }}/">
+<meta property="og:url" content="{{ config.base_url }}/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ language.title }}">
+<meta property="og:locale" content="{{ language.locale }}">
+<meta property="og:title" content="{{ config.title }}">
+<meta property="og:description" content="{{ language.description }}">
+<meta property="og:image" content="{{ get_url(path="images/og/card-" ~ lang ~ ".jpg") }}">
+<meta property="og:image:alt" content="{{ trans(key="home_title") }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+{% include "person_jsonld.html" %}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="{{ get_url(path='shared-themes/fonts.css') }}">
 <link rel="stylesheet" href="{{ get_url(path='shared-themes/themes.css') }}">

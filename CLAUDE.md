@@ -12,8 +12,9 @@ calendar integration.
   static site generator (Rust, crates.io). Templates are
   [Tera](https://keats.github.io/tera/) (Jinja2-like). It replaced zola on
   2026-10-16; `doc/DECISIONS.md` records why.
-- **Build orchestration**: rsconstruct (single binary, configured via `rsconstruct.toml`
-  and `config/*.lua`)
+- **Build orchestration**: rsconstruct (single binary, configured via `rsconstruct.toml`;
+  nothing in it reads `config/`, which holds `project.lua` for `rsmultigit gh
+  sync-metadata` and the Tailwind files of `build_collection_css.sh`)
 - **Frontend**: HTML5, SCSS, JavaScript (ES9+)
 - **Linting**: everything is a processor in `rsconstruct.toml` — oxlint
   (`.oxlintrc.json`, JavaScript), tidy and the Nu Html Checker (`vnu`; both over the rendered HTML in `_site/`, the second against the HTML standard's content rules), biome (`.biome.jsonc`, the CSS
@@ -97,7 +98,9 @@ which records the traps that outlived the migration.
   processors
 - `tests/` — pytest suite: the data import scripts (csv, audible, books, certifications,
   companies), the logo generator against the inline logo in `base.html`, the word-vector
-  trimmer, and `people.yaml` against every `with:` name in the data files
+  trimmer, `people.yaml` against every `with:` name in the data files, the Hebrew check
+  (`check_hebrew.py`), the CSS scoping of `import_teaching.py` and the episode matching
+  of `podcast_utils.py`
 - `.aspell.{en,he}.txt` — the spellcheck word lists; `out/aspell/` holds the compiled
   dictionaries (gitignored build output)
 - `_site/` — generated output (gitignored, never edit)
@@ -263,6 +266,10 @@ tags = ["religion", "philosophy", "ethics"]
   copies it, with the fonts and the switcher, from the submodule) and linked from `base.html`,
   not `@import`-ed from the SCSS: dart-sass leaves a plain `@import` of a `.css` file as a
   runtime import, and the relative path then resolves against `/style.css` and 404s.
+- **Code blocks take their syntax colours from the theme tokens too** (the
+  `pre.highlight` rules in `style.scss`, over the scope classes rssite's
+  highlighter writes). rssite's own `highlight.css` is still written to `_site/`
+  but no page links it: it is one fixed light palette, unreadable on the dark themes.
 - Prefer external stylesheets over inline `<style>` blocks or `style=` attributes.
 
 ## Git Conventions
@@ -311,7 +318,8 @@ tags = ["religion", "philosophy", "ethics"]
   is in this repo it could become a check-plus-fix step, but that change has not
   been made.
 - **`data/identity.toml` is generated — do not hand-edit it.** `gen_profiles.py`
-  writes it from the same `profiles.yaml`, and `templates/base.html` reads it with
+  writes it from the same `profiles.yaml`, and `templates/person_jsonld.html`
+  (included by `base.html` and by `root.html`, the language chooser at `/`) reads it with
   `load_data()` into the `Person` JSON-LD as schema.org `sameAs`. It is committed
   for the same reason the About page is: the rendering happens in the script, by
   hand, not in the build. It lives in `data/`, not `static/`, because it is an

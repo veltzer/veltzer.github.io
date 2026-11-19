@@ -137,7 +137,9 @@ def load_cache(max_age):
         return {}
     oldest = (datetime.date.today() - datetime.timedelta(days=max_age)).isoformat()
     cached = json.loads(CACHE.read_text(encoding="utf-8"))
-    return {page: day for page, day in cached.items() if day >= oldest}
+    # Strictly newer: an entry is fresh for max_age days, so 0 trusts none,
+    # not even one written earlier today.
+    return {page: day for page, day in cached.items() if day > oldest}
 
 
 def save_cache(cache):
@@ -153,18 +155,24 @@ def inspect_all(http, pages, cache):
     """
     today = datetime.date.today().isoformat()
     by_page = {}
-    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
-        futures = {pool.submit(inspect, http, page): page for page in pages}
-        for done, future in enumerate(as_completed(futures), 1):
-            page = futures[future]
-            indexed, state = future.result()
-            if indexed:
-                cache[page] = today
-            else:
-                by_page[page] = state
-            if done % 20 == 0 or done == len(pages):
-                save_cache(cache)
-                print(f"\rinspected {done} of {len(pages)}", end="", file=sys.stderr, flush=True)
+    try:
+        with ThreadPoolExecutor(max_workers=WORKERS) as pool:
+            futures = {pool.submit(inspect, http, page): page for page in pages}
+            for done, future in enumerate(as_completed(futures), 1):
+                page = futures[future]
+                indexed, state = future.result()
+                if indexed:
+                    cache[page] = today
+                else:
+                    by_page[page] = state
+                if done % 20 == 0 or done == len(pages):
+                    save_cache(cache)
+                    print(f"\rinspected {done} of {len(pages)}", end="", file=sys.stderr, flush=True)
+    finally:
+        # A failed request ends the run; the answers since the last save
+        # were paid for all the same.
+        if pages:
+            save_cache(cache)
     if pages:
         print(file=sys.stderr)
     return by_page

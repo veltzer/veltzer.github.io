@@ -226,6 +226,15 @@ def cmd_rotate(cfg):
                   f"({DEFAULTS['pass_path']}).\n")
             input(">>> Put the new key wherever the old one is used, then press Enter to "
                   "store it in pass and delete the old one <<<")
+    except (OSError, ValueError) as e:
+        # write_keys_js failed. The new key already exists in GCP and nothing
+        # else records its name, so say it before leaving.
+        die(
+            f"Could not write {KEYS_JS}: {e}\n"
+            f"State: the new key ({new_key_name}) exists in GCP and is used nowhere; "
+            f"pass at {cfg.pass_path} still holds the OLD key, which is NOT deleted. "
+            "Delete the new key, fix the file and rotate again."
+        )
     except KeyboardInterrupt:
         print(
             "\nInterrupted. State: the new key "

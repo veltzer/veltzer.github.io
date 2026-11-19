@@ -40,6 +40,14 @@ class TestScopeSelector:
         assert scope("html[data-theme=dark] .card") == "html[data-theme=dark] #app .card"
         assert scope(":root[data-theme=dark]") == ":root[data-theme=dark] #app"
 
+    def test_a_selector_that_starts_at_the_document_starts_at_the_wrapper(self):
+        assert scope("body > div") == "#app > div"
+        assert scope("body .card") == "#app .card"
+        assert scope("html body > div > p:last-child a") == "#app > div > p:last-child a"
+        assert scope("html body") == "#app"
+        assert scope("[data-theme=dark] body > div") == "[data-theme=dark] #app > div"
+        assert scope("bodybuilder") == "#app bodybuilder"
+
     def test_other_attribute_selector_on_an_element_is_scoped_inside(self):
         assert scope("[hidden]") == "#app [hidden]"
 

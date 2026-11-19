@@ -80,6 +80,11 @@ def fetch_poster_tmdb(imdb_id, token, result_key="movie_results"):
         # poster, not the rest of an incremental run.
         print(f"  TMDB unreachable for tt{imdb_id}: {e.reason}", file=sys.stderr)
         return None
+    except TimeoutError as e:
+        # A stall while reading the body: urlopen wraps a connect timeout in
+        # URLError, but resp.read() raises this one bare.
+        print(f"  TMDB timed out for tt{imdb_id}: {e}", file=sys.stderr)
+        return None
 
     results = data.get(result_key, [])
     if not results:
@@ -105,6 +110,9 @@ def fetch_poster_omdb(imdb_id, api_key):
         return None
     except urllib.error.URLError as e:
         print(f"  OMDB unreachable for tt{imdb_id}: {e.reason}", file=sys.stderr)
+        return None
+    except TimeoutError as e:
+        print(f"  OMDB timed out for tt{imdb_id}: {e}", file=sys.stderr)
         return None
 
     poster = data.get("Poster")

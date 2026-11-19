@@ -216,10 +216,23 @@ def scope_selector(selector, wrapper):
     match = HTML_ATTR_PREFIX.match(selector)
     if match and (match.group(1) or "data-theme" in match.group(2)):
         prefix = (match.group(1) or "") + match.group(2)
-        return f"{prefix} #{wrapper} {match.group(3).strip()}".strip()
+        rest = match.group(3).strip()
+        return f"{prefix} {scope_selector(rest, wrapper)}" if rest else f"{prefix} #{wrapper}"
+    # A selector that starts at the document (`body > div`, `html body .x`):
+    # the wrapper stands in for the document element here too. Prefixed as it
+    # is, it became `#wrapper body > div`, which matches nothing.
+    match = DOCUMENT_PREFIX.match(selector)
+    if match:
+        rest = selector[match.end():]
+        if rest in (":root", "html", "body") or DOCUMENT_PREFIX.match(rest):
+            return scope_selector(rest, wrapper)
+        return f"#{wrapper}{match.group(1)}{rest}"
     return f"#{wrapper} {selector}"
 
 
+# `html`, `:root` or `body` as the first compound of a longer selector, with
+# the combinator that follows it.
+DOCUMENT_PREFIX = re.compile(r"^(?:html|:root|body)(\s*[>+~]\s*|\s+)")
 # An optional `html` / `:root`, one or more [attr] groups, then the rest.
 HTML_ATTR_PREFIX = re.compile(r"^(html|:root)?((?:\[[^\]]*\])+)\s*(.*)$", re.DOTALL)
 

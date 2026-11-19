@@ -274,9 +274,8 @@ the box are skipped.
 Shared module of the `podcasts_*` scripts: RSS parsing, the matching of a
 chapter to its feed episode, and the ruamel.yaml configuration they share
 (`make_yaml()`, also used by `youtube_add_names.py`). Import-only. A rewrite
-with no edit keeps indentation, quoting and key order; the hand-wrapped long
-strings are re-wrapped (94 lines of `podcasts.yaml` as of 2026-11-15), which
-no dumper setting reproduces.
+with no edit writes the file back byte for byte (`podcasts.yaml`, checked
+2026-11-20): indentation, quoting, key order and line wrapping all survive.
 
 ## Spellcheck Scripts
 
@@ -418,7 +417,9 @@ profile, implies `--preview`).
 
 Manages a Google API key. Commands: `show`, `restrict`, `create`,
 `delete`, `rotate`. Reads/writes the key via `pass`. The `rotate` command
-creates a new key, waits for rebuild/deploy, then deletes the old one.
+creates a new key, writes it into `static/keys.js` (for the calendar key;
+any other `--pass-path` leaves the file alone), waits for rebuild/deploy,
+then stores the new key in `pass` and deletes the old one.
 Project-specific values are no longer hardcoded — they default to the
 calendar key (`--project-id veltzer-calendar-id`, `--pass-path
 cloud/gcp/calendar`, `--referrer veltzer.org/*`, etc.) and can be
