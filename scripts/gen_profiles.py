@@ -7,7 +7,7 @@ place on this site that shows it, so the copies cannot drift apart.
 Targets:
   content/about/_index.en.md         this site's About page
   content/about/_index.he.md         its Hebrew translation
-  static/identity.toml               sameAs URLs for the Person JSON-LD
+  data/identity.toml               sameAs URLs for the Person JSON-LD
 
 The same profiles.yaml also drives README.md in the ../veltzer repository, the
 GitHub profile page. That repo builds its own copy with its own rsconstruct
@@ -24,6 +24,7 @@ committed. profiles.yaml lives in this repo now, so this could become a
 check-plus-fix build step -- that is a separate change.
 """
 
+import html
 import sys
 from pathlib import Path
 
@@ -34,7 +35,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 SOURCE = REPO_ROOT / "data" / "yaml" / "profiles.yaml"
 ABOUT_EN = REPO_ROOT / "content" / "about" / "_index.en.md"
 ABOUT_HE = REPO_ROOT / "content" / "about" / "_index.he.md"
-IDENTITY = REPO_ROOT / "static" / "identity.toml"
+IDENTITY = REPO_ROOT / "data" / "identity.toml"
 
 # Groups whose links are identity profiles -- pages that ARE Mark Veltzer
 # somewhere else. Only these belong in schema.org sameAs, which means "another
@@ -117,10 +118,32 @@ def render(data, lang):
     return "\n".join(lines)
 
 
+def render_badge(extra):
+    """A badge image served by somebody else's server.
+
+    With `badge_width` / `badge_height` in the YAML it is an <img> that
+    reserves its space and loads lazily, so a slow badge service neither
+    holds the page up nor shifts it when the picture arrives. Markdown image
+    syntax can say neither, which is why this is HTML. (The GitHub profile
+    README, rendered from the same YAML by ../veltzer, keeps the Markdown
+    form: GitHub proxies and sizes images itself.)
+    """
+    size = "".join(
+        f' {attr}="{extra[key]}"'
+        for attr, key in (("width", "badge_width"), ("height", "badge_height"))
+        if key in extra
+    )
+    if not size:
+        return f"![{extra['badge_alt']}]({extra['badge_url']})"
+    alt = html.escape(extra["badge_alt"], quote=True)
+    url = html.escape(extra["badge_url"], quote=True)
+    return f'<img src="{url}" alt="{alt}"{size} loading="lazy" decoding="async">'
+
+
 def render_extra(extra, lang):
     """Render one trailing extra: a sentence with a link, or a linked badge."""
     if "badge_url" in extra:
-        badge = f"![{extra['badge_alt']}]({extra['badge_url']})"
+        badge = render_badge(extra)
         # The view counter is a bare badge with no link to wrap it.
         body = f"[{badge}]({extra['url']})" if "url" in extra else badge
         return f"### {body}" if extra.get("heading") else body
@@ -134,7 +157,7 @@ def render_identity(data):
     Written into static/ rather than being read from the YAML at build time
     for the same reason the About page is generated and committed: the
     rendering is done here, by hand, not in the build. load_data() picks it up
-    from static/identity.toml.
+    from data/identity.toml.
 
     Only SAMEAS_GROUPS contribute, and only top-level items -- see the comment
     on that constant. Nested children (the per-email keybr profiles) are skipped,

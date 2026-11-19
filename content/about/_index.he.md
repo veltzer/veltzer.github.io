@@ -73,8 +73,8 @@ template = "section.html"
 
 נראה שאני אחד מהמתכנתים המובילים בגיטהאב מישראל -> [משתמשי הגיטהאב המובילים בישראל](https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/israel.md)
 
-[![GitHub stats](https://github-readme-stats.vercel.app/api?username=veltzer)](https://github.com/anuraghazra/github-readme-stats)
+[<img src="https://github-readme-stats.vercel.app/api?username=veltzer" alt="GitHub stats" width="450" height="195" loading="lazy" decoding="async">](https://github.com/anuraghazra/github-readme-stats)
 
-### ![Profile view counter](https://komarev.com/ghpvc/?username=veltzer)
+### <img src="https://komarev.com/ghpvc/?username=veltzer" alt="Profile view counter" height="20" loading="lazy" decoding="async">
 
 <!-- END generated profiles -->

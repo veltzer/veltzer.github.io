@@ -235,7 +235,7 @@ src_files = ["data/yaml/books_read.yaml"]
 command = "pydatacheck"
 args = ["check_books"]
 [processor.checker.taplo]
-src_files = ["rssite.toml", "rsconstruct.toml", ".rumdl.toml", ".rumdl.content.toml", "pyproject.toml", "static/identity.toml", "i18n/en.toml", "i18n/he.toml"]
+src_files = ["rssite.toml", "rsconstruct.toml", ".rumdl.toml", ".rumdl.content.toml", "pyproject.toml", "data/identity.toml", "i18n/en.toml", "i18n/he.toml"]
 
 # The committed JSON: the lookup caches the data checks read and the search's
 # word lists. static/vendor is not ours, and .oxlintrc.json is JSON with

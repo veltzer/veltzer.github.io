@@ -43,6 +43,10 @@ extras:
   - id: stats
     badge_alt: "GitHub stats"
     badge_url: "https://github-readme-stats.vercel.app/api?username=veltzer"
+    # The size the service draws the card at. With it the site reserves the
+    # space and loads the card lazily (gen_profiles.py); the service is slow.
+    badge_width: 450
+    badge_height: 195
     url: "https://github.com/anuraghazra/github-readme-stats"
   - id: viewcounter
     # Rendered as a heading on the GitHub profile, matching how it has always
@@ -50,6 +54,8 @@ extras:
     heading: true
     badge_alt: "Profile view counter"
     badge_url: "https://komarev.com/ghpvc/?username=veltzer"
+    # Height only: the badge grows wider with every digit of the count.
+    badge_height: 20
 
 groups:
   - id: development

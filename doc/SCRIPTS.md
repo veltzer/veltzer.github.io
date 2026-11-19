@@ -128,7 +128,7 @@ The Hebrew `_index.he.md` stubs are hand-written and are not touched.
 Renders `data/yaml/profiles.yaml` into the region between the
 `<!-- BEGIN generated profiles -->` markers in `content/about/_index.en.md`
 and `_index.he.md` (contact line, intro, link groups and extras, in both
-languages), and writes `static/identity.toml`, the `sameAs` URLs the
+languages), and writes `data/identity.toml`, the `sameAs` URLs the
 `Person` JSON-LD in `templates/base.html` reads. A manual step whose
 output is committed. Run it after editing `profiles.yaml` and commit.
 

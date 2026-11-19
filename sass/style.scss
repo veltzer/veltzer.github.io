@@ -9,10 +9,12 @@
 // consistent.
 //
 // Azure applies by default via :root, so no attribute is needed for the
-// standard look -- it matches the indigo palette the MkDocs site used.
+// standard look -- it matches the indigo palette the MkDocs site used. A
+// reader whose system prefers dark and who has not chosen a theme gets
+// midnight instead (theme-onload.js and theme-switcher.js in the submodule).
 
-// themes.css is copied to static/shared-themes/ by scripts/build_site.py and
-// linked from base.html, rather than @import-ed here: dart-sass leaves a plain
+// themes.css is published into _site/shared-themes/ by the [[publish]] entry
+// in rssite.toml and linked from base.html, rather than @import-ed here: dart-sass leaves a plain
 // @import of a .css file as a runtime import, and the relative path would then
 // resolve against /style.css and 404.
 
@@ -795,4 +797,66 @@ th { background: var(--bg-surface); }
     padding: 0.75rem 1rem;
     border-radius: var(--radius-sm);
     margin-bottom: 1.25rem;
+}
+
+// ─── Print ───
+// A printed page (or one saved as PDF) is the text and nothing else: the
+// navigation, the theme and language controls, the search box, the related
+// posts and the footer are for the screen.
+//
+// The colours go back to the browser's own. A browser does not print
+// backgrounds, so a dark theme would put its light text on white paper; the
+// tokens are pointed at the CSS system colours (Canvas, CanvasText, ...)
+// under a light colour scheme instead, which keeps this stylesheet free of
+// raw colours and makes every rule above print black on white.
+@media print {
+    :root,
+    [data-theme] {
+        color-scheme: light;
+        --bg: Canvas;
+        --bg-surface: Canvas;
+        --bg-elevated: Canvas;
+        --bg-hover: Canvas;
+        --text-primary: CanvasText;
+        --text-secondary: CanvasText;
+        --text-muted: GrayText;
+        --border: GrayText;
+        --border-subtle: GrayText;
+        --accent: CanvasText;
+        --accent-dim: Canvas;
+        --shadow: none;
+    }
+
+    .site-header,
+    .site-footer,
+    .skip-link,
+    .lang-switcher,
+    .toc,
+    .heading-anchor,
+    .related-posts,
+    .post-nav,
+    .pagination,
+    .blog-search,
+    .archive-stats,
+    .archive-years-nav {
+        display: none;
+    }
+
+    .site-main,
+    .blog-main { max-width: none; padding: 0; }
+    .blog-layout { display: block; }
+
+    // Paper cannot scroll: long code lines wrap instead of running off it.
+    pre { overflow-x: visible; white-space: pre-wrap; overflow-wrap: anywhere; }
+    pre, blockquote, table, img, figure { break-inside: avoid; }
+    h1, h2, h3, h4 { break-after: avoid; }
+
+    // A link on paper is only its text, so an outside link's address is
+    // printed after it. Links within the site are left as they are.
+    .post-body a { text-decoration: underline; }
+    .post-body a[href^="http"]:not([href^="https://veltzer.org"])::after {
+        content: " (" attr(href) ")";
+        font-size: 0.85em;
+        overflow-wrap: anywhere;
+    }
 }

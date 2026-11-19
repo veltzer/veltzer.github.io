@@ -248,7 +248,13 @@ tags = ["religion", "philosophy", "ethics"]
   one commented exception: the chessboard squares mix the accent token against fixed
   greys, because cm-chessboard's own fills are hardcoded and a pure-token pairing hid the
   black pieces. Setting `data-theme` on `<html>` switches between the six themes; azure
-  is the default.
+  is the default, and a reader whose system prefers dark and who has not chosen a
+  theme gets midnight (the submodule's `theme-onload.js`, inlined in the head, and
+  `theme-switcher.js`; only a choice made in the selector is stored).
+- **Print is black on white whatever the theme**: the `@media print` block at the end
+  of `style.scss` points the tokens at the CSS system colours (`Canvas`, `CanvasText`)
+  under a light colour scheme, hides everything that is not the text (header, footer,
+  switchers, search, related posts) and prints an outside link's address after it.
 - `themes.css` is published into `_site/shared-themes/` by the `[[publish]]` entry in `rssite.toml` (rssite
   copies it, with the fonts and the switcher, from the submodule) and linked from `base.html`,
   not `@import`-ed from the SCSS: dart-sass leaves a plain `@import` of a `.css` file as a
@@ -300,11 +306,13 @@ tags = ["religion", "philosophy", "ethics"]
   not part of the build, and the generated content is committed; now that the YAML
   is in this repo it could become a check-plus-fix step, but that change has not
   been made.
-- **`static/identity.toml` is generated — do not hand-edit it.** `gen_profiles.py`
+- **`data/identity.toml` is generated — do not hand-edit it.** `gen_profiles.py`
   writes it from the same `profiles.yaml`, and `templates/base.html` reads it with
-  `load_data()` into the `Person` JSON-LD as schema.org `sameAs`. It lives in
-  `static/` and is committed for the same reason the About page is: the rendering
-  happens in the script, by hand, not in the build. Only the identity groups contribute
+  `load_data()` into the `Person` JSON-LD as schema.org `sameAs`. It is committed
+  for the same reason the About page is: the rendering happens in the script, by
+  hand, not in the build. It lives in `data/`, not `static/`, because it is an
+  input of the templates and not a file of the site (in `static/` it was also
+  served at `/identity.toml`). Only the identity groups contribute
   (`SAMEAS_GROUPS` in the script): `sameAs` asserts "another page for this same
   person", so the "learning sites I use that have no profiles" group is excluded
   by design — claiming audible.com would be a false identity claim.

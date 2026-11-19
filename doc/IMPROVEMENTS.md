@@ -416,6 +416,24 @@ came later) and the built page.
 
 ## Infrastructure
 
+- **Every commit rebuilds every page, and re-downloads every asset.** A
+  commit that touches only `doc/` still rebuilds all ~3,800 site products
+  (seen 2026-11-19), for two reasons, both in `templates/base.html`: every
+  footer names the commit it was built from (`git.short`, by decision, see
+  `doc/DECISIONS.md`), and every stylesheet, script and icon URL carries
+  `?v=<commit>`, so each deploy also invalidates every reader's cached copy
+  of files that did not change. Not fixable here alone:
+    - the `?v=` half needs a content hash per asset, which rssite does not
+      offer (no `get_hash`, and `style.css` is compiled inside rssite, so
+      nothing outside it knows the bytes). The fix is an rssite feature:
+      `get_url(path, cachebust=true)` or a `hash(path)` function.
+    - the footer half is a decision to revisit: naming the commit on every
+      page is what makes every page a product of every commit. Naming it on
+      one page (an about/colophon page) would leave the rest alone.
+
+  Until both are done a docs-only commit costs a full site build (~1-2
+  minutes) and a full redeploy.
+
 - ~~**mkdocs-rss-plugin is not idempotent (non-deterministic builds).** — DONE.~~
   The plugin delegates timestamp generation to MkDocs' `get_build_datetime()`, which
   honours `SOURCE_DATE_EPOCH`. `scripts/build_docs.py` sets
