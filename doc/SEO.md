@@ -512,3 +512,16 @@ state, the UI report is days behind, and the API says *unknown* for most of
 what the report calls *Discovered*). The UI is still where the
 domain-wide reasons (404, redirect, other repositories' pages) and the
 validation verdicts are read.
+
+**Request indexing, 2026-11-19.** There is no bulk way to ask: the Indexing
+API is limited to job postings and livestreams, so it is URL Inspection's
+"Request indexing" in the UI, one page at a time, and it said *Quota
+exceeded* after 11 again. Requested today: `not-all-cultures-equal` and
+`facts-llms-wont-say` (both languages), `/he/blog/relative-low-variance/`,
+and the English `atheists-are-too-generous`, `browser-passwords-command-line`,
+`dictators-nash-equilibrium`, `direct-democracy-is-natural`,
+`distance-rulers-to-ruled` and `embedded-linux-with-buildroot`. The list of
+slugs under *Still to request* above predates the 2026-11-07 renaming; the
+current list of waiting pages is whatever `scripts/check_indexing.py`
+prints. The page to open for a URL is the `inspectionResultLink` the URL
+Inspection API returns for it (the `id` in that link is opaque, not the URL).
