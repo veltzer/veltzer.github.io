@@ -3,7 +3,8 @@
 The state of the Hebrew version of the site: what is translated, how, and what
 is deliberately left in English. Written 2026-11-08, after the footer, the
 chess viewer and the calendar were translated. The status below is final
-unless something changes: the remaining gaps are decided, not pending.
+unless something changes: the remaining gaps are decided, not pending. (The
+chess viewer was removed on 2026-11-20.)
 
 ## Translated
 
@@ -23,13 +24,6 @@ unless something changes: the remaining gaps are decided, not pending.
 - **The footer.** The two provenance lines are `footer_*` keys
   (`templates/base.html`). Names, the version and the address sit in `<bdi>`
   so they do not reorder the Hebrew sentence.
-- **The chess viewer** (`content/chess/_index.en.md`). Its strings are the
-  `chess_*` keys, written into the page as `window.pageStrings` by
-  `templates/page_strings.html`. In Hebrew it runs right to left, except the
-  board, which stays left to right. Number ranges ("1996–2026") are wrapped in
-  Unicode isolates, or Hebrew text would show them reversed. The arrows on the
-  move buttons are swapped for right to left. The « » on the game buttons are
-  not swapped, because the browser already mirrors them.
 - **The calendar** (`content/calendar/_index.en.md`). It uses the `calendar_*`
   keys, handed to FullCalendar as an inline locale object instead of
   vendoring FullCalendar's locale files. Month and day names come from `Intl`
@@ -75,7 +69,7 @@ unless something changes: the remaining gaps are decided, not pending.
 - **An app's strings** are keys with a common prefix in both i18n files. The
   template sets `strings_prefix` and includes `page_strings.html`, which
   writes every matching key from `en.toml`, looked up with `trans()`, into
-  `window.pageStrings`. `chess.html` sets the prefix itself; `app.html` takes
+  `window.pageStrings`. `app.html` takes
   it from `[extra] strings_prefix` in the page's front matter. Placeholders
   are `{name}`, filled in by the app's `t(key, values)`.
 - **Adding a string**: add the key to both `i18n/en.toml` and `i18n/he.toml`.

@@ -76,7 +76,7 @@ increases clone size and slows operations. Several alternatives exist:
   and responsive image support.
 - Useful when image optimization is also a goal.
 
-### Separate Data Repository (current pattern for YAML/PGN)
+### Separate Data Repository (current pattern for YAML)
 
 - Keep images in a dedicated repo or storage location outside this repo.
 - Copy them in via `scripts/copy_data.py`, the way the YouTube

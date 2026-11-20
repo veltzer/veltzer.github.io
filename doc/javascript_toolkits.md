@@ -16,7 +16,6 @@ blog loads nothing at all.
 | Page | CSS | JS libraries |
 |------|-----|--------------|
 | `/en/media/`, `/en/training/data/` | Tailwind (compiled, vendored) | none -- plain JS in `static/data-collection-app.js` + nine plugin files |
-| `/en/chess/` | site stylesheet | chess.js, cm-chessboard -- both **vendored**, not CDN |
 | `/en/calendar/` | site stylesheet | FullCalendar 6.1.20 + its Google Calendar plugin -- **vendored** |
 | `/en/slides/`, `/en/syllabi/`, `/en/animations/` | site stylesheet | Material Web 2 (CDN) |
 | Blog posts, About, tags | site stylesheet (`sass/style.scss`) | none |
@@ -85,20 +84,10 @@ the version here. The Google Calendar plugin reads a public API key from
 `static/keys.js`; that key is public by design and referrer-restricted, see
 `doc/DECISIONS.md`.
 
-### chess.js and cm-chessboard -- chess
-
-**Vendored, not loaded from a CDN**: `static/vendor/chess.min.js` and
-`static/vendor/cm-chessboard/`.
-
-cm-chessboard 8.x is ESM-only with relative imports, which is why it is a local
-copy imported as a module rather than a script tag:
-
-```js
-import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
-```
-
 ### What is no longer used
 
+- **chess.js and cm-chessboard** -- removed on 2026-11-20 with the chess page; the
+  games are in the myworld app.
 - **js-yaml** -- removed. The data collection app reads JSON, not YAML: parsing the 6.5 MB
   YouTube file with js-yaml took ~399 ms in the browser. The only mention left in
   `static/data-collection-app.js` is the comment recording that decision.
@@ -117,7 +106,7 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
   [veltzer/embeddings](https://github.com/veltzer/embeddings) that
   `scripts/make_word_vectors.py` trims into `static/data/vectors/`. The
   other search boxes are per-page filters over each page's own data: the media
-  app, chess, slides, syllabi and animations.
+  app, slides, syllabi and animations.
 
 ## Media plugin filter system
 

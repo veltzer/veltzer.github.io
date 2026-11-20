@@ -70,7 +70,7 @@ Plugin data is authored as YAML in `data/yaml/`.
 `scripts/copy_data.py` converts it to JSON and gzips it into
 `static/data/<name>.json.gz`; the frontend loads the JSON, never the YAML
 (see `CLAUDE.md` for why). That is a manual step whose output is committed,
-because the chess and YouTube sources it also handles live in the private
+because the YouTube source it also handles lives in the private
 `../data` repo. A plugin whose sources are entirely in this repo can instead
 be generated at build time: `scripts/build_site.py companies` runs
 `scripts/import_companies.py` once per organization tab and

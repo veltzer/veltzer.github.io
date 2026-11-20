@@ -155,12 +155,6 @@ Uses `gzip -n` for reproducible output. Validates source files exist before
 copying. A manual step, not part of the build: CI has no `../data` checkout
 for the YouTube half, and the generated `static/data/` is committed.
 
-`static/data/games.pgn.gz`, the one file the chess viewer fetches, is not
-built by it: it is committed as it is. Its two sources (the ICS/GNU Chess
-games and the chess.com export) were removed from `../data` once the games
-were in the myworld database; they are in that repo's history, at commit
-`9841339`.
-
 ## Image Fetch Scripts
 
 All image scripts are incremental — they skip images that already exist.

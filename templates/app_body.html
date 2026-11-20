@@ -12,10 +12,10 @@
     follows the reader, so inside a page whose <html> is dir="rtl" their body
     is wrapped as English, left to right -- without that every flex row,
     text-align: start and margin-inline in the app would mirror.
-    The apps that are translated (chess, calendar) say so with
-    `[extra] translated = true` in their Hebrew file. They take their strings
-    from window.pageStrings (page_strings.html) and run in the page's own
-    language and direction, so they are not wrapped. -#}
+    An app that is translated (the calendar) says so with
+    `[extra] translated = true` in its Hebrew file. It takes its strings
+    from window.pageStrings (page_strings.html) and runs in the page's own
+    language and direction, so it is not wrapped. -#}
 {%- if lang == "en" or section.extra.translated %}
 {{- section.content | safe }}
 {%- else %}

@@ -3,8 +3,8 @@
 ## Project Overview
 
 Mark Veltzer's personal website hosted on GitHub Pages at veltzer.org (CNAME). Combines a
-bilingual blog (English + Hebrew), media consumption tracker, chess game viewer, and
-calendar integration.
+bilingual blog (English + Hebrew), media consumption tracker and calendar integration.
+The chess game viewer was removed on 2026-11-20: the games are in the myworld app.
 
 ## Tech Stack
 
@@ -30,7 +30,7 @@ calendar integration.
   entry's (required) `wikidata_id` in the video yaml is the Wikidata item of its `imdb_id` and every entry's (required) `rotten_tomatoes_id`
   the Rotten Tomatoes path on that item, or the hand-verified one in `data/rotten_tomatoes_manual.json`
   when Wikidata has none (`null` there and in the yaml = Rotten Tomatoes has no page; offline, against `shelve/wikidata_imdb.json`)
-- **Data**: YAML/JSON for media content, PGN for chess games, Markdown for blog posts
+- **Data**: YAML/JSON for media content, Markdown for blog posts
 
 The site used to be built with MkDocs. It is not any more — see *Migration notes* below,
 which records the traps that outlived the migration.
@@ -59,8 +59,7 @@ which records the traps that outlived the migration.
   museums, cv, trips, lectures, …; the full list is in `doc/DECISIONS.md`). Every file names its schema in `$schema`, which the
   build validates against `veltzer.github.io/web-schemas`. This directory came out of
   the private `../data` repo in 2026-09; the youtube CSV is still there (see
-  `scripts/copy_data.py`). The chess archive `static/data/games.pgn.gz` is committed
-  as it is; its sources left `../data` (they are in its history, at commit `9841339`)
+  `scripts/copy_data.py`)
 - `data/logos/` — one SVG per organization in `organizations.yaml` (which refers to
   them by paths relative to `data/`), linted by xmllint. The companies tab of the media
   page is built from these at build time: the `companies` step of `build_site.py`
@@ -257,10 +256,7 @@ tags = ["religion", "philosophy", "ethics"]
 
 - `sass/style.scss` is the site stylesheet, compiled by rssite to `/style.css`.
 - **Colours, radii, fonts and shadows come from `shared/shared-themes`** (the submodule).
-  Nothing in `style.scss` hardcodes a colour — every value is a `var(--token)` — with
-  one commented exception: the chessboard squares mix the accent token against fixed
-  greys, because cm-chessboard's own fills are hardcoded and a pure-token pairing hid the
-  black pieces. Setting `data-theme` on `<html>` switches between the six themes; azure
+  Nothing in `style.scss` hardcodes a colour — every value is a `var(--token)`. Setting `data-theme` on `<html>` switches between the six themes; azure
   is the default, and a reader whose system prefers dark and who has not chosen a
   theme gets midnight (the submodule's `theme-onload.js`, inlined in the head, and
   `theme-switcher.js`; only a choice made in the selector is stored).

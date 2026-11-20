@@ -18,11 +18,6 @@ js-yaml in the browser measured ~399ms against ~31ms for JSON.parse on the
 same data (12.9x), all of it blocking the main thread. Gzipped JSON is also
 marginally smaller than gzipped YAML. The .yaml files remain the build's
 intermediate representation.
-
-static/data/games.pgn.gz, the chess viewer's archive, is not built here: it
-is committed as it is. Its sources (the ICS/GNU Chess games and the chess.com
-export) left ../data once the games were in the myworld database; they are
-in that repo's history, at commit 9841339.
 """
 
 import json

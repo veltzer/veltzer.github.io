@@ -1,8 +1,8 @@
 # Suggested Improvements
 
 Struck-through entries are done; the note under each records what was actually
-changed and how it was verified. **The one item still open is the chess archive download under
-"Site review, 2026-09-07", parked on 2026-11-19 because the chess page is moving out**; the older `hebrew` language tag noted under
+changed and how it was verified. **No item is open**: the last one, the chess archive download
+under "Site review, 2026-09-07", went with the chess page, removed on 2026-11-20; the older `hebrew` language tag noted under
 "Right-to-left rendering" was resolved on 2026-10-29. Everything else above the
 site review is closed. Where a closed verdict was later overtaken by the code, a
 dated correction sits under it rather than a rewrite.
@@ -455,16 +455,6 @@ came later) and the built page.
   parents, so no extra setup was needed. Verified the directory is created, the cache-hit
   path returns the cached files, and `XDG_CACHE_HOME` is honoured when set.
 
-- **NOT A PROBLEM: `blog/data/games.pgn.gz` is unreferenced by design.**
-  Noting this so it does not get re-flagged by future audits. The file is 2.4 MB, is
-  copied in by `scripts/copy_data.py`, and no HTML or JS fetches it — `chess.html:64`
-  uses a hardcoded inline PGN instead. This is intentional: the game collection is staged
-  for a planned chess viewer that will display it. Leave it in place.
-
-  Superseded 2026-09-21: that viewer exists. `content/chess/_index.en.md` fetches
-  `/data/games.pgn.gz` (`DATA_URL`), so the file is referenced now; its size is the open
-  item "The chess page downloads the whole 21 MB archive" in the site review below.
-
 - ~~**Python linters are configured but never run.** — DONE.~~
   Added `[processor.pylint]` and `[processor.mypy]` over `scripts/`, so CI now enforces
   what the config files always specified. Note mypy's `dep_auto` defaults to `mypy.ini`
@@ -636,45 +626,6 @@ came later) and the built page.
   translation (no site-wide selector), or replacing/bypassing the `blog` plugin so post
   pages are real files — a much larger change to how the site is built.
 
-## Chess Viewer
-
-- ~~**The chess viewer is broken in production (dead CDN).** — DONE.~~
-  `chess.html` loads `https://unpkg.com/cm-chessboard@8.6.0/dist/cm-chessboard.js`,
-  which now returns **404 Not Found**. The page therefore throws
-  `ReferenceError: Chessboard is not defined` and renders no board at all — only the
-  game caption. Confirmed on the live site at `https://veltzer.org/chess.html`, so this
-  predates the Zola migration and is not caused by it.
-
-  Fixes, in rough order of robustness: vendor the library into `static/` so an upstream
-  removal cannot break the page again; pin a version that still exists on unpkg; or
-  switch to a different board library. Vendoring is the only option that makes the page
-  independent of a third party's retention policy.
-
-  Related: `doc/IMPROVEMENTS.md` already notes `blog/data/games.pgn.gz` is staged for a
-  planned chess viewer. Whatever replaces the CDN should probably read that file rather
-  than the hardcoded inline PGN currently in `chess.html`.
-
-  Fixed by vendoring both libraries into `static/vendor/` -- the page now loads nothing
-  from a CDN except Tailwind, so an upstream removal cannot break it again. Three separate
-  faults had to be fixed, only the first of which was the dead CDN:
-
-  1. `unpkg` had removed `cm-chessboard@8.6.0` entirely (404), so `Chessboard` was never
-     defined. Vendored 8.13.0.
-  2. 8.x is **ESM-only** with relative imports, so the old `<script src>` could never work
-     regardless of version. The page now uses `<script type="module">` and imports
-     `{Chessboard, FEN}`. The config API also changed: `sprite: {url, size}` became
-     `assetsUrl` plus `style.pieces.file`, and `position: "start"` must now be `FEN.start`
-     (the shorthand throws inside `Position.setFen`).
-  3. **The PGN never parsed, independently of any of the above.** chess.js requires a blank
-     line between the header block and the movetext, and will not accept header lines that
-     start with whitespace -- the literal in `chess.html` is indented to match the
-     surrounding code. `load_pgn()` simply returned `false` and the viewer showed an empty
-     board with the Next button disabled. Both are now handled, and a failed parse shows
-     "Could not load the game." instead of failing silently.
-
-  Verified in a browser: 32 pieces render, stepping forward walks e4, e5, Nf3, d6 ... to
-  "Move 33: Rd8#" (the checkmate ending the Opera Game), Prev walks back, no console errors.
-
 ## Blog Content
 
 - **NOT A PROBLEM: overlap between posts.**
@@ -834,18 +785,6 @@ open unless struck through. Ordered roughly by how visible the fault is.
   next validation the same way. See `doc/SEO.md`.
 
 ### Improvements
-
-- **The chess page downloads the whole 21 MB archive on every visit.** `games.pgn.gz`
-  is fetched, gunzipped and split before anything is usable; on a slow link that is tens
-  of seconds. A progress bar was added on 2026-09-07 (commit `2ad53ba`) so the wait is at
-  least visible, but the real fix is to not need the whole file: have a script
-  emit a small headers-only index (players, event, date, result, offset) and fetch the
-  movetext of a game on demand, or split the archive by year and load the selected year.
-  Stats (61,636 games, win/loss) come from the headers, so the index alone can render
-  the stat tiles.
-
-  **Parked, 2026-11-19:** the chess page is due to move out of this site, so this is
-  not to be fixed here. It goes with the page to wherever it lands.
 
 - ~~**No `og:image` / `twitter:image` anywhere.** — DONE, 2026-10-29.~~
   `scripts/make_og_images.py` draws a 1200x630 card per language (the logo, the
