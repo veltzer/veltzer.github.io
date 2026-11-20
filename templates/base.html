@@ -290,13 +290,13 @@
          read, nobody but the owner can change anything. Only offered while
          GoatCounter is the provider. -#}
      {%- if config.extra.analytics == "goatcounter" and config.extra.goatcounter_code %} &middot;
-     <a href="https://{{ config.extra.goatcounter_code }}.goatcounter.com" rel="noopener">{{ trans(key="label_stats") }}</a>
+     <a href="https://{{ config.extra.goatcounter_code }}.goatcounter.com" rel="noopener">{{ trans(key="label_goatcounter") }}</a>
      {%- endif %}
      {#- The public Data Studio report over the GA4 history (2026-08-18 to
          2026-11-06). Offered whatever the current provider, since the
          history it shows does not depend on it. -#}
      {%- if config.extra.google_analytics_report %} &middot;
-     <a href="{{ config.extra.google_analytics_report }}" rel="noopener">{{ trans(key="label_ga_stats") }}</a>
+     <a href="{{ config.extra.google_analytics_report }}" rel="noopener">{{ trans(key="label_google_analytics") }}</a>
      {%- endif %} &middot;
      <a href="{{ get_url(path='@/colophon/_index.md') }}">{{ trans(key="label_colophon") }}</a></p>
 </footer>

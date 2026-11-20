@@ -248,8 +248,9 @@ only remaining copy):
   on its own, so a locally served `_site/` does not show up in the dashboard.
 * **The dashboard is public** ("Dashboard viewable by: Anyone" in the
   GoatCounter site settings, set 2026-11-06), and the footer of every page
-  links to it as "Stats" / "סטטיסטיקות" (the `label_stats` string in
-  `i18n/`). The link is rendered only while GoatCounter is the provider.
+  links to it as "Goat Counter" in both languages (the `label_goatcounter`
+  string in `i18n/`; it was "Stats" until 2026-11-20, which said nothing
+  about where the link goes). The link is rendered only while GoatCounter is the provider.
 * **The GA4 history is public too.** GA4's own dashboard is login-only, so on
   2026-11-06 a Data Studio (Looker Studio) report was built over the GA4
   property: <https://lookerstudio.google.com/reporting/24e02d9a-1d16-4b2b-8af3-906f5e80be2d>.
@@ -257,7 +258,7 @@ only remaining copy):
   the owner's credentials, so viewers need no Google account. A date range
   control fixed to 2026-08-18 to 2026-11-06 drives views and active users over
   time, a country map and table, top pages and traffic sources. The footer
-  links to it as "Google Analytics stats" (`label_ga_stats`), from
+  links to it as "Google Analytics" (`label_google_analytics`), from
   `extra.google_analytics_report` in `rssite.toml`, independently of the
   current provider. Every view queries the GA4 Data API on the owner's token
   quota; Data Studio's default 12-hour cache keeps that small.
