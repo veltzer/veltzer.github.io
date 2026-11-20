@@ -294,9 +294,9 @@ zspell checker is in `doc/DECISIONS.md`.
 
 Run `aspell list` over the blog posts of one language with the compiled
 allowlist as an extra dictionary, and fail on any misspelled word. Run by
-`rsconstruct build` over `content/blog/*.en.md` and `*.he.md`. Each builds its
-dictionary itself if it is missing, because rsconstruct does not order
-generators before checkers.
+`rsconstruct build` over `content/blog/*.en.md` and `*.he.md`. The compiled
+dictionary is a `dep_inputs` of the check in `rsconstruct.toml`, so rsconstruct
+builds it first, on a cold build and after every edit of the word list.
 
 ## Validation Scripts
 

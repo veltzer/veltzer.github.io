@@ -32,11 +32,10 @@ fi
 # LC_ALL=C: a UTF-8 locale makes sort -u collate distinct strings as equal and
 # silently drop entries.
 #
-# Build to a temp file and rename into place. The checkers build the dictionary
-# themselves when it is missing (rsconstruct does not order generators before
-# checkers), so under -j0 a reader can otherwise open a half-written file and
-# fail with "is not in the proper format". rename(2) is atomic within a
-# filesystem, so a reader sees either the old file or the complete new one.
+# Build to a temp file and rename into place: rename(2) is atomic within a
+# filesystem, so the dictionary is either the old file or the complete new
+# one, never a half-written file that aspell rejects with "is not in the
+# proper format".
 tmp="${out}.$$"
 trap 'rm -f "${tmp}"' EXIT
 

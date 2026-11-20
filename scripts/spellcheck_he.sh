@@ -16,13 +16,8 @@ set -euo pipefail
 root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
 dict_dir="${root}/out/aspell"
 
-# Build the dictionary if it is missing. rsconstruct runs the generator and this
-# checker in the same pass and does not order them, so on a cold cache the
-# checker can start first -- which fails every time in CI. Depending on the
-# compiled artifact rather than on scheduling keeps this correct either way.
-if [ ! -f "${dict_dir}/.aspell.he.rws" ]; then
-	"${root}/scripts/build_he_dict.sh" >/dev/null
-fi
+# The dictionary is an input of this check (dep_inputs in rsconstruct.toml),
+# so rsconstruct has built it, from the current word list, before this runs.
 
 status=0
 for file in "$@"; do

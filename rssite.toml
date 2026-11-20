@@ -67,6 +67,9 @@ anchors = "safe"
 smart_punctuation = false
 highlight = true
 highlight_theme = "InspiredGitHub"
+# The syntax colours are theme tokens in sass/style.scss, so the generator's
+# fixed light palette is not written at all.
+highlight_css = false
 # A "#" link after every heading in a post, shown on hover (sass/style.scss),
 # to copy a link to that section.
 heading_anchors = "end"

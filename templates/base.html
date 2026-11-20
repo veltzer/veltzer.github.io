@@ -130,9 +130,9 @@
     as our overrides, so load order is what decides it. -#}
 {%- block vendor_css %}{% endblock %}
 <link rel="stylesheet" href="{{ get_url(path='style.css') }}{{ v }}">
-{#- rssite's highlight.css is not linked: it is one fixed light palette, and
-    its dark strings were unreadable on the dark themes. The syntax colours
-    are theme tokens, in sass/style.scss. -#}
+{#- No highlight.css: rssite's is one fixed light palette, whose dark strings
+    were unreadable on the dark themes, so it is switched off (highlight_css
+    in rssite.toml). The syntax colours are theme tokens, in sass/style.scss. -#}
 {#- The feed of this language: /en/atom.xml or /he/atom.xml. -#}
 <link rel="alternate" type="application/atom+xml" title="{{ language.title }}" href="{{ get_url(path=lang ~ '/atom.xml') }}">
 {%- block extra_head %}{% endblock %}

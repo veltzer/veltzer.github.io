@@ -33,8 +33,8 @@ fi
 # LC_ALL=C is load-bearing. Under en_US.UTF-8, sort -u collates distinct Hebrew
 # strings as equal and silently drops entries -- that is how four legitimate
 # words went missing from an earlier build of this list.
-# Build to a temp file and rename into place -- see scripts/build_en_dict.sh for
-# why: under -j0 a checker can otherwise read a half-written dictionary.
+# Build to a temp file and rename into place, so the dictionary is never a
+# half-written file -- see scripts/build_en_dict.sh.
 tmp="${out}.$$"
 trap 'rm -f "${tmp}"' EXIT
 LC_ALL=C sort -u "${src}" |

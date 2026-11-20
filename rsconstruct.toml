@@ -328,6 +328,10 @@ command = "scripts/check_hebrew.py"
 src_dirs = ["_site/he"]
 src_extensions = [".xml"]
 batch = true
+# The two spellchecks read the compiled dictionaries, so those are their
+# inputs: rsconstruct then builds a dictionary before the check that reads it.
+# With the word list as the input instead, a build that added a word ran the
+# check against the old dictionary and failed on the word just added.
 [processor.generator.generic.aspell_he_dict]
 command = "scripts/build_he_dict.sh"
 src_files = [".aspell.he.txt"]
@@ -337,7 +341,7 @@ output_extension = "rws"
 command = "scripts/spellcheck_he.sh"
 src_dirs = ["content/blog"]
 src_extensions = [".he.md"]
-dep_auto = [".aspell.he.txt"]
+dep_inputs = ["out/aspell/.aspell.he.rws"]
 [processor.generator.generic.aspell_en_dict]
 command = "scripts/build_en_dict.sh"
 src_files = [".aspell.en.txt"]
@@ -347,7 +351,7 @@ output_extension = "rws"
 command = "scripts/spellcheck_en.sh"
 src_dirs = ["content/blog"]
 src_extensions = [".en.md"]
-dep_auto = [".aspell.en.txt"]
+dep_inputs = ["out/aspell/.aspell.en.rws"]
 
 [pages]
 dir = "_site"

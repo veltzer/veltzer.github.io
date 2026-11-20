@@ -147,7 +147,8 @@ later; `[sitemap] pagers = false` (no page 2, 3, ... of a listing in the
 sitemap) needs 0.1.25; `author_id` in `rssite.toml` and the `image` key the
 blog's `[cascade]` sets (each post's share card, `page.image` in the
 templates and `image` in the post's JSON-LD) need 0.1.28; the Hebrew
-`author` under `[[languages]]` and Hebrew titles on the tag feeds need 0.1.29.
+`author` under `[[languages]]` and Hebrew titles on the tag feeds need 0.1.29;
+`highlight_css = false` needs 0.1.31.
 
 ## CI and the Workflow File
 
@@ -268,8 +269,9 @@ tags = ["religion", "philosophy", "ethics"]
   runtime import, and the relative path then resolves against `/style.css` and 404s.
 - **Code blocks take their syntax colours from the theme tokens too** (the
   `pre.highlight` rules in `style.scss`, over the scope classes rssite's
-  highlighter writes). rssite's own `highlight.css` is still written to `_site/`
-  but no page links it: it is one fixed light palette, unreadable on the dark themes.
+  highlighter writes). rssite's own `highlight.css` is one fixed light palette,
+  unreadable on the dark themes, so it is not written (`highlight_css = false`
+  under `[markdown]` in `rssite.toml`).
 - Prefer external stylesheets over inline `<style>` blocks or `style=` attributes.
 
 ## Git Conventions
