@@ -14,15 +14,20 @@ their data based on a shared interface.
 
 Plugin files go in `static/` and are named `plugin-<name>.js`.
 
-After creating a new plugin, register it in `static/data-collection-app.js` in the
-`ALL_PLUGIN_FILES` object:
+After creating a new plugin, register it in the
+`window.collectionPluginRegistry` object in `templates/data_collection.html`:
 
 ```javascript
-const ALL_PLUGIN_FILES = {
-    // ... existing plugins ...
-    'mykey': BASE_PATH + 'plugin-myname.js'
+window.collectionPluginRegistry = {
+// ... existing plugins ...
+'mykey': {{ get_url(path='plugin-myname.js') | json_encode | safe }},
 };
 ```
+
+Write the path as one literal string: `get_url` then names the script by a
+hash of its content (`?h=...`), so a reader never runs a cached old plugin
+under new HTML, and the build rebuilds the page when the plugin changes. A
+computed path gets no hash.
 
 The key must match the key used in `window.collectionPlugins['mykey']` inside
 the plugin file. It is also the value of the `?data=` URL parameter that
@@ -56,7 +61,7 @@ A single-plugin page shows no tab row.
 One script may register several keys: `plugin-companies.js` registers
 `companies` and five copies of it (`providers`, `consulting`, `publishers`,
 `education` and `certifiers`, each with another `file` and titles), all six
-keys map to it in `ALL_PLUGIN_FILES`, and the app loads each file once. A
+keys map to it in `window.collectionPluginRegistry`, and the app loads each file once. A
 copy made with `Object.assign` has to be a copy, not the same object under a
 second key, because the app writes the derived `sortFields` and `filters`
 onto each plugin object.
@@ -362,7 +367,7 @@ than writing the loop again:
 
 ## Existing Plugins
 
-The registry is `ALL_PLUGIN_FILES` in `static/data-collection-app.js`; as of
+The registry is `window.collectionPluginRegistry` in `templates/data_collection.html`; as of
 2026-11-15 it holds these fourteen keys in nine files.
 
 | Key | File | Data |

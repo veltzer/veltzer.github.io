@@ -1,8 +1,9 @@
 # Suggested Improvements
 
 Struck-through entries are done; the note under each records what was actually
-changed and how it was verified. **No item is open**: the last one, the chess archive download
-under "Site review, 2026-09-07", went with the chess page, removed on 2026-11-20; the older `hebrew` language tag noted under
+changed and how it was verified. **One item is open**: the footer half of "Every commit
+rebuilds every page" under "Infrastructure" (its asset half was done on 2026-11-20). The chess archive download
+under "Site review, 2026-09-07" went with the chess page, removed on 2026-11-20; the older `hebrew` language tag noted under
 "Right-to-left rendering" was resolved on 2026-10-29. Everything else above the
 site review is closed. Where a closed verdict was later overtaken by the code, a
 dated correction sits under it rather than a rewrite.
@@ -423,16 +424,24 @@ came later) and the built page.
   `doc/DECISIONS.md`), and every stylesheet, script and icon URL carries
   `?v=<commit>`, so each deploy also invalidates every reader's cached copy
   of files that did not change. Not fixable here alone:
-    - the `?v=` half needs a content hash per asset, which rssite does not
-      offer (no `get_hash`, and `style.css` is compiled inside rssite, so
-      nothing outside it knows the bytes). The fix is an rssite feature:
-      `get_url(path, cachebust=true)` or a `hash(path)` function.
+    - ~~the `?v=` half needs a content hash per asset, which rssite does not
+      offer.~~ **DONE, 2026-11-20.** rssite 0.1.32 cache-busts by content:
+      `get_url` on a static, published or Sass file with a literal path
+      appends `?h=<hash of its bytes>` (`cachebust`, on by default), and
+      the plan makes each page depend on the files it so names. `?v=` is
+      gone from the templates; the icons, the collection app's stylesheet
+      and scripts moved onto `get_url`, and the media plugins' registry
+      moved from `data-collection-app.js` into `data_collection.html`, one
+      literal `get_url` per script. A deploy that leaves a file alone now
+      leaves every reader's cached copy valid (one 304 after ten minutes
+      instead of a full download). A stylesheet edit still rewrites every
+      page, which is right: each one names the new hash.
     - the footer half is a decision to revisit: naming the commit on every
       page is what makes every page a product of every commit. Naming it on
       one page (an about/colophon page) would leave the rest alone.
 
-  Until both are done a docs-only commit costs a full site build (~1-2
-  minutes) and a full redeploy.
+  Until the footer half is done a docs-only commit costs a full site build
+  (~1-2 minutes) and a full redeploy.
 
 - ~~**mkdocs-rss-plugin is not idempotent (non-deterministic builds).** — DONE.~~
   The plugin delegates timestamp generation to MkDocs' `get_build_datetime()`, which

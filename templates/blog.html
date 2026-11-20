@@ -6,7 +6,7 @@
    extra width costs nothing because the column is capped there anyway. #}
 {% block main_class %}blog-main{% endblock %}
 {% block extra_head %}
-<script src="{{ get_url(path='blog-search.js') }}{{ v }}" defer></script>
+<script src="{{ get_url(path='blog-search.js') }}" defer></script>
 {% endblock %}
 {% block content %}
 <h1>{{ section.title }}</h1>

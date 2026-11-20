@@ -109,25 +109,26 @@
 </script>
 {%- endif %}
 
-{#- `v` is appended to our own stylesheets, scripts and icons so that a deploy changes
-    their URLs. GitHub Pages lets browsers cache them for ten minutes; without
-    it a reader got new HTML with the old style.css (an unstyled logo) and
-    kept the old favicon. -#}
-{%- set v = "" %}
-{%- if git %}{% set v = "?v=" ~ git.short %}{% endif %}
+{#- Our own stylesheets, scripts and icons are linked through get_url with a
+    literal path, which appends ?h=<hash of the file's bytes> (rssite's
+    cachebust, on by default). GitHub Pages lets browsers cache them for ten
+    minutes; without a changing URL a reader got new HTML with the old
+    style.css (an unstyled logo) and kept the old favicon. The hash changes
+    only with the file, so a deploy that leaves a file alone leaves the
+    reader's cached copy valid. -#}
 {#- The logo, drawn by scripts/make_logo.py: SVG for browsers that take it,
     ICO for the rest, and a PNG for iOS, which ignores SVG icons. -#}
-<link rel="icon" href="/favicon.ico{{ v }}" sizes="16x16 32x32 48x48">
-<link rel="icon" href="/favicon.svg{{ v }}" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png{{ v }}">
+<link rel="icon" href="{{ get_url(path='favicon.ico') }}" sizes="16x16 32x32 48x48">
+<link rel="icon" href="{{ get_url(path='favicon.svg') }}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{{ get_url(path='apple-touch-icon.png') }}">
 {#- The design tokens, the fonts and the switcher come from the shared-themes
     submodule, published beside the pages by the [[publish]] entry in
     rssite.toml. get_url checks that each file is one the build writes. -#}
-<link rel="stylesheet" href="{{ get_url(path='shared-themes/fonts.css') }}{{ v }}">
-<link rel="stylesheet" href="{{ get_url(path='shared-themes/themes.css') }}{{ v }}">
+<link rel="stylesheet" href="{{ get_url(path='shared-themes/fonts.css') }}">
+<link rel="stylesheet" href="{{ get_url(path='shared-themes/themes.css') }}">
 {#- Vendor stylesheets go before ours so our theme overrides win on order. -#}
 {%- block vendor_css %}{% endblock %}
-<link rel="stylesheet" href="{{ get_url(path='style.css') }}{{ v }}">
+<link rel="stylesheet" href="{{ get_url(path='style.css') }}">
 {#- No highlight.css: rssite's is one fixed light palette, whose dark strings
     were unreadable on the dark themes, so it is switched off (highlight_css
     in rssite.toml). The syntax colours are theme tokens, in sass/style.scss. -#}
@@ -257,7 +258,7 @@
 {% block content %}{% endblock %}
 </main>
 
-<script src="{{ get_url(path='shared-themes/theme-switcher.js') }}{{ v }}"></script>
+<script src="{{ get_url(path='shared-themes/theme-switcher.js') }}"></script>
 <script>
   // Theme: the shared helper wires #theme-select to data-theme on <html> and
   // persists the choice under a localStorage key shared with the teaching-*

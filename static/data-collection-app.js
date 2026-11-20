@@ -9,6 +9,7 @@
  *
  *   window.collectionBasePath   where plugins and data live ('/')
  *   window.collectionPluginKeys the plugins this page shows, in order
+ *   window.collectionPluginRegistry every plugin key and its script's URL
  *
  * There used to be a second copy -- a standalone static/media_app.html carrying its
  * own copy of the page. It was replaced with a redirect on 2026-08-18 (since removed): bypassing
@@ -26,6 +27,10 @@
 
     // --- Plugin Registry ---
     // Maps plugin key to its script file. Scripts are loaded on demand.
+    // The registry itself is window.collectionPluginRegistry, written by
+    // templates/data_collection.html: there each script's URL comes from
+    // get_url, which names it by a hash of its content, so new HTML never
+    // runs against a cached old plugin and an unchanged plugin stays cached.
     // Keys MUST match the key each plugin registers itself under in
     // window.collectionPlugins — getDataSources() returns that object, so those keys
     // are what drive the ?data=... URLs and the load-once guard in loadPlugin.
@@ -39,22 +44,7 @@
     // Movies, videos -> Video Series). Nothing may derive any order from
     // window.collectionPlugins: the scripts load in parallel and register in
     // whatever order they finish, so the tabs used to reshuffle between loads.
-    const ALL_PLUGIN_FILES = {
-        'audio': BASE_PATH + 'plugin-audio-courses.js',
-        'audible': BASE_PATH + 'plugin-audible.js',
-        'books': BASE_PATH + 'plugin-books.js',
-        'companies': BASE_PATH + 'plugin-companies.js',
-        'providers': BASE_PATH + 'plugin-companies.js',
-        'consulting': BASE_PATH + 'plugin-companies.js',
-        'publishers': BASE_PATH + 'plugin-companies.js',
-        'education': BASE_PATH + 'plugin-companies.js',
-        'certifiers': BASE_PATH + 'plugin-companies.js',
-        'certifications': BASE_PATH + 'plugin-certifications.js',
-        'features': BASE_PATH + 'plugin-movies.js',
-        'podcasts': BASE_PATH + 'plugin-podcasts.js',
-        'videos': BASE_PATH + 'plugin-series.js',
-        'youtube': BASE_PATH + 'plugin-youtube.js'
-    };
+    const ALL_PLUGIN_FILES = window.collectionPluginRegistry || {};
     const pageKeys = window.collectionPluginKeys || Object.keys(ALL_PLUGIN_FILES);
     window.collectionPluginFiles = {};
     pageKeys.forEach(function(key) {
@@ -76,9 +66,7 @@
         if (scriptLoads[src]) return scriptLoads[src];
         scriptLoads[src] = new Promise(function(resolve, reject) {
             const script = document.createElement('script');
-            // The deploy's ?v= (data_collection.html), so new HTML never runs
-            // against a cached old plugin.
-            script.src = src + (window.collectionAssetVersion || '');
+            script.src = src;
             script.onload = resolve;
             script.onerror = function() { reject(new Error('Failed to load ' + src)); };
             document.head.appendChild(script);

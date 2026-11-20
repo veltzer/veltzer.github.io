@@ -152,7 +152,9 @@ sitemap) needs 0.1.25; `author_id` in `rssite.toml` and the `image` key the
 blog's `[cascade]` sets (each post's share card, `page.image` in the
 templates and `image` in the post's JSON-LD) need 0.1.28; the Hebrew
 `author` under `[[languages]]` and Hebrew titles on the tag feeds need 0.1.29;
-`highlight_css = false` needs 0.1.31.
+`highlight_css = false` needs 0.1.31; the content-hash `?h=` that `get_url`
+appends to every stylesheet, script and icon (`cachebust`, on by default;
+the templates no longer carry a `?v=<commit>`) needs 0.1.32.
 
 ## CI and the Workflow File
 
