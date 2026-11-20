@@ -21,14 +21,6 @@ better than not, for its own sake and not merely because the alternative is
 embarrassing. Nothing on the blog makes the case directly.
 *epistemology, philosophy*
 
-### Untethered — humanity's disconnection from reality
-
-Sketched in `brevity-is-not-truth` but not developed. The working title was a
-book: how far human belief floats free of anything checkable, why reality
-television is the ironic case, and what the internet did to the mechanism that
-used to kill unsupported ideas by loneliness.
-*epistemology, culture*
-
 ### Are we steering, or drifting?
 
 `steering-or-drifting` is the sketch; the real work is the
