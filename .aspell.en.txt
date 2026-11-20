@@ -352,6 +352,7 @@ Mofaz
 Molech
 Molière's
 Moretti
+Morewedge
 Moshik
 Moshik's
 Multisite
@@ -755,6 +756,7 @@ colorectal
 colorindex
 compatibilism
 compatibilist
+coms
 confessionally
 config
 configs
@@ -1830,7 +1832,5 @@ zwwvjod
 Ēostre
 Ēosturmōnaþ
 Ṣeba
-Morewedge
 Brå
 Brå's
-coms
