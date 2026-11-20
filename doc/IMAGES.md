@@ -79,8 +79,8 @@ increases clone size and slows operations. Several alternatives exist:
 ### Separate Data Repository (current pattern for YAML/PGN)
 
 - Keep images in a dedicated repo or storage location outside this repo.
-- Copy them in via `scripts/copy_data.py`, the way the chess and YouTube
-  captures in `../data/` are handled today.
+- Copy them in via `scripts/copy_data.py`, the way the YouTube
+  capture in `../data/` is handled today.
 - Keeps this repo lightweight while preserving the current build workflow.
 
 ### GitHub Pages Artifact Deployment

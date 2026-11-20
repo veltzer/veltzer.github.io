@@ -147,18 +147,19 @@ rerun it only for a new release or once new posts have brought many new words.
 
 ### `scripts/copy_data.py`
 
-Builds `static/data/` from the media YAML in `data/yaml/` and the chess
-archives and YouTube CSV in the sibling `../data/` repo: converts the
+Builds `static/data/` from the media YAML in `data/yaml/` and the YouTube
+CSV in the sibling `../data/` repo: converts the
 YouTube CSV to YAML, runs the audible and books imports, converts every
 YAML file to JSON (the frontend reads JSON, not YAML) and gzips everything.
 Uses `gzip -n` for reproducible output. Validates source files exist before
 copying. A manual step, not part of the build: CI has no `../data` checkout
-for the chess and YouTube half, and the generated `static/data/` is committed.
+for the YouTube half, and the generated `static/data/` is committed.
 
-The two chess archives (`games.pgn.gz`, `chesscom.pgn.gz`) arrive gzipped
-and are decompressed and concatenated into a single `games.pgn`, which the
-common gzip step then compresses like every other data file. The chess
-viewer fetches that one merged file.
+`static/data/games.pgn.gz`, the one file the chess viewer fetches, is not
+built by it: it is committed as it is. Its two sources (the ICS/GNU Chess
+games and the chess.com export) were removed from `../data` once the games
+were in the myworld database; they are in that repo's history, at commit
+`9841339`.
 
 ## Image Fetch Scripts
 

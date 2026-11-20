@@ -58,8 +58,9 @@ which records the traps that outlived the migration.
   (`profiles.yaml`), plus the private lists that no page publishes (concerts,
   museums, cv, trips, lectures, …; the full list is in `doc/DECISIONS.md`). Every file names its schema in `$schema`, which the
   build validates against `veltzer.github.io/web-schemas`. This directory came out of
-  the private `../data` repo in 2026-09; the chess archives and the youtube CSV are
-  still there (see `scripts/copy_data.py`)
+  the private `../data` repo in 2026-09; the youtube CSV is still there (see
+  `scripts/copy_data.py`). The chess archive `static/data/games.pgn.gz` is committed
+  as it is; its sources left `../data` (they are in its history, at commit `9841339`)
 - `data/logos/` — one SVG per organization in `organizations.yaml` (which refers to
   them by paths relative to `data/`), linted by xmllint. The companies tab of the media
   page is built from these at build time: the `companies` step of `build_site.py`
@@ -292,8 +293,8 @@ tags = ["religion", "philosophy", "ethics"]
 - `_site/` is generated — never edit it. Edit `content/`, `templates/`, `sass/` or
   `static/` and rebuild.
 - YAML data for the media tracker lives in `data/yaml/` and is turned into the
-  `.json.gz` the frontend loads by `scripts/copy_data.py`, which also pulls the chess
-  archives and the youtube CSV from the sibling `../data/` repository (private, not
+  `.json.gz` the frontend loads by `scripts/copy_data.py`, which also pulls the
+  youtube CSV from the sibling `../data/` repository (private, not
   checked out in CI — which is why `copy_data.py` is still a manual step and
   `static/data/` is committed). **The frontend reads JSON, not YAML** — js-yaml took
   ~399ms on the 6.5MB youtube dataset against ~31ms for `JSON.parse`.

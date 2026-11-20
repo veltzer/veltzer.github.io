@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
 """
-Build static/data from the media YAML in data/yaml and the chess/youtube
-captures in the sibling ../data repo.
+Build static/data from the media YAML in data/yaml and the youtube capture
+in the sibling ../data repo.
 
 The YAML data for the media tracker lives in this repo under data/yaml. The
-chess archives and the youtube CSV are raw captures that still live in the
-separate ../data repository. This script validates the sources exist, copies
-the plain YAML files, merges the gzipped chess archives, runs the audible
+youtube CSV is a raw capture that still lives in the separate ../data
+repository. This script validates the sources exist, copies the plain YAML
+files, runs the audible
 import (type fixes + field cleanup), the books import (nested names, authors
 and readings flattened to one item per book) and the youtube CSV->YAML
 conversion,
@@ -18,9 +18,13 @@ js-yaml in the browser measured ~399ms against ~31ms for JSON.parse on the
 same data (12.9x), all of it blocking the main thread. Gzipped JSON is also
 marginally smaller than gzipped YAML. The .yaml files remain the build's
 intermediate representation.
+
+static/data/games.pgn.gz, the chess viewer's archive, is not built here: it
+is committed as it is. Its sources (the ICS/GNU Chess games and the chess.com
+export) left ../data once the games were in the myworld database; they are
+in that repo's history, at commit 9841339.
 """
 
-import gzip
 import json
 import shutil
 import subprocess
@@ -48,12 +52,6 @@ PLAIN_YAML = [
 # Files that need a source check but are processed rather than copied directly.
 PROCESSED_YAML = ["audible.yaml", "books_read.yaml"]
 
-CHESS_DIR = DATA_REPO / "raw" / "topics" / "games" / "chess"
-# Both archives are stored gzipped in the data repo. They are concatenated into
-# the single games.pgn.gz the chess viewer fetches: the viewer splits on the
-# [Event header of each game, so a plain concatenation with a blank line between
-# the two is a valid PGN stream.
-CHESS_PGN_GZ = [CHESS_DIR / "games.pgn.gz", CHESS_DIR / "chesscom.pgn.gz"]
 YOUTUBE_CSV = DATA_REPO / "raw" / "topics" / "video" / "youtube" / "all.list.csv"
 
 
@@ -73,9 +71,8 @@ def validate_sources():
     for name in PLAIN_YAML + PROCESSED_YAML:
         if not (YAML_DIR / name).is_file():
             die(f"Missing source file {YAML_DIR / name}")
-    for path in CHESS_PGN_GZ + [YOUTUBE_CSV]:
-        if not path.is_file():
-            die(f"Missing source file {path}. Clone the data repo alongside this one.")
+    if not YOUTUBE_CSV.is_file():
+        die(f"Missing source file {YOUTUBE_CSV}. Clone the data repo alongside this one.")
 
 
 def copy_plain_yaml():
@@ -98,22 +95,6 @@ def import_books():
         [str(SCRIPTS / "import_books.py"), str(YAML_DIR / "books_read.yaml"), str(DEST / "books.yaml")],
         check=True,
     )
-
-
-def copy_chess():
-    # The sources are already gzipped, so they are decompressed here and the
-    # merged result is re-gzipped by gzip_data_files() along with everything
-    # else -- that keeps a single, reproducible gzip step for the whole tree.
-    with open(DEST / "games.pgn", "wb") as out:
-        for index, path in enumerate(CHESS_PGN_GZ):
-            if index:
-                out.write(b"\n\n")
-            with gzip.open(path, "rb") as handle:
-                shutil.copyfileobj(handle, out)
-    # Count games the way the viewer splits them: one [Event header each.
-    with open(DEST / "games.pgn", "rb") as handle:
-        games = sum(1 for line in handle if line.startswith(b"[Event "))
-    report(DEST / "games.pgn.gz", f"{games} games")
 
 
 def convert_youtube():
@@ -143,7 +124,7 @@ def gzip_data_files():
     # reproducible across rebuilds; -f overwrites any existing .gz. Shelling out
     # to gzip keeps the output byte-identical to the original build (same OS-field
     # header byte), which matters for idempotent commits of build artifacts.
-    targets = sorted(DEST.glob("*.json")) + sorted(DEST.glob("*.pgn"))
+    targets = sorted(DEST.glob("*.json"))
     subprocess.run(["gzip", "-nf", *map(str, targets)], check=True)
 
 
@@ -152,7 +133,6 @@ def main():
     copy_plain_yaml()
     import_audible()
     import_books()
-    copy_chess()
     convert_youtube()
     convert_yaml_to_json()
     gzip_data_files()

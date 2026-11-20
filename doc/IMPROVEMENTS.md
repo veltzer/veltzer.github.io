@@ -838,7 +838,7 @@ open unless struck through. Ordered roughly by how visible the fault is.
 - **The chess page downloads the whole 21 MB archive on every visit.** `games.pgn.gz`
   is fetched, gunzipped and split before anything is usable; on a slow link that is tens
   of seconds. A progress bar was added on 2026-09-07 (commit `2ad53ba`) so the wait is at
-  least visible, but the real fix is to not need the whole file: have `copy_data.py`
+  least visible, but the real fix is to not need the whole file: have a script
   emit a small headers-only index (players, event, date, result, offset) and fetch the
   movetext of a game on demand, or split the archive by year and load the selected year.
   Stats (61,636 games, win/loss) come from the headers, so the index alone can render

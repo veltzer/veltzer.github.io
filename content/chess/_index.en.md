@@ -53,8 +53,8 @@ import {Chessboard, FEN} from "/vendor/cm-chessboard/src/Chessboard.js";
 (function () {
     const DATA_URL = "/data/games.pgn.gz";
     // The archive is ~61,600 games / ~100MB uncompressed -- the old ICS/GNU
-    // Chess games plus the chess.com export, merged into one file by
-    // scripts/copy_data.py. Parsing every one with chess.js up front would take
+    // Chess games plus the chess.com export, merged into one file, which is
+    // committed as it is. Parsing every one with chess.js up front would take
     // far too long, so the file is split into game texts and only the headers
     // are read eagerly; the moves of a game are parsed the first time it is
     // opened.
