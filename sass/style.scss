@@ -476,26 +476,53 @@ pre code { background: none; padding: 0; border: 0; }
 // generator's own highlight.css is one fixed light palette and is not written
 // (highlight_css = false in rssite.toml). The roles follow that palette: strings in the
 // accent, keywords and types bold, names of functions and of tags apart.
+//
+// The scope names are also ordinary words, and some are classes of this site
+// (`keyword control` met .control, the button look; `meta tag` met .tag, the
+// chip), so every scope span is first returned to plain text. The rules after
+// it say `span.` to outrank that reset.
+//
+// Each colour is the token mixed a third of the way to the text colour: the
+// entity tokens were chosen for chips, and as text on the code background
+// several fell under 3:1 (solarized, nord).
+@function syntax($token) {
+  @return color-mix(in srgb, var(#{$token}) 65%, var(--text-primary));
+}
+
 pre.highlight {
-  .comment { color: var(--text-secondary); font-style: italic; }
-  .string { color: var(--accent); }
-  .constant,
-  .support.type,
-  .support.class,
-  .entity.name.class,
-  .entity.other.inherited-class { color: var(--entity-1); }
-  .keyword,
-  .storage { color: var(--entity-4); font-weight: bold; }
-  .entity.name.function,
-  .entity.other.attribute-name { color: var(--entity-2); }
-  .entity.name.tag,
-  .support.function { color: var(--entity-3); }
-  .invalid { color: var(--danger); }
-  .markup.inserted { color: var(--success); background: var(--success-dim); }
-  .markup.deleted { color: var(--danger); background: var(--danger-dim); }
-  .markup.heading,
-  .markup.bold { font-weight: bold; }
-  .markup.italic { font-style: italic; }
+  span[class] {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    font-size: inherit;
+    line-height: inherit;
+    text-decoration: none;
+    white-space: inherit;
+    cursor: inherit;
+  }
+  span.comment { color: var(--text-secondary); font-style: italic; }
+  span.string { color: syntax(--accent); }
+  span.constant,
+  span.support.type,
+  span.support.class,
+  span.entity.name.class,
+  span.entity.other.inherited-class { color: syntax(--entity-1); }
+  span.keyword,
+  span.storage { color: syntax(--entity-4); font-weight: bold; }
+  span.entity.name.function,
+  span.entity.other.attribute-name { color: syntax(--entity-2); }
+  span.entity.name.tag,
+  span.support.function { color: syntax(--entity-3); }
+  span.invalid { color: var(--danger); }
+  span.markup.inserted { color: var(--success); background: var(--success-dim); }
+  span.markup.deleted { color: var(--danger); background: var(--danger-dim); }
+  span.markup.heading,
+  span.markup.bold { font-weight: bold; }
+  span.markup.italic { font-style: italic; }
 }
 
 table { border-collapse: collapse; width: 100%; }

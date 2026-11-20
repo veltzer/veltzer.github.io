@@ -65,3 +65,7 @@ class TestScopeCss:
         out = import_teaching.scope_css("@media (max-width: 600px) { .x { top: 0; } }", W)
         assert "#app .x" in out
         assert out.startswith("@media (max-width: 600px) {")
+
+    def test_font_face_rules_are_dropped(self):
+        css = '@font-face { font-family: "Outfit"; src: url("fonts/Outfit-Light.woff2"); } .x { top: 0; }'
+        assert import_teaching.scope_css(css, W) == "#app .x { top: 0; }"

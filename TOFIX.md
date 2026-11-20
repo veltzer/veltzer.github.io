@@ -15,14 +15,6 @@ purpose.
   GitHub description and topics. (`.luacheckrc`, which only configured a
   luacheck processor that does not run here, was removed on 2026-11-19.)
 
-- **The three imported app pages are behind their upstream sites.**
-  `import_teaching.py` now scopes a selector that starts at `body`
-  (`body > div` became `#app-slides body > div`, which matches nothing;
-  fixed 2026-11-20), but the committed pages were not re-imported: the
-  sibling sites have since added `@font-face` rules with relative
-  `fonts/...` URLs, which would 404 here. The importer has to handle those
-  before the next import.
-
 ## Left alone on purpose
 
 - **Movie "with" names** stay in `static/data/video_features.json.gz` and in

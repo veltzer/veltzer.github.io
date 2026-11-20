@@ -27,6 +27,8 @@ key, so the shared switcher serves the imported page unchanged.
 
 Everything is scoped under a wrapper div and the page's CSS is prefixed with
 that wrapper, so the imported styles cannot leak into the rest of the site.
+The inlined `@font-face` rules are dropped: this site already declares the
+same shared-themes fonts.
 
 Usage:
   scripts/import_teaching.py [--check]
@@ -267,6 +269,12 @@ def scope_css(css, wrapper):
     for prelude, body in split_css(css):
         if body is None:
             out.append(prelude)
+        elif prelude.startswith("@font-face"):
+            # The sibling sites inline shared-themes/fonts.css, whose URLs are
+            # relative to that file (`fonts/Outfit-Light.woff2`) and would 404
+            # from a page here. base.html links the same fonts.css from the
+            # same submodule, so the fonts are already declared: drop these.
+            continue
         elif prelude.startswith(CONDITIONAL_AT_RULES):
             out.append(f"{prelude} {{\n{scope_css(body, wrapper)}\n}}")
         elif prelude.startswith("@"):

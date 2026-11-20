@@ -117,7 +117,8 @@ Imports the three sibling teaching sites (`../teaching-slides`,
 `content/{slides,syllabi,animations}/_index.en.md` as native site pages. Each
 sibling builds a single self-contained `_site/index.html`; the script strips
 the document wrapper, drops the embedded header and theme `<select>` (this
-site's chrome supplies both), scopes the page's CSS under an `#app-<section>`
+site's chrome supplies both), drops the inlined `@font-face` rules (this site
+links the same shared-themes fonts), scopes the page's CSS under an `#app-<section>`
 wrapper, and writes the result with this site's front matter. A manual step,
 run after rebuilding a sibling site; the output is committed, and the build
 (local and CI, which has no sibling checkouts) uses the committed copies. `--check` reports what would be written without writing.

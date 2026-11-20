@@ -269,7 +269,9 @@ tags = ["religion", "philosophy", "ethics"]
   runtime import, and the relative path then resolves against `/style.css` and 404s.
 - **Code blocks take their syntax colours from the theme tokens too** (the
   `pre.highlight` rules in `style.scss`, over the scope classes rssite's
-  highlighter writes). rssite's own `highlight.css` is one fixed light palette,
+  highlighter writes; each colour is a token mixed a third of the way to the text
+  colour, for contrast, and the scope spans are first reset to plain text because
+  scope names such as `control` and `tag` are also classes of this site). rssite's own `highlight.css` is one fixed light palette,
   unreadable on the dark themes, so it is not written (`highlight_css = false`
   under `[markdown]` in `rssite.toml`).
 - Prefer external stylesheets over inline `<style>` blocks or `style=` attributes.

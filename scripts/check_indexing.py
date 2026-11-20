@@ -55,6 +55,8 @@ ADC_FILE = Path.home() / ".config/gcloud/application_default_credentials.json"
 TIMEOUT = 60
 # Search Analytics returns at most this many rows a request.
 PAGE_ROWS = 25000
+# Attempts at one request before giving up on it.
+RETRIES = 3
 # Parallel URL inspections; well inside the 600-a-minute quota.
 WORKERS = 8
 # Pages an inspection found indexed, with the day it said so. Google's state,
@@ -83,8 +85,19 @@ def session(project):
 
 
 def post(http, url, body):
-    """POST json and return the decoded answer, or exit with Google's reason."""
-    response = http.post(url, json=body, timeout=TIMEOUT)
+    """POST json and return the decoded answer, or exit with Google's reason.
+
+    A request that times out or loses its connection is tried RETRIES times
+    in all: one inspection in a few hundred stalls (seen 2026-11-20, a read
+    timeout after 60 seconds), and the next attempt answers.
+    """
+    for attempt in range(1, RETRIES + 1):
+        try:
+            response = http.post(url, json=body, timeout=TIMEOUT)
+            break
+        except (requests.Timeout, requests.ConnectionError):
+            if attempt == RETRIES:
+                raise
     if response.status_code != 200:
         try:
             message = response.json()["error"]["message"]
@@ -123,11 +136,19 @@ def shown_pages(http, days):
 
 
 def inspect(http, page):
-    """(indexed, coverage state) for one page, as Search Console reports it."""
-    status = post(http, f"{API}/v1/urlInspection/index:inspect", {
-        "inspectionUrl": page,
-        "siteUrl": PROPERTY,
-    })["inspectionResult"]["indexStatusResult"]
+    """(indexed, coverage state) for one page, as Search Console reports it.
+
+    A page Google would not answer for is reported as not inspected, in the
+    list with the unindexed ones, and the run goes on: it is not cached, so
+    the next run asks again.
+    """
+    try:
+        status = post(http, f"{API}/v1/urlInspection/index:inspect", {
+            "inspectionUrl": page,
+            "siteUrl": PROPERTY,
+        })["inspectionResult"]["indexStatusResult"]
+    except (requests.Timeout, requests.ConnectionError) as error:
+        return False, f"not inspected: {type(error).__name__} after {RETRIES} attempts"
     return status.get("verdict") == "PASS", status.get("coverageState", "unknown")
 
 

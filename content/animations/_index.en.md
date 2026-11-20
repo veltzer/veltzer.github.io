@@ -17,6 +17,7 @@ template = "app.html"
   --shadow: 0 1px 3px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.25);
 }
 #app-animations, [data-theme="azure"] #app-animations {
+  color-scheme: light;
   --bg: #ffffff;
   --bg-surface: #f5f5f7;
   --bg-elevated: #eaeaef;
@@ -43,6 +44,7 @@ template = "app.html"
   --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.06);
 }
 [data-theme="paper"] #app-animations {
+  color-scheme: light;
   --bg: #faf8f5;
   --bg-surface: #f0ede8;
   --bg-elevated: #e8e4de;
@@ -69,6 +71,7 @@ template = "app.html"
   --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.06);
 }
 [data-theme="midnight"] #app-animations {
+  color-scheme: dark;
   --bg: #0f1117;
   --bg-surface: #161922;
   --bg-elevated: #1e2130;
@@ -94,6 +97,7 @@ template = "app.html"
   --gradient-end: #6c8cff;
 }
 [data-theme="nord"] #app-animations {
+  color-scheme: dark;
   --bg: #2e3440;
   --bg-surface: #3b4252;
   --bg-elevated: #434c5e;
@@ -119,6 +123,7 @@ template = "app.html"
   --gradient-end: #88c0d0;
 }
 [data-theme="solarized"] #app-animations {
+  color-scheme: light;
   --bg: #fdf6e3;
   --bg-surface: #eee8d5;
   --bg-elevated: #e6dfcb;
@@ -145,6 +150,7 @@ template = "app.html"
   --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
 }
 [data-theme="rosepine"] #app-animations {
+  color-scheme: dark;
   --bg: #191724;
   --bg-surface: #1f1d2e;
   --bg-elevated: #26233a;
@@ -169,7 +175,6 @@ template = "app.html"
   --gradient-start: #e0def4;
   --gradient-end: #c4a7e7;
 }
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700&display=swap');
 #app-animations *, #app-animations *::before, #app-animations *::after { box-sizing: border-box; }
 #app-animations {
   font-family: var(--font-sans);
@@ -461,8 +466,9 @@ template = "app.html"
   --md-sys-color-outline-variant: var(--border-subtle);
   --md-sys-color-error: var(--danger);
 
-  --md-ref-typeface-brand: 'Roboto', system-ui, sans-serif;
-  --md-ref-typeface-plain: 'Roboto', system-ui, sans-serif;
+  
+  --md-ref-typeface-brand: var(--font-sans);
+  --md-ref-typeface-plain: var(--font-sans);
 }
 #app-animations md-outlined-text-field#search { width: 100%; }
 #app-animations .header-bar md-outlined-select { width: auto; min-width: 220px; }
