@@ -125,8 +125,8 @@ The site is built by rsconstruct's `processor.mass_generator.generic.site`:
 on, and each becomes a product, so an unchanged site runs rssite zero times,
 an edited post rebuilds only the files that list it, and `clean outputs` +
 `build` restores the site from cache. rssite also writes the feeds, the
-sitemap and the shared-themes files (`[[publish]]`), and reads the commit every footer names
-itself (`git` in the templates). The two steps it does not do are the
+sitemap and the shared-themes files (`[[publish]]`), and reads the commit the colophon
+names itself (`git` in the templates). The two steps it does not do are the
 companies data, `scripts/build_site.py companies`, and the per-post share
 cards, `scripts/make_post_cards.py` (one 1200x630 `og:image` per post,
 written to `_site/images/og/<file stem>.jpg`, never committed). See
@@ -375,8 +375,19 @@ tags = ["religion", "philosophy", "ethics"]
 - Dates are `{{ post.date | date }}` (or `date(long=true)` in a post header): the
   format is each language's `date_format` in `rssite.toml`, and the month names come
   from `i18n/he.toml`, which is how Hebrew dates are produced. `now()` is not available to
-  templates: the output of a build is a function of its sources, so the footer's year
-  is `git.year`, the commit's date.
+  templates: the output of a build is a function of its sources, so the copyright year
+  is `git.year`, the commit's date, and it is on the colophon, not in the footer.
+- **Only the colophon names the build.** `templates/colophon.html`
+  (`/en/colophon/`, `/he/colophon/`, linked from every footer and from the
+  root chooser) is the one template that reads `git`, `build` or
+  `rssite.version`: the commit, the build time, the generator's version and
+  the copyright year. Reading `git` makes the commit's files sources of a
+  page, so when every footer named the commit, every commit rebuilt and
+  redeployed every page. Now a commit rebuilds the colophon and whatever its
+  own changes touch, and every other page is byte-for-byte what the last
+  build wrote. Do not put any of them back into `base.html`, `root.html` or
+  any other template; `rssite plan` shows it at once (only the two colophon
+  outputs may list `.git/...` sources).
 - Site uses `.nojekyll` to bypass Jekyll processing on GitHub Pages.
 - CI checks out submodules recursively; without that the build fails on missing tokens.
 

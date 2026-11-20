@@ -1,8 +1,8 @@
 # Suggested Improvements
 
 Struck-through entries are done; the note under each records what was actually
-changed and how it was verified. **One item is open**: the footer half of "Every commit
-rebuilds every page" under "Infrastructure" (its asset half was done on 2026-11-20). The chess archive download
+changed and how it was verified. **No item is open**: the last one, "Every commit
+rebuilds every page" under "Infrastructure", was finished on 2026-11-20. The chess archive download
 under "Site review, 2026-09-07" went with the chess page, removed on 2026-11-20; the older `hebrew` language tag noted under
 "Right-to-left rendering" was resolved on 2026-10-29. Everything else above the
 site review is closed. Where a closed verdict was later overtaken by the code, a
@@ -436,12 +436,16 @@ came later) and the built page.
       leaves every reader's cached copy valid (one 304 after ten minutes
       instead of a full download). A stylesheet edit still rewrites every
       page, which is right: each one names the new hash.
-    - the footer half is a decision to revisit: naming the commit on every
-      page is what makes every page a product of every commit. Naming it on
-      one page (an about/colophon page) would leave the rest alone.
-
-  Until the footer half is done a docs-only commit costs a full site build
-  (~1-2 minutes) and a full redeploy.
+    - ~~the footer half is a decision to revisit: naming the commit on every
+      page is what makes every page a product of every commit.~~ **DONE,
+      2026-11-20.** The commit, the build time, the generator's version and
+      the copyright year (the commit's year) moved to a colophon,
+      `/en/colophon/` and `/he/colophon/` (`templates/colophon.html`, linked
+      from every footer and from the root chooser). It is the only template
+      that reads `git` or `build`: `rssite plan` lists `.git/...` sources for
+      those two outputs and no other, so a docs-only commit rebuilds the two
+      colophon pages and nothing else, and a page's bytes no longer depend
+      on when it was built.
 
 - ~~**mkdocs-rss-plugin is not idempotent (non-deterministic builds).** — DONE.~~
   The plugin delegates timestamp generation to MkDocs' `get_build_datetime()`, which

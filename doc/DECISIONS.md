@@ -387,6 +387,11 @@ rather than a workaround here.
   commit rebuilt the site, which took seconds. (Correction 2026-11-15: that
   file does not exist. The commit is rssite's `git` template context, which
   the footer reads directly.)
+  (Superseded 2026-11-20: the footer names nothing about the build any more.
+  The generator, its version, the commit, the build time and the copyright
+  year moved to a colophon page, `templates/colophon.html`, the one template
+  that reads `git` and `build`, so a commit no longer rebuilds every page and
+  a page's bytes do not depend on when it was built.)
 - The Hebrew app stubs declare `body_from = "en"` instead of the template
   fetching the English section.
 

@@ -1,0 +1,29 @@
+{% extends "section.html" %}
+{#- The colophon: how the site is made, and the one page that names the build.
+
+    The commit (`git`), the build time (`build`) and the generator's version
+    (`rssite.version`) used to be in every footer. Reading `git` makes the
+    commit's files sources of the page, so every commit rebuilt and
+    redeployed every page, and the build time differed on every build of the
+    same sources. Only this template reads them now: a commit rebuilds the
+    colophon and the pages whose own sources changed, and every other page
+    is byte-for-byte what the last build wrote. Keep it that way: no other
+    template may read git, build or rssite.version.
+
+    The wording is the i18n footer_* keys (they were written for the footer);
+    names, the version and the address sit in <bdi> so they do not reorder a
+    right-to-left sentence. Outside git (a tarball) the commit is left out. -#}
+{% block content %}
+<h1>{{ section.title }}</h1>
+{{ section.content | safe }}
+<h2>{{ trans(key="colophon_this_build") }}</h2>
+<ul class="colophon-build">
+  <li>{{ trans(key="footer_built_with") }} <a href="{{ rssite.url }}">{{ rssite.name }}</a> {{ trans(key="footer_version") }} <bdi>{{ rssite.version }}</bdi>, {{ trans(key="footer_generator_by") }} {{ trans(key="footer_author") }} <bdi>&lt;<a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a>&gt;</bdi></li>
+  {%- if git or build %}
+  <li>{{ trans(key="footer_built") }}{% if git %} {{ trans(key="footer_from") }} <bdi><a href="https://github.com/veltzer/veltzer.github.io">veltzer/veltzer.github.io</a></bdi> {{ trans(key="footer_commit") }} <a href="https://github.com/veltzer/veltzer.github.io/commit/{{ git.commit }}"><code>{{ git.short }}</code></a>{% if git.dirty %} {{ trans(key="footer_uncommitted") }}{% endif %}{% endif %}{% if build %} {{ trans(key="footer_on") }} <time datetime="{{ build.time }}" dir="ltr">{{ build.time | truncate(length=16, end="") | replace(from="T", to=" ") }} UTC</time>{% endif %}</li>
+  {%- endif %}
+  {#- The year is the commit's date rather than the build clock: the same
+      sources always give the same copyright. #}
+  <li dir="ltr">&copy; {% if git %}{{ git.year }} {% endif %}{{ config.author }}</li>
+</ul>
+{% endblock %}
