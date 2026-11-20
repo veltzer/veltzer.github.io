@@ -248,7 +248,7 @@ only remaining copy):
   on its own, so a locally served `_site/` does not show up in the dashboard.
 * **The dashboard is public** ("Dashboard viewable by: Anyone" in the
   GoatCounter site settings, set 2026-11-06), and the footer of every page
-  links to it as "Goat Counter" in both languages (the `label_goatcounter`
+  links to it as "GoatCounter" in both languages (the `label_goatcounter`
   string in `i18n/`; it was "Stats" until 2026-11-20, which said nothing
   about where the link goes). The link is rendered only while GoatCounter is the provider.
 * **The GA4 history is public too.** GA4's own dashboard is login-only, so on
