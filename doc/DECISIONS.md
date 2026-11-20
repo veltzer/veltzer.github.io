@@ -104,6 +104,9 @@ credential, this decision should be revisited — a proxy would then be
 warranted. As long as it stays a referrer-restricted, read-only Calendar
 browser key, the visible-in-source key is the correct, simplest design.
 
+What a Worker and the other hosted backends cost and offer, should a
+feature ever need one, is in `doc/BACKEND_SERVICES.md`.
+
 ## Company cards show a static OpenStreetMap image, not a Google Maps iframe
 
 Each card on the companies tab shows a small map of the company's one

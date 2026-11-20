@@ -107,7 +107,10 @@ which records the traps that outlived the migration.
 - `_site/` — generated output (gitignored, never edit)
 - `doc/` — project notes, decisions and the improvements backlog;
   `doc/TRANSLATION.md` is the state of the Hebrew translation (what is
-  translated, how, and what stays English by decision)
+  translated, how, and what stays English by decision);
+  `doc/BACKEND_SERVICES.md` is the research on adding dynamic features
+  (comments, counters, storage, uploads) to a static site, to read before
+  adding any
 
 ## Build Commands
 
