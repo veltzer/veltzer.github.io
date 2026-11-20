@@ -36,3 +36,8 @@ executable_sha256 = "b73acdf73b96c3ac9e56d2fa933427b3ee6a901e3cce6ba1e3ecb3f91ca
 url = "https://registry.npmjs.org/vnu-jar/-/vnu-jar-26.11.14.tgz"
 sha256 = "115cf1f0bd281c931a350b7642ff2614884d35bd2f3e2ce25a6763fea9083b00"
 executable_sha256 = "7673ca7aa7b0a306cbfabc6d7de3c963df9a289f1809d6b24fbc7d9511bfece5"
+
+[binary.zizmor]
+url = "https://github.com/zizmorcore/zizmor/releases/download/v1.32.0/zizmor-x86_64-unknown-linux-gnu.tar.gz"
+sha256 = "bb110cc765eca9cd7efb2e284a956be5974c60027b0970f16397d86208a9957b"
+executable_sha256 = "04d55fb88e582a8e9a9ce6b4753df723fc44c35e0d1a8e8771db9e017066c6df"
