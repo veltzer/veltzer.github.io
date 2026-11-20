@@ -11,7 +11,8 @@ calendar integration.
 - **Site generator**: [rssite](https://github.com/veltzer/rssite) — the fleet's own
   static site generator (Rust, crates.io). Templates are
   [Tera](https://keats.github.io/tera/) (Jinja2-like). It replaced zola on
-  2026-10-16; `doc/DECISIONS.md` records why.
+  2026-10-16; `doc/DECISIONS.md` records why, and `doc/SITE_GENERATORS.md`
+  compares it with MkDocs, zola and the rest.
 - **Build orchestration**: rsconstruct (single binary, configured via `rsconstruct.toml`;
   nothing in it reads `config/`, which holds `project.lua` for `rsmultigit gh
   sync-metadata` and the Tailwind files of `build_collection_css.sh`)
