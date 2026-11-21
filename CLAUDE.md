@@ -54,7 +54,7 @@ which records the traps that outlived the migration.
   how rssite pairs a post with its translation; nothing else is needed
     - `content/<page>/_index.{en,he}.md` — the standalone nav pages (about, media, calendar, …)
 - `data/yaml/` — the source of truth for the media tracker (podcasts, courses,
-  books, audible, video features and series) and for the profile block
+  books, video features and series) and for the profile block
   (`profiles.yaml`), plus the private lists that no page publishes (concerts,
   museums, cv, trips, lectures, …; the full list is in `doc/DECISIONS.md`). Every file names its schema in `$schema`, which the
   build validates against `veltzer.github.io/web-schemas`. This directory came out of
@@ -97,7 +97,7 @@ which records the traps that outlived the migration.
   reading Google Drive; a build step that runs only where that folder exists, via
   `enabled_if_dir_exists`), and the `build_*_dict.sh` / `spellcheck_*.sh` pair behind the aspell
   processors
-- `tests/` — pytest suite: the data import scripts (csv, audible, books, certifications,
+- `tests/` — pytest suite: the data import scripts (csv, books, certifications,
   companies), the logo generator against the inline logo in `base.html`, the word-vector
   trimmer, `people.yaml` against every `with:` name in the data files, the Hebrew check
   (`check_hebrew.py`), the CSS scoping of `import_teaching.py` and the episode matching

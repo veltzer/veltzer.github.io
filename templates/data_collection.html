@@ -175,7 +175,6 @@ window.collectionBasePath = '/';
 // and the build plan rebuilds this page when a plugin changes.
 window.collectionPluginRegistry = {
 'audio': {{ get_url(path='plugin-audio-courses.js') | json_encode | safe }},
-'audible': {{ get_url(path='plugin-audible.js') | json_encode | safe }},
 'books': {{ get_url(path='plugin-books.js') | json_encode | safe }},
 'companies': {{ get_url(path='plugin-companies.js') | json_encode | safe }},
 'providers': {{ get_url(path='plugin-companies.js') | json_encode | safe }},

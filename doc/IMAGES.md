@@ -9,7 +9,6 @@ verbatim to `/images/` in the built site.
 |---|---|---|
 | Movies | `movie-{imdb_id}.jpg` | TMDB CDN (by IMDB ID) |
 | TV Series | `series-{imdb_id}.jpg` | TMDB CDN (by IMDB ID) |
-| Audible | `audible-{asin}.jpg` | `cover_url` from YAML |
 | Books | `book-{cover}.jpg` (`simania-<id>` or `goodreads-<id>`), `book-no-cover.jpg` placeholder | `og:image` of the goodreads/simania page |
 | Audio Courses (GC) | `audiocourse-gc-{gc_id}.jpg` | Great Courses CDN |
 | Audio Courses (Audible) | `audiocourse-audible-{asin}.jpg` | Audible |

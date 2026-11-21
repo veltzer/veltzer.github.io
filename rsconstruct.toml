@@ -130,7 +130,6 @@ src_dirs = ["tests"]
 # suite on a warm cache.
 dep_inputs = [
     "scripts/csv_to_yaml.py",
-    "scripts/import_audible.py",
     "scripts/import_books.py",
     "scripts/import_certifications.py",
     "scripts/import_companies.py",
@@ -144,7 +143,6 @@ dep_inputs = [
     "templates/base.html",
     "static/favicon.svg",
     # test_people.py reads every data file's with: names.
-    "data/yaml/audible.yaml",
     "data/yaml/audio_books.yaml",
     "data/yaml/audio_courses.yaml",
     "data/yaml/books_loans.yaml",
@@ -218,7 +216,6 @@ command = "scripts/check_images.py"
 inputs = [
     "scripts/check_images.py",
     "scripts/import_books.py",
-    "data/yaml/audible.yaml",
     "data/yaml/audio_courses.yaml",
     "data/yaml/books_read.yaml",
     "data/yaml/concerts.yaml",

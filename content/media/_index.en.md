@@ -7,5 +7,5 @@ template = "data_collection.html"
 # the markup and reads this list.
 [extra]
 # Concerts and museums are private: see doc/DECISIONS.md.
-plugins = ["audio", "audible", "books", "features", "podcasts", "publishers", "videos", "youtube"]
+plugins = ["audio", "books", "features", "podcasts", "publishers", "videos", "youtube"]
 +++

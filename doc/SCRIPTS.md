@@ -149,7 +149,7 @@ rerun it only for a new release or once new posts have brought many new words.
 
 Builds `static/data/` from the media YAML in `data/yaml/` and the YouTube
 CSV in the sibling `../data/` repo: converts the
-YouTube CSV to YAML, runs the audible and books imports, converts every
+YouTube CSV to YAML, runs the books import, converts every
 YAML file to JSON (the frontend reads JSON, not YAML) and gzips everything.
 Uses `gzip -n` for reproducible output. Validates source files exist before
 copying. A manual step, not part of the build: CI has no `../data` checkout
@@ -184,12 +184,6 @@ with `great_courses_id`, Audible for those with `audible_asin`, and
 DuckDuckGo image search with tkinter GUI picker for the rest.
 Output: `static/images/audiocourse-{gc|audible|internal}-{id}.jpg`
 
-### `scripts/fetch_audible_images.py`
-
-Downloads Audible book cover images using the `cover_url` field from
-the YAML. No API keys or authentication needed.
-Output: `static/images/audible-{asin}.jpg`
-
 ### `scripts/fetch_book_covers.py`
 
 Downloads book covers for `books_read.yaml`. Every book carries a goodreads
@@ -210,12 +204,6 @@ the trimmed YAML the media viewer loads, keeping only title, channel, upload
 date, duration, view count, categories and URL. Rows whose title is
 `METADATA_NOT_FOUND` are kept with `status: missing` and a rebuilt watch URL
 so the viewer can still link out. Run by `scripts/copy_data.py`.
-
-### `scripts/import_audible.py`
-
-Copies `data/yaml/audible.yaml` into `static/data/` keeping only the
-fields the audible plugin uses, with integer fields coerced and string
-fields force-quoted so the output is stable. Run by `scripts/copy_data.py`.
 
 ### `scripts/import_books.py`
 

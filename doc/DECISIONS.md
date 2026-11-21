@@ -167,13 +167,6 @@ All static files (HTML, JS, CSS, images, data) live in `blog/` alongside
 the Markdown blog posts. MkDocs copies them through as-is to `docs/` on
 build. Never edit files in `docs/` directly.
 
-## Some Audible books return 404
-
-A few Audible ASINs return 404 because the publisher removed the book
-from the public store. The user still has access in their private library.
-The `cover_url` field in the YAML is used instead of scraping the product
-page, which avoids this issue for cover images.
-
 ## Some Great Courses are not on the website
 
 A few audio courses (Holiday Music, Discovery of Ancient Civilizations,
@@ -534,7 +527,7 @@ Private data types: the files in `data/yaml/` that no page publishes.
 - `video_courses.yaml`
 - `video_youtube.yaml`
 
-Published: `audible.yaml`, `audio_courses.yaml`, `books_read.yaml`,
+Published: `audio_courses.yaml`, `books_read.yaml`,
 `podcasts.yaml`, `video_features.yaml` and `video_series.yaml` on the media
 page; `organizations.yaml` and `certifications.yaml` on the training,
 consulting and education pages; `profiles.yaml` in the profile block. The

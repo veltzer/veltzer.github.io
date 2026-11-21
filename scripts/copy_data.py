@@ -7,8 +7,7 @@ in the sibling ../data repo.
 The YAML data for the media tracker lives in this repo under data/yaml. The
 youtube CSV is a raw capture that still lives in the separate ../data
 repository. This script validates the sources exist, copies the plain YAML
-files, runs the audible
-import (type fixes + field cleanup), the books import (nested names, authors
+files, runs the books import (nested names, authors
 and readings flattened to one item per book) and the youtube CSV->YAML
 conversion,
 converts every YAML file to JSON, then gzips everything in static/data.
@@ -45,7 +44,7 @@ PLAIN_YAML = [
 ]
 
 # Files that need a source check but are processed rather than copied directly.
-PROCESSED_YAML = ["audible.yaml", "books_read.yaml"]
+PROCESSED_YAML = ["books_read.yaml"]
 
 YOUTUBE_CSV = DATA_REPO / "raw" / "topics" / "video" / "youtube" / "all.list.csv"
 
@@ -73,14 +72,6 @@ def validate_sources():
 def copy_plain_yaml():
     for name in PLAIN_YAML:
         shutil.copyfile(YAML_DIR / name, DEST / name)
-
-
-def import_audible():
-    # Import audible with type fixes and field cleanup.
-    subprocess.run(
-        [str(SCRIPTS / "import_audible.py"), str(YAML_DIR / "audible.yaml"), str(DEST / "audible.yaml")],
-        check=True,
-    )
 
 
 def import_books():
@@ -126,7 +117,6 @@ def gzip_data_files():
 def main():
     validate_sources()
     copy_plain_yaml()
-    import_audible()
     import_books()
     convert_youtube()
     convert_yaml_to_json()

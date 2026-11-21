@@ -7,7 +7,6 @@ in static/images/.
 Checks:
 - Movies: static/images/movie-{imdb_id}.jpg
 - Series: static/images/series-{imdb_id}.jpg
-- Audible: static/images/audible-{asin}.jpg
 - Audio Courses: static/images/audiocourse-gc-{gc_id}.jpg
                  or audiocourse-audible-{asin}.jpg
                  or audiocourse-internal-{internal_id}.jpg
@@ -84,21 +83,6 @@ def check_series():
         path = os.path.join(str(IMAGE_DIR), f"series-{imdb_id}.jpg")
         if not os.path.exists(path):
             print(f"  MISSING: {path} ({entry.get('name', '?')})")
-            errors += 1
-    return len(entries), errors
-
-
-def check_audible():
-    """Check audible images."""
-    entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "audible.yaml"))
-    errors = 0
-    for entry in entries:
-        asin = entry.get("asin")
-        if not asin:
-            continue
-        path = os.path.join(str(IMAGE_DIR), f"audible-{asin}.jpg")
-        if not os.path.exists(path):
-            print(f"  MISSING: {path} ({entry.get('title', '?')})")
             errors += 1
     return len(entries), errors
 
@@ -230,7 +214,6 @@ def main():
     checks = [
         ("Movies", check_movies),
         ("Series", check_series),
-        ("Audible", check_audible),
         ("Audio Courses", check_audio_courses),
         ("Museums", check_museums),
         ("Podcasts", check_podcasts),

@@ -42,13 +42,13 @@ plugins:
 template = "data_collection.html"
 
 [extra]
-plugins = ["audio", "audible", "books"]    # the first is the default view
+plugins = ["audio", "books"]    # the first is the default view
 ```
 
 Today that is four pages (as of 2026-11-15; `grep -l data_collection.html
 content/*/_index.en.md content/*/*/_index.en.md` lists them):
 
-- `content/media/`: `audio`, `audible`, `books`, `features`, `podcasts`,
+- `content/media/`: `audio`, `books`, `features`, `podcasts`,
   `publishers`, `videos` and `youtube`;
 - `content/training/data/`: `companies` and `providers`, two tabs over
   organizations.yaml;
@@ -368,12 +368,11 @@ than writing the loop again:
 ## Existing Plugins
 
 The registry is `window.collectionPluginRegistry` in `templates/data_collection.html`; as of
-2026-11-15 it holds these fourteen keys in nine files.
+2026-11-21 it holds these thirteen keys in eight files.
 
 | Key | File | Data |
 |-----|------|------|
 | `audio` | `plugin-audio-courses.js` | `data/audio_courses.json.gz` |
-| `audible` | `plugin-audible.js` | `data/audible.json.gz` |
 | `books` | `plugin-books.js` | `data/books.json.gz` (flattened from `books_read.yaml` by `scripts/import_books.py`) |
 | `companies` | `plugin-companies.js` | `data/companies.json.gz` (the `teaching` organizations of `organizations.yaml`, written into `_site/` at build time by `scripts/import_companies.py`; their logos are copied from `data/logos/` to `/logos/` the same way) |
 | `providers` | `plugin-companies.js` | `data/training_providers.json.gz` (organizations with function `training-provider`; build-time, as above) |
