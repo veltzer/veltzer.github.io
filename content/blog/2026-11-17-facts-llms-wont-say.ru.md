@@ -97,6 +97,6 @@ tags = ["технологии", "политика", "культура", "ста�
 *См. также:* [AI and Religious Political Correctness](@/blog/2026-10-25-ai-religious-political-correctness.md)
 («ИИ и религиозная политкорректность») — о том же рефлексе применительно к
 религии, и
-[If Groups Differ, a Predictor Will Discriminate](@/blog/2025-05-05-statistical-discrimination.en.md)
+[If Groups Differ, a Predictor Will Discriminate](@/blog/2025-05-05-statistical-discrimination.md)
 («Если группы различаются, предсказатель будет дискриминировать») — о том,
 почему, ослепляя модель к различиям между группами, мы делаем её хуже.
