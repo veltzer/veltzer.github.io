@@ -510,7 +510,6 @@ page of its own.
 
 Private data types: the files in `data/yaml/` that no page publishes.
 
-- `audio_books.yaml`
 - `books_loans.yaml`
 - `concerts.yaml`
 - `courses.yaml`

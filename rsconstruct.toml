@@ -143,7 +143,6 @@ dep_inputs = [
     "templates/base.html",
     "static/favicon.svg",
     # test_people.py reads every data file's with: names.
-    "data/yaml/audio_books.yaml",
     "data/yaml/audio_courses.yaml",
     "data/yaml/books_loans.yaml",
     "data/yaml/books_read.yaml",
