@@ -35,6 +35,6 @@ tags = ["эпистемология", "статистика", "политика"
 
 - [Не та битва: как академическая левая выбрала не ту войну](@/blog/2026-10-04-academic-left-wrong-war.md)
 - [Бремя доказательства лежит на утверждающем](@/blog/2026-04-17-the-burden-of-proof.en.md)
-- [Представительная демократия устроена так, чтобы сделать половину страны циничной](@/blog/2026-05-11-representative-democracy-discourages-trust.en.md)
+- [Представительная демократия устроена так, чтобы сделать половину страны циничной](@/blog/2026-05-11-representative-democracy-discourages-trust.md)
 - [Сингулярность ломает идеологии](@/blog/2025-11-07-singularity-breaks-ideologies.en.md)
 - [Ода индивидуальности](@/blog/2026-10-01-an-ode-to-individuality.md)
