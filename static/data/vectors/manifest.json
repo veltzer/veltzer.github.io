@@ -13,9 +13,9 @@
       "post_words_missing": 9498
     },
     "ru": {
-      "words": 22858,
+      "words": 24346,
       "dim": 300,
-      "post_words_missing": 4250
+      "post_words_missing": 4876
     }
   }
 }
