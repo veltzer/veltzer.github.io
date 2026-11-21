@@ -37,4 +37,4 @@ tags = ["эпистемология", "статистика", "политика"
 - [Бремя доказательства лежит на утверждающем](@/blog/2026-04-17-the-burden-of-proof.en.md)
 - [Представительная демократия устроена так, чтобы сделать половину страны циничной](@/blog/2026-05-11-representative-democracy-discourages-trust.en.md)
 - [Сингулярность ломает идеологии](@/blog/2025-11-07-singularity-breaks-ideologies.en.md)
-- [Ода индивидуальности](@/blog/2026-10-01-an-ode-to-individuality.en.md)
+- [Ода индивидуальности](@/blog/2026-10-01-an-ode-to-individuality.md)
