@@ -222,8 +222,9 @@ tags = ["religion", "philosophy", "ethics"]
   English file. Copy `date` and `slug` verbatim from the English file — they are
   shared keys, and the name check fails on a mismatch.
   Translate the `title`, the `description` and the `tags` (see below); `scripts/check_hebrew.py`
-  fails the build when one is left in English. Do not add a `lang` key;
-  rssite reads it from the suffix (`.en` / `.he`; a file with neither is an error).
+  fails the build when one is left in English. Add the `.ru.md` the same way
+  (nothing checks its text for leftover English yet). Do not add a `lang` key;
+  rssite reads it from the suffix (`.en` / `.he` / `.ru`; a file with neither is an error).
   The language switcher renders itself from the `translations` rssite hands every
   template, so never hand-write cross-links between a post and its translation.
 - **Post slugs are shared between languages, deliberately.** `/en/blog/foo/` and
@@ -241,20 +242,16 @@ tags = ["religion", "philosophy", "ethics"]
   different counterparts, fails the build.
 - Links between posts use the `@/` syntax, resolved against the content root:
   `[text](@/blog/2026-04-28-euthyphro-dilemma.md)`.
-- Every post exists in both English and Hebrew, and the build enforces it:
-  `scripts/check_post_names.py` (the `post_names` processor) fails on any post
-  file without its `.en.md` and `.he.md` siblings. An unpaired post would otherwise
-  lose its language switcher silently, since `page.translations` just comes up empty.
-  It is not rssite's `require_translations`, because that would demand every post
-  in Russian too.
-- **Russian is the third language, and partial**: `/ru/` has the whole chrome
-  (`i18n/ru.toml`, the section pages, the About page) but only the posts
-  translated so far, as `<date>-<slug>.ru.md` next to the other two. Translation
-  goes newest first. Russian tags come from the fixed glossary in
-  `doc/TRANSLATION.md` (each English tag always maps to the same Russian one, or
-  the build fails). A Russian post links to an untranslated post as
-  `@/blog/<stem>.en.md`; once that post has a `.ru.md`, `check_post_names.py`
-  requires the plain `@/blog/<stem>.md`. After a batch, rerun
+- Every post exists in English, Hebrew and Russian, and the build enforces it:
+  `require_translations = true` in the three `content/blog/_index.*.md` files
+  fails on any post without its `.en.md`, `.he.md` and `.ru.md` siblings. An
+  unpaired post would otherwise lose its language switcher silently, since
+  `page.translations` just comes up empty.
+- **Russian is the third language**, translated in full on 2026-11-21: every
+  post has a `<date>-<slug>.ru.md`, and a new post needs one too. Russian tags
+  come from the fixed glossary in `doc/TRANSLATION.md` (each English tag always
+  maps to the same Russian one, or the build fails; a new tag gets a glossary
+  entry). After adding Russian posts, rerun
   `scripts/make_word_vectors.py --languages ru` for the semantic search.
 
 ## Coding Conventions

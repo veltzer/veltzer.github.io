@@ -466,7 +466,7 @@ reasoning and how the two providers are wired, are in `doc/ANALYTICS.md`.
 
 Every post's front matter carries a `slug`: a short name of at most four
 lowercase ASCII words, chosen by hand. The file is `<date>-<slug>.<lang>.md`,
-in both languages, and `scripts/check_post_names.py` fails the build when a
+in every language, and `scripts/check_post_names.py` fails the build when a
 name, slug or date disagree or a slug is too long.
 
 What the other tools do, and what was taken from each:
@@ -553,3 +553,8 @@ every post without a `.ru.md`. The English-Hebrew pairing it enforced moved
 to `scripts/check_post_names.py`, which requires the `.en.md` and `.he.md` of
 every post and leaves `.ru.md` optional. The state and the tag glossary are
 in `doc/TRANSLATION.md`.
+
+The last batch landed the same day: every post now has its `.ru.md`, so
+`require_translations = true` is back on all three blog sections and
+Russian is required of every new post like Hebrew. `check_post_names.py`
+lost the translation and link checks it carried in the meantime.

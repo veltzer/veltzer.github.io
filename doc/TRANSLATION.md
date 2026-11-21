@@ -94,25 +94,21 @@ Repeat these checks after adding an app or a page template.
 
 ## Russian (started 2026-11-21)
 
-Russian is the third language of the site, and unlike Hebrew it is partial
-by design: the posts are translated in batches, newest first, and `/ru/blog/`
-lists only the ones done so far. Everything else is in place:
+Russian is the third language of the site. The posts were translated in
+batches, newest first, all on 2026-11-21; since the last batch every post has
+its `.ru.md` and `require_translations` demands it of every new post, as it
+does the Hebrew. Around the posts:
 `i18n/ru.toml` (every key, with genitive month names for dates), the section
 pages (the apps and the calendar take their body from English, like Hebrew),
 the About page (the `_ru` fields of `profiles.yaml`), the share cards
 (Liberation Sans, since Outfit has no Cyrillic), the root chooser and the
 semantic search's vectors (`make_word_vectors.py --languages ru`, to rerun
-after each batch).
+after adding Russian posts).
 
-What makes a partial language possible:
-
-- No `require_translations` on the blog (it would demand all of them);
-  `scripts/check_post_names.py` requires every post in English and Hebrew,
-  and a Russian post to have its English original.
-- A Russian post links to an untranslated one as `@/blog/<stem>.en.md`, which
-  rssite resolves to the English page; `check_post_names.py` fails once the
-  target has a `.ru.md`, so the link is switched to `@/blog/<stem>.md`.
-- An untranslated page's language switcher falls back to the Russian home.
+While the translation was partial, the blog had no `require_translations`,
+`check_post_names.py` paired English and Hebrew instead, and a Russian post
+linked to an untranslated one as `@/blog/<stem>.en.md`. All three went with
+the last batch.
 
 Not yet done: no aspell spellcheck for Russian (it needs `aspell-ru`) and no
 `check_hebrew.py` counterpart for leftover English in Russian posts.
@@ -120,7 +116,7 @@ Not yet done: no aspell spellcheck for Russian (it needs `aspell-ru`) and no
 ### Tag glossary
 
 Tags pair by position across all three languages, so an English tag must
-always become the same Russian tag. The ones used so far:
+always become the same Russian tag. A new English tag gets its entry here:
 
 | en | ru | en | ru |
 | --- | --- | --- | --- |

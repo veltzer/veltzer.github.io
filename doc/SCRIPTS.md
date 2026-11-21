@@ -313,8 +313,8 @@ of the posts are not checked here.
 Checks that every blog post is named `<date>-<slug>.<lang>.md` after its own
 front matter, and that its `slug` is at most four lowercase ASCII words
 joined by `-`. Run by rsconstruct as `processor.checker.script.post_names`
-over `content/blog/` (the two `_index` files excluded). Because rssite pairs
-translations by file name, checking each file alone also keeps the two
+over `content/blog/` (the `_index` files excluded). Because rssite pairs
+translations by file name, checking each file alone also keeps the
 languages' `date` and `slug` equal. The rule is in `CLAUDE.md` under "Blog
 Posts".
 
