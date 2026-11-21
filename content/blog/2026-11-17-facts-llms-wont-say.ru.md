@@ -94,7 +94,7 @@ tags = ["технологии", "политика", "культура", "ста�
 У фактов нет политической партии. ИИ, который обращается с ними так, будто она
 у них есть, не безопасен. Он просто ненадёжен.
 
-*См. также:* [AI and Religious Political Correctness](@/blog/2026-10-25-ai-religious-political-correctness.en.md)
+*См. также:* [AI and Religious Political Correctness](@/blog/2026-10-25-ai-religious-political-correctness.md)
 («ИИ и религиозная политкорректность») — о том же рефлексе применительно к
 религии, и
 [If Groups Differ, a Predictor Will Discriminate](@/blog/2025-05-05-statistical-discrimination.en.md)
