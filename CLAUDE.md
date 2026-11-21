@@ -37,14 +37,14 @@ which records the traps that outlived the migration.
 
 ## Directory Structure
 
-- `rssite.toml` — the site config: `base_url`, the two `[[languages]]` (every
+- `rssite.toml` — the site config: `base_url`, the three `[[languages]]` (en, he, ru) (every
   language is explicit, there is no default; English is only the `fallback_language`
   for the root redirect and the global 404), the `tags` taxonomy (its translations
   inferred from the posts), the `[[publish]]` entry that serves the shared-themes files, and `[extra.nav]`
   which drives the header navigation. Every key is known to the generator; an unknown
   one fails the build
-- `i18n/` — `en.toml` and `he.toml`, the strings `trans()` returns plus the Hebrew
-  month names the `date` filter uses
+- `i18n/` — `en.toml`, `he.toml` and `ru.toml`, the strings `trans()` returns plus
+  the Hebrew and Russian month names the `date` filter uses
 - `content/` — all page and post source
     - `content/blog/<date>-<slug>.en.md` — blog posts, flat (no `YYYY/MM/` nesting),
   sorted by their date prefix. TOML front matter between `+++` lines: `title`,
@@ -242,9 +242,20 @@ tags = ["religion", "philosophy", "ethics"]
 - Links between posts use the `@/` syntax, resolved against the content root:
   `[text](@/blog/2026-04-28-euthyphro-dilemma.md)`.
 - Every post exists in both English and Hebrew, and the build enforces it:
-  `require_translations` in `content/blog/_index.{en,he}.md` makes rssite fail
-  on any `.en.md` without its `.he.md` (or the reverse). An unpaired post would otherwise lose its language switcher
-  silently, since `page.translations` just comes up empty.
+  `scripts/check_post_names.py` (the `post_names` processor) fails on any post
+  file without its `.en.md` and `.he.md` siblings. An unpaired post would otherwise
+  lose its language switcher silently, since `page.translations` just comes up empty.
+  It is not rssite's `require_translations`, because that would demand every post
+  in Russian too.
+- **Russian is the third language, and partial**: `/ru/` has the whole chrome
+  (`i18n/ru.toml`, the section pages, the About page) but only the posts
+  translated so far, as `<date>-<slug>.ru.md` next to the other two. Translation
+  goes newest first. Russian tags come from the fixed glossary in
+  `doc/TRANSLATION.md` (each English tag always maps to the same Russian one, or
+  the build fails). A Russian post links to an untranslated post as
+  `@/blog/<stem>.en.md`; once that post has a `.ru.md`, `check_post_names.py`
+  requires the plain `@/blog/<stem>.md`. After a batch, rerun
+  `scripts/make_word_vectors.py --languages ru` for the semantic search.
 
 ## Coding Conventions
 

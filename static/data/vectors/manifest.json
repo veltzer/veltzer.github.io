@@ -11,6 +11,11 @@
       "words": 35814,
       "dim": 300,
       "post_words_missing": 9498
+    },
+    "ru": {
+      "words": 13548,
+      "dim": 300,
+      "post_words_missing": 847
     }
   }
 }

@@ -7,13 +7,15 @@ the rest show beside a shared link (og:image), one per language.
 Targets:
   static/images/og/card-en.jpg
   static/images/og/card-he.jpg
+  static/images/og/card-ru.jpg
 
 Each card is the site's logo (make_logo.py), the name and the line under it, taken
 from home_title in i18n/<lang>.toml so the card says what the home page
-says. Latin text is set in Outfit, the site's heading font from the
-shared-themes submodule; Hebrew in Liberation Sans, which has both the
-Hebrew letters Outfit lacks and the comma Noto Sans Hebrew lacks (Pillow
-does no font fallback), laid out right to left (Pillow needs libraqm).
+says. English is set in Outfit, the site's heading font from the
+shared-themes submodule; Hebrew and Russian in Liberation Sans, which has the
+Hebrew and Cyrillic letters Outfit lacks and the comma Noto Sans Hebrew lacks
+(Pillow does no font fallback). Hebrew is laid out right to left (Pillow
+needs libraqm).
 
 Run it by hand after changing home_title or the colours; the JPEGs are
 committed, so building the site needs neither Pillow nor the fonts for them.
@@ -33,8 +35,12 @@ I18N = REPO_ROOT / "i18n"
 OUT_DIR = REPO_ROOT / "static" / "images" / "og"
 OUTFIT = REPO_ROOT / "shared" / "shared-themes" / "fonts" / "Outfit-Bold.ttf"
 OUTFIT_LIGHT = REPO_ROOT / "shared" / "shared-themes" / "fonts" / "Outfit-Light.ttf"
-HEBREW = Path("/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf")
-HEBREW_LIGHT = Path("/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf")
+LIBERATION = Path("/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf")
+LIBERATION_LIGHT = Path("/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf")
+
+# The languages of the site, and the ones written right to left.
+LANGUAGES = ("en", "he", "ru")
+RTL = ("he",)
 
 WIDTH, HEIGHT = 1200, 630
 # The default light theme's accent (shared-themes/themes.yaml), which is
@@ -55,6 +61,13 @@ def home_title(lang):
         return tomllib.load(stream)["home_title"]
 
 
+def fonts(lang):
+    """The bold and light faces a language's text is set in."""
+    if lang == "en":
+        return OUTFIT, OUTFIT_LIGHT
+    return LIBERATION, LIBERATION_LIGHT
+
+
 def draw_mark(image, left, top, size):
     """The logo, size x size, with its top left corner at (left, top)."""
     logo = mark(size)
@@ -62,10 +75,11 @@ def draw_mark(image, left, top, size):
 
 
 def card(lang):
-    rtl = lang == "he"
+    rtl = lang in RTL
     name, _, line = home_title(lang).partition(" – ")
-    bold = ImageFont.truetype(str(HEBREW if rtl else OUTFIT), 96)
-    light = ImageFont.truetype(str(HEBREW_LIGHT if rtl else OUTFIT_LIGHT), 48)
+    bold_path, light_path = fonts(lang)
+    bold = ImageFont.truetype(str(bold_path), 96)
+    light = ImageFont.truetype(str(light_path), 48)
     small = ImageFont.truetype(str(OUTFIT_LIGHT), 34)
     direction = "rtl" if rtl else "ltr"
 
@@ -91,11 +105,11 @@ def card(lang):
 def main():
     if not features.check("raqm"):
         die("Pillow was built without libraqm; Hebrew would be laid out left to right")
-    for font in (OUTFIT, OUTFIT_LIGHT, HEBREW, HEBREW_LIGHT):
+    for font in (OUTFIT, OUTFIT_LIGHT, LIBERATION, LIBERATION_LIGHT):
         if not font.is_file():
             die(f"{font} missing")
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    for lang in ("en", "he"):
+    for lang in LANGUAGES:
         target = OUT_DIR / f"card-{lang}.jpg"
         card(lang).save(target, quality=88, optimize=True, progressive=True)
         print(f"wrote {target.relative_to(REPO_ROOT)}")

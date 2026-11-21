@@ -9,8 +9,8 @@ Run by rsconstruct (processor.generator.generic.post_cards) in batch mode:
 
   make_post_cards.py <post.md> <card.jpg> [<post.md> <card.jpg> ...]
 
-Unlike the two site-wide cards these are build output, never committed:
-there are two per post, and a card drawn by hand goes stale the moment a
+Unlike the site-wide cards these are build output, never committed:
+there is one per post and language, and a card drawn by hand goes stale the moment a
 title changes. Each card is a product of its post, so editing a post
 redraws its card and nothing else.
 
@@ -27,16 +27,19 @@ from pathlib import Path
 from make_og_images import (
     ACCENT,
     BACKGROUND,
-    HEBREW,
-    HEBREW_LIGHT,
     HEIGHT,
+    LANGUAGES,
+    LIBERATION,
+    LIBERATION_LIGHT,
     MUTED,
     OUTFIT,
     OUTFIT_LIGHT,
+    RTL,
     TEXT,
     WIDTH,
     die,
     draw_mark,
+    fonts,
     home_title,
 )
 from PIL import Image, ImageDraw, ImageFont, features
@@ -94,12 +97,12 @@ def fit_title(draw, title, bold_path, width, direction):
 
 
 def card(lang, title, tags):
-    rtl = lang == "he"
+    rtl = lang in RTL
     direction = "rtl" if rtl else "ltr"
-    bold_path = HEBREW if rtl else OUTFIT
+    bold_path, light_path = fonts(lang)
     name = home_title(lang).partition(" – ")[0]
     name_font = ImageFont.truetype(str(bold_path), 40)
-    tag_font = ImageFont.truetype(str(HEBREW_LIGHT if rtl else OUTFIT_LIGHT), 32)
+    tag_font = ImageFont.truetype(str(light_path), 32)
     site_font = ImageFont.truetype(str(OUTFIT_LIGHT), 34)
 
     image = Image.new("RGB", (WIDTH, HEIGHT), BACKGROUND)
@@ -135,8 +138,8 @@ def card(lang, title, tags):
 def language_of(path):
     """post.en.md -> en: the suffix rssite reads the language from."""
     suffixes = Path(path).suffixes
-    if len(suffixes) < 2 or suffixes[-2] not in (".en", ".he"):
-        die(f"{path}: no .en/.he language suffix")
+    if len(suffixes) < 2 or suffixes[-2][1:] not in LANGUAGES:
+        die(f"{path}: no language suffix ({', '.join(LANGUAGES)})")
     return suffixes[-2][1:]
 
 
@@ -146,7 +149,7 @@ def main():
         die("usage: make_post_cards.py <post.md> <card.jpg> [...]")
     if not features.check("raqm"):
         die("Pillow was built without libraqm; Hebrew would be laid out left to right")
-    for font in (OUTFIT, OUTFIT_LIGHT, HEBREW, HEBREW_LIGHT):
+    for font in (OUTFIT, OUTFIT_LIGHT, LIBERATION, LIBERATION_LIGHT):
         if not font.is_file():
             die(f"{font} missing")
     for source, target in zip(pairs[0::2], pairs[1::2]):

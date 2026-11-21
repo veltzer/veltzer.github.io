@@ -8,8 +8,9 @@ page_template = "page.html"
 generate_feeds = true
 # One listing per year at blog/<year>/, the pages the archive table links to.
 year_archives = true
-# Every post exists in both languages: a missing translation fails the build.
-require_translations = true
+# Every post exists in English and Hebrew, which scripts/check_post_names.py
+# enforces. Not require_translations: the generator would demand every post in
+# Russian too, which is still being translated (see _index.ru.md).
 
 # Every post's share card, drawn by scripts/make_post_cards.py: templates
 # read it as page.image and the post's structured data carries it.

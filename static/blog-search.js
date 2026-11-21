@@ -40,9 +40,11 @@
     const defaultMode = form.dataset.mode;
     const lang = document.documentElement.lang;
     // The same dates the listing shows (date_format in rssite.toml): "2 Sep
-    // 2026" and "2 בספטמבר 2026". Assembled from parts because en-GB spells
-    // the short month "Sept" and en-US puts the day after the month.
-    const dateParts = new Intl.DateTimeFormat(lang === 'he' ? 'he-IL' : 'en-US', {
+    // 2026", "2 בספטמבר 2026" and "2 сент. 2026". Assembled from parts
+    // because en-GB spells the short month "Sept" and en-US puts the day
+    // after the month.
+    const locales = { he: 'he-IL', ru: 'ru-RU' };
+    const dateParts = new Intl.DateTimeFormat(locales[lang] || 'en-US', {
         day: 'numeric', month: lang === 'he' ? 'long' : 'short', year: 'numeric', timeZone: 'UTC',
     });
     const dateFormat = {

@@ -61,17 +61,20 @@
 </div>
 <script>
   // Send returning readers straight to the language they last used, but only
-  // when they arrive at the root with no explicit choice -- a link to /en/ or
-  // /he/ is always honoured because this page never runs for those.
+  // when they arrive at the root with no explicit choice -- a link to /en/,
+  // /he/ or /ru/ is always honoured because this page never runs for those.
   try {
     var last = localStorage.getItem("veltzer-site-lang");
-    if (last === "en" || last === "he") { location.replace("/" + last + "/"); }
+    var known = [{% for entry in languages %}"{{ entry.code }}"{% if not loop.last %}, {% endif %}{% endfor %}];
+    if (known.indexOf(last) !== -1) { location.replace("/" + last + "/"); }
   } catch (e) { /* storage blocked: show the chooser */ }
 </script>
 <footer class="site-footer">
   {#- How the site is made, and which commit it was built from, is on the
       colophon, the one page that names the build (see base.html). -#}
-  <p class="site-inscription" dir="ltr"><a href="{{ get_url(path='@/colophon/_index.md', lang='en') }}">{{ trans(key="label_colophon", lang="en") }}</a> &middot; <a href="{{ get_url(path='@/colophon/_index.md', lang='he') }}" lang="he">{{ trans(key="label_colophon", lang="he") }}</a></p>
+  <p class="site-inscription" dir="ltr">
+  {%- for entry in languages %}{% if not loop.first %} &middot;{% endif %} <a href="{{ get_url(path='@/colophon/_index.md', lang=entry.code) }}" lang="{{ entry.code }}">{{ trans(key="label_colophon", lang=entry.code) }}</a>{% endfor -%}
+  </p>
 </footer>
 </body>
 </html>

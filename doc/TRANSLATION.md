@@ -1,4 +1,4 @@
-# Hebrew Translation
+# Translation (Hebrew and Russian)
 
 The state of the Hebrew version of the site: what is translated, how, and what
 is deliberately left in English. Written 2026-11-08, after the footer, the
@@ -91,3 +91,65 @@ Checked on 2026-11-08 by:
   English chess page, to confirm nothing changed in English.
 
 Repeat these checks after adding an app or a page template.
+
+## Russian (started 2026-11-21)
+
+Russian is the third language of the site, and unlike Hebrew it is partial
+by design: the posts are translated in batches, newest first, and `/ru/blog/`
+lists only the ones done so far. Everything else is in place:
+`i18n/ru.toml` (every key, with genitive month names for dates), the section
+pages (the apps and the calendar take their body from English, like Hebrew),
+the About page (the `_ru` fields of `profiles.yaml`), the share cards
+(Liberation Sans, since Outfit has no Cyrillic), the root chooser and the
+semantic search's vectors (`make_word_vectors.py --languages ru`, to rerun
+after each batch).
+
+What makes a partial language possible:
+
+- No `require_translations` on the blog (it would demand all of them);
+  `scripts/check_post_names.py` requires every post in English and Hebrew,
+  and a Russian post to have its English original.
+- A Russian post links to an untranslated one as `@/blog/<stem>.en.md`, which
+  rssite resolves to the English page; `check_post_names.py` fails once the
+  target has a `.ru.md`, so the link is switched to `@/blog/<stem>.md`.
+- An untranslated page's language switcher falls back to the Russian home.
+
+Not yet done: no aspell spellcheck for Russian (it needs `aspell-ru`) and no
+`check_hebrew.py` counterpart for leftover English in Russian posts.
+
+### Tag glossary
+
+Tags pair by position across all three languages, so an English tag must
+always become the same Russian tag. The ones used so far:
+
+| en | ru | en | ru |
+| --- | --- | --- | --- |
+| politics | политика | religion | религия |
+| philosophy | философия | epistemology | эпистемология |
+| direct-democracy | прямая-демократия | opinion | мнение |
+| history | история | science | наука |
+| culture | культура | psychology | психология |
+| ethics | этика | economics | экономика |
+| statistics | статистика | atheism | атеизм |
+| programming | программирование | bible | библия |
+| game-theory | теория-игр | finance | финансы |
+| education | образование | technology | технологии |
+| neuroscience | нейронауки | security | безопасность |
+| israel | израиль | command-line | командная-строка |
+| law | право | media | медиа |
+| sysadmin | системное-администрирование | probability | вероятность |
+| open-source | открытый-код | music | музыка |
+| self-hosting | самохостинг | hardware | аппаратное-обеспечение |
+| markets | рынки | reference | справочник |
+| literature | литература | video | видео |
+| audio | аудио | climate | климат |
+| blogging | блогинг | browser | браузер |
+| archaeology | археология | database | базы-данных |
+| theory | теория | embedded | встраиваемые-системы |
+| performance | производительность | filesystem | файловые-системы |
+| memory | память | fiction | художественная-литература |
+| documentation | документация | keyboard | клавиатура |
+| debugging | отладка | hebrew | иврит |
+
+Product names stay as they are: linux, windows, ubuntu, debian, wordpress,
+php, perl, mysql, java, git, ux.

@@ -8,12 +8,12 @@ $schema: "https://veltzer.github.io/web-schemas/json/any.json"
 #
 #   veltzer/          -> README.md, the GitHub profile page
 #                        (rsconstruct build, scripts/gen_readme.py)
-#   veltzer.github.io -> content/about/_index.{en,he}.md, the site About page
+#   veltzer.github.io -> content/about/_index.{en,he,ru}.md, the site About page
 #                        (scripts/gen_profiles.py)
 #
-# Edit here, never in the generated files. Each group carries an English and a
-# Hebrew heading so /he/about/ is a real translated page rather than an English
-# list under a Hebrew title.
+# Edit here, never in the generated files. Each group carries an English, a
+# Hebrew and a Russian heading so /he/about/ and /ru/about/ are real translated
+# pages rather than an English list under a translated title.
 #
 # intro and extras hold the prose and badges that surround the link list. They
 # live here for the same reason the links do: both pages render them, so a
@@ -23,12 +23,14 @@ $schema: "https://veltzer.github.io/web-schemas/json/any.json"
 intro:
   text_en: "Various profiles of mine"
   text_he: "פרופילים שונים שלי"
+  text_ru: "Мои профили на разных сайтах"
 
 # Contact line above the link list: the sentence, then a link whose text is
 # link_text. Used to be a gitter badge; that room is gone.
 contact:
   text_en: "To contact me, write to"
   text_he: "ליצירת קשר כתבו אל"
+  text_ru: "Чтобы связаться со мной, пишите на"
   link_text: "mark.veltzer@gmail.com"
   url: "mailto:mark.veltzer@gmail.com"
 
@@ -37,8 +39,10 @@ extras:
   - id: israel
     text_en: "It seems like I'm one of the leading github commiters from Israel ->"
     text_he: "נראה שאני אחד מהמתכנתים המובילים בגיטהאב מישראל ->"
+    text_ru: "Похоже, я один из самых активных коммитеров GitHub в Израиле ->"
     link_text_en: "top GitHub users in Israel"
     link_text_he: "משתמשי הגיטהאב המובילים בישראל"
+    link_text_ru: "ведущие пользователи GitHub в Израиле"
     url: "https://github.com/gayanvoice/top-github-users/blob/main/markdown/public_contributions/israel.md"
   - id: stats
     badge_alt: "GitHub stats"
@@ -61,6 +65,7 @@ groups:
   - id: development
     title_en: "Development sites"
     title_he: "אתרי פיתוח"
+    title_ru: "Сайты для разработчиков"
     items:
       - name: "github.com"
         url: "https://github.com/veltzer"
@@ -76,6 +81,7 @@ groups:
   - id: learning
     title_en: "Learning sites with profiles"
     title_he: "אתרי לימוד עם פרופיל"
+    title_ru: "Учебные сайты с профилем"
     items:
       - name: "duolingo"
         url: "https://www.duolingo.com/profile/mark.veltzer"
@@ -99,6 +105,7 @@ groups:
   - id: learning_no_profile
     title_en: "Learning sites I use that have no profiles"
     title_he: "אתרי לימוד שאני משתמש בהם ללא פרופיל"
+    title_ru: "Учебные сайты, которыми я пользуюсь, без профиля"
     items:
       - name: "brilliant"
         url: "https://brilliant.org"
@@ -116,6 +123,7 @@ groups:
   - id: typing
     title_en: "Touch typing"
     title_he: "הקלדה עיוורת"
+    title_ru: "Слепая печать"
     items:
       - name: "ratatype"
         url: "https://www.ratatype.com/u4784203"
@@ -140,6 +148,7 @@ groups:
   - id: trove
     title_en: "Trove sites with profiles"
     title_he: "אתרי אוספים עם פרופיל"
+    title_ru: "Сайты-коллекции с профилем"
     items:
       - name: "goodreads"
         url: "https://www.goodreads.com/user/show/34371877-mark-veltzer"

@@ -11,9 +11,9 @@ author = "Mark Veltzer"
 author_id = "https://veltzer.org/#person"
 description = "Mark Veltzer – software engineer from Israel. Blog on programming, Linux and philosophy, plus media notes and teaching material."
 
-# Both languages are explicit and symmetrical: every content file carries a
-# language suffix (post.en.md, post.he.md) and every language is served under
-# its own prefix (/en/, /he/). There is no default language. English is only
+# Every language is explicit and symmetrical: every content file carries a
+# language suffix (post.en.md, post.he.md, post.ru.md) and every language is
+# served under its own prefix (/en/, /he/, /ru/). There is no default language. English is only
 # the fallback for the root redirect and the global 404.html, which a static
 # host cannot negotiate.
 fallback_language = "en"
@@ -44,6 +44,21 @@ title = "האתר האישי של מארק ולצר"
 # feeds and of the Hebrew posts' structured data.
 author = "מארק ולצר"
 description = "מארק ולצר – מהנדס תוכנה מישראל. בלוג על תכנות, לינוקס ופילוסופיה, לצד משחקי שחמט, המלצות מדיה וחומרי הוראה."
+generate_feeds = true
+
+# Russian, being translated: every page of the site exists, but only part of
+# the blog does so far (doc/TRANSLATION.md). Dates are "2 сентября 2026": the
+# month names in i18n/ru.toml are the genitive forms a date takes.
+[[languages]]
+code = "ru"
+name = "Русский"
+direction = "ltr"
+locale = "ru_RU"
+date_format = "%-d %b %Y"
+date_format_long = "%-d %B %Y"
+title = "Личный сайт Марка Вельцера"
+author = "Марк Вельцер"
+description = "Марк Вельцер – инженер-программист из Израиля. Блог о программировании, Linux и философии, а также заметки о книгах и фильмах и учебные материалы."
 generate_feeds = true
 
 # The one taxonomy. A post and its translation list the same tags in the

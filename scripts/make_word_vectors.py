@@ -4,8 +4,8 @@ Write the word vectors the blog's semantic search loads, into
 static/data/vectors/.
 
 The vectors come from the newest release of github.com/veltzer/embeddings:
-fastText trained on Wikipedia, 300 dimensions, English and Hebrew rotated into
-one shared space. A release holds 200,000 words per language, 160 MB
+fastText trained on Wikipedia, 300 dimensions, English, Hebrew and Russian
+rotated into one shared space. A release holds 200,000 words per language, 160 MB
 gzipped; the browser gets a slice of that: the most frequent --common words
 (what a query is likely to use) plus every word some post of that language
 uses (what the posts are made of). Rows keep the release's order, most
@@ -42,7 +42,7 @@ POSTS = REPO_ROOT / "content" / "blog"
 DEST = REPO_ROOT / "static" / "data" / "vectors"
 CACHE = REPO_ROOT / "download" / "embeddings"
 RELEASES = "https://api.github.com/repos/veltzer/embeddings/releases/latest"
-LANGUAGES = ["en", "he"]
+LANGUAGES = ["en", "he", "ru"]
 
 # The release's vectors are keyed by its tokenizer, so this one must be the
 # same: tokenize() in the embeddings repo's scripts/common.py, copied, and
@@ -128,6 +128,8 @@ def quantize(vectors: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.strip().splitlines()[0])
     parser.add_argument("--common", type=int, default=10000, help="most frequent words kept per language")
+    parser.add_argument("--languages", nargs="+", choices=LANGUAGES, default=LANGUAGES,
+                        help="redo only these languages; the others keep their files and manifest entry")
     args = parser.parse_args()
 
     release = json.loads(get(RELEASES))
@@ -137,7 +139,14 @@ def main() -> None:
                  f"this script and blog-search.js implement {TOKENIZER_VERSION}")
     DEST.mkdir(parents=True, exist_ok=True)
     out = {"release": release["tag_name"], "tokenizer_version": TOKENIZER_VERSION, "languages": {}}
-    for lang in LANGUAGES:
+    previous = DEST / "manifest.json"
+    if set(args.languages) != set(LANGUAGES) and previous.is_file():
+        kept = json.loads(previous.read_text())
+        if kept["release"] != out["release"] or kept["tokenizer_version"] != TOKENIZER_VERSION:
+            sys.exit(f"{previous} is from another release; redo every language")
+        out["languages"] = {lang: kept["languages"][lang] for lang in LANGUAGES
+                            if lang not in args.languages and lang in kept["languages"]}
+    for lang in args.languages:
         wanted = post_words(lang)
         words, vectors = select(fetch(release, f"{lang}.vec.gz"), args.common, wanted)
         rows, scale = quantize(vectors)
@@ -149,6 +158,7 @@ def main() -> None:
         size = sum((DEST / f"{lang}.{ext}").stat().st_size for ext in ("words.json", "int8", "scale.f32"))
         print(f"{lang}: {len(words)} words x {vectors.shape[1]}, {size / 1e6:.1f} MB; "
               f"{missing} post words are not in the release")
+    out["languages"] = {lang: out["languages"][lang] for lang in LANGUAGES if lang in out["languages"]}
     (DEST / "manifest.json").write_text(json.dumps(out, indent=2) + "\n")
 
 

@@ -7,6 +7,7 @@ place on this site that shows it, so the copies cannot drift apart.
 Targets:
   content/about/_index.en.md         this site's About page
   content/about/_index.he.md         its Hebrew translation
+  content/about/_index.ru.md         its Russian translation
   data/identity.toml               sameAs URLs for the Person JSON-LD
 
 The same profiles.yaml also drives README.md in the ../veltzer repository, the
@@ -35,6 +36,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 SOURCE = REPO_ROOT / "data" / "yaml" / "profiles.yaml"
 ABOUT_EN = REPO_ROOT / "content" / "about" / "_index.en.md"
 ABOUT_HE = REPO_ROOT / "content" / "about" / "_index.he.md"
+ABOUT_RU = REPO_ROOT / "content" / "about" / "_index.ru.md"
 IDENTITY = REPO_ROOT / "data" / "identity.toml"
 
 # Groups whose links are identity profiles -- pages that ARE Mark Veltzer
@@ -78,7 +80,8 @@ def render(data, lang):
     Contact line, intro, the link list, then the trailing extras -- the same
     order the GitHub profile README uses, from the same source, so the two
     pages show the same thing. Everything here is translated: the site serves
-    /he/about/ as a real Hebrew page, not an English one under a Hebrew title.
+    /he/about/ and /ru/about/ as real translated pages, not English ones under
+    a translated title.
     """
     lines = []
 
@@ -239,6 +242,7 @@ def main():
     data = load_profiles()
     splice(ABOUT_EN, render(data, "en"))
     splice(ABOUT_HE, render(data, "he"))
+    splice(ABOUT_RU, render(data, "ru"))
     write_identity(IDENTITY, render_identity(data))
 
 

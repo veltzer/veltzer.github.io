@@ -32,6 +32,9 @@ src_exclude_paths = [
     "_site/he/animations/index.html",
     "_site/he/slides/index.html",
     "_site/he/syllabi/index.html",
+    "_site/ru/animations/index.html",
+    "_site/ru/slides/index.html",
+    "_site/ru/syllabi/index.html",
 ]
 options = [
     "fix-uri: no",
@@ -56,6 +59,9 @@ src_exclude_paths = [
     "_site/he/animations/index.html",
     "_site/he/slides/index.html",
     "_site/he/syllabi/index.html",
+    "_site/ru/animations/index.html",
+    "_site/ru/slides/index.html",
+    "_site/ru/syllabi/index.html",
 ]
 args = ["--errors-only"]
 # rssite renders the site: `rssite plan` lists every file a build writes with
@@ -100,7 +106,7 @@ src_dirs = ["content/blog"]
 src_extensions = [".md"]
 # src_exclude_paths, not src_exclude_files: the latter takes bare file names,
 # so with paths it excluded nothing and the two index files got cards.
-src_exclude_paths = ["content/blog/_index.en.md", "content/blog/_index.he.md"]
+src_exclude_paths = ["content/blog/_index.en.md", "content/blog/_index.he.md", "content/blog/_index.ru.md"]
 output_dir = "_site/images/og"
 output_extension = "jpg"
 # The two Outfit files are the fonts the cards are set in (make_og_images.py).
@@ -109,6 +115,7 @@ dep_inputs = [
     "scripts/make_logo.py",
     "i18n/en.toml",
     "i18n/he.toml",
+    "i18n/ru.toml",
     "shared/shared-themes/fonts/Outfit-Bold.ttf",
     "shared/shared-themes/fonts/Outfit-Light.ttf",
 ]
@@ -244,7 +251,7 @@ src_files = ["data/yaml/books_read.yaml"]
 command = "pydatacheck"
 args = ["check_books"]
 [processor.checker.taplo]
-src_files = ["rssite.toml", "rsconstruct.toml", ".rumdl.toml", ".rumdl.content.toml", "pyproject.toml", "data/identity.toml", "i18n/en.toml", "i18n/he.toml"]
+src_files = ["rssite.toml", "rsconstruct.toml", ".rumdl.toml", ".rumdl.content.toml", "pyproject.toml", "data/identity.toml", "i18n/en.toml", "i18n/he.toml", "i18n/ru.toml"]
 
 # The committed JSON: the lookup caches the data checks read and the search's
 # word lists. static/vendor is not ours, and .oxlintrc.json is JSON with
@@ -304,7 +311,7 @@ src_exclude_dirs = ["vendor"]
 command = "scripts/check_post_names.py"
 src_dirs = ["content/blog"]
 src_extensions = [".md"]
-src_exclude_paths = ["content/blog/_index.en.md", "content/blog/_index.he.md"]
+src_exclude_paths = ["content/blog/_index.en.md", "content/blog/_index.he.md", "content/blog/_index.ru.md"]
 batch = true
 # What a Hebrew reader is handed outside the pages is Hebrew: the feeds and
 # the share cards. Three instances of one script (see it for the rules): the

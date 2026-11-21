@@ -541,3 +541,15 @@ consulting and education pages; `profiles.yaml` in the profile block. The
 YouTube tab comes from the CSV in the private `../data` repo, not from
 `video_youtube.yaml`. Publishing a private file is a decision to record
 here, not a side effect of adding a plugin.
+
+## Russian as a partial third language (2026-11-21)
+
+The blog is being translated to Russian a batch at a time, so Russian is a
+full site language (`[[languages]]` in `rssite.toml`) whose blog holds only
+the translated posts, rather than a branch that waits until all 439 are done.
+That rules out rssite's `require_translations` on the blog section: it checks
+a section against every language the section exists in, and would fail on
+every post without a `.ru.md`. The English-Hebrew pairing it enforced moved
+to `scripts/check_post_names.py`, which requires the `.en.md` and `.he.md` of
+every post and leaves `.ru.md` optional. The state and the tag glossary are
+in `doc/TRANSLATION.md`.
