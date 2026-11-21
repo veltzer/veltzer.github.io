@@ -13,7 +13,6 @@ dependencies = [
     # pydatacheck imports pylogconf but does not declare it; remove once it does.
     "pylogconf",
     "requests",
-    "ruamel.yaml",
 ]
 
 [dependency-groups]

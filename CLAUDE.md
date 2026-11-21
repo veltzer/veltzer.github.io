@@ -53,14 +53,14 @@ which records the traps that outlived the migration.
     - `content/blog/<date>-<slug>.he.md` — Hebrew translations. The shared file name is
   how rssite pairs a post with its translation; nothing else is needed
     - `content/<page>/_index.{en,he}.md` — the standalone nav pages (about, media, calendar, …)
-- `data/yaml/` — the source of truth for the media tracker (podcasts, courses,
+- `data/yaml/` — the source of truth for the media tracker (courses,
   books, video features and series) and for the profile block
   (`profiles.yaml`), plus the private lists that no page publishes (concerts,
   museums, cv, trips, lectures, …; the full list is in `doc/DECISIONS.md`). Every file names its schema in `$schema`, which the
   build validates against `veltzer.github.io/web-schemas`. This directory came out of
   the private `../data` repo in 2026-09. The YouTube videos (the reviewed
-  ones and the watch history) and the Audible library moved on to My World
-  (myworld.stream) in 2026-11
+  ones and the watch history), the Audible library and the podcasts moved
+  on to My World (myworld.stream) in 2026-11
 - `data/logos/` — one SVG per organization in `organizations.yaml` (which refers to
   them by paths relative to `data/`), linted by xmllint. The companies tab of the media
   page is built from these at build time: the `companies` step of `build_site.py`
@@ -90,7 +90,7 @@ which records the traps that outlived the migration.
   `npx tailwindcss` by hand and its output is committed, so the build needs no node),
   `make_og_images.py` (the two site-wide share cards, drawn by hand, committed), `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
   the sibling teaching repos), image fetchers, data importers, the `data/yaml/`
-  maintenance scripts (`podcasts_*.py`, `books_fetch_ids.py`, `great_courses_*.py`,
+  maintenance scripts (`books_fetch_ids.py`, `great_courses_*.py`,
   `audio_courses_check_*.py`, `videos_fetch_wikidata.py` (fills `wikidata_id` and `rotten_tomatoes_id` from each `imdb_id`), `organizations_geocode.py`,
   `organizations_pick_geo.py`, `organizations_fetch_maps.py` — all run from the
   repo root),
@@ -101,8 +101,7 @@ which records the traps that outlived the migration.
 - `tests/` — pytest suite: the data import scripts (csv, books, certifications,
   companies), the logo generator against the inline logo in `base.html`, the word-vector
   trimmer, `people.yaml` against every `with:` name in the data files, the Hebrew check
-  (`check_hebrew.py`), the CSS scoping of `import_teaching.py` and the episode matching
-  of `podcast_utils.py`
+  (`check_hebrew.py`) and the CSS scoping of `import_teaching.py`
 - `.aspell.{en,he}.txt` — the spellcheck word lists; `out/aspell/` holds the compiled
   dictionaries (gitignored build output)
 - `_site/` — generated output (gitignored, never edit)

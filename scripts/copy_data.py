@@ -34,7 +34,6 @@ DEST = REPO_ROOT / "static" / "data"
 # here: concerts.yaml and museums.yaml are private for now (doc/DECISIONS.md
 # lists every private data file).
 PLAIN_YAML = [
-    "podcasts.yaml",
     "video_features.yaml",
     "audio_courses.yaml",
     "video_series.yaml",

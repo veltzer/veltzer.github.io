@@ -135,8 +135,6 @@ dep_inputs = [
     "scripts/import_teaching.py",
     "scripts/make_word_vectors.py",
     "scripts/check_hebrew.py",
-    "scripts/podcast_utils.py",
-    "scripts/podcasts_backfill_rss_data.py",
     # test_logo.py compares make_logo.py with the two committed copies of the logo.
     "scripts/make_logo.py",
     "templates/base.html",
@@ -154,7 +152,6 @@ dep_inputs = [
     "data/yaml/museums.yaml",
     "data/yaml/organizations.yaml",
     "data/yaml/people.yaml",
-    "data/yaml/podcasts.yaml",
     "data/yaml/political_rallies.yaml",
     "data/yaml/profiles.yaml",
     "data/yaml/study_sites.yaml",
@@ -217,7 +214,6 @@ inputs = [
     "data/yaml/books_read.yaml",
     "data/yaml/concerts.yaml",
     "data/yaml/museums.yaml",
-    "data/yaml/podcasts.yaml",
     "data/yaml/video_features.yaml",
     "data/yaml/video_series.yaml",
 ]

@@ -14,7 +14,6 @@ verbatim to `/images/` in the built site.
 | Audio Courses (Audible) | `audiocourse-audible-{asin}.jpg` | Audible |
 | Audio Courses (other) | `audiocourse-internal-{id}.jpg`, `audiocourse-no-cover.jpg` placeholder | DuckDuckGo search |
 | Museums | `museum-{internal_id}.jpg` | DuckDuckGo search |
-| Podcasts | `podcast-{internal_id}.jpg` | DuckDuckGo search |
 
 ## Adding Images for New Entries
 

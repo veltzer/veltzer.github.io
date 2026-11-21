@@ -210,16 +210,11 @@ Downloads museum images via DuckDuckGo image search with tkinter GUI picker.
 Searches for `"{name} museum {city}"`.
 Output: `static/images/museum-{internal_id}.jpg`
 
-### `scripts/fetch_podcast_images.py`
-
-Downloads podcast images via DuckDuckGo image search with tkinter GUI picker.
-Output: `static/images/podcast-{internal_id}.jpg`
-
 ## Shared Modules
 
 ### `scripts/image_picker.py`
 
-Shared module used by museum, podcast, and audio course image scripts.
+Shared module used by the museum and audio course image scripts.
 Provides DuckDuckGo image search (with candidates cached under
 `$XDG_CACHE_HOME/veltzer-site/image-picker/`, defaulting to
 `~/.cache/veltzer-site/image-picker/`, so they survive a reboot) and a
@@ -243,14 +238,6 @@ Brings every existing image in `static/images/` down to that standard, for
 files that predate `image_standard.py` or were added by hand. Reports what
 would change by default; `--apply` does it. Idempotent: images already within
 the box are skipped.
-
-### `scripts/podcast_utils.py`
-
-Shared module of the `podcasts_*` scripts: RSS parsing, the matching of a
-chapter to its feed episode, and the ruamel.yaml configuration they share
-(`make_yaml()`). Import-only. A rewrite
-with no edit writes the file back byte for byte (`podcasts.yaml`, checked
-2026-11-20): indentation, quoting, key order and line wrapping all survive.
 
 ## Spellcheck Scripts
 
@@ -300,7 +287,7 @@ Posts".
 ### `scripts/check_images.py`
 
 Verifies every media item has a corresponding image in `static/images/`.
-Checks movies, series, audio courses, museums, podcasts, concerts
+Checks movies, series, audio courses, museums, concerts
 and books. Part of the build
 (`[processor.explicit.generic.check_images]` in `rsconstruct.toml`, which
 reruns when any image is added, changed or deleted): a media
@@ -486,32 +473,3 @@ Rotten Tomatoes has no page). Lookups are cached in
 `shelve/wikidata_imdb.json` (committed); only what is not cached is queried.
 The yaml is edited textually so its hand formatting survives. `--dry-run`
 reports without writing.
-
-### `scripts/podcasts_add_podcast.py`
-
-Interactive: search the iTunes Search API, pick a result, and append the
-podcast to `podcasts.yaml`.
-
-### `scripts/podcasts_add_chapters.py`
-
-Appends the next N episodes (default 10) of a podcast to its chapters from
-the RSS feed, continuing from where the last run stopped.
-
-### `scripts/podcasts_backfill_rss.py`
-
-Fills in missing `rss_feed` URLs in `podcasts.yaml` by looking each podcast
-up on the iTunes Search API. A hit is taken only when its name matches the
-podcast's; anything else is reported and skipped. Saves after each podcast.
-
-### `scripts/podcasts_backfill_rss_data.py`
-
-Backfills RSS metadata (description, pubDate, duration, enclosure, …) into
-existing chapters. A chapter is matched to a feed episode by guid, then by
-title, and by position (chapter `i` is episode `i`) only when its title is
-numeric or absent. A feed that fails is reported and skipped, and the file
-is saved after each podcast.
-
-### `scripts/podcasts_fill_chapter_names.py`
-
-Replaces numeric chapter titles with the real episode data from the feed;
-non-numeric titles are left alone.

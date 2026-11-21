@@ -11,7 +11,6 @@ Checks:
                  or audiocourse-audible-{asin}.jpg
                  or audiocourse-internal-{internal_id}.jpg
 - Museums: static/images/museum-{internal_id}.jpg
-- Podcasts: static/images/podcast-{internal_id}.jpg
 - Concerts: static/images/{image}, the file each show names
 - Books: static/images/book-simania-{simania_id}.jpg
          or book-goodreads-{goodreads_id}.jpg (simania wins when both exist)
@@ -144,23 +143,6 @@ def check_museums():
     return len(entries), errors
 
 
-def check_podcasts():
-    """Check podcast images."""
-    entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "podcasts.yaml"))
-    # parse_yaml_entries returns the top-level items only; chapters are nested
-    # inside them and never appear here. The filter just skips any item that
-    # has no internal_id and therefore no image to check.
-    podcast_entries = [e for e in entries if "internal_id" in e]
-    errors = 0
-    for entry in podcast_entries:
-        internal_id = entry["internal_id"]
-        path = os.path.join(str(IMAGE_DIR), f"podcast-{internal_id}.jpg")
-        if not os.path.exists(path):
-            print(f"  MISSING: {path} ({entry.get('name', '?')})")
-            errors += 1
-    return len(podcast_entries), errors
-
-
 def check_concerts():
     """Check concert images: every show names one; shows may share a file."""
     entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "concerts.yaml"))
@@ -215,7 +197,6 @@ def main():
         ("Series", check_series),
         ("Audio Courses", check_audio_courses),
         ("Museums", check_museums),
-        ("Podcasts", check_podcasts),
         ("Concerts", check_concerts),
         ("Books", check_books),
     ]

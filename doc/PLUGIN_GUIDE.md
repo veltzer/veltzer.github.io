@@ -48,7 +48,7 @@ plugins = ["audio", "books"]    # the first is the default view
 Today that is four pages (as of 2026-11-15; `grep -l data_collection.html
 content/*/_index.en.md content/*/*/_index.en.md` lists them):
 
-- `content/media/`: `audio`, `books`, `features`, `podcasts`,
+- `content/media/`: `audio`, `books`, `features`,
   `publishers` and `videos`;
 - `content/training/data/`: `companies` and `providers`, two tabs over
   organizations.yaml;
@@ -367,7 +367,7 @@ than writing the loop again:
 ## Existing Plugins
 
 The registry is `window.collectionPluginRegistry` in `templates/data_collection.html`; as of
-2026-11-21 it holds these twelve keys in seven files.
+2026-11-21 it holds these eleven keys in six files.
 
 | Key | File | Data |
 |-----|------|------|
@@ -381,5 +381,4 @@ The registry is `window.collectionPluginRegistry` in `templates/data_collection.
 | `certifiers` | `plugin-companies.js` | `data/certifiers.json.gz` (function `certification`: who certified me; build-time) |
 | `certifications` | `plugin-certifications.js` | `data/certifications.json.gz` (one card per certification, `certifications.yaml` joined with the issuers by `scripts/import_certifications.py`; build-time) |
 | `features` | `plugin-movies.js` | `data/video_features.json.gz` |
-| `podcasts` | `plugin-podcasts.js` | `data/podcasts.json.gz` |
 | `videos` | `plugin-series.js` | `data/video_series.json.gz` |

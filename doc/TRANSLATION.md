@@ -38,7 +38,7 @@ chess viewer was removed on 2026-11-20.)
   them are Hebrew. Translating them means adding translations in the teaching
   repositories, a large job (syllabi alone is ~390KB). Decided 2026-11-08: not
   worth doing.
-- **The data itself.** Book, movie, course and podcast titles, reviews and
+- **The data itself.** Book, movie and course titles, reviews and
   company names in the collections are content, not interface. Translating
   them would mean keeping a Hebrew copy of the data.
 - **Proper names.** Theme names (Azure, Paper, Midnight, Nord, Solarized, Rosé
