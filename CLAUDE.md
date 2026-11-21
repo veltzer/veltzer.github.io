@@ -58,8 +58,9 @@ which records the traps that outlived the migration.
   (`profiles.yaml`), plus the private lists that no page publishes (concerts,
   museums, cv, trips, lectures, …; the full list is in `doc/DECISIONS.md`). Every file names its schema in `$schema`, which the
   build validates against `veltzer.github.io/web-schemas`. This directory came out of
-  the private `../data` repo in 2026-09; the youtube CSV is still there (see
-  `scripts/copy_data.py`)
+  the private `../data` repo in 2026-09. The YouTube videos (the reviewed
+  ones and the watch history) and the Audible library moved on to My World
+  (myworld.stream) in 2026-11
 - `data/logos/` — one SVG per organization in `organizations.yaml` (which refers to
   them by paths relative to `data/`), linted by xmllint. The companies tab of the media
   page is built from these at build time: the `companies` step of `build_site.py`
@@ -90,7 +91,7 @@ which records the traps that outlived the migration.
   `make_og_images.py` (the two site-wide share cards, drawn by hand, committed), `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
   the sibling teaching repos), image fetchers, data importers, the `data/yaml/`
   maintenance scripts (`podcasts_*.py`, `books_fetch_ids.py`, `great_courses_*.py`,
-  `audio_courses_check_*.py`, `youtube_add_names.py`, `videos_fetch_wikidata.py` (fills `wikidata_id` and `rotten_tomatoes_id` from each `imdb_id`), `organizations_geocode.py`,
+  `audio_courses_check_*.py`, `videos_fetch_wikidata.py` (fills `wikidata_id` and `rotten_tomatoes_id` from each `imdb_id`), `organizations_geocode.py`,
   `organizations_pick_geo.py`, `organizations_fetch_maps.py` — all run from the
   repo root),
   `serve.py`, `make_logo.py` (the logo and the favicon/touch icons drawn from it), `make_word_vectors.py` (the blog search's word vectors), `export_posts_for_ai.py` (mirrors the posts to `~/insync/for_ai/blog` for AI agents
@@ -299,11 +300,9 @@ tags = ["religion", "philosophy", "ethics"]
 - `_site/` is generated — never edit it. Edit `content/`, `templates/`, `sass/` or
   `static/` and rebuild.
 - YAML data for the media tracker lives in `data/yaml/` and is turned into the
-  `.json.gz` the frontend loads by `scripts/copy_data.py`, which also pulls the
-  youtube CSV from the sibling `../data/` repository (private, not
-  checked out in CI — which is why `copy_data.py` is still a manual step and
-  `static/data/` is committed). **The frontend reads JSON, not YAML** — js-yaml took
-  ~399ms on the 6.5MB youtube dataset against ~31ms for `JSON.parse`.
+  `.json.gz` the frontend loads by `scripts/copy_data.py`, a manual step whose
+  output (`static/data/`) is committed. **The frontend reads JSON, not YAML** — js-yaml took
+  ~399ms on the 6.5MB YouTube dataset the site had then against ~31ms for `JSON.parse`.
 - The blog index has a search box (`static/blog-search.js`) over rssite's
   `<lang>/search.json` (`[search]` in `rssite.toml`). It indexes titles, opening
   text, tags and the full text (`content = true`, ~800 KB gzipped per language

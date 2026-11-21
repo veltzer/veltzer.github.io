@@ -1,16 +1,14 @@
 #!/usr/bin/env python
 
 """
-Build static/data from the media YAML in data/yaml and the youtube capture
-in the sibling ../data repo.
+Build static/data from the media YAML in data/yaml.
 
-The YAML data for the media tracker lives in this repo under data/yaml. The
-youtube CSV is a raw capture that still lives in the separate ../data
-repository. This script validates the sources exist, copies the plain YAML
-files, runs the books import (nested names, authors
-and readings flattened to one item per book) and the youtube CSV->YAML
-conversion,
-converts every YAML file to JSON, then gzips everything in static/data.
+The YAML data for the media tracker lives in this repo under data/yaml. This
+script validates the sources exist, copies the plain YAML files, runs the
+books import (nested names, authors and readings flattened to one item per
+book), converts every YAML file to JSON, then gzips everything in
+static/data. (The YouTube watch history, built here from a CSV in ../data,
+lives in My World now, myworld.stream.)
 
 The frontend consumes the JSON, not the YAML: parsing 6.5MB of YAML with
 js-yaml in the browser measured ~399ms against ~31ms for JSON.parse on the
@@ -30,7 +28,6 @@ import yaml
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = REPO_ROOT / "scripts"
 YAML_DIR = REPO_ROOT / "data" / "yaml"
-DATA_REPO = REPO_ROOT.parent / "data"
 DEST = REPO_ROOT / "static" / "data"
 
 # Plain YAML files copied verbatim from data/yaml. Only published data goes
@@ -45,8 +42,6 @@ PLAIN_YAML = [
 
 # Files that need a source check but are processed rather than copied directly.
 PROCESSED_YAML = ["books_read.yaml"]
-
-YOUTUBE_CSV = DATA_REPO / "raw" / "topics" / "video" / "youtube" / "all.list.csv"
 
 
 def die(message):
@@ -65,8 +60,6 @@ def validate_sources():
     for name in PLAIN_YAML + PROCESSED_YAML:
         if not (YAML_DIR / name).is_file():
             die(f"Missing source file {YAML_DIR / name}")
-    if not YOUTUBE_CSV.is_file():
-        die(f"Missing source file {YOUTUBE_CSV}. Clone the data repo alongside this one.")
 
 
 def copy_plain_yaml():
@@ -79,14 +72,6 @@ def import_books():
     # into the one-item-per-book shape the media page searches and filters on.
     subprocess.run(
         [str(SCRIPTS / "import_books.py"), str(YAML_DIR / "books_read.yaml"), str(DEST / "books.yaml")],
-        check=True,
-    )
-
-
-def convert_youtube():
-    # Convert youtube CSV to yaml.
-    subprocess.run(
-        [str(SCRIPTS / "csv_to_yaml.py"), str(YOUTUBE_CSV), str(DEST / "youtube.yaml")],
         check=True,
     )
 
@@ -118,7 +103,6 @@ def main():
     validate_sources()
     copy_plain_yaml()
     import_books()
-    convert_youtube()
     convert_yaml_to_json()
     gzip_data_files()
 

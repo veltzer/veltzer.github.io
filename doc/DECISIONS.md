@@ -53,13 +53,6 @@ No BMP anywhere: no browser asks for it and it is uncompressed.
 `tests/test_logo.py` keeps the header's inline copy and the committed
 `favicon.svg` in step with the script.
 
-## YouTube thumbnails are loaded from CDN, not stored locally
-
-Unlike other media types, YouTube thumbnails are fetched at runtime from
-`i.ytimg.com` by the plugin's `renderImage`. Downloading ~30,000 images
-locally would add 1-2GB to the git repo and slow every build. The current
-approach is correct and intentional.
-
 ## Google Calendar API key is intentionally public
 
 The API key is restricted by HTTP referrer (`veltzer.github.io/*`, and the
@@ -524,14 +517,13 @@ Private data types: the files in `data/yaml/` that no page publishes.
 - `text_books.yaml`
 - `trips.yaml`
 - `video_courses.yaml`
-- `video_youtube.yaml`
 
 Published: `audio_courses.yaml`, `books_read.yaml`,
 `podcasts.yaml`, `video_features.yaml` and `video_series.yaml` on the media
 page; `organizations.yaml` and `certifications.yaml` on the training,
 consulting and education pages; `profiles.yaml` in the profile block. The
-YouTube tab comes from the CSV in the private `../data` repo, not from
-`video_youtube.yaml`. Publishing a private file is a decision to record
+YouTube videos (`video_youtube.yaml` and the watch history) live in My
+World (myworld.stream) now, as the Audible library does. Publishing a private file is a decision to record
 here, not a side effect of adding a plugin.
 
 ## Russian as a partial third language (2026-11-21)

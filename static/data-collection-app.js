@@ -147,8 +147,8 @@
         let allItems = []; // To store the fetched data
         let activeConfig = {}; // To store the config of the current view
         // Bumped on every loadData() call. A load that finishes after a newer
-        // one started must not touch the page: clicking YouTube then another tab
-        // used to render the 29k YouTube items through that tab's plugin
+        // one started must not touch the page: clicking the (since removed) YouTube
+        // tab then another used to render its 29k items through that tab's plugin
         // when the slower fetch landed second.
         let loadSequence = 0;
         let currentPage = 1;
@@ -394,7 +394,7 @@
                         const numVal = Number(raw);
                         // An item with no value for this field is in no bucket.
                         // NaN compares false against both bounds, so without
-                        // this the metadata-less YouTube items matched every
+                        // this items with no metadata (the YouTube tab's, once) matched every
                         // duration and view-count range at once.
                         if (raw == null || raw === '' || Number.isNaN(numVal)) return false;
                         const range = filterConfig.ranges.find(function(r) { return r.label === f.value; });
@@ -607,8 +607,8 @@
             } else {
                 jsonText = await response.text();
             }
-            // JSON rather than YAML: js-yaml took ~399ms on the 6.5MB youtube
-            // data against ~31ms for JSON.parse, all on the main thread.
+            // JSON rather than YAML: js-yaml took ~399ms on the 6.5MB data of the
+            // YouTube tab there was then against ~31ms for JSON.parse, all on the main thread.
             const data = JSON.parse(jsonText);
             // Rename 'title' to 'name' for consistency if it exists
             return (data.items || []).map(item => {
@@ -670,7 +670,7 @@
             try {
                 // The parsed dataset is kept per plugin, so switching tab or
                 // view back and forth does not refetch and reparse it (the
-                // YouTube file is ~30,000 items).
+                // YouTube tab there was once had ~30,000 items).
                 let items = datasetCache.get(dataType);
                 if (!items) {
                     statusMessage.textContent = t('ui_loading', {title: activeConfig.title});
@@ -693,7 +693,7 @@
                     statusMessage.textContent = '';
                 } else {
                     // The same path as every later render, so a default
-                    // filter (YouTube: Available) applies to the first one too.
+                    // filter (a filter's defaultValue) applies to the first one too.
                     currentPage = 1;
                     renderItems(getFilteredItems());
                 }
@@ -875,7 +875,7 @@
         }
 
         // --- Handle Search Input ---
-        // Debounced: the YouTube tab searches ~30,000 items per keystroke.
+        // Debounced: a large tab is searched in full on every keystroke.
         let searchTimer = null;
         searchInput.addEventListener('input', function() {
             clearTimeout(searchTimer);

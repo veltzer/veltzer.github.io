@@ -147,13 +147,12 @@ rerun it only for a new release or once new posts have brought many new words.
 
 ### `scripts/copy_data.py`
 
-Builds `static/data/` from the media YAML in `data/yaml/` and the YouTube
-CSV in the sibling `../data/` repo: converts the
-YouTube CSV to YAML, runs the books import, converts every
+Builds `static/data/` from the media YAML in `data/yaml/`: copies the
+plain files, runs the books import, converts every
 YAML file to JSON (the frontend reads JSON, not YAML) and gzips everything.
 Uses `gzip -n` for reproducible output. Validates source files exist before
-copying. A manual step, not part of the build: CI has no `../data` checkout
-for the YouTube half, and the generated `static/data/` is committed.
+copying. A manual step, not part of the build; the generated `static/data/`
+is committed.
 
 ## Image Fetch Scripts
 
@@ -196,14 +195,6 @@ Output: `static/images/book-{cover}.jpg`, where `{cover}` is the key
 `import_books.NO_COVER`) gets no key and the card shows
 `static/images/book-no-cover.jpg`, a hand-made placeholder drawn at the
 card's 800x384 geometry so `object-cover` crops nothing that matters.
-
-### `scripts/csv_to_yaml.py`
-
-Converts the YouTube CSV export (`input output` positional arguments) into
-the trimmed YAML the media viewer loads, keeping only title, channel, upload
-date, duration, view count, categories and URL. Rows whose title is
-`METADATA_NOT_FOUND` are kept with `status: missing` and a rebuilt watch URL
-so the viewer can still link out. Run by `scripts/copy_data.py`.
 
 ### `scripts/import_books.py`
 
@@ -257,7 +248,7 @@ the box are skipped.
 
 Shared module of the `podcasts_*` scripts: RSS parsing, the matching of a
 chapter to its feed episode, and the ruamel.yaml configuration they share
-(`make_yaml()`, also used by `youtube_add_names.py`). Import-only. A rewrite
+(`make_yaml()`). Import-only. A rewrite
 with no edit writes the file back byte for byte (`podcasts.yaml`, checked
 2026-11-20): indentation, quoting, key order and line wrapping all survive.
 
@@ -309,8 +300,8 @@ Posts".
 ### `scripts/check_images.py`
 
 Verifies every media item has a corresponding image in `static/images/`.
-Checks movies, series, audible, audio courses, museums, podcasts, concerts
-and books. Skips YouTube (uses external CDN thumbnails). Part of the build
+Checks movies, series, audio courses, museums, podcasts, concerts
+and books. Part of the build
 (`[processor.explicit.generic.check_images]` in `rsconstruct.toml`, which
 reruns when any image is added, changed or deleted): a media
 item added without its image fails it, so run the matching `fetch_*.py`.
@@ -524,9 +515,3 @@ is saved after each podcast.
 
 Replaces numeric chapter titles with the real episode data from the feed;
 non-numeric titles are left alone.
-
-### `scripts/youtube_add_names.py`
-
-Fetches the title for every item without a `name` in a YouTube YAML file
-(`video_youtube.yaml`) and writes it back in place. The title of a consent
-or interstitial page is refused rather than recorded.

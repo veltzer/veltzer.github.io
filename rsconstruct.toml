@@ -129,7 +129,6 @@ src_dirs = ["tests"]
 # Everything the tests import or read, so an edit to any of it re-runs the
 # suite on a warm cache.
 dep_inputs = [
-    "scripts/csv_to_yaml.py",
     "scripts/import_books.py",
     "scripts/import_certifications.py",
     "scripts/import_companies.py",
@@ -165,7 +164,6 @@ dep_inputs = [
     "data/yaml/video_courses.yaml",
     "data/yaml/video_features.yaml",
     "data/yaml/video_series.yaml",
-    "data/yaml/video_youtube.yaml",
 ]
 [analyzer.markdown]
 

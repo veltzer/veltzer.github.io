@@ -15,7 +15,6 @@ Checks:
 - Concerts: static/images/{image}, the file each show names
 - Books: static/images/book-simania-{simania_id}.jpg
          or book-goodreads-{goodreads_id}.jpg (simania wins when both exist)
-- YouTube: skipped (uses external thumbnails)
 
 Usage:
   scripts/check_images.py [--output-files STAMP]

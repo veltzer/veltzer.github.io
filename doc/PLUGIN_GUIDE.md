@@ -49,7 +49,7 @@ Today that is four pages (as of 2026-11-15; `grep -l data_collection.html
 content/*/_index.en.md content/*/*/_index.en.md` lists them):
 
 - `content/media/`: `audio`, `books`, `features`, `podcasts`,
-  `publishers`, `videos` and `youtube`;
+  `publishers` and `videos`;
 - `content/training/data/`: `companies` and `providers`, two tabs over
   organizations.yaml;
 - `content/training/education/`: `education`, `certifiers` and
@@ -74,9 +74,8 @@ The nav tabs are sorted by `navTitle`, not by list order.
 Plugin data is authored as YAML in `data/yaml/`.
 `scripts/copy_data.py` converts it to JSON and gzips it into
 `static/data/<name>.json.gz`; the frontend loads the JSON, never the YAML
-(see `CLAUDE.md` for why). That is a manual step whose output is committed,
-because the YouTube source it also handles lives in the private
-`../data` repo. A plugin whose sources are entirely in this repo can instead
+(see `CLAUDE.md` for why). That is a manual step whose output is committed.
+A plugin whose sources are entirely in this repo can instead
 be generated at build time: `scripts/build_site.py companies` runs
 `scripts/import_companies.py` once per organization tab and
 `scripts/import_certifications.py` once, and writes seven files into
@@ -280,7 +279,7 @@ window.collectionPlugins['mykey'] = {
 | `ranges` | no | — | Required for `range` filterType. Array of `{label, min, max}` |
 | `extractValues` | no | — | For `custom` filterType: extract array of values from item |
 | `match` | no | — | For `custom` filterType: `(item, selectedValue) -> boolean` |
-| `defaultValue` | no | — | For `select` filters: preselect this option instead of "All" on load, and seed the active filters so the first render is already filtered (the YouTube plugin uses it for its metadata filter) |
+| `defaultValue` | no | — | For `select` filters: preselect this option instead of "All" on load, and seed the active filters so the first render is already filtered (the YouTube plugin, since removed, used it for its metadata filter; no plugin does now) |
 
 ## Built-in Fields
 
@@ -368,7 +367,7 @@ than writing the loop again:
 ## Existing Plugins
 
 The registry is `window.collectionPluginRegistry` in `templates/data_collection.html`; as of
-2026-11-21 it holds these thirteen keys in eight files.
+2026-11-21 it holds these twelve keys in seven files.
 
 | Key | File | Data |
 |-----|------|------|
@@ -384,4 +383,3 @@ The registry is `window.collectionPluginRegistry` in `templates/data_collection.
 | `features` | `plugin-movies.js` | `data/video_features.json.gz` |
 | `podcasts` | `plugin-podcasts.js` | `data/podcasts.json.gz` |
 | `videos` | `plugin-series.js` | `data/video_series.json.gz` |
-| `youtube` | `plugin-youtube.js` | `data/youtube.json.gz` |

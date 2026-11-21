@@ -15,7 +15,6 @@ verbatim to `/images/` in the built site.
 | Audio Courses (other) | `audiocourse-internal-{id}.jpg`, `audiocourse-no-cover.jpg` placeholder | DuckDuckGo search |
 | Museums | `museum-{internal_id}.jpg` | DuckDuckGo search |
 | Podcasts | `podcast-{internal_id}.jpg` | DuckDuckGo search |
-| YouTube | N/A (external) | `i.ytimg.com` at runtime |
 
 ## Adding Images for New Entries
 
@@ -79,7 +78,7 @@ increases clone size and slows operations. Several alternatives exist:
 
 - Keep images in a dedicated repo or storage location outside this repo.
 - Copy them in via `scripts/copy_data.py`, the way the YouTube
-  capture in `../data/` is handled today.
+  capture in `../data/` was handled until it moved to My World.
 - Keeps this repo lightweight while preserving the current build workflow.
 
 ### GitHub Pages Artifact Deployment
@@ -104,8 +103,8 @@ increases clone size and slows operations. Several alternatives exist:
 
 ### Lazy-Load from Original CDNs at Runtime
 
-- For movies/TV the TMDB CDN URLs are available; YouTube already uses
-  `i.ytimg.com` at runtime.
+- For movies/TV the TMDB CDN URLs are available (the YouTube tab, before
+  it moved to My World, used `i.ytimg.com` at runtime).
 - Extend this pattern to all media types — never store images locally.
 - Trade-off: depends on external CDN uptime; some sources may block hotlinking.
 

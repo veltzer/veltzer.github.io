@@ -16,7 +16,6 @@ from ruamel.yaml import YAML
 
 ROOT = Path(__file__).resolve().parent.parent
 PODCASTS = ROOT / "data" / "yaml" / "podcasts.yaml"
-VIDEO_YOUTUBE = ROOT / "data" / "yaml" / "video_youtube.yaml"
 
 
 @pytest.mark.parametrize(("raw", "expected"), [
@@ -38,10 +37,9 @@ def test_duration_to_seconds_rejects(raw):
         duration_to_seconds(raw)
 
 
-@pytest.mark.parametrize("path", [PODCASTS, VIDEO_YOUTUBE])
-def test_roundtrip_is_stable_and_lossless(path):
+def test_roundtrip_is_stable_and_lossless():
     """A no-edit load+dump keeps the data, and dumping the dump changes nothing."""
-    text = path.read_text(encoding="utf-8")
+    text = PODCASTS.read_text(encoding="utf-8")
     yaml = make_yaml()
     once = dump_to_string(yaml, yaml.load(text))
     twice = dump_to_string(yaml, make_yaml().load(once))
