@@ -261,10 +261,12 @@ tags = ["religion", "philosophy", "ethics"]
 
 - `sass/style.scss` is the site stylesheet, compiled by rssite to `/style.css`.
 - **Colours, radii, fonts and shadows come from `shared/shared-themes`** (the submodule).
-  Nothing in `style.scss` hardcodes a colour — every value is a `var(--token)`. Setting `data-theme` on `<html>` switches between the six themes; azure
-  is the default, and a reader whose system prefers dark and who has not chosen a
-  theme gets midnight (the submodule's `theme-onload.js`, inlined in the head, and
-  `theme-switcher.js`; only a choice made in the selector is stored).
+  Nothing in `style.scss` hardcodes a colour — every value is a `var(--token)`. Setting `data-theme` on `<html>` switches between the six themes. The
+  selector's first entry, **Auto**, is the default: azure, or midnight when the
+  system prefers dark, following the system as it changes (the submodule's
+  `theme-onload.js`, inlined in the head, and `theme-switcher.js`, which adds the
+  Auto entry itself). Auto stores nothing and choosing it clears a stored theme;
+  only a named theme is stored. Without JavaScript the page is azure.
 - **Print is black on white whatever the theme**: the `@media print` block at the end
   of `style.scss` points the tokens at the CSS system colours (`Canvas`, `CanvasText`)
   under a light colour scheme, hides everything that is not the text (header, footer,
