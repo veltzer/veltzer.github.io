@@ -14,7 +14,7 @@ tags = ["браузер", "linux", "безопасность"]
 
 * Google-Chrome шпионит за вами и отправляет слишком много информации Google и рекламодателям.
 * Google-Chrome в Linux потребляет слишком много процессорного времени, и его отзывчивость намного хуже, чем у Firefox. Я действительно видел это на сайтах для тренировки слепой печати.
-* Google-Chrome в Linux пишет на диск слишком много и изнашивает его. Это известная проблема https://unix.stackexchange.com/questions/438456/google-chrome-high-i-o-writes
+* Google-Chrome в Linux пишет на диск слишком много и изнашивает его. Это известная проблема <https://unix.stackexchange.com/questions/438456/google-chrome-high-i-o-writes>
 
 Итог всего этого: в Linux я рекомендую Firefox, а не Google-Chrome.
 

@@ -137,9 +137,9 @@ mistaken for an outstanding task.
 
 ## Sources
 
-- https://supabase.com/pricing
-- https://appwrite.io/pricing
-- https://developers.cloudflare.com/workers/platform/pricing/
-- https://giscus.app
-- https://github.com/pocketbase/pocketbase
-- https://www.goatcounter.com/help/gdpr
+- <https://supabase.com/pricing>
+- <https://appwrite.io/pricing>
+- <https://developers.cloudflare.com/workers/platform/pricing/>
+- <https://giscus.app>
+- <https://github.com/pocketbase/pocketbase>
+- <https://www.goatcounter.com/help/gdpr>

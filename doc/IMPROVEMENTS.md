@@ -626,7 +626,7 @@ came later) and the built page.
 
   Not a config or ordering mistake — verified with `i18n` placed both before and after
   `blog`, identical failure both ways. Upstream issue:
-  https://github.com/squidfunk/mkdocs-material/issues/4863 . The `mkdocs-static-i18n`
+  <https://github.com/squidfunk/mkdocs-material/issues/4863> . The `mkdocs-static-i18n`
   project is documented as frozen (core MkDocs upstream unmaintained), so a fix is not
   expected. A comment in `mkdocs.yml` says the same thing at the point of temptation.
 

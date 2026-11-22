@@ -169,7 +169,7 @@ The Material for MkDocs team has warned that MkDocs 2.0 will introduce
 backward-incompatible changes: all plugins will stop working, all theme
 overrides will break, and no migration path exists. Currently on MkDocs
 1.6.1 which works fine. Monitor this before upgrading MkDocs.
-See: https://squidfunk.github.io/mkdocs-material/blog/2026/02/18/mkdocs-2.0/
+See: <https://squidfunk.github.io/mkdocs-material/blog/2026/02/18/mkdocs-2.0/>
 
 ## Hebrew font: Heebo alongside Inter
 
