@@ -140,7 +140,6 @@ dep_inputs = [
     "templates/base.html",
     "static/favicon.svg",
     # test_people.py reads every data file's with: names.
-    "data/yaml/audio_courses.yaml",
     "data/yaml/books_loans.yaml",
     "data/yaml/books_read.yaml",
     "data/yaml/certifications.yaml",
@@ -210,7 +209,6 @@ command = "scripts/check_images.py"
 inputs = [
     "scripts/check_images.py",
     "scripts/import_books.py",
-    "data/yaml/audio_courses.yaml",
     "data/yaml/books_read.yaml",
     "data/yaml/concerts.yaml",
     "data/yaml/museums.yaml",

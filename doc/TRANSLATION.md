@@ -14,9 +14,7 @@ chess viewer was removed on 2026-11-20.)
   about and the section pages.
 - **The site's own strings.** Every key in `i18n/en.toml` has a value in
   `i18n/he.toml`; a missing key fails the build. That covers the nav, the
-  language and theme pickers, dates, the footer and the blog search. The
-  only keys whose Hebrew is the same as the English are brand names
-  (Audible, The Great Courses) and view-count bands ("1K–10K").
+  language and theme pickers, dates, the footer and the blog search.
 - **The data collection apps** (media and teaching data): their interface
   strings are the `app_*` keys, written into the page as
   `window.collectionStrings` by `templates/data_collection.html` and read

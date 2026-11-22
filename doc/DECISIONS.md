@@ -160,13 +160,6 @@ All static files (HTML, JS, CSS, images, data) live in `blog/` alongside
 the Markdown blog posts. MkDocs copies them through as-is to `docs/` on
 build. Never edit files in `docs/` directly.
 
-## Some Great Courses are not on the website
-
-A few audio courses (Holiday Music, Discovery of Ancient Civilizations,
-The Bible and Western Culture, etc.) are not available on
-shop.thegreatcourses.com. These use `internal_id` for image naming
-and DuckDuckGo image search for cover images.
-
 ## MkDocs 2.0 will break Material for MkDocs
 
 **Historical (MkDocs era).** The site no longer uses MkDocs, so this warning
@@ -518,12 +511,12 @@ Private data types: the files in `data/yaml/` that no page publishes.
 - `trips.yaml`
 - `video_courses.yaml`
 
-Published: `audio_courses.yaml`, `books_read.yaml`,
+Published: `books_read.yaml`,
 `video_features.yaml` and `video_series.yaml` on the media
 page; `organizations.yaml` and `certifications.yaml` on the training,
 consulting and education pages; `profiles.yaml` in the profile block. The
-YouTube videos (`video_youtube.yaml` and the watch history) and the podcasts
-(`podcasts.yaml`) live in My
+YouTube videos (`video_youtube.yaml` and the watch history), the podcasts
+(`podcasts.yaml`) and the audio courses (`audio_courses.yaml`) live in My
 World (myworld.stream) now, as the Audible library does. Publishing a private file is a decision to record
 here, not a side effect of adding a plugin.
 

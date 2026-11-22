@@ -35,7 +35,6 @@ DEST = REPO_ROOT / "static" / "data"
 # lists every private data file).
 PLAIN_YAML = [
     "video_features.yaml",
-    "audio_courses.yaml",
     "video_series.yaml",
 ]
 

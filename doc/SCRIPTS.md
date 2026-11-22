@@ -176,13 +176,6 @@ Downloads TV series poster images from TMDB (with OMDB fallback) by IMDB ID.
 Output: `static/images/series-{imdb_id}.jpg`
 Requires: same as movie posters.
 
-### `scripts/fetch_audiocourse_images.py`
-
-Downloads audio course cover images. Uses Great Courses CDN for courses
-with `great_courses_id`, Audible for those with `audible_asin`, and
-DuckDuckGo image search with tkinter GUI picker for the rest.
-Output: `static/images/audiocourse-{gc|audible|internal}-{id}.jpg`
-
 ### `scripts/fetch_book_covers.py`
 
 Downloads book covers for `books_read.yaml`. Every book carries a goodreads
@@ -214,7 +207,7 @@ Output: `static/images/museum-{internal_id}.jpg`
 
 ### `scripts/image_picker.py`
 
-Shared module used by the museum and audio course image scripts.
+Shared module used by the museum image script.
 Provides DuckDuckGo image search (with candidates cached under
 `$XDG_CACHE_HOME/veltzer-site/image-picker/`, defaulting to
 `~/.cache/veltzer-site/image-picker/`, so they survive a reboot) and a
@@ -287,7 +280,7 @@ Posts".
 ### `scripts/check_images.py`
 
 Verifies every media item has a corresponding image in `static/images/`.
-Checks movies, series, audio courses, museums, concerts
+Checks movies, series, museums, concerts
 and books. Part of the build
 (`[processor.explicit.generic.check_images]` in `rsconstruct.toml`, which
 reruns when any image is added, changed or deleted): a media
@@ -392,27 +385,6 @@ overridden via flags or the matching `API_KEY_*` environment variables.
 These edit or check the YAML under `data/yaml/` and use paths relative to
 the repository root, so run them from there. They came across from the
 `../data` repo together with the YAML in 2026-09.
-
-### `scripts/great_courses_fetch_ids.py`
-
-Interactive script to look up Great Courses IDs and slugs by searching
-shop.thegreatcourses.com. Shows course info, professor, and cover image
-for confirmation. Incremental with cache in `/tmp/great_courses_cache.json`.
-
-### `scripts/great_courses_check_unique.py`
-
-Checks that all `great_courses_id` and `great_courses_slug` values
-in `audio_courses.yaml` are unique.
-
-### `scripts/audio_courses_check_ids.py`
-
-Checks that every audio course has at least one identifier:
-`great_courses_id`, `audible_asin`, or `internal_id`.
-
-### `scripts/audio_courses_check_lecturers.py`
-
-Compares lecturer names in YAML against professor names on The Great
-Courses website for courses with a `great_courses_slug`.
 
 ### `scripts/books_fetch_ids.py`
 

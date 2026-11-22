@@ -59,8 +59,8 @@ which records the traps that outlived the migration.
   museums, cv, trips, lectures, …; the full list is in `doc/DECISIONS.md`). Every file names its schema in `$schema`, which the
   build validates against `veltzer.github.io/web-schemas`. This directory came out of
   the private `../data` repo in 2026-09. The YouTube videos (the reviewed
-  ones and the watch history), the Audible library and the podcasts moved
-  on to My World (myworld.stream) in 2026-11
+  ones and the watch history), the Audible library, the podcasts and the
+  audio courses moved on to My World (myworld.stream) in 2026-11
 - `data/logos/` — one SVG per organization in `organizations.yaml` (which refers to
   them by paths relative to `data/`), linted by xmllint. The companies tab of the media
   page is built from these at build time: the `companies` step of `build_site.py`
@@ -90,8 +90,7 @@ which records the traps that outlived the migration.
   `npx tailwindcss` by hand and its output is committed, so the build needs no node),
   `make_og_images.py` (the two site-wide share cards, drawn by hand, committed), `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
   the sibling teaching repos), image fetchers, data importers, the `data/yaml/`
-  maintenance scripts (`books_fetch_ids.py`, `great_courses_*.py`,
-  `audio_courses_check_*.py`, `videos_fetch_wikidata.py` (fills `wikidata_id` and `rotten_tomatoes_id` from each `imdb_id`), `organizations_geocode.py`,
+  maintenance scripts (`books_fetch_ids.py`, `videos_fetch_wikidata.py` (fills `wikidata_id` and `rotten_tomatoes_id` from each `imdb_id`), `organizations_geocode.py`,
   `organizations_pick_geo.py`, `organizations_fetch_maps.py` — all run from the
   repo root),
   `serve.py`, `make_logo.py` (the logo and the favicon/touch icons drawn from it), `make_word_vectors.py` (the blog search's word vectors), `export_posts_for_ai.py` (mirrors the posts to `~/insync/for_ai/blog` for AI agents

@@ -39,9 +39,9 @@
     // ones this page shows. The first key is the view shown when the URL names
     // none. The nav tabs
     // are sorted by their label (see generateNav), not by this order or by
-    // these keys: the keys are URL and preference identifiers and three of
-    // them differ from their label (audio -> Audio Courses, features ->
-    // Movies, videos -> Video Series). Nothing may derive any order from
+    // these keys: the keys are URL and preference identifiers and two of
+    // them differ from their label (features -> Movies, videos -> Video
+    // Series). Nothing may derive any order from
     // window.collectionPlugins: the scripts load in parallel and register in
     // whatever order they finish, so the tabs used to reshuffle between loads.
     const ALL_PLUGIN_FILES = window.collectionPluginRegistry || {};

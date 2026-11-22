@@ -10,9 +10,6 @@ verbatim to `/images/` in the built site.
 | Movies | `movie-{imdb_id}.jpg` | TMDB CDN (by IMDB ID) |
 | TV Series | `series-{imdb_id}.jpg` | TMDB CDN (by IMDB ID) |
 | Books | `book-{cover}.jpg` (`simania-<id>` or `goodreads-<id>`), `book-no-cover.jpg` placeholder | `og:image` of the goodreads/simania page |
-| Audio Courses (GC) | `audiocourse-gc-{gc_id}.jpg` | Great Courses CDN |
-| Audio Courses (Audible) | `audiocourse-audible-{asin}.jpg` | Audible |
-| Audio Courses (other) | `audiocourse-internal-{id}.jpg`, `audiocourse-no-cover.jpg` placeholder | DuckDuckGo search |
 | Museums | `museum-{internal_id}.jpg` | DuckDuckGo search |
 
 ## Adding Images for New Entries
@@ -37,7 +34,6 @@ portrait covers are shown whole over a blurred backdrop instead (see
 - TMDB/OMDB poster scripts: no cache (fast CDN downloads)
 - DuckDuckGo image picker: cached under `$XDG_CACHE_HOME/veltzer-site/image-picker/`
   (default `~/.cache/veltzer-site/image-picker/`) per search term
-- Great Courses ID lookup: cached in `/tmp/great_courses_cache.json`
 
 Delete these to force fresh searches.
 
