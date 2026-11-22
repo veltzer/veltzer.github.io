@@ -8,7 +8,7 @@ slug = "windows-damage-to-tech"
 tags = ["windows", "linux", "opinion"]
 +++
 
-## Production Runs on Linux. Development Should Have Too.
+## Production Runs on Linux. Development Should Have Too
 
 Here's a fact that should make every tech executive uncomfortable: virtually
 all production infrastructure today runs on Linux. Cloud servers, containers,
