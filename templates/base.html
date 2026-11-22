@@ -204,41 +204,43 @@
     {%- endfor %}
   </nav>
   <script>
-  // Close an open nav menu when the reader clicks outside it or presses Escape.
+  // Close an open nav or language menu when the reader clicks outside it or presses Escape.
   document.addEventListener('click', function (event) {
-    document.querySelectorAll('details.nav-menu[open]').forEach(function (menu) {
+    document.querySelectorAll('details.nav-menu[open], details.lang-menu[open]').forEach(function (menu) {
       if (!menu.contains(event.target)) menu.removeAttribute('open');
     });
   });
   document.addEventListener('keydown', function (event) {
     if (event.key !== 'Escape') return;
-    document.querySelectorAll('details.nav-menu[open]').forEach(function (menu) {
+    document.querySelectorAll('details.nav-menu[open], details.lang-menu[open]').forEach(function (menu) {
       menu.removeAttribute('open');
       menu.querySelector('summary').focus();
     });
   });
   </script>
 
-  {#- Header controls: language as links, theme as a <select>.
+  {#- Header controls: language as a dropdown of links, theme as a <select>.
 
-      Language: one link per language. Where the current document exists in
-      the other language -- posts, sections and tag pages alike -- the link
-      points straight at it so the reader stays where they are. Anything
-      without a counterpart falls back to the other language's home page,
-      better than hiding the switcher and leaving /he/ unreachable. Plain
-      links rather than a <select> that navigated on `change`: they work
-      without JavaScript, and a keyboard reader arrowing through a closed
-      select was sent away at the first option. -#}
+      Language: a <details> styled like the theme select, its summary naming
+      the current language, its panel one link per other language. Where the
+      current document exists in that language -- posts, sections and tag
+      pages alike -- the link points straight at it so the reader stays where
+      they are. Anything without a counterpart falls back to that language's
+      home page, better than hiding the switcher and leaving /he/ unreachable.
+      Links in a <details> rather than a <select> that navigated on `change`:
+      they work without JavaScript, and a keyboard reader arrowing through a
+      closed select was sent away at the first option. -#}
   <div class="site-controls">
-    <nav class="site-langs" aria-label="{{ trans(key="label_language") }}">
-      {%- for entry in languages %}
-      {%- if entry.code == lang %}
-      <span class="lang current" lang="{{ entry.code }}" aria-current="page">{{ entry.name }}</span>
-      {%- else %}
-      <a class="lang" href="{{ alternates | get(key=entry.code, default=entry.url_prefix) }}" lang="{{ entry.code }}" hreflang="{{ entry.code }}">{{ entry.name }}</a>
-      {%- endif %}
-      {%- endfor %}
-    </nav>
+    <details class="lang-menu">
+      <summary class="site-select" aria-label="{{ trans(key="label_language") }}: {{ language.name }}" lang="{{ lang }}">{{ language.name }}</summary>
+      <nav class="lang-menu-items" aria-label="{{ trans(key="label_language") }}">
+        {%- for entry in languages %}
+        {%- if entry.code != lang %}
+        <a href="{{ alternates | get(key=entry.code, default=entry.url_prefix) }}" lang="{{ entry.code }}" hreflang="{{ entry.code }}" dir="{{ entry.direction }}">{{ entry.name }}</a>
+        {%- endif %}
+        {%- endfor %}
+      </nav>
+    </details>
 
     <label class="visually-hidden" for="theme-select">{{ trans(key="label_theme") }}</label>
     {#- The theme list, its order and its labels come from the shared-themes
@@ -269,7 +271,7 @@
   // reader straight to their language next time. Written on the click rather
   // than inferred from the URL, so only a choice is recorded. The link itself
   // does the navigation.
-  document.querySelectorAll('.site-langs a').forEach(function (link) {
+  document.querySelectorAll('.lang-menu-items a').forEach(function (link) {
     link.addEventListener('click', function () {
       try { localStorage.setItem('veltzer-site-lang', link.getAttribute('hreflang')); } catch (e) { /* storage blocked */ }
     });
