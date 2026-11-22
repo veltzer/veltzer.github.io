@@ -105,7 +105,8 @@ which records the traps that outlived the migration.
   translated, how, and what stays English by decision);
   `doc/BACKEND_SERVICES.md` is the research on adding dynamic features
   (comments, counters, storage, uploads) to a static site, to read before
-  adding any
+  adding any; `doc/SHARE_CARDS.md` is the share cards (`og:image`): the
+  two kinds, their layout, and why every one carries the portrait
 
 ## Build Commands
 

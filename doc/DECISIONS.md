@@ -536,3 +536,12 @@ The last batch landed the same day: every post now has its `.ru.md`, so
 `require_translations = true` is back on all three blog sections and
 Russian is required of every new post like Hebrew. `check_post_names.py`
 lost the translation and link checks it carried in the meantime.
+
+## Share cards carry the author's portrait (2026-11-22)
+
+Every share card, the site-wide ones and the one per post, shows the
+author's portrait (the About page's drawing) beside the text, instead of
+being lettering only. A per-tag picture, an optional per-post picture and
+generated pictures were weighed against it; the per-post picture stays open
+as an addition. The cards, their layout and the reasoning are in
+`doc/SHARE_CARDS.md`.
