@@ -262,6 +262,8 @@ src_extensions = [".jpg", ".jpeg", ".png", ".gif", ".webp"]
 # data/logos/*.svg are the organization logos organizations.yaml points at
 # (paths in that file are relative to data/): well-formed XML via ixmllint.
 [processor.checker.ixmllint]
+# warnings fail too, not only fatal errors
+strict = true
 src_dirs = ["static", "data/logos"]
 src_exclude_dirs = ["vendor"]
 # Every post is <date>-<slug>.<lang>.md with a short `slug` (at most four
