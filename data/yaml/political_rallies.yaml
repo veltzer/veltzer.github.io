@@ -1,3 +1,4 @@
+---
 # next line is neccessary for vscode which does not read the $schema attribute
 # yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/political_rallies.json
 $schema: "https://veltzer.github.io/web-schemas/json/political_rallies.json"
