@@ -510,7 +510,7 @@ Private data types: the files in `data/yaml/` that no page publishes.
 - `trips.yaml`
 - `video_courses.yaml`
 
-Published: `organizations.yaml` (its publishers on the media page) and
+Published: `organizations.yaml` and
 `certifications.yaml` on the training, consulting and education pages;
 `profiles.yaml` in the profile block. The films and series
 (`video_features.yaml`, `video_series.yaml`, with their posters, since

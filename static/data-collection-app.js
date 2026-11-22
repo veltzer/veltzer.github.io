@@ -2,9 +2,9 @@
  * The data collection app: a searchable, sortable, filterable card grid over
  * one JSON file per plugin (static/plugin-*.js).
  *
- * Entry points: every page using templates/data_collection.html -- the media
- * section (/en/media/, /he/media/) and the training section's teaching
- * data page (/en/training/data/, /he/training/data/). The template
+ * Entry points: every page using templates/data_collection.html -- the
+ * training section's teaching data page (/en/training/data/,
+ * /he/training/data/), the consulting page and the education page. The template
  * sets, BEFORE loading this script:
  *
  *   window.collectionBasePath   where plugins and data live ('/')
@@ -747,7 +747,7 @@
                 // for a white page, and the blurred backdrop is dropped
                 // because a blurred logo behind a crisp one reads as a
                 // printing error. Styles for the classes live in
-                // content/media/_index.en.md next to the other #collection-root rules.
+                // templates/data_collection.html next to the other #collection-root rules.
                 const contain = activeConfig.imageFit === 'contain';
                 const light = activeConfig.imageBackground === 'light';
                 const imgHtml = imgUrl

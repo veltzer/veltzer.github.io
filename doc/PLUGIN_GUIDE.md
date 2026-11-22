@@ -1,7 +1,7 @@
 # Data Collection Plugin Development Guide
 
 This guide explains how to create a new plugin for the data collection app
-(`static/data-collection-app.js`), which runs the media, training data,
+(`static/data-collection-app.js`), which runs the training data,
 education and consulting pages.
 
 ## Overview
@@ -42,14 +42,12 @@ plugins:
 template = "data_collection.html"
 
 [extra]
-plugins = ["features", "videos"]    # the first is the default view
+plugins = ["companies", "providers"]    # the first is the default view
 ```
 
-Today that is four pages (as of 2026-11-15; `grep -l data_collection.html
+Today that is three pages (as of 2026-11-15; `grep -l data_collection.html
 content/*/_index.en.md content/*/*/_index.en.md` lists them):
 
-- `content/media/`: `features`,
-  `publishers` and `videos`;
 - `content/training/data/`: `companies` and `providers`, two tabs over
   organizations.yaml;
 - `content/training/education/`: `education`, `certifiers` and
@@ -59,8 +57,8 @@ content/*/_index.en.md content/*/*/_index.en.md` lists them):
 A single-plugin page shows no tab row.
 
 One script may register several keys: `plugin-companies.js` registers
-`companies` and five copies of it (`providers`, `consulting`, `publishers`,
-`education` and `certifiers`, each with another `file` and titles), all six
+`companies` and four copies of it (`providers`, `consulting`,
+`education` and `certifiers`, each with another `file` and titles), all five
 keys map to it in `window.collectionPluginRegistry`, and the app loads each file once. A
 copy made with `Object.assign` has to be a copy, not the same object under a
 second key, because the app writes the derived `sortFields` and `filters`
@@ -75,8 +73,8 @@ Plugin data is authored as YAML in `data/yaml/` and loaded by the frontend
 as gzipped JSON, never as YAML (see `CLAUDE.md` for why). It is generated at
 build time: `scripts/build_site.py companies` runs
 `scripts/import_companies.py` once per organization tab and
-`scripts/import_certifications.py` once, and writes seven files into
-`_site/data/` (`companies`, `training_providers`, `consulting`, `publishers`,
+`scripts/import_certifications.py` once, and writes six files into
+`_site/data/` (`companies`, `training_providers`, `consulting`,
 `education`, `certifiers` and `certifications`, all `.json.gz`) directly,
 nothing committed. The YAML structure should be:
 
@@ -280,7 +278,7 @@ window.collectionPlugins['mykey'] = {
 
 ## Built-in Fields
 
-The media page automatically handles these item fields if present:
+The data collection app automatically handles these item fields if present:
 
 - `name` (or `title`, which gets renamed to `name`) - displayed as card title
 - `review` (or `subtitle`) - displayed as card description
@@ -362,7 +360,6 @@ The registry is `window.collectionPluginRegistry` in `templates/data_collection.
 | `companies` | `plugin-companies.js` | `data/companies.json.gz` (the `teaching` organizations of `organizations.yaml`, written into `_site/` at build time by `scripts/import_companies.py`; their logos are copied from `data/logos/` to `/logos/` the same way) |
 | `providers` | `plugin-companies.js` | `data/training_providers.json.gz` (organizations with function `training-provider`; build-time, as above) |
 | `consulting` | `plugin-companies.js` | `data/consulting.json.gz` (function `consulting`; build-time) |
-| `publishers` | `plugin-companies.js` | `data/publishers.json.gz` (function `publisher`; build-time) |
 | `education` | `plugin-companies.js` | `data/education.json.gz` (function `education`; build-time) |
 | `certifiers` | `plugin-companies.js` | `data/certifiers.json.gz` (function `certification`: who certified me; build-time) |
 | `certifications` | `plugin-certifications.js` | `data/certifications.json.gz` (one card per certification, `certifications.yaml` joined with the issuers by `scripts/import_certifications.py`; build-time) |

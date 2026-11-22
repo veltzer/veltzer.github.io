@@ -12,7 +12,7 @@ sat in the repo for a museum card that renders at 192 pixels tall.
 The numbers come from the markup, not from taste
 ------------------------------------------------
 data-collection-app.js renders every card as `w-full h-48 object-cover` inside
-`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3` (content/media/_index.en.md).
+`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3` (templates/data_collection.html).
 
   h-48 is 12rem = 192 CSS pixels tall.
   Three columns in a ~1280px content area, minus gaps, is ~400 CSS pixels wide.

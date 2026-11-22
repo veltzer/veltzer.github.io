@@ -15,8 +15,7 @@ build writes with its sources, and each is cached separately.
   `scripts/import_companies.py`, once per `--function` of
   `organizations.yaml`, writes `companies.json.gz` (taught at),
   `training_providers.json.gz` (taught for), `consulting.json.gz`
-  (consulted for), `publishers.json.gz` (the media page's publishers),
-  `education.json.gz` (studied at) and `certifiers.json.gz` (certified by);
+  (consulted for), `education.json.gz` (studied at) and `certifiers.json.gz` (certified by);
   `scripts/import_certifications.py` joins `certifications.yaml` with the
   issuers into `certifications.json.gz` (one entry per certification). The
   stanza in `rsconstruct.toml` names all seven outputs; every map image the
@@ -236,7 +235,7 @@ item added without its image fails it, so run the matching `fetch_*.py`.
 ### `scripts/import_companies.py`
 
 Picks the organizations with one `--function` (`teaching`,
-`training-provider`, `consulting`, `publisher`, `education` or
+`training-provider`, `consulting`, `education` or
 `certification`; `TABS` in the script) among their `functions` out of
 `data/yaml/organizations.yaml`, trims each to the fields the companies tab
 shows (name, logo, status, headquarters, Israel office, the one `geo` map

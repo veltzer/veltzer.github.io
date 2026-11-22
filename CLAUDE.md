@@ -293,11 +293,12 @@ tags = ["religion", "philosophy", "ethics"]
 
 - `_site/` is generated — never edit it. Edit `content/`, `templates/`, `sass/` or
   `static/` and rebuild.
-- The media page's data is built from `data/yaml/` into the `.json.gz` the
+- The data collection pages' data is built from `data/yaml/` into the `.json.gz` the
   frontend loads (`scripts/build_site.py`). **The frontend reads JSON, not YAML** — js-yaml took
   ~399ms on the 6.5MB YouTube dataset the site had then against ~31ms for `JSON.parse`.
   The films and series it used to show, with `scripts/copy_data.py` that built
-  them, are gone: they live in My World now (myworld.stream).
+  them, are gone: they live in My World now (myworld.stream), and so do the
+  publishers, with the media page that showed them (2026-11-22).
 - The blog index has a search box (`static/blog-search.js`) over rssite's
   `<lang>/search.json` (`[search]` in `rssite.toml`). It indexes titles, opening
   text, tags and the full text (`content = true`, ~800 KB gzipped per language

@@ -76,11 +76,6 @@ class TestSelection:
         assert [item["name"] for item in import_companies.convert(data, "education")["items"]] == ["Rimon"]
         assert [item["name"] for item in import_companies.convert(data, "certification")["items"]] == ["MySQL"]
 
-    def test_publishers_tab(self):
-        data = {"items": [organization(), organization(id=3, name="Audible", functions=["publisher"])]}
-        assert [item["name"] for item in import_companies.convert(data, "publisher")["items"]] == ["Audible"]
-        assert import_companies.shown(data["items"][1])
-
     def test_every_tab_function_is_shown(self):
         assert import_companies.shown(organization(functions=["training-provider"]))
         assert import_companies.shown(organization(functions=["consulting"]))
@@ -191,9 +186,9 @@ class TestMainFailurePaths:
 
     def test_no_organization_with_the_function(self, tmp_path, monkeypatch, capsys):
         item = organization(functions=["consulting"])
-        code, err, target = self.run_main(tmp_path, monkeypatch, capsys, {"items": [item]}, "--function", "publisher")
+        code, err, target = self.run_main(tmp_path, monkeypatch, capsys, {"items": [item]}, "--function", "education")
         assert code == 1
-        assert "'publisher'" in err
+        assert "'education'" in err
         assert not target.exists()
 
     def test_missing_map_image_fails_when_images_dir_given(self, tmp_path, monkeypatch, capsys):

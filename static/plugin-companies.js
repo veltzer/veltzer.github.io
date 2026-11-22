@@ -250,16 +250,6 @@ window.collectionPlugins['consulting'] = Object.assign({}, window.collectionPlug
     subtitle: t('companies_consulting_subtitle')
 });
 
-// The publishers of the audiobooks, courses and radio I consumed, as a tab of
-// the media page: the same cards over the organizations whose functions
-// include publisher.
-window.collectionPlugins['publishers'] = Object.assign({}, window.collectionPlugins['companies'], {
-    file: 'data/publishers.json.gz',
-    navTitle: t('companies_publishers_nav_title'),
-    title: t('companies_publishers_title'),
-    subtitle: t('companies_publishers_subtitle')
-});
-
 // The schools and universities I studied at, and the companies that certified
 // me, two of the tabs of the education page (/training/education/). Its third
 // tab is the certifications themselves, one card per certification

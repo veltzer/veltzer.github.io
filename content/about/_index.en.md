@@ -13,9 +13,8 @@ underneath them – and I have spent a good part of my career teaching those
 subjects as well as writing them. Much of the teaching material I use is
 published on this site under [Syllabi](/en/syllabi/) and [Slides](/en/slides/).
 
-Outside work I read and listen a great deal, play chess, and keep a public
-record of what I read and hear: the [Media](/en/media/) section tracks the books,
-talks, courses and films I go through. The [blog](/en/blog/) is where the longer writing lands, in
+Outside work I read and listen a great deal and play chess. The
+[blog](/en/blog/) is where the longer writing lands, in
 English and in Hebrew, on programming, mathematics, religion and philosophy.
 
 The profile links below are the other places I exist online.

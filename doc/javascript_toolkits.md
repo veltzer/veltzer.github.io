@@ -15,7 +15,7 @@ blog loads nothing at all.
 
 | Page | CSS | JS libraries |
 |------|-----|--------------|
-| `/en/media/`, `/en/training/data/` | Tailwind (compiled, vendored) | none -- plain JS in `static/data-collection-app.js` + nine plugin files |
+| `/en/training/data/`, `/en/consulting/`, `/en/training/education/` | Tailwind (compiled, vendored) | none -- plain JS in `static/data-collection-app.js` + nine plugin files |
 | `/en/calendar/` | site stylesheet | FullCalendar 6.1.20 + its Google Calendar plugin -- **vendored** |
 | `/en/slides/`, `/en/syllabi/`, `/en/animations/` | site stylesheet | Material Web 2 (CDN) |
 | Blog posts, About, tags | site stylesheet (`sass/style.scss`) | none |
@@ -92,7 +92,7 @@ the version here. The Google Calendar plugin reads a public API key from
   YouTube file with js-yaml took ~399 ms in the browser. The only mention left in
   `static/data-collection-app.js` is the comment recording that decision.
 - **Bootstrap** -- removed before the zola migration, in favour of Tailwind on the
-  media page.
+  data collection pages.
 - **elasticlunr / `search_index.en.js`** -- gone. Under zola (the generator before rssite) it was switched off
   (the 4.1 MB index was generated and deployed on every build and nothing ever
   loaded it). The blog search replaced it: `[search]` in `rssite.toml` writes

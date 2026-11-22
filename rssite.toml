@@ -9,7 +9,7 @@ author = "Mark Veltzer"
 # with it the author of a post's JSON-LD is that same person, not a second,
 # nameless one.
 author_id = "https://veltzer.org/#person"
-description = "Mark Veltzer – software engineer from Israel. Blog on programming, Linux and philosophy, plus media notes and teaching material."
+description = "Mark Veltzer – software engineer from Israel. Blog on programming, Linux and philosophy, plus teaching material."
 
 # Every language is explicit and symmetrical: every content file carries a
 # language suffix (post.en.md, post.he.md, post.ru.md) and every language is
@@ -27,7 +27,7 @@ locale = "en_US"
 date_format = "%-d %b %Y"
 date_format_long = "%-d %B %Y"
 title = "Mark Veltzer's personal site"
-description = "Mark Veltzer – software engineer from Israel. Blog on programming, Linux and philosophy, plus media notes and teaching material."
+description = "Mark Veltzer – software engineer from Israel. Blog on programming, Linux and philosophy, plus teaching material."
 generate_feeds = true
 
 [[languages]]
@@ -167,7 +167,6 @@ search_modes = ["semantic", "full", "simple"]
 nav = [
     { key = "nav_blog", path = "blog/" },
     { key = "nav_tags", path = "tags/" },
-    { key = "nav_media", path = "media/" },
     { key = "nav_calendar", path = "calendar/" },
     { key = "nav_training", children = [
         { key = "nav_training_overview", path = "training/" },
