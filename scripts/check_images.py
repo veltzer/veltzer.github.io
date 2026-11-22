@@ -9,8 +9,6 @@ Checks:
 - Series: static/images/series-{imdb_id}.jpg
 - Museums: static/images/museum-{internal_id}.jpg
 - Concerts: static/images/{image}, the file each show names
-- Books: static/images/book-simania-{simania_id}.jpg
-         or book-goodreads-{goodreads_id}.jpg (simania wins when both exist)
 
 Usage:
   scripts/check_images.py [--output-files STAMP]
@@ -26,7 +24,6 @@ import sys
 from pathlib import Path
 
 import yaml
-from import_books import convert_item
 
 # Resolved from this file rather than the cwd, so the script works from
 # anywhere instead of only from the repo root.
@@ -133,31 +130,6 @@ def check_concerts():
     return len(entries), errors
 
 
-def check_books():
-    """Check book covers.
-
-    The cover key is derived the same way import_books.py derives it for the
-    site data, so the check and the fetcher (scripts/fetch_book_covers.py)
-    can never disagree about which file a book renders.
-    """
-    entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "books_read.yaml"))
-    errors = 0
-    for entry in entries:
-        flat = convert_item(entry)
-        if not flat.get("goodreads_id") and not flat.get("simania_id"):
-            print(f"  NO ID: {flat.get('name', '?')}")
-            errors += 1
-            continue
-        cover = flat.get("cover")
-        if not cover:
-            # a key listed in import_books.NO_COVER: the site has no image
-            continue
-        path = os.path.join(str(IMAGE_DIR), f"book-{cover}.jpg")
-        if not os.path.exists(path):
-            print(f"  MISSING: {path} ({flat.get('name', '?')})")
-            errors += 1
-    return len(entries), errors
-
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.strip().splitlines()[0])
@@ -170,7 +142,6 @@ def main():
         ("Series", check_series),
         ("Museums", check_museums),
         ("Concerts", check_concerts),
-        ("Books", check_books),
     ]
 
     for label, check_fn in checks:

@@ -176,27 +176,6 @@ Downloads TV series poster images from TMDB (with OMDB fallback) by IMDB ID.
 Output: `static/images/series-{imdb_id}.jpg`
 Requires: same as movie posters.
 
-### `scripts/fetch_book_covers.py`
-
-Downloads book covers for `books_read.yaml`. Every book carries a goodreads
-or simania id; both sites publish the cover as the page's `og:image`, so no
-API key is needed. goodreads pages are fetched through `/en/book/show/<id>`
-(the plain url answers scripts with an empty WAF challenge).
-Output: `static/images/book-{cover}.jpg`, where `{cover}` is the key
-`scripts/import_books.py` puts on each item (`simania-<id>`, else
-`goodreads-<id>`). A book whose page has no cover (listed in
-`import_books.NO_COVER`) gets no key and the card shows
-`static/images/book-no-cover.jpg`, a hand-made placeholder drawn at the
-card's 800x384 geometry so `object-cover` crops nothing that matters.
-
-### `scripts/import_books.py`
-
-Flattens `data/yaml/books_read.yaml` (names, authors, ownings and
-readings, each a list per language) into one item per book for the media
-page: `name`, `authors`, `rating`/`last_read`/`review` of the latest dated
-reading, `readings`, `owned_languages`, `cover`, `url`. Run by
-`scripts/copy_data.py`.
-
 ### `scripts/fetch_museum_images.py`
 
 Downloads museum images via DuckDuckGo image search with tkinter GUI picker.
@@ -280,8 +259,8 @@ Posts".
 ### `scripts/check_images.py`
 
 Verifies every media item has a corresponding image in `static/images/`.
-Checks movies, series, museums, concerts
-and books. Part of the build
+Checks movies, series, museums and
+concerts. Part of the build
 (`[processor.explicit.generic.check_images]` in `rsconstruct.toml`, which
 reruns when any image is added, changed or deleted): a media
 item added without its image fails it, so run the matching `fetch_*.py`.
@@ -385,14 +364,6 @@ overridden via flags or the matching `API_KEY_*` environment variables.
 These edit or check the YAML under `data/yaml/` and use paths relative to
 the repository root, so run them from there. They came across from the
 `../data` repo together with the YAML in 2026-09.
-
-### `scripts/books_fetch_ids.py`
-
-Interactive lookup of goodreads ids for the books in `books_read.yaml` that
-have none yet: searches goodreads by the english title, scores the hits,
-verifies a confirmed hit against the book page and writes the id (and the
-exact page title, which `check_books` insists on). Caches page lookups in
-`shelve/`, the same caches `check_books` reads.
 
 ### `scripts/organizations_geocode.py`
 

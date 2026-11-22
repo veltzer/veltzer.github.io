@@ -1,6 +1,6 @@
 {# A page whose whole body is the data collection app (static/data-collection-app.js).
 
-   Used by the media section (/media/: books, series, films...) and by the
+   Used by the media section (/media/: series, films...) and by the
    teaching data page under training (/training/data/: the clients I
    taught at and the training companies I taught for). Both run the same app; each
    page names the plugins it shows in its front matter, so the markup, styles
@@ -174,7 +174,6 @@ window.collectionBasePath = '/';
 // a hash of its content: new HTML is never paired with a cached old plugin,
 // and the build plan rebuilds this page when a plugin changes.
 window.collectionPluginRegistry = {
-'books': {{ get_url(path='plugin-books.js') | json_encode | safe }},
 'companies': {{ get_url(path='plugin-companies.js') | json_encode | safe }},
 'providers': {{ get_url(path='plugin-companies.js') | json_encode | safe }},
 'consulting': {{ get_url(path='plugin-companies.js') | json_encode | safe }},

@@ -26,7 +26,6 @@ from pathlib import Path
 import yaml
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-SCRIPTS = REPO_ROOT / "scripts"
 YAML_DIR = REPO_ROOT / "data" / "yaml"
 DEST = REPO_ROOT / "static" / "data"
 
@@ -37,10 +36,6 @@ PLAIN_YAML = [
     "video_features.yaml",
     "video_series.yaml",
 ]
-
-# Files that need a source check but are processed rather than copied directly.
-PROCESSED_YAML = ["books_read.yaml"]
-
 
 def die(message):
     print(f"ERROR: {message}", file=sys.stderr)
@@ -55,7 +50,7 @@ def report(path, what):
 
 
 def validate_sources():
-    for name in PLAIN_YAML + PROCESSED_YAML:
+    for name in PLAIN_YAML:
         if not (YAML_DIR / name).is_file():
             die(f"Missing source file {YAML_DIR / name}")
 
@@ -63,15 +58,6 @@ def validate_sources():
 def copy_plain_yaml():
     for name in PLAIN_YAML:
         shutil.copyfile(YAML_DIR / name, DEST / name)
-
-
-def import_books():
-    # Flatten the nested books_read.yaml (names/authors per language, readings)
-    # into the one-item-per-book shape the media page searches and filters on.
-    subprocess.run(
-        [str(SCRIPTS / "import_books.py"), str(YAML_DIR / "books_read.yaml"), str(DEST / "books.yaml")],
-        check=True,
-    )
 
 
 def convert_yaml_to_json():
@@ -100,7 +86,6 @@ def gzip_data_files():
 def main():
     validate_sources()
     copy_plain_yaml()
-    import_books()
     convert_yaml_to_json()
     gzip_data_files()
 

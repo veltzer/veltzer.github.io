@@ -507,16 +507,15 @@ Private data types: the files in `data/yaml/` that no page publishes.
 - `political_rallies.yaml`
 - `study_sites.yaml`
 - `text_articles.yaml`
-- `text_books.yaml`
 - `trips.yaml`
 - `video_courses.yaml`
 
-Published: `books_read.yaml`,
-`video_features.yaml` and `video_series.yaml` on the media
+Published: `video_features.yaml` and `video_series.yaml` on the media
 page; `organizations.yaml` and `certifications.yaml` on the training,
 consulting and education pages; `profiles.yaml` in the profile block. The
 YouTube videos (`video_youtube.yaml` and the watch history), the podcasts
-(`podcasts.yaml`) and the audio courses (`audio_courses.yaml`) live in My
+(`podcasts.yaml`), the audio courses (`audio_courses.yaml`) and the books
+read (`books_read.yaml`, with `text_books.yaml`'s ratings) live in My
 World (myworld.stream) now, as the Audible library does. Publishing a private file is a decision to record
 here, not a side effect of adding a plugin.
 

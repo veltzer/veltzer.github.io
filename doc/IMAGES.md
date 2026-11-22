@@ -9,7 +9,6 @@ verbatim to `/images/` in the built site.
 |---|---|---|
 | Movies | `movie-{imdb_id}.jpg` | TMDB CDN (by IMDB ID) |
 | TV Series | `series-{imdb_id}.jpg` | TMDB CDN (by IMDB ID) |
-| Books | `book-{cover}.jpg` (`simania-<id>` or `goodreads-<id>`), `book-no-cover.jpg` placeholder | `og:image` of the goodreads/simania page |
 | Museums | `museum-{internal_id}.jpg` | DuckDuckGo search |
 
 ## Adding Images for New Entries
@@ -25,7 +24,7 @@ verbatim to `/images/` in the built site.
 Card images sit in a fixed 2:1 landscape box (the `<img>` markup is built in
 `static/data-collection-app.js`), so card heights are consistent regardless of the
 source dimensions. Landscape sources are cropped with `object-cover`; the
-books, movies and series plugins declare `imageFit: 'contain'` so their
+movies and series plugins declare `imageFit: 'contain'` so their
 portrait covers are shown whole over a blurred backdrop instead (see
 `doc/PLUGIN_GUIDE.md`).
 

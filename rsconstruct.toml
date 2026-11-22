@@ -129,7 +129,6 @@ src_dirs = ["tests"]
 # Everything the tests import or read, so an edit to any of it re-runs the
 # suite on a warm cache.
 dep_inputs = [
-    "scripts/import_books.py",
     "scripts/import_certifications.py",
     "scripts/import_companies.py",
     "scripts/import_teaching.py",
@@ -141,7 +140,6 @@ dep_inputs = [
     "static/favicon.svg",
     # test_people.py reads every data file's with: names.
     "data/yaml/books_loans.yaml",
-    "data/yaml/books_read.yaml",
     "data/yaml/certifications.yaml",
     "data/yaml/concerts.yaml",
     "data/yaml/courses.yaml",
@@ -155,7 +153,6 @@ dep_inputs = [
     "data/yaml/profiles.yaml",
     "data/yaml/study_sites.yaml",
     "data/yaml/text_articles.yaml",
-    "data/yaml/text_books.yaml",
     "data/yaml/trips.yaml",
     "data/yaml/video_courses.yaml",
     "data/yaml/video_features.yaml",
@@ -168,8 +165,8 @@ dep_inputs = [
 # data/yaml is the source of truth for the media tracker and the profile block
 # (it used to live in the private ../data repo). The four checks it had there
 # came with it: lint, schema validation ($schema in each file), a JSON
-# conversion that proves every file parses, and pydatacheck's cross-checks
-# against imdb / goodreads / simania, which read their caches from shelve/.
+# conversion that proves every file parses, and pydatacheck's cross-check
+# against imdb, which reads its cache from shelve/.
 [processor.checker.iyamllint]
 src_dirs = [".github", "data/yaml"]
 
@@ -208,8 +205,6 @@ dep_inputs = ["shelve/wikidata_imdb.json", "data/rotten_tomatoes_manual.json", "
 command = "scripts/check_images.py"
 inputs = [
     "scripts/check_images.py",
-    "scripts/import_books.py",
-    "data/yaml/books_read.yaml",
     "data/yaml/concerts.yaml",
     "data/yaml/museums.yaml",
     "data/yaml/video_features.yaml",
@@ -234,10 +229,6 @@ inputs = ["scripts/export_posts_for_ai.py"]
 input_globs = ["content/blog/*.md"]
 output_files = ["out/export_posts_for_ai/ok"]
 
-[processor.checker.script.check_books]
-src_files = ["data/yaml/books_read.yaml"]
-command = "pydatacheck"
-args = ["check_books"]
 [processor.checker.taplo]
 src_files = ["rssite.toml", "rsconstruct.toml", ".rumdl.toml", ".rumdl.content.toml", "pyproject.toml", "data/identity.toml", "i18n/en.toml", "i18n/he.toml", "i18n/ru.toml"]
 

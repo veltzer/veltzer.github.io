@@ -25,8 +25,8 @@ The chess game viewer was removed on 2026-11-20: the games are in the myworld ap
   actionlint, xmllint, a JSON lint of the committed `.json` files, an encoding check, a duplicate-image check, an aspell
   spellcheck of the blog in both languages (`scripts/spellcheck_{en,he}.sh` against
   the word lists in `.aspell.{en,he}.txt`), and over `data/yaml/` a schema check
-  (`iyamlschema`), a parse check (`yaml2json`) and pydatacheck's `check_videos` /
-  `check_books` cross-checks against imdb, goodreads and simania, plus a `wikidata_ids` check that every
+  (`iyamlschema`), a parse check (`yaml2json`) and pydatacheck's `check_videos`
+  cross-check against imdb, plus a `wikidata_ids` check that every
   entry's (required) `wikidata_id` in the video yaml is the Wikidata item of its `imdb_id` and every entry's (required) `rotten_tomatoes_id`
   the Rotten Tomatoes path on that item, or the hand-verified one in `data/rotten_tomatoes_manual.json`
   when Wikidata has none (`null` there and in the yaml = Rotten Tomatoes has no page; offline, against `shelve/wikidata_imdb.json`)
@@ -54,13 +54,13 @@ which records the traps that outlived the migration.
   how rssite pairs a post with its translation; nothing else is needed
     - `content/<page>/_index.{en,he}.md` — the standalone nav pages (about, media, calendar, …)
 - `data/yaml/` — the source of truth for the media tracker (courses,
-  books, video features and series) and for the profile block
+  video features and series) and for the profile block
   (`profiles.yaml`), plus the private lists that no page publishes (concerts,
   museums, cv, trips, lectures, …; the full list is in `doc/DECISIONS.md`). Every file names its schema in `$schema`, which the
   build validates against `veltzer.github.io/web-schemas`. This directory came out of
   the private `../data` repo in 2026-09. The YouTube videos (the reviewed
-  ones and the watch history), the Audible library, the podcasts and the
-  audio courses moved on to My World (myworld.stream) in 2026-11
+  ones and the watch history), the Audible library, the podcasts, the
+  audio courses and the books read moved on to My World (myworld.stream) in 2026-11
 - `data/logos/` — one SVG per organization in `organizations.yaml` (which refers to
   them by paths relative to `data/`), linted by xmllint. The companies tab of the media
   page is built from these at build time: the `companies` step of `build_site.py`
@@ -69,8 +69,8 @@ which records the traps that outlived the migration.
   The static map image on each company card (`static/images/map-<lat>_<lon>.jpg`,
   one per distinct `geo` point) *is* committed: `scripts/organizations_fetch_maps.py`
   renders it from OpenStreetMap tiles, and the build fails when one is missing
-- `shelve/` — the imdb / goodreads / simania lookup caches that pydatacheck's
-  `check_videos` and `check_books` read (committed, so CI never hits the network),
+- `shelve/` — the imdb lookup cache that pydatacheck's
+  `check_videos` reads (committed, so CI never hits the network),
   plus the Nominatim geocoding cache `organizations_geocode.py` reads and writes
 - `templates/` — Tera templates (`base.html`, `page.html`, `blog.html`, taxonomy pages)
 - `sass/style.scss` — compiled to `/style.css` by rssite
@@ -90,7 +90,7 @@ which records the traps that outlived the migration.
   `npx tailwindcss` by hand and its output is committed, so the build needs no node),
   `make_og_images.py` (the two site-wide share cards, drawn by hand, committed), `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
   the sibling teaching repos), image fetchers, data importers, the `data/yaml/`
-  maintenance scripts (`books_fetch_ids.py`, `videos_fetch_wikidata.py` (fills `wikidata_id` and `rotten_tomatoes_id` from each `imdb_id`), `organizations_geocode.py`,
+  maintenance scripts (`videos_fetch_wikidata.py` (fills `wikidata_id` and `rotten_tomatoes_id` from each `imdb_id`), `organizations_geocode.py`,
   `organizations_pick_geo.py`, `organizations_fetch_maps.py` — all run from the
   repo root),
   `serve.py`, `make_logo.py` (the logo and the favicon/touch icons drawn from it), `make_word_vectors.py` (the blog search's word vectors), `export_posts_for_ai.py` (mirrors the posts to `~/insync/for_ai/blog` for AI agents
