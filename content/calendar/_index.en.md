@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         // Event colours come from the theme rather than being hardcoded: read
-        // the tokens off <html> so the calendar matches whatever theme is
+        // the tokens off the html element so the calendar matches whatever theme is
         // selected. FullCalendar wants concrete colours here, not var().
         eventColor: themeToken('--accent', '#1a73e8'),
         eventTextColor: themeToken('--bg', '#ffffff'),
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     calendar.render();
 
-    // The theme switcher flips data-theme on <html>; the --fc-* variables in
+    // The theme switcher flips data-theme on the html element; the --fc-* variables in
     // the stylesheet follow automatically, but the event colours were passed to
     // FullCalendar as concrete values, so they need setting again.
     new MutationObserver(function () {
