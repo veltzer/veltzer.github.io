@@ -346,23 +346,6 @@ h3 { font-size: 1.1rem; margin: 1.8rem 0 0.5rem; }
   padding: 0.75rem 1rem;
 }
 
-// The per-post language switcher (templates/page.html). The site-level one
-// is the .lang-menu dropdown in the header.
-.lang-switcher { display: flex; gap: 0.4rem; margin-top: 0.75rem; }
-.lang {
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
-  padding: 0.15rem 0.5rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xs);
-  text-decoration: none;
-  color: var(--text-secondary);
-  transition: background var(--transition), color var(--transition);
-}
-.lang:hover { background: var(--bg-hover); color: var(--accent); }
-.lang.current { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-
 // Blog index: post list plus the archive-stats sidebar. Wider than
 // .site-main's reading column because it carries two columns; the post column
 // is still capped at the reading measure so the prose width does not change.
@@ -750,7 +733,6 @@ th { background: var(--bg-surface); }
     .site-header,
     .site-footer,
     .skip-link,
-    .lang-switcher,
     .toc,
     .heading-anchor,
     .related-posts,

@@ -25,24 +25,6 @@
       </span>
       {%- endif %}
     </p>
-
-    {#- The language switcher, from `translations`: this post in every
-        language it exists in, in configured order. Adding a language means
-        adding a file -- no template change and no hand-maintained
-        cross-links between posts. Hidden when a post has no translation; in
-        practice every post has both languages (require_translations in
-        content/blog/_index.*.md fails the build otherwise). -#}
-    {%- if translations | length > 1 %}
-    <nav class="lang-switcher" aria-label="{{ trans(key='label_translations') }}">
-      {%- for translation in translations %}
-      {%- if translation.current %}
-      <span class="lang current" aria-current="page">{{ translation.lang }}</span>
-      {%- else %}
-      <a class="lang" href="{{ translation.permalink }}" hreflang="{{ translation.lang }}">{{ translation.lang }}</a>
-      {%- endif %}
-      {%- endfor %}
-    </nav>
-    {%- endif %}
   </header>
 
   {#- A table of contents for the long essays only: six sections or more,
