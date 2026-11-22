@@ -176,6 +176,5 @@ nav = [
         { key = "nav_slides", path = "slides/" },
         { key = "nav_animations", path = "animations/" },
     ] },
-    { key = "nav_consulting", path = "consulting/" },
     { key = "nav_about", path = "about/" },
 ]

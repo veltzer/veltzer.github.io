@@ -2,7 +2,10 @@
 # next line is neccessary for vscode which does not read the $schema attribute
 # yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/organizations.json
 # Organizations I taught at, taught for (training companies that hired me to teach: function training-provider),
-# consulted for, studied at or was certified by.
+# studied at or was certified by.
+# The consulting (function consulting) was removed on 2026-11-22: the companies I consulted for live in My World
+# (myworld.stream) now, with the relation Consulting. The ones that were only that (ids 13, 42-44, 48, 55, 65, 72)
+# left this file; the rest stay for what else they are.
 # The publishers of the media I consumed (function publisher: ids 59, 82, 102, 108-111, 113) were removed on 2026-11-22:
 # they live in My World (myworld.stream) now, as organizations of type Publisher.
 # id 105 (AWS Solutions Architect) was merged into id 100 (Amazon Web Services) on 2026-11-08: an organization
@@ -77,7 +80,6 @@ items:
   remark: Israel Cyprus Champagne/US Moscow India London Malaysia Dublin
   functions:
   - teaching
-  - consulting
   logo: logos/amdocs.svg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/1/18/Amdocs_Logo.svg
@@ -150,7 +152,6 @@ items:
   slug: answers
   functions:
   - teaching
-  - consulting
   logo: logos/answers.svg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/d/d6/Answers_dot_com_logo.svg
@@ -290,7 +291,6 @@ items:
   slug: cadence
   functions:
   - teaching
-  - consulting
   logo: logos/cadence.svg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/4/48/Cadence-Logo.svg
@@ -462,39 +462,6 @@ items:
   sources:
   - https://en.globes.co.il/en/article-ribbon-completes-463m-eci-acquisition-1001320578
   - https://ribboncommunications.com/company/media-center/press-releases/ribbon-communications-inc-merge-eci-telecom-group-ltd
-- id: 13
-  name: Wellsphere
-  slug: wellsphere
-  functions:
-  - consulting
-  logo: logos/wellsphere.svg
-  logo_kind: traced from original bitmap (no vector logo found online)
-  old_url: http://www.wellsphere.com
-  status: acquired
-  what_happened: Acquired by The HealthCentral Network in January 2009; HealthCentral was in turn bought by Remedy Health Media in 2011 (renamed HealthCentral Corporation in 2023) and the Wellsphere brand
-    was retired.
-  website: https://www.healthcentral.com
-  location: Arlington, Virginia, USA (HealthCentral Corporation)
-  location_geo:
-    place: Arlington, Virginia, USA
-    lat: 38.87693
-    lon: -77.08931
-  former_website: http://www.wellsphere.com (dead; domain no longer resolves; archived at web.archive.org)
-  former_location: San Mateo, California, USA
-  former_location_geo:
-    place: San Mateo, California, USA
-    lat: 37.563
-    lon: -122.32533
-  address: 1730 S. El Camino Real, Suite 600, San Mateo, California, USA
-  address_source: https://www.cbinsights.com/company/wellsphere
-  geo:
-    from: former_location
-    place: San Mateo, California, USA
-    lat: 37.563
-    lon: -122.32533
-  sources:
-  - https://www.cbsnews.com/news/healthcentral-buys-acquires-tech-centric-health-portal-wellsphere/
-  - https://en.wikipedia.org/wiki/HealthCentral
 - id: 14
   name: Hinbit
   slug: hinbit
@@ -640,7 +607,6 @@ items:
   from_date: '2004-11-20'
   functions:
   - training-provider
-  - consulting
   logo: logos/interbit.svg
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.interbit.co.il
@@ -1204,7 +1170,6 @@ items:
   slug: rafael
   functions:
   - teaching
-  - consulting
   logo: logos/rafael.svg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/a/a1/Rafael_Advanced_Defense_Systems_Logo.svg
@@ -1508,122 +1473,11 @@ items:
   sources:
   - https://en.wikipedia.org/wiki/Acquisition_of_Sun_Microsystems_by_Oracle_Corporation
   - https://www.oracle.com/il-en/corporate/contact/field-offices/
-- id: 42
-  name: Xacct
-  slug: xacct
-  remark: Before aquisition by Amdocs
-  functions:
-  - consulting
-  logo: logos/xacct.svg
-  logo_kind: traced from original bitmap (no vector logo found online)
-  old_url: http://www.xacct.biz
-  status: acquired
-  what_happened: Acquired by Amdocs in February 2004 for about US$29.5M.
-  website: https://www.amdocs.com
-  location: Chesterfield, Missouri, USA
-  location_geo:
-    place: Chesterfield, Missouri, USA
-    lat: 38.65818
-    lon: -90.56806
-  israel_office: Ra'anana, Israel (Amdocs)
-  israel_office_geo:
-    place: Ra'anana, Israel
-    lat: 32.18602
-    lon: 34.86784
-  former_website: http://www.xacct.biz (dead, does not resolve)
-  former_location: Santa Clara, California, USA (R&D in Tel Aviv, Israel)
-  former_location_geo:
-    place: Santa Clara, California, USA
-    lat: 37.35411
-    lon: -121.95517
-  address: 1 Dolev St., Ra'anana, Israel
-  address_source: https://www.amdocs.com/careers/locations
-  geo:
-    from: israel_office
-    place: Ra'anana, Israel
-    lat: 32.18602
-    lon: 34.86784
-  sources:
-  - https://www.lightreading.com/cable-technology/amdocs-buys-xacct-at-last-
-  - https://mergr.com/transaction/amdocs-acquires-xacct-technologies
-- id: 43
-  name: Regard
-  slug: regard
-  remark: Company no longer active; was a subsidiary of Mer Systems (Mer Group), Holon, Israel (owner's note, 2026-09-26)
-  functions:
-  - consulting
-  logo: logos/regard.svg
-  logo_kind: traced from original bitmap (no vector logo found online)
-  old_url: http://www.moit.gov.il/CmsTamat/CompanyProfile.aspx?CompanyType=1&Companyid=69391
-  status: defunct
-  what_happened: Small Israeli software company, a subsidiary of Mer Systems (Mer Group, Holon), no longer active (owner's note); no public record found and its only known web presence, a Ministry of Industry
-    (moit.gov.il) company-profile page, was already returning 404 in the earliest Wayback snapshot (2013).
-  israel_office: Holon, Israel (via the parent Mer Systems)
-  israel_office_geo:
-    place: Holon, Israel
-    lat: 32.01931
-    lon: 34.78041
-  former_website: http://www.moit.gov.il/CmsTamat/CompanyProfile.aspx?CompanyType=1&Companyid=69391 (dead; Wayback has only a 2013 404 snapshot)
-  former_location: Holon, Israel (the parent Mer Systems' home; the Mer Group corporate office is at 5 Hatzoref St., Holon)
-  former_location_geo:
-    place: Holon, Israel
-    lat: 32.01931
-    lon: 34.78041
-  address: 5 HaTzoref St., Holon, Israel (Mer Group, its parent)
-  address_source: https://craft.co/mer-group-company
-  geo:
-    from: israel_office
-    place: Holon, Israel
-    lat: 32.01931
-    lon: 34.78041
-  sources:
-  - https://web.archive.org/web/2013/http://www.moit.gov.il/CmsTamat/CompanyProfile.aspx?CompanyType=1&Companyid=69391
-  - https://www.zoominfo.com/pic/mer-group/111477519
-  - https://en.wikipedia.org/wiki/Mer_Group
-- id: 44
-  name: Telmap
-  slug: telmap
-  remark: Before they were bought by Intel
-  functions:
-  - consulting
-  logo: logos/telmap.svg
-  logo_kind: traced from original bitmap (no vector logo found online)
-  old_url: http://global.telmap.com
-  status: acquired
-  what_happened: Acquired by Intel in October 2011 (reported $300M); Intel shut Telmap down in July 2013, laying off its ~150 Israeli staff.
-  website: https://www.intel.com
-  location: Santa Clara, California, USA
-  location_geo:
-    place: Santa Clara, California, USA
-    lat: 37.35411
-    lon: -121.95517
-  israel_office: Herzliya, Israel (closed 2013)
-  israel_office_geo:
-    place: Herzliya, Israel
-    lat: 32.16768
-    lon: 34.83083
-  former_website: http://global.telmap.com (dead; now a hosting-panel error page, Wayback shows 301s since 2025)
-  former_location: Herzliya, Israel
-  former_location_geo:
-    place: Herzliya, Israel
-    lat: 32.16768
-    lon: 34.83083
-  address: 11 Bareket St., Herzliya, Israel
-  address_source: https://www.cbinsights.com/company/telmap1
-  geo:
-    from: israel_office
-    place: Herzliya, Israel
-    lat: 32.16768
-    lon: 34.83083
-  sources:
-  - https://en.globes.co.il/en/article-1000686907
-  - https://en.globes.co.il/en/article-1000865885
 - id: 45
   name: Intel
   slug: intel
   functions:
   - teaching
-  - consulting
   logo: logos/intel.svg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/0/0e/Intel_logo_%282020%2C_light_blue%29.svg
@@ -1697,7 +1551,6 @@ items:
   slug: sap
   functions:
   - teaching
-  - consulting
   logo: logos/sap.svg
   logo_kind: official vector
   logo_source: https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg
@@ -1726,41 +1579,6 @@ items:
   sources:
   - https://www.sap.com/germany/about/company/office-locations/israel.html
   - https://www.timesofisrael.com/sap-sets-up-new-67-million-hq-in-raanana/
-- id: 48
-  name: Yahoo
-  slug: yahoo
-  remark: Work on 9.yahoo.com
-  functions:
-  - consulting
-  logo: logos/yahoo.svg
-  logo_kind: official vector
-  logo_source: https://upload.wikimedia.org/wikipedia/commons/3/3a/Yahoo%21_%282019%29.svg
-  logo_license: Public domain (text logo, Commons)
-  logo_note: Current Yahoo logo (2019 redesign); verified.
-  old_url: http://www.yahoo.com
-  status: active
-  what_happened: Bought by Verizon in 2017, then sold to Apollo Global Management in 2021; still operates as Yahoo Inc. with R&D centers in Israel.
-  website: https://www.yahoo.com
-  location: New York, New York, USA
-  location_geo:
-    place: New York, New York, USA
-    lat: 40.71273
-    lon: -74.00602
-  israel_office: Haifa (research) and Tel Aviv, Israel
-  israel_office_geo:
-    place: Haifa, Israel
-    lat: 32.81912
-    lon: 34.99839
-  address: MATAM High-Tech Park, Haifa, Israel
-  address_source: https://en.globes.co.il/en/article-1000308378
-  geo:
-    from: israel_office
-    place: Haifa, Israel
-    lat: 32.81912
-    lon: 34.99839
-  sources:
-  - https://en.wikipedia.org/wiki/Yahoo_Inc._(2017%E2%80%93present)
-  - https://www.timesofisrael.com/yahoo-to-expand-israel-based-rd-centers-under-new-local-leadership/
 - id: 49
   name: Cloverleaf
   slug: cloverleaf
@@ -1979,47 +1797,6 @@ items:
   sources:
   - https://www.final.co.il/
   - https://www.crunchbase.com/organization/final-israel
-- id: 55
-  name: Finjan
-  slug: finjan
-  functions:
-  - consulting
-  logo: logos/finjan.svg
-  logo_kind: official vector
-  logo_source: https://content.equisolve.net/_0d60e0c812cac097933e2e32620609ff/finjan/files/theme/images/logo-blue.svg
-  logo_license: company brand asset (finjan.com site logo)
-  logo_note: Current Finjan Holdings 'finjan Cybersecurity' logo; enwiki also has File:Finjan_cybersecurity_logo.svg (same mark) but Wikimedia originals were rate-limited (HTTP 429).
-  old_url: http://www.finjan.com
-  status: acquired
-  what_happened: Product business and Netanya development center sold to M86 Security in November 2009 (M86 later absorbed by Trustwave); the remaining patent-licensing entity Finjan Holdings was taken
-    private by Fortress Investment Group in July 2020.
-  website: https://www.finjan.com
-  location: East Palo Alto, California, USA
-  location_geo:
-    place: East Palo Alto, California, USA
-    lat: 37.46883
-    lon: -122.14108
-  israel_office: Netanya, Israel (R&D, until the 2009 M86 sale)
-  israel_office_geo:
-    place: Netanya, Israel
-    lat: 32.32862
-    lon: 34.85662
-  former_website: http://www.finjan.com (still live, now Finjan Holdings LLC patent-licensing site)
-  former_location: Netanya, Israel (R&D) / San Jose, California, USA
-  former_location_geo:
-    place: Netanya, Israel
-    lat: 32.32862
-    lon: 34.85662
-  address: 1 Hamachshev St., New Industrial Area, Netanya, Israel
-  address_source: https://ised-isde.canada.ca/cipo/trademark-search/1352281?wbdisable=true
-  geo:
-    from: israel_office
-    place: Netanya, Israel
-    lat: 32.32862
-    lon: 34.85662
-  sources:
-  - https://en.wikipedia.org/wiki/Finjan_Holdings
-  - https://www.globenewswire.com/news-release/2020/07/24/2067294/0/en/Fortress-Affiliates-Complete-Their-Acquisition-of-Finjan.html
 - id: 56
   name: EMC
   slug: emc
@@ -2315,45 +2092,6 @@ items:
   sources:
   - https://en.wikipedia.org/wiki/LivePerson
   - https://www.liveperson.com/company/careers/
-- id: 65
-  name: Sentrigo
-  slug: sentrigo
-  remark: Before they were bought by McAfee
-  functions:
-  - consulting
-  logo: logos/sentrigo.svg
-  logo_kind: traced from original bitmap (no vector logo found online)
-  old_url: http://www.sentrigo.com
-  status: acquired
-  what_happened: Acquired by McAfee (then Intel-owned) in March/April 2011 for a reported $30-40M; the Hedgehog products went into McAfee's enterprise line, which became Trellix in 2022; sentrigo.com is
-    dead.
-  website: https://www.trellix.com/
-  location: San Jose, California, USA
-  location_geo:
-    place: San Jose, California, USA
-    lat: 37.33617
-    lon: -121.89059
-  israel_office: Kfar Saba
-  israel_office_geo:
-    place: Kfar Saba, Israel
-    lat: 32.17735
-    lon: 34.90746
-  former_website: http://www.sentrigo.com (dead - resolves to a parking IP, serves nothing)
-  former_location: Santa Clara, California, USA (US HQ); Kfar Saba, Israel (R&D)
-  former_location_geo:
-    place: Santa Clara, California, USA
-    lat: 37.35411
-    lon: -121.95517
-  address: 20 Hata'as St., Kfar Saba, Israel
-  address_source: http://web.archive.org/web/20070702175933/http://www.sentrigo.com:80/contact_us.htm
-  geo:
-    from: israel_office
-    place: Kfar Saba, Israel
-    lat: 32.17735
-    lon: 34.90746
-  sources:
-  - https://en.wikipedia.org/wiki/Sentrigo
-  - https://en.globes.co.il/en/article-1000632756
 - id: 66
   name: Giga Spaces
   slug: gigaspaces
@@ -2552,39 +2290,6 @@ items:
   sources:
   - https://en.wikipedia.org/wiki/Radware
   - https://craft.co/radware/locations
-- id: 72
-  name: Bituach Yashir
-  slug: bituach-yashir
-  functions:
-  - consulting
-  logo: logos/bituach-yashir.svg
-  logo_kind: official vector
-  logo_source: https://www.555.co.il/sites/default/files/logo1.svg
-  logo_license: company brand asset
-  logo_note: Current site header logo (four dots mark + 'ביטוח ישיר / IDI חברה לביטוח בע"מ').
-  old_url: http://www.555.co.il
-  status: active
-  website: https://www.555.co.il
-  location: Petah Tikva, Israel
-  location_geo:
-    place: Petah Tikva, Israel
-    lat: 32.08776
-    lon: 34.886
-  israel_office: Petah Tikva, Israel (35 Efal St.)
-  israel_office_geo:
-    place: Petah Tikva, Israel
-    lat: 32.08776
-    lon: 34.886
-  address: 35 Efal St., Petah Tikva, Israel
-  address_source: https://www.555.co.il/clients/contact_us.html
-  geo:
-    from: israel_office
-    place: Petah Tikva, Israel
-    lat: 32.08776
-    lon: 34.886
-  sources:
-  - https://www.555.co.il/clients/contact_us.html
-  - https://en.globes.co.il/en/article-idi-becomes-israels-most-valuable-insurance-co-1001108919
 - id: 73
   name: mPrest
   slug: mprest
@@ -2624,7 +2329,6 @@ items:
   slug: william-hill
   functions:
   - teaching
-  - consulting
   logo: logos/william-hill.svg
   logo_kind: official vector
   logo_source: https://www.williamhill.com/
@@ -2929,7 +2633,6 @@ items:
   remark: In Limassol, Cyprus
   functions:
   - teaching
-  - consulting
   logo: logos/utx.svg
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.u-tx.com
@@ -3039,7 +2742,6 @@ items:
   slug: earlysense
   functions:
   - teaching
-  - consulting
   logo: logos/earlysense.svg
   logo_kind: official vector
   logo_source: https://web.archive.org/web/2020id_/https://www.earlysense.com/wp-content/themes/earlysense/assets/images/logo-earlysense.svg
@@ -3288,7 +2990,6 @@ items:
   slug: checkpoint
   functions:
   - teaching
-  - consulting
   logo: logos/checkpoint.svg
   logo_kind: official vector
   logo_source: https://en.wikipedia.org/wiki/Special:FilePath/Check-Point-2024-logo-color.svg
@@ -3432,7 +3133,6 @@ items:
   from_date: '2013-06-01'
   functions:
   - training-provider
-  - consulting
   logo: logos/johnbryce.svg
   logo_kind: traced from original bitmap (no vector logo found online)
   old_url: http://www.johnbryce.co.il

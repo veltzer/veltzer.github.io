@@ -239,17 +239,6 @@ window.collectionPlugins['providers'] = Object.assign({}, window.collectionPlugi
     subtitle: t('companies_providers_subtitle')
 });
 
-// The companies I consulted for, on their own page (/consulting/):
-// the same cards over the organizations whose functions include consulting.
-// Unlike the two teaching tabs this one may share organizations with them,
-// since I taught at some of the companies I consulted for.
-window.collectionPlugins['consulting'] = Object.assign({}, window.collectionPlugins['companies'], {
-    file: 'data/consulting.json.gz',
-    navTitle: t('companies_consulting_nav_title'),
-    title: t('companies_consulting_title'),
-    subtitle: t('companies_consulting_subtitle')
-});
-
 // The schools and universities I studied at, and the companies that certified
 // me, two of the tabs of the education page (/training/education/). Its third
 // tab is the certifications themselves, one card per certification

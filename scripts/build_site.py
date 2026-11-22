@@ -10,7 +10,7 @@ step declaring exactly what it reads and writes in rsconstruct.toml so
 rsconstruct can order, cache and restore it:
 
   companies      _site/data/companies.json.gz, training_providers.json.gz,
-                 consulting.json.gz, education.json.gz, certifiers.json.gz,
+                 education.json.gz, certifiers.json.gz,
                  certifications.json.gz and _site/logos/
 
 companies is an explicit processor: rsconstruct appends `--inputs ...
@@ -51,14 +51,13 @@ def die(message):
     sys.exit(1)
 
 
-def write_companies(companies_file, providers_file, consulting_file, education_file, certifiers_file,
+def write_companies(companies_file, providers_file, education_file, certifiers_file,
                     certifications_file, logos_dir):
     """Build the organization tabs' data and logos straight into the output.
 
     One JSON per tab, from the same YAML: on the teaching data page the
     companies I taught at (function teaching) and the training companies I
-    taught for (function training-provider), on the consulting data page
-    the companies I consulted for (function consulting), and on
+    taught for (function training-provider), and on
     the education page the schools I studied at (function education) and the
     companies that certified me (function certification). The education
     page's third tab is the certifications I hold, one per certification
@@ -75,7 +74,6 @@ def write_companies(companies_file, providers_file, consulting_file, education_f
     plugin can use them as they are.
     """
     for output_file, function in ((companies_file, "teaching"), (providers_file, "training-provider"),
-                                  (consulting_file, "consulting"),
                                   (education_file, "education"), (certifiers_file, "certification")):
         output_file.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run(
@@ -103,7 +101,7 @@ def write_companies(companies_file, providers_file, consulting_file, education_f
 
 # The steps, in the order the bare command lists them, each with its line.
 STEPS = {
-    "companies": "write _site/data/companies.json.gz, training_providers.json.gz, consulting.json.gz,"
+    "companies": "write _site/data/companies.json.gz, training_providers.json.gz,"
                  " education.json.gz, certifiers.json.gz, certifications.json.gz and _site/logos/",
 }
 

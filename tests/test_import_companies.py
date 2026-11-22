@@ -17,7 +17,7 @@ def organization(**overrides):
         "id": 2,
         "name": "Amdocs",
         "slug": "amdocs",
-        "functions": ["teaching", "consulting"],
+        "functions": ["teaching"],
         "logo": "logos/amdocs.svg",
         "logo_kind": "official vector",
         "logo_source": "https://upload.wikimedia.org/wikipedia/commons/1/18/Amdocs_Logo.svg",
@@ -43,8 +43,8 @@ class TestSelection:
         out = import_companies.convert({"items": [organization()]})
         assert [item["name"] for item in out["items"]] == ["Amdocs"]
 
-    def test_consulting_only_organizations_are_dropped(self):
-        out = import_companies.convert({"items": [organization(functions=["consulting"])]})
+    def test_organizations_not_taught_at_are_dropped(self):
+        out = import_companies.convert({"items": [organization(functions=["education"])]})
         assert out["items"] == []
 
     def test_missing_functions_means_not_taught(self):
@@ -65,11 +65,6 @@ class TestSelection:
         data = {"items": [organization(), organization(id=3, name="Both", functions=["teaching", "training-provider"])]}
         assert import_companies.overlapping(data) == ["Both"]
 
-    def test_consulting_tab_overlaps_teaching(self):
-        data = {"items": [organization(), organization(id=3, name="Advised", functions=["consulting"])]}
-        assert [item["name"] for item in import_companies.convert(data, "consulting")["items"]] == ["Amdocs", "Advised"]
-        assert import_companies.overlapping(data) == []
-
     def test_education_and_certification_tabs(self):
         data = {"items": [organization(), organization(id=4, name="Rimon", functions=["education"]),
                           organization(id=5, name="MySQL", functions=["certification"])]}
@@ -78,10 +73,11 @@ class TestSelection:
 
     def test_every_tab_function_is_shown(self):
         assert import_companies.shown(organization(functions=["training-provider"]))
-        assert import_companies.shown(organization(functions=["consulting"]))
         assert import_companies.shown(organization(functions=["certification"]))
         assert import_companies.shown(organization(functions=["education"]))
         assert not import_companies.shown(organization(functions=[]))
+        # the consulting went to My World (myworld.stream): it has no tab
+        assert not import_companies.shown(organization(functions=["consulting"]))
 
 
 class TestFields:
@@ -89,7 +85,7 @@ class TestFields:
         out = import_companies.convert_item(organization())
         assert out["name"] == "Amdocs"
         assert out["logo"] == "logos/amdocs.svg"
-        assert out["functions"] == ["teaching", "consulting"]
+        assert out["functions"] == ["teaching"]
         assert out["status"] == "active"
         assert out["website"] == "https://www.amdocs.com"
         assert out["israel_office"].startswith("Ra'anana")
@@ -185,7 +181,7 @@ class TestMainFailurePaths:
         assert not target.exists()
 
     def test_no_organization_with_the_function(self, tmp_path, monkeypatch, capsys):
-        item = organization(functions=["consulting"])
+        item = organization()
         code, err, target = self.run_main(tmp_path, monkeypatch, capsys, {"items": [item]}, "--function", "education")
         assert code == 1
         assert "'education'" in err

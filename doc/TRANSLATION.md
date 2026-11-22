@@ -10,7 +10,7 @@ chess viewer was removed on 2026-11-20.)
 
 - **Every page.** Every page under `content/` has a Hebrew file
   (`*.he.md` beside each `*.en.md`), and none of the Hebrew files has English
-  body text. That covers the blog posts, training, consulting, education,
+  body text. That covers the blog posts, training, education,
   about and the section pages.
 - **The site's own strings.** Every key in `i18n/en.toml` has a value in
   `i18n/he.toml`; a missing key fails the build. That covers the nav, the

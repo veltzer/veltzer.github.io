@@ -10,12 +10,12 @@ The one build step around rssite, run by `rsconstruct build` as a processor
 `processor.mass_generator.generic.site`: `rssite plan` lists every file a
 build writes with its sources, and each is cached separately.
 
-- `companies` writes the organization tabs' data, seven files in
+- `companies` writes the organization tabs' data, five files in
   `_site/data/`, and copies `data/logos/*.svg` to `_site/logos/`.
   `scripts/import_companies.py`, once per `--function` of
   `organizations.yaml`, writes `companies.json.gz` (taught at),
-  `training_providers.json.gz` (taught for), `consulting.json.gz`
-  (consulted for), `education.json.gz` (studied at) and `certifiers.json.gz` (certified by);
+  `training_providers.json.gz` (taught for),
+  `education.json.gz` (studied at) and `certifiers.json.gz` (certified by);
   `scripts/import_certifications.py` joins `certifications.yaml` with the
   issuers into `certifications.json.gz` (one entry per certification). The
   stanza in `rsconstruct.toml` names all seven outputs; every map image the
@@ -235,7 +235,7 @@ item added without its image fails it, so run the matching `fetch_*.py`.
 ### `scripts/import_companies.py`
 
 Picks the organizations with one `--function` (`teaching`,
-`training-provider`, `consulting`, `education` or
+`training-provider`, `education` or
 `certification`; `TABS` in the script) among their `functions` out of
 `data/yaml/organizations.yaml`, trims each to the fields the companies tab
 shows (name, logo, status, headquarters, Israel office, the one `geo` map

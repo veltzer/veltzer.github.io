@@ -3,14 +3,12 @@
 """Import one tab of organizations from data/yaml/organizations.yaml.
 
 organizations.yaml records every organization I dealt with -- taught at,
-taught for, consulted for, was certified by -- with research notes, sources,
+taught for, studied at, was certified by -- with research notes, sources,
 three geocoded place fields and logo provenance. Each tab of the site's
 organization pages is the organizations with one ``--function`` among their
 ``functions`` (TABS lists them): the teaching data page (/training/data/)
 has ``teaching``, the companies I taught at, and ``training-provider``, the
-training companies I taught for, which exclude each other (EXCLUSIVE); the
-consulting page (/consulting/) has ``consulting``, which an
-organization I also taught at may have too;
+training companies I taught for, which exclude each other (EXCLUSIVE);
 the education page (/training/education/) has ``education``, the schools and
 universities I studied at, and ``certification``, the companies that certified
 me; its third tab, the certifications themselves, is built from
@@ -52,12 +50,11 @@ import yaml
 
 TEACHING = "teaching"
 TRAINING_PROVIDER = "training-provider"
-CONSULTING = "consulting"
 EDUCATION = "education"
 CERTIFICATION = "certification"
 # The functions that get a tab, so a card, an address and a map image (see
 # organizations_fetch_maps.py): every organization with one of them is shown.
-TABS = (TEACHING, TRAINING_PROVIDER, CONSULTING, EDUCATION, CERTIFICATION)
+TABS = (TEACHING, TRAINING_PROVIDER, EDUCATION, CERTIFICATION)
 # Tabs of one page that are different relationships to the same kind of
 # organization, so no organization may be on two of them.
 EXCLUSIVE = (TEACHING, TRAINING_PROVIDER)
