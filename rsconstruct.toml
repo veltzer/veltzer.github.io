@@ -9,7 +9,8 @@ cargo = ["rssite"]
 [processor.checker.oxlint]
 src_dirs = ["static"]
 src_exclude_dirs = ["vendor"]
-args = ["-c", ".oxlintrc.json"]
+args = ["-c", ".oxlintrc.repo.json"]
+dep_inputs = [".oxlintrc.repo.json"]
 # The rendered pages, checked the way `tidy -errors` does (in-process): a
 # stray or unclosed tag, an unknown element, a <style> in the body. It does
 # not know HTML5's content rules (a <main> nested in a <main> passes); the
