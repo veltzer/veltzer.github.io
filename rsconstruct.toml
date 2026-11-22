@@ -117,6 +117,8 @@ dep_inputs = [
     "i18n/ru.toml",
     "shared/shared-themes/fonts/Outfit-Bold.ttf",
     "shared/shared-themes/fonts/Outfit-Light.ttf",
+    # The author's portrait, drawn on every card.
+    "static/images/mark-veltzer.jpg",
 ]
 
 [processor.checker.ruff]

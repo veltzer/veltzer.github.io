@@ -16,7 +16,9 @@ redraws its card and nothing else.
 
 The look matches the site-wide card: the logo and the author's
 name at the top, the title large, the tags under it, veltzer.org and the
-accent band at the bottom. Hebrew is laid out right to left (Pillow needs
+accent band at the bottom. The author's portrait (the drawing on the About
+page) sits in a circle on the far side from the text, so every shared link
+shows a picture. Hebrew is laid out right to left (Pillow needs
 libraqm, which its wheels bundle).
 """
 
@@ -42,7 +44,7 @@ from make_og_images import (
     fonts,
     home_title,
 )
-from PIL import Image, ImageDraw, ImageFont, features
+from PIL import Image, ImageDraw, ImageFont, ImageOps, features
 
 MARGIN = 90
 # The title gets the largest size at which it fits in MAX_LINES lines.
@@ -50,6 +52,13 @@ TITLE_SIZES = (76, 68, 60, 54, 48, 44)
 MAX_LINES = 4
 TITLE_TOP = 190
 TITLE_BOTTOM = 470
+PORTRAIT = Path(__file__).resolve().parent.parent / "static" / "images" / "mark-veltzer.jpg"
+PORTRAIT_SIZE = 300
+PORTRAIT_TOP = 165
+# Space between the title column and the portrait.
+PORTRAIT_GAP = 50
+# The circle is drawn this many times larger and scaled down, for a smooth edge.
+SUPERSAMPLE = 4
 
 
 def front_matter(path):
@@ -96,7 +105,22 @@ def fit_title(draw, title, bold_path, width, direction):
     return font, lines, round(size * 1.18)
 
 
-def card(lang, title, tags):
+def portrait():
+    """The portrait cropped to a circle with a thin accent ring, as RGBA."""
+    size = PORTRAIT_SIZE
+    big = size * SUPERSAMPLE
+    face = ImageOps.fit(Image.open(PORTRAIT).convert("RGB"), (big, big), Image.Resampling.LANCZOS)
+    ring = 3 * SUPERSAMPLE
+    out = Image.new("RGBA", (big, big), (0, 0, 0, 0))
+    disc = ImageDraw.Draw(out)
+    disc.ellipse((0, 0, big - 1, big - 1), fill=ACCENT)
+    mask = Image.new("L", (big, big), 0)
+    ImageDraw.Draw(mask).ellipse((ring, ring, big - 1 - ring, big - 1 - ring), fill=255)
+    out.paste(face, (0, 0), mask)
+    return out.resize((size, size), Image.Resampling.LANCZOS)
+
+
+def card(lang, title, tags, face):
     rtl = lang in RTL
     direction = "rtl" if rtl else "ltr"
     bold_path, light_path = fonts(lang)
@@ -121,7 +145,13 @@ def card(lang, title, tags):
         name_x = edge + mark + 24
     draw.text((name_x, 80), name, font=name_font, fill=TEXT, anchor=anchor, direction=direction)
 
-    font, lines, line_height = fit_title(draw, title, bold_path, WIDTH - 2 * MARGIN, direction)
+    # The portrait on the far side from the text; the title column ends
+    # PORTRAIT_GAP short of it.
+    left = MARGIN if rtl else WIDTH - MARGIN - PORTRAIT_SIZE
+    image.paste(face, (left, PORTRAIT_TOP), face)
+    column = WIDTH - 2 * MARGIN - PORTRAIT_SIZE - PORTRAIT_GAP
+
+    font, lines, line_height = fit_title(draw, title, bold_path, column, direction)
     y = TITLE_TOP
     for line in lines:
         draw.text((edge, y), line, font=font, fill=TEXT, anchor=anchor, direction=direction)
@@ -152,10 +182,13 @@ def main():
     for font in (OUTFIT, OUTFIT_LIGHT, LIBERATION, LIBERATION_LIGHT):
         if not font.is_file():
             die(f"{font} missing")
+    if not PORTRAIT.is_file():
+        die(f"{PORTRAIT} missing")
+    face = portrait()
     for source, target in zip(pairs[0::2], pairs[1::2]):
         meta = front_matter(source)
         tags = meta.get("taxonomies", {}).get("tags", [])
-        image = card(language_of(source), meta["title"], tags)
+        image = card(language_of(source), meta["title"], tags, face)
         Path(target).parent.mkdir(parents=True, exist_ok=True)
         image.save(target, quality=85, optimize=True, progressive=True)
 

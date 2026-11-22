@@ -123,7 +123,7 @@ an edited post rebuilds only the files that list it, and `clean outputs` +
 sitemap and the shared-themes files (`[[publish]]`), and reads the commit the colophon
 names itself (`git` in the templates). The two steps it does not do are the
 companies data, `scripts/build_site.py companies`, and the per-post share
-cards, `scripts/make_post_cards.py` (one 1200x630 `og:image` per post,
+cards, `scripts/make_post_cards.py` (one 1200x630 `og:image` per post, the title beside the author's portrait,
 written to `_site/images/og/<file stem>.jpg`, never committed). See
 `rsconstruct.toml`.
 
