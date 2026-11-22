@@ -155,18 +155,16 @@ dep_inputs = [
     "data/yaml/text_articles.yaml",
     "data/yaml/trips.yaml",
     "data/yaml/video_courses.yaml",
-    "data/yaml/video_features.yaml",
-    "data/yaml/video_series.yaml",
 ]
 [analyzer.markdown]
 
 [analyzer.tera]
 # ─── data ────────────────────────────────────────────────────────────────────
 # data/yaml is the source of truth for the media tracker and the profile block
-# (it used to live in the private ../data repo). The four checks it had there
-# came with it: lint, schema validation ($schema in each file), a JSON
-# conversion that proves every file parses, and pydatacheck's cross-check
-# against imdb, which reads its cache from shelve/.
+# (it used to live in the private ../data repo). Three of the checks it had
+# there came with it: lint, schema validation ($schema in each file) and a
+# JSON conversion that proves every file parses. The films and series, with
+# their imdb and Wikidata checks, live in My World now (myworld.stream).
 [processor.checker.iyamllint]
 src_dirs = [".github", "data/yaml"]
 
@@ -176,27 +174,9 @@ src_dirs = ["data/yaml"]
 [processor.generator.yaml2json]
 src_dirs = ["data/yaml"]
 
-[processor.checker.script.check_videos]
-src_files = ["data/yaml/video_series.yaml", "data/yaml/video_features.yaml"]
-command = "pydatacheck"
-args = ["check_videos"]
-batch = true
-
-# Each wikidata_id in the video yaml must be the Wikidata item whose IMDb id
-# (P345) is the entry's imdb_id, and every entry's rotten_tomatoes_id the
-# Rotten Tomatoes path (P1258) on that item, as recorded in
-# shelve/wikidata_imdb.json by scripts/videos_fetch_wikidata.py, or, when
-# Wikidata has none, the hand-verified one in data/rotten_tomatoes_manual.json.
-# The check reads only those two files.
-[processor.checker.script.wikidata_ids]
-src_files = ["data/yaml/video_series.yaml", "data/yaml/video_features.yaml"]
-command = "scripts/check_wikidata_ids.py"
-batch = true
-dep_inputs = ["shelve/wikidata_imdb.json", "data/rotten_tomatoes_manual.json", "scripts/check_wikidata_ids.py"]
-
-# Every media item has its card image in static/images/: a series added to the
-# YAML without running its fetch_*.py used to ship with a broken card (eight
-# series in 2026-11 did) because this check was manual. An explicit step rather
+# Every concert and museum has its image in static/images/: a series added to
+# the YAML without its image used to ship with a broken card (eight series in
+# 2026-11 did, before they moved to My World) because this check was manual. An explicit step rather
 # than a script checker: a checker caches per file, so a deleted image just
 # drops out of its list, while here the matched glob is one input set and
 # adding, deleting or changing an image reruns the check. It writes an empty
@@ -207,8 +187,6 @@ inputs = [
     "scripts/check_images.py",
     "data/yaml/concerts.yaml",
     "data/yaml/museums.yaml",
-    "data/yaml/video_features.yaml",
-    "data/yaml/video_series.yaml",
 ]
 input_globs = ["static/images/*.jpg"]
 output_files = ["out/check_images/ok"]

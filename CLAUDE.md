@@ -25,11 +25,9 @@ The chess game viewer was removed on 2026-11-20: the games are in the myworld ap
   actionlint, xmllint, a JSON lint of the committed `.json` files, an encoding check, a duplicate-image check, an aspell
   spellcheck of the blog in both languages (`scripts/spellcheck_{en,he}.sh` against
   the word lists in `.aspell.{en,he}.txt`), and over `data/yaml/` a schema check
-  (`iyamlschema`), a parse check (`yaml2json`) and pydatacheck's `check_videos`
-  cross-check against imdb, plus a `wikidata_ids` check that every
-  entry's (required) `wikidata_id` in the video yaml is the Wikidata item of its `imdb_id` and every entry's (required) `rotten_tomatoes_id`
-  the Rotten Tomatoes path on that item, or the hand-verified one in `data/rotten_tomatoes_manual.json`
-  when Wikidata has none (`null` there and in the yaml = Rotten Tomatoes has no page; offline, against `shelve/wikidata_imdb.json`)
+  (`iyamlschema`) and a parse check (`yaml2json`). The films and series, and
+  their imdb, Wikidata and Rotten Tomatoes checks, live in My World now
+  (myworld.stream) since 2026-11-22
 - **Data**: YAML/JSON for media content, Markdown for blog posts
 
 The site used to be built with MkDocs. It is not any more — see *Migration notes* below,
@@ -53,8 +51,7 @@ which records the traps that outlived the migration.
     - `content/blog/<date>-<slug>.he.md` — Hebrew translations. The shared file name is
   how rssite pairs a post with its translation; nothing else is needed
     - `content/<page>/_index.{en,he}.md` — the standalone nav pages (about, media, calendar, …)
-- `data/yaml/` — the source of truth for the media tracker (courses,
-  video features and series) and for the profile block
+- `data/yaml/` — the source of truth for the profile block
   (`profiles.yaml`), plus the private lists that no page publishes (concerts,
   museums, cv, trips, lectures, …; the full list is in `doc/DECISIONS.md`). Every file names its schema in `$schema`, which the
   build validates against `veltzer.github.io/web-schemas`. This directory came out of
@@ -69,9 +66,8 @@ which records the traps that outlived the migration.
   The static map image on each company card (`static/images/map-<lat>_<lon>.jpg`,
   one per distinct `geo` point) *is* committed: `scripts/organizations_fetch_maps.py`
   renders it from OpenStreetMap tiles, and the build fails when one is missing
-- `shelve/` — the imdb lookup cache that pydatacheck's
-  `check_videos` reads (committed, so CI never hits the network),
-  plus the Nominatim geocoding cache `organizations_geocode.py` reads and writes
+- `shelve/` — the Nominatim geocoding cache `organizations_geocode.py` reads
+  and writes (committed, so CI never hits the network)
 - `templates/` — Tera templates (`base.html`, `page.html`, `blog.html`, taxonomy pages)
 - `sass/style.scss` — compiled to `/style.css` by rssite
 - `static/` — copied verbatim to the site root: media plugins, images, data and `vendor/`
@@ -90,7 +86,7 @@ which records the traps that outlived the migration.
   `npx tailwindcss` by hand and its output is committed, so the build needs no node),
   `make_og_images.py` (the two site-wide share cards, drawn by hand, committed), `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
   the sibling teaching repos), image fetchers, data importers, the `data/yaml/`
-  maintenance scripts (`videos_fetch_wikidata.py` (fills `wikidata_id` and `rotten_tomatoes_id` from each `imdb_id`), `organizations_geocode.py`,
+  maintenance scripts (`organizations_geocode.py`,
   `organizations_pick_geo.py`, `organizations_fetch_maps.py` — all run from the
   repo root),
   `serve.py`, `make_logo.py` (the logo and the favicon/touch icons drawn from it), `make_word_vectors.py` (the blog search's word vectors), `export_posts_for_ai.py` (mirrors the posts to `~/insync/for_ai/blog` for AI agents
@@ -297,10 +293,11 @@ tags = ["religion", "philosophy", "ethics"]
 
 - `_site/` is generated — never edit it. Edit `content/`, `templates/`, `sass/` or
   `static/` and rebuild.
-- YAML data for the media tracker lives in `data/yaml/` and is turned into the
-  `.json.gz` the frontend loads by `scripts/copy_data.py`, a manual step whose
-  output (`static/data/`) is committed. **The frontend reads JSON, not YAML** — js-yaml took
+- The media page's data is built from `data/yaml/` into the `.json.gz` the
+  frontend loads (`scripts/build_site.py`). **The frontend reads JSON, not YAML** — js-yaml took
   ~399ms on the 6.5MB YouTube dataset the site had then against ~31ms for `JSON.parse`.
+  The films and series it used to show, with `scripts/copy_data.py` that built
+  them, are gone: they live in My World now (myworld.stream).
 - The blog index has a search box (`static/blog-search.js`) over rssite's
   `<lang>/search.json` (`[search]` in `rssite.toml`). It indexes titles, opening
   text, tags and the full text (`content = true`, ~800 KB gzipped per language

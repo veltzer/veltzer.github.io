@@ -36,8 +36,7 @@ Everything else stays behind: the research ``sources``, the three per-field
 ``*_geo`` blocks the ``geo`` point was picked from, the bitmap the logo was
 traced from, and the ``old_url`` the 2019 database held.
 
-Unlike the other importers this one is a build step, not a copy_data.py
-step: the YAML lives in this repo, so ``build_site.py companies`` runs it
+This importer is a build step, not a manual one: the YAML lives in this repo, so ``build_site.py companies`` runs it
 and writes the gzipped JSON straight into the output directory. Nothing is
 committed. The logo paths are kept as they are in the YAML, relative to
 data/ (``logos/<slug>.svg``), because the same step copies data/logos/ to

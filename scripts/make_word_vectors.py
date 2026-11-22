@@ -21,7 +21,7 @@ tokenizer version.
 
 The browser computes the post vectors itself from <lang>/search.json, so a
 new post needs no rerun; a word only it uses is ignored until the next run.
-A manual step like copy_data.py, run from the repo root; the release is
+A manual step, run from the repo root; the release is
 downloaded once into download/embeddings/<tag>/.
 """
 

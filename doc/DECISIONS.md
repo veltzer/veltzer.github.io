@@ -510,10 +510,11 @@ Private data types: the files in `data/yaml/` that no page publishes.
 - `trips.yaml`
 - `video_courses.yaml`
 
-Published: `video_features.yaml` and `video_series.yaml` on the media
-page; `organizations.yaml` and `certifications.yaml` on the training,
-consulting and education pages; `profiles.yaml` in the profile block. The
-YouTube videos (`video_youtube.yaml` and the watch history), the podcasts
+Published: `organizations.yaml` (its publishers on the media page) and
+`certifications.yaml` on the training, consulting and education pages;
+`profiles.yaml` in the profile block. The films and series
+(`video_features.yaml`, `video_series.yaml`, with their posters, since
+2026-11-22), the YouTube videos (`video_youtube.yaml` and the watch history), the podcasts
 (`podcasts.yaml`), the audio courses (`audio_courses.yaml`) and the books
 read (`books_read.yaml`, with `text_books.yaml`'s ratings) live in My
 World (myworld.stream) now, as the Audible library does. Publishing a private file is a decision to record

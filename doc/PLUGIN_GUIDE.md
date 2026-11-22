@@ -71,12 +71,9 @@ The nav tabs are sorted by `navTitle`, not by list order.
 
 ## Data Files
 
-Plugin data is authored as YAML in `data/yaml/`.
-`scripts/copy_data.py` converts it to JSON and gzips it into
-`static/data/<name>.json.gz`; the frontend loads the JSON, never the YAML
-(see `CLAUDE.md` for why). That is a manual step whose output is committed.
-A plugin whose sources are entirely in this repo can instead
-be generated at build time: `scripts/build_site.py companies` runs
+Plugin data is authored as YAML in `data/yaml/` and loaded by the frontend
+as gzipped JSON, never as YAML (see `CLAUDE.md` for why). It is generated at
+build time: `scripts/build_site.py companies` runs
 `scripts/import_companies.py` once per organization tab and
 `scripts/import_certifications.py` once, and writes seven files into
 `_site/data/` (`companies`, `training_providers`, `consulting`, `publishers`,
@@ -322,9 +319,6 @@ after adding a class.
 Inside plugin methods you can use:
 
 - `window.escapeHtml(str)` - HTML-escape a string (always use for user data)
-- `showPeople()` - whether to show "With:" people info (reads
-  `window.collectionFeatureFlags.showPeople`); gate every use of `with` on it:
-  the card line, the toggle, the filter and the search field
 - `mediaFormatDate(str)` - shared date formatter (returns `YYYY-MM-DD` or null)
 - `renderBarChart(title, counts, options)` - render a bar chart card
 - `renderStatCard(value, label)` - render a stat summary card
@@ -355,19 +349,13 @@ than writing the loop again:
 - `countBy(items, keyFn)` - a counts object over `keyFn(item)`
 - `yearOf(date)` / `countByYear(items, dateFn)` - the year of a date, and
   items per year
-- `deviceCounts(items)` - items per `device`
 - `sortKeys(keys)` - numeric order when every key is a number, text otherwise
-- `hasReviewField(label)` - the standard "has a review" boolean field
-- `toggleLine(toggle, labelHtml, valueHtml, extraClass)` - one
-  `<li data-toggle>` line of a card; `linkLine(toggle, href, text)` for a link
-- `mediaLinkLines(item, prefix)` - the IMDb / Wikidata / Rotten Tomatoes
-  lines, labelled by the `<prefix>_view_imdb`, `_view_wikidata` and
-  `_view_rt` strings
 
 ## Existing Plugins
 
 The registry is `window.collectionPluginRegistry` in `templates/data_collection.html`; as of
-2026-11-21 it holds these nine keys in four files.
+2026-11-22 it holds these seven keys in two files (the films and series,
+`plugin-movies.js` and `plugin-series.js`, went to My World that day).
 
 | Key | File | Data |
 |-----|------|------|
@@ -378,5 +366,3 @@ The registry is `window.collectionPluginRegistry` in `templates/data_collection.
 | `education` | `plugin-companies.js` | `data/education.json.gz` (function `education`; build-time) |
 | `certifiers` | `plugin-companies.js` | `data/certifiers.json.gz` (function `certification`: who certified me; build-time) |
 | `certifications` | `plugin-certifications.js` | `data/certifications.json.gz` (one card per certification, `certifications.yaml` joined with the issuers by `scripts/import_certifications.py`; build-time) |
-| `features` | `plugin-movies.js` | `data/video_features.json.gz` |
-| `videos` | `plugin-series.js` | `data/video_series.json.gz` |

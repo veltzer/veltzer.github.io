@@ -145,36 +145,10 @@ version is the one it and `static/blog-search.js` implement. A manual step,
 and the output is committed; the browser builds the post vectors itself, so
 rerun it only for a new release or once new posts have brought many new words.
 
-### `scripts/copy_data.py`
-
-Builds `static/data/` from the media YAML in `data/yaml/`: copies the
-plain files, runs the books import, converts every
-YAML file to JSON (the frontend reads JSON, not YAML) and gzips everything.
-Uses `gzip -n` for reproducible output. Validates source files exist before
-copying. A manual step, not part of the build; the generated `static/data/`
-is committed.
-
 ## Image Fetch Scripts
 
 All image scripts are incremental — they skip images that already exist.
 Use `--force` to re-download.
-
-The poster fetchers (`fetch_movie_posters.py`, `fetch_series_posters.py`) read
-the built `static/data/video_features.json.gz` and `video_series.json.gz`, not
-the YAML. A video added to `data/yaml/` is therefore skipped until
-`scripts/copy_data.py` has rebuilt those files: run `copy_data.py` first.
-
-### `scripts/fetch_movie_posters.py`
-
-Downloads movie poster images from TMDB (with OMDB fallback) by IMDB ID.
-Output: `static/images/movie-{imdb_id}.jpg`
-Requires: `pass` entries `keys/themoviedb.org.read` and `keys/omdbapi.com.key`
-
-### `scripts/fetch_series_posters.py`
-
-Downloads TV series poster images from TMDB (with OMDB fallback) by IMDB ID.
-Output: `static/images/series-{imdb_id}.jpg`
-Requires: same as movie posters.
 
 ### `scripts/fetch_museum_images.py`
 
@@ -191,11 +165,6 @@ Provides DuckDuckGo image search (with candidates cached under
 `$XDG_CACHE_HOME/veltzer-site/image-picker/`, defaulting to
 `~/.cache/veltzer-site/image-picker/`, so they survive a reboot) and a
 tkinter image browser GUI with prev/next/select/skip/quit.
-
-### `scripts/poster_utils.py`
-
-Shared module used by movie and series poster scripts. Provides TMDB
-and OMDB poster lookup with fallback.
 
 ### `scripts/image_standard.py`
 
@@ -258,11 +227,10 @@ Posts".
 
 ### `scripts/check_images.py`
 
-Verifies every media item has a corresponding image in `static/images/`.
-Checks movies, series, museums and
-concerts. Part of the build
+Verifies every museum and concert has its image in `static/images/`. (The
+films and series, with their poster fetchers, live in My World now.) Part of the build
 (`[processor.explicit.generic.check_images]` in `rsconstruct.toml`, which
-reruns when any image is added, changed or deleted): a media
+reruns when any image is added, changed or deleted): an
 item added without its image fails it, so run the matching `fetch_*.py`.
 
 ### `scripts/import_companies.py`
@@ -280,16 +248,6 @@ the `_site/data/*.json.gz` named under `build_site.py` above, and copies `data/l
 `_site/logos/` next to it. Nothing is committed. With `--images-dir` (the
 build passes `static/images/`) it fails when a company's map image has not
 been rendered by `organizations_fetch_maps.py`.
-
-### `scripts/check_wikidata_ids.py`
-
-Run by rsconstruct as `processor.checker.script.wikidata_ids` over the video
-yaml files. Fails when an entry has no `wikidata_id` or `rotten_tomatoes_id`,
-or when the Wikidata id is not the item whose IMDb id is the entry's
-`imdb_id`, or the Rotten Tomatoes id is neither the item's nor the
-hand-verified one. Reads only `shelve/wikidata_imdb.json` and
-`data/rotten_tomatoes_manual.json`, so it never uses the network; the fix for
-a new entry is to run `videos_fetch_wikidata.py`.
 
 ### `scripts/import_certifications.py`
 
@@ -404,15 +362,3 @@ it after adding an organization or changing its point: the build fails
 (`import_companies.py --images-dir`) when an image is missing. The images
 are committed. Why a static image and not a Google Maps iframe is in
 `doc/DECISIONS.md`.
-
-### `scripts/videos_fetch_wikidata.py`
-
-Fills `wikidata_id` and `rotten_tomatoes_id` into `video_series.yaml` and
-`video_features.yaml` from each entry's `imdb_id`. Asks the Wikidata Query
-Service which item has that IMDb id (P345) and takes the item's Rotten
-Tomatoes path (P1258), or the hand-verified path in
-`data/rotten_tomatoes_manual.json` when Wikidata has none (`null` there means
-Rotten Tomatoes has no page). Lookups are cached in
-`shelve/wikidata_imdb.json` (committed); only what is not cached is queried.
-The yaml is edited textually so its hand formatting survives. `--dry-run`
-reports without writing.

@@ -1,11 +1,11 @@
 +++
 title = "Медиа"
-description = "Что Марк Вельцер посмотрел: фильмы и сериалы, с оценками и заметками."
+description = "Издатели аудиокниг, курсов и радио, которые слушает Марк Вельцер: где они находятся и что с ними стало."
 template = "data_collection.html"
 
 # The same app as the English page (templates/data_collection.html); front
 # matter is per file, so the plugin list is repeated here.
 [extra]
 # Concerts and museums are private: see doc/DECISIONS.md.
-plugins = ["features", "publishers", "videos"]
+plugins = ["publishers"]
 +++

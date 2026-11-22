@@ -99,84 +99,6 @@ function countByYear(items, dateFn) {
 }
 
 /**
- * The device distribution of items, for renderBarChart.
- * @param {Array} items
- * @returns {Object} {device: count}
- */
-function deviceCounts(items) {
-    return countBy(items, function(item) { return item.device; });
-}
-
-/**
- * Whether the page publishes the names of the people an item was shared with
- * (window.collectionFeatureFlags.showPeople, set by the page template).
- * Plugins must not offer a filter, toggle, card line or search on `with`
- * unless this is true. Read it when the plugin is built or rendered.
- * @returns {boolean}
- */
-function showPeople() {
-    return Boolean(window.collectionFeatureFlags && window.collectionFeatureFlags.showPeople);
-}
-
-/**
- * The shared "has a review" boolean filter field.
- * @param {string} label - the translated label
- * @returns {Object} an entry for a plugin's fields array
- */
-function hasReviewField(label) {
-    return {field: 'has_review', label: label, type: 'string', sortable: false,
-        filterType: 'boolean', value: function(item) { return Boolean(item.review && item.review.trim() !== ''); }
-    };
-}
-
-/**
- * One <li data-toggle> detail line of a card.
- * @param {string} toggle - the toggleFields key that shows and hides it
- * @param {string} label - label markup, already translated (shown bold; '' for none)
- * @param {string} html - the value, already escaped
- * @param {string} [extraClass] - classes added after py-2
- * @returns {string} HTML string
- */
-function toggleLine(toggle, label, html, extraClass) {
-    return '<li class="py-2' + (extraClass ? ' ' + extraClass : '') + '" data-toggle="' + window.escapeHtml(toggle) + '">' +
-        (label ? '<strong>' + label + '</strong> ' : '') + html + '</li>';
-}
-
-/**
- * An <li data-toggle> holding one external link.
- * @param {string} toggle - the toggleFields key
- * @param {string} href - the URL (escaped here)
- * @param {string} text - link text, already translated
- * @returns {string} HTML string
- */
-function linkLine(toggle, href, text) {
-    return toggleLine(toggle, '', '<a href="' + window.escapeHtml(href) +
-        '" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">&#x1F517; ' +
-        text + '</a>');
-}
-
-/**
- * The IMDb / Wikidata / Rotten Tomatoes link lines a film or series card ends
- * with (toggle keys imdb, wikidata, rottentomatoes).
- * @param {Object} item - with imdb_id, wikidata_id, rotten_tomatoes_id
- * @param {string} prefix - string key prefix: <prefix>_view_imdb, _view_wikidata, _view_rt
- * @returns {string} HTML string
- */
-function mediaLinkLines(item, prefix) {
-    let html = '';
-    if (item.imdb_id) {
-        html += linkLine('imdb', 'https://www.imdb.com/title/tt' + item.imdb_id + '/', t(prefix + '_view_imdb'));
-    }
-    if (item.wikidata_id) {
-        html += linkLine('wikidata', 'https://www.wikidata.org/wiki/' + item.wikidata_id, t(prefix + '_view_wikidata'));
-    }
-    if (item.rotten_tomatoes_id) {
-        html += linkLine('rottentomatoes', 'https://www.rottentomatoes.com/' + item.rotten_tomatoes_id, t(prefix + '_view_rt'));
-    }
-    return html;
-}
-
-/**
  * Render a horizontal bar chart card.
  * @param {string} title - Card header text
  * @param {Object} counts - {label: count} object
@@ -264,14 +186,8 @@ window.t = t;
 window.renderBarChart = renderBarChart;
 window.renderStatCard = renderStatCard;
 window.mediaFormatDate = mediaFormatDate;
-window.showPeople = showPeople;
 window.tally = tally;
 window.countBy = countBy;
 window.yearOf = yearOf;
 window.countByYear = countByYear;
-window.deviceCounts = deviceCounts;
-window.hasReviewField = hasReviewField;
-window.toggleLine = toggleLine;
-window.linkLine = linkLine;
-window.mediaLinkLines = mediaLinkLines;
 window.sortKeys = sortKeys;

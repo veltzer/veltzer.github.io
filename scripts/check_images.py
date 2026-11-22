@@ -5,8 +5,6 @@ Check that every media item that should have a local image actually has one
 in static/images/.
 
 Checks:
-- Movies: static/images/movie-{imdb_id}.jpg
-- Series: static/images/series-{imdb_id}.jpg
 - Museums: static/images/museum-{internal_id}.jpg
 - Concerts: static/images/{image}, the file each show names
 
@@ -47,37 +45,6 @@ def parse_yaml_entries(path):
         return []
     items = data.get("items", data) if isinstance(data, dict) else data
     return [item for item in items if isinstance(item, dict)]
-
-
-def check_movies():
-    """Check movie images."""
-    entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "video_features.yaml"))
-    errors = 0
-    for entry in entries:
-        imdb_id = entry.get("imdb_id")
-        if not imdb_id:
-            continue
-        path = os.path.join(str(IMAGE_DIR), f"movie-{imdb_id}.jpg")
-        if not os.path.exists(path):
-            print(f"  MISSING: {path} ({entry.get('name', '?')})")
-            errors += 1
-    return len(entries), errors
-
-
-def check_series():
-    """Check series images."""
-    entries = parse_yaml_entries(os.path.join(str(DATA_DIR), "video_series.yaml"))
-    errors = 0
-    for entry in entries:
-        imdb_id = entry.get("imdb_id")
-        if not imdb_id:
-            continue
-        path = os.path.join(str(IMAGE_DIR), f"series-{imdb_id}.jpg")
-        if not os.path.exists(path):
-            print(f"  MISSING: {path} ({entry.get('name', '?')})")
-            errors += 1
-    return len(entries), errors
-
 
 
 def check_museums():
@@ -138,8 +105,6 @@ def main():
     args = parser.parse_args()
     total_errors = 0
     checks = [
-        ("Movies", check_movies),
-        ("Series", check_series),
         ("Museums", check_museums),
         ("Concerts", check_concerts),
     ]

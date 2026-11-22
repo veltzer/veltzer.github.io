@@ -7,30 +7,28 @@ verbatim to `/images/` in the built site.
 
 | Media Type | Pattern | Source |
 |---|---|---|
-| Movies | `movie-{imdb_id}.jpg` | TMDB CDN (by IMDB ID) |
-| TV Series | `series-{imdb_id}.jpg` | TMDB CDN (by IMDB ID) |
 | Museums | `museum-{internal_id}.jpg` | DuckDuckGo search |
+
+The film and series posters (`movie-*.jpg`, `series-*.jpg`) went to My World
+(myworld.stream) with the films and series on 2026-11-22.
 
 ## Adding Images for New Entries
 
 1. Add the entry to the YAML in `data/yaml/`
-2. Run `scripts/copy_data.py` to update `static/data/`
-3. Run the appropriate fetch script (see `doc/SCRIPTS.md`)
-4. Run `scripts/check_images.py` to verify all images are present
-5. Run `rsconstruct build --verbose -j0` to build the site
+2. Run the appropriate fetch script (see `doc/SCRIPTS.md`)
+3. Run `scripts/check_images.py` to verify all images are present
+4. Run `rsconstruct build --verbose -j0` to build the site
 
 ## Uniform Display
 
 Card images sit in a fixed 2:1 landscape box (the `<img>` markup is built in
 `static/data-collection-app.js`), so card heights are consistent regardless of the
-source dimensions. Landscape sources are cropped with `object-cover`; the
-movies and series plugins declare `imageFit: 'contain'` so their
-portrait covers are shown whole over a blurred backdrop instead (see
-`doc/PLUGIN_GUIDE.md`).
+source dimensions. Landscape sources are cropped with `object-cover`; a
+plugin whose covers are portrait declares `imageFit: 'contain'` so they are
+shown whole over a blurred backdrop instead (see `doc/PLUGIN_GUIDE.md`).
 
 ## Caches
 
-- TMDB/OMDB poster scripts: no cache (fast CDN downloads)
 - DuckDuckGo image picker: cached under `$XDG_CACHE_HOME/veltzer-site/image-picker/`
   (default `~/.cache/veltzer-site/image-picker/`) per search term
 
@@ -71,8 +69,8 @@ increases clone size and slows operations. Several alternatives exist:
 ### Separate Data Repository (current pattern for YAML)
 
 - Keep images in a dedicated repo or storage location outside this repo.
-- Copy them in via `scripts/copy_data.py`, the way the YouTube
-  capture in `../data/` was handled until it moved to My World.
+- Copy them in by a script, the way the YouTube capture in `../data/` was
+  handled until it moved to My World.
 - Keeps this repo lightweight while preserving the current build workflow.
 
 ### GitHub Pages Artifact Deployment
@@ -97,8 +95,8 @@ increases clone size and slows operations. Several alternatives exist:
 
 ### Lazy-Load from Original CDNs at Runtime
 
-- For movies/TV the TMDB CDN URLs are available (the YouTube tab, before
-  it moved to My World, used `i.ytimg.com` at runtime).
+- The YouTube tab, before it moved to My World, used `i.ytimg.com` at
+  runtime.
 - Extend this pattern to all media types — never store images locally.
 - Trade-off: depends on external CDN uptime; some sources may block hotlinking.
 

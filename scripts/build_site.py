@@ -66,9 +66,9 @@ def write_companies(companies_file, providers_file, consulting_file, publishers_
     rather than per company: certifications.yaml joined with the issuing
     organizations by import_certifications.py.
 
-    The other media tabs read committed static/data/*.json.gz files that
-    scripts/copy_data.py produces by hand, because half of their sources
-    live in the private ../data repo that CI cannot see. organizations.yaml
+    (The films and series tabs read committed static/data/*.json.gz files
+    that scripts/copy_data.py produced by hand; they went to My World on
+    2026-11-22, with the script.) organizations.yaml
     and the logos it names live in this repo, so there is nothing to commit:
     the JSON is generated and the SVGs copied into _site/ on every build,
     beside rssite's output. The logo paths inside the YAML are relative

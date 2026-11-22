@@ -1,6 +1,6 @@
 {# A page whose whole body is the data collection app (static/data-collection-app.js).
 
-   Used by the media section (/media/: series, films...) and by the
+   Used by the media section (/media/: the publishers) and by the
    teaching data page under training (/training/data/: the clients I
    taught at and the training companies I taught for). Both run the same app; each
    page names the plugins it shows in its front matter, so the markup, styles
@@ -153,9 +153,6 @@ class="search-input w-full">
 </div>
 
 <script>
-window.collectionFeatureFlags = {
-showPeople: false,
-};
 // The app's strings in the page's language: every app_* key of i18n/en.toml,
 // looked up in this language with trans() (see the comment at the top).
 window.collectionStrings = {
@@ -181,8 +178,6 @@ window.collectionPluginRegistry = {
 'education': {{ get_url(path='plugin-companies.js') | json_encode | safe }},
 'certifiers': {{ get_url(path='plugin-companies.js') | json_encode | safe }},
 'certifications': {{ get_url(path='plugin-certifications.js') | json_encode | safe }},
-'features': {{ get_url(path='plugin-movies.js') | json_encode | safe }},
-'videos': {{ get_url(path='plugin-series.js') | json_encode | safe }},
 };
 </script>
 <script src="{{ get_url(path='data-collection-utils.js') }}"></script>

@@ -17,9 +17,6 @@ purpose.
 
 ## Left alone on purpose
 
-- **Movie "with" names** stay in `static/data/video_features.json.gz` and in
-  `data/yaml/video_features.yaml`; the page does not show them
-  (`showPeople: false`). Decided 2026-11-15.
 - **`scripts/build_collection_css.sh` fetches `tailwindcss@3` with `npx`**
   at run time, by hand, outside the build: pinning it further goes against
   the no-pins rule, and bringing it into the build would add Node to CI.

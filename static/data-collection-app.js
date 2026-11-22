@@ -595,7 +595,7 @@
 
             let jsonText;
             if (config.file.endsWith('.gz')) {
-                // Only the .json.gz is shipped (see scripts/copy_data.py), so
+                // Only the .json.gz is shipped (see scripts/build_site.py), so
                 // a browser without DecompressionStream has nothing to fall
                 // back to; say so rather than fetching a file that is not there.
                 if (typeof DecompressionStream === 'undefined') {
