@@ -502,21 +502,20 @@ page of its own.
 Update 2026-11-23: the concerts, the museums and `people.yaml` (with every
 concert and museum image, `check_images.py`, `fetch_museum_images.py`,
 `image_picker.py` and `tests/test_people.py`) went to My World
-(myworld.stream), where every one of them was checked first. The `with:`
-names left in `lectures.yaml`, `political_rallies.yaml` and `trips.yaml` are
-people My World has; nothing on the site checks them any more.
+(myworld.stream), where every one of them was checked first. So did
+`trips.yaml`, `lectures.yaml` and `political_rallies.yaml` the same day, to
+My World's new Trips, Lectures and Rallies pages (every field checked
+against it; who came along are the people My World has, under the names
+it gives them now).
 
 Private data types: the files in `data/yaml/` that no page publishes.
 
 - `books_loans.yaml`
 - `courses.yaml`
 - `cv.yaml`
-- `lectures.yaml`
 - `loans.yaml`
-- `political_rallies.yaml`
 - `study_sites.yaml`
 - `text_articles.yaml`
-- `trips.yaml`
 - `video_courses.yaml`
 
 Published: none of the organizations any more (`organizations.yaml` and
