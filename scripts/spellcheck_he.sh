@@ -30,7 +30,7 @@ for file in "$@"; do
 		--dict-dir="${dict_dir}" \
 		--add-extra-dicts=.aspell.he.rws \
 		list | LC_ALL=C sort -u)
-	if [ -n "${misspelled}" ]; then
+	if [[ -n "${misspelled}" ]]; then
 		echo "Misspelled words in ${file}:"
 		echo "${misspelled}"
 		status=1

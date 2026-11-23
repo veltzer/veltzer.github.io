@@ -25,7 +25,7 @@ mkdir -p "${out_dir}"
 
 # The language data file ships in aspell-he, not with aspell itself; without it
 # `create master` fails with a bare non-zero exit. See scripts/build_en_dict.sh.
-if [ ! -f /usr/lib/aspell/he.dat ]; then
+if [[ ! -f /usr/lib/aspell/he.dat ]]; then
 	echo "error: /usr/lib/aspell/he.dat is missing -- install the aspell-he package" >&2
 	exit 1
 fi
@@ -41,4 +41,5 @@ LC_ALL=C sort -u "${src}" |
 	aspell --lang=he --encoding=utf-8 create master "${tmp}"
 mv -f "${tmp}" "${out}"
 
-echo "built ${out} ($(LC_ALL=C sort -u "${src}" | wc -l) words)"
+word_count="$(LC_ALL=C sort -u "${src}" | wc -l)"
+echo "built ${out} (${word_count} words)"

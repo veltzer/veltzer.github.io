@@ -35,7 +35,7 @@ for file in "$@"; do
 		list |
 		{ LC_ALL=C.UTF-8 grep -Pv '[^\x00-\xFF]' || true; } |
 		LC_ALL=C sort -u)
-	if [ -n "${misspelled}" ]; then
+	if [[ -n "${misspelled}" ]]; then
 		echo "Misspelled words in ${file}:"
 		echo "${misspelled}"
 		status=1

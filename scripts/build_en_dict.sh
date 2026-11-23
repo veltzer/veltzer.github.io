@@ -24,7 +24,7 @@ mkdir -p "${out_dir}"
 # fails with a bare non-zero exit, which is how this first broke CI: aspell and
 # aspell-he installed, aspell-en did not, and nothing said so. Check explicitly
 # and name the fix.
-if [ ! -f /usr/lib/aspell/en.dat ]; then
+if [[ ! -f /usr/lib/aspell/en.dat ]]; then
 	echo "error: /usr/lib/aspell/en.dat is missing -- install the aspell-en package" >&2
 	exit 1
 fi
@@ -56,4 +56,5 @@ rm -f "${err}"
 
 mv -f "${tmp}" "${out}"
 
-echo "built ${out} ($(LC_ALL=C sort -u "${src}" | wc -l) words)"
+word_count="$(LC_ALL=C sort -u "${src}" | wc -l)"
+echo "built ${out} (${word_count} words)"
