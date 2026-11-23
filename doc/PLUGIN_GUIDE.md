@@ -42,26 +42,28 @@ plugins:
 template = "data_collection.html"
 
 [extra]
-plugins = ["companies", "providers"]    # the first is the default view
+plugins = ["education", "certifiers"]    # the first is the default view
 ```
 
-Today that is two pages (as of 2026-11-22; `grep -l data_collection.html
+Today that is two pages (as of 2026-11-23; `grep -l data_collection.html
 content/*/_index.en.md content/*/*/_index.en.md` lists them):
 
-- `content/training/data/`: `companies` and `providers`, two tabs over
-  organizations.yaml;
+- `content/training/data/`: `companies`, over organizations.yaml;
 - `content/training/education/`: `education`, `certifiers` and
   `certifications`.
 
 The consulting page (`content/consulting/`, key `consulting`) went to My
 World (myworld.stream) on 2026-11-22: the companies I consulted for are
-organizations with the relation Consulting there.
+organizations with the relation Consulting there. So did the training
+companies I taught for (key `providers`, function `training-provider`), on
+2026-11-23: there they have the relation Training provider and the type
+Training Company.
 
 A single-plugin page shows no tab row.
 
 One script may register several keys: `plugin-companies.js` registers
-`companies` and three copies of it (`providers`, `education` and
-`certifiers`, each with another `file` and titles), all four
+`companies` and two copies of it (`education` and
+`certifiers`, each with another `file` and titles), all three
 keys map to it in `window.collectionPluginRegistry`, and the app loads each file once. A
 copy made with `Object.assign` has to be a copy, not the same object under a
 second key, because the app writes the derived `sortFields` and `filters`
@@ -76,8 +78,8 @@ Plugin data is authored as YAML in `data/yaml/` and loaded by the frontend
 as gzipped JSON, never as YAML (see `CLAUDE.md` for why). It is generated at
 build time: `scripts/build_site.py companies` runs
 `scripts/import_companies.py` once per organization tab and
-`scripts/import_certifications.py` once, and writes five files into
-`_site/data/` (`companies`, `training_providers`,
+`scripts/import_certifications.py` once, and writes four files into
+`_site/data/` (`companies`,
 `education`, `certifiers` and `certifications`, all `.json.gz`) directly,
 nothing committed. The YAML structure should be:
 
@@ -361,7 +363,6 @@ The registry is `window.collectionPluginRegistry` in `templates/data_collection.
 | Key | File | Data |
 |-----|------|------|
 | `companies` | `plugin-companies.js` | `data/companies.json.gz` (the `teaching` organizations of `organizations.yaml`, written into `_site/` at build time by `scripts/import_companies.py`; their logos are copied from `data/logos/` to `/logos/` the same way) |
-| `providers` | `plugin-companies.js` | `data/training_providers.json.gz` (organizations with function `training-provider`; build-time, as above) |
 | `education` | `plugin-companies.js` | `data/education.json.gz` (function `education`; build-time) |
 | `certifiers` | `plugin-companies.js` | `data/certifiers.json.gz` (function `certification`: who certified me; build-time) |
 | `certifications` | `plugin-certifications.js` | `data/certifications.json.gz` (one card per certification, `certifications.yaml` joined with the issuers by `scripts/import_certifications.py`; build-time) |

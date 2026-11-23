@@ -51,19 +51,10 @@ class TestSelection:
         assert not import_companies.has_function(organization(functions=None), "teaching")
         assert not import_companies.shown({"name": "x"})
 
-    def test_training_providers_tab(self):
-        data = {"items": [organization(), organization(id=3, name="Logtel", functions=["training-provider"])]}
-        assert [item["name"] for item in import_companies.convert(data, "training-provider")["items"]] == ["Logtel"]
-        assert [item["name"] for item in import_companies.convert(data)["items"]] == ["Amdocs"]
-
     def test_a_shown_organization_without_an_address_is_reported(self):
         data = {"items": [organization(), organization(id=3, name="Nowhere", address=None),
                           organization(id=4, name="Publisher", functions=[], address=None)]}
         assert import_companies.without_address(data) == ["Nowhere"]
-
-    def test_an_organization_on_both_tabs_is_reported(self):
-        data = {"items": [organization(), organization(id=3, name="Both", functions=["teaching", "training-provider"])]}
-        assert import_companies.overlapping(data) == ["Both"]
 
     def test_education_and_certification_tabs(self):
         data = {"items": [organization(), organization(id=4, name="Rimon", functions=["education"]),
@@ -72,12 +63,12 @@ class TestSelection:
         assert [item["name"] for item in import_companies.convert(data, "certification")["items"]] == ["MySQL"]
 
     def test_every_tab_function_is_shown(self):
-        assert import_companies.shown(organization(functions=["training-provider"]))
         assert import_companies.shown(organization(functions=["certification"]))
         assert import_companies.shown(organization(functions=["education"]))
         assert not import_companies.shown(organization(functions=[]))
-        # the consulting went to My World (myworld.stream): it has no tab
+        # the consulting and the training companies went to My World (myworld.stream): they have no tab
         assert not import_companies.shown(organization(functions=["consulting"]))
+        assert not import_companies.shown(organization(functions=["training-provider"]))
 
 
 class TestFields:
@@ -196,9 +187,3 @@ class TestMainFailurePaths:
         assert "map image(s) missing" in err
         assert not target.exists()
 
-    def test_overlapping_tabs(self, tmp_path, monkeypatch, capsys):
-        item = organization(functions=["teaching", "training-provider"])
-        code, err, target = self.run_main(tmp_path, monkeypatch, capsys, {"items": [item]})
-        assert code == 1
-        assert "more than one tab" in err
-        assert not target.exists()

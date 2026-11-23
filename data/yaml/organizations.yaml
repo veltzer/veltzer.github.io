@@ -1,8 +1,10 @@
 ---
 # next line is neccessary for vscode which does not read the $schema attribute
 # yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/organizations.json
-# Organizations I taught at, taught for (training companies that hired me to teach: function training-provider),
-# studied at or was certified by.
+# Organizations I taught at, studied at or was certified by.
+# The training companies I taught for (function training-provider: ids 14, 18, 31, 99, 122-124) were removed on
+# 2026-11-23: they live in My World (myworld.stream) now, with the relation Training provider and the type
+# Training Company.
 # The consulting (function consulting) was removed on 2026-11-22: the companies I consulted for live in My World
 # (myworld.stream) now, with the relation Consulting. The ones that were only that (ids 13, 42-44, 48, 55, 65, 72)
 # left this file; the rest stay for what else they are.
@@ -14,7 +16,7 @@
 # id 125 (Tel Aviv University) was added on 2026-11-07, and id 126 (Rimon School of Music) on 2026-11-08; with the
 # Hebrew and Open universities they have function education (a school I studied at).
 # ids 122-124 (AgileSparks, DevelopIntelligence, Logtel) were added on 2026-11-07 as training providers, and Hinbit,
-# Interbit, John Bryce and Ness moved from teaching to training-provider the same day.
+# Interbit, John Bryce and Ness moved from teaching to training-provider the same day (all seven left on 2026-11-23).
 # Extracted from the myworld MySQL database (TbOrganization, backup of 2019-05-11);
 # ids 116-121 were added on 2026-11-07 from companies_i_taught.txt in the private ../data repo, so they
 # have no old_url.
@@ -462,38 +464,6 @@ items:
   sources:
   - https://en.globes.co.il/en/article-ribbon-completes-463m-eci-acquisition-1001320578
   - https://ribboncommunications.com/company/media-center/press-releases/ribbon-communications-inc-merge-eci-telecom-group-ltd
-- id: 14
-  name: Hinbit
-  slug: hinbit
-  remark: public courses
-  functions:
-  - training-provider
-  logo: logos/hinbit.svg
-  logo_kind: traced from original bitmap (no vector logo found online)
-  old_url: http://hinbit.com
-  status: active
-  what_happened: Still trading as Hinbit Development Ltd, but now presents itself as a software/IoT development shop; the site no longer lists public training courses.
-  website: http://hinbit.com
-  location: Ra'anana, Israel
-  location_geo:
-    place: Ra'anana, Israel
-    lat: 32.18602
-    lon: 34.86784
-  israel_office: Givat Hen, Israel (registered address; the moshav just south of Ra'anana)
-  israel_office_geo:
-    place: Givat Hen, Israel
-    lat: 32.16859
-    lon: 34.87606
-  address: Givat Hen 4390500, Israel
-  address_source: https://www.northdata.com/Hinbit+Development+Ltd.,+Giv'at+Hen/ICA-513739771
-  geo:
-    from: israel_office
-    place: Givat Hen, Israel
-    lat: 32.16859
-    lon: 34.87606
-  sources:
-  - http://www.hinbit.com/hebrew_site/index.php
-  - https://www.kycisrael.com/companies/513739771/hinbit-development-ltd/
 - id: 15
   name: IBM
   slug: ibm
@@ -600,40 +570,6 @@ items:
     lon: 17.63874
   sources:
   - https://en.wikipedia.org/wiki/MySQL_AB
-- id: 18
-  name: Interbit
-  slug: interbit
-  remark: public courses
-  from_date: '2004-11-20'
-  functions:
-  - training-provider
-  logo: logos/interbit.svg
-  logo_kind: traced from original bitmap (no vector logo found online)
-  old_url: http://www.interbit.co.il
-  status: active
-  website: https://interbit.co.il
-  location: Ramat Gan, Israel (6 HaChilazon St., Diamond Exchange district)
-  location_geo:
-    place: Ramat Gan, Israel
-    lat: 32.06869
-    lon: 34.82468
-  israel_office: Ramat Gan (6 HaChilazon St., Diamond Exchange district)
-  israel_office_geo:
-    place: Ramat Gan, Israel
-    lat: 32.06869
-    lon: 34.82468
-  address: 6 HaChilazon St., Diamond Exchange district, Ramat Gan 5252270, Israel
-  address_source: https://www.d.co.il/40171820/25800/
-  geo:
-    from: israel_office
-    place: Ramat Gan, Israel
-    lat: 32.06869
-    lon: 34.82468
-  sources:
-  - https://interbit.co.il/
-  - https://www.crunchbase.com/organization/interbit-t-c
-  - https://www.d.co.il/40171820/25800/
-  - https://www.ilimudim.co.il/i/inatrebet/m
 - id: 19
   name: Israeli Air Industry
   slug: israeli-air-industry
@@ -1045,49 +981,6 @@ items:
   sources:
   - https://newsroom.cisco.com/c/r/newsroom/en/us/a/y2012/m07/cisco-completes-acquisition-of-nds.html
   - https://en.wikipedia.org/wiki/Synamedia
-- id: 31
-  name: Ness
-  slug: ness
-  remark: public courses
-  functions:
-  - training-provider
-  logo: logos/ness.svg
-  logo_kind: official vector
-  logo_source: https://cdn-ilemfgf.nitrocdn.com/gSGyNWAzytVlaJPhAbboIpFZKApqAsZn/assets/images/optimized/rev-db441ee/www.ness.com/wp-content/uploads/2026/03/Frame-1000005902.svg
-  logo_license: company brand asset (site header logo of Ness Digital Engineering)
-  logo_note: Current Ness circular emblem (navy). The same emblem is inlined in the ness-tech.co.il header (Ness Israel), so it covers both the batch site and the global brand.
-  old_url: http://www.ness.com
-  status: acquired
-  what_happened: Ness Technologies Inc. was taken private by Citi Venture Capital International in October 2011; the Israeli business (Ness Technologies Israel) was sold to Hilan Group in June 2014, while
-    the rest became KKR-owned Ness Digital Engineering (2022).
-  website: https://www.ness-tech.co.il
-  location: Ra'anana, Israel (Infinity Park, 7 HaPnina St.)
-  location_geo:
-    place: Ra'anana, Israel
-    lat: 32.18602
-    lon: 34.86784
-  israel_office: Ra'anana, Israel (Infinity Park, 7 HaPnina St.)
-  israel_office_geo:
-    place: Ra'anana, Israel
-    lat: 32.18602
-    lon: 34.86784
-  former_website: http://www.ness.com (still live, but now belongs to Ness Digital Engineering, Teaneck NJ)
-  former_location: Tel Aviv, Israel (Ness Tower, Atidim Park; US HQ Hackensack, New Jersey)
-  former_location_geo:
-    place: Tel Aviv, Israel
-    lat: 32.0853
-    lon: 34.78181
-  address: Infinity Park, 7 HaPnina St., Ra'anana 4310302, Israel
-  address_source: https://ness-tech.co.il/en
-  geo:
-    from: israel_office
-    place: Ra'anana, Israel
-    lat: 32.18602
-    lon: 34.86784
-  sources:
-  - https://www.ness-tech.co.il/contactus
-  - https://www.ness-tech.co.il/en
-  - https://www.sec.gov/Archives/edgar/data/1089638/000114420411012902/v213173_10k.htm
 - id: 32
   name: Orbotech
   slug: orbotech
@@ -3127,38 +3020,6 @@ items:
   sources:
   - https://he.wikipedia.org/wiki/%D7%91%D7%99%D7%AA_%D7%94%D7%A1%D7%A4%D7%A8_%D7%9C%D7%9E%D7%A7%D7%A6%D7%95%D7%A2%D7%95%D7%AA_%D7%94%D7%9E%D7%97%D7%A9%D7%91
   - https://en.wikipedia.org/wiki/Mamram
-- id: 99
-  name: John Bryce
-  slug: johnbryce
-  from_date: '2013-06-01'
-  functions:
-  - training-provider
-  logo: logos/johnbryce.svg
-  logo_kind: traced from original bitmap (no vector logo found online)
-  old_url: http://www.johnbryce.co.il
-  status: active
-  website: https://www.johnbryce.co.il/
-  location: Tel Aviv, Israel (29 Homa uMigdal St.)
-  location_geo:
-    place: Tel Aviv, Israel
-    lat: 32.0853
-    lon: 34.78181
-  israel_office: Tel Aviv, Israel (29 Homa uMigdal St.); branches in Haifa (46 HaHistadrut St.) and Jerusalem (Technology Park, Tower building, 4th floor)
-  israel_office_geo:
-    place: Tel Aviv, Israel
-    lat: 32.0853
-    lon: 34.78181
-  address: 29 Homa uMigdal St., Tel Aviv, Israel
-  address_source: https://www.johnbryce.co.il/
-  geo:
-    from: israel_office
-    place: Tel Aviv, Israel
-    lat: 32.0853
-    lon: 34.78181
-  sources:
-  - https://www.johnbryce.co.il/content/john-bryce-training-college/
-  - https://www.matrix-globalservices.com/subsidiaries/
-  - https://www.johnbryce.co.il/%d7%90%d7%95%d7%93%d7%95%d7%aa/branches/
 - id: 100
   name: Amazon Web Services
   slug: aws
@@ -3565,108 +3426,6 @@ items:
     lon: 34.90746
   sources:
   - http://web.archive.org/web/20190608002059/http://levj.tripod.com/
-- id: 122
-  name: AgileSparks
-  slug: agilesparks
-  remark: agile training and coaching company I taught courses for
-  functions:
-  - training-provider
-  logo: logos/agilesparks.svg
-  logo_kind: official vector
-  logo_source: https://agilesparks.com/wp-content/uploads/2022/06/AS-LOGO.svg
-  logo_license: company brand asset (site header logo)
-  logo_note: the white header logo from the official site, recoloured dark (#333333) for light backgrounds
-  status: acquired
-  what_happened: Agile and lean training and consulting firm founded in 2008; in March 2025 the SQLink group bought control of it in a deal
-    valuing it at about NIS 10 million, with founder and CEO Erez Tatcher keeping about a quarter and staying on.
-  website: https://agilesparks.com/
-  location: Herzliya, Israel
-  location_geo:
-    place: Herzliya, Israel
-    lat: 32.16768
-    lon: 34.83083
-  israel_office: Herzliya, Israel (business directories; also listed in Kfar Hasidim), with offices in Boston and India
-  israel_office_geo:
-    place: Herzliya, Israel
-    lat: 32.16768
-    lon: 34.83083
-  address: 3 Shenkar St., Herzliya, Israel
-  address_source: https://www.leadiq.com/c/agilesparks/5a1da6bf23000052009a0a86
-  geo:
-    from: israel_office
-    place: Herzliya, Israel
-    lat: 32.16768
-    lon: 34.83083
-  sources:
-  - https://finance.walla.co.il/item/3734830
-  - https://www.ice.co.il/digital-140/news/article/1055333
-  - https://enterpriseleague.com/company/agilesparks
-  - https://partnerdirectory.atlassian.com/agilesparks
-- id: 123
-  name: DevelopIntelligence
-  slug: developintelligence
-  remark: US developer training company I taught courses for
-  functions:
-  - training-provider
-  logo: logos/developintelligence.svg
-  logo_kind: traced from original bitmap (no vector logo found online)
-  logo_license: company brand asset (site header logo)
-  logo_note: trace of the 2019 header logo archived at http://web.archive.org/web/20200831220820/https://www.developintelligence.com/
-  status: acquired
-  what_happened: Acquired by Pluralsight in October 2020 (terms not disclosed); developintelligence.com now redirects to Pluralsight's
-    professional services pages.
-  website: https://www.pluralsight.com/product/professional-services
-  location: Lafayette, Colorado, USA (from Louisville, then Boulder in 2014)
-  location_geo:
-    place: Lafayette, Colorado, USA
-    lat: 39.9936
-    lon: -105.0897
-  former_website: https://www.developintelligence.com (now redirects to pluralsight.com)
-  address: 2675 North Park Drive, Lafayette, Colorado, USA
-  address_source: https://bizwest.com/?p=331098
-  geo:
-    from: location
-    place: Lafayette, Colorado, USA
-    lat: 39.9936
-    lon: -105.0897
-  sources:
-  - https://www.pluralsight.com/newsroom/press-releases/pluralsight-acquires-developintelligence-to-broaden-upskilling-e
-  - https://trainingindustry.com/press-release/it-and-technical-training/pluralsight-acquires-developintelligence-to-broaden-upskilling-experiences-for-enterprises-and-enable-businesses-to-accelerate-digital-transformation/
-  - https://pitchbook.com/profiles/company/83578-06
-- id: 124
-  name: Logtel
-  slug: logtel
-  remark: technology training and conference company I taught courses for
-  functions:
-  - training-provider
-  logo: logos/logtel.svg
-  logo_kind: traced from original bitmap (no vector logo found online)
-  logo_license: company brand asset (site header logo)
-  logo_note: trace of the white header logo from https://www.logtel.com/wp-content/uploads/2022/12/whitelogtelnew.png, recoloured in the
-    dark blue (#1d4274) of the site icon
-  status: active
-  what_happened: Training company established in 1984; authorized training provider for AMD Xilinx in Israel.
-  website: https://www.logtel.com/
-  location: Petah Tikva, Israel
-  location_geo:
-    place: Petah Tikva, Israel
-    lat: 32.08776
-    lon: 34.886
-  israel_office: Petah Tikva, Israel (Global Towers, 1 Derech Yitzhak Rabin)
-  israel_office_geo:
-    place: Petah Tikva, Israel
-    lat: 32.08776
-    lon: 34.886
-  address: Global Towers, 1 Derech Yitzhak Rabin, Petah Tikva, Israel
-  address_source: https://www.logtel.com/contact-us/
-  geo:
-    from: israel_office
-    place: Petah Tikva, Israel
-    lat: 32.08776
-    lon: 34.886
-  sources:
-  - https://www.logtel.com/
-  - https://www.zoominfo.com/c/logtel/22970916
 - id: 125
   name: Tel Aviv University
   slug: tel-aviv-university

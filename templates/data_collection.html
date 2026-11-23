@@ -1,13 +1,12 @@
 {# A page whose whole body is the data collection app (static/data-collection-app.js).
 
    Used by the teaching data page under training (/training/data/: the
-   clients I taught at and the training companies I taught for) and the
-   education page. They run the same app; each
+   clients I taught at) and the education page. They run the same app; each
    page names the plugins it shows in its front matter, so the markup, styles
    and scripts live here once instead of in a copy per page:
 
      [extra]
-     plugins = ["companies", "providers"]   # plugin keys, the first is the default view
+     plugins = ["education", "certifiers"]   # plugin keys, the first is the default view
 
    The Hebrew page of each section repeats [extra] (front matter is per file).
 
@@ -172,7 +171,6 @@ window.collectionBasePath = '/';
 // and the build plan rebuilds this page when a plugin changes.
 window.collectionPluginRegistry = {
 'companies': {{ get_url(path='plugin-companies.js') | json_encode | safe }},
-'providers': {{ get_url(path='plugin-companies.js') | json_encode | safe }},
 'education': {{ get_url(path='plugin-companies.js') | json_encode | safe }},
 'certifiers': {{ get_url(path='plugin-companies.js') | json_encode | safe }},
 'certifications': {{ get_url(path='plugin-certifications.js') | json_encode | safe }},

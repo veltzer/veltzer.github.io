@@ -226,23 +226,12 @@ window.collectionPlugins['companies'] = {
     }
 };
 
-// The training companies I taught FOR (not clients: they hired me to teach
-// their courses to their own customers): the same cards over the organizations
-// whose functions include training-provider (scripts/import_companies.py
-// writes one JSON per tab). The app derives sortFields and filters onto each
-// plugin object, so this is a copy, not the same object under a second key.
-// Both keys map to this file in the app's registry, which loads it once.
-window.collectionPlugins['providers'] = Object.assign({}, window.collectionPlugins['companies'], {
-    file: 'data/training_providers.json.gz',
-    navTitle: t('companies_providers_nav_title'),
-    title: t('companies_providers_title'),
-    subtitle: t('companies_providers_subtitle')
-});
-
 // The schools and universities I studied at, and the companies that certified
 // me, two of the tabs of the education page (/training/education/). Its third
 // tab is the certifications themselves, one card per certification
-// (plugin-certifications.js).
+// (plugin-certifications.js). The app derives sortFields and filters onto each
+// plugin object, so these are copies, not the same object under a second key.
+// All three keys map to this file in the app's registry, which loads it once.
 window.collectionPlugins['education'] = Object.assign({}, window.collectionPlugins['companies'], {
     file: 'data/education.json.gz',
     navTitle: t('companies_education_nav_title'),

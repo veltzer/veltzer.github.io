@@ -3,12 +3,12 @@
 """Import one tab of organizations from data/yaml/organizations.yaml.
 
 organizations.yaml records every organization I dealt with -- taught at,
-taught for, studied at, was certified by -- with research notes, sources,
+studied at, was certified by -- with research notes, sources,
 three geocoded place fields and logo provenance. Each tab of the site's
 organization pages is the organizations with one ``--function`` among their
 ``functions`` (TABS lists them): the teaching data page (/training/data/)
-has ``teaching``, the companies I taught at, and ``training-provider``, the
-training companies I taught for, which exclude each other (EXCLUSIVE);
+has ``teaching``, the companies I taught at (the training companies I taught
+for, ``training-provider``, went to My World, myworld.stream, on 2026-11-23);
 the education page (/training/education/) has ``education``, the schools and
 universities I studied at, and ``certification``, the companies that certified
 me; its third tab, the certifications themselves, is built from
@@ -49,15 +49,11 @@ from pathlib import Path
 import yaml
 
 TEACHING = "teaching"
-TRAINING_PROVIDER = "training-provider"
 EDUCATION = "education"
 CERTIFICATION = "certification"
 # The functions that get a tab, so a card, an address and a map image (see
 # organizations_fetch_maps.py): every organization with one of them is shown.
-TABS = (TEACHING, TRAINING_PROVIDER, EDUCATION, CERTIFICATION)
-# Tabs of one page that are different relationships to the same kind of
-# organization, so no organization may be on two of them.
-EXCLUSIVE = (TEACHING, TRAINING_PROVIDER)
+TABS = (TEACHING, EDUCATION, CERTIFICATION)
 
 # Fields copied verbatim when present. The order is the order in the JSON.
 KEPT = (
@@ -89,17 +85,6 @@ def has_function(item, function):
 def shown(item):
     """True when the organization appears on some tab."""
     return any(has_function(item, function) for function in TABS)
-
-
-def overlapping(data):
-    """The names of organizations on more than one tab, which must not happen.
-
-    The tabs are disjoint relationships: a client I taught at (teaching) is
-    not a training company I taught for (training-provider), and the page
-    would show such an organization twice.
-    """
-    return [item.get("name", "?") for item in data.get("items") or []
-            if sum(has_function(item, function) for function in EXCLUSIVE) > 1]
 
 
 def without_address(data):
@@ -158,11 +143,6 @@ def main():
         data = yaml.safe_load(handle)
     if not data or "items" not in data:
         print(f"ERROR: {args.input} has no items", file=sys.stderr)
-        return 1
-    both = overlapping(data)
-    if both:
-        print(f"ERROR: {args.input}: on more than one tab ({', '.join(EXCLUSIVE)} are exclusive): {', '.join(both)}",
-              file=sys.stderr)
         return 1
     missing = without_address(data)
     if missing:

@@ -19,8 +19,7 @@ for many of them is published on this site under [Syllabi](/en/syllabi/) and
 
 Courses can be tailored to your team's needs and delivered on site or online.
 The [clients I have taught at](/en/training/data/) range from startups to
-multinationals, and I have also taught courses for
-[training companies](/en/training/data/?data=providers) in Israel and the US.
+multinationals.
 Where I studied and the certifications I hold are on
 [Education & Certifications](/en/training/education/).
 
