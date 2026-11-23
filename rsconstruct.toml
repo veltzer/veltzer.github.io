@@ -121,21 +121,6 @@ dep_inputs = [
     "scripts/make_logo.py",
     "templates/base.html",
     "static/favicon.svg",
-    # test_people.py reads every data file's with: names.
-    "data/yaml/books_loans.yaml",
-    "data/yaml/concerts.yaml",
-    "data/yaml/courses.yaml",
-    "data/yaml/cv.yaml",
-    "data/yaml/lectures.yaml",
-    "data/yaml/loans.yaml",
-    "data/yaml/museums.yaml",
-    "data/yaml/people.yaml",
-    "data/yaml/political_rallies.yaml",
-    "data/yaml/profiles.yaml",
-    "data/yaml/study_sites.yaml",
-    "data/yaml/text_articles.yaml",
-    "data/yaml/trips.yaml",
-    "data/yaml/video_courses.yaml",
 ]
 [analyzer.markdown]
 
@@ -145,7 +130,8 @@ dep_inputs = [
 # (it used to live in the private ../data repo). Three of the checks it had
 # there came with it: lint, schema validation ($schema in each file) and a
 # JSON conversion that proves every file parses. The films and series, with
-# their imdb and Wikidata checks, live in My World now (myworld.stream).
+# their imdb and Wikidata checks, and the concerts, museums and people, with
+# their image check, live in My World now (myworld.stream).
 [processor.checker.iyamllint]
 src_dirs = [".github", "data/yaml"]
 
@@ -154,23 +140,6 @@ src_dirs = ["data/yaml"]
 
 [processor.generator.yaml2json]
 src_dirs = ["data/yaml"]
-
-# Every concert and museum has its image in static/images/: a series added to
-# the YAML without its image used to ship with a broken card (eight series in
-# 2026-11 did, before they moved to My World) because this check was manual. An explicit step rather
-# than a script checker: a checker caches per file, so a deleted image just
-# drops out of its list, while here the matched glob is one input set and
-# adding, deleting or changing an image reruns the check. It writes an empty
-# stamp file on success, the output the step needs.
-[processor.explicit.generic.check_images]
-command = "scripts/check_images.py"
-inputs = [
-    "scripts/check_images.py",
-    "data/yaml/concerts.yaml",
-    "data/yaml/museums.yaml",
-]
-input_globs = ["static/images/*.jpg"]
-output_files = ["out/check_images/ok"]
 
 # Mirror every post to ~/insync/for_ai/blog, which Insync syncs to Google
 # Drive for AI agents that read it. Runs only on a machine with that folder

@@ -26,8 +26,8 @@ the box passes through untouched rather than being upscaled into blur. The
 TMDB posters (w300, 300x450) are taller than the 384 box, so they are shrunk
 to 256x384; the height is the binding edge for portrait images.
 
--strip is not only about bytes. Museum images come from a phone via
-image_picker's search, and phone JPEGs carry EXIF that can include GPS
+-strip is not only about bytes. The museum images (in My World since 2026-11-23)
+came from a phone, and phone JPEGs carry EXIF that can include GPS
 coordinates. Publishing those with a picture of a museum you visited is a
 privacy leak, not a weight problem.
 

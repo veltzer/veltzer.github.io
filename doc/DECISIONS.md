@@ -499,16 +499,20 @@ their strings. The data and the images stay; the plugins are in the git
 history (last present in the commit before this date's) if either list gets a
 page of its own.
 
+Update 2026-11-23: the concerts, the museums and `people.yaml` (with every
+concert and museum image, `check_images.py`, `fetch_museum_images.py`,
+`image_picker.py` and `tests/test_people.py`) went to My World
+(myworld.stream), where every one of them was checked first. The `with:`
+names left in `lectures.yaml`, `political_rallies.yaml` and `trips.yaml` are
+people My World has; nothing on the site checks them any more.
+
 Private data types: the files in `data/yaml/` that no page publishes.
 
 - `books_loans.yaml`
-- `concerts.yaml`
 - `courses.yaml`
 - `cv.yaml`
 - `lectures.yaml`
 - `loans.yaml`
-- `museums.yaml`
-- `people.yaml`
 - `political_rallies.yaml`
 - `study_sites.yaml`
 - `text_articles.yaml`

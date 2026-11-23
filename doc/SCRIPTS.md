@@ -120,32 +120,12 @@ version is the one it and `static/blog-search.js` implement. A manual step,
 and the output is committed; the browser builds the post vectors itself, so
 rerun it only for a new release or once new posts have brought many new words.
 
-## Image Fetch Scripts
-
-All image scripts are incremental — they skip images that already exist.
-Use `--force` to re-download.
-
-### `scripts/fetch_museum_images.py`
-
-Downloads museum images via DuckDuckGo image search with tkinter GUI picker.
-Searches for `"{name} museum {city}"`.
-Output: `static/images/museum-{internal_id}.jpg`
-
-## Shared Modules
-
-### `scripts/image_picker.py`
-
-Shared module used by the museum image script.
-Provides DuckDuckGo image search (with candidates cached under
-`$XDG_CACHE_HOME/veltzer-site/image-picker/`, defaulting to
-`~/.cache/veltzer-site/image-picker/`, so they survive a reboot) and a
-tkinter image browser GUI with prev/next/select/skip/quit.
+## Image Modules
 
 ### `scripts/image_standard.py`
 
 One place that decides how large an image in `static/images/` may be
-(`800x384>`, JPEG, EXIF stripped) and the `normalise()` function the fetchers
-call on save. The numbers were derived from the card geometry of the data
+(`800x384>`, JPEG, EXIF stripped) and the `normalise()` function images are saved through. The numbers were derived from the card geometry of the data
 collection app (removed 2026-11-23); the module docstring explains the arithmetic.
 
 ### `scripts/normalise_images.py`
@@ -199,14 +179,6 @@ over `content/blog/` (the `_index` files excluded). Because rssite pairs
 translations by file name, checking each file alone also keeps the
 languages' `date` and `slug` equal. The rule is in `CLAUDE.md` under "Blog
 Posts".
-
-### `scripts/check_images.py`
-
-Verifies every museum and concert has its image in `static/images/`. (The
-films and series, with their poster fetchers, live in My World now.) Part of the build
-(`[processor.explicit.generic.check_images]` in `rsconstruct.toml`, which
-reruns when any image is added, changed or deleted): an
-item added without its image fails it, so run the matching `fetch_*.py`.
 
 ### `scripts/check_profile_links.py`
 

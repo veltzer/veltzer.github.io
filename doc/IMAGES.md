@@ -3,34 +3,19 @@
 All media cover images are stored in `static/images/`, which rssite copies
 verbatim to `/images/` in the built site.
 
-## Naming Conventions
+## What is left
 
-| Media Type | Pattern | Source |
-|---|---|---|
-| Museums | `museum-{internal_id}.jpg` | DuckDuckGo search |
-
-The film and series posters (`movie-*.jpg`, `series-*.jpg`) went to My World
-(myworld.stream) with the films and series on 2026-11-22.
-
-## Adding Images for New Entries
-
-1. Add the entry to the YAML in `data/yaml/`
-2. Run the appropriate fetch script (see `doc/SCRIPTS.md`)
-3. Run `scripts/check_images.py` to verify all images are present
-4. Run `rsconstruct build --verbose -j0` to build the site
+`mark-veltzer.jpg` (the About page), `og/` (the share cards) and
+`fatar-fix/` (a post's photos). The concert and museum photos
+(`concert-*.jpg`, `museum-*.jpg`) went to My World (myworld.stream) with the
+concerts and museums on 2026-11-23, as the film and series posters
+(`movie-*.jpg`, `series-*.jpg`) did on 2026-11-22.
 
 ## Uniform Display
 
 The data collection app that showed card images in a fixed 2:1 box was
 removed on 2026-11-23 (what it showed lives in My World, myworld.stream);
 `scripts/image_standard.py` still sizes images to its card geometry.
-
-## Caches
-
-- DuckDuckGo image picker: cached under `$XDG_CACHE_HOME/veltzer-site/image-picker/`
-  (default `~/.cache/veltzer-site/image-picker/`) per search term
-
-Delete these to force fresh searches.
 
 ## Alternatives to Storing Images in Git
 

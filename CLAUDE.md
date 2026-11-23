@@ -52,12 +52,12 @@ which records the traps that outlived the migration.
   how rssite pairs a post with its translation; nothing else is needed
     - `content/<page>/_index.{en,he}.md` — the standalone nav pages (about, media, calendar, …)
 - `data/yaml/` — the source of truth for the profile block
-  (`profiles.yaml`), plus the private lists that no page publishes (concerts,
-  museums, cv, trips, lectures, …; the full list is in `doc/DECISIONS.md`). Every file names its schema in `$schema`, which the
+  (`profiles.yaml`), plus the private lists that no page publishes (cv,
+  trips, lectures, …; the full list is in `doc/DECISIONS.md`). Every file names its schema in `$schema`, which the
   build validates against `veltzer.github.io/web-schemas`. This directory came out of
   the private `../data` repo in 2026-09. The YouTube videos (the reviewed
   ones and the watch history), the Audible library, the podcasts, the
-  audio courses and the books read moved on to My World (myworld.stream) in 2026-11
+  audio courses, the books read, and the concerts, museums and people moved on to My World (myworld.stream) in 2026-11
 - `templates/` — Tera templates (`base.html`, `page.html`, `blog.html`, taxonomy pages)
 - `sass/style.scss` — compiled to `/style.css` by rssite
 - `static/` — copied verbatim to the site root: media plugins, images, data and `vendor/`
@@ -66,18 +66,17 @@ which records the traps that outlived the migration.
   `git submodule update --init --recursive` on a fresh clone or the build fails.**
 - `scripts/` — `check_post_names.py` (post file names against their `date` and `slug`), `check_hebrew.py` (the Hebrew feeds and share cards carry no untranslated text: the Hebrew posts' title, description and tags, and the built `_site/he/**/atom.xml`; a build step), `check_redirects.py` (checks the
   live site's host redirects and sitemap), `check_indexing.py` (which sitemap pages Google has indexed, through the Search
-  Console API with the gcloud login; network, run by hand), `check_images.py` (every media item has its
-  local image in `static/images/`; a build step), `check_profile_links.py` (the profile
+  Console API with the gcloud login; network, run by hand), `check_profile_links.py` (the profile
   URLs in `profiles.yaml` still resolve; network, run by hand, not part of the build),
   `manage_api_key.py` (the Google Calendar API key's restrictions, stored in `pass`),
   `make_og_images.py` (the two site-wide share cards, drawn by hand, committed), `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
-  the sibling teaching repos), image fetchers, data importers,
+  the sibling teaching repos), data importers,
   `serve.py`, `make_logo.py` (the logo and the favicon/touch icons drawn from it), `make_word_vectors.py` (the blog search's word vectors), `export_posts_for_ai.py` (mirrors the posts to `~/insync/for_ai/blog` for AI agents
   reading Google Drive; a build step that runs only where that folder exists, via
   `enabled_if_dir_exists`), and the `build_*_dict.sh` / `spellcheck_*.sh` pair behind the aspell
   processors
 - `tests/` — pytest suite: the data import scripts, the logo generator against the inline logo in `base.html`, the word-vector
-  trimmer, `people.yaml` against every `with:` name in the data files, the Hebrew check
+  trimmer, the Hebrew check
   (`check_hebrew.py`) and the CSS scoping of `import_teaching.py`
 - `.aspell.{en,he}.txt` — the spellcheck word lists; `out/aspell/` holds the compiled
   dictionaries (gitignored build output)
