@@ -265,11 +265,12 @@ than strips, so
 ### Consequence to be aware of
 
 Because tags are no longer copied verbatim between a post and its translation,
-nothing checks that the two tag sets stay conceptually in step. A Hebrew post
-tagged with an English word will not error -- it will quietly create a new
-English term under `/he/tags/`. The technology tags that legitimately stay in
-latin (today only `mysql`; gpg, ssh, mkdocs and github-pages were translated
-since) make that easy to miss.
+an English word on a Hebrew post would quietly create a new English term under
+`/he/tags/`. That was a live risk when this was written; it is caught now:
+`scripts/check_hebrew.py` fails on a Hebrew post's tag that is neither Hebrew
+nor one of the technology names in `LATIN_TAGS` (`mysql`, `php`), and the
+positional pairing (`infer_translations`) fails on tag lists of different
+lengths. Everything about tags is gathered in `doc/TAGS.md`.
 
 ## No custom JS/HTML minification
 

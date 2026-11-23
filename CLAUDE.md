@@ -101,6 +101,8 @@ which records the traps that outlived the migration.
   dictionaries (gitignored build output)
 - `_site/` — generated output (gitignored, never edit)
 - `doc/` — project notes, decisions and the improvements backlog;
+  `doc/TAGS.md` gathers everything about the blog's tags (how they work,
+  the decisions, the checks, the open questions);
   `doc/TRANSLATION.md` is the state of the Hebrew translation (what is
   translated, how, and what stays English by decision);
   `doc/BACKEND_SERVICES.md` is the research on adding dynamic features

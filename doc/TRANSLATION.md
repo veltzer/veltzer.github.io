@@ -114,7 +114,8 @@ Not yet done: no aspell spellcheck for Russian (it needs `aspell-ru`) and no
 ### Tag glossary
 
 Tags pair by position across all three languages, so an English tag must
-always become the same Russian tag. A new English tag gets its entry here:
+always become the same Russian tag. A new English tag gets its entry here
+(the rest of what concerns tags is in `doc/TAGS.md`):
 
 | en | ru | en | ru |
 | --- | --- | --- | --- |
