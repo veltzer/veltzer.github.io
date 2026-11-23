@@ -79,7 +79,6 @@ def start_server(port, docs_dir):
 
     # Not a `with`: the server outlives this function by design and is closed in
     # main()'s finally block (httpd.shutdown() / httpd.server_close()).
-    # pylint: disable=consider-using-with
     httpd = ReusableServer(("127.0.0.1", port), handler)
     thread = threading.Thread(target=httpd.serve_forever, daemon=True)
     thread.start()
@@ -128,7 +127,6 @@ def launch_browser(url, anonymous):
 
     # Not a `with`: the browser is meant to outlive this function; main() decides
     # whether to wait on it and cleans up the temp profile afterwards.
-    # pylint: disable=consider-using-with
     proc = subprocess.Popen(args)
     return proc, profile_dir
 

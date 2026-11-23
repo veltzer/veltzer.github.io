@@ -29,6 +29,7 @@ import argparse
 import gzip
 import hashlib
 import json
+import os
 import re
 import sys
 import unicodedata
@@ -76,7 +77,13 @@ def post_words(lang: str) -> set[str]:
 
 
 def get(url: str) -> bytes:
-    with urllib.request.urlopen(url) as response:
+    """Fetch url. GitHub API calls carry GH_TOKEN when it is set (CI sets
+    it), so they do not share the runner IP's anonymous rate limit."""
+    request = urllib.request.Request(url)
+    token = os.environ.get("GH_TOKEN")
+    if token and url.startswith("https://api.github.com/"):
+        request.add_header("Authorization", f"Bearer {token}")
+    with urllib.request.urlopen(request) as response:
         return response.read()
 
 

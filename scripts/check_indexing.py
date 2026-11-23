@@ -30,7 +30,7 @@ crawled is not a failure of this repo. See doc/SEO.md.
 """
 
 import argparse
-import datetime
+import datetime as dt
 import json
 import re
 import subprocess
@@ -118,13 +118,13 @@ def sitemap_urls():
 
 def local_today():
     """Today's date, local time."""
-    return datetime.datetime.now().astimezone().date()
+    return dt.datetime.now().astimezone().date()
 
 
 def shown_pages(http, days):
     """Every page of the property that appeared in a search result."""
     end = local_today()
-    start = end - datetime.timedelta(days=days)
+    start = end - dt.timedelta(days=days)
     url = f"{API}/webmasters/v3/sites/{urllib.parse.quote(PROPERTY, safe='')}/searchAnalytics/query"
     pages = set()
     start_row = 0
@@ -163,7 +163,7 @@ def load_cache(max_age):
     """The cached indexed pages that are still fresh: {url: iso date}."""
     if not CACHE.exists():
         return {}
-    oldest = (local_today() - datetime.timedelta(days=max_age)).isoformat()
+    oldest = (local_today() - dt.timedelta(days=max_age)).isoformat()
     cached = json.loads(CACHE.read_text(encoding="utf-8"))
     # Strictly newer: an entry is fresh for max_age days, so 0 trusts none,
     # not even one written earlier today.
