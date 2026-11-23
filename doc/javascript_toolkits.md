@@ -15,7 +15,7 @@ blog loads nothing at all.
 
 | Page | CSS | JS libraries |
 |------|-----|--------------|
-| `/en/training/data/`, `/en/training/education/` | Tailwind (compiled, vendored) | none -- plain JS in `static/data-collection-app.js` + two plugin files |
+| `/en/training/education/` | Tailwind (compiled, vendored) | none -- plain JS in `static/data-collection-app.js` + two plugin files |
 | `/en/calendar/` | site stylesheet | FullCalendar 6.1.20 + its Google Calendar plugin -- **vendored** |
 | `/en/slides/`, `/en/syllabi/`, `/en/animations/` | site stylesheet | Material Web 2 (CDN) |
 | Blog posts, About, tags | site stylesheet (`sass/style.scss`) | none |

@@ -59,9 +59,9 @@ which records the traps that outlived the migration.
   ones and the watch history), the Audible library, the podcasts, the
   audio courses and the books read moved on to My World (myworld.stream) in 2026-11
 - `data/logos/` — one SVG per organization in `organizations.yaml` (which refers to
-  them by paths relative to `data/`), linted by xmllint. The companies tab of the media
-  page is built from these at build time: the `companies` step of `build_site.py`
-  writes `_site/data/companies.json.gz` via `scripts/import_companies.py` and copies
+  them by paths relative to `data/`), linted by xmllint. The education page's
+  organization tabs are built from these at build time: the `companies` step of `build_site.py`
+  writes `_site/data/education.json.gz` and `certifiers.json.gz` via `scripts/import_companies.py` and copies
   the SVGs to `_site/logos/`. Neither is committed, unlike the rest of `static/data/`.
   The static map image on each company card (`static/images/map-<lat>_<lon>.jpg`,
   one per distinct `geo` point) *is* committed: `scripts/organizations_fetch_maps.py`

@@ -76,11 +76,9 @@ function logoKindLabel(kind) {
     return capitalize(kind);
 }
 
-window.collectionPlugins['companies'] = {
-    file: 'data/companies.json.gz',
-    navTitle: t('companies_nav_title'),
-    title: t('companies_title'),
-    subtitle: t('companies_subtitle'),
+// The cards of an organization tab: each tab below is a copy of these with
+// its own file and titles.
+const companyCards = {
     ratingScale: null,
     searchPlaceholder: t('companies_search_placeholder'),
     searchFields: ['name', 'location', 'israel_office', 'address', 'status', 'review', 'remark'],
@@ -231,15 +229,15 @@ window.collectionPlugins['companies'] = {
 // tab is the certifications themselves, one card per certification
 // (plugin-certifications.js). The app derives sortFields and filters onto each
 // plugin object, so these are copies, not the same object under a second key.
-// All three keys map to this file in the app's registry, which loads it once.
-window.collectionPlugins['education'] = Object.assign({}, window.collectionPlugins['companies'], {
+// Both keys map to this file in the app's registry, which loads it once.
+window.collectionPlugins['education'] = Object.assign({}, companyCards, {
     file: 'data/education.json.gz',
     navTitle: t('companies_education_nav_title'),
     title: t('companies_education_title'),
     subtitle: t('companies_education_subtitle')
 });
 
-window.collectionPlugins['certifiers'] = Object.assign({}, window.collectionPlugins['companies'], {
+window.collectionPlugins['certifiers'] = Object.assign({}, companyCards, {
     file: 'data/certifiers.json.gz',
     navTitle: t('companies_certifiers_nav_title'),
     title: t('companies_certifiers_title'),

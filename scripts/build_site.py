@@ -9,8 +9,7 @@ becomes a cached product. What rssite does not produce is done here, each
 step declaring exactly what it reads and writes in rsconstruct.toml so
 rsconstruct can order, cache and restore it:
 
-  companies      _site/data/companies.json.gz,
-                 education.json.gz, certifiers.json.gz,
+  companies      _site/data/education.json.gz, certifiers.json.gz,
                  certifications.json.gz and _site/logos/
 
 companies is an explicit processor: rsconstruct appends `--inputs ...
@@ -51,13 +50,11 @@ def die(message):
     sys.exit(1)
 
 
-def write_companies(companies_file, education_file, certifiers_file,
-                    certifications_file, logos_dir):
+def write_companies(education_file, certifiers_file, certifications_file, logos_dir):
     """Build the organization tabs' data and logos straight into the output.
 
-    One JSON per tab, from the same YAML: on the teaching data page the
-    companies I taught at (function teaching), and on
-    the education page the schools I studied at (function education) and the
+    One JSON per tab, from the same YAML: on the education page the schools
+    I studied at (function education) and the
     companies that certified me (function certification). The education
     page's third tab is the certifications I hold, one per certification
     rather than per company: certifications.yaml joined with the issuing
@@ -72,8 +69,7 @@ def write_companies(companies_file, education_file, certifiers_file,
     to data/ (logos/<slug>.svg), and data/logos/ lands at /logos/, so the
     plugin can use them as they are.
     """
-    for output_file, function in ((companies_file, "teaching"), (education_file, "education"),
-                                  (certifiers_file, "certification")):
+    for output_file, function in ((education_file, "education"), (certifiers_file, "certification")):
         output_file.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run(
             [sys.executable, str(COMPANIES_IMPORTER), str(ORGANIZATIONS_YAML), str(output_file),
@@ -100,8 +96,7 @@ def write_companies(companies_file, education_file, certifiers_file,
 
 # The steps, in the order the bare command lists them, each with its line.
 STEPS = {
-    "companies": "write _site/data/companies.json.gz,"
-                 " education.json.gz, certifiers.json.gz, certifications.json.gz and _site/logos/",
+    "companies": "write _site/data/education.json.gz, certifiers.json.gz, certifications.json.gz and _site/logos/",
 }
 
 

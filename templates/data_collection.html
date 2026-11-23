@@ -1,9 +1,8 @@
 {# A page whose whole body is the data collection app (static/data-collection-app.js).
 
-   Used by the teaching data page under training (/training/data/: the
-   clients I taught at) and the education page. They run the same app; each
-   page names the plugins it shows in its front matter, so the markup, styles
-   and scripts live here once instead of in a copy per page:
+   Used by the education page under training (/training/education/). Any
+   page that runs the app names the plugins it shows in its front matter, so
+   the markup, styles and scripts live here once instead of in a copy per page:
 
      [extra]
      plugins = ["education", "certifiers"]   # plugin keys, the first is the default view
@@ -170,7 +169,6 @@ window.collectionBasePath = '/';
 // a hash of its content: new HTML is never paired with a cached old plugin,
 // and the build plan rebuilds this page when a plugin changes.
 window.collectionPluginRegistry = {
-'companies': {{ get_url(path='plugin-companies.js') | json_encode | safe }},
 'education': {{ get_url(path='plugin-companies.js') | json_encode | safe }},
 'certifiers': {{ get_url(path='plugin-companies.js') | json_encode | safe }},
 'certifications': {{ get_url(path='plugin-certifications.js') | json_encode | safe }},

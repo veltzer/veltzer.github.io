@@ -2,14 +2,11 @@
 
 """Import one tab of organizations from data/yaml/organizations.yaml.
 
-organizations.yaml records every organization I dealt with -- taught at,
-studied at, was certified by -- with research notes, sources,
-three geocoded place fields and logo provenance. Each tab of the site's
-organization pages is the organizations with one ``--function`` among their
-``functions`` (TABS lists them): the teaching data page (/training/data/)
-has ``teaching``, the companies I taught at (the training companies I taught
-for, ``training-provider``, went to My World, myworld.stream, on 2026-11-23);
-the education page (/training/education/) has ``education``, the schools and
+organizations.yaml records the organizations I studied at or was certified
+by, with research notes, sources, three geocoded place fields and logo
+provenance. Each tab of the education page (/training/education/) is the
+organizations with one ``--function`` among their ``functions`` (TABS lists
+them): ``education``, the schools and
 universities I studied at, and ``certification``, the companies that certified
 me; its third tab, the certifications themselves, is built from
 certifications.yaml by import_certifications.py. A tab wants only the fields a
@@ -48,12 +45,14 @@ from pathlib import Path
 
 import yaml
 
-TEACHING = "teaching"
 EDUCATION = "education"
 CERTIFICATION = "certification"
 # The functions that get a tab, so a card, an address and a map image (see
 # organizations_fetch_maps.py): every organization with one of them is shown.
-TABS = (TEACHING, EDUCATION, CERTIFICATION)
+TABS = (EDUCATION, CERTIFICATION)
+# The clients I taught at (teaching), the training companies I taught for
+# (training-provider) and the companies I consulted for (consulting) went to My
+# World (myworld.stream) in November 2026: they have no tab.
 
 # Fields copied verbatim when present. The order is the order in the JSON.
 KEPT = (
@@ -117,7 +116,7 @@ def missing_maps(items, images_dir):
     return sorted({item["map"] for item in items if "map" in item and not (images_dir / item["map"].rsplit("/", 1)[-1]).is_file()})
 
 
-def convert(data, function=TEACHING):
+def convert(data, function):
     """Filter to the organizations with ``function`` and trim each to its card fields."""
     items = data.get("items") or []
     return {"items": [convert_item(item) for item in items if has_function(item, function)]}
@@ -134,8 +133,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("input", help="path to data/yaml/organizations.yaml")
     parser.add_argument("output", help="path of the .json.gz to write")
-    parser.add_argument("--function", choices=TABS, default=TEACHING,
-                        help="the relationship this tab shows (default: %(default)s)")
+    parser.add_argument("--function", choices=TABS, required=True,
+                        help="the relationship this tab shows")
     parser.add_argument("--images-dir", type=Path,
                         help="static/images/; when given, fail if any company's map image is missing")
     args = parser.parse_args()

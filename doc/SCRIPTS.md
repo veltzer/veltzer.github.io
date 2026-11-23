@@ -10,14 +10,13 @@ The one build step around rssite, run by `rsconstruct build` as a processor
 `processor.mass_generator.generic.site`: `rssite plan` lists every file a
 build writes with its sources, and each is cached separately.
 
-- `companies` writes the organization tabs' data, four files in
+- `companies` writes the organization tabs' data, three files in
   `_site/data/`, and copies `data/logos/*.svg` to `_site/logos/`.
   `scripts/import_companies.py`, once per `--function` of
-  `organizations.yaml`, writes `companies.json.gz` (taught at),
-  `education.json.gz` (studied at) and `certifiers.json.gz` (certified by);
+  `organizations.yaml`, writes `education.json.gz` (studied at) and `certifiers.json.gz` (certified by);
   `scripts/import_certifications.py` joins `certifications.yaml` with the
   issuers into `certifications.json.gz` (one entry per certification). The
-  stanza in `rsconstruct.toml` names all five outputs (the four files and `_site/logos/`); every map image the
+  stanza in `rsconstruct.toml` names all four outputs (the three files and `_site/logos/`); every map image the
   YAML names must exist under `static/images/`.
 
 Everything else that used to be a step here is the generator's own now: the

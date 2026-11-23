@@ -1,8 +1,8 @@
-"""Tests for import_companies.py, which picks the taught-at organizations.
+"""Tests for import_companies.py, which picks the organizations of one tab.
 
 organizations.yaml carries every organization with research notes, three
-geocoded fields and logo provenance; the companies tab wants the teaching
-ones with only their card fields. These pin the selection rule, what is
+geocoded fields and logo provenance; a tab wants the ones with its function
+(education or certification) with only their card fields. These pin the selection rule, what is
 dropped, the one map point that survives, and what_happened, which the card line is built from.
 """
 
@@ -17,7 +17,7 @@ def organization(**overrides):
         "id": 2,
         "name": "Amdocs",
         "slug": "amdocs",
-        "functions": ["teaching"],
+        "functions": ["certification"],
         "logo": "logos/amdocs.svg",
         "logo_kind": "official vector",
         "logo_source": "https://upload.wikimedia.org/wikipedia/commons/1/18/Amdocs_Logo.svg",
@@ -39,16 +39,16 @@ def organization(**overrides):
 
 
 class TestSelection:
-    def test_teaching_organizations_are_kept(self):
-        out = import_companies.convert({"items": [organization()]})
+    def test_organizations_with_the_function_are_kept(self):
+        out = import_companies.convert({"items": [organization()]}, "certification")
         assert [item["name"] for item in out["items"]] == ["Amdocs"]
 
-    def test_organizations_not_taught_at_are_dropped(self):
-        out = import_companies.convert({"items": [organization(functions=["education"])]})
+    def test_organizations_without_the_function_are_dropped(self):
+        out = import_companies.convert({"items": [organization(functions=["education"])]}, "certification")
         assert out["items"] == []
 
-    def test_missing_functions_means_not_taught(self):
-        assert not import_companies.has_function(organization(functions=None), "teaching")
+    def test_missing_functions_means_no_tab(self):
+        assert not import_companies.has_function(organization(functions=None), "certification")
         assert not import_companies.shown({"name": "x"})
 
     def test_a_shown_organization_without_an_address_is_reported(self):
@@ -57,7 +57,7 @@ class TestSelection:
         assert import_companies.without_address(data) == ["Nowhere"]
 
     def test_education_and_certification_tabs(self):
-        data = {"items": [organization(), organization(id=4, name="Rimon", functions=["education"]),
+        data = {"items": [organization(functions=["consulting"]), organization(id=4, name="Rimon", functions=["education"]),
                           organization(id=5, name="MySQL", functions=["certification"])]}
         assert [item["name"] for item in import_companies.convert(data, "education")["items"]] == ["Rimon"]
         assert [item["name"] for item in import_companies.convert(data, "certification")["items"]] == ["MySQL"]
@@ -66,8 +66,10 @@ class TestSelection:
         assert import_companies.shown(organization(functions=["certification"]))
         assert import_companies.shown(organization(functions=["education"]))
         assert not import_companies.shown(organization(functions=[]))
-        # the consulting and the training companies went to My World (myworld.stream): they have no tab
+        # the consulting, the training companies and the clients I taught at went to My World
+        # (myworld.stream): they have no tab
         assert not import_companies.shown(organization(functions=["consulting"]))
+        assert not import_companies.shown(organization(functions=["teaching"]))
         assert not import_companies.shown(organization(functions=["training-provider"]))
 
 
@@ -76,7 +78,7 @@ class TestFields:
         out = import_companies.convert_item(organization())
         assert out["name"] == "Amdocs"
         assert out["logo"] == "logos/amdocs.svg"
-        assert out["functions"] == ["teaching"]
+        assert out["functions"] == ["certification"]
         assert out["status"] == "active"
         assert out["website"] == "https://www.amdocs.com"
         assert out["israel_office"].startswith("Ra'anana")
@@ -118,21 +120,21 @@ class TestBlurb:
 class TestMissingMaps:
     def test_present_image_is_not_missing(self, tmp_path):
         (tmp_path / "map-32.18602_34.86784.jpg").write_bytes(b"jpeg")
-        items = import_companies.convert({"items": [organization()]})["items"]
+        items = import_companies.convert({"items": [organization()]}, "certification")["items"]
         assert import_companies.missing_maps(items, tmp_path) == []
 
     def test_absent_image_is_reported_once_per_point(self, tmp_path):
-        items = import_companies.convert({"items": [organization(), organization(id=3, name="Other")]})["items"]
+        items = import_companies.convert({"items": [organization(), organization(id=3, name="Other")]}, "certification")["items"]
         assert import_companies.missing_maps(items, tmp_path) == ["images/map-32.18602_34.86784.jpg"]
 
     def test_item_without_geo_needs_no_image(self, tmp_path):
-        items = import_companies.convert({"items": [organization(geo=None)]})["items"]
+        items = import_companies.convert({"items": [organization(geo=None)]}, "certification")["items"]
         assert import_companies.missing_maps(items, tmp_path) == []
 
 
 class TestOutput:
     def test_gzipped_json_is_reproducible(self, tmp_path):
-        data = import_companies.convert({"items": [organization()]})
+        data = import_companies.convert({"items": [organization()]}, "certification")
         first = tmp_path / "a.json.gz"
         second = tmp_path / "b.json.gz"
         import_companies.write_json_gz(first, data)
@@ -153,6 +155,8 @@ class TestMainFailurePaths:
         source = tmp_path / "organizations.yaml"
         source.write_text(yaml.safe_dump(data), encoding="utf-8")
         target = tmp_path / "out.json.gz"
+        if "--function" not in extra:
+            extra = ("--function", "certification", *extra)
         monkeypatch.setattr(sys, "argv", ["import_companies.py", str(source), str(target), *extra])
         code = import_companies.main()
         return code, capsys.readouterr().err, target

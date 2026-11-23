@@ -2,9 +2,8 @@
  * The data collection app: a searchable, sortable, filterable card grid over
  * one JSON file per plugin (static/plugin-*.js).
  *
- * Entry points: every page using templates/data_collection.html -- the
- * training section's teaching data page (/en/training/data/,
- * /he/training/data/) and the education page. The template
+ * Entry points: every page using templates/data_collection.html -- today
+ * the training section's education page (/en/training/education/). The template
  * sets, BEFORE loading this script:
  *
  *   window.collectionBasePath   where plugins and data live ('/')
@@ -55,7 +54,7 @@
     window.collectionPlugins = window.collectionPlugins || {};
 
     // One load per script file: a file may register several keys (the
-    // companies plugin registers companies, education and certifiers), and loading all
+    // companies plugin registers education and certifiers), and loading all
     // plugins in parallel would otherwise insert it once per key.
     const scriptLoads = {};
 
