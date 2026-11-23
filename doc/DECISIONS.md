@@ -506,12 +506,14 @@ concert and museum image, `check_images.py`, `fetch_museum_images.py`,
 `trips.yaml`, `lectures.yaml` and `political_rallies.yaml` the same day, to
 My World's new Trips, Lectures and Rallies pages (every field checked
 against it; who came along are the people My World has, under the names
-it gives them now).
+it gives them now). And `courses.yaml`: its three Coursera courses and
+DevOps on AWS to My World's new Courses page (each with the school, the
+provider and the lecturer its name gave), its other six entries being the
+certifications already on My World's Certifications page.
 
 Private data types: the files in `data/yaml/` that no page publishes.
 
 - `books_loans.yaml`
-- `courses.yaml`
 - `cv.yaml`
 - `loans.yaml`
 - `study_sites.yaml`
