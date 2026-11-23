@@ -5,7 +5,7 @@
    the markup, styles and scripts live here once instead of in a copy per page:
 
      [extra]
-     plugins = ["education", "certifiers"]   # plugin keys, the first is the default view
+     plugins = ["education"]   # plugin keys, the first is the default view
 
    The Hebrew page of each section repeats [extra] (front matter is per file).
 
@@ -170,8 +170,6 @@ window.collectionBasePath = '/';
 // and the build plan rebuilds this page when a plugin changes.
 window.collectionPluginRegistry = {
 'education': {{ get_url(path='plugin-companies.js') | json_encode | safe }},
-'certifiers': {{ get_url(path='plugin-companies.js') | json_encode | safe }},
-'certifications': {{ get_url(path='plugin-certifications.js') | json_encode | safe }},
 };
 </script>
 <script src="{{ get_url(path='data-collection-utils.js') }}"></script>

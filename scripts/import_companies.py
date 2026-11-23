@@ -2,14 +2,11 @@
 
 """Import one tab of organizations from data/yaml/organizations.yaml.
 
-organizations.yaml records the organizations I studied at or was certified
-by, with research notes, sources, three geocoded place fields and logo
-provenance. Each tab of the education page (/training/education/) is the
-organizations with one ``--function`` among their ``functions`` (TABS lists
-them): ``education``, the schools and
-universities I studied at, and ``certification``, the companies that certified
-me; its third tab, the certifications themselves, is built from
-certifications.yaml by import_certifications.py. A tab wants only the fields a
+organizations.yaml records the organizations I studied at, with research
+notes, sources, three geocoded place fields and logo provenance. A tab of
+the education page (/training/education/) is the organizations with one
+``--function`` among their ``functions`` (TABS lists them): today the one
+tab, ``education``, the schools and universities I studied at. A tab wants only the fields a
 card shows: the name, the logo path, the current status
 and what happened, where the company is and where its Israel office was,
 the one map point chosen for it, the static map image of that point, and
@@ -46,13 +43,13 @@ from pathlib import Path
 import yaml
 
 EDUCATION = "education"
-CERTIFICATION = "certification"
 # The functions that get a tab, so a card, an address and a map image (see
 # organizations_fetch_maps.py): every organization with one of them is shown.
-TABS = (EDUCATION, CERTIFICATION)
+TABS = (EDUCATION,)
 # The clients I taught at (teaching), the training companies I taught for
-# (training-provider) and the companies I consulted for (consulting) went to My
-# World (myworld.stream) in November 2026: they have no tab.
+# (training-provider), the companies I consulted for (consulting) and those
+# that certified me (certification) went to My World (myworld.stream) in
+# November 2026: they have no tab.
 
 # Fields copied verbatim when present. The order is the order in the JSON.
 KEPT = (

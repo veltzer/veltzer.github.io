@@ -42,13 +42,12 @@ plugins:
 template = "data_collection.html"
 
 [extra]
-plugins = ["education", "certifiers"]    # the first is the default view
+plugins = ["education"]    # the first is the default view
 ```
 
 Today that is one page (as of 2026-11-23; `grep -l data_collection.html
 content/*/_index.en.md content/*/*/_index.en.md` lists them):
-`content/training/education/`, with `education`, `certifiers` and
-`certifications`.
+`content/training/education/`, with `education`.
 
 The consulting page (`content/consulting/`, key `consulting`) went to My
 World (myworld.stream) on 2026-11-22: the companies I consulted for are
@@ -57,14 +56,18 @@ companies I taught for (key `providers`, function `training-provider`), on
 2026-11-23: there they have the relation Training provider and the type
 Training Company. The same day the teaching data page went too
 (`content/training/data/`, key `companies`, function `teaching`): the clients
-I taught at are organizations with the relation Teaching in My World.
+I taught at are organizations with the relation Teaching in My World. And
+the companies that certified me (key `certifiers`, function `certification`)
+and the certifications (key `certifications`, `certifications.yaml`,
+`plugin-certifications.js`): the companies have the relation Certification
+there, and the certifications are its Certifications page.
 
 A single-plugin page shows no tab row.
 
-One script may register several keys: `plugin-companies.js` registers
-two copies of its organization cards (`education` and
-`certifiers`, each with its own `file` and titles), both
-keys map to it in `window.collectionPluginRegistry`, and the app loads each file once. A
+One script may register several keys, each a copy of the same cards with
+its own `file` and titles (`plugin-companies.js` registers one today,
+`education`); every key maps to the script in
+`window.collectionPluginRegistry`, and the app loads each file once. A
 copy made with `Object.assign` has to be a copy, not the same object under a
 second key, because the app writes the derived `sortFields` and `filters`
 onto each plugin object.
@@ -77,9 +80,8 @@ The nav tabs are sorted by `navTitle`, not by list order.
 Plugin data is authored as YAML in `data/yaml/` and loaded by the frontend
 as gzipped JSON, never as YAML (see `CLAUDE.md` for why). It is generated at
 build time: `scripts/build_site.py companies` runs
-`scripts/import_companies.py` once per organization tab and
-`scripts/import_certifications.py` once, and writes three files into
-`_site/data/` (`education`, `certifiers` and `certifications`, all `.json.gz`) directly,
+`scripts/import_companies.py` once per organization tab and writes
+`_site/data/education.json.gz` directly,
 nothing committed. The YAML structure should be:
 
 ```yaml
@@ -201,7 +203,7 @@ window.collectionPlugins['mykey'] = {
     // is renamed to `name` and before search, sort, filters and rendering
     // see the item. It mutates the item in place (return value ignored). Use
     // it to derive fields in the page's language from the language-neutral
-    // data: the certifications plugin builds `item.subtitle` here with t().
+    // data: a card line in the reader's language built here with t().
     prepareItem: function(item) {
         item.subtitle = t('mine_line', {name: item.name});
     },
@@ -209,10 +211,10 @@ window.collectionPlugins['mykey'] = {
     // sortFields and filters — normally derived from `fields`. A plugin that
     // sets either one explicitly keeps it: the app derives only the ones
     // that are missing. Use it when sorting needs something the unified
-    // field cannot say. The certifications plugin gives sortFields so that
-    // an undated certification sorts after the dated ones (its `value`
-    // returns a high placeholder), while its filters still come from
-    // `fields`, where the year filter must not see that placeholder. The
+    // field cannot say: a sortFields whose `value` puts the undated rows
+    // after the dated ones with a high placeholder, say, while the filters
+    // still come from `fields`, where a year filter must not see that
+    // placeholder. The
     // shapes are {field, label, type, value?} for a sort field and
     // {field, label, type: <filterType>, value?, ranges?, extractValues?,
     // match?, defaultValue?} for a filter.
@@ -356,12 +358,11 @@ than writing the loop again:
 ## Existing Plugins
 
 The registry is `window.collectionPluginRegistry` in `templates/data_collection.html`; as of
-2026-11-23 it holds these three keys in two files (the films and series,
+2026-11-23 it holds this one key in one file (the films and series,
 `plugin-movies.js` and `plugin-series.js`, went to My World on 2026-11-22,
-and the `providers` and `companies` keys on 2026-11-23).
+and the `providers`, `companies`, `certifiers` and `certifications` keys on
+2026-11-23).
 
 | Key | File | Data |
 |-----|------|------|
 | `education` | `plugin-companies.js` | `data/education.json.gz` (the `education` organizations of `organizations.yaml`, written into `_site/` at build time by `scripts/import_companies.py`; their logos are copied from `data/logos/` to `/logos/` the same way) |
-| `certifiers` | `plugin-companies.js` | `data/certifiers.json.gz` (function `certification`: who certified me; build-time) |
-| `certifications` | `plugin-certifications.js` | `data/certifications.json.gz` (one card per certification, `certifications.yaml` joined with the issuers by `scripts/import_certifications.py`; build-time) |

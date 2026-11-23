@@ -224,22 +224,14 @@ const companyCards = {
     }
 };
 
-// The schools and universities I studied at, and the companies that certified
-// me, two of the tabs of the education page (/training/education/). Its third
-// tab is the certifications themselves, one card per certification
-// (plugin-certifications.js). The app derives sortFields and filters onto each
-// plugin object, so these are copies, not the same object under a second key.
-// Both keys map to this file in the app's registry, which loads it once.
+// The schools and universities I studied at, the tab of the education page
+// (/training/education/). The app derives sortFields and filters onto each
+// plugin object, so this is a copy of the cards, not the cards themselves.
+// (The companies that certified me and the certifications went to My World,
+// myworld.stream, on 2026-11-23.)
 window.collectionPlugins['education'] = Object.assign({}, companyCards, {
     file: 'data/education.json.gz',
     navTitle: t('companies_education_nav_title'),
     title: t('companies_education_title'),
     subtitle: t('companies_education_subtitle')
-});
-
-window.collectionPlugins['certifiers'] = Object.assign({}, companyCards, {
-    file: 'data/certifiers.json.gz',
-    navTitle: t('companies_certifiers_nav_title'),
-    title: t('companies_certifiers_title'),
-    subtitle: t('companies_certifiers_subtitle')
 });

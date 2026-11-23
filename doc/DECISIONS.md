@@ -511,8 +511,8 @@ Private data types: the files in `data/yaml/` that no page publishes.
 - `trips.yaml`
 - `video_courses.yaml`
 
-Published: `organizations.yaml` and
-`certifications.yaml` on the training and education pages;
+Published: `organizations.yaml` on the education page
+(`certifications.yaml` went to My World on 2026-11-23);
 `profiles.yaml` in the profile block. The films and series
 (`video_features.yaml`, `video_series.yaml`, with their posters, since
 2026-11-22), the YouTube videos (`video_youtube.yaml` and the watch history), the podcasts

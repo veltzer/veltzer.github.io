@@ -10,13 +10,10 @@ The one build step around rssite, run by `rsconstruct build` as a processor
 `processor.mass_generator.generic.site`: `rssite plan` lists every file a
 build writes with its sources, and each is cached separately.
 
-- `companies` writes the organization tabs' data, three files in
-  `_site/data/`, and copies `data/logos/*.svg` to `_site/logos/`.
-  `scripts/import_companies.py`, once per `--function` of
-  `organizations.yaml`, writes `education.json.gz` (studied at) and `certifiers.json.gz` (certified by);
-  `scripts/import_certifications.py` joins `certifications.yaml` with the
-  issuers into `certifications.json.gz` (one entry per certification). The
-  stanza in `rsconstruct.toml` names all four outputs (the three files and `_site/logos/`); every map image the
+- `companies` writes the education page's data, `_site/data/education.json.gz`
+  (by `scripts/import_companies.py --function education` over
+  `organizations.yaml`: where I studied), and copies `data/logos/*.svg` to
+  `_site/logos/`. The stanza in `rsconstruct.toml` names both outputs; every map image the
   YAML names must exist under `static/images/`.
 
 Everything else that used to be a step here is the generator's own now: the
@@ -232,9 +229,8 @@ item added without its image fails it, so run the matching `fetch_*.py`.
 
 ### `scripts/import_companies.py`
 
-Picks the organizations with one `--function` (`teaching`,
-`education` or
-`certification`; `TABS` in the script) among their `functions` out of
+Picks the organizations with one `--function` (`education`, the one
+there is; `TABS` in the script) among their `functions` out of
 `data/yaml/organizations.yaml`, trims each to the fields the companies tab
 shows (name, logo, status, headquarters, Israel office, the one `geo` map
 point and the path of its static map image, website, logo attribution) and
@@ -245,15 +241,6 @@ the `_site/data/*.json.gz` named under `build_site.py` above, and copies `data/l
 `_site/logos/` next to it. Nothing is committed. With `--images-dir` (the
 build passes `static/images/`) it fails when a company's map image has not
 been rendered by `organizations_fetch_maps.py`.
-
-### `scripts/import_certifications.py`
-
-Builds the certifications tab of the education page: one card per
-certification in `data/yaml/certifications.yaml`, joined with the issuing
-organization's name, logo, website and status from `organizations.yaml`.
-Fails when a certification names an organization that does not exist or one
-whose `functions` lack `certification`. Run by `build_site.py companies`, which
-writes `_site/data/certifications.json.gz`.
 
 ### `scripts/check_profile_links.py`
 

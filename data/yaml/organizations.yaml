@@ -1,7 +1,10 @@
 ---
 # next line is neccessary for vscode which does not read the $schema attribute
 # yaml-language-server: $schema=https://veltzer.github.io/web-schemas/json/organizations.json
-# Organizations I studied at or was certified by.
+# Organizations I studied at.
+# The companies that certified me (function certification: ids 17, 41, 100) were removed on 2026-11-23 with
+# certifications.yaml: they live in My World (myworld.stream) now, the companies with the relation Certification and
+# the certifications themselves on its Certifications page, each with the company that issued it.
 # The clients I taught at (function teaching: 90 organizations, every one but the 7 left, ids 17, 41, 84, 89, 100, 125, 126) were removed
 # on 2026-11-23: they live in My World (myworld.stream) now, with the relation Teaching. Their logos and the map
 # images only they used left with them.
@@ -39,81 +42,6 @@
 # when one has no map point.
 $schema: https://veltzer.github.io/web-schemas/json/organizations.json
 items:
-- id: 17
-  name: MySQL
-  slug: mysql
-  from_date: '2008-03-21'
-  functions:
-  - certification
-  logo: logos/mysql.svg
-  logo_kind: traced from original bitmap (no vector logo found online)
-  logo_note: the MySQL AB-era logo (dolphin, dark blue My, orange SQL, registered mark) from the original bitmap, flattened to its two
-    colours and traced with vtracer on 2026-11-08; the current Oracle-era logo differs
-  old_url: http://www.mysql.com
-  status: acquired
-  what_happened: Acquired by Sun Microsystems in February 2008 for about $1 billion; Sun was acquired by Oracle in January 2010, so MySQL is now an Oracle product.
-  website: https://www.mysql.com
-  location: Austin, Texas, USA (Oracle)
-  location_geo:
-    place: Austin, Texas, USA
-    lat: 30.27113
-    lon: -97.7437
-  former_website: http://www.mysql.com (still live, now run by Oracle)
-  former_location: Uppsala, Sweden (with a US office in Cupertino, California)
-  former_location_geo:
-    place: Uppsala, Sweden
-    lat: 59.85861
-    lon: 17.63874
-  address: Bangårdsgatan 8, 753 20 Uppsala, Sweden
-  address_source: https://vakanser.se/jobb/network+engineer
-  geo:
-    from: former_location
-    place: Uppsala, Sweden
-    lat: 59.85861
-    lon: 17.63874
-  sources:
-  - https://en.wikipedia.org/wiki/MySQL_AB
-- id: 41
-  name: Sun Microsystems
-  slug: sun-microsystems
-  from_date: '2008-05-02'
-  functions:
-  - certification
-  logo: logos/sun-microsystems.svg
-  logo_kind: official vector
-  logo_source: https://upload.wikimedia.org/wikipedia/commons/8/8b/Sun-Logo.svg
-  logo_license: Public domain (Commons)
-  logo_note: Classic Sun Microsystems logo (ambigram + wordmark) from Wikimedia Commons; 23 paths, verified.
-  old_url: http://www.oracle.com
-  status: acquired
-  what_happened: Acquired by Oracle on 27 January 2010 for about US$7.4bn.
-  website: https://www.oracle.com
-  location: Austin, Texas, USA
-  location_geo:
-    place: Austin, Texas, USA
-    lat: 30.27113
-    lon: -97.7437
-  israel_office: Petah Tikva, Israel (Oracle Israel); Sun Israel was in Herzliya
-  israel_office_geo:
-    place: Petah Tikva, Israel
-    lat: 32.08776
-    lon: 34.886
-  former_website: http://www.sun.com (redirects to oracle.com/it-infrastructure)
-  former_location: Santa Clara, California, USA
-  former_location_geo:
-    place: Santa Clara, California, USA
-    lat: 37.35411
-    lon: -121.95517
-  address: 4150 Network Circle, Santa Clara, CA 95054, USA
-  address_source: https://www.sec.gov/Archives/edgar/data/0000709519/000118143107006432/rrd144413.htm
-  geo:
-    from: former_location
-    place: Santa Clara, California, USA
-    lat: 37.35411
-    lon: -121.95517
-  sources:
-  - https://en.wikipedia.org/wiki/Acquisition_of_Sun_Microsystems_by_Oracle_Corporation
-  - https://www.oracle.com/il-en/corporate/contact/field-offices/
 - id: 84
   name: Hebrew University of Jerusalem
   slug: hebrew-university
@@ -180,39 +108,6 @@ items:
     lon: 34.86784
   sources:
   - https://en.wikipedia.org/wiki/Open_University_of_Israel
-- id: 100
-  name: Amazon Web Services
-  slug: aws
-  from_date: '2014-02-02'
-  functions:
-  - certification
-  logo: logos/aws.svg
-  logo_kind: official vector
-  logo_source: https://commons.wikimedia.org/wiki/Special:FilePath/Amazon_Web_Services_Logo.svg
-  logo_license: PD-textlogo (Wikimedia Commons)
-  logo_note: Current AWS logo
-  old_url: http://aws.amazon.com
-  status: active
-  website: https://aws.amazon.com/
-  location: Seattle, Washington, USA
-  location_geo:
-    place: Seattle, Washington, USA
-    lat: 47.60383
-    lon: -122.33006
-  israel_office: Tel Aviv, Israel
-  israel_office_geo:
-    place: Tel Aviv, Israel
-    lat: 32.0853
-    lon: 34.78181
-  address: Azrieli Sarona Tower, 121 Menachem Begin Rd, Tel Aviv 6701203, Israel
-  address_source: https://www.whoprofits.org/companies/company/7401
-  geo:
-    from: israel_office
-    place: Tel Aviv, Israel
-    lat: 32.0853
-    lon: 34.78181
-  sources: &id001
-  - https://press.aboutamazon.com/2023/8/aws-launches-infrastructure-region-in-israel
 - id: 125
   name: Tel Aviv University
   slug: tel-aviv-university

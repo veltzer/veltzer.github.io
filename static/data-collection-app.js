@@ -54,7 +54,7 @@
     window.collectionPlugins = window.collectionPlugins || {};
 
     // One load per script file: a file may register several keys (the
-    // companies plugin registers education and certifiers), and loading all
+    // companies plugin could register several), and loading all
     // plugins in parallel would otherwise insert it once per key.
     const scriptLoads = {};
 

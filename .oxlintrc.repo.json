@@ -25,23 +25,6 @@
 			}
 		},
 		{
-			"files": ["static/plugin-certifications.js"],
-			"globals": {
-				// static/data-collection-utils.js
-				"countBy": "readonly",
-				// static/data-collection-utils.js
-				"countByYear": "readonly",
-				// static/data-collection-utils.js
-				"mediaFormatDate": "readonly",
-				// static/data-collection-utils.js
-				"renderBarChart": "readonly",
-				// static/data-collection-utils.js
-				"renderStatCard": "readonly",
-				// static/data-collection-utils.js
-				"t": "readonly"
-			}
-		},
-		{
 			"files": ["static/plugin-companies.js"],
 			"globals": {
 				// static/data-collection-utils.js

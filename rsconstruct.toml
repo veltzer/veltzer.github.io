@@ -81,17 +81,15 @@ predict_args = ["plan"]
 output_dirs = ["_site"]
 
 # The organization tabs: organizations.yaml becomes _site/data/education.json.gz
-# (studied at) and certifiers.json.gz (certified by), and
-# certifications.yaml joined with the
-# issuers becomes certifications.json.gz (one entry per certification), and
+# (studied at), and
 # data/logos/ is copied to _site/logos/. The importer checks every map
 # image the YAML names exists under static/images/.
 [processor.explicit.generic.companies]
 command = "scripts/build_site.py"
 args = ["companies"]
-inputs = ["data/yaml/organizations.yaml", "data/yaml/certifications.yaml", "scripts/build_site.py", "scripts/import_companies.py", "scripts/import_certifications.py"]
+inputs = ["data/yaml/organizations.yaml", "scripts/build_site.py", "scripts/import_companies.py"]
 input_globs = ["data/logos/*.svg", "static/images/map-*.jpg"]
-output_files = ["_site/data/education.json.gz", "_site/data/certifiers.json.gz", "_site/data/certifications.json.gz"]
+output_files = ["_site/data/education.json.gz"]
 output_dirs = ["_site/logos"]
 
 # A share card (og:image) per blog post: content/blog/foo.en.md becomes
@@ -130,7 +128,6 @@ src_dirs = ["tests"]
 # Everything the tests import or read, so an edit to any of it re-runs the
 # suite on a warm cache.
 dep_inputs = [
-    "scripts/import_certifications.py",
     "scripts/import_companies.py",
     "scripts/import_teaching.py",
     "scripts/make_word_vectors.py",
@@ -141,7 +138,6 @@ dep_inputs = [
     "static/favicon.svg",
     # test_people.py reads every data file's with: names.
     "data/yaml/books_loans.yaml",
-    "data/yaml/certifications.yaml",
     "data/yaml/concerts.yaml",
     "data/yaml/courses.yaml",
     "data/yaml/cv.yaml",

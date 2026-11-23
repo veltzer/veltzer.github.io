@@ -60,8 +60,8 @@ which records the traps that outlived the migration.
   audio courses and the books read moved on to My World (myworld.stream) in 2026-11
 - `data/logos/` — one SVG per organization in `organizations.yaml` (which refers to
   them by paths relative to `data/`), linted by xmllint. The education page's
-  organization tabs are built from these at build time: the `companies` step of `build_site.py`
-  writes `_site/data/education.json.gz` and `certifiers.json.gz` via `scripts/import_companies.py` and copies
+  tab is built from these at build time: the `companies` step of `build_site.py`
+  writes `_site/data/education.json.gz` via `scripts/import_companies.py` and copies
   the SVGs to `_site/logos/`. Neither is committed, unlike the rest of `static/data/`.
   The static map image on each company card (`static/images/map-<lat>_<lon>.jpg`,
   one per distinct `geo` point) *is* committed: `scripts/organizations_fetch_maps.py`
@@ -79,7 +79,6 @@ which records the traps that outlived the migration.
   Console API with the gcloud login; network, run by hand), `check_images.py` (every media item has its
   local image in `static/images/`; a build step), `check_profile_links.py` (the profile
   URLs in `profiles.yaml` still resolve; network, run by hand, not part of the build),
-  `import_certifications.py` (the certifications tab data, run by the companies step),
   `manage_api_key.py` (the Google Calendar API key's restrictions, stored in `pass`),
   `build_collection_css.sh` (compiles the data collection app's Tailwind
   stylesheet from `config/tailwind.collection.*` into `static/vendor/`; it runs
@@ -93,7 +92,7 @@ which records the traps that outlived the migration.
   reading Google Drive; a build step that runs only where that folder exists, via
   `enabled_if_dir_exists`), and the `build_*_dict.sh` / `spellcheck_*.sh` pair behind the aspell
   processors
-- `tests/` — pytest suite: the data import scripts (csv, books, certifications,
+- `tests/` — pytest suite: the data import scripts (csv, books,
   companies), the logo generator against the inline logo in `base.html`, the word-vector
   trimmer, `people.yaml` against every `with:` name in the data files, the Hebrew check
   (`check_hebrew.py`) and the CSS scoping of `import_teaching.py`

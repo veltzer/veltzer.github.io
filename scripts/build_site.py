@@ -9,8 +9,7 @@ becomes a cached product. What rssite does not produce is done here, each
 step declaring exactly what it reads and writes in rsconstruct.toml so
 rsconstruct can order, cache and restore it:
 
-  companies      _site/data/education.json.gz, certifiers.json.gz,
-                 certifications.json.gz and _site/logos/
+  companies      _site/data/education.json.gz and _site/logos/
 
 companies is an explicit processor: rsconstruct appends `--inputs ...
 --output-files ... --output-dirs ...`.
@@ -38,9 +37,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 COMPANIES_IMPORTER = REPO_ROOT / "scripts" / "import_companies.py"
-CERTIFICATIONS_IMPORTER = REPO_ROOT / "scripts" / "import_certifications.py"
 ORGANIZATIONS_YAML = REPO_ROOT / "data" / "yaml" / "organizations.yaml"
-CERTIFICATIONS_YAML = REPO_ROOT / "data" / "yaml" / "certifications.yaml"
 LOGOS_SRC = REPO_ROOT / "data" / "logos"
 IMAGES_DIR = REPO_ROOT / "static" / "images"
 
@@ -50,15 +47,13 @@ def die(message):
     sys.exit(1)
 
 
-def write_companies(education_file, certifiers_file, certifications_file, logos_dir):
-    """Build the organization tabs' data and logos straight into the output.
+def write_companies(education_file, logos_dir):
+    """Build the education page's data and logos straight into the output.
 
-    One JSON per tab, from the same YAML: on the education page the schools
-    I studied at (function education) and the
-    companies that certified me (function certification). The education
-    page's third tab is the certifications I hold, one per certification
-    rather than per company: certifications.yaml joined with the issuing
-    organizations by import_certifications.py.
+    One JSON per tab, from organizations.yaml: today the one tab of the
+    education page, the schools I studied at (function education). The
+    companies that certified me and the certifications went to My World
+    (myworld.stream) on 2026-11-23, with certifications.yaml.
 
     (The films and series tabs read committed static/data/*.json.gz files
     that scripts/copy_data.py produced by hand; they went to My World on
@@ -69,7 +64,7 @@ def write_companies(education_file, certifiers_file, certifications_file, logos_
     to data/ (logos/<slug>.svg), and data/logos/ lands at /logos/, so the
     plugin can use them as they are.
     """
-    for output_file, function in ((education_file, "education"), (certifiers_file, "certification")):
+    for output_file, function in ((education_file, "education"),):
         output_file.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run(
             [sys.executable, str(COMPANIES_IMPORTER), str(ORGANIZATIONS_YAML), str(output_file),
@@ -77,12 +72,6 @@ def write_companies(education_file, certifiers_file, certifications_file, logos_
             check=True,
             cwd=REPO_ROOT,
         )
-    subprocess.run(
-        [sys.executable, str(CERTIFICATIONS_IMPORTER), str(CERTIFICATIONS_YAML), str(ORGANIZATIONS_YAML),
-         str(certifications_file)],
-        check=True,
-        cwd=REPO_ROOT,
-    )
     if not LOGOS_SRC.is_dir():
         die(f"{LOGOS_SRC} missing")
     logos_dir.mkdir(parents=True, exist_ok=True)
@@ -96,7 +85,7 @@ def write_companies(education_file, certifiers_file, certifications_file, logos_
 
 # The steps, in the order the bare command lists them, each with its line.
 STEPS = {
-    "companies": "write _site/data/education.json.gz, certifiers.json.gz, certifications.json.gz and _site/logos/",
+    "companies": "write _site/data/education.json.gz and _site/logos/",
 }
 
 
