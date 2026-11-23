@@ -7,6 +7,7 @@ blog-search.js, the third) must agree on.
 """
 
 import numpy as np
+
 from make_word_vectors import quantize, tokenize
 
 
@@ -15,11 +16,11 @@ def test_niqqud_is_dropped():
 
 
 def test_geresh_and_gershayim_fold_to_ascii():
-    assert tokenize("צ׳יפס של צה״ל") == ["צ'יפס", "של", 'צה"ל']
+    assert tokenize("ג\u05f3ק של צה\u05f4ל") == ["ג'ק", "של", 'צה"ל']
 
 
 def test_apostrophes_and_accents():
-    assert tokenize("Don’t visit the Café") == ["don't", "visit", "the", "cafe"]
+    assert tokenize("Don\u2019t visit the Café") == ["don't", "visit", "the", "cafe"]
 
 
 def test_digits_and_punctuation_split_words():

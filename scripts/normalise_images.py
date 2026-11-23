@@ -21,8 +21,9 @@ import argparse
 import sys
 from pathlib import Path
 
-from image_standard import MAX_EDGE, ImageError, normalise
 from PIL import Image
+
+from image_standard import MAX_EDGE, ImageError, normalise
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 IMAGE_DIR = REPO_ROOT / "static" / "images"

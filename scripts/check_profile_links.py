@@ -75,8 +75,7 @@ def load_links():
     for group in groups:
         for item in group["items"]:
             links.append((item["name"], item["url"]))
-            for child in item.get("children", []):
-                links.append((child["name"], child["url"]))
+            links.extend((child["name"], child["url"]) for child in item.get("children", []))
     return links
 
 
@@ -110,8 +109,8 @@ def check(link):
     if error is not None or status is None or status >= 400:
         status, error = request(url, "GET")
 
-    if error is not None:
-        return "broken", name, url, error
+    if error is not None or status is None:
+        return "broken", name, url, error or "no answer"
     if status in BLOCKED_STATUSES:
         return "blocked", name, url, f"HTTP {status}"
     if status >= 400:

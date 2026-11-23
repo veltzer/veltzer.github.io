@@ -27,7 +27,7 @@ def test_header_logo_matches_the_geometry():
 def test_path_data_matches_the_points():
     chevron = " L".join(f"{x} {y}" for x, y in make_logo.CHEVRON)
     (cx, cy), (ex, _) = make_logo.CURSOR
-    assert make_logo.PATH == f"M{chevron} M{cx} {cy} H{ex}"
+    assert f"M{chevron} M{cx} {cy} H{ex}" == make_logo.PATH
 
 
 def test_committed_favicon_is_current():

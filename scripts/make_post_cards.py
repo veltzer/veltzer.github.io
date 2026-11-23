@@ -27,6 +27,8 @@ import sys
 import tomllib
 from pathlib import Path
 
+from PIL import Image, ImageDraw, ImageFont, features
+
 from make_og_images import (
     ACCENT,
     BACKGROUND,
@@ -50,7 +52,6 @@ from make_og_images import (
     portrait,
     wrap,
 )
-from PIL import Image, ImageDraw, ImageFont, features
 
 # The title gets the largest size at which it fits in MAX_LINES lines.
 TITLE_SIZES = (76, 68, 60, 54, 48, 44)
@@ -90,7 +91,7 @@ def card(lang, title, tags, face):
     rtl = lang in RTL
     direction = "rtl" if rtl else "ltr"
     bold_path, light_path = fonts(lang)
-    name = home_title(lang).partition(" – ")[0]
+    name = home_title(lang).partition(" \u2013 ")[0]
     name_font = ImageFont.truetype(str(bold_path), 40)
     tag_font = ImageFont.truetype(str(light_path), 32)
     site_font = ImageFont.truetype(str(OUTFIT_LIGHT), 34)
@@ -145,7 +146,7 @@ def main():
         if not font.is_file():
             die(f"{font} missing")
     face = portrait()
-    for source, target in zip(pairs[0::2], pairs[1::2]):
+    for source, target in zip(pairs[0::2], pairs[1::2], strict=False):
         meta = front_matter(source)
         tags = meta.get("taxonomies", {}).get("tags", [])
         image = card(language_of(source), meta["title"], tags, face)

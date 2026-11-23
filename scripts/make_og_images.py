@@ -28,8 +28,9 @@ import sys
 import tomllib
 from pathlib import Path
 
-from make_logo import mark
 from PIL import Image, ImageDraw, ImageFont, ImageOps, features
+
+from make_logo import mark
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 I18N = REPO_ROOT / "i18n"
@@ -128,7 +129,7 @@ def wrap(draw, text, font, width, direction):
 
 def card(lang, face):
     rtl = lang in RTL
-    name, _, line = home_title(lang).partition(" – ")
+    name, _, line = home_title(lang).partition(" \u2013 ")
     bold_path, light_path = fonts(lang)
     direction = "rtl" if rtl else "ltr"
     light = ImageFont.truetype(str(light_path), 48)

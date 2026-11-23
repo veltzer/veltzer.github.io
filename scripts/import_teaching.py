@@ -323,10 +323,10 @@ def extract(html, wrapper):
     # Scope the imported CSS so it cannot style the rest of the site. Rules that
     # target the document itself become rules on the wrapper.
     scoped = []
-    for sheet in styles:
+    for raw_sheet in styles:
         # Strip comments first: a /* ... */ containing a brace would otherwise
         # be parsed as a block and end up with a selector glued on.
-        sheet = re.sub(r"/\*.*?\*/", "", sheet, flags=re.DOTALL)
+        sheet = re.sub(r"/\*.*?\*/", "", raw_sheet, flags=re.DOTALL)
         # Follow the h1 -> h2 demotion of the markup. Only stylesheets: the
         # scripts' inline SVG paths contain "h1" as a path command.
         sheet = re.sub(r"\bh1\b", "h2", sheet)
@@ -360,9 +360,7 @@ def build_page(html, wrapper):
     if parts is None:
         return None
     styles, body, scripts = parts
-    chunks = []
-    for sheet in styles:
-        chunks.append(f"<style>\n{sheet}\n</style>")
+    chunks = [f"<style>\n{sheet}\n</style>" for sheet in styles]
     chunks.append(f'<div id="{wrapper}" class="app-root">\n{body}\n</div>')
     for attrs, code in scripts:
         chunks.append(f"<script{attrs}>{code}</script>")

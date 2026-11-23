@@ -72,5 +72,5 @@ def test_english_in_a_feed_is_reported_once_per_string(tmp_path):
 
 
 def test_the_card_name_must_be_hebrew(tmp_path):
-    assert check_hebrew.problems(write(tmp_path, "he.toml", 'home_title = "מארק ולצר – מהנדס"\n')) == []
-    assert check_hebrew.problems(write(tmp_path, "he.toml", 'home_title = "Mark Veltzer – מהנדס"\n'))
+    assert check_hebrew.problems(write(tmp_path, "he.toml", 'home_title = "מארק ולצר \u2013 מהנדס"\n')) == []
+    assert check_hebrew.problems(write(tmp_path, "he.toml", 'home_title = "Mark Veltzer \u2013 מהנדס"\n'))

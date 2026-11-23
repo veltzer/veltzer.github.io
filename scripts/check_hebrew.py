@@ -61,16 +61,18 @@ def post_problems(path: Path) -> list[str]:
         value = front.get(key)
         if not isinstance(value, str) or not is_hebrew(value):
             found.append(f"{key} has no Hebrew in it: {value!r}")
-    for tag in front.get("taxonomies", {}).get("tags", []):
-        if tag not in LATIN_TAGS and not is_hebrew(tag):
-            found.append(f"tag {tag!r} is not translated (or add it to LATIN_TAGS)")
+    found.extend(
+        f"tag {tag!r} is not translated (or add it to LATIN_TAGS)"
+        for tag in front.get("taxonomies", {}).get("tags", [])
+        if tag not in LATIN_TAGS and not is_hebrew(tag)
+    )
     return found
 
 
 def strings_problems(path: Path) -> list[str]:
     strings = tomllib.loads(path.read_text(encoding="utf-8"))
     title = strings.get("home_title")
-    if not isinstance(title, str) or not is_hebrew(title.partition(" – ")[0]):
+    if not isinstance(title, str) or not is_hebrew(title.partition(" \u2013 ")[0]):
         return [f"home_title does not start with a Hebrew name: {title!r}"]
     return []
 

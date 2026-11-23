@@ -107,11 +107,10 @@ def render(data, lang):
         lines.append("")
         for item in items:
             lines.append(f"* [{item['name']}]({item['url']})")
-            for child in item.get("children", []):
-                # Four spaces: this content is linted with .rumdl.content.toml,
-                # whose MD007 indent is 4 (gen_readme.py's README is linted
-                # under that repo's own config, which wants 2).
-                lines.append(f"    * [{child['name']}]({child['url']})")
+            # Four spaces: this content is linted with .rumdl.content.toml,
+            # whose MD007 indent is 4 (gen_readme.py's README is linted
+            # under that repo's own config, which wants 2).
+            lines.extend(f"    * [{child['name']}]({child['url']})" for child in item.get("children", []))
 
     for extra in data.get("extras", []):
         lines.append("")

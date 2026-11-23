@@ -91,13 +91,15 @@ def post(http, url, body):
     in all: one inspection in a few hundred stalls (seen 2026-11-20, a read
     timeout after 60 seconds), and the next attempt answers.
     """
-    for attempt in range(1, RETRIES + 1):
+    for _ in range(RETRIES - 1):
         try:
             response = http.post(url, json=body, timeout=TIMEOUT)
             break
         except (requests.Timeout, requests.ConnectionError):
-            if attempt == RETRIES:
-                raise
+            continue
+    else:
+        # the last attempt: its failure is the answer
+        response = http.post(url, json=body, timeout=TIMEOUT)
     if response.status_code != 200:
         try:
             message = response.json()["error"]["message"]
@@ -114,9 +116,14 @@ def sitemap_urls():
     return re.findall(r"<loc>([^<]+)</loc>", response.text)
 
 
+def local_today():
+    """Today's date, local time."""
+    return datetime.datetime.now().astimezone().date()
+
+
 def shown_pages(http, days):
     """Every page of the property that appeared in a search result."""
-    end = datetime.date.today()
+    end = local_today()
     start = end - datetime.timedelta(days=days)
     url = f"{API}/webmasters/v3/sites/{urllib.parse.quote(PROPERTY, safe='')}/searchAnalytics/query"
     pages = set()
@@ -156,7 +163,7 @@ def load_cache(max_age):
     """The cached indexed pages that are still fresh: {url: iso date}."""
     if not CACHE.exists():
         return {}
-    oldest = (datetime.date.today() - datetime.timedelta(days=max_age)).isoformat()
+    oldest = (local_today() - datetime.timedelta(days=max_age)).isoformat()
     cached = json.loads(CACHE.read_text(encoding="utf-8"))
     # Strictly newer: an entry is fresh for max_age days, so 0 trusts none,
     # not even one written earlier today.
@@ -174,7 +181,7 @@ def inspect_all(http, pages, cache):
     Every indexed verdict goes into the cache, which is saved as the answers
     arrive so that an interrupted run keeps what it paid for.
     """
-    today = datetime.date.today().isoformat()
+    today = local_today().isoformat()
     by_page = {}
     try:
         with ThreadPoolExecutor(max_workers=WORKERS) as pool:

@@ -60,11 +60,9 @@ def die(message):
 
 
 def run(cmd, *, capture=False, check=True):
-    """Run a command, optionally capturing stdout. Returns stdout (stripped) when captured."""
+    """Run a command, optionally capturing stdout. Returns stdout (stripped) when captured, else the empty string."""
     result = subprocess.run(cmd, check=check, text=True, capture_output=capture)
-    if capture:
-        return result.stdout.strip()
-    return None
+    return result.stdout.strip() if capture else ""
 
 
 def pass_show(pass_path):
@@ -76,13 +74,12 @@ def pass_show(pass_path):
 
 
 def pass_insert(pass_path, secret):
-    proc = subprocess.run(
+    return subprocess.run(
         ["pass", "insert", "-e", "-f", pass_path],
         input=f"{secret}\n",
         text=True,
         check=True,
     )
-    return proc
 
 
 def find_key_name(cfg, api_key):
