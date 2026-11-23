@@ -37,5 +37,10 @@ ignore-missing-imports = [
 ]
 
 [tool.pytest.ini_options]
+# Every strictness check pytest has (strict_config, strict_markers,
+# strict_xfail, strict_parametrization_ids), and every warning fails the
+# test that raised it rather than scrolling past in the summary.
+strict = true
+filterwarnings = ["error"]
 # Tests import from here: the scripts under test are standalone executables, not an installed package.
 pythonpath = ["scripts"]
