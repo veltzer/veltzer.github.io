@@ -509,16 +509,14 @@ against it; who came along are the people My World has, under the names
 it gives them now). And `courses.yaml`: its three Coursera courses and
 DevOps on AWS to My World's new Courses page (each with the school, the
 provider and the lecturer its name gave), its other six entries being the
-certifications already on My World's Certifications page.
+certifications already on My World's Certifications page. And
+`books_loans.yaml` and `study_sites.yaml` to My World's new Loans and
+Websites pages; `loans.yaml`, `text_articles.yaml` and
+`video_courses.yaml`, which were empty, went without a copy.
 
 Private data types: the files in `data/yaml/` that no page publishes.
 
-- `books_loans.yaml`
 - `cv.yaml`
-- `loans.yaml`
-- `study_sites.yaml`
-- `text_articles.yaml`
-- `video_courses.yaml`
 
 Published: none of the organizations any more (`organizations.yaml` and
 `certifications.yaml` went to My World on 2026-11-23);

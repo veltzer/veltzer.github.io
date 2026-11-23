@@ -52,12 +52,12 @@ which records the traps that outlived the migration.
   how rssite pairs a post with its translation; nothing else is needed
     - `content/<page>/_index.{en,he}.md` — the standalone nav pages (about, media, calendar, …)
 - `data/yaml/` — the source of truth for the profile block
-  (`profiles.yaml`), plus the private lists that no page publishes (cv,
-  books lent, study sites, …; the full list is in `doc/DECISIONS.md`). Every file names its schema in `$schema`, which the
+  (`profiles.yaml`), plus one private file that no page publishes (`cv.yaml`; see
+  `doc/DECISIONS.md`). Every file names its schema in `$schema`, which the
   build validates against `veltzer.github.io/web-schemas`. This directory came out of
   the private `../data` repo in 2026-09. The YouTube videos (the reviewed
   ones and the watch history), the Audible library, the podcasts, the
-  audio courses, the books read, the concerts, museums and people, the trips, lectures and rallies, and the courses taken moved on to My World (myworld.stream) in 2026-11
+  audio courses, the books read, the concerts, museums and people, the trips, lectures and rallies, the courses taken, and the books lent and study sites moved on to My World (myworld.stream) in 2026-11
 - `templates/` — Tera templates (`base.html`, `page.html`, `blog.html`, taxonomy pages)
 - `sass/style.scss` — compiled to `/style.css` by rssite
 - `static/` — copied verbatim to the site root: media plugins, images, data and `vendor/`
