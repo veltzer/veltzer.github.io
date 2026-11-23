@@ -8,7 +8,7 @@ Why not `rssite serve`?
   auto-reload), but it is NOT faithful to what gets deployed:
     - It serves from an in-memory build, not the real `_site/` output.
     - It runs rssite alone, without the step rsconstruct runs around it
-      (the companies data), so that is missing.
+      (the post share cards), so that is missing.
     - It injects a livereload script and can handle routing /
       trailing-slashes slightly differently than a plain static server.
 

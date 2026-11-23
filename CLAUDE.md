@@ -58,42 +58,25 @@ which records the traps that outlived the migration.
   the private `../data` repo in 2026-09. The YouTube videos (the reviewed
   ones and the watch history), the Audible library, the podcasts, the
   audio courses and the books read moved on to My World (myworld.stream) in 2026-11
-- `data/logos/` — one SVG per organization in `organizations.yaml` (which refers to
-  them by paths relative to `data/`), linted by xmllint. The education page's
-  tab is built from these at build time: the `companies` step of `build_site.py`
-  writes `_site/data/education.json.gz` via `scripts/import_companies.py` and copies
-  the SVGs to `_site/logos/`. Neither is committed, unlike the rest of `static/data/`.
-  The static map image on each company card (`static/images/map-<lat>_<lon>.jpg`,
-  one per distinct `geo` point) *is* committed: `scripts/organizations_fetch_maps.py`
-  renders it from OpenStreetMap tiles, and the build fails when one is missing
-- `shelve/` — the Nominatim geocoding cache `organizations_geocode.py` reads
-  and writes (committed, so CI never hits the network)
 - `templates/` — Tera templates (`base.html`, `page.html`, `blog.html`, taxonomy pages)
 - `sass/style.scss` — compiled to `/style.css` by rssite
 - `static/` — copied verbatim to the site root: media plugins, images, data and `vendor/`
   (locally vendored JS libraries); the apps themselves live in `content/<app>/`
 - `shared/shared-themes/` — git submodule providing the design tokens. **Run
   `git submodule update --init --recursive` on a fresh clone or the build fails.**
-- `scripts/` — `build_site.py` (the companies build step), `check_post_names.py` (post file names against their `date` and `slug`), `check_hebrew.py` (the Hebrew feeds and share cards carry no untranslated text: the Hebrew posts' title, description and tags, and the built `_site/he/**/atom.xml`; a build step), `check_redirects.py` (checks the
+- `scripts/` — `check_post_names.py` (post file names against their `date` and `slug`), `check_hebrew.py` (the Hebrew feeds and share cards carry no untranslated text: the Hebrew posts' title, description and tags, and the built `_site/he/**/atom.xml`; a build step), `check_redirects.py` (checks the
   live site's host redirects and sitemap), `check_indexing.py` (which sitemap pages Google has indexed, through the Search
   Console API with the gcloud login; network, run by hand), `check_images.py` (every media item has its
   local image in `static/images/`; a build step), `check_profile_links.py` (the profile
   URLs in `profiles.yaml` still resolve; network, run by hand, not part of the build),
   `manage_api_key.py` (the Google Calendar API key's restrictions, stored in `pass`),
-  `build_collection_css.sh` (compiles the data collection app's Tailwind
-  stylesheet from `config/tailwind.collection.*` into `static/vendor/`; it runs
-  `npx tailwindcss` by hand and its output is committed, so the build needs no node),
   `make_og_images.py` (the two site-wide share cards, drawn by hand, committed), `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
-  the sibling teaching repos), image fetchers, data importers, the `data/yaml/`
-  maintenance scripts (`organizations_geocode.py`,
-  `organizations_pick_geo.py`, `organizations_fetch_maps.py` — all run from the
-  repo root),
+  the sibling teaching repos), image fetchers, data importers,
   `serve.py`, `make_logo.py` (the logo and the favicon/touch icons drawn from it), `make_word_vectors.py` (the blog search's word vectors), `export_posts_for_ai.py` (mirrors the posts to `~/insync/for_ai/blog` for AI agents
   reading Google Drive; a build step that runs only where that folder exists, via
   `enabled_if_dir_exists`), and the `build_*_dict.sh` / `spellcheck_*.sh` pair behind the aspell
   processors
-- `tests/` — pytest suite: the data import scripts (csv, books,
-  companies), the logo generator against the inline logo in `base.html`, the word-vector
+- `tests/` — pytest suite: the data import scripts, the logo generator against the inline logo in `base.html`, the word-vector
   trimmer, `people.yaml` against every `with:` name in the data files, the Hebrew check
   (`check_hebrew.py`) and the CSS scoping of `import_teaching.py`
 - `.aspell.{en,he}.txt` — the spellcheck word lists; `out/aspell/` holds the compiled
@@ -123,14 +106,13 @@ on, and each becomes a product, so an unchanged site runs rssite zero times,
 an edited post rebuilds only the files that list it, and `clean outputs` +
 `build` restores the site from cache. rssite also writes the feeds, the
 sitemap and the shared-themes files (`[[publish]]`), and reads the commit the colophon
-names itself (`git` in the templates). The two steps it does not do are the
-companies data, `scripts/build_site.py companies`, and the per-post share
-cards, `scripts/make_post_cards.py` (one 1200x630 `og:image` per post, the title beside the author's portrait,
+names itself (`git` in the templates). The step it does not do is the
+per-post share cards, `scripts/make_post_cards.py` (one 1200x630 `og:image` per post, the title beside the author's portrait,
 written to `_site/images/og/<file stem>.jpg`, never committed). See
 `rsconstruct.toml`.
 
 **Never run `rssite build` by hand for a real build — go through the build
-system.** `rssite build` alone skips the companies data and the post cards. `rssite check` is fine at any time:
+system.** `rssite build` alone skips the post cards. `rssite check` is fine at any time:
 it renders the whole site twice in memory and reports every broken link,
 template or translation without writing anything. The real output is
 `_site/`, and only after `rsconstruct build`.
@@ -254,9 +236,6 @@ tags = ["religion", "philosophy", "ethics"]
 ## Coding Conventions
 
 - JavaScript: camelCase, ES9+, oxlint-clean
-- Media plugins follow a consistent interface: `file`, `navTitle`, `title`, `subtitle`,
-  `searchPlaceholder`, `searchFields`, `defaultSort`, `fields`, `renderDetails`,
-  `renderStats` and the rest documented in `doc/PLUGIN_GUIDE.md`
 - Python: ruff- and pyrefly-clean; both run in CI over `scripts/` and `tests/`
 
 ## Style Sheets
@@ -297,12 +276,12 @@ tags = ["religion", "philosophy", "ethics"]
 
 - `_site/` is generated — never edit it. Edit `content/`, `templates/`, `sass/` or
   `static/` and rebuild.
-- The data collection pages' data is built from `data/yaml/` into the `.json.gz` the
-  frontend loads (`scripts/build_site.py`). **The frontend reads JSON, not YAML** — js-yaml took
-  ~399ms on the 6.5MB YouTube dataset the site had then against ~31ms for `JSON.parse`.
-  The films and series it used to show, with `scripts/copy_data.py` that built
-  them, are gone: they live in My World now (myworld.stream), and so do the
-  publishers, with the media page that showed them (2026-11-22).
+- The data collection app and its pages are gone (2026-11-23): what they
+  showed (the films and series, the publishers, the organizations I taught at,
+  taught for, consulted for, studied at or was certified by, and the
+  certifications) lives in My World now (myworld.stream). If a page ever
+  loads data again, **it reads JSON, not YAML** — js-yaml took ~399ms on the
+  6.5MB YouTube dataset the site had then against ~31ms for `JSON.parse`.
 - The blog index has a search box (`static/blog-search.js`) over rssite's
   `<lang>/search.json` (`[search]` in `rssite.toml`). It indexes titles, opening
   text, tags and the full text (`content = true`, ~800 KB gzipped per language

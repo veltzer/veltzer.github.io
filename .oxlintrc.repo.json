@@ -12,30 +12,5 @@
 		"node": true,
 		"es2022": true
 	},
-	"globals": {},
-	// templates/data_collection.html loads static/data-collection-utils.js before the app and its plugins, all plain <script>s: they use its helpers (the comment names the file)
-	"overrides": [
-		{
-			"files": ["static/data-collection-app.js"],
-			"globals": {
-				// static/data-collection-utils.js
-				"sortKeys": "readonly",
-				// static/data-collection-utils.js
-				"t": "readonly"
-			}
-		},
-		{
-			"files": ["static/plugin-companies.js"],
-			"globals": {
-				// static/data-collection-utils.js
-				"renderBarChart": "readonly",
-				// static/data-collection-utils.js
-				"renderStatCard": "readonly",
-				// static/data-collection-utils.js
-				"t": "readonly",
-				// static/data-collection-utils.js
-				"tally": "readonly"
-			}
-		}
-	]
+	"globals": {}
 }

@@ -164,8 +164,8 @@ a:hover { text-decoration: underline; }
   align-items: center;
 }
 
-// Controls: the header's theme select and every button, select
-// and number field of the data collection app (.control) share one look.
+// Controls: the header's theme select and every button and select
+// drawn as one (.control) share one look.
 .site-select,
 .control {
   background: var(--bg);
@@ -306,26 +306,6 @@ h3 { font-size: 1.1rem; margin: 1.8rem 0 0.5rem; }
 }
 .tag:hover { background: var(--bg-hover); color: var(--accent); }
 
-// Chips: the view tabs of the data collection app. A larger .tag; the
-// current one is filled with the accent, like the current language.
-.chip {
-  display: inline-block;
-  background: var(--bg-elevated);
-  color: var(--text-secondary);
-  border: 1px solid transparent;
-  border-radius: var(--radius-pill);
-  padding: 0.35rem 0.9rem;
-  font-size: 0.85rem;
-  font-weight: 500;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background var(--transition), color var(--transition);
-}
-.chip:hover { background: var(--bg-hover); color: var(--accent); }
-.chip.current { background: var(--accent); color: var(--bg); }
-.chip-outline { background: transparent; border-color: var(--border); }
-.chip-outline:hover { border-color: var(--accent); }
-
 // A small filled label for a value, such as a rating.
 .badge {
   display: inline-block;
@@ -415,9 +395,8 @@ h3 { font-size: 1.1rem; margin: 1.8rem 0 0.5rem; }
   margin-bottom: 2rem;
 }
 
-// Search boxes: one look for every search field on the site -- the blog's
-// (static/blog-search.js) and the data collection app's
-// (templates/data_collection.html) -- so they cannot drift apart again.
+// Search boxes: one look for every search field on the site (the blog's,
+// static/blog-search.js), so they cannot drift apart again.
 // The blog's mode <select> beside it shares the rule.
 .search-input,
 .blog-search-mode {
@@ -580,9 +559,9 @@ th { background: var(--bg-surface); }
   unicode-bidi: isolate;
 }
 
-// Application pages (media / calendar / slides / syllabi / animations).
+// Application pages (calendar / slides / syllabi / animations).
 // These host a whole application rather than prose, so their templates
-// (data_collection.html, app.html) swap the narrow reading column for this
+// (app.html) swap the narrow reading column for this
 // wide container. The 42rem measure that suits an essay squeezes an
 // application. The class name dates from when the teaching sites were framed in
 // an iframe; nothing is framed any more, the markup is imported into the page.

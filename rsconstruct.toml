@@ -70,27 +70,13 @@ args = ["--errors-only"]
 # edited post rebuilds only the files that list it and other processors can
 # write into _site/ beside rssite's files. rssite also writes the feeds, the
 # sitemap and the archive stats, and reads
-# the commit for the footer itself (its git files are page sources). The one
-# step it cannot do is the companies data, a scripts/build_site.py
-# subcommand declaring what it reads and writes.
+# the commit for the footer itself (its git files are page sources).
 [processor.mass_generator.generic.site]
 command = "rssite"
 args = ["build"]
 predict_command = "rssite"
 predict_args = ["plan"]
 output_dirs = ["_site"]
-
-# The organization tabs: organizations.yaml becomes _site/data/education.json.gz
-# (studied at), and
-# data/logos/ is copied to _site/logos/. The importer checks every map
-# image the YAML names exists under static/images/.
-[processor.explicit.generic.companies]
-command = "scripts/build_site.py"
-args = ["companies"]
-inputs = ["data/yaml/organizations.yaml", "scripts/build_site.py", "scripts/import_companies.py"]
-input_globs = ["data/logos/*.svg", "static/images/map-*.jpg"]
-output_files = ["_site/data/education.json.gz"]
-output_dirs = ["_site/logos"]
 
 # A share card (og:image) per blog post: content/blog/foo.en.md becomes
 # _site/images/og/foo.en.jpg, which templates/base.html names. Build output,
@@ -128,7 +114,6 @@ src_dirs = ["tests"]
 # Everything the tests import or read, so an edit to any of it re-runs the
 # suite on a warm cache.
 dep_inputs = [
-    "scripts/import_companies.py",
     "scripts/import_teaching.py",
     "scripts/make_word_vectors.py",
     "scripts/check_hebrew.py",
@@ -144,7 +129,6 @@ dep_inputs = [
     "data/yaml/lectures.yaml",
     "data/yaml/loans.yaml",
     "data/yaml/museums.yaml",
-    "data/yaml/organizations.yaml",
     "data/yaml/people.yaml",
     "data/yaml/political_rallies.yaml",
     "data/yaml/profiles.yaml",
@@ -211,7 +195,7 @@ src_files = ["rssite.toml", "rsconstruct.toml", ".rumdl.toml", ".rumdl.content.t
 # word lists. static/vendor is not ours, and .oxlintrc.json is JSON with
 # comments, which oxlint itself parses on every run.
 [processor.checker.ijsonlint]
-src_dirs = ["data", "shelve", "static"]
+src_dirs = ["data", "static"]
 src_exclude_dirs = ["vendor"]
 
 [processor.checker.encoding]
@@ -254,12 +238,10 @@ src_exclude_paths = [
 [processor.checker.duplicate_files]
 src_dirs = ["static/images"]
 src_extensions = [".jpg", ".jpeg", ".png", ".gif", ".webp"]
-# data/logos/*.svg are the organization logos organizations.yaml points at
-# (paths in that file are relative to data/): well-formed XML via ixmllint.
 [processor.checker.ixmllint]
 # warnings fail too, not only fatal errors
 strict = true
-src_dirs = ["static", "data/logos"]
+src_dirs = ["static"]
 src_exclude_dirs = ["vendor"]
 # Every post is <date>-<slug>.<lang>.md with a short `slug` (at most four
 # words) in its front matter; see the script and CLAUDE.md, "Blog Posts".

@@ -21,11 +21,9 @@ The film and series posters (`movie-*.jpg`, `series-*.jpg`) went to My World
 
 ## Uniform Display
 
-Card images sit in a fixed 2:1 landscape box (the `<img>` markup is built in
-`static/data-collection-app.js`), so card heights are consistent regardless of the
-source dimensions. Landscape sources are cropped with `object-cover`; a
-plugin whose covers are portrait declares `imageFit: 'contain'` so they are
-shown whole over a blurred backdrop instead (see `doc/PLUGIN_GUIDE.md`).
+The data collection app that showed card images in a fixed 2:1 box was
+removed on 2026-11-23 (what it showed lives in My World, myworld.stream);
+`scripts/image_standard.py` still sizes images to its card geometry.
 
 ## Caches
 

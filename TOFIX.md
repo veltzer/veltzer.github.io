@@ -17,9 +17,6 @@ purpose.
 
 ## Left alone on purpose
 
-- **`scripts/build_collection_css.sh` fetches `tailwindcss@3` with `npx`**
-  at run time, by hand, outside the build: pinning it further goes against
-  the no-pins rule, and bringing it into the build would add Node to CI.
 - **`/keys.js` on the calendar page carries no `?v=`**: the page is markdown
   and has no access to the template's version string. The file changes only
   when the key is rotated.

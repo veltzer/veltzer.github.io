@@ -18,7 +18,6 @@ for many of them is published on this site under [Syllabi](/en/syllabi/) and
 * Algorithms, optimization, data science, machine learning and AI
 
 Courses can be tailored to your team's needs and delivered on site or online.
-Where I studied is on [Education](/en/training/education/).
 
 ## Contact
 

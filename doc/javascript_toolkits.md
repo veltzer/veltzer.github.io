@@ -15,40 +15,11 @@ blog loads nothing at all.
 
 | Page | CSS | JS libraries |
 |------|-----|--------------|
-| `/en/training/education/` | Tailwind (compiled, vendored) | none -- plain JS in `static/data-collection-app.js` + two plugin files |
 | `/en/calendar/` | site stylesheet | FullCalendar 6.1.20 + its Google Calendar plugin -- **vendored** |
 | `/en/slides/`, `/en/syllabi/`, `/en/animations/` | site stylesheet | Material Web 2 (CDN) |
 | Blog posts, About, tags | site stylesheet (`sass/style.scss`) | none |
 
 ## CSS
-
-### Tailwind, in the data collection app only
-
-`templates/data_collection.html` links `static/vendor/tailwind-collection.css`: the
-utilities the data collection app uses, compiled with Tailwind 3 by
-`scripts/build_collection_css.sh` from `config/tailwind.collection.config.js` (the
-theme-token palette) and committed. Until 2026-10-29 the page loaded Tailwind's
-in-browser compiler from `https://cdn.tailwindcss.com`, which Tailwind says is
-not for production: a render-blocking third-party script that compiled the CSS
-on every visit.
-
-Tailwind finds classes by scanning the files the config lists for whole class
-names. A class added to the data collection app or a plugin has no rule until the script
-is rerun, and a class assembled at run time (`'bg-' + colour`) is never found;
-write class names out in full.
-
-**It is the only page that does.** The previous version of this file claimed
-Tailwind was "the sole CSS framework for all custom standalone pages"; that was
-true when there were seven standalone pages, and is not true now. Everything
-else uses the site's own stylesheet, compiled from `sass/style.scss`.
-
-Keeping Tailwind for the data collection app is deliberate. The card grid, filter row and
-stat tiles are utility-class layouts that would have to be rewritten to move
-off it, and the compiled file holds only the classes the app uses (about 9 KB).
-
-The rest of the site does not need it, and adding it to `base.html` would put a
-render-blocking stylesheet on all ~630 built pages to serve a handful of
-classes.
 
 ### The site stylesheet
 
@@ -88,9 +59,11 @@ the version here. The Google Calendar plugin reads a public API key from
 
 - **chess.js and cm-chessboard** -- removed on 2026-11-20 with the chess page; the
   games are in the myworld app.
-- **js-yaml** -- removed. The data collection app reads JSON, not YAML: parsing the 6.5 MB
-  YouTube file with js-yaml took ~399 ms in the browser. The only mention left in
-  `static/data-collection-app.js` is the comment recording that decision.
+- **js-yaml** -- removed. The data collection app read JSON, not YAML: parsing the 6.5 MB
+  YouTube file with js-yaml took ~399 ms in the browser.
+- **Tailwind** -- removed on 2026-11-23 with the data collection app (the
+  education page, the last that ran it), whose compiled utilities it was; what
+  it showed lives in My World (myworld.stream).
 - **Bootstrap** -- removed before the zola migration, in favour of Tailwind on the
   data collection pages.
 - **elasticlunr / `search_index.en.js`** -- gone. Under zola (the generator before rssite) it was switched off
@@ -105,46 +78,5 @@ the version here. The Google Calendar plugin reads a public API key from
   ranks posts by meaning, with word vectors from
   [veltzer/embeddings](https://github.com/veltzer/embeddings) that
   `scripts/make_word_vectors.py` trims into `static/data/vectors/`. The
-  other search boxes are per-page filters over each page's own data: the media
-  app, slides, syllabi and animations.
-
-## Media plugin filter system
-
-Each plugin in `static/plugin-*.js` declares a `fields` registry. Filters are
-*derived* from it by `deriveFieldsConfig` in `static/data-collection-app.js` rather than
-hand-declared, so adding a field to a plugin gives you its filter for free.
-
-`filterable` defaults to true; every plugin marks exactly one field
-`filterable: false` -- the title, which the search box already covers.
-
-| Type | Description | Example |
-|------|-------------|---------|
-| `select` | Dropdown of unique field values | Device, City, Channel |
-| `year` | Years extracted from a date field | Year Watched, Year Added |
-| `boolean` | Yes/No toggle | Has Chapters |
-| `range` | Numeric buckets, `{label, min, max}` | Duration (Short/Medium/Long) |
-| `custom` | Plugin supplies `value(item)` and `match(item, val)` | Status (Finished/In Progress) |
-
-Filters combine with the search box using AND.
-
-### Adding one
-
-```js
-fields: [
-    {field: 'device', label: 'Device', type: 'select'},
-    {field: 'date_utcz', label: 'Year', type: 'year'},
-    {field: 'duration', label: 'Duration', type: 'range',
-        value: function(item) { return item.duration || 0; },
-        ranges: [
-            {label: 'Short (< 5 min)', min: 0, max: 300},
-            {label: 'Long (5+ min)', min: 300, max: null}
-        ]
-    }
-]
-```
-
-## Standalone HTML in `static/`
-
-None. The standalone apps were replaced by the templated sections on
-2026-08-18 and kept as redirect stubs until 2026-10-28, when every legacy
-redirect was removed (see `doc/DECISIONS.md`).
+  other search boxes are per-page filters over each page's own data: slides,
+  syllabi and animations.

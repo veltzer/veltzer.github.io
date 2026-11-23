@@ -102,6 +102,10 @@ feature ever need one, is in `doc/BACKEND_SERVICES.md`.
 
 ## Company cards show a static OpenStreetMap image, not a Google Maps iframe
 
+(History: the company cards, with organizations.yaml, the map images and the
+scripts that made them, were removed on 2026-11-23; the organizations live in
+My World, myworld.stream, now.)
+
 Each card on the companies tab shows a small map of the company's one
 `geo` point (chosen in `organizations.yaml`, see `organizations_pick_geo.py`)
 above the "on Google Maps" link. The map is a static JPEG rendered once
@@ -511,8 +515,8 @@ Private data types: the files in `data/yaml/` that no page publishes.
 - `trips.yaml`
 - `video_courses.yaml`
 
-Published: `organizations.yaml` on the education page
-(`certifications.yaml` went to My World on 2026-11-23);
+Published: none of the organizations any more (`organizations.yaml` and
+`certifications.yaml` went to My World on 2026-11-23);
 `profiles.yaml` in the profile block. The films and series
 (`video_features.yaml`, `video_series.yaml`, with their posters, since
 2026-11-22), the YouTube videos (`video_youtube.yaml` and the watch history), the podcasts

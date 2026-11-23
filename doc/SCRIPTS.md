@@ -2,25 +2,6 @@
 
 ## Build Scripts
 
-### `scripts/build_site.py`
-
-The one build step around rssite, run by `rsconstruct build` as a processor
-(see `rsconstruct.toml`; a real build goes through the build system -- see
-`CLAUDE.md`). rssite itself is rsconstruct's
-`processor.mass_generator.generic.site`: `rssite plan` lists every file a
-build writes with its sources, and each is cached separately.
-
-- `companies` writes the education page's data, `_site/data/education.json.gz`
-  (by `scripts/import_companies.py --function education` over
-  `organizations.yaml`: where I studied), and copies `data/logos/*.svg` to
-  `_site/logos/`. The stanza in `rsconstruct.toml` names both outputs; every map image the
-  YAML names must exist under `static/images/`.
-
-Everything else that used to be a step here is the generator's own now: the
-commit every footer names is the `git` context variable; the root language
-chooser is `templates/root.html`; the sitemap and the feeds are built in; and
-the shared-themes files are published by the `[[publish]]` entry.
-
 ### `scripts/make_post_cards.py`
 
 Draws the share card (`og:image`, 1200x630) of every blog post: the author
@@ -164,8 +145,8 @@ tkinter image browser GUI with prev/next/select/skip/quit.
 
 One place that decides how large an image in `static/images/` may be
 (`800x384>`, JPEG, EXIF stripped) and the `normalise()` function the fetchers
-call on save. The numbers are derived from the card geometry in
-`data-collection-app.js`; the module docstring explains the arithmetic.
+call on save. The numbers were derived from the card geometry of the data
+collection app (removed 2026-11-23); the module docstring explains the arithmetic.
 
 ### `scripts/normalise_images.py`
 
@@ -227,21 +208,6 @@ films and series, with their poster fetchers, live in My World now.) Part of the
 reruns when any image is added, changed or deleted): an
 item added without its image fails it, so run the matching `fetch_*.py`.
 
-### `scripts/import_companies.py`
-
-Picks the organizations with one `--function` (`education`, the one
-there is; `TABS` in the script) among their `functions` out of
-`data/yaml/organizations.yaml`, trims each to the fields the companies tab
-shows (name, logo, status, headquarters, Israel office, the one `geo` map
-point and the path of its static map image, website, logo attribution) and
-gives each a `review` line: what happened to it, or its status when nothing
-did. Writes gzipped JSON with a fixed mtime. Unlike the other importers this
-is a build step: `build_site.py companies` runs it once per tab and writes
-the `_site/data/*.json.gz` named under `build_site.py` above, and copies `data/logos/*.svg` to
-`_site/logos/` next to it. Nothing is committed. With `--images-dir` (the
-build passes `static/images/`) it fails when a company's map image has not
-been rendered by `organizations_fetch_maps.py`.
-
 ### `scripts/check_profile_links.py`
 
 Requests every profile URL in `data/yaml/profiles.yaml` — the ~30 links
@@ -264,17 +230,6 @@ reported as **blocked** rather than **broken**, so the report stays worth
 reading; without that split it would be mostly false positives. The checker
 sends a browser User-Agent and retries with GET when HEAD fails, since a number
 of hosts do not implement HEAD properly.
-
-## Tailwind
-
-### `scripts/build_collection_css.sh`
-
-Compiles the data collection app's Tailwind stylesheet:
-`config/tailwind.collection.config.js` and `config/tailwind.collection.css`
-become `static/vendor/tailwind-collection.css` (minified), through
-`npx tailwindcss@3`. It is run by hand, needs node, and its output is
-committed, so the build itself needs no node. Run it after adding a Tailwind
-class to the app or to a plugin: a class the scan has not seen has no rule.
 
 ## Local Preview
 
@@ -300,49 +255,3 @@ Project-specific values are no longer hardcoded — they default to the
 calendar key (`--project-id veltzer-calendar-id`, `--pass-path
 cloud/gcp/calendar`, `--referrer veltzer.org/*`, etc.) and can be
 overridden via flags or the matching `API_KEY_*` environment variables.
-
-## Data maintenance scripts
-
-These edit or check the YAML under `data/yaml/` and use paths relative to
-the repository root, so run them from there. They came across from the
-`../data` repo together with the YAML in 2026-09.
-
-### `scripts/organizations_geocode.py`
-
-Adds map coordinates to `organizations.yaml`: every `location`,
-`israel_office` and `former_location` gets a `<field>_geo` block right after
-it (`place`, the prose reduced to one city; `lat`/`lon` in WGS84 decimal
-degrees), resolved through Nominatim (OpenStreetMap) at one request per
-second. Lookups are cached in `shelve/nominatim_geocode.json`, so a re-run
-after adding an organization only resolves the new places; existing `_geo`
-blocks survive unless `--force`, which also reports a block whose place no
-longer resolves. An entry in the script's `OVERRIDES` wins over the cache, so
-adding one fixes a place that was cached as unresolved. Edits the yaml textually (the file is
-hand-wrapped, no dumper round-trips it), so the diff is only the new blocks.
-Places with no city (`unknown, Israel`) get no block.
-
-### `scripts/organizations_pick_geo.py`
-
-Interactive: chooses the one map point per organization from the `_geo`
-blocks the geocoder wrote, and records it as a `geo` block (`from`, `place`,
-`lat`, `lon`) just before the item's `sources`. Organizations whose points
-all fall on one spot are decided silently; the rest prompt with every
-distinct spot and the prose behind it, the Israel office suggested first.
-The file is saved after each answer, so `q` or Ctrl-C loses nothing and the
-next run resumes. `--auto` takes every suggestion, `--force` asks again.
-
-### `scripts/organizations_fetch_maps.py`
-
-Renders the static map image each company card shows: for every
-organization shown on any tab (not only the teaching ones; `import_companies.shown`)
-its `geo` point, an 800x320 JPEG of OpenStreetMap tiles at zoom
-13 with a pin on the point, written to `static/images/map-<lat>_<lon>.jpg`
-(one file per distinct point, named by `import_companies.map_path`, so
-companies on the same city centroid share one image and the duplicate-image
-check stays happy). Tiles are fetched paced with a real User-Agent, as the
-OSM tile policy asks, and cached under `out/osm_tiles/` (gitignored), so a
-re-run fetches nothing. Existing images are skipped unless `--force`. Run
-it after adding an organization or changing its point: the build fails
-(`import_companies.py --images-dir`) when an image is missing. The images
-are committed. Why a static image and not a Google Maps iframe is in
-`doc/DECISIONS.md`.

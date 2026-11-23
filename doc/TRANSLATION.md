@@ -15,10 +15,6 @@ chess viewer was removed on 2026-11-20.)
 - **The site's own strings.** Every key in `i18n/en.toml` has a value in
   `i18n/he.toml`; a missing key fails the build. That covers the nav, the
   language and theme pickers, dates, the footer and the blog search.
-- **The data collection app** (the education page): its interface
-  strings are the `app_*` keys, written into the page as
-  `window.collectionStrings` by `templates/data_collection.html` and read
-  with `t()`. The app runs right to left in Hebrew.
 - **The footer.** The two provenance lines are `footer_*` keys
   (`templates/base.html`). Names, the version and the address sit in `<bdi>`
   so they do not reorder the Hebrew sentence.
