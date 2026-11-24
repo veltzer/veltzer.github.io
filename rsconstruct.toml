@@ -188,7 +188,7 @@ src_extensions = [".css"]
 # headings. They are build output, not authored markdown.
 [processor.checker.rumdl.prose]
 src_dirs = ["doc"]
-src_files = ["README.md", "CLAUDE.md", "TOFIX.md"]
+src_files = ["README.md", "CLAUDE.md"]
 
 # content/ is rssite pages: the H1 comes from the frontmatter title via
 # templates/page.html, so they are linted with the content config.
