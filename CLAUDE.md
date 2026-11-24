@@ -298,11 +298,11 @@ tags = ["religion", "philosophy", "ethics"]
   generated or committed.
 - **The profile block on the About page is generated — do not hand-edit it.** It
   lives in `data/yaml/profiles.yaml` and is rendered by `scripts/gen_profiles.py`
-  into `content/about/_index.en.md` and `content/about/_index.he.md`. The YAML holds
+  into `content/about/_index.{en,he,ru}.md`. The YAML holds
   the whole shared block, not just links: `contact` (the email line), `intro`,
   `groups` (the links), and `extras` (the top-committers line, the GitHub stats
-  badge, the view counter). Every one carries `_en` and `_he` text so `/he/about/`
-  is a real Hebrew page. Only the region between the
+  badge, the view counter). Every one carries `_en`, `_he` and `_ru` text so `/he/about/`
+  and `/ru/about/` are real translated pages. Only the region between the
   `<!-- BEGIN generated profiles -->` markers is replaced, so the hand-written prose
   above it survives. Edit the YAML, run the script, commit. It is a manual step,
   not part of the build, and the generated content is committed; now that the YAML
