@@ -214,5 +214,6 @@ any other `--pass-path` leaves the file alone), waits for rebuild/deploy,
 then stores the new key in `pass` and deletes the old one.
 Project-specific values are no longer hardcoded — they default to the
 calendar key (`--project-id veltzer-calendar-id`, `--pass-path
-cloud/gcp/calendar`, `--referrer veltzer.org/*`, etc.) and can be
-overridden via flags or the matching `API_KEY_*` environment variables.
+gcp/veltzer-calendar-id/api-key`, `--referrer veltzer.org/*`, etc.) and
+can be overridden via flags or the matching `API_KEY_*` environment
+variables.
