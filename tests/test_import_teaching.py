@@ -1,4 +1,5 @@
-"""Tests for import_teaching.py's stylesheet scoping.
+"""Tests for import_teaching.py: its stylesheet scoping, and the check that
+every directory a sibling site publishes is accounted for.
 
 The teaching sites' CSS is pasted into this site's pages, so every rule must be
 confined to the wrapper id. The cases here are the selector shapes that a
@@ -69,3 +70,12 @@ class TestScopeCss:
     def test_font_face_rules_are_dropped(self):
         css = '@font-face { font-family: "Outfit"; src: url("fonts/Outfit-Light.woff2"); } .x { top: 0; }'
         assert import_teaching.scope_css(css, W) == "#app .x { top: 0; }"
+
+
+def test_unknown_site_directory_is_reported(tmp_path):
+    for name in ("courses", "tracks", "fonts", "blurbs"):
+        (tmp_path / name).mkdir()
+    (tmp_path / "index.html").write_text("", encoding="utf-8")
+    assert import_teaching.unknown_roots("teaching-syllabi", tmp_path) == []
+    (tmp_path / "talks").mkdir()
+    assert import_teaching.unknown_roots("teaching-syllabi", tmp_path) == ["talks"]

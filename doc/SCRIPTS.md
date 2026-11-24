@@ -94,7 +94,12 @@ sibling builds a single self-contained `_site/index.html`; the script strips
 the document wrapper, drops the embedded header and theme `<select>` (this
 site's chrome supplies both), drops the inlined `@font-face` rules (this site
 links the same shared-themes fonts), scopes the page's CSS under an `#app-<section>`
-wrapper, and writes the result with this site's front matter. A manual step,
+wrapper, points the links into the sibling's asset directories
+(`ASSET_ROOTS`: PDFs, Word files, syllabus and blurb pages) at
+`/<repo>/...`, where the sibling's own Pages site serves them, and writes the
+result with this site's front matter. It stops with an error when a sibling's
+`_site/` has a top-level directory `ASSET_ROOTS` does not list, since links into
+it would stay relative and 404 here. A manual step,
 run after rebuilding a sibling site; the output is committed, and the build
 (local and CI, which has no sibling checkouts) uses the committed copies. `--check` reports what would be written without writing.
 The Hebrew `_index.he.md` stubs are hand-written and are not touched.

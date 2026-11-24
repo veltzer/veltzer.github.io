@@ -71,9 +71,12 @@ SITES = [
 # a fresh checkout, so import_teaching.py does not even run there.
 ASSET_ROOTS = {
     "teaching-slides": ["pdfunite", "marp"],
-    "teaching-syllabi": ["courses", "tracks"],
+    "teaching-syllabi": ["courses", "tracks", "blurbs"],
     "teaching-animations": ["animations"],
 }
+# Top-level directories of a sibling's _site that are not linked assets:
+# this site serves the same shared-themes fonts itself.
+NOT_ASSET_ROOTS = {"fonts"}
 
 FRONT_MATTER = '''+++
 title = "{title}"
@@ -355,6 +358,18 @@ def rewrite_assets(text, repo):
     return pattern.sub(lambda m: f'"/{repo}/{m.group(1)}"', text)
 
 
+def unknown_roots(repo, site_dir):
+    """Top-level directories of a sibling's _site that ASSET_ROOTS does not cover.
+
+    The list is explicit on purpose (see rewrite_assets for what a derived one
+    would break), so a sibling that starts publishing a new directory has to be
+    answered here: until it is, the links into it would stay relative and 404
+    on this site, as the syllabi blurbs did when they arrived.
+    """
+    known = set(ASSET_ROOTS.get(repo, [])) | NOT_ASSET_ROOTS
+    return sorted(p.name for p in site_dir.iterdir() if p.is_dir() and p.name not in known)
+
+
 def build_page(html, wrapper):
     parts = extract(html, wrapper)
     if parts is None:
@@ -377,6 +392,11 @@ def main():
         source = SIBLINGS / repo / "_site" / "index.html"
         if not source.is_file():
             die(f"{source} not found. Build {repo} first.")
+        unknown = unknown_roots(repo, source.parent)
+        if unknown:
+            die(f"{source.parent} has directories ASSET_ROOTS[{repo!r}] does not list: "
+                f"{', '.join(unknown)}. Add each to ASSET_ROOTS (the page links into it) "
+                f"or to NOT_ASSET_ROOTS.")
         wrapper = f"app-{section}"
         page = build_page(source.read_text(encoding="utf-8"), wrapper)
         if page is None:

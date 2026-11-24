@@ -964,7 +964,7 @@ template = "app.html"
 
 <hr>
 <p>Mark Veltzer <a href="mailto:mark.veltzer@gmail.com">mark.veltzer@gmail.com</a> <a href="https://github.com/veltzer">@veltzer</a></p>
-<p class="build-info">Built from <code>ef34bcd32665</code> on 2026-11-20 00:25 UTC &middot; local build</p>
+<p class="build-info">Built from <code>c9af42788b8e</code> on 2026-11-23 10:11 UTC &middot; local build</p>
 </div>
 </div>
 
@@ -1115,7 +1115,7 @@ function render() {
         if (type && e.type !== type) return false;
         if (tag && !e.tags.includes(tag)) return false;
         if (audience && !e.audience.includes(audience)) return false;
-        if (duration && e.duration_days !== parseInt(duration)) return false;
+        if (duration && e.duration_days !== parseInt(duration, 10)) return false;
         return true;
     });
 
@@ -1259,7 +1259,7 @@ acList.addEventListener("mousedown", function(ev) {
     var item = ev.target.closest(".autocomplete-item");
     if (item) {
         acList.classList.remove("visible");
-        var idx = parseInt(item.dataset.index);
+        var idx = parseInt(item.dataset.index, 10);
         var query = searchEl.value.toLowerCase();
         var matches = DATA.filter(e => e.name.toLowerCase().includes(query));
         if (matches[idx]) {

@@ -79,7 +79,7 @@ which records the traps that outlived the migration.
   processors
 - `tests/` — pytest suite: the data import scripts, the logo generator against the inline logo in `base.html`, the word-vector
   trimmer, the Hebrew check
-  (`check_hebrew.py`) and the CSS scoping of `import_teaching.py`
+  (`check_hebrew.py`), the CSS scoping and asset-directory check of `import_teaching.py`, and `gen_profiles.py --check`
 - `.aspell.{en,he}.txt` — the spellcheck word lists; `out/aspell/` holds the compiled
   dictionaries (gitignored build output)
 - `_site/` — generated output (gitignored, never edit)
