@@ -19,7 +19,7 @@ English and in Hebrew, on programming, mathematics, religion and philosophy.
 
 The profile links below are the other places I exist online.
 
-<!-- BEGIN generated profiles -- edit data/yaml/profiles.yaml -->
+<!-- BEGIN generated profiles -- edit data/profiles.yaml -->
 
 To contact me, write to [mark.veltzer@gmail.com](mailto:mark.veltzer@gmail.com)
 

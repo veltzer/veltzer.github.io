@@ -17,7 +17,7 @@ template = "section.html"
 
 קישורי הפרופילים שלמטה הם שאר המקומות שבהם אני נמצא ברשת.
 
-<!-- BEGIN generated profiles -- edit data/yaml/profiles.yaml -->
+<!-- BEGIN generated profiles -- edit data/profiles.yaml -->
 
 ליצירת קשר כתבו אל [mark.veltzer@gmail.com](mailto:mark.veltzer@gmail.com)
 

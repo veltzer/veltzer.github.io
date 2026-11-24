@@ -24,8 +24,9 @@ The chess game viewer was removed on 2026-11-20: the games are in the myworld ap
   rumdl (`.rumdl.toml` for prose, `.rumdl.content.toml` for `content/`), taplo, yamllint,
   actionlint, xmllint, a JSON lint of the committed `.json` files, an encoding check, a duplicate-image check, an aspell
   spellcheck of the blog in both languages (`scripts/spellcheck_{en,he}.sh` against
-  the word lists in `.aspell.{en,he}.txt`), and over `data/yaml/` a schema check
-  (`iyamlschema`) and a parse check (`yaml2json`). The films and series, and
+  the word lists in `.aspell.{en,he}.txt`), and over `data/profiles.yaml` a schema check
+  (`iyamlschema`), a parse check (`yaml2json`) and the `profiles` check that the
+  files `gen_profiles.py` renders from it are up to date. The films and series, and
   their imdb, Wikidata and Rotten Tomatoes checks, live in My World now
   (myworld.stream) since 2026-11-22
 - **Data**: YAML/JSON for media content, Markdown for blog posts
@@ -51,10 +52,12 @@ which records the traps that outlived the migration.
     - `content/blog/<date>-<slug>.he.md` — Hebrew translations. The shared file name is
   how rssite pairs a post with its translation; nothing else is needed
     - `content/<page>/_index.{en,he}.md` — the standalone nav pages (about, media, calendar, …)
-- `data/yaml/` — the source of truth for the profile block
-  (`profiles.yaml`), its only file. It names its schema in `$schema`, which the
-  build validates against `veltzer.github.io/web-schemas`. This directory came out of
-  the private `../data` repo in 2026-09. The YouTube videos (the reviewed
+- `data/` — `profiles.yaml`, the source of truth for the profile block (see
+  *Important Notes*), and `identity.toml`, generated from it. The YAML names its
+  schema in `$schema`, which the build validates against
+  `veltzer.github.io/web-schemas`. It came out of the private `../data` repo in
+  2026-09 inside a `data/yaml/` directory, with the rest of that data, and moved up
+  to `data/` on 2026-11-24 once it was the only file left. The YouTube videos (the reviewed
   ones and the watch history), the Audible library, the podcasts, the
   audio courses, the books read, the concerts, museums and people, the trips, lectures and rallies, the courses taken, and the books lent and study sites moved on to My World (myworld.stream) in 2026-11. The CV that came with them (`cv.yaml`) was a stale copy of the one in the private `../data` repo (`markdown/cv*.md`) and was deleted on 2026-11-24
 - `templates/` — Tera templates (`base.html`, `page.html`, `blog.html`, taxonomy pages)
@@ -297,23 +300,24 @@ tags = ["religion", "philosophy", "ethics"]
   and `section.years` (the year archives with their counts). Nothing about it is
   generated or committed.
 - **The profile block on the About page is generated — do not hand-edit it.** It
-  lives in `data/yaml/profiles.yaml` and is rendered by `scripts/gen_profiles.py`
+  lives in `data/profiles.yaml` and is rendered by `scripts/gen_profiles.py`
   into `content/about/_index.{en,he,ru}.md`. The YAML holds
   the whole shared block, not just links: `contact` (the email line), `intro`,
   `groups` (the links), and `extras` (the top-committers line, the GitHub stats
   badge, the view counter). Every one carries `_en`, `_he` and `_ru` text so `/he/about/`
   and `/ru/about/` are real translated pages. Only the region between the
   `<!-- BEGIN generated profiles -->` markers is replaced, so the hand-written prose
-  above it survives. Edit the YAML, run the script, commit. It is a manual step,
-  not part of the build, and the generated content is committed; now that the YAML
-  is in this repo it could become a check-plus-fix step, but that change has not
-  been made.
+  above it survives. Edit the YAML, run the script, commit. The build does not
+  write the generated content, it checks it: the `profiles` processor runs
+  `gen_profiles.py --check`, which fails when a generated file no longer matches
+  what the YAML renders to (an edit to the YAML without a rerun, or a hand edit
+  inside the block). The fix is to run the script and commit.
 - **`data/identity.toml` is generated — do not hand-edit it.** `gen_profiles.py`
   writes it from the same `profiles.yaml`, and `templates/person_jsonld.html`
   (included by `base.html` and by `root.html`, the language chooser at `/`) reads it with
   `load_data()` into the `Person` JSON-LD as schema.org `sameAs`. It is committed
-  for the same reason the About page is: the rendering happens in the script, by
-  hand, not in the build. It lives in `data/`, not `static/`, because it is an
+  for the same reason the About page is: the script writes it, and the build only
+  checks it is up to date. It lives in `data/`, not `static/`, because it is an
   input of the templates and not a file of the site (in `static/` it was also
   served at `/identity.toml`). Only the identity groups contribute
   (`SAMEAS_GROUPS` in the script): `sameAs` asserts "another page for this same

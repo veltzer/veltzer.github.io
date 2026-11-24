@@ -19,7 +19,7 @@ template = "section.html"
 
 Ссылки на профили ниже – другие места, где я есть в сети.
 
-<!-- BEGIN generated profiles -- edit data/yaml/profiles.yaml -->
+<!-- BEGIN generated profiles -- edit data/profiles.yaml -->
 
 Чтобы связаться со мной, пишите на [mark.veltzer@gmail.com](mailto:mark.veltzer@gmail.com)
 

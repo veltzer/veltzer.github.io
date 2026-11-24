@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-Check that the profile URLs in data/yaml/profiles.yaml still resolve.
+Check that the profile URLs in data/profiles.yaml still resolve.
 
 Those ~30 links are rendered into content/about/ here and into README.md in the
 ../veltzer repository. They are exactly the kind of URL that dies quietly: a
@@ -37,7 +37,7 @@ from pathlib import Path
 import yaml
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-YAML_PATH = REPO_ROOT / "data" / "yaml" / "profiles.yaml"
+YAML_PATH = REPO_ROOT / "data" / "profiles.yaml"
 
 # A browser UA. Several of these sites (goodreads, imdb, udemy) return 403 to
 # anything that identifies itself as a script, so the default urllib agent makes
@@ -121,7 +121,7 @@ def check(link):
 def main():
     """Check every profile URL and report anything that is not plainly fine."""
     parser = argparse.ArgumentParser(
-        description="Check the profile URLs in data/yaml/profiles.yaml"
+        description="Check the profile URLs in data/profiles.yaml"
     )
     parser.add_argument(
         "--jobs", type=int, default=8,

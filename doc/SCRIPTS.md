@@ -101,12 +101,15 @@ The Hebrew `_index.he.md` stubs are hand-written and are not touched.
 
 ### `scripts/gen_profiles.py`
 
-Renders `data/yaml/profiles.yaml` into the region between the
-`<!-- BEGIN generated profiles -->` markers in `content/about/_index.en.md`
-and `_index.he.md` (contact line, intro, link groups and extras, in both
-languages), and writes `data/identity.toml`, the `sameAs` URLs the
-`Person` JSON-LD in `templates/base.html` reads. A manual step whose
-output is committed. Run it after editing `profiles.yaml` and commit.
+Renders `data/profiles.yaml` into the region between the
+`<!-- BEGIN generated profiles -->` markers in `content/about/_index.{en,he,ru}.md`
+(contact line, intro, link groups and extras, in all three languages), and
+writes `data/identity.toml`, the `sameAs` URLs the `Person` JSON-LD in
+`templates/person_jsonld.html` reads. Its output is committed: run it after
+editing `profiles.yaml` and commit. With `--check` it writes nothing and exits
+non-zero when a generated file is out of date; the build runs it that way
+(the `profiles` processor), so a forgotten rerun or a hand edit inside a
+generated block fails the build.
 
 ### `scripts/make_word_vectors.py`
 
@@ -182,7 +185,7 @@ Posts".
 
 ### `scripts/check_profile_links.py`
 
-Requests every profile URL in `data/yaml/profiles.yaml` — the ~30 links
+Requests every profile URL in `data/profiles.yaml` — the ~30 links
 rendered into `content/about/` and into `README.md` in the `../veltzer`
 repository — and reports anything that no longer resolves. Run on demand:
 
