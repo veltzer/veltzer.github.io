@@ -126,7 +126,7 @@ dep_inputs = [
 
 [analyzer.tera]
 # ─── data ────────────────────────────────────────────────────────────────────
-# data/yaml is the source of truth for the media tracker and the profile block
+# data/yaml is the source of truth for the profile block (profiles.yaml)
 # (it used to live in the private ../data repo). Three of the checks it had
 # there came with it: lint, schema validation ($schema in each file) and a
 # JSON conversion that proves every file parses. The films and series, with

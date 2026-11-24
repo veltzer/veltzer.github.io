@@ -514,9 +514,10 @@ certifications already on My World's Certifications page. And
 Websites pages; `loans.yaml`, `text_articles.yaml` and
 `video_courses.yaml`, which were empty, went without a copy.
 
-Private data types: the files in `data/yaml/` that no page publishes.
-
-- `cv.yaml`
+Private data types: none any more. The last one, `cv.yaml`, was deleted on
+2026-11-24: it was a stale YAML copy of the CV that lives in the private
+`../data` repo (`markdown/cv*.md`, built there to PDF, DOCX and HTML), and
+this repo is public, so "private" only meant that no page published it.
 
 Published: none of the organizations any more (`organizations.yaml` and
 `certifications.yaml` went to My World on 2026-11-23);
