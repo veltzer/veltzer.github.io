@@ -1,14 +1,19 @@
-{# A page whose body is an imported application: the teaching-* browsers
-   brought in by scripts/import_teaching.py, and the calendar.
+{# A page whose body is an application rather than prose: the calendar.
 
    It uses the wide container. The application's markup, styles
    and scripts are part of this page, so there is one document, one scrollbar,
-   and the site header and theme apply to it directly. #}
+   and the site header and theme apply to it directly.
+
+   The application exists once, in the English file; the other languages'
+   files carry a translated title and `body_from = "en"`, so rssite gives them
+   the English body. The app takes its strings from window.pageStrings
+   (page_strings.html, under the section's `strings_prefix`), so it runs in
+   the page's own language and direction. #}
 {% extends "base.html" %}
 {% block title %}{{ section.title }} &middot; {{ language.title }}{% endblock %}
 {% block main_class %}embed-main{% endblock %}
 {% block content %}
 <h1 class="embed-title">{{ section.title }}</h1>
 {%- if section.extra.strings_prefix %}{% set strings_prefix = section.extra.strings_prefix %}{% include "page_strings.html" %}{% endif %}
-{% include "app_body.html" %}
+{{ section.content | safe }}
 {% endblock %}

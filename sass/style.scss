@@ -22,24 +22,11 @@
 // One corner for everything: the site is square. Every box, button, chip,
 // badge, switch, input and image takes the small --radius-xs, so the larger shared
 // radius tokens are pointed at it here rather than in each rule. This
-// stylesheet loads after themes.css, so these win over its :root values; the
-// imported teaching apps (templates/app.html) define their own copies of the
-// tokens on their root element, so they are overridden there too.
-:root,
-body #app-syllabi,
-body #app-slides,
-body #app-animations {
+// stylesheet loads after themes.css, so these win over its :root values.
+:root {
   --radius-sm: var(--radius-xs);
   --radius: var(--radius-xs);
   --radius-pill: var(--radius-xs);
-  // The teaching apps' Material Web components (switches, chips, selects)
-  // draw their corners from these, inside their shadow DOM.
-  --md-sys-shape-corner-extra-small: var(--radius-xs);
-  --md-sys-shape-corner-small: var(--radius-xs);
-  --md-sys-shape-corner-medium: var(--radius-xs);
-  --md-sys-shape-corner-large: var(--radius-xs);
-  --md-sys-shape-corner-extra-large: var(--radius-xs);
-  --md-sys-shape-corner-full: var(--radius-xs);
 }
 
 body {
@@ -559,12 +546,11 @@ th { background: var(--bg-surface); }
   unicode-bidi: isolate;
 }
 
-// Application pages (calendar / slides / syllabi / animations).
-// These host a whole application rather than prose, so their templates
-// (app.html) swap the narrow reading column for this
-// wide container. The 42rem measure that suits an essay squeezes an
-// application. The class name dates from when the teaching sites were framed in
-// an iframe; nothing is framed any more, the markup is imported into the page.
+// Application pages (the calendar). These host a whole application rather
+// than prose, so their template (app.html) swaps the narrow reading column
+// for this wide container. The 42rem measure that suits an essay squeezes an
+// application. The class name dates from when the teaching sites were framed
+// in an iframe; they are separate sites now, linked from the Training menu.
 .embed-main {
   max-width: 80rem;
   margin: 0 auto;
@@ -573,26 +559,6 @@ th { background: var(--bg-surface); }
 
 .embed-title {
   margin-bottom: 1rem;
-}
-
-// The imported teaching pages (slides, syllabi, animations) wrap their markup
-// in .app-root; media and calendar do not use it. There is one document
-// and one scrollbar. .embed-main just widens the container past the reading
-// column.
-.app-root { width: 100%; }
-
-// Build provenance on the About page. Matches the style the slides app already
-// uses for the same information, so the two look like one convention rather
-// than two.
-.build-info {
-  font-size: 0.85em;
-  opacity: 0.7;
-
-  code {
-    background: transparent;
-    padding: 0;
-    font-size: 0.95em;
-  }
 }
 
 /* The year strip on a year archive page and the archive table's year links. */

@@ -10,13 +10,12 @@ than none, because it gets trusted.
 
 ## The short version
 
-There is no single framework. The app pages each load what they need, and the
+There is no single framework. The calendar loads what it needs, and the
 blog loads nothing at all.
 
 | Page | CSS | JS libraries |
 |------|-----|--------------|
 | `/en/calendar/` | site stylesheet | FullCalendar 6.1.20 + its Google Calendar plugin -- **vendored** |
-| `/en/slides/`, `/en/syllabi/`, `/en/animations/` | site stylesheet | Material Web 2 (CDN) |
 | Blog posts, About, tags | site stylesheet (`sass/style.scss`) | none |
 
 ## CSS
@@ -29,19 +28,6 @@ submodule (`shared/shared-themes/`), published to `_site/shared-themes/` by the
 truth; the copy is build output.
 
 ## JavaScript libraries
-
-### Material Web 2 -- slides, syllabi, animations
-
-```text
-https://cdn.jsdelivr.net/npm/@material/web@2/all.js/+esm
-```
-
-Three of the four app sections import it as an ES module. It supplies the
-filter chips, buttons and cards those pages use.
-
-Not pinned to a patch version, and loaded with no SRI hash. Both are worth
-knowing about; neither is currently a problem, since the pages degrade to
-unstyled-but-working elements if the CDN fails.
 
 ### FullCalendar 6.1.20 -- calendar
 
@@ -77,6 +63,4 @@ the version here. The Google Calendar plugin reads a public API key from
   over the titles, opening text and tags or over the full text too; the third
   ranks posts by meaning, with word vectors from
   [veltzer/embeddings](https://github.com/veltzer/embeddings) that
-  `scripts/make_word_vectors.py` trims into `static/data/vectors/`. The
-  other search boxes are per-page filters over each page's own data: slides,
-  syllabi and animations.
+  `scripts/make_word_vectors.py` trims into `static/data/vectors/`.

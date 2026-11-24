@@ -85,25 +85,6 @@ exists (`enabled_if_dir_exists`); elsewhere the build reports it as skipped.
 One gap: reverting a post to a state already built does not rerun it (the
 cache matches the old state), so run the script by hand after a revert.
 
-### `scripts/import_teaching.py`
-
-Imports the three sibling teaching sites (`../teaching-slides`,
-`../teaching-syllabi`, `../teaching-animations`) into
-`content/{slides,syllabi,animations}/_index.en.md` as native site pages. Each
-sibling builds a single self-contained `_site/index.html`; the script strips
-the document wrapper, drops the embedded header and theme `<select>` (this
-site's chrome supplies both), drops the inlined `@font-face` rules (this site
-links the same shared-themes fonts), scopes the page's CSS under an `#app-<section>`
-wrapper, points the links into the sibling's asset directories
-(`ASSET_ROOTS`: PDFs, Word files, syllabus and blurb pages) at
-`/<repo>/...`, where the sibling's own Pages site serves them, and writes the
-result with this site's front matter. It stops with an error when a sibling's
-`_site/` has a top-level directory `ASSET_ROOTS` does not list, since links into
-it would stay relative and 404 here. A manual step,
-run after rebuilding a sibling site; the output is committed, and the build
-(local and CI, which has no sibling checkouts) uses the committed copies. `--check` reports what would be written without writing.
-The Hebrew `_index.he.md` stubs are hand-written and are not touched.
-
 ### `scripts/gen_profiles.py`
 
 Renders `data/profiles.yaml` into the region between the

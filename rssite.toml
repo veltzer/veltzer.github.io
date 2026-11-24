@@ -164,15 +164,19 @@ search_modes = ["semantic", "full", "simple"]
 # language prefix, so every item follows the reader's language, apps included.
 # An entry with `children` is a menu (templates/base.html): its key labels the
 # menu button and the children are its items; it has no path of its own.
+# An entry with `url` instead of `path` leaves this site: the three teaching
+# sites are the teaching-* repositories' own Pages sites, served under
+# veltzer.org/<repo>/, in English only. They used to be copied in as pages of
+# this site, and the copies fell behind (see doc/DECISIONS.md, 2026-11-24).
 nav = [
     { key = "nav_blog", path = "blog/" },
     { key = "nav_tags", path = "tags/" },
     { key = "nav_calendar", path = "calendar/" },
     { key = "nav_training", children = [
         { key = "nav_training_overview", path = "training/" },
-        { key = "nav_syllabi", path = "syllabi/" },
-        { key = "nav_slides", path = "slides/" },
-        { key = "nav_animations", path = "animations/" },
+        { key = "nav_syllabi", url = "/teaching-syllabi/" },
+        { key = "nav_slides", url = "/teaching-slides/" },
+        { key = "nav_animations", url = "/teaching-animations/" },
     ] },
     { key = "nav_about", path = "about/" },
 ]

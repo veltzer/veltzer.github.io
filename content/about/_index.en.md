@@ -11,7 +11,7 @@ My name is Mark Veltzer and I am a software engineer from Israel.
 I work mostly in and around Linux – C, C++, Python, Rust and the systems layer
 underneath them – and I have spent a good part of my career teaching those
 subjects as well as writing them. Much of the teaching material I use is
-published on this site under [Syllabi](/en/syllabi/) and [Slides](/en/slides/).
+published on this site under [Syllabi](/teaching-syllabi/) and [Slides](/teaching-slides/).
 
 Outside work I read and listen a great deal and play chess. The
 [blog](/en/blog/) is where the longer writing lands, in

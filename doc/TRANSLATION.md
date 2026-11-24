@@ -25,13 +25,12 @@ chess viewer was removed on 2026-11-20.)
 
 ## Not translated, by decision
 
-- **Syllabi, Slides and Animations.** These are generated from the teaching
-  repositories by `scripts/import_teaching.py`. Their Hebrew pages
-  (`body_from = "en"`) reuse the English body inside a `dir="ltr" lang="en"`
-  wrapper (`templates/app_body.html`), so only the title, nav and footer around
-  them are Hebrew. Translating them means adding translations in the teaching
-  repositories, a large job (syllabi alone is ~390KB). Decided 2026-11-08: not
-  worth doing.
+- **Syllabi, Slides and Animations.** They are not pages of this site any
+  more (2026-11-24): the Training menu links to the teaching repositories' own
+  sites, `/teaching-syllabi/`, `/teaching-slides/` and `/teaching-animations/`,
+  which are English only. Translating them means adding translations in the
+  teaching repositories, a large job (syllabi alone is ~390KB). Decided
+  2026-11-08: not worth doing.
 - **The data itself.** Movie and course titles, reviews and
   company names in the collections are content, not interface. Translating
   them would mean keeping a Hebrew copy of the data.
@@ -56,10 +55,8 @@ chess viewer was removed on 2026-11-20.)
 ## How it fits together
 
 - **A page** has an `.en.md` and an `.he.md` file. Applications whose body
-  exists once set `body_from = "en"` in the Hebrew file. If the app is
-  translated (its strings come from i18n), the Hebrew file also sets
-  `[extra] translated = true`, so `app_body.html` does not wrap the body as
-  English.
+  exists once (the calendar) set `body_from = "en"` in the Hebrew file and
+  take their strings from i18n.
 - **An app's strings** are keys with a common prefix in both i18n files. The
   template sets `strings_prefix` and includes `page_strings.html`, which
   writes every matching key from `en.toml`, looked up with `trans()`, into

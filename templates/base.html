@@ -182,10 +182,12 @@
   </a>
   <nav class="site-nav" aria-label="{{ trans(key="nav_label_site") }}">
     {%- for item in config.extra.nav %}
-    {#- Every entry takes the language prefix, apps included: a Hebrew reader
-        who opens an app keeps the Hebrew nav, switcher and way back. The app
-        sections exist in Hebrew as stubs that take the English body
-        (body_from = "en"), so /he/calendar/ is a real page. -#}
+    {#- Every entry with a `path` takes the language prefix, apps included: a
+        Hebrew reader who opens an app keeps the Hebrew nav, switcher and way
+        back. The app sections exist in Hebrew as stubs that take the English
+        body (body_from = "en"), so /he/calendar/ is a real page. An entry
+        with a `url` (the teaching sites) is a site of its own and is linked
+        as it is. -#}
     {%- if item.children %}
     {#- A menu: a native <details>, so it opens on click, tap and keyboard
         with no script; the one below only closes it on an outside click or
@@ -194,12 +196,12 @@
       <summary>{{ trans(key=item.key) }}</summary>
       <div class="nav-menu-items">
         {%- for child in item.children %}
-        <a href="{{ language.url_prefix }}{{ child.path }}">{{ trans(key=child.key) }}</a>
+        <a href="{% if child.url %}{{ child.url }}{% else %}{{ language.url_prefix }}{{ child.path }}{% endif %}">{{ trans(key=child.key) }}</a>
         {%- endfor %}
       </div>
     </details>
     {%- else %}
-    <a href="{{ language.url_prefix }}{{ item.path }}">{{ trans(key=item.key) }}</a>
+    <a href="{% if item.url %}{{ item.url }}{% else %}{{ language.url_prefix }}{{ item.path }}{% endif %}">{{ trans(key=item.key) }}</a>
     {%- endif %}
     {%- endfor %}
   </nav>

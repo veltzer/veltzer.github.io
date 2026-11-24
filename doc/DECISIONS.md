@@ -554,3 +554,34 @@ being lettering only. A per-tag picture, an optional per-post picture and
 generated pictures were weighed against it; the per-post picture stays open
 as an addition. The cards, their layout and the reasoning are in
 `doc/SHARE_CARDS.md`.
+
+## The teaching sites are linked, not copied (2026-11-24)
+
+The Syllabi, Slides and Animations pages (`/en/syllabi/`, `/en/slides/`,
+`/en/animations/`, and their Hebrew and Russian stubs) were copies of the
+teaching-syllabi, teaching-slides and teaching-animations repositories' own
+Pages sites, which GitHub serves under `veltzer.org/<repo>/`.
+`scripts/import_teaching.py` stripped each sibling's `_site/index.html` down
+to its markup, scoped its CSS under a wrapper and committed it as a page of
+this site, so the teaching browsers carried this site's header, theme
+switcher and language chrome. It ran by hand, and the copies fell behind:
+the syllabi copy had none of the ten blurbs teaching-syllabi published
+after the last import, and links into a directory the import did not know
+(the blurbs') would have 404'd.
+
+The copies are gone. The Training menu links to `/teaching-syllabi/`,
+`/teaching-slides/` and `/teaching-animations/` directly (nav entries with a
+`url` instead of a `path`), and so do the Training and About pages. What is
+lost is this site's chrome around them, and a Hebrew or Russian reader now
+lands on an English site (the bodies were English already). What is gained:
+one page per browser, always current, and no import step. The tidy, vnu and
+rumdl exclusions the copies needed, tidy's `custom-tags` option, the
+Material Web corner tokens and the `app_body.html` wrapper went with them.
+
+Weighed against it: a build check that fails while a copy is stale (keeps
+the chrome, but every teaching push then blocks the site build until a
+re-import, and CI cannot run it without the siblings), and a thin page that
+fetches the teaching data at run time (current and keeps the chrome, but
+needs every teaching repository to publish its data as a file). The old
+URLs 404, as with every retired URL of this site (no legacy redirects, by
+decision).

@@ -8,8 +8,8 @@ I offer professional training on a variety of topics, from embedded to AI,
 in Hebrew or English.
 
 Over the years I have taught more than 150 different courses, and the material
-for many of them is published on this site under [Syllabi](/en/syllabi/) and
-[Slides](/en/slides/). The subjects span the whole stack:
+for many of them is published on this site under [Syllabi](/teaching-syllabi/) and
+[Slides](/teaching-slides/). The subjects span the whole stack:
 
 * Embedded Linux, real-time Linux and device drivers
 * Systems programming in C, C++ and Rust

@@ -71,15 +71,14 @@ which records the traps that outlived the migration.
   Console API with the gcloud login; network, run by hand), `check_profile_links.py` (the profile
   URLs in `profiles.yaml` still resolve; network, run by hand, not part of the build),
   `manage_api_key.py` (the Google Calendar API key's restrictions, stored in `pass`),
-  `make_og_images.py` (the two site-wide share cards, drawn by hand, committed), `gen_profiles.py` (About page), `import_teaching.py` (slides/syllabi/animations from
-  the sibling teaching repos), data importers,
+  `make_og_images.py` (the two site-wide share cards, drawn by hand, committed), `gen_profiles.py` (About page), data importers,
   `serve.py`, `make_logo.py` (the logo and the favicon/touch icons drawn from it), `make_word_vectors.py` (the blog search's word vectors), `export_posts_for_ai.py` (mirrors the posts to `~/insync/for_ai/blog` for AI agents
   reading Google Drive; a build step that runs only where that folder exists, via
   `enabled_if_dir_exists`), and the `build_*_dict.sh` / `spellcheck_*.sh` pair behind the aspell
   processors
 - `tests/` — pytest suite: the data import scripts, the logo generator against the inline logo in `base.html`, the word-vector
   trimmer, the Hebrew check
-  (`check_hebrew.py`), the CSS scoping and asset-directory check of `import_teaching.py`, and `gen_profiles.py --check`
+  (`check_hebrew.py`) and `gen_profiles.py --check`
 - `.aspell.{en,he}.txt` — the spellcheck word lists; `out/aspell/` holds the compiled
   dictionaries (gitignored build output)
 - `_site/` — generated output (gitignored, never edit)

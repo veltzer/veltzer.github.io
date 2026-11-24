@@ -20,6 +20,3 @@ purpose.
 - **`/keys.js` on the calendar page carries no `?v=`**: the page is markdown
   and has no access to the template's version string. The file changes only
   when the key is rotated.
-- **The three imported app pages** (animations, slides, syllabi) keep the
-  upstream sites' `<style>` blocks in the body: `import_teaching.py`
-  generates them that way, and the tidy and vnu checks exclude them.
