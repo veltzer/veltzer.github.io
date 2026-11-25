@@ -1840,3 +1840,6 @@ Defangs
 Roback
 defanged
 defangs
+DSM
+HiTOP
+rulebook
