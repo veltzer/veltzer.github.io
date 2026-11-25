@@ -230,8 +230,10 @@ tags = ["religion", "philosophy", "ethics"]
   post has a `<date>-<slug>.ru.md`, and a new post needs one too. Russian tags
   come from the fixed glossary in `doc/TRANSLATION.md` (each English tag always
   maps to the same Russian one, or the build fails; a new tag gets a glossary
-  entry). After adding Russian posts, rerun
-  `scripts/make_word_vectors.py --languages ru` for the semantic search.
+  entry). A new post, in any language, needs no rerun of
+  `scripts/make_word_vectors.py`: the browser computes the post vectors from
+  `search.json`. A rerun (all languages) only adds the rare words that some
+  post uses and the trimmed vectors lack; it is optional and occasional.
 
 ## Coding Conventions
 
