@@ -22,7 +22,11 @@ must carry the Search Console scope. Once:
 
     gcloud auth application-default login \\
         --scopes=https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/webmasters.readonly
-    gcloud services enable searchconsole.googleapis.com
+    gcloud services enable searchconsole.googleapis.com --project=veltzer-githubpages-id
+
+The quota project is this repository's own GCP project, the gcp_project named
+in .gcp.conf (veltzer-githubpages-id), not whatever quota project the gcloud
+login happens to carry, so the site's API use stays out of other projects.
 
 Not part of the build: it talks to the network and reports Google's state,
 not the tree's. It always exits 0 when it could ask; a page waiting to be
@@ -51,7 +55,8 @@ SITE = CONFIG["base_url"].rstrip("/")
 # and every repository that publishes under the domain.
 PROPERTY = "sc-domain:" + (urllib.parse.urlparse(SITE).hostname or "")
 API = "https://searchconsole.googleapis.com"
-ADC_FILE = Path.home() / ".config/gcloud/application_default_credentials.json"
+# This repository's GCP project: the quota project of every request.
+GCP_CONF = Path(__file__).resolve().parent.parent / ".gcp.conf"
 TIMEOUT = 60
 # Search Analytics returns at most this many rows a request.
 PAGE_ROWS = 25000
@@ -64,6 +69,17 @@ WORKERS = 8
 CACHE = Path.home() / ".cache" / "veltzer.github.io" / "indexed.json"
 
 
+def repo_project():
+    """The gcp_project line of .gcp.conf, or None when there is none."""
+    if not GCP_CONF.exists():
+        return None
+    for line in GCP_CONF.read_text(encoding="utf-8").splitlines():
+        key, sep, value = line.partition("=")
+        if sep and key.strip() == "gcp_project":
+            return value.strip()
+    return None
+
+
 def session(project):
     """A requests session carrying the gcloud token and the quota project."""
     result = subprocess.run(
@@ -74,10 +90,10 @@ def session(project):
     )
     if result.returncode != 0:
         sys.exit(f"no gcloud application-default login:\n{result.stderr.strip()}")
-    if project is None and ADC_FILE.exists():
-        project = json.loads(ADC_FILE.read_text(encoding="utf-8")).get("quota_project_id")
+    if project is None:
+        project = repo_project()
     if not project:
-        sys.exit("no quota project: pass --project or set one on the gcloud login")
+        sys.exit(f"no quota project: pass --project or set gcp_project in {GCP_CONF}")
     http = requests.Session()
     http.headers["Authorization"] = f"Bearer {result.stdout.strip()}"
     http.headers["x-goog-user-project"] = project
@@ -211,7 +227,7 @@ def main():
     parser.add_argument("--days", type=int, default=90, help="how far back a search appearance counts (default 90)")
     parser.add_argument("--no-inspect", action="store_true", help="skip the per-page inspection of the pages not seen in search")
     parser.add_argument("--max-age", type=int, default=30, help="days an inspection that said 'indexed' is trusted (default 30; 0 inspects everything again)")
-    parser.add_argument("--project", help="Google Cloud quota project (default: the one on the gcloud login)")
+    parser.add_argument("--project", help="Google Cloud quota project (default: gcp_project in .gcp.conf)")
     args = parser.parse_args()
 
     http = session(args.project)

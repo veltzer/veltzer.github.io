@@ -60,9 +60,10 @@ found indexed is remembered in `~/.cache/veltzer.github.io/indexed.json` for
 waiting. `--no-inspect` runs the first step alone.
 
 It authenticates as the gcloud application-default login, which must carry
-the Search Console scope, and the Search Console API must be enabled on the
-quota project (`veltzer-calendar-id`). The one-time commands are in the
-script's docstring. No key is stored anywhere.
+the Search Console scope. The quota project is this repository's own GCP
+project, `veltzer-githubpages-id`, read from `gcp_project` in `.gcp.conf`
+(`--project` overrides it), with the Search Console API enabled on it. The
+one-time commands are in the script's docstring. No key is stored anywhere.
 
 Not part of the build -- it talks to the network and reports Google's state,
 not the tree's. It covers this site's sitemap only; the domain property's

@@ -599,7 +599,17 @@ calendar at all, and it holds no API key. Removed with it: `static/keys.js`
 strings, the calendar CSS, and the application-page machinery only it used
 (`templates/app.html`, `templates/page_strings.html`, `.embed-main`). The
 key itself (`web-app-key` in GCP project `veltzer-calendar-id`) was deleted
-in GCP and its pass entry removed. The project itself stays: it is
-`scripts/check_indexing.py`'s Search Console quota project (and gcp-calendar's
-OAuth project), so `.gcp.conf` still names it. The old URLs 404, as with every
-retired URL of this site.
+in GCP and its pass entry removed. The old URLs 404, as with every retired
+URL of this site.
+
+## The site has its own GCP project, `veltzer-githubpages-id` (2026-11-25)
+
+Once the calendar was gone, the site's only use of GCP was the Search Console
+quota project of `scripts/check_indexing.py`, and that was
+`veltzer-calendar-id`, the project gcp-calendar uses. The site now has a
+project of its own, `veltzer-githubpages-id` (the fleet's `veltzer-<name>-id`
+pattern), with only the Search Console API enabled and no billing. `.gcp.conf`
+names it, and `check_indexing.py` takes its quota project from there instead
+of from the gcloud login, whose quota project is shared by everything that
+uses the application-default login. The site no longer touches
+`veltzer-calendar-id` at all.
