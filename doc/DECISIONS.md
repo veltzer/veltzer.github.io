@@ -599,5 +599,7 @@ calendar at all, and it holds no API key. Removed with it: `static/keys.js`
 strings, the calendar CSS, and the application-page machinery only it used
 (`templates/app.html`, `templates/page_strings.html`, `.embed-main`). The
 key itself (`web-app-key` in GCP project `veltzer-calendar-id`) was deleted
-in GCP and its pass entry removed, and `.gcp.conf`, which named that
-project, went too. The old URLs 404, as with every retired URL of this site.
+in GCP and its pass entry removed. The project itself stays: it is
+`scripts/check_indexing.py`'s Search Console quota project (and gcp-calendar's
+OAuth project), so `.gcp.conf` still names it. The old URLs 404, as with every
+retired URL of this site.
