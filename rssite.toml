@@ -171,7 +171,6 @@ search_modes = ["semantic", "full", "simple"]
 nav = [
     { key = "nav_blog", path = "blog/" },
     { key = "nav_tags", path = "tags/" },
-    { key = "nav_calendar", path = "calendar/" },
     { key = "nav_training", children = [
         { key = "nav_training_overview", path = "training/" },
         { key = "nav_syllabi", url = "/teaching-syllabi/" },

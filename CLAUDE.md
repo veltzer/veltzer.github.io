@@ -3,7 +3,8 @@
 ## Project Overview
 
 Mark Veltzer's personal website hosted on GitHub Pages at veltzer.org (CNAME). Combines a
-bilingual blog (English + Hebrew), media consumption tracker and calendar integration.
+bilingual blog (English + Hebrew) and media consumption tracker.
+The public Google Calendar page and its API key were removed on 2026-11-25.
 The chess game viewer was removed on 2026-11-20: the games are in the myworld app.
 
 ## Tech Stack
@@ -51,7 +52,7 @@ which records the traps that outlived the migration.
   Posts*). A bare `*.md` without a language suffix is an error
     - `content/blog/<date>-<slug>.he.md` — Hebrew translations. The shared file name is
   how rssite pairs a post with its translation; nothing else is needed
-    - `content/<page>/_index.{en,he}.md` — the standalone nav pages (about, media, calendar, …)
+    - `content/<page>/_index.{en,he}.md` — the standalone nav pages (about, media, …)
 - `data/` — `profiles.yaml`, the source of truth for the profile block (see
   *Important Notes*), and `identity.toml`, generated from it. The YAML names its
   schema in `$schema`, which the build validates against
@@ -70,7 +71,6 @@ which records the traps that outlived the migration.
   live site's host redirects and sitemap), `check_indexing.py` (which sitemap pages Google has indexed, through the Search
   Console API with the gcloud login; network, run by hand), `check_profile_links.py` (the profile
   URLs in `profiles.yaml` still resolve; network, run by hand, not part of the build),
-  `manage_api_key.py` (the Google Calendar API key's restrictions, stored in `pass`),
   `make_og_images.py` (the two site-wide share cards, drawn by hand, committed), `gen_profiles.py` (About page), data importers,
   `serve.py`, `make_logo.py` (the logo and the favicon/touch icons drawn from it), `make_word_vectors.py` (the blog search's word vectors), `export_posts_for_ai.py` (mirrors the posts to `~/insync/for_ai/blog` for AI agents
   reading Google Drive; a build step that runs only where that folder exists, via
@@ -343,8 +343,8 @@ tags = ["religion", "philosophy", "ethics"]
   was removed on 2026-10-28 (see `doc/DECISIONS.md`). Do not add
   `[[redirects]]`, `pager_aliases`, `feeds.root` or redirect stubs in
   `static/` to rescue an old URL.
-- Google Calendar API key is public by design in `static/keys.js` — it is referrer- and
-  API-restricted (see `doc/DECISIONS.md`). This is not a leak.
+- The site holds no API keys. The one it had, the Google Calendar browser key in
+  `static/keys.js`, went with the calendar page on 2026-11-25 (see `doc/DECISIONS.md`).
 - **Analytics is GoatCounter, switched on**: `extra.analytics` in `rssite.toml`
   names the provider (`"goatcounter"`, `"google"` or `""` for none) and
   `templates/base.html` emits the matching script, guarded on the provider's

@@ -182,12 +182,10 @@
   </a>
   <nav class="site-nav" aria-label="{{ trans(key="nav_label_site") }}">
     {%- for item in config.extra.nav %}
-    {#- Every entry with a `path` takes the language prefix, apps included: a
-        Hebrew reader who opens an app keeps the Hebrew nav, switcher and way
-        back. The app sections exist in Hebrew as stubs that take the English
-        body (body_from = "en"), so /he/calendar/ is a real page. An entry
-        with a `url` (the teaching sites) is a site of its own and is linked
-        as it is. -#}
+    {#- Every entry with a `path` takes the language prefix, so a Hebrew
+        reader keeps the Hebrew nav, switcher and way back. An entry with a
+        `url` (the teaching sites) is a site of its own and is linked as it
+        is. -#}
     {%- if item.children %}
     {#- A menu: a native <details>, so it opens on click, tap and keyboard
         with no script; the one below only closes it on an outside click or

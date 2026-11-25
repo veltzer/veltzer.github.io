@@ -6,7 +6,6 @@
 nav_blog = "Блог"
 nav_about = "Обо мне"
 nav_tags = "Теги"
-nav_calendar = "Календарь"
 nav_slides = "Слайды"
 nav_syllabi = "Программы курсов"
 nav_animations = "Анимации"
@@ -58,7 +57,7 @@ search_mode_semantic = "По смыслу"
 search_mode_full = "Полный текст"
 search_mode_simple = "Заголовки и теги"
 
-# Footer and calendar (templates/base.html, content/calendar).
+# Footer (templates/base.html).
 footer_built_with = "Собрано с помощью"
 footer_version = "версии"
 footer_generator_by = "генератора статических сайтов от"
@@ -69,17 +68,6 @@ footer_commit = "коммит"
 footer_uncommitted = "(с незакоммиченными изменениями)"
 footer_on = "в"
 colophon_this_build = "Эта сборка"
-calendar_error = "Не удалось загрузить события календаря."
-calendar_prev = "назад"
-calendar_next = "вперёд"
-calendar_today = "сегодня"
-calendar_month = "месяц"
-calendar_week = "неделя"
-calendar_day = "день"
-calendar_list = "список"
-calendar_all_day = "весь день"
-calendar_more = "ещё"
-calendar_no_events = "Нет событий"
 
 [dates]
 months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"]

@@ -172,7 +172,7 @@ src_dirs = ["sass"]
 [processor.checker.biome]
 src_dirs = ["out/processor.generator.isass"]
 src_extensions = [".css"]
-# not linted: static/vendor (vendored FullCalendar, and the compiled media Tailwind CSS)
+# not linted: static/vendor (vendored third-party code)
 [processor.checker.rumdl.prose]
 src_dirs = ["doc"]
 src_files = ["README.md", "CLAUDE.md"]

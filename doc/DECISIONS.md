@@ -55,6 +55,9 @@ No BMP anywhere: no browser asks for it and it is uncompressed.
 
 ## Google Calendar API key is intentionally public
 
+(Historical: the calendar page and the key were removed on 2026-11-25, see
+the last section. What follows is why the key was public while it existed.)
+
 The API key is restricted by HTTP referrer (`veltzer.github.io/*`, and the
 custom domain `veltzer.org/*`) and limited to the Calendar API only. Google
 designed browser API keys to be public — the restrictions prevent misuse.
@@ -585,3 +588,16 @@ fetches the teaching data at run time (current and keeps the chrome, but
 needs every teaching repository to publish its data as a file). The old
 URLs 404, as with every retired URL of this site (no legacy redirects, by
 decision).
+
+## The calendar page is gone, and with it the site's only key (2026-11-25)
+
+The public Google Calendar page (`/en/calendar/` and its Hebrew and Russian
+stubs) is removed, at the owner's request: the site no longer shows the
+calendar at all, and it holds no API key. Removed with it: `static/keys.js`
+(the Calendar browser key and the calendar ID), the vendored FullCalendar,
+`scripts/manage_api_key.py`, the Calendar nav entry and the `calendar_*`
+strings, the calendar CSS, and the application-page machinery only it used
+(`templates/app.html`, `templates/page_strings.html`, `.embed-main`). The
+key itself (`web-app-key` in GCP project `veltzer-calendar-id`) was deleted
+in GCP and its pass entry removed, and `.gcp.conf`, which named that
+project, went too. The old URLs 404, as with every retired URL of this site.

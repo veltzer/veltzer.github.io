@@ -5,7 +5,6 @@
 nav_blog = "בלוג"
 nav_about = "אודות"
 nav_tags = "תגיות"
-nav_calendar = "יומן"
 nav_slides = "מצגות"
 nav_syllabi = "סילבוסים"
 nav_animations = "אנימציות"
@@ -57,7 +56,7 @@ search_mode_semantic = "לפי משמעות"
 search_mode_full = "טקסט מלא"
 search_mode_simple = "כותרות ותגיות"
 
-# Footer and calendar (templates/base.html, content/calendar).
+# Footer (templates/base.html).
 footer_built_with = "נבנה עם"
 footer_version = "גרסה"
 footer_generator_by = "מחולל אתרים סטטיים מאת"
@@ -68,17 +67,6 @@ footer_commit = "קומיט"
 footer_uncommitted = "(עם שינויים שטרם נכנסו לקומיט)"
 footer_on = "בתאריך"
 colophon_this_build = "הבנייה הזו"
-calendar_error = "טעינת אירועי היומן נכשלה."
-calendar_prev = "הקודם"
-calendar_next = "הבא"
-calendar_today = "היום"
-calendar_month = "חודש"
-calendar_week = "שבוע"
-calendar_day = "יום"
-calendar_list = "סדר יום"
-calendar_all_day = "כל היום"
-calendar_more = "נוספים"
-calendar_no_events = "אין אירועים להצגה"
 
 [dates]
 months = ["ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"]

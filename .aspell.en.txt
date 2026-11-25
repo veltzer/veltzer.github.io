@@ -708,7 +708,6 @@ bzip
 cacheability
 cacheable
 caladea
-calendarel
 callosum
 camelcase
 carlito
@@ -1019,7 +1018,6 @@ gnosis
 gnostic
 gnupg
 googlecalendarapikey
-googlecalendarid
 gpg
 grandmasters
 grep
