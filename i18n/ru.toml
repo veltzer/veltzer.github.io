@@ -68,6 +68,10 @@ footer_commit = "коммит"
 footer_uncommitted = "(с незакоммиченными изменениями)"
 footer_on = "в"
 colophon_this_build = "Эта сборка"
+colophon_utc = "UTC"
+colophon_local = "Ваше местное время"
+colophon_built_at = "Собрано"
+colophon_deployed_at = "Развёрнуто"
 
 [dates]
 months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"]

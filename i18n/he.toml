@@ -67,6 +67,10 @@ footer_commit = "קומיט"
 footer_uncommitted = "(עם שינויים שטרם נכנסו לקומיט)"
 footer_on = "בתאריך"
 colophon_this_build = "הבנייה הזו"
+colophon_utc = "UTC"
+colophon_local = "השעה המקומית שלך"
+colophon_built_at = "נבנה"
+colophon_deployed_at = "הועלה לאתר"
 
 [dates]
 months = ["ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"]

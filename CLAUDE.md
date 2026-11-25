@@ -375,6 +375,12 @@ tags = ["religion", "philosophy", "ethics"]
   build wrote. Do not put any of them back into `base.html`, `root.html` or
   any other template; `rssite plan` shows it at once (only the two colophon
   outputs may list `.git/...` sources).
+- The colophon also shows the build and deploy times in UTC and in the
+  reader's own time zone (`static/colophon-times.js`). The build time comes
+  from `build.time` in the page; the deploy time is not known at build time,
+  so the script reads it from the `Last-Modified` header GitHub Pages serves
+  the page with (a HEAD request for the page itself). The table is hidden
+  until the script fills it.
 - Site uses `.nojekyll` to bypass Jekyll processing on GitHub Pages.
 - CI checks out submodules recursively; without that the build fails on missing tokens.
 

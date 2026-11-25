@@ -26,4 +26,21 @@
       sources always give the same copyright. #}
   <li dir="ltr">&copy; {% if git %}{{ git.year }} {% endif %}{{ config.author }}</li>
 </ul>
+{#- The build and deploy times in UTC and in the reader's time zone, filled
+    by static/colophon-times.js: the build time from data-time, the deploy
+    time from the Last-Modified header Pages serves this page with. Hidden
+    until the script shows it, so without JavaScript only the UTC build time
+    in the list above is there. -#}
+<table class="colophon-times" hidden>
+  <thead>
+    <tr><td></td><th scope="col">{{ trans(key="colophon_utc") }}</th><th scope="col">{{ trans(key="colophon_local") }}</th></tr>
+  </thead>
+  <tbody>
+    {%- if build %}
+    <tr class="build-time" data-time="{{ build.time }}" hidden><th scope="row">{{ trans(key="colophon_built_at") }}</th><td class="utc">&mdash;</td><td class="local">&mdash;</td></tr>
+    {%- endif %}
+    <tr class="deploy-time" hidden><th scope="row">{{ trans(key="colophon_deployed_at") }}</th><td class="utc">&mdash;</td><td class="local">&mdash;</td></tr>
+  </tbody>
+</table>
+<script src="{{ get_url(path='colophon-times.js') }}" defer></script>
 {% endblock %}
