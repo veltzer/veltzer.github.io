@@ -28,16 +28,12 @@ Some properties, like the anti-aliasing option, is notoriously bad by default an
 
 The values of the `awt.useSystemAAFontSettings` key are as follows:
 
--
-`false` corresponds to disabling font smoothing on the desktop.
+- `false` corresponds to disabling font smoothing on the desktop.
 
--
-`on` corresponds to Gnome Best shapes/Best contrast (no equivalent Windows setting).
+- `on` corresponds to Gnome Best shapes/Best contrast (no equivalent Windows setting).
 
--
-`gasp` corresponds to Windows `Standard` font smoothing (no equivalent Gnome desktop setting).
+- `gasp` corresponds to Windows `Standard` font smoothing (no equivalent Gnome desktop setting).
 
--
-`lcd` corresponds to Gnome's `subpixel smoothing` and Windows `ClearType`.
+- `lcd` corresponds to Gnome's `subpixel smoothing` and Windows `ClearType`.
 
 What is the best option to choose? Well - I really don't know. On my laptop `lcd` looks best. Let me know about your own experience...

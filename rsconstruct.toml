@@ -15,20 +15,12 @@ dep_inputs = [".oxlintrc.repo.json"]
 # stray or unclosed tag, an unknown element, a <style> in the body. It does
 # not know HTML5's content rules (a <main> nested in a <main> passes); the
 # vnu check below does.
-# The options silence what is correct here and tidy 5.8 does not know:
-# Hebrew tag URLs are valid IRIs (fix-uri), data-* and loading/decoding
-# attributes are HTML5 (warn-proprietary-attributes), and an empty element is a
-# placeholder a script fills (drop-empty-elements). fix-style-tags: no makes
-# a <style> in the body a warning instead of a silent move.
+# fix-style-tags: no makes a <style> in the body a warning instead of a
+# silent move.
 [processor.checker.itidy]
 src_dirs = ["_site"]
 src_exclude_dirs = ["vendor"]
-options = [
-    "fix-uri: no",
-    "warn-proprietary-attributes: no",
-    "fix-style-tags: no",
-    "drop-empty-elements: no",
-]
+options = ["fix-style-tags: no"]
 # The rendered pages again, against the HTML standard itself: the Nu Html
 # Checker (the validator behind validator.w3.org) knows the content model,
 # so it catches what tidy cannot, a <main> inside a <main> for one. Its
