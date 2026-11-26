@@ -269,3 +269,7 @@ args = ["--offline", "--no-progress", "--persona=pedantic"]
 
 [processor.checker.ishellcheck]
 src_dirs = ["scripts"]
+
+# lint the Lua configuration with luacheck (policy: .luacheckrc)
+[processor.checker.iluacheck]
+src_dirs = ["config"]
