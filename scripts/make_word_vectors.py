@@ -84,12 +84,14 @@ def get(url: str) -> bytes:
     if token and url.startswith("https://api.github.com/"):
         request.add_header("Authorization", f"Bearer {token}")
     with urllib.request.urlopen(request) as response:
-        return response.read()
+        body: bytes = response.read()
+        return body
 
 
 def fetch(release: dict, name: str) -> Path:
     """Download one asset of release (once) and check it against SHA256SUMS."""
-    target = CACHE / release["tag_name"]
+    tag_name: str = release["tag_name"]
+    target = CACHE / tag_name
     target.mkdir(parents=True, exist_ok=True)
     assets = {a["name"]: a["browser_download_url"] for a in release["assets"]}
     path = target / name
