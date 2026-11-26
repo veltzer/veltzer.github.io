@@ -100,7 +100,7 @@ dep_inputs = [
 # My World now (myworld.stream).
 [processor.checker.iyamllint]
 src_dirs = [".github"]
-src_files = ["data/profiles.yaml"]
+src_files = ["data/profiles.yaml", ".yamllint.yaml"]
 
 [processor.checker.iyamlschema]
 src_files = ["data/profiles.yaml"]
