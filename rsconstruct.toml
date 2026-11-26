@@ -31,14 +31,14 @@ options = [
 ]
 # The rendered pages again, against the HTML standard itself: the Nu Html
 # Checker (the validator behind validator.w3.org) knows the content model,
-# so it catches what tidy cannot, a <main> inside a <main> for one. Errors
-# only: its warnings include advice (a section without a heading) and the
-# empty headings a script fills in. It is a jar run with java; the jar is
-# pinned in rsconstruct.lock.
+# so it catches what tidy cannot, a <main> inside a <main> for one. Its
+# warnings fail the build like its errors (--Werror; vnu alone exits zero on
+# warnings). It is a jar run with java; the jar is pinned in
+# rsconstruct.lock.
 [processor.checker.vnu]
 src_dirs = ["_site"]
 src_exclude_dirs = ["vendor"]
-args = ["--errors-only"]
+args = ["--Werror"]
 # rssite renders the site: `rssite plan` lists every file a build writes with
 # the sources each depends on, and rsconstruct makes each one a product, so an
 # edited post rebuilds only the files that list it and other processors can

@@ -26,10 +26,10 @@
 {%- for own in [true, false] %}
 {%- for entry in languages %}
 {%- if (own and entry.code == lang) or (not own and entry.code != lang) %}
-<section lang="{{ entry.code }}" dir="{{ entry.direction }}">
+<div lang="{{ entry.code }}" dir="{{ entry.direction }}">
 <p>{{ trans(key="not_found_text", lang=entry.code) }}</p>
 <p><a href="{{ entry.url_prefix }}">{{ trans(key="not_found_home", lang=entry.code) }}</a> &middot; <a href="{{ entry.url_prefix }}blog/">{{ trans(key="nav_blog", lang=entry.code) }}</a> &middot; <a href="{{ entry.url_prefix }}tags/">{{ trans(key="tags_title", lang=entry.code) }}</a></p>
-</section>
+</div>
 {%- endif %}
 {%- endfor %}
 {%- endfor %}
