@@ -141,7 +141,7 @@ input_globs = ["content/blog/*.md"]
 output_files = ["out/export_posts_for_ai/ok"]
 
 [processor.checker.taplo]
-src_files = ["rssite.toml", "rsconstruct.toml", ".rumdl.toml", ".rumdl.content.toml", "pyproject.toml", "data/identity.toml", "i18n/en.toml", "i18n/he.toml", "i18n/ru.toml"]
+src_files = [".ruff.toml", ".rumdl.content.toml", ".rumdl.toml", "data/identity.toml", "i18n/en.toml", "i18n/he.toml", "i18n/ru.toml", "pyproject.toml", "rsconstruct.toml", "rssite.toml"]
 
 # The committed JSON: the lookup caches the data checks read and the search's
 # word lists. static/vendor is not ours, and .oxlintrc.json is JSON with
