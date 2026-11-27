@@ -35,6 +35,7 @@ import sys
 import unicodedata
 import urllib.request
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 
@@ -88,7 +89,7 @@ def get(url: str) -> bytes:
         return body
 
 
-def fetch(release: dict, name: str) -> Path:
+def fetch(release: dict[str, Any], name: str) -> Path:
     """Download one asset of release (once) and check it against SHA256SUMS."""
     tag_name: str = release["tag_name"]
     target = CACHE / tag_name
