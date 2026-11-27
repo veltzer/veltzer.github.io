@@ -1,8 +1,8 @@
 +++
-title = "Direct Democracy Shows Where Morals Actually Come From"
-description = "Morals rest on public consensus, not God. Direct democracy erodes the divine grounding by showing people making their own morality, which new problems like genetic engineering demand."
 date = 2023-10-19
+description = "Morals rest on public consensus, not God. Direct democracy erodes the divine grounding by showing people making their own morality, which new problems like genetic engineering demand."
 slug = "morals-from-consensus"
+title = "Direct Democracy Shows Where Morals Actually Come From"
 
 [taxonomies]
 tags = ["direct-democracy", "religion", "ethics"]

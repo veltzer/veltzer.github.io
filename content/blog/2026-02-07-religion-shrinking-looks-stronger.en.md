@@ -1,8 +1,8 @@
 +++
-title = "Religion Looks Stronger Because It Is Shrinking"
-description = "Religion declines from the edges inward: moderates leave first, and the frightened remnant grows louder and more radical. Loudness and numbers move in opposite directions."
 date = 2026-02-07
+description = "Religion declines from the edges inward: moderates leave first, and the frightened remnant grows louder and more radical. Loudness and numbers move in opposite directions."
 slug = "religion-shrinking-looks-stronger"
+title = "Religion Looks Stronger Because It Is Shrinking"
 
 [taxonomies]
 tags = ["religion", "statistics", "culture"]

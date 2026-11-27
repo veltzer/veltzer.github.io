@@ -1,8 +1,8 @@
 +++
-title = "MkDocs и GitHub Pages: работающая структура файлов"
-description = "MkDocs стирает выходной каталог при каждой сборке, поэтому HTML, JS и CSS, положенные в docs/, исчезают. Держите их в docs_dir, и MkDocs скопирует их сам."
 date = 2026-03-21
+description = "MkDocs стирает выходной каталог при каждой сборке, поэтому HTML, JS и CSS, положенные в docs/, исчезают. Держите их в docs_dir, и MkDocs скопирует их сам."
 slug = "mkdocs-github-pages"
+title = "MkDocs и GitHub Pages: работающая структура файлов"
 
 [taxonomies]
 tags = ["документация"]

@@ -1,8 +1,8 @@
 +++
-title = "The Ethical Problem with Religious Childhood Indoctrination"
-description = "Most religious belief is installed in children before they can evaluate it. That is how religion spreads, and it exploits a trust no other domain would let anyone exploit."
 date = 2026-04-15
+description = "Most religious belief is installed in children before they can evaluate it. That is how religion spreads, and it exploits a trust no other domain would let anyone exploit."
 slug = "childhood-indoctrination"
+title = "The Ethical Problem with Religious Childhood Indoctrination"
 
 [taxonomies]
 tags = ["religion", "ethics", "culture"]

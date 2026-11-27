@@ -1,8 +1,8 @@
 +++
-title = "For Humans, Stories Equals Truth"
-description = "We mistake a compelling story for truth. Childhood fables install binary thinking, the market sells comforting falsehoods, and the real fight is with our own nature."
 date = 2026-11-02
+description = "We mistake a compelling story for truth. Childhood fables install binary thinking, the market sells comforting falsehoods, and the real fight is with our own nature."
 slug = "stories-equal-truth"
+title = "For Humans, Stories Equals Truth"
 
 [taxonomies]
 tags = ["epistemology", "psychology", "culture", "economics"]

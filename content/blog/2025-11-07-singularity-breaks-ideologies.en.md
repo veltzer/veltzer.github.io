@@ -1,8 +1,8 @@
 +++
-title = "The Singularity Breaks Ideologies"
-description = "Ideologies are bundles of unrelated positions that make sense only while conditions hold still. Accelerating technology breaks the bundles, which argues for deciding issues directly."
 date = 2025-11-07
+description = "Ideologies are bundles of unrelated positions that make sense only while conditions hold still. Accelerating technology breaks the bundles, which argues for deciding issues directly."
 slug = "singularity-breaks-ideologies"
+title = "The Singularity Breaks Ideologies"
 
 [taxonomies]
 tags = ["politics", "science", "opinion", "direct-democracy"]

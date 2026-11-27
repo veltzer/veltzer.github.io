@@ -1,8 +1,8 @@
 +++
-title = "The 3,000-Year Taboo: Religion as the Original Political Correctness"
-description = "Religion enforced speech taboos and mandatory pieties for 3,000 years. A right that rails against political correctness while shielding faith is acting in bad faith."
 date = 2026-10-10
+description = "Religion enforced speech taboos and mandatory pieties for 3,000 years. A right that rails against political correctness while shielding faith is acting in bad faith."
 slug = "religion-original-political-correctness"
+title = "The 3,000-Year Taboo: Religion as the Original Political Correctness"
 
 [taxonomies]
 tags = ["religion", "politics", "history", "atheism"]

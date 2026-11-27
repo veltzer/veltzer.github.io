@@ -1,8 +1,8 @@
 +++
-title = "A Field With Traditions Is Confessing Something"
-description = "There is no continental physics. A field that splits into traditions is admitting that it rests on untestable assumptions its own practitioners do not share."
 date = 2024-11-28
+description = "There is no continental physics. A field that splits into traditions is admitting that it rests on untestable assumptions its own practitioners do not share."
 slug = "tradition-is-a-confession"
+title = "A Field With Traditions Is Confessing Something"
 
 [taxonomies]
 tags = ["philosophy", "epistemology", "science"]

@@ -1,8 +1,8 @@
 +++
-title = "Ripping CDs on Linux Without Losing Anything"
-description = "cdparanoia for an accurate read, abcde for tagging and encoding to FLAC, whipper with AccurateRip for the scratched discs: a faithful rip of a CD shelf, done once."
 date = 2012-11-04
+description = "cdparanoia for an accurate read, abcde for tagging and encoding to FLAC, whipper with AccurateRip for the scratched discs: a faithful rip of a CD shelf, done once."
 slug = "cd-ripping-on-linux"
+title = "Ripping CDs on Linux Without Losing Anything"
 
 [taxonomies]
 tags = ["linux", "audio", "command-line"]

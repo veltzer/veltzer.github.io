@@ -1,8 +1,8 @@
 +++
-title = "How the Market Defangs Ideas"
-description = "The market cares only about money, so it pushes against any costly idea, true or false, moral or not, and more exactly against whatever the people paying do not want to hear."
 date = 2026-11-22
+description = "The market cares only about money, so it pushes against any costly idea, true or false, moral or not, and more exactly against whatever the people paying do not want to hear."
 slug = "market-defangs-ideas"
+title = "How the Market Defangs Ideas"
 
 [taxonomies]
 tags = ["economics", "markets", "ethics"]

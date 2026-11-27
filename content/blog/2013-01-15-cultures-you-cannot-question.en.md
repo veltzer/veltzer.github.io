@@ -1,8 +1,8 @@
 +++
-title = "\"Don't Ask Me About My Politics\" Is How Bankrupt Systems Defend Themselves"
-description = "Religions and political camps both declare their beliefs private exactly where they cannot be defended. In a system built on argument, that norm marks the positions as bankrupt."
 date = 2013-01-15
+description = "Religions and political camps both declare their beliefs private exactly where they cannot be defended. In a system built on argument, that norm marks the positions as bankrupt."
 slug = "cultures-you-cannot-question"
+title = "\"Don't Ask Me About My Politics\" Is How Bankrupt Systems Defend Themselves"
 
 [taxonomies]
 tags = ["politics", "religion", "culture"]

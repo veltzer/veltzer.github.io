@@ -1,8 +1,8 @@
 +++
-title = "What Divine Command Theory Actually Implies"
-description = "If right means whatever God commands, genocide and child sacrifice would be good on command. Believers recoil, and the recoil shows they do not really hold the theory."
 date = 2026-04-13
+description = "If right means whatever God commands, genocide and child sacrifice would be good on command. Believers recoil, and the recoil shows they do not really hold the theory."
 slug = "divine-command-theory-problems"
+title = "What Divine Command Theory Actually Implies"
 
 [taxonomies]
 tags = ["religion", "philosophy", "ethics"]

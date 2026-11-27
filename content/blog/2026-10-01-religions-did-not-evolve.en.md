@@ -1,8 +1,8 @@
 +++
-title = "Religions Did Not Evolve, They Merely Survived"
-description = "Dennett is wrong that religions evolved into brilliant designs. They suppress variation on purpose, changed as little as they could, and merely survived."
 date = 2026-10-01
+description = "Dennett is wrong that religions evolved into brilliant designs. They suppress variation on purpose, changed as little as they could, and merely survived."
 slug = "religions-did-not-evolve"
+title = "Religions Did Not Evolve, They Merely Survived"
 
 [taxonomies]
 tags = ["religion", "philosophy", "science"]

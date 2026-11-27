@@ -1,8 +1,8 @@
 +++
-title = "People Do Not Actually Want the Truth"
-description = "Against Harari: people want the truth only where being wrong hurts fast. Elsewhere they prefer comfortable delusion, so more information will not fix it."
 date = 2020-05-09
+description = "Against Harari: people want the truth only where being wrong hurts fast. Elsewhere they prefer comfortable delusion, so more information will not fix it."
 slug = "people-avoid-the-truth"
+title = "People Do Not Actually Want the Truth"
 
 [taxonomies]
 tags = ["epistemology", "psychology", "philosophy"]

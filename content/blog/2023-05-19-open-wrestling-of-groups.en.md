@@ -1,8 +1,8 @@
 +++
-title = "Direct Democracy Is the Open Wrestling of Groups, and Open Is Better"
-description = "Groups with conflicting interests will fight either way. Representation hides the fight in lobbies and bureaucracy where it festers; direct democracy stages it in the open."
 date = 2023-05-19
+description = "Groups with conflicting interests will fight either way. Representation hides the fight in lobbies and bureaucracy where it festers; direct democracy stages it in the open."
 slug = "open-wrestling-of-groups"
+title = "Direct Democracy Is the Open Wrestling of Groups, and Open Is Better"
 
 [taxonomies]
 tags = ["direct-democracy", "politics"]

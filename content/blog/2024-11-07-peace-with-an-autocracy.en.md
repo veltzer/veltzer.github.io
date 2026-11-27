@@ -1,8 +1,8 @@
 +++
-title = "A Peace With an Autocracy Is a Peace With One Man"
-description = "A treaty with an autocrat lasts only as long as his interest in it. A lasting peace, including with a future Palestinian state, needs a government answerable to its own people."
 date = 2024-11-07
+description = "A treaty with an autocrat lasts only as long as his interest in it. A lasting peace, including with a future Palestinian state, needs a government answerable to its own people."
 slug = "peace-with-an-autocracy"
+title = "A Peace With an Autocracy Is a Peace With One Man"
 
 [taxonomies]
 tags = ["israel", "politics"]

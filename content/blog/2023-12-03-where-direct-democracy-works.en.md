@@ -1,8 +1,8 @@
 +++
-title = "Three Conditions Decide Whether Direct Democracy Can Take Root"
-description = "Direct democracy needs decentralised media, citizens who regard their own judgement as legitimate, and an army that takes orders. A country that lacks any of them should not try it yet."
 date = 2023-12-03
+description = "Direct democracy needs decentralised media, citizens who regard their own judgement as legitimate, and an army that takes orders. A country that lacks any of them should not try it yet."
 slug = "where-direct-democracy-works"
+title = "Three Conditions Decide Whether Direct Democracy Can Take Root"
 
 [taxonomies]
 tags = ["direct-democracy", "politics"]

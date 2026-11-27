@@ -1,8 +1,8 @@
 +++
-title = "The Sugar Trap of Faith: Why Natural Belief Must Be Resisted"
-description = "Religion feels natural because it fits biases evolution built into the brain. So does the craving for sugar, and in both cases being natural is a reason to resist, not to indulge."
 date = 2026-10-31
+description = "Religion feels natural because it fits biases evolution built into the brain. So does the craving for sugar, and in both cases being natural is a reason to resist, not to indulge."
 slug = "sugar-trap-of-faith"
+title = "The Sugar Trap of Faith: Why Natural Belief Must Be Resisted"
 
 [taxonomies]
 tags = ["religion", "psychology", "science", "epistemology"]

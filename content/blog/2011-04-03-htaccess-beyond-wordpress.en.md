@@ -1,8 +1,8 @@
 +++
-title = "WordPress Wants to Own Your Whole Site, and Your .htaccess Should Say No"
-description = "WordPress's catch-all rewrite turns every stray URL on a mixed site into a WordPress request. Scope its rules to /blog/ and let the root .htaccess handle the rest."
 date = 2011-04-03
+description = "WordPress's catch-all rewrite turns every stray URL on a mixed site into a WordPress request. Scope its rules to /blog/ and let the root .htaccess handle the rest."
 slug = "htaccess-beyond-wordpress"
+title = "WordPress Wants to Own Your Whole Site, and Your .htaccess Should Say No"
 
 [taxonomies]
 tags = ["wordpress", "sysadmin", "self-hosting"]

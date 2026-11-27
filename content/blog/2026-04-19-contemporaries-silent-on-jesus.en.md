@@ -1,8 +1,8 @@
 +++
-title = "The Silence of Contemporaries on Jesus"
-description = "Philo and Seneca wrote during Jesus' supposed lifetime and never mention him. The Jesus of the Gospels looks like a literary creation that grew once the fact-checkers were gone."
 date = 2026-04-19
+description = "Philo and Seneca wrote during Jesus' supposed lifetime and never mention him. The Jesus of the Gospels looks like a literary creation that grew once the fact-checkers were gone."
 slug = "contemporaries-silent-on-jesus"
+title = "The Silence of Contemporaries on Jesus"
 
 [taxonomies]
 tags = ["religion", "history", "bible"]

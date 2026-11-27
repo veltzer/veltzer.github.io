@@ -1,8 +1,8 @@
 +++
-title = "Being Part of Something Larger Makes People Happy, and Voting Every Four Years Is Not It"
-description = "Belonging to something larger is one of the few happiness findings that holds up. Voting every four years is spectating, not belonging; deciding real questions is the real thing."
 date = 2023-08-08
+description = "Belonging to something larger is one of the few happiness findings that holds up. Voting every four years is spectating, not belonging; deciding real questions is the real thing."
 slug = "happiness-and-direct-democracy"
+title = "Being Part of Something Larger Makes People Happy, and Voting Every Four Years Is Not It"
 
 [taxonomies]
 tags = ["direct-democracy", "psychology"]

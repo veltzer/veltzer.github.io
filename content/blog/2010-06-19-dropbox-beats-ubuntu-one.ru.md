@@ -1,8 +1,8 @@
 +++
-title = "Dropbox лучше Ubuntu One даже в Ubuntu"
-description = "Dropbox обходит Ubuntu One на самой Ubuntu: его легко установить и удалить, у него понятный значок в трее, лучший инструмент командной строки, и он не навязывает синхронизацию закладок и контактов."
 date = 2010-06-19
+description = "Dropbox обходит Ubuntu One на самой Ubuntu: его легко установить и удалить, у него понятный значок в трее, лучший инструмент командной строки, и он не навязывает синхронизацию закладок и контактов."
 slug = "dropbox-beats-ubuntu-one"
+title = "Dropbox лучше Ubuntu One даже в Ubuntu"
 
 [taxonomies]
 tags = ["linux", "самохостинг", "ubuntu"]

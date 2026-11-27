@@ -1,8 +1,8 @@
 +++
-title = "There Are Only Two Levers on Human Behaviour, and We Can Pull One"
-description = "Behaviour is about half genes and half environment, so there are two levers. The genetic one is out of reach; the social one is real and belongs to the people who live under it."
 date = 2025-07-16
+description = "Behaviour is about half genes and half environment, so there are two levers. The genetic one is out of reach; the social one is real and belongs to the people who live under it."
 slug = "genes-and-society-levers"
+title = "There Are Only Two Levers on Human Behaviour, and We Can Pull One"
 
 [taxonomies]
 tags = ["science", "politics", "psychology"]

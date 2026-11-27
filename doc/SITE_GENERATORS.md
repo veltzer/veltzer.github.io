@@ -63,7 +63,7 @@ reason rssite exists.
 The fleet's own generator: Rust, one binary, on crates.io. Written after the
 zola period, with this site as its first user.
 
-### Strengths
+### Strengths of rssite
 
 - `rssite plan` lists every file a build writes with the sources each
   depends on, and `build` is the same code run to the end. rsconstruct turns
@@ -93,7 +93,7 @@ zola period, with this site as its first user.
   days in 2026-11 for this site (0.1.28: the author `@id` and post images;
   0.1.29: Hebrew feed titles and author; 0.1.31: `highlight_css`).
 
-### Weaknesses
+### Weaknesses of rssite
 
 - One maintainer and, so far, one family of sites using it. Nobody else has
   found its bugs, and nobody else will fix them.
@@ -115,14 +115,14 @@ would be a poor recommendation to anyone outside the fleet.
 Python, built for documentation; the blog is a plugin of the Material theme.
 The site ran on it until 2026-08.
 
-### Strengths
+### Strengths of MkDocs with Material
 
 - Material is the best-looking theme of any generator here, with no CSS work.
 - Small configuration, Markdown with good extensions (admonitions, tabs).
 - Search built in, navigation generated from the directory tree.
 - Python plugins are easy to write.
 
-### Weaknesses
+### Weaknesses of MkDocs with Material
 
 - The blog is secondary, and it showed: no real taxonomies beyond what the
   plugin offers, and a full rebuild on every run.
@@ -143,7 +143,7 @@ a blog in two languages.
 Rust, one binary, Tera templates, Sass and syntax highlighting built in. The
 site ran on it from 2026-08 to 2026-10-16.
 
-### Strengths
+### Strengths of zola
 
 - No runtime, fast, simple TOML configuration.
 - A real blog: sections, taxonomies, feeds, pagination, a search index.
@@ -174,7 +174,7 @@ sum was a build held together by workarounds.
 
 Go, one binary, the most widely used generator of this kind.
 
-### Strengths
+### Strengths of Hugo
 
 - Very fast, no runtime, large community and theme catalogue.
 - Multilingual is first-class and the closest to what this site needs:
@@ -183,7 +183,7 @@ Go, one binary, the most widely used generator of this kind.
 - Asset pipeline built in (Sass, image processing, fingerprinting).
 - Taxonomies, archetypes, shortcodes, output formats.
 
-### Weaknesses
+### Weaknesses of Hugo
 
 - Go templates are hard to read and harder to debug; the template lookup
   order is a subject of its own.
@@ -200,14 +200,14 @@ translated tags. The price is the template language and an opaque build.
 
 Ruby; the generator GitHub Pages runs natively.
 
-### Strengths
+### Strengths of Jekyll
 
 - Push and it builds: no CI needed on GitHub Pages.
 - Built for blogging from the start: posts, drafts, categories, tags,
   pagination.
 - Huge theme ecosystem and documentation.
 
-### Weaknesses
+### Weaknesses of Jekyll
 
 - Ruby and Bundler environments are a recurring cost.
 - Slow on large sites.
@@ -223,13 +223,13 @@ gave up long ago by having a build.
 
 JavaScript; a small, flexible core with a choice of template languages.
 
-### Strengths
+### Strengths of Eleventy
 
 - No opinions about structure, fast builds, good incremental support.
 - Any template language (Nunjucks, Liquid, and more).
 - The whole npm ecosystem is available.
 
-### Weaknesses
+### Weaknesses of Eleventy
 
 - Needs Node, which this site's build deliberately does not have.
 - Nothing is given: pagination, tags, feeds and a theme are assembled by hand.
@@ -243,13 +243,13 @@ out of parts. Here that role is taken.
 
 Python; built for blogging.
 
-### Strengths
+### Strengths of Pelican
 
 - Posts, categories, tags and feeds are first-class.
 - Jinja2 templates and Python plugins.
 - Markdown and reStructuredText.
 
-### Weaknesses
+### Weaknesses of Pelican
 
 - Small community, slow development, dated themes.
 - No search of its own.
@@ -264,13 +264,13 @@ Astro is a JavaScript framework for content sites that ships HTML and adds
 scripts only where a component asks for them. Gatsby and Next.js (static
 export) are React frameworks that can also emit a static site.
 
-### Strengths
+### Strengths of Astro and the React frameworks
 
 - A component model, for pages that are really applications.
 - Astro has typed content collections and built-in routing per language.
 - Image optimisation and modern tooling.
 
-### Weaknesses
+### Weaknesses of Astro and the React frameworks
 
 - Node and a large dependency tree, at build time and to keep up to date.
 - Far more machinery than a blog needs; Gatsby and Next.js also ship a

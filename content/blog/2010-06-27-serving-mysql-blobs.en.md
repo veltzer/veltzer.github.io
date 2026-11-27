@@ -1,8 +1,8 @@
 +++
-title = "Serving a File Out of a MySQL Blob, and Why You Probably Should Not"
-description = "How to serve a file out of a MySQL BLOB correctly in PHP, and why you usually should not: keep the bytes on disk and only the metadata in the database."
 date = 2010-06-27
+description = "How to serve a file out of a MySQL BLOB correctly in PHP, and why you usually should not: keep the bytes on disk and only the metadata in the database."
 slug = "serving-mysql-blobs"
+title = "Serving a File Out of a MySQL Blob, and Why You Probably Should Not"
 
 [taxonomies]
 tags = ["php", "mysql", "programming"]

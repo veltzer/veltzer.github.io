@@ -1,8 +1,8 @@
 +++
-title = "World Politics Runs on Six Factors, Each Simple to Understand and Impossible to Predict"
-description = "Communication, education, growth at the top and the bottom, war and foreign influence push societies toward the many or the few. Watch them, not the politicians."
 date = 2025-08-12
+description = "Communication, education, growth at the top and the bottom, war and foreign influence push societies toward the many or the few. Watch them, not the politicians."
 slug = "factors-of-world-politics"
+title = "World Politics Runs on Six Factors, Each Simple to Understand and Impossible to Predict"
 
 [taxonomies]
 tags = ["politics", "history"]

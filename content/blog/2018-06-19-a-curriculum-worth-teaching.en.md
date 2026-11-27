@@ -1,8 +1,8 @@
 +++
-title = "A Curriculum of What Schools Refuse to Teach"
-description = "Schools should teach epistemology, statistics, cognitive bias, self-deception, why grammar rules are conventions, why arguments fail, and how to disrespect authorities."
 date = 2018-06-19
+description = "Schools should teach epistemology, statistics, cognitive bias, self-deception, why grammar rules are conventions, why arguments fail, and how to disrespect authorities."
 slug = "a-curriculum-worth-teaching"
+title = "A Curriculum of What Schools Refuse to Teach"
 
 [taxonomies]
 tags = ["culture", "epistemology", "opinion"]

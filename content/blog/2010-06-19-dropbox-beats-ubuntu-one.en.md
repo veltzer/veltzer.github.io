@@ -1,8 +1,8 @@
 +++
-title = "Dropbox is better than Ubuntu one even in Ubuntu"
-description = "Dropbox beats Ubuntu One on Ubuntu itself: easy to install and remove, a clear tray icon, a better command line tool, and no pushing to sync bookmarks and contacts."
 date = 2010-06-19
+description = "Dropbox beats Ubuntu One on Ubuntu itself: easy to install and remove, a clear tray icon, a better command line tool, and no pushing to sync bookmarks and contacts."
 slug = "dropbox-beats-ubuntu-one"
+title = "Dropbox is better than Ubuntu one even in Ubuntu"
 
 [taxonomies]
 tags = ["linux", "self-hosting", "ubuntu"]

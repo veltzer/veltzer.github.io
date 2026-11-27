@@ -1,8 +1,8 @@
 +++
-title = "שינוי מערכת התווים של מסד נתונים MySQL"
-description = "ALTER DATABASE משנה רק את מערכת התווים של ברירת המחדל ולא את הטבלאות הקיימות. סקריפט bash קצר מריץ במקום זאת ALTER TABLE CONVERT TO CHARSET על כל טבלה."
 date = 2010-08-12
+description = "ALTER DATABASE משנה רק את מערכת התווים של ברירת המחדל ולא את הטבלאות הקיימות. סקריפט bash קצר מריץ במקום זאת ALTER TABLE CONVERT TO CHARSET על כל טבלה."
 slug = "mysql-database-character-set"
+title = "שינוי מערכת התווים של מסד נתונים MySQL"
 
 [taxonomies]
 tags = ["mysql", "בסיסי-נתונים", "לינוקס"]

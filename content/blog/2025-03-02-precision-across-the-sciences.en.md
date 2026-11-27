@@ -1,8 +1,8 @@
 +++
-title = "Precision Falls as You Climb the Ladder of the Sciences"
-description = "The more accurate a science, the less it relies on words: from the Higgs boson up to a pack of wolves. Saying 'democracy' like 'electron' is a category error."
 date = 2025-03-02
+description = "The more accurate a science, the less it relies on words: from the Higgs boson up to a pack of wolves. Saying 'democracy' like 'electron' is a category error."
 slug = "precision-across-the-sciences"
+title = "Precision Falls as You Climb the Ladder of the Sciences"
 
 [taxonomies]
 tags = ["science", "epistemology", "philosophy"]

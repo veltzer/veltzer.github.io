@@ -1,8 +1,8 @@
 +++
-title = "Why Bother With Reality?"
-description = "I keep assuming that being connected to reality is worth it. Here is the argument: true beliefs are what actions run on, false ones are paid for by other people, and a life on a false map is not your own."
 date = 2026-11-20
+description = "I keep assuming that being connected to reality is worth it. Here is the argument: true beliefs are what actions run on, false ones are paid for by other people, and a life on a false map is not your own."
 slug = "why-bother-with-reality"
+title = "Why Bother With Reality?"
 
 [taxonomies]
 tags = ["epistemology", "philosophy", "ethics"]

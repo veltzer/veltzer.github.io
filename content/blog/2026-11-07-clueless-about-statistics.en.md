@@ -1,8 +1,8 @@
 +++
-title = "Most People Don't Have a Clue About Statistics"
-description = "Scale, base rates, mean versus median, regression to the mean: the statistical mistakes most people make, and why a public that makes them is easy to fool."
 date = 2026-11-07
+description = "Scale, base rates, mean versus median, regression to the mean: the statistical mistakes most people make, and why a public that makes them is easy to fool."
 slug = "clueless-about-statistics"
+title = "Most People Don't Have a Clue About Statistics"
 
 [taxonomies]
 tags = ["statistics", "probability", "education"]

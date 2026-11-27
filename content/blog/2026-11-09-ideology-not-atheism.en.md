@@ -1,8 +1,8 @@
 +++
-title = "Ideology, Not Atheism"
-description = "The 20th century did not prove that atheism kills. Stalin, Mao and Pol Pot killed for an ideology; atheism is not one, and religion, which is one, motivates killing more strongly."
 date = 2026-11-09
+description = "The 20th century did not prove that atheism kills. Stalin, Mao and Pol Pot killed for an ideology; atheism is not one, and religion, which is one, motivates killing more strongly."
 slug = "ideology-not-atheism"
+title = "Ideology, Not Atheism"
 
 [taxonomies]
 tags = ["religion", "atheism", "history", "politics"]

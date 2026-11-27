@@ -1,8 +1,8 @@
 +++
-title = "The Men Who Lied About Iraq Also Killed People in the Pandemic"
-description = "The Iraq WMD lie spent public trust that the pandemic later needed. The public does not compartmentalise government, so some pandemic dead belong on the Iraq ledger."
 date = 2025-04-26
+description = "The Iraq WMD lie spent public trust that the pandemic later needed. The public does not compartmentalise government, so some pandemic dead belong on the Iraq ledger."
 slug = "iraq-lies-and-pandemic"
+title = "The Men Who Lied About Iraq Also Killed People in the Pandemic"
 
 [taxonomies]
 tags = ["politics", "psychology"]

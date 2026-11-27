@@ -1,8 +1,8 @@
 +++
-title = "Freedom May Have a Speed Limit, but No Country Is Anywhere Near It"
-description = "There may be a limit on how fast a society can become free, but the real constraint is whoever holds the brakes, and no country is moving anywhere near that limit."
 date = 2025-10-05
+description = "There may be a limit on how fast a society can become free, but the real constraint is whoever holds the brakes, and no country is moving anywhere near that limit."
 slug = "freedom-speed-limit"
+title = "Freedom May Have a Speed Limit, but No Country Is Anywhere Near It"
 
 [taxonomies]
 tags = ["politics", "history"]

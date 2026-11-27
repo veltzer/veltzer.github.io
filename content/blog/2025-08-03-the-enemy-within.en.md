@@ -1,8 +1,8 @@
 +++
-title = "The Enemy Within Is Not a Dictator's Belief, It Is His Equipment"
-description = "Dictators do not discover an enemy within; they pick it up as a tool that divides the people, justifies new powers and rehearses the repression of everyone else."
 date = 2025-08-03
+description = "Dictators do not discover an enemy within; they pick it up as a tool that divides the people, justifies new powers and rehearses the repression of everyone else."
 slug = "the-enemy-within"
+title = "The Enemy Within Is Not a Dictator's Belief, It Is His Equipment"
 
 [taxonomies]
 tags = ["politics", "history"]

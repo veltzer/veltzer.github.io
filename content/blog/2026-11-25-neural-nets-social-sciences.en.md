@@ -1,8 +1,8 @@
 +++
-title = "What Neural Nets Can Teach Social Sciences"
-description = "Language is murky because reality is murky. Symbolic AI fought the fuzziness and failed; neural nets embraced it and learned to speak. Complex fields should do the same."
 date = 2026-11-25
+description = "Language is murky because reality is murky. Symbolic AI fought the fuzziness and failed; neural nets embraced it and learned to speak. Complex fields should do the same."
 slug = "neural-nets-social-sciences"
+title = "What Neural Nets Can Teach Social Sciences"
 
 [taxonomies]
 tags = ["science", "epistemology", "philosophy", "law", "economics", "psychology"]

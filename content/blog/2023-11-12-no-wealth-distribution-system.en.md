@@ -1,8 +1,8 @@
 +++
-title = "We Have No System for Distributing Wealth, and Cannot Admit It"
-description = "Markets may be the best system yet tried, but best available is not good enough. We have no defensible way to distribute wealth, and cannot fix what we may not call broken."
 date = 2023-11-12
+description = "Markets may be the best system yet tried, but best available is not good enough. We have no defensible way to distribute wealth, and cannot fix what we may not call broken."
 slug = "no-wealth-distribution-system"
+title = "We Have No System for Distributing Wealth, and Cannot Admit It"
 
 [taxonomies]
 tags = ["economics", "epistemology", "philosophy"]

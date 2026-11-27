@@ -1,8 +1,8 @@
 +++
-title = "Relative With Low Variance Is Absolute"
-description = "Morality is decided by societies, so it is relative. But human nature keeps the variance so low that it works as absolute, which is why the debate never ends."
 date = 2026-11-14
+description = "Morality is decided by societies, so it is relative. But human nature keeps the variance so low that it works as absolute, which is why the debate never ends."
 slug = "relative-low-variance"
+title = "Relative With Low Variance Is Absolute"
 
 [taxonomies]
 tags = ["philosophy", "ethics", "religion"]

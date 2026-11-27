@@ -1,8 +1,8 @@
 +++
-title = "WordPress and UNIX security (part 2)"
-description = "A WordPress blog runs fine with no write permission for the web server. Own the files as root, open them only for an upload, and drop plugins that need more."
 date = 2010-07-09
+description = "A WordPress blog runs fine with no write permission for the web server. Own the files as root, open them only for an upload, and drop plugins that need more."
 slug = "wordpress-unix-security-2"
+title = "WordPress and UNIX security (part 2)"
 
 [taxonomies]
 tags = ["wordpress", "security", "linux"]

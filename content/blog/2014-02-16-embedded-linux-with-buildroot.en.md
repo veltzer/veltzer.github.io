@@ -1,8 +1,8 @@
 +++
-title = "Buildroot Is the Fastest Way From a Bare Board to a Booting Linux"
-description = "Buildroot turns one config file into toolchain, bootloader, kernel and root filesystem, reproducibly. A tour from defconfig to adding a package, and when Yocto is worth it instead."
 date = 2014-02-16
+description = "Buildroot turns one config file into toolchain, bootloader, kernel and root filesystem, reproducibly. A tour from defconfig to adding a package, and when Yocto is worth it instead."
 slug = "embedded-linux-with-buildroot"
+title = "Buildroot Is the Fastest Way From a Bare Board to a Booting Linux"
 
 [taxonomies]
 tags = ["linux", "embedded"]

@@ -1,8 +1,8 @@
 +++
-title = "The Pagan Origins of Christmas and Easter"
-description = "The December date, the Christmas tree, Easter eggs and the hare all predate Christianity. The Church did not conquer paganism; it absorbed it under a thin Christian rebranding."
 date = 2026-04-23
+description = "The December date, the Christmas tree, Easter eggs and the hare all predate Christianity. The Church did not conquer paganism; it absorbed it under a thin Christian rebranding."
 slug = "pagan-origins-christmas-easter"
+title = "The Pagan Origins of Christmas and Easter"
 
 [taxonomies]
 tags = ["religion", "history", "culture"]
@@ -12,7 +12,7 @@ Two of the most important holidays in the Christian calendar — Christmas and E
 
 ## Christmas
 
-### The Date
+### The Date of Christmas
 
 The New Testament gives no date for the birth of Jesus. The Gospels of Matthew and Luke both contain nativity narratives, but they contradict each other on almost every detail and provide no indication of the time of year. Luke's mention of shepherds watching flocks in the fields at night is actually an argument *against* a December birth — Palestinian shepherds typically did not keep flocks in open fields in winter.
 
@@ -46,7 +46,7 @@ The English word "Easter" (and the German "Ostern") almost certainly derives fro
 
 The vast majority of other languages — French *Pâques*, Spanish *Pascua*, Italian *Pasqua*, Russian *Paskha* — use a name derived from the Hebrew *Pesach* (Passover), which is linguistically and historically correct. Only in English and German did the pagan goddess's name win out.
 
-### The Date
+### The Date of Easter
 
 Easter has no fixed calendar date — it falls on the first Sunday after the first full moon after the spring equinox. This formula is entirely astronomical and was debated and adjusted by church councils for centuries (the Quartodeciman controversy, the Council of Nicaea in 325 CE). The spring equinox connection is itself a relic of the solar calendar significance of the season.
 

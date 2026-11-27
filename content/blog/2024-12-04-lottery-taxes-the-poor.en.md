@@ -1,8 +1,8 @@
 +++
-title = "The State Lottery Is a Tax That Only the Poor Pay"
-description = "Mifal HaPayis is a tax: public money funding public goods, paid overwhelmingly by the poorest. The buildings it funds should say so, next to the progressive taxes."
 date = 2024-12-04
+description = "Mifal HaPayis is a tax: public money funding public goods, paid overwhelmingly by the poorest. The buildings it funds should say so, next to the progressive taxes."
 slug = "lottery-taxes-the-poor"
+title = "The State Lottery Is a Tax That Only the Poor Pay"
 
 [taxonomies]
 tags = ["israel", "economics", "opinion"]

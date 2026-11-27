@@ -1,8 +1,8 @@
 +++
-title = "The Central Bank Is a Standing Vote of No Confidence in Our Representatives"
-description = "Central bank independence concedes that elected representatives cannot be trusted with money, and it hands a value judgement, jobs against prices, to people nobody elected."
 date = 2025-09-05
+description = "Central bank independence concedes that elected representatives cannot be trusted with money, and it hands a value judgement, jobs against prices, to people nobody elected."
 slug = "central-bank-no-confidence"
+title = "The Central Bank Is a Standing Vote of No Confidence in Our Representatives"
 
 [taxonomies]
 tags = ["economics", "politics", "direct-democracy"]

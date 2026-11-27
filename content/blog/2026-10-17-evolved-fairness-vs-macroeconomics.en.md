@@ -1,8 +1,8 @@
 +++
-title = "Stone Age Sentiments vs. Modern Macroeconomics: Why Evolved Fairness Clashes with Economic Laws"
-description = "Moral intuitions built for foraging bands misfire in an economy of strangers: organ donation, minimum wage, inequality, housing. Keep the moral ends, change the Stone Age means."
 date = 2026-10-17
+description = "Moral intuitions built for foraging bands misfire in an economy of strangers: organ donation, minimum wage, inequality, housing. Keep the moral ends, change the Stone Age means."
 slug = "evolved-fairness-vs-macroeconomics"
+title = "Stone Age Sentiments vs. Modern Macroeconomics: Why Evolved Fairness Clashes with Economic Laws"
 
 [taxonomies]
 tags = ["economics", "psychology", "politics"]

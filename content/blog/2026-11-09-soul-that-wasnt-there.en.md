@@ -1,8 +1,8 @@
 +++
-title = "The Soul That Wasn't There"
-description = "How an immortal soul crept into a religion whose founding books never mention one: the Torah knows breath and Sheol, and the soul came later, from Plato."
 date = 2026-11-09
+description = "How an immortal soul crept into a religion whose founding books never mention one: the Torah knows breath and Sheol, and the soul came later, from Plato."
 slug = "soul-that-wasnt-there"
+title = "The Soul That Wasn't There"
 
 [taxonomies]
 tags = ["religion", "bible", "history", "atheism"]

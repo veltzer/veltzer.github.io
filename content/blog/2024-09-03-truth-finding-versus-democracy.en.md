@@ -1,8 +1,8 @@
 +++
-title = "Why Truth-Finding Rejects Democracy but Politics Requires It"
-description = "Physics can ignore majority opinion because nobody pays to bend its answers; politics cannot. Democracy's real merit is resisting capture, so decisions should be dispersed."
 date = 2024-09-03
+description = "Physics can ignore majority opinion because nobody pays to bend its answers; politics cannot. Democracy's real merit is resisting capture, so decisions should be dispersed."
 slug = "truth-finding-versus-democracy"
+title = "Why Truth-Finding Rejects Democracy but Politics Requires It"
 
 [taxonomies]
 tags = ["epistemology", "politics", "science", "direct-democracy"]

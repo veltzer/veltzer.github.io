@@ -1,8 +1,8 @@
 +++
-title = "Faith Is Not a Virtue. It Is an Anti-Epistemology."
-description = "Believing more strongly than the evidence warrants is a defect everywhere except religion. Faith is not a virtue but a method designed not to respond to the world."
 date = 2026-04-10
+description = "Believing more strongly than the evidence warrants is a defect everywhere except religion. Faith is not a virtue but a method designed not to respond to the world."
 slug = "faith-as-anti-epistemology"
+title = "Faith Is Not a Virtue. It Is an Anti-Epistemology."
 
 [taxonomies]
 tags = ["religion", "epistemology", "philosophy"]

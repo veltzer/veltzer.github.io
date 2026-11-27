@@ -1,8 +1,8 @@
 +++
-title = "Переключение версий Java в системе Debian/Ubuntu"
-description = "update-java-alternatives переключает Java по умолчанию между Sun и openjdk в Debian или Ubuntu, а --auto возвращает автоматический режим, чтобы новые установки снова брали верх."
 date = 2010-07-26
+description = "update-java-alternatives переключает Java по умолчанию между Sun и openjdk в Debian или Ubuntu, а --auto возвращает автоматический режим, чтобы новые установки снова брали верх."
 slug = "switching-java-versions"
+title = "Переключение версий Java в системе Debian/Ubuntu"
 
 [taxonomies]
 tags = ["java", "debian", "linux"]

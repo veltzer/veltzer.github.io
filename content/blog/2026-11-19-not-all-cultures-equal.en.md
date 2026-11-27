@@ -1,8 +1,8 @@
 +++
-title = "Not All Cultures Are Equal"
-description = "Cultures and religions are sets of ideas, and ideas can be judged. Calling one superior is a statistical claim about outcomes, and the scores are not all the same."
 date = 2026-11-19
+description = "Cultures and religions are sets of ideas, and ideas can be judged. Calling one superior is a statistical claim about outcomes, and the scores are not all the same."
 slug = "not-all-cultures-equal"
+title = "Not All Cultures Are Equal"
 
 [taxonomies]
 tags = ["culture", "religion", "politics", "statistics"]

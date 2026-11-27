@@ -1,8 +1,8 @@
 +++
-title = "Why Believers Wear Symbols and Non-Believers Do Not"
-description = "Believers wear symbols because their beliefs are held up by other people, not by the world, and need visible, constant reinforcement. Atheism needs no uniform."
 date = 2026-09-30
+description = "Believers wear symbols because their beliefs are held up by other people, not by the world, and need visible, constant reinforcement. Atheism needs no uniform."
 slug = "why-believers-wear-symbols"
+title = "Why Believers Wear Symbols and Non-Believers Do Not"
 
 [taxonomies]
 tags = ["religion", "psychology", "culture"]

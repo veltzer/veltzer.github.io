@@ -1,8 +1,8 @@
 +++
-title = "Why Theology Has Never Discovered Anything"
-description = "Two thousand years, brilliant minds, vast resources, and not one new truth about the world that outsiders accept. That empty list is not an oversight; it is the result."
 date = 2026-08-11
+description = "Two thousand years, brilliant minds, vast resources, and not one new truth about the world that outsiders accept. That empty list is not an oversight; it is the result."
 slug = "why-theology-discovers-nothing"
+title = "Why Theology Has Never Discovered Anything"
 
 [taxonomies]
 tags = ["religion", "science", "epistemology"]

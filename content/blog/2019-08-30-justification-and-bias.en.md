@@ -1,8 +1,8 @@
 +++
-title = "AlphaZero Proves We Can Justify Anything"
-description = "Grandmasters can justify any AlphaZero move, with good reason to trust it. Do the same for a political view with no oracle and it is bias. Did the reasons come before the conclusion?"
 date = 2019-08-30
+description = "Grandmasters can justify any AlphaZero move, with good reason to trust it. Do the same for a political view with no oracle and it is bias. Did the reasons come before the conclusion?"
 slug = "justification-and-bias"
+title = "AlphaZero Proves We Can Justify Anything"
 
 [taxonomies]
 tags = ["epistemology", "game-theory", "philosophy"]

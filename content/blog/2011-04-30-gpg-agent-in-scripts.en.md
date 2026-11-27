@@ -1,8 +1,8 @@
 +++
-title = "Using gpg-agent to write authenticating scripts"
-description = "Scripts run under sudo or ssh lose your gpg-agent and keep asking for the pass-phrase. Pass GPG_AGENT_INFO through to them and the agent's cache does the work."
 date = 2011-04-30
+description = "Scripts run under sudo or ssh lose your gpg-agent and keep asking for the pass-phrase. Pass GPG_AGENT_INFO through to them and the agent's cache does the work."
 slug = "gpg-agent-in-scripts"
+title = "Using gpg-agent to write authenticating scripts"
 
 [taxonomies]
 tags = ["security", "linux"]

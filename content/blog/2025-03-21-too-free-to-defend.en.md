@@ -1,8 +1,8 @@
 +++
-title = "A Society Can Be Too Free to Defend Itself From the People Inside It"
-description = "Against a movement that would abolish elections, every defence looks like the disease. The line is not at opinion but at action against the mechanism."
 date = 2025-03-21
+description = "Against a movement that would abolish elections, every defence looks like the disease. The line is not at opinion but at action against the mechanism."
 slug = "too-free-to-defend"
+title = "A Society Can Be Too Free to Defend Itself From the People Inside It"
 
 [taxonomies]
 tags = ["politics", "philosophy"]

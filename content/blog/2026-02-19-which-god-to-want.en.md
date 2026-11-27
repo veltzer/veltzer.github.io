@@ -1,8 +1,8 @@
 +++
-title = "Would You Want God to Exist? Depends Which One"
-description = "The distant creator already exists: he is physics. The personal God of the believers I would not want, because the universe we found is far more magnificent."
 date = 2026-02-19
+description = "The distant creator already exists: he is physics. The personal God of the believers I would not want, because the universe we found is far more magnificent."
 slug = "which-god-to-want"
+title = "Would You Want God to Exist? Depends Which One"
 
 [taxonomies]
 tags = ["religion", "atheism", "philosophy"]

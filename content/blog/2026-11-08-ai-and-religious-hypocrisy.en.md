@@ -1,8 +1,8 @@
 +++
-title = "AI and the Hypocrisy of Religion"
-description = "If our minds reflect God's, machines smarter than us should shake every believer. They don't, which shows religion was never about reason but about comfort."
 date = 2026-11-08
+description = "If our minds reflect God's, machines smarter than us should shake every believer. They don't, which shows religion was never about reason but about comfort."
 slug = "ai-and-religious-hypocrisy"
+title = "AI and the Hypocrisy of Religion"
 
 [taxonomies]
 tags = ["religion", "atheism", "technology", "philosophy"]

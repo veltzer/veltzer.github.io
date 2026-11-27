@@ -1,8 +1,8 @@
 +++
-title = "The Attribution Error Is What Keeps the Political System Unquestioned"
-description = "We explain politicians by their character rather than the structure they sit in. Five forces keep that error in place, and it is what keeps the system unquestioned."
 date = 2022-09-11
+description = "We explain politicians by their character rather than the structure they sit in. Five forces keep that error in place, and it is what keeps the system unquestioned."
 slug = "attribution-error-in-politics"
+title = "The Attribution Error Is What Keeps the Political System Unquestioned"
 
 [taxonomies]
 tags = ["politics", "psychology", "epistemology", "direct-democracy"]

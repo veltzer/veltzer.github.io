@@ -1,8 +1,8 @@
 +++
-title = "What Bitcoin Advocates Leave Out"
-description = "Bitcoin advocates hide that they hold cheap coins, and an economy run on Bitcoin would produce the most unequal distribution of wealth in human history."
 date = 2021-11-30
+description = "Bitcoin advocates hide that they hold cheap coins, and an economy run on Bitcoin would produce the most unequal distribution of wealth in human history."
 slug = "bitcoin-advocacy-omits"
+title = "What Bitcoin Advocates Leave Out"
 
 [taxonomies]
 tags = ["economics", "finance", "opinion"]

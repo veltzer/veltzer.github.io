@@ -1,8 +1,8 @@
 +++
-title = "Переход с Google-Chrome на Firefox в Linux"
-description = "Google-Chrome в Linux шпионит за вами, жжёт процессор и изнашивает диск лишними записями. Переходите на Firefox; скрипт перечисляет настройки, которые нужно поменять при переезде."
 date = 2025-09-01
+description = "Google-Chrome в Linux шпионит за вами, жжёт процессор и изнашивает диск лишними записями. Переходите на Firefox; скрипт перечисляет настройки, которые нужно поменять при переезде."
 slug = "chrome-to-firefox"
+title = "Переход с Google-Chrome на Firefox в Linux"
 
 [taxonomies]
 tags = ["браузер", "linux", "безопасность"]

@@ -1,8 +1,8 @@
 +++
-title = "Command line id3 2.4 tagging in Linux"
-description = "Of the Linux command line id3 taggers, id3, id3v2 and id3tool cannot handle 2.4 tags. eyeD3 handles everything and is the one to use."
 date = 2010-08-29
+description = "Of the Linux command line id3 taggers, id3, id3v2 and id3tool cannot handle 2.4 tags. eyeD3 handles everything and is the one to use."
 slug = "command-line-id3-tagging"
+title = "Command line id3 2.4 tagging in Linux"
 
 [taxonomies]
 tags = ["linux", "audio", "command-line"]

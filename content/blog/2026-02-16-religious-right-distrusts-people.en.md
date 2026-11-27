@@ -1,8 +1,8 @@
 +++
-title = "Why the Religious Right Believes People Are Bad"
-description = "Saying he would be immoral without God starts as a debating move, then hardens into belief, and that dark view of human nature drives a right-wing politics of suspicion."
 date = 2026-02-16
+description = "Saying he would be immoral without God starts as a debating move, then hardens into belief, and that dark view of human nature drives a right-wing politics of suspicion."
 slug = "religious-right-distrusts-people"
+title = "Why the Religious Right Believes People Are Bad"
 
 [taxonomies]
 tags = ["religion", "politics", "psychology"]

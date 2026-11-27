@@ -1,8 +1,8 @@
 +++
-title = "Printing Money Is a Tax, and Should Be Judged Like One"
-description = "Printing money is not a unique evil. It is a tax, a transfer from holders of money to whoever gets the new money first, and the real question is who holds the lever."
 date = 2025-08-05
+description = "Printing money is not a unique evil. It is a tax, a transfer from holders of money to whoever gets the new money first, and the real question is who holds the lever."
 slug = "printing-money-is-tax"
+title = "Printing Money Is a Tax, and Should Be Judged Like One"
 
 [taxonomies]
 tags = ["economics", "finance", "politics"]

@@ -1,8 +1,8 @@
 +++
-title = "Free Will Is the Last Consoling Story"
-description = "A decision is either caused or random, and neither is free will. Giving it up costs less than feared and ends the old habit of hating people for not being made differently."
 date = 2026-08-17
+description = "A decision is either caused or random, and neither is free will. Giving it up costs less than feared and ends the old habit of hating people for not being made differently."
 slug = "free-will-consoling-story"
+title = "Free Will Is the Last Consoling Story"
 
 [taxonomies]
 tags = ["philosophy", "science", "ethics"]

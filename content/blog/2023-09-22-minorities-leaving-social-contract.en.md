@@ -1,8 +1,8 @@
 +++
-title = "A Weak Regime Cannot Hold the Social Contract Together"
-description = "Communities like Israel's ultra-orthodox negotiate a partial exit from the social contract because a weak regime sells it for votes. A direct democracy has nobody to buy."
 date = 2023-09-22
+description = "Communities like Israel's ultra-orthodox negotiate a partial exit from the social contract because a weak regime sells it for votes. A direct democracy has nobody to buy."
 slug = "minorities-leaving-social-contract"
+title = "A Weak Regime Cannot Hold the Social Contract Together"
 
 [taxonomies]
 tags = ["direct-democracy", "politics"]

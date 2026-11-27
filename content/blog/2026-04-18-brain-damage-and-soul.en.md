@@ -1,8 +1,8 @@
 +++
-title = "What Brain Damage Tells Us About the Soul"
-description = "Brain damage destroys memory, personality and moral character — the very things a soul is meant to carry. A mind that depends on a brain ends when the brain ends."
 date = 2026-04-18
+description = "Brain damage destroys memory, personality and moral character — the very things a soul is meant to carry. A mind that depends on a brain ends when the brain ends."
 slug = "brain-damage-and-soul"
+title = "What Brain Damage Tells Us About the Soul"
 
 [taxonomies]
 tags = ["religion", "science", "neuroscience"]

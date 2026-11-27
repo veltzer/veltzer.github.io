@@ -1,8 +1,8 @@
 +++
-title = "We Could Rent Everything and Tax the Rest, and No Government We Have Could Make It Happen"
-description = "Renting products or heavily taxing disposables would make durability profitable, and both exist in pieces. Organised industries block them; a direct vote by the buyers would not."
 date = 2024-07-05
+description = "Renting products or heavily taxing disposables would make durability profitable, and both exist in pieces. Organised industries block them; a direct vote by the buyers would not."
 slug = "the-throwaway-economy"
+title = "We Could Rent Everything and Tax the Rest, and No Government We Have Could Make It Happen"
 
 [taxonomies]
 tags = ["economics", "climate", "politics"]

@@ -1,8 +1,8 @@
 +++
-title = "Stop Debating God"
-description = "Agreeing to debate whether God exists concedes that it is an open question. Arguments do not change minds; social attitude does, so the right response to faith is dismissal."
 date = 2026-11-22
+description = "Agreeing to debate whether God exists concedes that it is an open question. Arguments do not change minds; social attitude does, so the right response to faith is dismissal."
 slug = "stop-debating-god"
+title = "Stop Debating God"
 
 [taxonomies]
 tags = ["religion", "atheism", "psychology"]

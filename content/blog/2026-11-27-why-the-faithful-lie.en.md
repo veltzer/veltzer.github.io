@@ -1,8 +1,8 @@
 +++
-title = "Why the Faithful Lie"
-description = "Why do believers deny plain facts in the name of their faith? Flat earthers gave me the answer: it is not religion, it is loyalty to a group and an identity."
 date = 2026-11-27
+description = "Why do believers deny plain facts in the name of their faith? Flat earthers gave me the answer: it is not religion, it is loyalty to a group and an identity."
 slug = "why-the-faithful-lie"
+title = "Why the Faithful Lie"
 
 [taxonomies]
 tags = ["religion", "psychology", "epistemology", "atheism"]

@@ -1,8 +1,8 @@
 +++
-title = "Producing MySQL dates from Perl"
-description = "A small Perl function that formats the current local time as a MySQL datetime string, ready to insert into a datetime column."
 date = 2011-04-24
+description = "A small Perl function that formats the current local time as a MySQL datetime string, ready to insert into a datetime column."
 slug = "mysql-dates-from-perl"
+title = "Producing MySQL dates from Perl"
 
 [taxonomies]
 tags = ["perl", "mysql", "programming"]

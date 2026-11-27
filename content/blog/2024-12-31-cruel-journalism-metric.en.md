@@ -1,8 +1,8 @@
 +++
-title = "A Cruel Metric for Journalism, and Why Almost Nothing Scores"
-description = "A question scores only if it extracts what the subject wanted hidden; an answer scores only if it is falsifiable and new. By that measure almost no journalism scores."
 date = 2024-12-31
+description = "A question scores only if it extracts what the subject wanted hidden; an answer scores only if it is falsifiable and new. By that measure almost no journalism scores."
 slug = "cruel-journalism-metric"
+title = "A Cruel Metric for Journalism, and Why Almost Nothing Scores"
 
 [taxonomies]
 tags = ["media", "epistemology", "opinion"]

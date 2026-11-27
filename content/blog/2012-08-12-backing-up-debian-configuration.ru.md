@@ -1,8 +1,8 @@
 +++
-title = "Резервное копирование конфигурации системы Debian, а не её байтов"
-description = "Пакеты Debian можно скачать снова, а ваши решения — нет. Три команды сохраняют их: tar каталога /etc плюс списки выбора dpkg и update-alternatives."
 date = 2012-08-12
+description = "Пакеты Debian можно скачать снова, а ваши решения — нет. Три команды сохраняют их: tar каталога /etc плюс списки выбора dpkg и update-alternatives."
 slug = "backing-up-debian-configuration"
+title = "Резервное копирование конфигурации системы Debian, а не её байтов"
 
 [taxonomies]
 tags = ["linux", "debian", "системное-администрирование"]

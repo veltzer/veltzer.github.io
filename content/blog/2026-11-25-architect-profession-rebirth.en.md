@@ -1,8 +1,8 @@
 +++
-title = "AI Gives Rebirth to the Software Architect Profession"
-description = "AI did not make the software architect obsolete. By making code cheap it shortened the architect's feedback loop from a year to a day, and turned architecture into experiment."
 date = 2026-11-25
+description = "AI did not make the software architect obsolete. By making code cheap it shortened the architect's feedback loop from a year to a day, and turned architecture into experiment."
 slug = "architect-profession-rebirth"
+title = "AI Gives Rebirth to the Software Architect Profession"
 
 [taxonomies]
 tags = ["programming", "technology", "epistemology"]

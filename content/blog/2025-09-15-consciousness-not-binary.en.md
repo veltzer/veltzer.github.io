@@ -1,8 +1,8 @@
 +++
-title = "Consciousness Is Probably Not Binary"
-description = "As an infant you were probably half conscious, and development looks gradual, not like a switch. Against Annaka Harris, consciousness most likely comes in degrees."
 date = 2025-09-15
+description = "As an infant you were probably half conscious, and development looks gradual, not like a switch. Against Annaka Harris, consciousness most likely comes in degrees."
 slug = "consciousness-not-binary"
+title = "Consciousness Is Probably Not Binary"
 
 [taxonomies]
 tags = ["neuroscience", "philosophy", "science"]

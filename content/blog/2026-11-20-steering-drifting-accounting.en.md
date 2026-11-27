@@ -1,8 +1,8 @@
 +++
-title = "Steering or Drifting: The Accounting"
-description = "Six more domains asked the same question: does this raise or lower our collective ability to decide something and do it? We kept steering in the small and gave it up in the large."
 date = 2026-11-20
+description = "Six more domains asked the same question: does this raise or lower our collective ability to decide something and do it? We kept steering in the small and gave it up in the large."
 slug = "steering-drifting-accounting"
+title = "Steering or Drifting: The Accounting"
 
 [taxonomies]
 tags = ["politics", "philosophy", "history"]

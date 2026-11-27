@@ -1,8 +1,8 @@
 +++
-title = "Word Embeddings and the Arbitrariness of the Sign"
-description = "A word needs thousands of numbers because meaning lives in relations between concepts, not in its letters. Lesson one of linguistics is lesson one of vector search."
 date = 2026-09-11
+description = "A word needs thousands of numbers because meaning lives in relations between concepts, not in its letters. Lesson one of linguistics is lesson one of vector search."
 slug = "embeddings-and-arbitrary-signs"
+title = "Word Embeddings and the Arbitrariness of the Sign"
 
 [taxonomies]
 tags = ["philosophy", "programming", "epistemology", "science"]

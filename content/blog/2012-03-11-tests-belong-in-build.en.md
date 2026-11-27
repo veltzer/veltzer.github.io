@@ -1,8 +1,8 @@
 +++
-title = "Tests Are Build Products, and the Build System Should Own Them"
-description = "A test has inputs and an output that goes stale when they change, so it is a build product. Let the build own the tests and a green build means the affected tests passed."
 date = 2012-03-11
+description = "A test has inputs and an output that goes stale when they change, so it is a build product. Let the build own the tests and a green build means the affected tests passed."
 slug = "tests-belong-in-build"
+title = "Tests Are Build Products, and the Build System Should Own Them"
 
 [taxonomies]
 tags = ["programming", "opinion"]

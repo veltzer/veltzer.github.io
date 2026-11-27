@@ -1,8 +1,8 @@
 +++
-title = "Direct Democracy Is Also a Weapon in the Struggle Between Regimes"
-description = "Free societies regress whenever they fight unfree ones, because a small ruling group tightens its grip. Direct democracy has no such group, so it fights without losing its freedom."
 date = 2023-05-10
+description = "Free societies regress whenever they fight unfree ones, because a small ruling group tightens its grip. Direct democracy has no such group, so it fights without losing its freedom."
 slug = "direct-democracy-as-weapon"
+title = "Direct Democracy Is Also a Weapon in the Struggle Between Regimes"
 
 [taxonomies]
 tags = ["direct-democracy", "politics", "history"]

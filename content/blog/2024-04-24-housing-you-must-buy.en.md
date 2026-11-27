@@ -1,8 +1,8 @@
 +++
-title = "Housing Is a Product You Must Buy, and Capitalism Has No Answer for Those"
-description = "Markets work when buyers can walk away, and nobody can walk away from shelter. Neither politicians nor private landlords will stop the extraction; only a direct public vote can."
 date = 2024-04-24
+description = "Markets work when buyers can walk away, and nobody can walk away from shelter. Neither politicians nor private landlords will stop the extraction; only a direct public vote can."
 slug = "housing-you-must-buy"
+title = "Housing Is a Product You Must Buy, and Capitalism Has No Answer for Those"
 
 [taxonomies]
 tags = ["economics", "politics", "direct-democracy"]

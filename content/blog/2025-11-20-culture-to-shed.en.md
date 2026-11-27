@@ -1,8 +1,8 @@
 +++
-title = "A Book Idea: Culture as Something to Shed"
-description = "Outline of an unwritten book arguing that culture is a mild disease, curable by science, direct democracy, asking whose interest an idea serves, and default disbelief."
 date = 2025-11-20
+description = "Outline of an unwritten book arguing that culture is a mild disease, curable by science, direct democracy, asking whose interest an idea serves, and default disbelief."
 slug = "culture-to-shed"
+title = "A Book Idea: Culture as Something to Shed"
 
 [taxonomies]
 tags = ["culture", "philosophy", "opinion"]

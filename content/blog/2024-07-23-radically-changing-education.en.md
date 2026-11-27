@@ -1,8 +1,8 @@
 +++
-title = "Education Costs Nothing Now, So Stop Selling It"
-description = "Every child could learn individually from free material at almost no cost. School survives on the socialisation excuse, which really means training in submission to hierarchy."
 date = 2024-07-23
+description = "Every child could learn individually from free material at almost no cost. School survives on the socialisation excuse, which really means training in submission to hierarchy."
 slug = "radically-changing-education"
+title = "Education Costs Nothing Now, So Stop Selling It"
 
 [taxonomies]
 tags = ["education", "technology", "opinion"]

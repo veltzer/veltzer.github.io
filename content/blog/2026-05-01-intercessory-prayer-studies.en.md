@@ -1,8 +1,8 @@
 +++
-title = "What the Prayer Studies Actually Found"
-description = "The Templeton-funded STEP trial and other controlled studies found no benefit from praying for the sick. The most testable claim in religion was tested, and it failed."
 date = 2026-05-01
+description = "The Templeton-funded STEP trial and other controlled studies found no benefit from praying for the sick. The most testable claim in religion was tested, and it failed."
 slug = "intercessory-prayer-studies"
+title = "What the Prayer Studies Actually Found"
 
 [taxonomies]
 tags = ["religion", "science", "statistics"]

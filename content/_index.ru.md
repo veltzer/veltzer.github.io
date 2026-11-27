@@ -1,4 +1,4 @@
 +++
-title = "Главная"
 template = "index.html"
+title = "Главная"
 +++

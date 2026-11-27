@@ -1,8 +1,8 @@
 +++
-title = "Beauty, Truth and the Size of Working Memory"
-description = "Beauty is the feeling of an object fitting into short-term memory. The same mechanism rules proofs, historical explanation and music, and it is no guide to truth."
 date = 2026-10-02
+description = "Beauty is the feeling of an object fitting into short-term memory. The same mechanism rules proofs, historical explanation and music, and it is no guide to truth."
 slug = "beauty-and-working-memory"
+title = "Beauty, Truth and the Size of Working Memory"
 
 [taxonomies]
 tags = ["epistemology", "philosophy", "psychology", "music"]

@@ -1,8 +1,8 @@
 +++
-title = "Rich and Poor Are Becoming Different Species"
-description = "Purchasable citizenship and life-extending medicine are turning the gap between rich and poor from a difference of class into something closer to a difference of species."
 date = 2020-01-30
+description = "Purchasable citizenship and life-extending medicine are turning the gap between rich and poor from a difference of class into something closer to a difference of species."
 slug = "rich-poor-speciation"
+title = "Rich and Poor Are Becoming Different Species"
 
 [taxonomies]
 tags = ["economics", "science", "ethics"]

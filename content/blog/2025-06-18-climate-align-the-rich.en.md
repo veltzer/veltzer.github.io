@@ -1,8 +1,8 @@
 +++
-title = "A Pre-Commitment to Expropriate the Rich If the Climate Breaks"
-description = "The rich can buy their way out of a climate catastrophe, so they have little stake in preventing it. Legislate now that great fortunes are confiscated if it comes."
 date = 2025-06-18
+description = "The rich can buy their way out of a climate catastrophe, so they have little stake in preventing it. Legislate now that great fortunes are confiscated if it comes."
 slug = "climate-align-the-rich"
+title = "A Pre-Commitment to Expropriate the Rich If the Climate Breaks"
 
 [taxonomies]
 tags = ["politics", "economics", "ethics", "direct-democracy"]

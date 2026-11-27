@@ -1,8 +1,8 @@
 +++
-title = "A Law That Forces the Legislature to Answer One Question Every Two Months"
-description = "Every two months the legislature must vote, on the record, on the question most citizens asked. Nothing is decided, but the public learns what its representatives think."
 date = 2025-05-14
+description = "Every two months the legislature must vote, on the record, on the question most citizens asked. Nothing is decided, but the public learns what its representatives think."
 slug = "halfway-to-direct-democracy"
+title = "A Law That Forces the Legislature to Answer One Question Every Two Months"
 
 [taxonomies]
 tags = ["direct-democracy", "politics"]

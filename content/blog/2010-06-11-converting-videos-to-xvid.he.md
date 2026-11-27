@@ -1,8 +1,8 @@
 +++
-title = "המרת סרטונים ל־xvid בלינוקס"
-description = "סקריפט bash שמשתמש ב־mencoder כדי להמיר סרטונים לקודק xvid במקום, כך שיתנגנו ב־PS3, ועוצר בקובץ הראשון שנכשל."
 date = 2010-06-11
+description = "סקריפט bash שמשתמש ב־mencoder כדי להמיר סרטונים לקודק xvid במקום, כך שיתנגנו ב־PS3, ועוצר בקובץ הראשון שנכשל."
 slug = "converting-videos-to-xvid"
+title = "המרת סרטונים ל־xvid בלינוקס"
 
 [taxonomies]
 tags = ["לינוקס", "וידאו"]

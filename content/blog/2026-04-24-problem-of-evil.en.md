@@ -1,8 +1,8 @@
 +++
-title = "The Problem of Evil: Why Suffering Breaks the God of the Philosophers"
-description = "Epicurus's argument has stood for 2,300 years. Every theodicy explains too little, proves too much, or quietly gives up the attributes of the God it set out to defend."
 date = 2026-04-24
+description = "Epicurus's argument has stood for 2,300 years. Every theodicy explains too little, proves too much, or quietly gives up the attributes of the God it set out to defend."
 slug = "problem-of-evil"
+title = "The Problem of Evil: Why Suffering Breaks the God of the Philosophers"
 
 [taxonomies]
 tags = ["religion", "philosophy", "atheism"]

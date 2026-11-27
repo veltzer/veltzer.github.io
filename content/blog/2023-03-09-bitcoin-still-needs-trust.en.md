@@ -1,8 +1,8 @@
 +++
-title = "Bitcoin Does Not Remove Trust, It Moves It"
-description = "'No trust required' is wrong three ways: nobody reads the algorithm, a perfect one still needs a crowd to price it, and governments can still tax or ban it."
 date = 2023-03-09
+description = "'No trust required' is wrong three ways: nobody reads the algorithm, a perfect one still needs a crowd to price it, and governments can still tax or ban it."
 slug = "bitcoin-still-needs-trust"
+title = "Bitcoin Does Not Remove Trust, It Moves It"
 
 [taxonomies]
 tags = ["finance", "economics", "epistemology"]

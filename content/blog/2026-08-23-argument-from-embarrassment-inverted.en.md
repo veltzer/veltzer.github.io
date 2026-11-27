@@ -1,8 +1,8 @@
 +++
-title = "The Argument from Embarrassment, Inverted"
-description = "Apologists treat awkward Gospel details as marks of truth. Every long-lived movement generates awkward material, so awkwardness shows a story was told, not that it is true."
 date = 2026-08-23
+description = "Apologists treat awkward Gospel details as marks of truth. Every long-lived movement generates awkward material, so awkwardness shows a story was told, not that it is true."
 slug = "argument-from-embarrassment-inverted"
+title = "The Argument from Embarrassment, Inverted"
 
 [taxonomies]
 tags = ["religion", "epistemology", "history"]

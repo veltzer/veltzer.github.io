@@ -1,8 +1,8 @@
 +++
-title = "Graph How Often People Throw Out Their Governments, and Watch the Ideology Disappear"
-description = "A proposed graph of how often electorates throw out their governments over time. A rising line would show the public has stopped arguing ideology and is rejecting rulers as such."
 date = 2026-05-12
+description = "A proposed graph of how often electorates throw out their governments over time. A rising line would show the public has stopped arguing ideology and is rejecting rulers as such."
 slug = "how-often-governments-change"
+title = "Graph How Often People Throw Out Their Governments, and Watch the Ideology Disappear"
 
 [taxonomies]
 tags = ["politics", "statistics", "history"]

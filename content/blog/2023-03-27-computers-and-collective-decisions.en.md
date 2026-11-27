@@ -1,8 +1,8 @@
 +++
-title = "What Computers Can Honestly Do for Collective Decisions"
-description = "Computers should not govern. They should make deciding cheap, informed, checked and remembered, cutting the loss between what a public knows and what it decides."
 date = 2023-03-27
+description = "Computers should not govern. They should make deciding cheap, informed, checked and remembered, cutting the loss between what a public knows and what it decides."
 slug = "computers-and-collective-decisions"
+title = "What Computers Can Honestly Do for Collective Decisions"
 
 [taxonomies]
 tags = ["direct-democracy", "technology"]

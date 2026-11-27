@@ -1,8 +1,8 @@
 +++
-title = "Producing MySQL dates on the command line"
-description = "A one-line shell alias, date +'%F %T', prints the current date and time in MySQL format for pasting into database editors that will not take SQL."
 date = 2010-07-21
+description = "A one-line shell alias, date +'%F %T', prints the current date and time in MySQL format for pasting into database editors that will not take SQL."
 slug = "mysql-dates-command-line"
+title = "Producing MySQL dates on the command line"
 
 [taxonomies]
 tags = ["mysql", "linux", "command-line"]

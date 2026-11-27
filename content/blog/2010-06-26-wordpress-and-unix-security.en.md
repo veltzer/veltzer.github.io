@@ -1,8 +1,8 @@
 +++
-title = "WordPress and UNIX security"
-description = "Keep WordPress files owned by root and hand the plugin and theme folders to the web server user only for the length of an install, then take them back."
 date = 2010-06-26
+description = "Keep WordPress files owned by root and hand the plugin and theme folders to the web server user only for the length of an install, then take them back."
 slug = "wordpress-and-unix-security"
+title = "WordPress and UNIX security"
 
 [taxonomies]
 tags = ["wordpress", "security", "linux"]

@@ -1,7 +1,7 @@
 +++
-title = "Colophon"
 description = "How this site is made: the generator, the build, the checks and the hosting, and which commit the pages you are reading were built from."
 template = "colophon.html"
+title = "Colophon"
 +++
 
 This site is static. Every page is a file, written ahead of time and served

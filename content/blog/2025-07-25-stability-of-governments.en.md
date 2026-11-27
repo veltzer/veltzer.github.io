@@ -1,8 +1,8 @@
 +++
-title = "Representative Government Is Harder to Topple Than a King, and That Is Not Only Good News"
-description = "Kings fell easily because the regime was one person. Representative government is safe from coups, and by the same property safe from correction by its own citizens."
 date = 2025-07-25
+description = "Kings fell easily because the regime was one person. Representative government is safe from coups, and by the same property safe from correction by its own citizens."
 slug = "stability-of-governments"
+title = "Representative Government Is Harder to Topple Than a King, and That Is Not Only Good News"
 
 [taxonomies]
 tags = ["politics", "history"]

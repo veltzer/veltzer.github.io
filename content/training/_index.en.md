@@ -1,7 +1,7 @@
 +++
-title = "Training"
 description = "Mark Veltzer offers professional training courses on a variety of topics, from embedded Linux and systems programming to machine learning and AI, in Hebrew or English."
 template = "section.html"
+title = "Training"
 +++
 
 I offer professional training on a variety of topics, from embedded to AI,

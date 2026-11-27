@@ -1,8 +1,8 @@
 +++
-title = "Understanding Is Compression"
-description = "Knowledge is compression: understanding something means being able to say it shorter. The criterion sorts Ptolemy from Newton, and machine learning arrives at it independently."
 date = 2011-07-05
+description = "Knowledge is compression: understanding something means being able to say it shorter. The criterion sorts Ptolemy from Newton, and machine learning arrives at it independently."
 slug = "understanding-is-compression"
+title = "Understanding Is Compression"
 
 [taxonomies]
 tags = ["epistemology", "science", "theory"]

@@ -1,8 +1,8 @@
 +++
-title = "Intersubjective Reality Changes Slowly Because Hierarchies Own It"
-description = "Money, nations and laws exist because we agree they do, yet the agreement changes slowly. The brake is not public caution but the hierarchies that embody the old agreement."
 date = 2023-10-28
+description = "Money, nations and laws exist because we agree they do, yet the agreement changes slowly. The brake is not public caution but the hierarchies that embody the old agreement."
 slug = "intersubjective-reality-moves-slowly"
+title = "Intersubjective Reality Changes Slowly Because Hierarchies Own It"
 
 [taxonomies]
 tags = ["direct-democracy", "culture"]

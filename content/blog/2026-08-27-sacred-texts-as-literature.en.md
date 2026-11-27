@@ -1,8 +1,8 @@
 +++
-title = "The Myth of Sacred Literature: Holy Books Judged as Books"
-description = "Judged as books, on craft, character and the ability to hold a reader who owes them nothing, holy texts fall short. Almost nobody reads another faith's scripture for pleasure."
 date = 2026-08-27
+description = "Judged as books, on craft, character and the ability to hold a reader who owes them nothing, holy texts fall short. Almost nobody reads another faith's scripture for pleasure."
 slug = "sacred-texts-as-literature"
+title = "The Myth of Sacred Literature: Holy Books Judged as Books"
 
 [taxonomies]
 tags = ["religion", "literature", "philosophy", "culture"]

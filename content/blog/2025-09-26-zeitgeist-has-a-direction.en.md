@@ -1,8 +1,8 @@
 +++
-title = "The Zeitgeist Has a Direction, and Communication Is What Drives It"
-description = "Moral progress runs one way, toward treating strangers as people, because respect follows from knowing someone and communication is how we know. To improve the world, connect."
 date = 2025-09-26
+description = "Moral progress runs one way, toward treating strangers as people, because respect follows from knowing someone and communication is how we know. To improve the world, connect."
 slug = "zeitgeist-has-a-direction"
+title = "The Zeitgeist Has a Direction, and Communication Is What Drives It"
 
 [taxonomies]
 tags = ["politics", "history", "culture"]

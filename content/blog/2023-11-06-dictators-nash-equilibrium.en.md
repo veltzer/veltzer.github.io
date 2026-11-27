@@ -1,8 +1,8 @@
 +++
-title = "Trading With Dictators Is a Nash Equilibrium, and Only a Coalition Can Leave It"
-description = "No democracy gains by stopping its trade with dictators alone. Only a coalition that accepts short-term losses can leave that equilibrium, and representatives cannot build one."
 date = 2023-11-06
+description = "No democracy gains by stopping its trade with dictators alone. Only a coalition that accepts short-term losses can leave that equilibrium, and representatives cannot build one."
 slug = "dictators-nash-equilibrium"
+title = "Trading With Dictators Is a Nash Equilibrium, and Only a Coalition Can Leave It"
 
 [taxonomies]
 tags = ["politics", "game-theory", "direct-democracy"]

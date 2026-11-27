@@ -1,8 +1,8 @@
 +++
-title = "Запись экрана в Linux: инструменты и одна команда, которой пользуюсь я"
-description = "Сравнение recordMyDesktop, ffmpeg x11grab, SimpleScreenRecorder и OBS плюс та единственная команда ffmpeg, которой пользуюсь я. Правило: пишите быстро с ultrafast x264, сжимайте вторым проходом."
 date = 2013-11-24
+description = "Сравнение recordMyDesktop, ffmpeg x11grab, SimpleScreenRecorder и OBS плюс та единственная команда ffmpeg, которой пользуюсь я. Правило: пишите быстро с ultrafast x264, сжимайте вторым проходом."
 slug = "recording-the-linux-desktop"
+title = "Запись экрана в Linux: инструменты и одна команда, которой пользуюсь я"
 
 [taxonomies]
 tags = ["linux", "видео"]

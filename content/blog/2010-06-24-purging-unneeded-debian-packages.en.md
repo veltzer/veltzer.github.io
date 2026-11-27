@@ -1,8 +1,8 @@
 +++
-title = "Purging unneeded packages on a debian system"
-description = "One dpkg command line purges every package left in the rc state, removed but with its configuration files still on the system."
 date = 2010-06-24
+description = "One dpkg command line purges every package left in the rc state, removed but with its configuration files still on the system."
 slug = "purging-unneeded-debian-packages"
+title = "Purging unneeded packages on a debian system"
 
 [taxonomies]
 tags = ["linux", "debian"]

@@ -1,8 +1,8 @@
 +++
-title = "הקלטת שולחן העבודה בלינוקס: הכלים והפקודה האחת שאני משתמש בה"
-description = "השוואה בין recordMyDesktop, ffmpeg x11grab, SimpleScreenRecorder ו-OBS, והפקודה האחת של ffmpeg שאני משתמש בה. הכלל: להקליט מהר עם x264 ultrafast, ולדחוס במעבר שני."
 date = 2013-11-24
+description = "השוואה בין recordMyDesktop, ffmpeg x11grab, SimpleScreenRecorder ו-OBS, והפקודה האחת של ffmpeg שאני משתמש בה. הכלל: להקליט מהר עם x264 ultrafast, ולדחוס במעבר שני."
 slug = "recording-the-linux-desktop"
+title = "הקלטת שולחן העבודה בלינוקס: הכלים והפקודה האחת שאני משתמש בה"
 
 [taxonomies]
 tags = ["לינוקס", "וידאו"]

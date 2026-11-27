@@ -1,8 +1,8 @@
 +++
-title = "We Want Purposes That Evolution Did Not Give Us"
-description = "Nearly all our purposes come from evolution, yet we crave more. Religion has long supplied that role; honest substitutes like craft and inquiry work well enough."
 date = 2022-12-01
+description = "Nearly all our purposes come from evolution, yet we crave more. Religion has long supplied that role; honest substitutes like craft and inquiry work well enough."
 slug = "purpose-beyond-biology"
+title = "We Want Purposes That Evolution Did Not Give Us"
 
 [taxonomies]
 tags = ["philosophy", "religion", "science"]

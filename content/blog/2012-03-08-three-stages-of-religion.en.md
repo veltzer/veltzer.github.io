@@ -1,8 +1,8 @@
 +++
-title = "The Three Stages of Religion, and Why Stage Two Is Not the End"
-description = "Religion has moved from holy war to mutual respect, and the common assumption is that it should stop there. It should not: the real goal is not believing false things at all."
 date = 2012-03-08
+description = "Religion has moved from holy war to mutual respect, and the common assumption is that it should stop there. It should not: the real goal is not believing false things at all."
 slug = "three-stages-of-religion"
+title = "The Three Stages of Religion, and Why Stage Two Is Not the End"
 
 [taxonomies]
 tags = ["religion", "atheism", "philosophy"]

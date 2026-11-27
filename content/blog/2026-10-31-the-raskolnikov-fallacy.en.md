@@ -1,8 +1,8 @@
 +++
-title = "The Raskolnikov Fallacy: Why Dostoevsky Misunderstood Morality"
-description = "Crime and Punishment claims that losing faith leads to murder. Prisons and the world's most secular, least violent societies show the opposite: Dostoevsky was wrong."
 date = 2026-10-31
+description = "Crime and Punishment claims that losing faith leads to murder. Prisons and the world's most secular, least violent societies show the opposite: Dostoevsky was wrong."
 slug = "the-raskolnikov-fallacy"
+title = "The Raskolnikov Fallacy: Why Dostoevsky Misunderstood Morality"
 
 [taxonomies]
 tags = ["religion", "atheism", "ethics", "literature"]

@@ -1,8 +1,8 @@
 +++
-title = "LLMs and the Facts They Won't Say"
-description = "Ask an AI model about culture and crime and it deflects, buries the gap under adjustments and blames the questioner. That is not neutrality, it is unreliability."
 date = 2026-11-17
+description = "Ask an AI model about culture and crime and it deflects, buries the gap under adjustments and blames the questioner. That is not neutrality, it is unreliability."
 slug = "facts-llms-wont-say"
+title = "LLMs and the Facts They Won't Say"
 
 [taxonomies]
 tags = ["technology", "politics", "culture", "statistics"]

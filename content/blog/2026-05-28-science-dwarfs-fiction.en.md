@@ -1,8 +1,8 @@
 +++
-title = "The Imagination of Science Dwarfs the Imagination of Fiction"
-description = "Science fiction is old human drama in a costume. The truly wild ideas, ones no mind anticipated, come from science, which also tells us truths fiction exists to soften."
 date = 2026-05-28
+description = "Science fiction is old human drama in a costume. The truly wild ideas, ones no mind anticipated, come from science, which also tells us truths fiction exists to soften."
 slug = "science-dwarfs-fiction"
+title = "The Imagination of Science Dwarfs the Imagination of Fiction"
 
 [taxonomies]
 tags = ["philosophy", "science", "fiction"]

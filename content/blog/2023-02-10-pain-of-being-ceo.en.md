@@ -1,8 +1,8 @@
 +++
-title = "Pain Is the Price of Being the CEO"
-description = "If consciousness is the CEO that may override every lower signal, it needs an alarm it cannot dismiss. That is pain, and it makes no sense for a mere observer."
 date = 2023-02-10
+description = "If consciousness is the CEO that may override every lower signal, it needs an alarm it cannot dismiss. That is pain, and it makes no sense for a mere observer."
 slug = "pain-of-being-ceo"
+title = "Pain Is the Price of Being the CEO"
 
 [taxonomies]
 tags = ["neuroscience", "philosophy", "science"]

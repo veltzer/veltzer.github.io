@@ -1,8 +1,8 @@
 +++
-title = "The Stock Exchange Does Two Things, and You Cannot Keep One Without the Other"
-description = "The exchange raises capital and moves wealth from amateurs to professionals, and the two are one function seen from two sides. A six-month holding floor would tax the second."
 date = 2024-05-21
+description = "The exchange raises capital and moves wealth from amateurs to professionals, and the two are one function seen from two sides. A six-month holding floor would tax the second."
 slug = "stock-exchange-dual-nature"
+title = "The Stock Exchange Does Two Things, and You Cannot Keep One Without the Other"
 
 [taxonomies]
 tags = ["finance", "economics", "markets"]

@@ -1,8 +1,8 @@
 +++
-title = "Kant's Categorical Imperative Is a Misreading of Game Theory"
-description = "Asking what if everyone did that assumes uniform worlds. Game theory shows the real equilibrium is a stable mix of cooperators and free-riders, and Kant got it backwards."
 date = 2026-05-29
+description = "Asking what if everyone did that assumes uniform worlds. Game theory shows the real equilibrium is a stable mix of cooperators and free-riders, and Kant got it backwards."
 slug = "kant-misread-game-theory"
+title = "Kant's Categorical Imperative Is a Misreading of Game Theory"
 
 [taxonomies]
 tags = ["philosophy", "game-theory"]

@@ -1,8 +1,8 @@
 +++
-title = "Why Won't God Heal Amputees?"
-description = "Claimed miraculous healings all fall within what can happen naturally; no amputated limb has ever regrown. That pattern is the fingerprint of a phenomenon that does not exist."
 date = 2026-04-14
+description = "Claimed miraculous healings all fall within what can happen naturally; no amputated limb has ever regrown. That pattern is the fingerprint of a phenomenon that does not exist."
 slug = "amputees-never-regrow"
+title = "Why Won't God Heal Amputees?"
 
 [taxonomies]
 tags = ["religion", "science", "epistemology"]

@@ -1,7 +1,7 @@
 +++
-title = "About Mark Veltzer"
 description = "Mark Veltzer is a software engineer from Israel working in Linux, C, C++, Python and Rust, who teaches and writes about programming, mathematics and philosophy."
 template = "section.html"
+title = "About Mark Veltzer"
 +++
 
 <img class="portrait" src="/images/mark-veltzer.jpg" width="480" height="480" alt="A drawing of Mark Veltzer">

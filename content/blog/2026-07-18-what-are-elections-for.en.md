@@ -1,8 +1,8 @@
 +++
-title = "What Are Elections Actually For?"
-description = "Elections do not reveal who should lead, what the public wants, or educate anyone. They can punish a failed government, and even that fails when both parties agree."
 date = 2026-07-18
+description = "Elections do not reveal who should lead, what the public wants, or educate anyone. They can punish a failed government, and even that fails when both parties agree."
 slug = "what-are-elections-for"
+title = "What Are Elections Actually For?"
 
 [taxonomies]
 tags = ["politics", "epistemology"]

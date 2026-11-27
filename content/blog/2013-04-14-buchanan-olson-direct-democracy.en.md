@@ -1,8 +1,8 @@
 +++
-title = "Buchanan, Olson, and the Economic Case for Direct Democracy"
-description = "Buchanan shows representative government runs deficits by construction; Olson shows it serves concentrated interests. Both diagnoses point to deciding issues directly."
 date = 2013-04-14
+description = "Buchanan shows representative government runs deficits by construction; Olson shows it serves concentrated interests. Both diagnoses point to deciding issues directly."
 slug = "buchanan-olson-direct-democracy"
+title = "Buchanan, Olson, and the Economic Case for Direct Democracy"
 
 [taxonomies]
 tags = ["politics", "economics", "opinion", "direct-democracy"]

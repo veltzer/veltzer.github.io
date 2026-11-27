@@ -1,8 +1,8 @@
 +++
-title = "Real time programming tips: running critical tests at application startup"
-description = "Check every environmental condition a real time application depends on, from OS versions to free memory and devices, in its first second, and halt if any fails."
 date = 2010-09-04
+description = "Check every environmental condition a real time application depends on, from OS versions to free memory and devices, in its first second, and halt if any fails."
 slug = "realtime-startup-critical-tests"
+title = "Real time programming tips: running critical tests at application startup"
 
 [taxonomies]
 tags = ["embedded", "programming"]

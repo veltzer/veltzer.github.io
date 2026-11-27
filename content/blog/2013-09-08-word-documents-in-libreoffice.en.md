@@ -1,8 +1,8 @@
 +++
-title = "Why Word Documents Look Wrong in LibreOffice, and What Actually Helps"
-description = "Word files break in LibreOffice mostly because of missing fonts. Install metric-compatible fonts like Carlito and Caladea, fix substitutions, and ask for a PDF for looking."
 date = 2013-09-08
+description = "Word files break in LibreOffice mostly because of missing fonts. Install metric-compatible fonts like Carlito and Caladea, fix substitutions, and ask for a PDF for looking."
 slug = "word-documents-in-libreoffice"
+title = "Why Word Documents Look Wrong in LibreOffice, and What Actually Helps"
 
 [taxonomies]
 tags = ["linux", "opinion"]

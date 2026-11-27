@@ -1,8 +1,8 @@
 +++
-title = "Why Humanity Is Untethered from Reality"
-description = "The human mind was not built to track reality, and most of our institutions make it worse. We stay tethered only where a hard, impartial test forces us to; everywhere else we produce stories."
 date = 2026-11-20
+description = "The human mind was not built to track reality, and most of our institutions make it worse. We stay tethered only where a hard, impartial test forces us to; everywhere else we produce stories."
 slug = "untethered-from-reality"
+title = "Why Humanity Is Untethered from Reality"
 
 [taxonomies]
 tags = ["epistemology", "culture", "religion", "science"]

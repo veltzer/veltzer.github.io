@@ -1,8 +1,8 @@
 +++
-title = "Open heart surgery on a Fatar StudioLogic SL880"
-description = "A slumped key on a Fatar StudioLogic SL880 usually means a broken inner plastic. Open the case and swap in the part from an unused low key, step by step with photos."
 date = 2011-06-18
+description = "A slumped key on a Fatar StudioLogic SL880 usually means a broken inner plastic. Open the case and swap in the part from an unused low key, step by step with photos."
 slug = "fatar-sl880-surgery"
+title = "Open heart surgery on a Fatar StudioLogic SL880"
 
 [taxonomies]
 tags = ["hardware", "keyboard", "music"]

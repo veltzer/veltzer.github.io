@@ -1,8 +1,8 @@
 +++
-title = "Work on the Whole Society, Not the Neighbourhood"
-description = "That the local-or-global debate persists shows wasted effort. The answer is global: spend a reforming life where the rules are made, not where they are suffered."
 date = 2025-05-23
+description = "That the local-or-global debate persists shows wasted effort. The answer is global: spend a reforming life where the rules are made, not where they are suffered."
 slug = "local-or-global-effort"
+title = "Work on the Whole Society, Not the Neighbourhood"
 
 [taxonomies]
 tags = ["politics", "opinion"]

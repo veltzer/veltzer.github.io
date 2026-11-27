@@ -1,8 +1,8 @@
 +++
-title = "Biology Proves Hierarchy Is Optional"
-description = "Cells and ant colonies coordinate vast numbers without anyone in command. Human hierarchy is a fact about humans, not a requirement of coordination at scale."
 date = 2023-05-26
+description = "Cells and ant colonies coordinate vast numbers without anyone in command. Human hierarchy is a fact about humans, not a requirement of coordination at scale."
 slug = "biology-hierarchy-optional"
+title = "Biology Proves Hierarchy Is Optional"
 
 [taxonomies]
 tags = ["politics", "science", "opinion", "direct-democracy"]

@@ -1,8 +1,8 @@
 +++
-title = "A WordPress Theme Is Two Files and a Loop"
-description = "The minimum WordPress theme is a style.css and an index.php that runs the loop. Build one from the ground up and every large theme becomes readable."
 date = 2010-10-24
+description = "The minimum WordPress theme is a style.css and an index.php that runs the loop. Build one from the ground up and every large theme becomes readable."
 slug = "writing-a-wordpress-theme"
+title = "A WordPress Theme Is Two Files and a Loop"
 
 [taxonomies]
 tags = ["wordpress", "php", "programming"]

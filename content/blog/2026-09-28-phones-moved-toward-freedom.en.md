@@ -1,8 +1,8 @@
 +++
-title = "Phones Moved Toward Freedom One Concession at a Time, and So Does Power"
-description = "Phones went from carrier-owned to nearly free one concession at a time, against the same excuses of security and user incompetence. Power in society will take that path."
 date = 2026-09-28
+description = "Phones went from carrier-owned to nearly free one concession at a time, against the same excuses of security and user incompetence. Power in society will take that path."
 slug = "phones-moved-toward-freedom"
+title = "Phones Moved Toward Freedom One Concession at a Time, and So Does Power"
 
 [taxonomies]
 tags = ["technology", "politics", "direct-democracy"]

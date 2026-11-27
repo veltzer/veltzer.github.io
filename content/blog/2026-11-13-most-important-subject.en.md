@@ -1,8 +1,8 @@
 +++
-title = "The Most Important Subject Nobody Teaches"
-description = "Epistemology, how we know that things are true, is the most important subject a person can learn, yet no elementary school teaches it. Why it matters and why it is missing."
 date = 2026-11-13
+description = "Epistemology, how we know that things are true, is the most important subject a person can learn, yet no elementary school teaches it. Why it matters and why it is missing."
 slug = "most-important-subject"
+title = "The Most Important Subject Nobody Teaches"
 
 [taxonomies]
 tags = ["epistemology", "education", "religion", "politics"]

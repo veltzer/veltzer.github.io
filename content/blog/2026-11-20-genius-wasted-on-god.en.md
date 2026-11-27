@@ -1,8 +1,8 @@
 +++
-title = "Genius Wasted on God"
-description = "Newton, Gödel, Descartes, Cantor and Kepler did abysmal work to prop up their belief in God. No amount of brilliance survives a conclusion you have already decided to reach."
 date = 2026-11-20
+description = "Newton, Gödel, Descartes, Cantor and Kepler did abysmal work to prop up their belief in God. No amount of brilliance survives a conclusion you have already decided to reach."
 slug = "genius-wasted-on-god"
+title = "Genius Wasted on God"
 
 [taxonomies]
 tags = ["religion", "science", "history"]

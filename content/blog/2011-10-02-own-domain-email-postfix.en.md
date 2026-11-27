@@ -1,8 +1,8 @@
 +++
-title = "Email for Your Own Domain With Postfix"
-description = "The receiving side of mail for your own domain: Postfix delivering to a real user, aliases for the role accounts, SpamAssassin, and unknown recipients rejected during SMTP."
 date = 2011-10-02
+description = "The receiving side of mail for your own domain: Postfix delivering to a real user, aliases for the role accounts, SpamAssassin, and unknown recipients rejected during SMTP."
 slug = "own-domain-email-postfix"
+title = "Email for Your Own Domain With Postfix"
 
 [taxonomies]
 tags = ["linux", "sysadmin", "self-hosting"]

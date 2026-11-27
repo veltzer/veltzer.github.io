@@ -1,8 +1,8 @@
 +++
-title = "Euthyphro Is the Wrong Weapon"
-description = "A theist escapes Euthyphro by positing a real good we cannot access. The objection that works is empirical: believers reason to morals first, then pick the verses."
 date = 2026-08-18
+description = "A theist escapes Euthyphro by positing a real good we cannot access. The objection that works is empirical: believers reason to morals first, then pick the verses."
 slug = "euthyphro-wrong-weapon"
+title = "Euthyphro Is the Wrong Weapon"
 
 [taxonomies]
 tags = ["religion", "philosophy", "ethics"]

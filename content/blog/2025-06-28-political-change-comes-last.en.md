@@ -1,8 +1,8 @@
 +++
-title = "Political Change Is the Last Step, Not the First"
-description = "Laws and revolutions record a change in understanding that new means of communication already made possible. The Declaration of Independence was the Enlightenment's receipt."
 date = 2025-06-28
+description = "Laws and revolutions record a change in understanding that new means of communication already made possible. The Declaration of Independence was the Enlightenment's receipt."
 slug = "political-change-comes-last"
+title = "Political Change Is the Last Step, Not the First"
 
 [taxonomies]
 tags = ["politics", "history"]

@@ -1,8 +1,8 @@
 +++
-title = "Put Your Monitors to Sleep From the Command Line"
-description = "One line, xset dpms force suspend, turns the monitors dark right now without locking the screen. The three power states, the Enter-key wrinkle, and binding it to a key."
 date = 2013-07-21
+description = "One line, xset dpms force suspend, turns the monitors dark right now without locking the screen. The three power states, the Enter-key wrinkle, and binding it to a key."
 slug = "monitors-to-sleep"
+title = "Put Your Monitors to Sleep From the Command Line"
 
 [taxonomies]
 tags = ["linux", "command-line"]

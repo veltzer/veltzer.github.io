@@ -1,8 +1,8 @@
 +++
-title = "Recording Your Desktop on Linux: The Tools and the One Command I Use"
-description = "recordMyDesktop, ffmpeg x11grab, SimpleScreenRecorder and OBS compared, plus the one ffmpeg command I use. The rule: record fast with ultrafast x264, compress in a second pass."
 date = 2013-11-24
+description = "recordMyDesktop, ffmpeg x11grab, SimpleScreenRecorder and OBS compared, plus the one ffmpeg command I use. The rule: record fast with ultrafast x264, compress in a second pass."
 slug = "recording-the-linux-desktop"
+title = "Recording Your Desktop on Linux: The Tools and the One Command I Use"
 
 [taxonomies]
 tags = ["linux", "video"]

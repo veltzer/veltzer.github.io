@@ -1,8 +1,8 @@
 +++
-title = "Leaders Believe Their Own Ideology Less Than the Public Does"
-description = "Against Harari: autocratic leaders do not believe their ideology more than the public. Citizens of communist states joked about it, and leaders see the machinery up close."
 date = 2014-05-08
+description = "Against Harari: autocratic leaders do not believe their ideology more than the public. Citizens of communist states joked about it, and leaders see the machinery up close."
 slug = "leaders-do-not-believe"
+title = "Leaders Believe Their Own Ideology Less Than the Public Does"
 
 [taxonomies]
 tags = ["politics", "history", "psychology"]

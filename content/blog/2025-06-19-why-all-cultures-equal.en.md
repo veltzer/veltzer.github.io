@@ -1,8 +1,8 @@
 +++
-title = "We Say All Cultures Are Equal Because We Do Not Trust Our Government"
-description = "We refuse to rank cultures because our governments sell wars with claims of cultural superiority. The relativism is a rational leash on our rulers, and it is still a lie."
 date = 2025-06-19
+description = "We refuse to rank cultures because our governments sell wars with claims of cultural superiority. The relativism is a rational leash on our rulers, and it is still a lie."
 slug = "why-all-cultures-equal"
+title = "We Say All Cultures Are Equal Because We Do Not Trust Our Government"
 
 [taxonomies]
 tags = ["politics", "culture", "epistemology"]

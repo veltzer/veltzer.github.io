@@ -1,8 +1,8 @@
 +++
-title = "\"I Decided\" Without Free Will"
-description = "There is no free will, yet 'I decided' is not an error: it reports that no external agent compelled you, a distinction that matters for law and ethics and comes in degrees."
 date = 2023-02-09
+description = "There is no free will, yet 'I decided' is not an error: it reports that no external agent compelled you, a distinction that matters for law and ethics and comes in degrees."
 slug = "decided-without-free-will"
+title = "\"I Decided\" Without Free Will"
 
 [taxonomies]
 tags = ["neuroscience", "philosophy", "epistemology"]

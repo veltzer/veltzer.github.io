@@ -1,8 +1,8 @@
 +++
-title = "Тема WordPress — это два файла и цикл"
-description = "Минимальная тема WordPress — это style.css и index.php, в котором работает цикл. Соберите такую тему с нуля, и любая большая тема станет читаемой."
 date = 2010-10-24
+description = "Минимальная тема WordPress — это style.css и index.php, в котором работает цикл. Соберите такую тему с нуля, и любая большая тема станет читаемой."
 slug = "writing-a-wordpress-theme"
+title = "Тема WordPress — это два файла и цикл"
 
 [taxonomies]
 tags = ["wordpress", "php", "программирование"]

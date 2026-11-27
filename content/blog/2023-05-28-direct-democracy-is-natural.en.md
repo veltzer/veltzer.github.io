@@ -1,8 +1,8 @@
 +++
-title = "Direct Democracy Is the Natural Arrangement, Representation Is the Strange One"
-description = "Humans spent nearly all their history deciding together in small bands. Representation is the recent anomaly that needs justifying; direct democracy needs only engineering."
 date = 2023-05-28
+description = "Humans spent nearly all their history deciding together in small bands. Representation is the recent anomaly that needs justifying; direct democracy needs only engineering."
 slug = "direct-democracy-is-natural"
+title = "Direct Democracy Is the Natural Arrangement, Representation Is the Strange One"
 
 [taxonomies]
 tags = ["direct-democracy", "psychology"]

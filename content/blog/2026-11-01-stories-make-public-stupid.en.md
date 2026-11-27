@@ -1,8 +1,8 @@
 +++
-title = "Literature and Stories Make the Public Stupid"
-description = "All stories, even great literature, simplify human causation. A public raised on them takes a vivid anecdote for evidence and rejects real, multi-causal explanations."
 date = 2026-11-01
+description = "All stories, even great literature, simplify human causation. A public raised on them takes a vivid anecdote for evidence and rejects real, multi-causal explanations."
 slug = "stories-make-public-stupid"
+title = "Literature and Stories Make the Public Stupid"
 
 [taxonomies]
 tags = ["culture", "epistemology", "literature", "psychology"]

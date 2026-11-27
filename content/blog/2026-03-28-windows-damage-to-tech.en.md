@@ -1,8 +1,8 @@
 +++
-title = "The Long-Term Damage Windows Has Done to the Tech Industry"
-description = "Production runs on Linux, yet the industry trained a generation of developers on Windows, and it is still paying for that in tooling, culture and wasted years."
 date = 2026-03-28
+description = "Production runs on Linux, yet the industry trained a generation of developers on Windows, and it is still paying for that in tooling, culture and wasted years."
 slug = "windows-damage-to-tech"
+title = "The Long-Term Damage Windows Has Done to the Tech Industry"
 
 [taxonomies]
 tags = ["windows", "linux", "opinion"]

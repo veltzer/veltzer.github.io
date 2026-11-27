@@ -1,8 +1,8 @@
 +++
-title = "Minimum Wage Is to Economics What Gay Marriage Was to Culture"
-description = "Like gay marriage before it, the minimum wage debate is a diversion that costs the parties' funders nothing. The real cause of inequality, hierarchy itself, goes unnamed."
 date = 2012-11-19
+description = "Like gay marriage before it, the minimum wage debate is a diversion that costs the parties' funders nothing. The real cause of inequality, hierarchy itself, goes unnamed."
 slug = "minimum-wage-diversion"
+title = "Minimum Wage Is to Economics What Gay Marriage Was to Culture"
 
 [taxonomies]
 tags = ["economics", "politics", "opinion"]

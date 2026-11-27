@@ -1,8 +1,8 @@
 +++
-title = "Politics Is About Organizations, Not People"
-description = "The unit that acts in politics is the organization: ten organized people far outweigh ten individuals. A politics about persons is a theory of the wrong thing."
 date = 2025-05-10
+description = "The unit that acts in politics is the organization: ten organized people far outweigh ten individuals. A politics about persons is a theory of the wrong thing."
 slug = "politics-is-organizations"
+title = "Politics Is About Organizations, Not People"
 
 [taxonomies]
 tags = ["politics", "opinion"]

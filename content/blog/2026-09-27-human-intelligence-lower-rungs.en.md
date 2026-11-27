@@ -1,8 +1,8 @@
 +++
-title = "Human Intelligence Is Probably on the Lower Rungs of the Ladder"
-description = "Human intelligence probably sits just above the line that allows culture at all. Logic is unnatural to us, our hardware is slow, and evolution stopped at good enough."
 date = 2026-09-27
+description = "Human intelligence probably sits just above the line that allows culture at all. Logic is unnatural to us, our hardware is slow, and evolution stopped at good enough."
 slug = "human-intelligence-lower-rungs"
+title = "Human Intelligence Is Probably on the Lower Rungs of the Ladder"
 
 [taxonomies]
 tags = ["science", "philosophy", "psychology", "epistemology", "neuroscience"]

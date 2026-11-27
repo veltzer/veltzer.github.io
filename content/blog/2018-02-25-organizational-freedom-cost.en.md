@@ -1,8 +1,8 @@
 +++
-title = "The Higher You Climb, the Less Free You Are"
-description = "Each promotion tests whether you will put the institution above outsiders, so those at the top are the least free, and the ones selected never to make the organisation democratic."
 date = 2018-02-25
+description = "Each promotion tests whether you will put the institution above outsiders, so those at the top are the least free, and the ones selected never to make the organisation democratic."
 slug = "organizational-freedom-cost"
+title = "The Higher You Climb, the Less Free You Are"
 
 [taxonomies]
 tags = ["politics", "opinion", "ethics", "direct-democracy"]

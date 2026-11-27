@@ -1,8 +1,8 @@
 +++
-title = "Trust in Government Is Not a Nicety, It Is the Thing That Makes a State Work"
-description = "Money, taxes, defence and vaccination all run on trust, and trust comes from structure. The Swiss pay huge fines because they see into decisions and help make them."
 date = 2025-08-21
+description = "Money, taxes, defence and vaccination all run on trust, and trust comes from structure. The Swiss pay huge fines because they see into decisions and help make them."
 slug = "trust-in-government"
+title = "Trust in Government Is Not a Nicety, It Is the Thing That Makes a State Work"
 
 [taxonomies]
 tags = ["politics", "psychology"]

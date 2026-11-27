@@ -1,8 +1,8 @@
 +++
-title = "Institutions Almost Never Die, and That Fact Is Evidence"
-description = "Institutions survive even sustained public hostility. That survival is open evidence that public desire is not what governs, and a measure of how democratic we are."
 date = 2021-03-04
+description = "Institutions survive even sustained public hostility. That survival is open evidence that public desire is not what governs, and a measure of how democratic we are."
 slug = "institutions-never-die"
+title = "Institutions Almost Never Die, and That Fact Is Evidence"
 
 [taxonomies]
 tags = ["politics", "history", "opinion", "direct-democracy"]

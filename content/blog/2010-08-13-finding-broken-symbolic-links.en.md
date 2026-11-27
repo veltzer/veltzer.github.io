@@ -1,8 +1,8 @@
 +++
-title = "Finding broken symbolic links"
-description = "find has no broken link type, and find -L wanders too far. Running test -e from find on each link finds them while keeping every feature of find."
 date = 2010-08-13
+description = "find has no broken link type, and find -L wanders too far. Running test -e from find on each link finds them while keeping every feature of find."
 slug = "finding-broken-symbolic-links"
+title = "Finding broken symbolic links"
 
 [taxonomies]
 tags = ["linux", "filesystem", "command-line"]

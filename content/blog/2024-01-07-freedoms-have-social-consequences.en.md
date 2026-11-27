@@ -1,8 +1,8 @@
 +++
-title = "We Demand Freedoms We Have Never Weighed"
-description = "Our demand for freedom is a revolt against an encroaching state and a rich class that already buys its way around the law. Nobody has ever weighed which freedoms we actually want."
 date = 2024-01-07
+description = "Our demand for freedom is a revolt against an encroaching state and a rich class that already buys its way around the law. Nobody has ever weighed which freedoms we actually want."
 slug = "freedoms-have-social-consequences"
+title = "We Demand Freedoms We Have Never Weighed"
 
 [taxonomies]
 tags = ["direct-democracy", "politics", "philosophy"]

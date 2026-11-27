@@ -1,8 +1,8 @@
 +++
-title = "A Fifty-Fifty Election Extracts Almost No Information From the Public"
-description = "If elections reliably land near fifty-fifty, the result is decided by noise and tells you almost nothing about what the public wants. Ask the questions one at a time."
 date = 2026-08-14
+description = "If elections reliably land near fifty-fifty, the result is decided by noise and tells you almost nothing about what the public wants. Ask the questions one at a time."
 slug = "fifty-fifty-elections-uninformative"
+title = "A Fifty-Fifty Election Extracts Almost No Information From the Public"
 
 [taxonomies]
 tags = ["politics", "statistics", "epistemology"]

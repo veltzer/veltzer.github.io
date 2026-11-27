@@ -1,8 +1,8 @@
 +++
-title = "Gouldner's New Class Finally Has a Room to Meet In"
-description = "Gouldner's new class, whose capital is education and whose habit is critical discourse, could never assemble. The internet is its meeting hall, and closed doors will not survive it."
 date = 2024-01-25
+description = "Gouldner's new class, whose capital is education and whose habit is critical discourse, could never assemble. The internet is its meeting hall, and closed doors will not survive it."
 slug = "gouldners-new-class"
+title = "Gouldner's New Class Finally Has a Room to Meet In"
 
 [taxonomies]
 tags = ["politics", "history", "culture"]

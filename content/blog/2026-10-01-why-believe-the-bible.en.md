@@ -1,8 +1,8 @@
 +++
-title = "Why People Believe the Bible: The Social, Psychological and Cognitive Machinery"
-description = "Belief in the Bible is held up by social systems, emotional needs and evolved cognition, never by the text being true. That is why refutations never seem to land."
 date = 2026-10-01
+description = "Belief in the Bible is held up by social systems, emotional needs and evolved cognition, never by the text being true. That is why refutations never seem to land."
 slug = "why-believe-the-bible"
+title = "Why People Believe the Bible: The Social, Psychological and Cognitive Machinery"
 
 [taxonomies]
 tags = ["religion", "psychology", "bible"]

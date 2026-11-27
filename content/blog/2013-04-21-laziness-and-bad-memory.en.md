@@ -1,8 +1,8 @@
 +++
-title = "The Two Traits That Make a Programmer Are Laziness and a Bad Memory"
-description = "Laziness makes you automate instead of repeating yourself; a bad memory forces code clear enough to need no remembering. Diligence and memory just make mess survivable."
 date = 2013-04-21
+description = "Laziness makes you automate instead of repeating yourself; a bad memory forces code clear enough to need no remembering. Diligence and memory just make mess survivable."
 slug = "laziness-and-bad-memory"
+title = "The Two Traits That Make a Programmer Are Laziness and a Bad Memory"
 
 [taxonomies]
 tags = ["programming", "opinion"]

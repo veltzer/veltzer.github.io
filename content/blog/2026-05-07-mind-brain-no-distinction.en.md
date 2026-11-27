@@ -1,8 +1,8 @@
 +++
-title = "The Mind Is the Brain, and Pretending Otherwise Is a Special Pleading"
-description = "Mind and brain show every hallmark that elsewhere makes two things one: tight correlation, mechanistic dependence, predictable manipulation. Only an unwelcome verdict keeps it open."
 date = 2026-05-07
+description = "Mind and brain show every hallmark that elsewhere makes two things one: tight correlation, mechanistic dependence, predictable manipulation. Only an unwelcome verdict keeps it open."
 slug = "mind-brain-no-distinction"
+title = "The Mind Is the Brain, and Pretending Otherwise Is a Special Pleading"
 
 [taxonomies]
 tags = ["religion", "science", "neuroscience"]

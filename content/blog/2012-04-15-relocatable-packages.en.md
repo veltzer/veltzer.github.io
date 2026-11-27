@@ -1,8 +1,8 @@
 +++
-title = "Software Should Not Care Where It Was Installed"
-description = "Unix programs break when moved because install paths are baked in at compile time. Link with $ORIGIN, find your own path at start-up, and installing becomes copying."
 date = 2012-04-15
+description = "Unix programs break when moved because install paths are baked in at compile time. Link with $ORIGIN, find your own path at start-up, and installing becomes copying."
 slug = "relocatable-packages"
+title = "Software Should Not Care Where It Was Installed"
 
 [taxonomies]
 tags = ["linux", "programming", "opinion"]

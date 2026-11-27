@@ -1,8 +1,8 @@
 +++
-title = "Jared Diamond's Surviving Societies Had One Thing in Common, and Representative Government Does Not Have It"
-description = "Diamond's surviving societies all saw the danger and acted decisively. Representative government has reasons to look away and cannot act fast; direct democracy lacks both flaws."
 date = 2023-08-26
+description = "Diamond's surviving societies all saw the danger and acted decisively. Representative government has reasons to look away and cannot act fast; direct democracy lacks both flaws."
 slug = "collapse-and-response-time"
+title = "Jared Diamond's Surviving Societies Had One Thing in Common, and Representative Government Does Not Have It"
 
 [taxonomies]
 tags = ["direct-democracy", "history"]

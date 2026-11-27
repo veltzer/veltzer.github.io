@@ -1,8 +1,8 @@
 +++
-title = "The Morality of the \"Ban\""
-description = "The Herem in Joshua commands what we would now call genocide. Whether or not it happened, attributing it to God shows how far religious nationalism can go."
 date = 2026-04-05
+description = "The Herem in Joshua commands what we would now call genocide. Whether or not it happened, attributing it to God shows how far religious nationalism can go."
 slug = "biblical-ban-morality"
+title = "The Morality of the \"Ban\""
 
 [taxonomies]
 tags = ["religion", "bible", "ethics"]

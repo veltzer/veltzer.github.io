@@ -1,8 +1,8 @@
 +++
-title = "We Solved Subsistence and Kept the Fear"
-description = "Rich countries have solved subsistence: hunger there is a distribution failure, not scarcity. The fear of want survives because employers, advertisers and politicians need it."
 date = 2024-05-03
+description = "Rich countries have solved subsistence: hunger there is a distribution failure, not scarcity. The fear of want survives because employers, advertisers and politicians need it."
 slug = "scarcity-is-solved"
+title = "We Solved Subsistence and Kept the Fear"
 
 [taxonomies]
 tags = ["economics", "culture", "opinion"]

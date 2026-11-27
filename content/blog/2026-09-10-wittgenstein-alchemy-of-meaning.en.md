@@ -1,8 +1,8 @@
 +++
-title = "Wittgenstein Is to Word Embeddings What Alchemy Is to Chemistry"
-description = "Wittgenstein saw that meaning is use but stopped at description; word embeddings measured it. Philosophy of language now stands where alchemy stood to chemistry."
 date = 2026-09-10
+description = "Wittgenstein saw that meaning is use but stopped at description; word embeddings measured it. Philosophy of language now stands where alchemy stood to chemistry."
 slug = "wittgenstein-alchemy-of-meaning"
+title = "Wittgenstein Is to Word Embeddings What Alchemy Is to Chemistry"
 
 [taxonomies]
 tags = ["philosophy", "programming", "epistemology", "science"]

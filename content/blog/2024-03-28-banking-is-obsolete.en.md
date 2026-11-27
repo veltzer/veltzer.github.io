@@ -1,8 +1,8 @@
 +++
-title = "Money Is a Number in a Database, So Why Do We Still Have Banks?"
-description = "Money is now just rows in a database. Put every citizen on one audited public ledger and banks shrink to lenders who risk their own money, not their depositors'."
 date = 2024-03-28
+description = "Money is now just rows in a database. Put every citizen on one audited public ledger and banks shrink to lenders who risk their own money, not their depositors'."
 slug = "banking-is-obsolete"
+title = "Money Is a Number in a Database, So Why Do We Still Have Banks?"
 
 [taxonomies]
 tags = ["economics", "finance", "technology"]

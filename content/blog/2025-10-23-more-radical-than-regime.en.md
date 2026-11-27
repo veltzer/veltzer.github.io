@@ -1,8 +1,8 @@
 +++
-title = "A Population More Radical Than Its Regime Is a Dictator's Best Insurance"
-description = "A regime whose people are more extreme than it is cannot be pushed toward elections, so the radicalisation is nearly as good as a bomb, and a lever reformers ignore."
 date = 2025-10-23
+description = "A regime whose people are more extreme than it is cannot be pushed toward elections, so the radicalisation is nearly as good as a bomb, and a lever reformers ignore."
 slug = "more-radical-than-regime"
+title = "A Population More Radical Than Its Regime Is a Dictator's Best Insurance"
 
 [taxonomies]
 tags = ["politics"]

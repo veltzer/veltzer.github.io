@@ -1,8 +1,8 @@
 +++
-title = "Why Body Counts Can't Tell Us the Motive"
-description = "The size of the communist death toll is the theist's strongest card, but a body count mostly measures the method and means of killing, technology and famine, not the motive."
 date = 2026-11-09
+description = "The size of the communist death toll is the theist's strongest card, but a body count mostly measures the method and means of killing, technology and famine, not the motive."
 slug = "body-counts-and-motive"
+title = "Why Body Counts Can't Tell Us the Motive"
 
 [taxonomies]
 tags = ["atheism", "history", "statistics", "religion"]

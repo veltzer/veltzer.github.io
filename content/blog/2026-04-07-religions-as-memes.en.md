@@ -1,8 +1,8 @@
 +++
-title = "Religions Behave Like Memes, Not Revelations"
-description = "Religions mutate, split, compete and spread the way memes do. Their success proves transmissibility, not truth — a real revelation would behave differently."
 date = 2026-04-07
+description = "Religions mutate, split, compete and spread the way memes do. Their success proves transmissibility, not truth — a real revelation would behave differently."
 slug = "religions-as-memes"
+title = "Religions Behave Like Memes, Not Revelations"
 
 [taxonomies]
 tags = ["religion", "culture", "science"]

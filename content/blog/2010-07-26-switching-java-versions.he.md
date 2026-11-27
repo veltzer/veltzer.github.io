@@ -1,8 +1,8 @@
 +++
-title = "החלפת גרסאות ג'אווה במערכת דביאן/אובונטו"
-description = "הפקודה update-java-alternatives מחליפה את ג'אווה של ברירת המחדל בין Sun ל־openjdk בדביאן או באובונטו, והאפשרות --auto מחזירה למצב האוטומטי."
 date = 2010-07-26
+description = "הפקודה update-java-alternatives מחליפה את ג'אווה של ברירת המחדל בין Sun ל־openjdk בדביאן או באובונטו, והאפשרות --auto מחזירה למצב האוטומטי."
 slug = "switching-java-versions"
+title = "החלפת גרסאות ג'אווה במערכת דביאן/אובונטו"
 
 [taxonomies]
 tags = ["ג׳אווה", "דביאן", "לינוקס"]

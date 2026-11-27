@@ -1,8 +1,8 @@
 +++
-title = "The Bible Is Monolatrous, Not Monotheistic: Every Reason in One Place"
-description = "The Hebrew Bible mostly teaches monolatry, not monotheism: other gods exist and you must not serve them. Ten lines of evidence, and the few late chapters that deny them."
 date = 2026-09-26
+description = "The Hebrew Bible mostly teaches monolatry, not monotheism: other gods exist and you must not serve them. Ten lines of evidence, and the few late chapters that deny them."
 slug = "bible-is-monolatrous"
+title = "The Bible Is Monolatrous, Not Monotheistic: Every Reason in One Place"
 
 [taxonomies]
 tags = ["religion", "bible", "history"]

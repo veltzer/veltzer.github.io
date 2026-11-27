@@ -1,8 +1,8 @@
 +++
-title = "The Two-Party System Corrupts Institutions, Not Just Voters"
-description = "A two-party system forces think tanks, media and universities to pick sides, and then the machinery meant to correct individual bias enforces it, with no one needing to lie."
 date = 2017-08-09
+description = "A two-party system forces think tanks, media and universities to pick sides, and then the machinery meant to correct individual bias enforces it, with no one needing to lie."
 slug = "bipartisanship-corrupts-institutions"
+title = "The Two-Party System Corrupts Institutions, Not Just Voters"
 
 [taxonomies]
 tags = ["politics", "epistemology", "opinion", "direct-democracy"]

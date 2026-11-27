@@ -1,8 +1,8 @@
 +++
-title = "Russell's Fear That Culture Decides Truth"
-description = "Russell feared that society decides what is true, and he was right. That makes how society decides the key question — an argument for democratising it, not for despair."
 date = 2024-06-27
+description = "Russell feared that society decides what is true, and he was right. That makes how society decides the key question — an argument for democratising it, not for despair."
 slug = "russell-who-decides-truth"
+title = "Russell's Fear That Culture Decides Truth"
 
 [taxonomies]
 tags = ["philosophy", "epistemology", "politics"]

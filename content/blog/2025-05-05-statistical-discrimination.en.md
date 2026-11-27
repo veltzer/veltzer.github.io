@@ -1,8 +1,8 @@
 +++
-title = "If Groups Differ, a Predictor Will Discriminate, and Blinding It Makes It Worse"
-description = "If groups differ in base rates, any good predictor treats them differently, and blinding it makes it worse. That is arithmetic; what to do about it is a political choice."
 date = 2025-05-05
+description = "If groups differ in base rates, any good predictor treats them differently, and blinding it makes it worse. That is arithmetic; what to do about it is a political choice."
 slug = "statistical-discrimination"
+title = "If Groups Differ, a Predictor Will Discriminate, and Blinding It Makes It Worse"
 
 [taxonomies]
 tags = ["politics", "statistics", "ethics"]

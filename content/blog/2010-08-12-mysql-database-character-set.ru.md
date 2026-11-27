@@ -1,8 +1,8 @@
 +++
-title = "Смена кодировки базы данных MySQL"
-description = "ALTER DATABASE меняет только кодировку по умолчанию, но не существующие таблицы. Короткий скрипт на bash вместо этого выполняет ALTER TABLE CONVERT TO CHARSET для каждой таблицы."
 date = 2010-08-12
+description = "ALTER DATABASE меняет только кодировку по умолчанию, но не существующие таблицы. Короткий скрипт на bash вместо этого выполняет ALTER TABLE CONVERT TO CHARSET для каждой таблицы."
 slug = "mysql-database-character-set"
+title = "Смена кодировки базы данных MySQL"
 
 [taxonomies]
 tags = ["mysql", "базы-данных", "linux"]

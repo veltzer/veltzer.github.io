@@ -1,8 +1,8 @@
 +++
-title = "The Tribal Candidate: Why Electing People Instead of Ideas Breaks Democracy"
-description = "Elections built around candidates exploit an instinct evolved for small bands: loyalty to a chief. Voting on ideas, as direct democracy does, takes that crutch away."
 date = 2026-10-31
+description = "Elections built around candidates exploit an instinct evolved for small bands: loyalty to a chief. Voting on ideas, as direct democracy does, takes that crutch away."
 slug = "the-tribal-candidate"
+title = "The Tribal Candidate: Why Electing People Instead of Ideas Breaks Democracy"
 
 [taxonomies]
 tags = ["politics", "direct-democracy", "psychology", "epistemology"]

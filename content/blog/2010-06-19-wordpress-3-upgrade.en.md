@@ -1,8 +1,8 @@
 +++
-title = "Blog upgrade to wordpress 3.0"
-description = "The upgrade to WordPress 3.0 is easy and nothing to fear. The real reason for it is the multi site feature, which will host a second blog in Hebrew."
 date = 2010-06-19
+description = "The upgrade to WordPress 3.0 is easy and nothing to fear. The real reason for it is the multi site feature, which will host a second blog in Hebrew."
 slug = "wordpress-3-upgrade"
+title = "Blog upgrade to wordpress 3.0"
 
 [taxonomies]
 tags = ["wordpress", "blogging", "linux"]

@@ -1,8 +1,8 @@
 +++
-title = "Why There Are Different Societies, and Why Their Meetings Go Badly"
-description = "Geography made societies different, and the payoffs facing leaders make their meetings violent. The mountain made them strangers; the leadership made them enemies."
 date = 2025-10-31
+description = "Geography made societies different, and the payoffs facing leaders make their meetings violent. The mountain made them strangers; the leadership made them enemies."
 slug = "why-societies-differ"
+title = "Why There Are Different Societies, and Why Their Meetings Go Badly"
 
 [taxonomies]
 tags = ["politics", "history", "game-theory"]

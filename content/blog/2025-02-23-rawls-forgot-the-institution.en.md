@@ -1,8 +1,8 @@
 +++
-title = "Rawls Designed Principles for Institutions and Forgot What Institutions Do to Principles"
-description = "The veil of ignorance survives as a test, but Rawls wrote principles for institutions and ignored that institutions follow their interests, not principles."
 date = 2025-02-23
+description = "The veil of ignorance survives as a test, but Rawls wrote principles for institutions and ignored that institutions follow their interests, not principles."
 slug = "rawls-forgot-the-institution"
+title = "Rawls Designed Principles for Institutions and Forgot What Institutions Do to Principles"
 
 [taxonomies]
 tags = ["philosophy", "ethics", "politics"]

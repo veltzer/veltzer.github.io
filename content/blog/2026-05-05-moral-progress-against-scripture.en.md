@@ -1,8 +1,8 @@
 +++
-title = "Moral Progress Happens Against Scripture, Not Because of It"
-description = "Scripture regulated slavery, subordinated women and condemned homosexuality. Each wrong was overturned by appeal to standards outside the holy books, against religious resistance."
 date = 2026-05-05
+description = "Scripture regulated slavery, subordinated women and condemned homosexuality. Each wrong was overturned by appeal to standards outside the holy books, against religious resistance."
 slug = "moral-progress-against-scripture"
+title = "Moral Progress Happens Against Scripture, Not Because of It"
 
 [taxonomies]
 tags = ["religion", "bible", "ethics"]

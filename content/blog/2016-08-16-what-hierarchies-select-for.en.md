@@ -1,8 +1,8 @@
 +++
-title = "What Do Hierarchies Actually Select For?"
-description = "Peterson says hierarchies track competence. My guess: they do where performance is measurable and fast, and reward office politics where it is diffuse and slow. Research it."
 date = 2016-08-16
+description = "Peterson says hierarchies track competence. My guess: they do where performance is measurable and fast, and reward office politics where it is diffuse and slow. Research it."
 slug = "what-hierarchies-select-for"
+title = "What Do Hierarchies Actually Select For?"
 
 [taxonomies]
 tags = ["politics", "psychology", "opinion"]

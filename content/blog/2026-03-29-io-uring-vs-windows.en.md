@@ -1,8 +1,8 @@
 +++
-title = "Linux io_uring vs Windows I/O: A Technical Comparison"
-description = "io_uring replaces the per-operation system call with ring buffers in shared memory, and beats Windows IOCP and RIO for new servers, databases and storage engines."
 date = 2026-03-29
+description = "io_uring replaces the per-operation system call with ring buffers in shared memory, and beats Windows IOCP and RIO for new servers, databases and storage engines."
 slug = "io-uring-vs-windows"
+title = "Linux io_uring vs Windows I/O: A Technical Comparison"
 
 [taxonomies]
 tags = ["linux", "windows", "performance"]

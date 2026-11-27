@@ -1,8 +1,8 @@
 +++
-title = "Truth Is Not Short, Which Is Why Falsehood Spreads"
-description = "People admire what is short, and truth is never short. That is why ideologies spread, and why only shared measurement against the world can unite us."
 date = 2011-01-23
+description = "People admire what is short, and truth is never short. That is why ideologies spread, and why only shared measurement against the world can unite us."
 slug = "brevity-is-not-truth"
+title = "Truth Is Not Short, Which Is Why Falsehood Spreads"
 
 [taxonomies]
 tags = ["epistemology", "philosophy", "culture"]

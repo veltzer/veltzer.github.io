@@ -1,8 +1,8 @@
 +++
-title = "The Primacy of the Scientific Method: Why Empirical Rigor Is the Only Path to Knowledge"
-description = "Intuition and pure logic without evidence are mirages. Only the scientific method corrects itself against reality, which makes it the only path to knowledge."
 date = 2026-10-05
+description = "Intuition and pure logic without evidence are mirages. Only the scientific method corrects itself against reality, which makes it the only path to knowledge."
 slug = "primacy-of-scientific-method"
+title = "The Primacy of the Scientific Method: Why Empirical Rigor Is the Only Path to Knowledge"
 
 [taxonomies]
 tags = ["science", "epistemology", "philosophy"]

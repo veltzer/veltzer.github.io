@@ -1,8 +1,8 @@
 +++
-title = "A Ten-Line PHP Template Function Is All a Small Site Needs"
-description = "PHP already is a template language. Ten lines of extract, output buffering and include replace Smarty or Twig on a small site, with no syntax to learn and no cache."
 date = 2010-04-11
+description = "PHP already is a template language. Ten lines of extract, output buffering and include replace Smarty or Twig on a small site, with no syntax to learn and no cache."
 slug = "minimal-php-template"
+title = "A Ten-Line PHP Template Function Is All a Small Site Needs"
 
 [taxonomies]
 tags = ["php", "programming"]

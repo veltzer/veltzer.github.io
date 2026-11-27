@@ -1,8 +1,8 @@
 +++
-title = "The Apologetic Buffer: How Philosophy Departments Shield Religion from Science"
-description = "Theology should share the fate of astrology, yet it survives in universities because philosophy departments keep a shelter of untestable metaphysics for faith to retreat into."
 date = 2026-10-29
+description = "Theology should share the fate of astrology, yet it survives in universities because philosophy departments keep a shelter of untestable metaphysics for faith to retreat into."
 slug = "the-apologetic-buffer"
+title = "The Apologetic Buffer: How Philosophy Departments Shield Religion from Science"
 
 [taxonomies]
 tags = ["religion", "philosophy", "science", "epistemology", "education", "atheism"]

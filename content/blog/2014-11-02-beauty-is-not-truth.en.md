@@ -1,8 +1,8 @@
 +++
-title = "Beauty Is Not Truth — It Is an Artifact of Our Brain Size"
-description = "Beauty tracks the size of our working memory, not truth: the ugly four-colour proof is ugly only to us, and truths and falsehoods are perfectly symmetric under negation."
 date = 2014-11-02
+description = "Beauty tracks the size of our working memory, not truth: the ugly four-colour proof is ugly only to us, and truths and falsehoods are perfectly symmetric under negation."
 slug = "beauty-is-not-truth"
+title = "Beauty Is Not Truth — It Is an Artifact of Our Brain Size"
 
 [taxonomies]
 tags = ["epistemology", "philosophy", "science"]

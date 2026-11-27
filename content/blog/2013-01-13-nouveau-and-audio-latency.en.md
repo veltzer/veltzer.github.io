@@ -1,8 +1,8 @@
 +++
-title = "The Open Nouveau Driver Was Causing My Audio Latency"
-description = "A steady trickle of JACK xruns survived every usual fix. latencytop showed the nouveau graphics driver holding up the kernel, and the proprietary NVIDIA driver ended them."
 date = 2013-01-13
+description = "A steady trickle of JACK xruns survived every usual fix. latencytop showed the nouveau graphics driver holding up the kernel, and the proprietary NVIDIA driver ended them."
 slug = "nouveau-and-audio-latency"
+title = "The Open Nouveau Driver Was Causing My Audio Latency"
 
 [taxonomies]
 tags = ["linux", "audio", "hardware"]

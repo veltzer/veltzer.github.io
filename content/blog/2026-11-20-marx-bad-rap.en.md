@@ -1,8 +1,8 @@
 +++
-title = "Marx Got a Bad Rap"
-description = "Marx was one of the sharpest critics capitalism ever had and one of the worst guides to designing a government. Read him for the diagnosis; for how to govern, read Madison."
 date = 2026-11-20
+description = "Marx was one of the sharpest critics capitalism ever had and one of the worst guides to designing a government. Read him for the diagnosis; for how to govern, read Madison."
 slug = "marx-bad-rap"
+title = "Marx Got a Bad Rap"
 
 [taxonomies]
 tags = ["politics", "economics", "history", "philosophy"]

@@ -1,8 +1,8 @@
 +++
-title = "I Accuse the Israeli Education System"
-description = "A Zola-style list of charges: Israel's schools sort children into tribal streams, reward memory, teach ideology as history, and never teach how to find out what is true."
 date = 2024-11-16
+description = "A Zola-style list of charges: Israel's schools sort children into tribal streams, reward memory, teach ideology as history, and never teach how to find out what is true."
 slug = "i-accuse-israeli-education"
+title = "I Accuse the Israeli Education System"
 
 [taxonomies]
 tags = ["israel", "education", "opinion"]

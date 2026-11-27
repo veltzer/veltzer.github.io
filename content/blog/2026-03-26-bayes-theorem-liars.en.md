@@ -1,8 +1,8 @@
 +++
-title = "Why Known Liars Making a Claim Actually Reduces Its Probability: A Bayesian Explanation"
-description = "When a known liar asserts a claim, Bayes' theorem shows the claim becomes less likely than before. A worked example, with lessons for propaganda and religious texts."
 date = 2026-03-26
+description = "When a known liar asserts a claim, Bayes' theorem shows the claim becomes less likely than before. A worked example, with lessons for propaganda and religious texts."
 slug = "bayes-theorem-liars"
+title = "Why Known Liars Making a Claim Actually Reduces Its Probability: A Bayesian Explanation"
 
 [taxonomies]
 tags = ["probability", "statistics"]

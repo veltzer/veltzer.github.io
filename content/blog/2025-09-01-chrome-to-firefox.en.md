@@ -1,8 +1,8 @@
 +++
-title = "Move from Google-Chrome to Firefox on Linux"
-description = "Google-Chrome on Linux spies on you, burns CPU and wears out your disk with excess writes. Switch to Firefox; a script lists the configs to change when you move."
 date = 2025-09-01
+description = "Google-Chrome on Linux spies on you, burns CPU and wears out your disk with excess writes. Switch to Firefox; a script lists the configs to change when you move."
 slug = "chrome-to-firefox"
+title = "Move from Google-Chrome to Firefox on Linux"
 
 [taxonomies]
 tags = ["browser", "linux", "security"]

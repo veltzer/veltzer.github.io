@@ -1,8 +1,8 @@
 +++
-title = "A Basic Income Would Let People Speak, Which Is Exactly Why It Is Opposed"
-description = "A basic income makes losing a job survivable, so people could afford to speak up, strike and refuse. That transfer of leverage, not inflation, is why it is fought so hard."
 date = 2024-07-14
+description = "A basic income makes losing a job survivable, so people could afford to speak up, strike and refuse. That transfer of leverage, not inflation, is why it is fought so hard."
 slug = "why-ubi-is-opposed"
+title = "A Basic Income Would Let People Speak, Which Is Exactly Why It Is Opposed"
 
 [taxonomies]
 tags = ["economics", "politics"]

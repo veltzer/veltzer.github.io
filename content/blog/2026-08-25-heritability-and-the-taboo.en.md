@@ -1,8 +1,8 @@
 +++
-title = "Heritability and the Discomfort That Follows It"
-description = "Nearly every psychological trait is substantially heritable, a result few wanted. Discomfort is not an argument; state the finding precisely, limits included, rather than suppress it."
 date = 2026-08-25
+description = "Nearly every psychological trait is substantially heritable, a result few wanted. Discomfort is not an argument; state the finding precisely, limits included, rather than suppress it."
 slug = "heritability-and-the-taboo"
+title = "Heritability and the Discomfort That Follows It"
 
 [taxonomies]
 tags = ["science", "opinion", "epistemology"]

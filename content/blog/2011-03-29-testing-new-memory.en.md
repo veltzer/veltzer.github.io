@@ -1,8 +1,8 @@
 +++
-title = "Test procedures for new memory installations"
-description = "New RAM is faulty more often than you think, and the symptoms look like anything but memory. A two-step check: memtest86+ first, then a kernel compile that loads every core."
 date = 2011-03-29
+description = "New RAM is faulty more often than you think, and the symptoms look like anything but memory. A two-step check: memtest86+ first, then a kernel compile that loads every core."
 slug = "testing-new-memory"
+title = "Test procedures for new memory installations"
 
 [taxonomies]
 tags = ["hardware", "linux", "memory"]

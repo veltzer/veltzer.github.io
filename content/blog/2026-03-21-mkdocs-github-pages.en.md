@@ -1,8 +1,8 @@
 +++
-title = "MkDocs with GitHub Pages: File Layout That Works"
-description = "MkDocs wipes its output directory on every build, so static HTML, JS and CSS placed in docs/ vanish. Keep them in docs_dir and let MkDocs copy them through."
 date = 2026-03-21
+description = "MkDocs wipes its output directory on every build, so static HTML, JS and CSS placed in docs/ vanish. Keep them in docs_dir and let MkDocs copy them through."
 slug = "mkdocs-github-pages"
+title = "MkDocs with GitHub Pages: File Layout That Works"
 
 [taxonomies]
 tags = ["documentation"]

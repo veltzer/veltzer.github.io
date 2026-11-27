@@ -1,8 +1,8 @@
 +++
-title = "The Definition of Good Will Not Hold Still"
-description = "Even the most good for the most people will not hold still: good shifts with lifespan and technology, does not aggregate, depends on context, and splits individual from collective."
 date = 2018-11-14
+description = "Even the most good for the most people will not hold still: good shifts with lifespan and technology, does not aggregate, depends on context, and splits individual from collective."
 slug = "definition-of-good-moves"
+title = "The Definition of Good Will Not Hold Still"
 
 [taxonomies]
 tags = ["ethics", "philosophy", "science"]

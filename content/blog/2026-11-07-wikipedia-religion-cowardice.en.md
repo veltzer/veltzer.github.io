@@ -1,8 +1,8 @@
 +++
-title = "Wikipedia's Cowardice About Religion"
-description = "Wikipedia calls flat earth what it is but presents the resurrection as one view among others: neutrality between a fact and a fairy tale is not neutrality."
 date = 2026-11-07
+description = "Wikipedia calls flat earth what it is but presents the resurrection as one view among others: neutrality between a fact and a fairy tale is not neutrality."
 slug = "wikipedia-religion-cowardice"
+title = "Wikipedia's Cowardice About Religion"
 
 [taxonomies]
 tags = ["religion", "atheism", "epistemology"]

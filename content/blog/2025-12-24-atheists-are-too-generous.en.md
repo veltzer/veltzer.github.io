@@ -1,8 +1,8 @@
 +++
-title = "The Internet Atheists Are Giving the Other Side Too Much Credit"
-description = "Polite atheist debaters treat believers as honest inquirers. But the arguments come after the belief, as fortifications, and pretending otherwise costs atheists the argument."
 date = 2025-12-24
+description = "Polite atheist debaters treat believers as honest inquirers. But the arguments come after the belief, as fortifications, and pretending otherwise costs atheists the argument."
 slug = "atheists-are-too-generous"
+title = "The Internet Atheists Are Giving the Other Side Too Much Credit"
 
 [taxonomies]
 tags = ["religion", "atheism", "opinion"]

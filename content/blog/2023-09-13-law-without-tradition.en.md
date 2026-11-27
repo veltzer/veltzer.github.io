@@ -1,8 +1,8 @@
 +++
-title = "Law Without Tradition and Authority"
-description = "Tradition and authority are the justifications that need no justification, which is why beneficiaries of bad laws prefer them. Direct democracy admits that laws are decisions we made."
 date = 2023-09-13
+description = "Tradition and authority are the justifications that need no justification, which is why beneficiaries of bad laws prefer them. Direct democracy admits that laws are decisions we made."
 slug = "law-without-tradition"
+title = "Law Without Tradition and Authority"
 
 [taxonomies]
 tags = ["law", "direct-democracy"]

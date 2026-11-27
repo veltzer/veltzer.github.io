@@ -1,8 +1,8 @@
 +++
-title = "The Shalit Case Was Never Discussed, Because Nobody Trusted the Government to Discuss It"
-description = "For five years Israel could not discuss the price of freeing Gilad Shalit, because a public that distrusts its government cannot deliberate. It can only push for one side."
 date = 2023-10-10
+description = "For five years Israel could not discuss the price of freeing Gilad Shalit, because a public that distrusts its government cannot deliberate. It can only push for one side."
 slug = "shalit-case-and-distrust"
+title = "The Shalit Case Was Never Discussed, Because Nobody Trusted the Government to Discuss It"
 
 [taxonomies]
 tags = ["israel", "direct-democracy", "ethics"]

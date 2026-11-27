@@ -1,8 +1,8 @@
 +++
-title = "Every Right We Have Was Pried From a Closed Fist, and Look What Is Still in It"
-description = "Nobody profits from denying the dying their own death, yet that right came last. Representative systems hoard decisions to protect governing itself, not for money."
 date = 2026-06-04
+description = "Nobody profits from denying the dying their own death, yet that right came last. Representative systems hoard decisions to protect governing itself, not for money."
 slug = "stingy-with-rights"
+title = "Every Right We Have Was Pried From a Closed Fist, and Look What Is Still in It"
 
 [taxonomies]
 tags = ["politics", "direct-democracy"]

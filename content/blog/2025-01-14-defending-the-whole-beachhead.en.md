@@ -1,8 +1,8 @@
 +++
-title = "You Fight Differently When Everything You Own Is on the Beach"
-description = "Politics bundles every issue into one party package, so losing a tax question feels like losing everything. Split the bundle and the ferocity drains away."
 date = 2025-01-14
+description = "Politics bundles every issue into one party package, so losing a tax question feels like losing everything. Split the bundle and the ferocity drains away."
 slug = "defending-the-whole-beachhead"
+title = "You Fight Differently When Everything You Own Is on the Beach"
 
 [taxonomies]
 tags = ["politics", "psychology", "opinion"]

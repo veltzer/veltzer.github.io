@@ -1,8 +1,8 @@
 +++
-title = "A Society Can Be Watched Closely and Still Be Free, on Three Conditions"
-description = "Surveillance is not the enemy of liberty. A watched society stays free if the watching runs both ways, the watchers are watched, and the watched set the rules."
 date = 2026-09-01
+description = "Surveillance is not the enemy of liberty. A watched society stays free if the watching runs both ways, the watchers are watched, and the watched set the rules."
 slug = "liberty-under-total-surveillance"
+title = "A Society Can Be Watched Closely and Still Be Free, on Three Conditions"
 
 [taxonomies]
 tags = ["technology", "politics", "philosophy"]

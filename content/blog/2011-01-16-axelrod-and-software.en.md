@@ -1,8 +1,8 @@
 +++
-title = "Open Source Is Tit for Tat, and Lock-In Is Always Defect"
-description = "Axelrod's tournament explains the software industry: lock-in is always defect, open source is tit for tat, and reciprocity, not altruism, wins the repeated game."
 date = 2011-01-16
+description = "Axelrod's tournament explains the software industry: lock-in is always defect, open source is tit for tat, and reciprocity, not altruism, wins the repeated game."
 slug = "axelrod-and-software"
+title = "Open Source Is Tit for Tat, and Lock-In Is Always Defect"
 
 [taxonomies]
 tags = ["open-source", "game-theory", "programming"]

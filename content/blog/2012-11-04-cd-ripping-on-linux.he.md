@@ -1,8 +1,8 @@
 +++
-title = "העתקת דיסקים בלינוקס בלי לאבד דבר"
-description = "cdparanoia לקריאה מדויקת, abcde לתיוג ולקידוד ל-FLAC, ו-whipper עם AccurateRip לדיסקים השרוטים: העתקה נאמנה של מדף דיסקים, פעם אחת ולתמיד."
 date = 2012-11-04
+description = "cdparanoia לקריאה מדויקת, abcde לתיוג ולקידוד ל-FLAC, ו-whipper עם AccurateRip לדיסקים השרוטים: העתקה נאמנה של מדף דיסקים, פעם אחת ולתמיד."
 slug = "cd-ripping-on-linux"
+title = "העתקת דיסקים בלינוקס בלי לאבד דבר"
 
 [taxonomies]
 tags = ["לינוקס", "שמע", "שורת-פקודה"]

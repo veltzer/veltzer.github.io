@@ -1,8 +1,8 @@
 +++
-title = "From Many to One: The Polytheistic Roots of Ancient Israel"
-description = "Archaeology and the Bible itself show Israel worshipped Yahweh alongside Asherah and other gods. Monotheism came late, peaking in the Babylonian exile."
 date = 2026-03-31
+description = "Archaeology and the Bible itself show Israel worshipped Yahweh alongside Asherah and other gods. Monotheism came late, peaking in the Babylonian exile."
 slug = "ancient-israel-polytheism"
+title = "From Many to One: The Polytheistic Roots of Ancient Israel"
 
 [taxonomies]
 tags = ["religion", "history", "bible"]

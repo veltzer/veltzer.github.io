@@ -1,8 +1,8 @@
 +++
-title = "Philosophy and the Scientific Revolution: The Failure of Ambiguity"
-description = "The Scientific Revolution was a decision to build theories only from primitives that mean exactly one thing. Philosophy never made it, which is why its questions remain open."
 date = 2026-09-14
+description = "The Scientific Revolution was a decision to build theories only from primitives that mean exactly one thing. Philosophy never made it, which is why its questions remain open."
 slug = "philosophy-failure-of-ambiguity"
+title = "Philosophy and the Scientific Revolution: The Failure of Ambiguity"
 
 [taxonomies]
 tags = ["philosophy", "science", "epistemology", "history"]

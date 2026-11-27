@@ -1,8 +1,8 @@
 +++
-title = "יצירת תאריכי MySQL מתוך פרל"
-description = "פונקציית פרל קטנה שמעצבת את השעה המקומית הנוכחית כמחרוזת datetime של MySQL, מוכנה להכנסה לעמודה מסוג datetime."
 date = 2011-04-24
+description = "פונקציית פרל קטנה שמעצבת את השעה המקומית הנוכחית כמחרוזת datetime של MySQL, מוכנה להכנסה לעמודה מסוג datetime."
 slug = "mysql-dates-from-perl"
+title = "יצירת תאריכי MySQL מתוך פרל"
 
 [taxonomies]
 tags = ["פרל", "mysql", "תכנות"]

@@ -1,8 +1,8 @@
 +++
-title = "Representative Government Forces Every Debate to the Wrong Altitude"
-description = "Electing people instead of deciding questions bundles every issue into for-or-against, an altitude where nothing true can be said. Better candidates cannot fix a structural flaw."
 date = 2015-11-08
+description = "Electing people instead of deciding questions bundles every issue into for-or-against, an altitude where nothing true can be said. Better candidates cannot fix a structural flaw."
 slug = "representative-government-altitude"
+title = "Representative Government Forces Every Debate to the Wrong Altitude"
 
 [taxonomies]
 tags = ["politics", "opinion", "direct-democracy"]

@@ -1,8 +1,8 @@
 +++
-title = "Social Media, Not Music, Moves Communities"
-description = "Social media drove everyone insane in fifteen years and settled the question: music is a broadcast, social media is a network, and only a network rewires a society."
 date = 2022-07-30
+description = "Social media drove everyone insane in fifteen years and settled the question: music is a broadcast, social media is a network, and only a network rewires a society."
 slug = "social-media-beats-music"
+title = "Social Media, Not Music, Moves Communities"
 
 [taxonomies]
 tags = ["culture", "music", "opinion"]

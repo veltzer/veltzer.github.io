@@ -1,8 +1,8 @@
 +++
-title = "There Is No Such Thing as the \"Appearance of Design\""
-description = "Real and apparent design cannot be told apart, because nothing separates them. Selection does not imitate design: like agile development, it is how design gets done."
 date = 2026-09-24
+description = "Real and apparent design cannot be told apart, because nothing separates them. Selection does not imitate design: like agile development, it is how design gets done."
 slug = "appearance-of-design"
+title = "There Is No Such Thing as the \"Appearance of Design\""
 
 [taxonomies]
 tags = ["philosophy", "science", "atheism", "programming", "linux"]

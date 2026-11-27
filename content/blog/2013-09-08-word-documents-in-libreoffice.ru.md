@@ -1,8 +1,8 @@
 +++
-title = "Почему документы Word выглядят в LibreOffice неправильно и что на самом деле помогает"
-description = "Файлы Word ломаются в LibreOffice в основном из-за недостающих шрифтов. Поставьте метрически совместимые Carlito и Caladea, настройте замены, а для просмотра попросите PDF."
 date = 2013-09-08
+description = "Файлы Word ломаются в LibreOffice в основном из-за недостающих шрифтов. Поставьте метрически совместимые Carlito и Caladea, настройте замены, а для просмотра попросите PDF."
 slug = "word-documents-in-libreoffice"
+title = "Почему документы Word выглядят в LibreOffice неправильно и что на самом деле помогает"
 
 [taxonomies]
 tags = ["linux", "мнение"]

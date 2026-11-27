@@ -1,8 +1,8 @@
 +++
-title = "Mathematics Is More Imaginative Than Any Mythology"
-description = "Myths are enlarged people in costumes. Mathematics gave us non-Euclidean geometry, infinities of different sizes and the limits of proof, and the constraint of proof is what made it possible."
 date = 2026-08-21
+description = "Myths are enlarged people in costumes. Mathematics gave us non-Euclidean geometry, infinities of different sizes and the limits of proof, and the constraint of proof is what made it possible."
 slug = "mathematics-out-imagines-mythology"
+title = "Mathematics Is More Imaginative Than Any Mythology"
 
 [taxonomies]
 tags = ["philosophy", "science"]

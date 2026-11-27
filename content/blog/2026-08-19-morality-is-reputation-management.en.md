@@ -1,8 +1,8 @@
 +++
-title = "Your Morality Is Mostly Reputation Management"
-description = "A photo of eyes over an honesty box raises payments. Much of conscience is evolved machinery for being seen to cooperate, which is why it switches on when watched."
 date = 2026-08-19
+description = "A photo of eyes over an honesty box raises payments. Much of conscience is evolved machinery for being seen to cooperate, which is why it switches on when watched."
 slug = "morality-is-reputation-management"
+title = "Your Morality Is Mostly Reputation Management"
 
 [taxonomies]
 tags = ["science", "game-theory", "ethics"]

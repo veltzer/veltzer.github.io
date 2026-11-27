@@ -1,8 +1,8 @@
 +++
-title = "Every Regulatory Dilemma Is Really a Trust Dilemma"
-description = "Pollution, disclosure, monopolies: the regulatory balance is never struck because nobody trusts whoever would strike it. A public that cannot be bought should set the level."
 date = 2023-07-21
+description = "Pollution, disclosure, monopolies: the regulatory balance is never struck because nobody trusts whoever would strike it. A public that cannot be bought should set the level."
 slug = "supervision-without-stifling"
+title = "Every Regulatory Dilemma Is Really a Trust Dilemma"
 
 [taxonomies]
 tags = ["direct-democracy", "economics"]

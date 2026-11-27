@@ -1,7 +1,7 @@
 +++
-title = "О Марке Вельцере"
 description = "Марк Вельцер – инженер-программист из Израиля, работающий с Linux, C, C++, Python и Rust, который преподаёт и пишет о программировании, математике и философии."
 template = "section.html"
+title = "О Марке Вельцере"
 +++
 
 <img class="portrait" src="/images/mark-veltzer.jpg" width="480" height="480" alt="Рисунок: портрет Марка Вельцера">

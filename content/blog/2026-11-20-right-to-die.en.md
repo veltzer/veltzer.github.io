@@ -1,8 +1,8 @@
 +++
-title = "The Most Important Right Religion Takes From You"
-description = "The idea that your life is not yours to end comes from religion and is enforced on everyone. A competent adult owns their life; safeguards should protect that choice, not replace it."
 date = 2026-11-20
+description = "The idea that your life is not yours to end comes from religion and is enforced on everyone. A competent adult owns their life; safeguards should protect that choice, not replace it."
 slug = "right-to-die"
+title = "The Most Important Right Religion Takes From You"
 
 [taxonomies]
 tags = ["religion", "ethics", "politics", "law"]

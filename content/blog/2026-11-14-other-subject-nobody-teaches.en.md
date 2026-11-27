@@ -1,8 +1,8 @@
 +++
-title = "The Other Subject Nobody Teaches"
-description = "Knowing how to find the truth is only half the job. The other half is knowing how our own minds get in the way: biases, tribal loyalty and the limits of intuition."
 date = 2026-11-14
+description = "Knowing how to find the truth is only half the job. The other half is knowing how our own minds get in the way: biases, tribal loyalty and the limits of intuition."
 slug = "other-subject-nobody-teaches"
+title = "The Other Subject Nobody Teaches"
 
 [taxonomies]
 tags = ["psychology", "education", "epistemology", "statistics"]

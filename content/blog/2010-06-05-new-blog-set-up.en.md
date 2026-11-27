@@ -1,8 +1,8 @@
 +++
-title = "New blog set up"
-description = "The blog moves from Google to my own machine, for more control over my data and over the look, feel and features of the blog."
 date = 2010-06-05
+description = "The blog moves from Google to my own machine, for more control over my data and over the look, feel and features of the blog."
 slug = "new-blog-set-up"
+title = "New blog set up"
 
 [taxonomies]
 tags = ["blogging", "self-hosting", "linux"]

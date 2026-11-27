@@ -1,8 +1,8 @@
 +++
-title = "The Wisdom of Crowds Only Appears Under Conditions, and the First Pillar Meets Them"
-description = "Crowds are wise only under Surowiecki's conditions: diversity, independence, decentralisation and aggregation. Direct public voting is built to meet them; representation meets none of them."
 date = 2024-02-03
+description = "Crowds are wise only under Surowiecki's conditions: diversity, independence, decentralisation and aggregation. Direct public voting is built to meet them; representation meets none of them."
 slug = "wisdom-of-crowds"
+title = "The Wisdom of Crowds Only Appears Under Conditions, and the First Pillar Meets Them"
 
 [taxonomies]
 tags = ["direct-democracy", "epistemology"]

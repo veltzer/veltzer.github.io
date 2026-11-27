@@ -1,8 +1,8 @@
 +++
-title = "The Architecture of Emotion and Reason: From Modern Institutions to the Star Trek Triad"
-description = "Schools, news and Hollywood now flatter emotion over evidence. The bridge of the Enterprise shows the balance: McCoy's heart, Spock's rigor and Kirk's integrating will."
 date = 2026-10-10
+description = "Schools, news and Hollywood now flatter emotion over evidence. The bridge of the Enterprise shows the balance: McCoy's heart, Spock's rigor and Kirk's integrating will."
 slug = "the-star-trek-triad"
+title = "The Architecture of Emotion and Reason: From Modern Institutions to the Star Trek Triad"
 
 [taxonomies]
 tags = ["psychology", "culture", "media", "education", "philosophy"]

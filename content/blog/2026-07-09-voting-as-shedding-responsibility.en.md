@@ -1,8 +1,8 @@
 +++
-title = "Voting for a Person Is How You Get Rid of the Responsibility to Understand"
-description = "A vote for a representative buys the right not to be the one who was wrong. Understanding comes only with responsibility, so shedding one means losing the other."
 date = 2026-07-09
+description = "A vote for a representative buys the right not to be the one who was wrong. Understanding comes only with responsibility, so shedding one means losing the other."
 slug = "voting-as-shedding-responsibility"
+title = "Voting for a Person Is How You Get Rid of the Responsibility to Understand"
 
 [taxonomies]
 tags = ["politics", "direct-democracy", "psychology"]

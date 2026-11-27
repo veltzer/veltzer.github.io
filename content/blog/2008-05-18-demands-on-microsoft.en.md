@@ -1,8 +1,8 @@
 +++
-title = "What Open Source Should Demand From Microsoft"
-description = "Stop asking whether Microsoft has changed. Ask which of five checkable demands it has met: open formats, documented protocols, patent non-assertion, no OEM exclusivity, open tests."
 date = 2008-05-18
+description = "Stop asking whether Microsoft has changed. Ask which of five checkable demands it has met: open formats, documented protocols, patent non-assertion, no OEM exclusivity, open tests."
 slug = "demands-on-microsoft"
+title = "What Open Source Should Demand From Microsoft"
 
 [taxonomies]
 tags = ["open-source", "windows", "opinion"]

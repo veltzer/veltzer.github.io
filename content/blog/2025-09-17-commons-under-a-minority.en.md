@@ -1,8 +1,8 @@
 +++
-title = "The Tragedy of the Commons Is Worse When a Minority Holds the Commons"
-description = "Government is not an outside referee of the commons but a minority with its own interests, which makes the tragedy worse. People enforce limits they set themselves."
 date = 2025-09-17
+description = "Government is not an outside referee of the commons but a minority with its own interests, which makes the tragedy worse. People enforce limits they set themselves."
 slug = "commons-under-a-minority"
+title = "The Tragedy of the Commons Is Worse When a Minority Holds the Commons"
 
 [taxonomies]
 tags = ["direct-democracy", "game-theory", "economics"]

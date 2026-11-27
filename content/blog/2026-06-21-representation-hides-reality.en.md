@@ -1,8 +1,8 @@
 +++
-title = "Representation Does Our Understanding for Us, and Keeps the Change"
-description = "Representation delegates understanding, not just decision. Powerful interests do the understanding in their favour, and a public that never has to decide never learns."
 date = 2026-06-21
+description = "Representation delegates understanding, not just decision. Powerful interests do the understanding in their favour, and a public that never has to decide never learns."
 slug = "representation-hides-reality"
+title = "Representation Does Our Understanding for Us, and Keeps the Change"
 
 [taxonomies]
 tags = ["politics", "direct-democracy", "epistemology"]

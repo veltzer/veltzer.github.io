@@ -1,8 +1,8 @@
 +++
-title = "A Simple Chroot Jail for a Single Application"
-description = "Build a chroot jail by hand: copy the binary and the libraries ldd names, add device nodes, run it unprivileged. Doing it once shows exactly what containers add."
 date = 2011-06-19
+description = "Build a chroot jail by hand: copy the binary and the libraries ldd names, add device nodes, run it unprivileged. Doing it once shows exactly what containers add."
 slug = "a-simple-chroot-jail"
+title = "A Simple Chroot Jail for a Single Application"
 
 [taxonomies]
 tags = ["linux", "security", "sysadmin"]

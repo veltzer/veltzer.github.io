@@ -1,8 +1,8 @@
 +++
-title = "Muxing Subtitles Into Video Files on Linux"
-description = "Soft subtitles go in as a track with mkvmerge or ffmpeg, in seconds and with no quality loss; burn them in only when a device forces you. Plus a script to pair files in bulk."
 date = 2013-03-17
+description = "Soft subtitles go in as a track with mkvmerge or ffmpeg, in seconds and with no quality loss; burn them in only when a device forces you. Plus a script to pair files in bulk."
 slug = "muxing-subtitles-into-video"
+title = "Muxing Subtitles Into Video Files on Linux"
 
 [taxonomies]
 tags = ["linux", "video", "command-line"]

@@ -1,8 +1,8 @@
 +++
-title = "מנהל ההתקן הפתוח nouveau היה הגורם להשהיית השמע שלי"
-description = "זרם קבוע של xruns ב-JACK שרד כל תיקון רגיל. latencytop הראה שמנהל ההתקן הגרפי nouveau מעכב את הקרנל, ומנהל ההתקן הקנייני של NVIDIA שם להם סוף."
 date = 2013-01-13
+description = "זרם קבוע של xruns ב-JACK שרד כל תיקון רגיל. latencytop הראה שמנהל ההתקן הגרפי nouveau מעכב את הקרנל, ומנהל ההתקן הקנייני של NVIDIA שם להם סוף."
 slug = "nouveau-and-audio-latency"
+title = "מנהל ההתקן הפתוח nouveau היה הגורם להשהיית השמע שלי"
 
 [taxonomies]
 tags = ["לינוקס", "שמע", "חומרה"]

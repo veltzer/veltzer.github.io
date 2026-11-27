@@ -1,8 +1,8 @@
 +++
-title = "Mass Mourning for People Nobody Knew"
-description = "Grief for a dead head of state is real but misfiring: broadcast faces fool equipment built for small groups, and the media machinery manufactures the emotion for ratings."
 date = 2024-11-19
+description = "Grief for a dead head of state is real but misfiring: broadcast faces fool equipment built for small groups, and the media machinery manufactures the emotion for ratings."
 slug = "mass-mourning-for-strangers"
+title = "Mass Mourning for People Nobody Knew"
 
 [taxonomies]
 tags = ["culture", "psychology", "opinion"]

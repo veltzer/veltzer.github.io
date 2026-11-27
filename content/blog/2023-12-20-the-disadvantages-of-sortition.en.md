@@ -1,8 +1,8 @@
 +++
-title = "Seven Things Wrong With Sortition"
-description = "Sortition gives the public no reason to learn, the public will not trust the draw, and its members are easy to corrupt. Random selection is fine for checking power, poor for holding it."
 date = 2023-12-20
+description = "Sortition gives the public no reason to learn, the public will not trust the draw, and its members are easy to corrupt. Random selection is fine for checking power, poor for holding it."
 slug = "the-disadvantages-of-sortition"
+title = "Seven Things Wrong With Sortition"
 
 [taxonomies]
 tags = ["direct-democracy", "politics"]

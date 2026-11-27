@@ -1,8 +1,8 @@
 +++
-title = "Justice Costs a Lawyer, and That Is Not an Accident"
-description = "In small claims the system prices justice at slightly more than the matter is worth. Lawyers did not design that toll booth, they staff it, and someone profits from it."
 date = 2025-01-18
+description = "In small claims the system prices justice at slightly more than the matter is worth. Lawyers did not design that toll booth, they staff it, and someone profits from it."
 slug = "legal-profession-inhibits-justice"
+title = "Justice Costs a Lawyer, and That Is Not an Accident"
 
 [taxonomies]
 tags = ["law", "politics", "opinion"]

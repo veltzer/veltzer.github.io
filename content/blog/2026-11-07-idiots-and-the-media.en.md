@@ -1,8 +1,8 @@
 +++
-title = "The media thinks that you are an idiot, then they are right"
-description = "Media reduce complex data to one emotional human story, banking on the public's statistical illiteracy and trading reality for a comfortable fiction."
 date = 2026-11-07
+description = "Media reduce complex data to one emotional human story, banking on the public's statistical illiteracy and trading reality for a comfortable fiction."
 slug = "idiots-and-the-media"
+title = "The media thinks that you are an idiot, then they are right"
 
 [taxonomies]
 tags = ["media", "statistics", "epistemology"]

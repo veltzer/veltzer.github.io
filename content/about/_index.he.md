@@ -1,7 +1,7 @@
 +++
-title = "אודות מארק ולצר"
 description = "מארק ולצר הוא מהנדס תוכנה מישראל העובד בלינוקס, C, C++, פייתון וראסט, ומלמד וכותב על תכנות, מתמטיקה ופילוסופיה."
 template = "section.html"
+title = "אודות מארק ולצר"
 +++
 
 <img class="portrait" src="/images/mark-veltzer.jpg" width="480" height="480" alt="ציור של מארק ולצר">

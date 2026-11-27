@@ -1,8 +1,8 @@
 +++
-title = "Backing Up a Debian System's Configuration, Not Its Bytes"
-description = "Debian's packages can be downloaded again; your decisions cannot. Three commands back them up: a tar of /etc plus the dpkg and update-alternatives selections."
 date = 2012-08-12
+description = "Debian's packages can be downloaded again; your decisions cannot. Three commands back them up: a tar of /etc plus the dpkg and update-alternatives selections."
 slug = "backing-up-debian-configuration"
+title = "Backing Up a Debian System's Configuration, Not Its Bytes"
 
 [taxonomies]
 tags = ["linux", "debian", "sysadmin"]

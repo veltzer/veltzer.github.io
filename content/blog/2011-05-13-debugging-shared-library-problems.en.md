@@ -1,8 +1,8 @@
 +++
-title = "Debugging shared library problems"
-description = "When libraries installed from source make it unclear which one a program really loads, ldconfig -p prints the dynamic linker cache and settles it."
 date = 2011-05-13
+description = "When libraries installed from source make it unclear which one a program really loads, ldconfig -p prints the dynamic linker cache and settles it."
 slug = "debugging-shared-library-problems"
+title = "Debugging shared library problems"
 
 [taxonomies]
 tags = ["linux", "debugging"]

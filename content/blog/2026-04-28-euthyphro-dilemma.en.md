@@ -1,8 +1,8 @@
 +++
-title = "The Euthyphro Dilemma: Why Morality Cannot Come From God"
-description = "Is something good because God commands it, or commanded because it is good? Either morality is arbitrary or it is independent of God; there is no third option."
 date = 2026-04-28
+description = "Is something good because God commands it, or commanded because it is good? Either morality is arbitrary or it is independent of God; there is no third option."
 slug = "euthyphro-dilemma"
+title = "The Euthyphro Dilemma: Why Morality Cannot Come From God"
 
 [taxonomies]
 tags = ["religion", "philosophy", "ethics"]

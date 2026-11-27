@@ -1,8 +1,8 @@
 +++
-title = "A War the Majority Chose Is a War You Can Fight"
-description = "Free societies fight wars badly because under representation nobody knows whether the war is theirs. A war the majority chose directly has the moral standing to be fought and finished."
 date = 2023-10-01
+description = "Free societies fight wars badly because under representation nobody knows whether the war is theirs. A war the majority chose directly has the moral standing to be fought and finished."
 slug = "moral-clarity-in-war"
+title = "A War the Majority Chose Is a War You Can Fight"
 
 [taxonomies]
 tags = ["direct-democracy", "politics", "ethics"]

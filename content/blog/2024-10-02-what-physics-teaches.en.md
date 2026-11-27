@@ -1,8 +1,8 @@
 +++
-title = "What Physics Can Teach the Fields That Are Not Physics"
-description = "Physics' equations do not transfer to other fields, but its habits do: humility about limits, defining terms by measurement, error bars, null models and preferring the measurable."
 date = 2024-10-02
+description = "Physics' equations do not transfer to other fields, but its habits do: humility about limits, defining terms by measurement, error bars, null models and preferring the measurable."
 slug = "what-physics-teaches"
+title = "What Physics Can Teach the Fields That Are Not Physics"
 
 [taxonomies]
 tags = ["science", "epistemology", "philosophy"]

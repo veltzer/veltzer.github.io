@@ -1,8 +1,8 @@
 +++
-title = "Institutions Made Us Moral, Philosophers Just Wrote About It"
-description = "Four thousand years of moral philosophy barely changed behaviour; institutions and shifts in power did. The open moral problem is institutional design."
 date = 2024-12-20
+description = "Four thousand years of moral philosophy barely changed behaviour; institutions and shifts in power did. The open moral problem is institutional design."
 slug = "institutions-made-us-moral"
+title = "Institutions Made Us Moral, Philosophers Just Wrote About It"
 
 [taxonomies]
 tags = ["ethics", "philosophy", "history", "politics"]

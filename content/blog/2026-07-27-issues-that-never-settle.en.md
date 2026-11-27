@@ -1,8 +1,8 @@
 +++
-title = "Why a Representative Government Cannot Settle an Issue Even When the Public Has Settled It"
-description = "Even with a clear public majority and a legislative one, a government fears the intense minority and the organisations, so the issue stays open. Direct democracy would settle it."
 date = 2026-07-27
+description = "Even with a clear public majority and a legislative one, a government fears the intense minority and the organisations, so the issue stays open. Direct democracy would settle it."
 slug = "issues-that-never-settle"
+title = "Why a Representative Government Cannot Settle an Issue Even When the Public Has Settled It"
 
 [taxonomies]
 tags = ["politics", "direct-democracy"]

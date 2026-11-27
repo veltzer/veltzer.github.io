@@ -1,8 +1,8 @@
 +++
-title = "Philosophy: Anti Education"
-description = "Philosophy is not just unproductive but anti-education: it never fixes its terms, trains people to think imprecisely, and rewards them for feeling rigorous."
 date = 2026-09-09
+description = "Philosophy is not just unproductive but anti-education: it never fixes its terms, trains people to think imprecisely, and rewards them for feeling rigorous."
 slug = "mirage-of-pure-reason"
+title = "Philosophy: Anti Education"
 
 [taxonomies]
 tags = ["philosophy", "epistemology", "religion", "science"]

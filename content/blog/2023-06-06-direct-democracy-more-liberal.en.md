@@ -1,8 +1,8 @@
 +++
-title = "Direct Democracy Can Be More Liberal Than Any Representative Regime"
-description = "Representative regimes are weak and coarse, so organised illiberal minorities cap how liberal they can be. Direct democracy has no party to capture and no such ceiling."
 date = 2023-06-06
+description = "Representative regimes are weak and coarse, so organised illiberal minorities cap how liberal they can be. Direct democracy has no party to capture and no such ceiling."
 slug = "direct-democracy-more-liberal"
+title = "Direct Democracy Can Be More Liberal Than Any Representative Regime"
 
 [taxonomies]
 tags = ["direct-democracy", "politics"]

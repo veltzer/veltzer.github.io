@@ -1,8 +1,8 @@
 +++
-title = "Commented-Out Code Should Still Have to Compile"
-description = "Commented-out code rots silently. Mark it so the compiler parses and checks it like live code, and fails the build when it no longer makes sense."
 date = 2025-11-27
+description = "Commented-out code rots silently. Mark it so the compiler parses and checks it like live code, and fails the build when it no longer makes sense."
 slug = "comments-the-compiler-checks"
+title = "Commented-Out Code Should Still Have to Compile"
 
 [taxonomies]
 tags = ["programming", "opinion"]

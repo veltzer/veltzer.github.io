@@ -1,8 +1,8 @@
 +++
-title = "The Burden of Proof Is on the Claimant"
-description = "The skeptic need not disprove God. Whoever asserts that something exists carries the burden, and withholding belief without evidence is the rational default, not a rival faith."
 date = 2026-04-17
+description = "The skeptic need not disprove God. Whoever asserts that something exists carries the burden, and withholding belief without evidence is the rational default, not a rival faith."
 slug = "the-burden-of-proof"
+title = "The Burden of Proof Is on the Claimant"
 
 [taxonomies]
 tags = ["religion", "epistemology"]

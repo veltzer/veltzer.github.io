@@ -1,8 +1,8 @@
 +++
-title = "Dispersed Power Is More Moral"
-description = "The clearest cases of immorality come from a small group holding the lever. Direct democracy leaves no small group worth capturing, so lobbying is not solved but made pointless."
 date = 2024-02-13
+description = "The clearest cases of immorality come from a small group holding the lever. Direct democracy leaves no small group worth capturing, so lobbying is not solved but made pointless."
 slug = "dispersed-power-is-moral"
+title = "Dispersed Power Is More Moral"
 
 [taxonomies]
 tags = ["politics", "ethics", "opinion", "direct-democracy"]

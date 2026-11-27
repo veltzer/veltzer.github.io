@@ -1,8 +1,8 @@
 +++
-title = "Films Are Negative for a Reason, and It Is Not the Reason I Am"
-description = "Films are dark because drama needs conflict, and they blame villains who get defeated. Evidence-based pessimism blames structures that make good people do bad things."
 date = 2023-01-14
+description = "Films are dark because drama needs conflict, and they blame villains who get defeated. Evidence-based pessimism blames structures that make good people do bad things."
 slug = "negativity-in-films"
+title = "Films Are Negative for a Reason, and It Is Not the Reason I Am"
 
 [taxonomies]
 tags = ["culture", "opinion", "psychology"]

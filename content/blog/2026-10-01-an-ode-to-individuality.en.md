@@ -1,8 +1,8 @@
 +++
-title = "An Ode to Individuality"
-description = "The greatest and the worst human achievements were the work of individuals. Let individuals create, but let everyone decide, by direct democracy, what we live with."
 date = 2026-10-01
+description = "The greatest and the worst human achievements were the work of individuals. Let individuals create, but let everyone decide, by direct democracy, what we live with."
 slug = "an-ode-to-individuality"
+title = "An Ode to Individuality"
 
 [taxonomies]
 tags = ["culture", "philosophy", "opinion"]

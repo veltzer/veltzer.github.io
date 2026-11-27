@@ -1,8 +1,8 @@
 +++
-title = "Omniscience vs. Free Will: The Contradiction at the Heart of Theism"
-description = "If God knows every choice you will make, you cannot do otherwise, and judging you is unjust. Most theists need both omniscience and free will, and simply hope no one notices."
 date = 2026-04-29
+description = "If God knows every choice you will make, you cannot do otherwise, and judging you is unjust. Most theists need both omniscience and free will, and simply hope no one notices."
 slug = "omniscience-vs-free-will"
+title = "Omniscience vs. Free Will: The Contradiction at the Heart of Theism"
 
 [taxonomies]
 tags = ["religion", "philosophy"]

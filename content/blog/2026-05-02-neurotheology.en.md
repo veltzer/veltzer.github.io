@@ -1,8 +1,8 @@
 +++
-title = "Neurotheology: When God Is a Brain State"
-description = "The sense of divine presence can be induced on demand by seizures, psychedelics, sensory deprivation and hypoxia. A divine that a drug can summon is indistinguishable from a brain event."
 date = 2026-05-02
+description = "The sense of divine presence can be induced on demand by seizures, psychedelics, sensory deprivation and hypoxia. A divine that a drug can summon is indistinguishable from a brain event."
 slug = "neurotheology"
+title = "Neurotheology: When God Is a Brain State"
 
 [taxonomies]
 tags = ["religion", "science", "neuroscience"]

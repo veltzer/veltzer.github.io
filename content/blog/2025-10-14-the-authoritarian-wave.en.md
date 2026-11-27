@@ -1,8 +1,8 @@
 +++
-title = "The Authoritarian Wave Has Several Causes, and the Largest Is That Democracy Is Not Working"
-description = "Many causes feed the authoritarian wave, but the largest is that representative democracy does not work. The strongman is the wrong answer to a correct question."
 date = 2025-10-14
+description = "Many causes feed the authoritarian wave, but the largest is that representative democracy does not work. The strongman is the wrong answer to a correct question."
 slug = "the-authoritarian-wave"
+title = "The Authoritarian Wave Has Several Causes, and the Largest Is That Democracy Is Not Working"
 
 [taxonomies]
 tags = ["politics", "media", "history"]

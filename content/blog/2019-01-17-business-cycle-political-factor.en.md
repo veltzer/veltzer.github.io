@@ -1,8 +1,8 @@
 +++
-title = "The Business Cycle Has a Political Factor Economists Leave Out"
-description = "Booms overreach because whole firms depend on them continuing, and politicians will not stop one, as 2008 showed. The brake must sit outside the representative system."
 date = 2019-01-17
+description = "Booms overreach because whole firms depend on them continuing, and politicians will not stop one, as 2008 showed. The brake must sit outside the representative system."
 slug = "business-cycle-political-factor"
+title = "The Business Cycle Has a Political Factor Economists Leave Out"
 
 [taxonomies]
 tags = ["economics", "politics", "finance", "direct-democracy"]

@@ -1,8 +1,8 @@
 +++
-title = "Divine Hiddenness: The Argument from Reasonable Non-Belief"
-description = "A loving God who wants a relationship with everyone would not leave sincere, careful people unconvinced. Reasonable non-belief is itself strong evidence that no such God exists."
 date = 2026-04-27
+description = "A loving God who wants a relationship with everyone would not leave sincere, careful people unconvinced. Reasonable non-belief is itself strong evidence that no such God exists."
 slug = "divine-hiddenness"
+title = "Divine Hiddenness: The Argument from Reasonable Non-Belief"
 
 [taxonomies]
 tags = ["religion", "philosophy"]

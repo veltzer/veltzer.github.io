@@ -1,8 +1,8 @@
 +++
-title = "The Long Tail of Faith: Why Radical Religion Cannot Be Detached from Religion"
-description = "Religious extremism is not a hijacking of faith but the tail of its distribution. The tail shrinks only when ordinary believers moderate and move the whole curve."
 date = 2026-10-31
+description = "Religious extremism is not a hijacking of faith but the tail of its distribution. The tail shrinks only when ordinary believers moderate and move the whole curve."
 slug = "long-tail-of-faith"
+title = "The Long Tail of Faith: Why Radical Religion Cannot Be Detached from Religion"
 
 [taxonomies]
 tags = ["religion", "statistics", "culture"]

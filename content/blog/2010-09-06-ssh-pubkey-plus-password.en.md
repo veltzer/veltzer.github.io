@@ -1,8 +1,8 @@
 +++
-title = "Configuring ssh server for pubkey + password authentication"
-description = "Configure sshd for public key authentication with a pass phrase on the key, so a lost laptop or phone does not open the way into your home computer."
 date = 2010-09-06
+description = "Configure sshd for public key authentication with a pass phrase on the key, so a lost laptop or phone does not open the way into your home computer."
 slug = "ssh-pubkey-plus-password"
+title = "Configuring ssh server for pubkey + password authentication"
 
 [taxonomies]
 tags = ["security", "linux"]
