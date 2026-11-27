@@ -14,7 +14,7 @@ In modern Christianity, Satan is the ultimate personification of evil—a rebel 
 
 In the earliest parts of the Hebrew Bible, the word *satan* is not a proper name. It is a common noun meaning "adversary" or "accuser." It can refer to a human enemy (1 Kings 11:14) or a divine functionary.
 
-In the **Book of Job**, *ha-satan* ("The Accuser") appears as a member of God’s own heavenly council. He is not God’s enemy; he is God’s "prosecuting attorney." His job is to wander the earth and test the loyalty of humans. He acts with God's permission and for God's purposes. He is a servant of the divine, not a rebel against it.
+In the **Book of Job**, *ha-satan* ("The Accuser") appears as a member of God's own heavenly council. He is not God's enemy; he is God's "prosecuting attorney." His job is to wander the earth and test the loyalty of humans. He acts with God's permission and for God's purposes. He is a servant of the divine, not a rebel against it.
 
 ## The Persian Connection
 

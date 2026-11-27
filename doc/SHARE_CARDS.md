@@ -12,7 +12,7 @@ the way they do.
 ## Two kinds of card
 
 | | Site-wide cards | Post cards |
-|---|---|---|
+| --- | --- | --- |
 | Used by | every page that is not a post: the home page, About, the tag and archive pages, the apps, the root language chooser | each blog post, in each language |
 | Files | `static/images/og/card-{en,he,ru}.jpg`, one per language | `_site/images/og/<post file stem>.jpg`, e.g. `2026-04-28-euthyphro-dilemma.en.jpg` |
 | Drawn by | `scripts/make_og_images.py`, by hand | `scripts/make_post_cards.py`, by the build (`processor.generator.generic.post_cards` in `rsconstruct.toml`) |

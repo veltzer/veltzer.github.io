@@ -14,7 +14,7 @@ There is no single framework. The calendar loads what it needs, and the
 blog loads nothing at all.
 
 | Page | CSS | JS libraries |
-|------|-----|--------------|
+| ------ | ----- | -------------- |
 | `/en/calendar/` | site stylesheet | FullCalendar 6.1.20 + its Google Calendar plugin -- **vendored** |
 | Blog posts, About, tags | site stylesheet (`sass/style.scss`) | none |
 

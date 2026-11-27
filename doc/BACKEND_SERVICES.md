@@ -34,7 +34,7 @@ So the realistic shape is *two* services, not one:
 ## Comparison
 
 | | Storage | Counters | Uploads | Forum | Free tier | Pauses when idle? |
-|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- |
 | **Cloudflare** (Workers/D1/R2/KV) | R2 10 GB | D1 or KV | R2 | no | 100k req/day | **no** |
 | **Supabase** | 1 GB files, 500 MB Postgres | Postgres table | yes | no | 5 GB egress, 50k MAU | yes, after 1 week |
 | **Appwrite** | 2 GB | DB table | yes | no | 5 GB bandwidth, 75k MAU | yes, after 1 week |

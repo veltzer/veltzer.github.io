@@ -187,12 +187,12 @@ copying the snippet into each and giving the measurement ID four more places to 
 `CLAUDE.md`), so there are no `static/*.html` files any more and the old URLs 404. The
 table is history:
 
-  | file | redirected to (until 2026-10-28) |
-  | --- | --- |
-  | `media_app.html` | `/en/media/` |
-  | `calendar_app.html` | `/en/calendar/` |
-  | `chess.html` | `/en/chess/` (already did) |
-  | `full_index.html` | `/` |
+| file | redirected to (until 2026-10-28) |
+| --- | --- |
+| `media_app.html` | `/en/media/` |
+| `calendar_app.html` | `/en/calendar/` |
+| `chess.html` | `/en/chess/` (already did) |
+| `full_index.html` | `/` |
 
 While they existed, a visitor following an old bookmark landed on the templated page and
 was counted there; the stubs carried `noindex, follow` so they did not compete in search.
