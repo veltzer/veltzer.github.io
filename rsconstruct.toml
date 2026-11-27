@@ -82,6 +82,9 @@ src_dirs = ["tests"]
 dep_inputs = [
     "scripts/make_word_vectors.py",
     "scripts/check_hebrew.py",
+    "scripts/show_card.py",
+    "scripts/make_og_images.py",
+    "scripts/make_post_cards.py",
     # test_logo.py compares make_logo.py with the two committed copies of the logo.
     "scripts/make_logo.py",
     "templates/base.html",

@@ -108,6 +108,31 @@ cover the whole text. `veltzer.org` is always Outfit.
 - Look before committing: the cards are JPEGs, so open a few of them,
   including a Hebrew one and the longest title.
 
+## Seeing a card
+
+`scripts/show_card.py <post>` shows the card of one post, named by its
+file, by its slug (`--lang he` for a language other than English) or by any
+URL of the site:
+
+```sh
+scripts/show_card.py why-the-faithful-lie
+scripts/show_card.py content/blog/2026-11-27-why-the-faithful-lie.he.md
+scripts/show_card.py --local why-the-faithful-lie
+```
+
+It reads the page with WhatsApp's user agent, prints the `og:` tags, fetches
+the picture `og:image` names, checks what a platform would trip over (the
+size, the dimensions, a missing tag) and opens a mock-up of the two forms a
+preview takes. It asks the live site, which is what a link shared now shows;
+`--local` reads `_site/` after a build, to look before pushing.
+
+The two forms matter. The large preview shows the whole card. The small one
+(a thumbnail beside the title) shows only a square cut from the middle of
+the card, and the portrait stands at the far edge, so the small form shows
+the middle of the title and at most a sliver of the face.
+
+The script shows the card as it is now, not what a platform has cached.
+
 The platforms cache a link's preview, some for days. After a card changes,
 a link already shared keeps its old card until the platform fetches it
 again; LinkedIn's Post Inspector and Facebook's Sharing Debugger force a
