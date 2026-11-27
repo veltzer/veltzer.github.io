@@ -9,10 +9,12 @@ Targets:
   static/images/og/card-he.jpg
   static/images/og/card-ru.jpg
 
-Each card is the site's logo (make_logo.py), the name and the line under it, taken
-from home_title in i18n/<lang>.toml so the card says what the home page
-says, and the author's portrait in a circle on the far side from the text,
-as on the per-post cards (doc/SHARE_CARDS.md has the decisions behind them). English is set in Outfit, the site's heading font from the
+Each card is the author's portrait in a circle, the name and the line under
+it, taken from home_title in i18n/<lang>.toml so the card says what the home
+page says, all centred inside the middle square of the card: a small preview
+shows only that square, so it has to be a whole picture by itself. The site's
+logo (make_logo.py) and veltzer.org stand in the corners outside it, as on
+the per-post cards (doc/SHARE_CARDS.md has the decisions behind them). English is set in Outfit, the site's heading font from the
 shared-themes submodule; Hebrew and Russian in Liberation Sans, which has the
 Hebrew and Cyrillic letters Outfit lacks and the comma Noto Sans Hebrew lacks
 (Pillow does no font fallback). Hebrew is laid out right to left (Pillow
@@ -54,13 +56,24 @@ ACCENT = (64, 81, 181)
 TEXT = (33, 33, 33)
 MUTED = (96, 96, 96)
 
-MARGIN = 90
-# The portrait: a circle on the far side from the text, the text column
-# ending PORTRAIT_GAP short of it.
-PORTRAIT_SIZE = 300
-PORTRAIT_TOP = 165
-PORTRAIT_GAP = 50
-COLUMN = WIDTH - 2 * MARGIN - PORTRAIT_SIZE - PORTRAIT_GAP
+# The small form of a preview (a thumbnail beside the title) shows only the
+# square cut from the middle of the card, so the portrait and all the text
+# are centred inside that square, in a column SQUARE_PAD short of its sides.
+# Only the logo and veltzer.org stand outside it, in the corners.
+SQUARE = HEIGHT
+SQUARE_LEFT = (WIDTH - SQUARE) // 2
+SQUARE_PAD = 30
+COLUMN = SQUARE - 2 * SQUARE_PAD
+CENTRE = WIDTH // 2
+# The bottom band, and the distance of the corner items from the edges.
+BAND = 18
+MARGIN = 48
+LOGO = 72
+# The portrait: a circle at the top of the middle square. The site-wide
+# card has less to say than a post's, so its portrait is larger.
+PORTRAIT_SIZE = 210
+SITE_PORTRAIT_SIZE = 270
+PORTRAIT_TOP = 34
 # The circle is drawn this many times larger and scaled down, for a smooth edge.
 SUPERSAMPLE = 4
 
@@ -88,11 +101,10 @@ def draw_mark(image, left, top, size):
     image.paste(logo, (left, top), logo)
 
 
-def portrait():
+def portrait(size=PORTRAIT_SIZE):
     """The portrait cropped to a circle with a thin accent ring, as RGBA."""
     if not PORTRAIT.is_file():
         die(f"{PORTRAIT} missing")
-    size = PORTRAIT_SIZE
     big = size * SUPERSAMPLE
     face = ImageOps.fit(Image.open(PORTRAIT).convert("RGB"), (big, big), Image.Resampling.LANCZOS)
     ring = 3 * SUPERSAMPLE
@@ -104,10 +116,26 @@ def portrait():
     return out.resize((size, size), Image.Resampling.LANCZOS)
 
 
-def draw_portrait(image, face, rtl):
-    """The portrait on the far side from the text: right, or left for RTL."""
-    left = MARGIN if rtl else WIDTH - MARGIN - PORTRAIT_SIZE
-    image.paste(face, (left, PORTRAIT_TOP), face)
+def blank(face, rtl):
+    """What every card starts from: the band, the portrait and the corners.
+
+    The logo stands in the top corner where reading starts and veltzer.org
+    in the bottom corner where it ends, both outside the middle square.
+    """
+    image = Image.new("RGB", (WIDTH, HEIGHT), BACKGROUND)
+    draw = ImageDraw.Draw(image)
+    draw.rectangle((0, HEIGHT - BAND, WIDTH, HEIGHT), fill=ACCENT)
+    image.paste(face, (CENTRE - face.width // 2, PORTRAIT_TOP), face)
+    draw_mark(image, WIDTH - MARGIN - LOGO if rtl else MARGIN, MARGIN, LOGO)
+    site = ImageFont.truetype(str(OUTFIT_LIGHT), 32)
+    draw.text((MARGIN if rtl else WIDTH - MARGIN, HEIGHT - BAND - 28), "veltzer.org", font=site,
+              fill=ACCENT, anchor="ls" if rtl else "rs")
+    return image, draw
+
+
+def centred(draw, top, text, font, fill, direction):
+    """One line of text, centred in the middle square, its top at top."""
+    draw.text((CENTRE, top), text, font=font, fill=fill, anchor="ma", direction=direction)
 
 
 def wrap(draw, text, font, width, direction):
@@ -127,38 +155,45 @@ def wrap(draw, text, font, width, direction):
     return lines
 
 
+def balanced(draw, text, font, width, direction):
+    """wrap(), then the same number of lines at the narrowest width that
+    keeps it: lines of about one length, not full ones and a stray word."""
+    lines = wrap(draw, text, font, width, direction)
+    low, high = 0, width
+    while high - low > 4:
+        middle = (low + high) // 2
+        if len(wrap(draw, text, font, middle, direction)) <= len(lines):
+            high = middle
+        else:
+            low = middle
+    narrow = wrap(draw, text, font, high, direction)
+    # A word wider than the narrow width overflows it; keep the plain wrap then.
+    if max(draw.textlength(line, font=font, direction=direction) for line in narrow) > width:
+        return lines
+    return narrow
+
+
 def card(lang, face):
     rtl = lang in RTL
     name, _, line = home_title(lang).partition(" \u2013 ")
     bold_path, light_path = fonts(lang)
     direction = "rtl" if rtl else "ltr"
-    light = ImageFont.truetype(str(light_path), 48)
-    small = ImageFont.truetype(str(OUTFIT_LIGHT), 34)
+    light = ImageFont.truetype(str(light_path), 38)
 
-    image = Image.new("RGB", (WIDTH, HEIGHT), BACKGROUND)
-    draw = ImageDraw.Draw(image)
-    draw.rectangle((0, HEIGHT - 18, WIDTH, HEIGHT), fill=ACCENT)
-    draw_portrait(image, face, rtl)
+    image, draw = blank(face, rtl)
 
-    # Logo, name and line stacked at the start of the reading direction,
-    # in the column beside the portrait. The name takes the largest size
-    # that fits the column on one line.
-    edge = WIDTH - MARGIN if rtl else MARGIN
-    anchor = "ra" if rtl else "la"
-    logo = 110
-    draw_mark(image, edge - logo if rtl else edge, 110, logo)
-    size = 96
+    # The name under the portrait, at the largest size that fits the column
+    # on one line, then the line under it, wrapped.
+    size = 84
     bold = ImageFont.truetype(str(bold_path), size)
     while draw.textlength(name, font=bold, direction=direction) > COLUMN:
         size -= 4
         bold = ImageFont.truetype(str(bold_path), size)
-    draw.text((edge, 260), name, font=bold, fill=TEXT, anchor=anchor, direction=direction)
-    y = 380
-    for text in wrap(draw, line, light, COLUMN, direction):
-        draw.text((edge, y), text, font=light, fill=MUTED, anchor=anchor, direction=direction)
-        y += 60
-    draw.text((WIDTH - edge if rtl else WIDTH - MARGIN, 548), "veltzer.org", font=small,
-              fill=ACCENT, anchor="la" if rtl else "ra")
+    centred(draw, 328, name, bold, TEXT, direction)
+    y = 444
+    for text in balanced(draw, line, light, COLUMN, direction):
+        centred(draw, y, text, light, MUTED, direction)
+        y += 50
     return image
 
 
@@ -169,7 +204,7 @@ def main():
         if not font.is_file():
             die(f"{font} missing")
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    face = portrait()
+    face = portrait(SITE_PORTRAIT_SIZE)
     for lang in LANGUAGES:
         target = OUT_DIR / f"card-{lang}.jpg"
         card(lang, face).save(target, quality=88, optimize=True, progressive=True)

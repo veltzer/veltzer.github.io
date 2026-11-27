@@ -14,11 +14,11 @@ there is one per post and language, and a card drawn by hand goes stale the mome
 title changes. Each card is a product of its post, so editing a post
 redraws its card and nothing else.
 
-The look matches the site-wide card: the logo and the author's
-name at the top, the title large, the tags under it, veltzer.org and the
-accent band at the bottom, and the author's portrait (the drawing on the
-About page) in a circle on the far side from the text, so every shared link
-shows a picture. Hebrew is laid out right to left (Pillow needs libraqm,
+The look matches the site-wide card: the author's portrait (the drawing on
+the About page) in a circle, the author's name under it, then the title
+large and the tags, all centred inside the middle square of the card, which
+is the whole of what a small preview shows. The logo and veltzer.org stand
+in the corners, the accent band along the bottom. Hebrew is laid out right to left (Pillow needs libraqm,
 which its wheels bundle). doc/SHARE_CARDS.md has the decisions behind the
 cards.
 """
@@ -27,37 +27,38 @@ import sys
 import tomllib
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFont, features
+from PIL import ImageFont, features
 
 from make_og_images import (
     ACCENT,
-    BACKGROUND,
     COLUMN,
-    HEIGHT,
     LANGUAGES,
     LIBERATION,
     LIBERATION_LIGHT,
-    MARGIN,
     MUTED,
     OUTFIT,
     OUTFIT_LIGHT,
     RTL,
     TEXT,
-    WIDTH,
+    balanced,
+    blank,
+    centred,
     die,
-    draw_mark,
-    draw_portrait,
     fonts,
     home_title,
     portrait,
     wrap,
 )
 
-# The title gets the largest size at which it fits in MAX_LINES lines.
-TITLE_SIZES = (76, 68, 60, 54, 48, 44)
-MAX_LINES = 4
-TITLE_TOP = 190
-TITLE_BOTTOM = 470
+# The author's name stands under the portrait, the title in the box under
+# that, at the largest size at which it fits the box in MAX_LINES lines, and
+# the tags under the box.
+NAME_TOP = 256
+TITLE_SIZES = (72, 64, 56, 50, 44, 40, 36, 32)
+MAX_LINES = 5
+TITLE_TOP = 306
+TITLE_BOTTOM = 524
+TAGS_TOP = 540
 
 
 def front_matter(path):
@@ -76,7 +77,7 @@ def fit_title(draw, title, bold_path, width, direction):
         lines = wrap(draw, title, font, width, direction)
         line_height = round(size * 1.18)
         if len(lines) <= MAX_LINES and len(lines) * line_height <= TITLE_BOTTOM - TITLE_TOP:
-            return font, lines, line_height
+            return font, balanced(draw, title, font, width, direction), line_height
     # Longer than every size allows: the smallest size, cut at MAX_LINES.
     size = TITLE_SIZES[-1]
     font = ImageFont.truetype(str(bold_path), size)
@@ -87,44 +88,34 @@ def fit_title(draw, title, bold_path, width, direction):
     return font, lines, round(size * 1.18)
 
 
+def fit_tags(draw, tags, font, width, direction):
+    """The tags joined by a dot, as many of the first ones as fit the width."""
+    kept = list(tags)
+    while len(kept) > 1 and draw.textlength(" · ".join(kept), font=font, direction=direction) > width:
+        kept.pop()
+    return " · ".join(kept)
+
+
 def card(lang, title, tags, face):
     rtl = lang in RTL
     direction = "rtl" if rtl else "ltr"
     bold_path, light_path = fonts(lang)
     name = home_title(lang).partition(" \u2013 ")[0]
-    name_font = ImageFont.truetype(str(bold_path), 40)
-    tag_font = ImageFont.truetype(str(light_path), 32)
-    site_font = ImageFont.truetype(str(OUTFIT_LIGHT), 34)
+    name_font = ImageFont.truetype(str(bold_path), 32)
+    tag_font = ImageFont.truetype(str(light_path), 28)
 
-    image = Image.new("RGB", (WIDTH, HEIGHT), BACKGROUND)
-    draw = ImageDraw.Draw(image)
-    draw.rectangle((0, HEIGHT - 18, WIDTH, HEIGHT), fill=ACCENT)
+    image, draw = blank(face, rtl)
+    centred(draw, NAME_TOP, name, name_font, ACCENT, direction)
 
-    # The reading direction decides which edge everything hangs from.
-    edge = WIDTH - MARGIN if rtl else MARGIN
-    anchor = "ra" if rtl else "la"
-    mark = 64
-    if rtl:
-        draw_mark(image, edge - mark, 70, mark)
-        name_x = edge - mark - 24
-    else:
-        draw_mark(image, edge, 70, mark)
-        name_x = edge + mark + 24
-    draw.text((name_x, 80), name, font=name_font, fill=TEXT, anchor=anchor, direction=direction)
-
-    draw_portrait(image, face, rtl)
-
+    # The title, its lines centred in the box between the name and the tags.
     font, lines, line_height = fit_title(draw, title, bold_path, COLUMN, direction)
-    y = TITLE_TOP
+    y = TITLE_TOP + (TITLE_BOTTOM - TITLE_TOP - len(lines) * line_height) // 2
     for line in lines:
-        draw.text((edge, y), line, font=font, fill=TEXT, anchor=anchor, direction=direction)
+        centred(draw, y, line, font, TEXT, direction)
         y += line_height
 
     if tags:
-        draw.text((edge, 500), " · ".join(tags), font=tag_font, fill=MUTED, anchor=anchor,
-                  direction=direction)
-    draw.text((WIDTH - edge if rtl else WIDTH - MARGIN, 548), "veltzer.org", font=site_font,
-              fill=ACCENT, anchor="la" if rtl else "ra")
+        centred(draw, TAGS_TOP, fit_tags(draw, tags, tag_font, COLUMN, direction), tag_font, MUTED, direction)
     return image
 
 

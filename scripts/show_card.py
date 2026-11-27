@@ -13,7 +13,9 @@ otherwise) or by any URL of the site. The script reads the page the way
 WhatsApp does (its user agent, the og: tags in the head), fetches the picture
 og:image names, prints what it found and opens a mock-up of the two forms a
 preview takes: the large one, the whole 1200x630 card above the title, and
-the small one, a square cut from the middle of the card beside the title.
+the small one, a square cut from the middle of the card beside the title
+(the cards are drawn so that this square holds the portrait and the whole
+text, doc/SHARE_CARDS.md).
 
 By default it asks the live site, which is what a link shared now will show.
 --local reads the built _site/ instead (run `rsconstruct build` first), to
@@ -65,6 +67,7 @@ INK = (17, 27, 33)
 FADED = (84, 101, 111)
 LARGE_WIDTH = 500
 THUMB = 96
+ENLARGED = 220
 PAD = 10
 
 
@@ -163,7 +166,7 @@ def clipped(lines, count):
     return [*lines[: count - 1], lines[count - 1].rstrip(".,;: ") + "…"]
 
 
-def draw_text(draw, left, top, width, tags, lang, title_lines):
+def draw_text(draw, left, top, width, tags, lang, title_lines, description_lines):
     """Title, description and host in a column; returns the y below them."""
     bold, light = fonts(lang)
     rtl = lang in RTL
@@ -173,7 +176,7 @@ def draw_text(draw, left, top, width, tags, lang, title_lines):
     host = urllib.parse.urlparse(tags.get("og:url", "")).hostname or ""
     blocks = (
         (tags.get("og:title", ""), ImageFont.truetype(str(bold), 19), INK, title_lines, 25, direction),
-        (tags.get("og:description", ""), ImageFont.truetype(str(light), 15), FADED, 2, 20, direction),
+        (tags.get("og:description", ""), ImageFont.truetype(str(light), 15), FADED, description_lines, 20, direction),
         (host, ImageFont.truetype(str(OUTFIT_LIGHT), 14), FADED, 1, 20, None),
     )
     for text, font, colour, count, leading, text_direction in blocks:
@@ -199,7 +202,7 @@ def mockup(tags, picture, lang):
     draw.rounded_rectangle((left, top, left + LARGE_WIDTH + 2 * PAD, bottom + 105), 10, fill=BUBBLE)
     draw.rectangle((left + PAD, bottom, left + PAD + LARGE_WIDTH, bottom + 95), fill=PANEL)
     canvas.paste(large, (left + PAD, top + PAD))
-    draw_text(draw, left + 2 * PAD, bottom + 8, LARGE_WIDTH - 2 * PAD, tags, lang, 1)
+    draw_text(draw, left + 2 * PAD, bottom + 8, LARGE_WIDTH - 2 * PAD, tags, lang, 1, 2)
 
     # The small form: a square cut from the middle of the card, the text beside it.
     left, width = 580, 400
@@ -207,7 +210,12 @@ def mockup(tags, picture, lang):
     draw.rounded_rectangle((left, top, left + width, top + THUMB + 2 * PAD), 10, fill=BUBBLE)
     draw.rectangle((left + PAD, top + PAD, left + width - PAD, top + PAD + THUMB), fill=PANEL)
     canvas.paste(ImageOps.fit(picture, (THUMB, THUMB), Image.Resampling.LANCZOS), (left + PAD, top + PAD))
-    draw_text(draw, left + THUMB + 2 * PAD, top + PAD + 4, width - THUMB - 4 * PAD, tags, lang, 2)
+    draw_text(draw, left + THUMB + 2 * PAD, top + PAD + 4, width - THUMB - 4 * PAD, tags, lang, 2, 1)
+
+    # The same square enlarged, to judge what the thumbnail is made of.
+    top += THUMB + 2 * PAD + 50
+    draw.text((left, top - 30), "The middle square, enlarged", font=label, fill=FADED)
+    canvas.paste(ImageOps.fit(picture, (ENLARGED, ENLARGED), Image.Resampling.LANCZOS), (left, top))
     return canvas
 
 

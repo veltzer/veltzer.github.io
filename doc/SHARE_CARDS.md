@@ -38,17 +38,42 @@ its constants and drawing helpers from `make_og_images.py`, so the two
 cannot drift.
 
 - White background, the default light theme's accent (`#4051b5`, azure in
-  `shared-themes`) for the logo tile, the portrait's ring, `veltzer.org`
-  and an 18px band along the bottom.
-- Text on the near side of the reading direction, in a column 670px wide.
-- **The author's portrait** in a 300px circle on the far side.
-- `veltzer.org` bottom right (bottom left in Hebrew).
-- Site-wide card: the logo large, then the name as large as fits the column
-  on one line (96px at most), then the line under it, wrapped.
-- Post card: the logo and the name small at the top, then the title at the
-  largest of 76 down to 44px at which it fits four lines (cut with an
-  ellipsis beyond that; the longest title, 107 characters, fits at the
-  default sizes), then the tags joined by `·`.
+  `shared-themes`) for the logo tile, the portrait's ring, the author's
+  name on a post card, `veltzer.org` and an 18px band along the bottom.
+- **Everything that matters is centred inside the middle square** of the
+  card (630x630, see below): the portrait at the top, the text under it in
+  a column 570px wide.
+- **The author's portrait** in a circle, 210px on a post card and 270px on
+  a site-wide one, which has less to say.
+- Outside the square, only the corners: the logo top left and `veltzer.org`
+  bottom right (mirrored in Hebrew).
+- Site-wide card: under the portrait the name, as large as fits the column
+  on one line (84px at most), then the line under it, wrapped.
+- Post card: under the portrait the author's name, small, in the accent;
+  then the title at the largest of 72 down to 32px at which it fits its box
+  in at most five lines (cut with an ellipsis beyond that; the longest
+  title, 107 characters, fits); then the tags joined by `·`, as many of the
+  first ones as fit one line.
+- Wrapped text is balanced: the lines of a title are of about one length,
+  never three full lines and a stray word.
+
+## The middle square (2026-11-27)
+
+A preview takes one of two forms, and the platform chooses. The large one
+shows the whole card. The small one, a thumbnail beside the title, shows
+only a square cut from the middle of it: 630 of the 1200 pixels.
+
+Until 2026-11-27 the cards were laid out across the full width, the text
+on one side and the portrait on the other. The small form then showed the
+middle of the title, its words cut at both ends, and a sliver of the face.
+Now the square is the card: the portrait and every word are inside it, so
+the small form shows a whole picture, with the face at its top, which is
+the one thing still readable at thumbnail size. The price is paid by the
+large form, whose two sides carry only the logo and `veltzer.org`, and
+whose title is set in a narrower column and so somewhat smaller.
+
+One picture has to serve both forms: a page names one `og:image`, and
+nothing tells a platform to use a second, square one for its thumbnail.
 
 The cards are not themed. A share card is seen outside the site, by people
 who have not chosen a theme, and one fixed look is what makes it
@@ -86,8 +111,8 @@ build. The site-wide cards need `make_og_images.py` run by hand.
 ## Right to left
 
 Hebrew is laid out right to left (Pillow needs libraqm, which its wheels
-bundle; both scripts refuse to run without it), and the whole card mirrors:
-the text hangs from the right edge, the portrait moves to the left, and
+bundle; both scripts refuse to run without it). The middle square is
+centred, so only the corners mirror: the logo moves to the top right and
 `veltzer.org` to the bottom left.
 
 ## Fonts
@@ -123,13 +148,10 @@ scripts/show_card.py --local why-the-faithful-lie
 It reads the page with WhatsApp's user agent, prints the `og:` tags, fetches
 the picture `og:image` names, checks what a platform would trip over (the
 size, the dimensions, a missing tag) and opens a mock-up of the two forms a
-preview takes. It asks the live site, which is what a link shared now shows;
-`--local` reads `_site/` after a build, to look before pushing.
-
-The two forms matter. The large preview shows the whole card. The small one
-(a thumbnail beside the title) shows only a square cut from the middle of
-the card, and the portrait stands at the far edge, so the small form shows
-the middle of the title and at most a sliver of the face.
+preview takes, the large one and the small one, with the middle square the
+small one is cut from shown enlarged beside them. It asks the live site,
+which is what a link shared now shows; `--local` reads `_site/` after a
+build, to look before pushing.
 
 The script shows the card as it is now, not what a platform has cached.
 

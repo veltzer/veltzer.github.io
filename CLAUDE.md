@@ -107,7 +107,7 @@ an edited post rebuilds only the files that list it, and `clean outputs` +
 `build` restores the site from cache. rssite also writes the feeds, the
 sitemap and the shared-themes files (`[[publish]]`), and reads the commit the colophon
 names itself (`git` in the templates). The step it does not do is the
-per-post share cards, `scripts/make_post_cards.py` (one 1200x630 `og:image` per post, the title beside the author's portrait,
+per-post share cards, `scripts/make_post_cards.py` (one 1200x630 `og:image` per post, the author's portrait over the title, centred in the middle square a small preview shows,
 written to `_site/images/og/<file stem>.jpg`, never committed). See
 `rsconstruct.toml`.
 
