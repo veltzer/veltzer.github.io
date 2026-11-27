@@ -83,7 +83,7 @@ def _stroke(draw, points, scale, fill):
         draw.ellipse((x - r, y - r, x + r, y + r), fill=fill)
 
 
-def mark(size, rounded=True, tile=TILE, ink=INK):
+def mark(size, *, rounded=True, tile=TILE, ink=INK):
     """The mark as a size x size RGBA image, antialiased by supersampling."""
     big = size * SUPERSAMPLE
     scale = big / GRID
