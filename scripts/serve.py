@@ -39,6 +39,7 @@ import time
 import urllib.error
 import urllib.request
 from pathlib import Path
+from typing import override
 
 DEFAULT_PORT = 8000
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -53,6 +54,7 @@ class PagesHandler(http.server.SimpleHTTPRequestHandler):
     """Static handler that answers a missing path with the site's 404.html,
     status 404, the way GitHub Pages does, instead of Python's own error page."""
 
+    @override
     def send_error(self, code, message=None, explain=None):
         page = Path(self.directory or ".") / "404.html"
         if code != 404 or not page.is_file():

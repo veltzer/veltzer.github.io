@@ -20,6 +20,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
+from typing import override
 
 CONFIG = tomllib.loads(
     (Path(__file__).resolve().parent.parent / "rssite.toml").read_text(encoding="utf-8")
@@ -47,6 +48,7 @@ def fetch_status(url, follow):
     """Return (status, location) for url, without raising on 3xx or 4xx."""
 
     class NoRedirect(urllib.request.HTTPRedirectHandler):
+        @override
         def redirect_request(self, *_args, **_kwargs):
             return None
 

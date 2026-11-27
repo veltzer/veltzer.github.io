@@ -40,6 +40,7 @@ import urllib.parse
 import urllib.request
 from html.parser import HTMLParser
 from pathlib import Path
+from typing import override
 
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
@@ -78,6 +79,7 @@ class MetaTags(HTMLParser):
         super().__init__()
         self.tags = {}
 
+    @override
     def handle_starttag(self, tag, attrs):
         if tag != "meta":
             return
