@@ -28,8 +28,12 @@ output and redraw themselves.
 """
 
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from PIL import Image, ImageDraw
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 STATIC = REPO_ROOT / "static"
@@ -97,7 +101,7 @@ def mark(size, *, rounded=True, tile=TILE, ink=INK):
 
 
 def main():
-    targets = {
+    targets: dict[str, Callable[[Path], object]] = {
         "favicon.svg": lambda path: path.write_text(svg(), encoding="utf-8"),
         "favicon.ico": lambda path: mark(256).save(path, sizes=[(16, 16), (32, 32), (48, 48)]),
         "apple-touch-icon.png": lambda path: mark(180, rounded=False).convert("RGB").save(
