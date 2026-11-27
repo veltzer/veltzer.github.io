@@ -33,14 +33,14 @@ IMAGE_DIR = REPO_ROOT / "static" / "images"
 MAX_W, MAX_H = (int(n) for n in MAX_EDGE.rstrip(">").split("x"))
 
 
-def oversized(path):
+def oversized(path: Path) -> bool:
     """True if the image exceeds the standard in either dimension."""
     with Image.open(path) as image:
         width, height = image.size
     return width > MAX_W or height > MAX_H
 
 
-def main():
+def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--apply", action="store_true",
                         help="rewrite the files; without it, only report")

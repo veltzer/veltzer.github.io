@@ -44,12 +44,12 @@ ALTERNATE_HOSTS = [
 TIMEOUT = 30
 
 
-def fetch_status(url, follow):
+def fetch_status(url: str, *, follow: bool):
     """Return (status, location) for url, without raising on 3xx or 4xx."""
 
     class NoRedirect(urllib.request.HTTPRedirectHandler):
         @override
-        def redirect_request(self, *_args, **_kwargs):
+        def redirect_request(self, *_args, **_kwargs) -> None:
             return None
 
     handlers = [] if follow else [NoRedirect]
@@ -64,7 +64,7 @@ def fetch_status(url, follow):
         return None, str(error)
 
 
-def check_hosts():
+def check_hosts() -> list[str]:
     """Each non-canonical host redirects once to the canonical one."""
     failures = []
     for url in ALTERNATE_HOSTS:
@@ -76,7 +76,7 @@ def check_hosts():
     return failures
 
 
-def check_sitemap(site):
+def check_sitemap(site: str):
     """The sitemap lists real pages only: no paginator redirect stubs."""
     status, _ = fetch_status(site + "/sitemap.xml", follow=True)
     if status != 200:
@@ -96,7 +96,7 @@ def check_sitemap(site):
     return failures, entries
 
 
-def main():
+def main() -> int:
     site = base_url().rstrip("/")
     print(f"checking {site}\n")
 

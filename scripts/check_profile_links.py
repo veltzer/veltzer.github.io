@@ -33,6 +33,7 @@ import sys
 import urllib.error
 import urllib.request
 from pathlib import Path
+from typing import Any
 
 import yaml
 
@@ -56,7 +57,7 @@ BLOCKED_STATUSES = {401, 403, 405, 429, 999}
 logger = logging.getLogger(__name__)
 
 
-def die(message):
+def die(message: str):
     """Print an error to stderr and exit non-zero."""
     print(f"ERROR: {message}", file=sys.stderr)
     sys.exit(1)
@@ -79,7 +80,7 @@ def load_links():
     return links
 
 
-def request(url, method):
+def request(url: str, method: str):
     """Return the HTTP status for one request, or an error string."""
     req = urllib.request.Request(url, method=method)
     req.add_header("User-Agent", USER_AGENT)
@@ -97,7 +98,7 @@ def request(url, method):
         return None, str(getattr(error, "reason", error))
 
 
-def check(link):
+def check(link: dict[str, Any]):
     """Classify one link as ok, blocked or broken.
 
     HEAD first because it avoids downloading the page, then GET on anything that
@@ -118,7 +119,7 @@ def check(link):
     return "ok", name, url, f"HTTP {status}"
 
 
-def main():
+def main() -> int:
     """Check every profile URL and report anything that is not plainly fine."""
     parser = argparse.ArgumentParser(
         description="Check the profile URLs in data/profiles.yaml"

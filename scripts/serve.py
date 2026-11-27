@@ -39,13 +39,14 @@ import time
 import urllib.error
 import urllib.request
 from pathlib import Path
-from typing import override
+from subprocess import Popen
+from typing import Any, override
 
 DEFAULT_PORT = 8000
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
-def read_site_dir():
+def read_site_dir() -> Path:
     # The site's output dir: [processor.mass_generator.generic.site] output_dirs.
     return (REPO_ROOT / "_site").resolve()
 
@@ -55,7 +56,7 @@ class PagesHandler(http.server.SimpleHTTPRequestHandler):
     status 404, the way GitHub Pages does, instead of Python's own error page."""
 
     @override
-    def send_error(self, code, message=None, explain=None):
+    def send_error(self, code: int, message: str | None = None, explain: str | None = None) -> None:
         page = Path(self.directory or ".") / "404.html"
         if code != 404 or not page.is_file():
             super().send_error(code, message, explain)
@@ -69,8 +70,8 @@ class PagesHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(body)
 
 
-def start_server(port, docs_dir):
-    def handler(*args, **kwargs):
+def start_server(port: int, docs_dir: Path):
+    def handler(*args: Any, **kwargs: Any) -> PagesHandler:
         return PagesHandler(*args, directory=str(docs_dir), **kwargs)
 
     class ReusableServer(http.server.ThreadingHTTPServer):
@@ -87,7 +88,7 @@ def start_server(port, docs_dir):
     return httpd
 
 
-def wait_for_server(url, timeout=10.0):
+def wait_for_server(url: str, timeout: float = 10.0) -> bool:
     deadline = time.time() + timeout
     while time.time() < deadline:
         try:
@@ -108,7 +109,7 @@ def find_browser():
     return None, None
 
 
-def launch_browser(url, anonymous):
+def launch_browser(url: str, *, anonymous: bool) -> tuple[Popen[bytes], str | None] | tuple[None, None]:
     name, path = find_browser()
     if not path:
         print(
@@ -133,7 +134,7 @@ def launch_browser(url, anonymous):
     return proc, profile_dir
 
 
-def main():
+def main() -> int:
     parser = argparse.ArgumentParser(
         description="Serve the built _site/ locally (run `rsconstruct build` first).",
     )
@@ -174,7 +175,7 @@ def main():
             if not wait_for_server(url):
                 print("Server did not become ready in time.", file=sys.stderr)
                 return 1
-            browser_proc, profile_dir = launch_browser(url, args.anonymous)
+            browser_proc, profile_dir = launch_browser(url, anonymous=args.anonymous)
             if args.anonymous and browser_proc is not None:
                 # Anonymous launch keeps the browser process attached to this
                 # temp profile, so waiting on it gives a clean shutdown signal.

@@ -43,8 +43,12 @@ import shutil
 import subprocess
 import tempfile
 import urllib.request
+from typing import TYPE_CHECKING
 
 from PIL import Image, UnidentifiedImageError
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 # Max width x height in device pixels: 2x the rendered card, see above.
 MAX_EDGE = "800x384>"
@@ -52,7 +56,7 @@ MAX_EDGE = "800x384>"
 QUALITY = "85"
 
 
-def _magick():
+def _magick() -> str | None:
     """The ImageMagick binary, preferring v7's `magick` over the v6 `convert`."""
     return shutil.which("magick") or shutil.which("convert")
 
@@ -65,7 +69,7 @@ class ImageError(OSError):
     """
 
 
-def normalise(path):
+def normalise(path: Path | str) -> bool:
     """Shrink `path` in place to the site standard. Returns True if it ran.
 
     Silently does nothing when ImageMagick is absent: a contributor without it
@@ -92,7 +96,7 @@ def normalise(path):
     return True
 
 
-def download_image(url, dest, timeout=15, user_agent="Mozilla/5.0"):
+def download_image(url: str, dest: Path | str, timeout: int = 15, user_agent: str = "Mozilla/5.0") -> None:
     """Download `url` to `dest` as a verified, normalised image.
 
     The bytes go to a temporary name next to `dest`, are checked to open as an
@@ -127,6 +131,6 @@ def download_image(url, dest, timeout=15, user_agent="Mozilla/5.0"):
         raise
 
 
-def _remove(path):
+def _remove(path: str) -> None:
     with contextlib.suppress(FileNotFoundError):
         os.unlink(path)

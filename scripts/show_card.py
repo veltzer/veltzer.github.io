@@ -75,12 +75,12 @@ PAD = 10
 class MetaTags(HTMLParser):
     """The <meta property=...> and <meta name=...> tags of a page, first one wins."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.tags = {}
 
     @override
-    def handle_starttag(self, tag, attrs):
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         if tag != "meta":
             return
         found = dict(attrs)
@@ -90,7 +90,7 @@ class MetaTags(HTMLParser):
             self.tags.setdefault(key, content)
 
 
-def meta_tags(html):
+def meta_tags(html: str):
     parser = MetaTags()
     parser.feed(html)
     return parser.tags
@@ -101,7 +101,7 @@ def base_url():
         return tomllib.load(stream)["base_url"].rstrip("/")
 
 
-def page_url(post, lang):
+def page_url(post: str, lang: str):
     """The URL of what the user named: a URL, a post file or a slug."""
     if post.startswith(("http://", "https://")):
         return post
@@ -115,15 +115,15 @@ def page_url(post, lang):
     return f"{base_url()}/{lang}/blog/{post}/"
 
 
-def local_path(url):
+def local_path(url: str):
     """The file under _site/ that the live site serves at url."""
     if not url.startswith(base_url() + "/"):
         die(f"{url}: not under {base_url()}, so _site/ does not have it")
     path = SITE / urllib.parse.urlparse(url).path.lstrip("/")
-    return path / "index.html" if url.split("?")[0].endswith("/") else path
+    return path / "index.html" if url.split("?", maxsplit=1)[0].endswith("/") else path
 
 
-def read(url, local):
+def read(url: str, *, local: bool):
     """The bytes at url and their content type (None when read from _site/)."""
     if local:
         path = local_path(url)
@@ -141,7 +141,7 @@ def read(url, local):
     raise AssertionError("unreachable")
 
 
-def problems(tags, data, content_type, picture):
+def problems(tags: dict[str, str], data: bytes, content_type: str | None, picture: Image.Image) -> list[str]:
     """Everything about the card a platform would trip over."""
     found = []
     if not tags["og:image"].startswith("https://"):
@@ -161,14 +161,14 @@ def problems(tags, data, content_type, picture):
     return found
 
 
-def clipped(lines, count):
+def clipped(lines: list[str], count: int):
     """The first count lines, the last ending in an ellipsis when some were cut."""
     if len(lines) <= count:
         return lines
     return [*lines[: count - 1], lines[count - 1].rstrip(".,;: ") + "…"]
 
 
-def draw_text(draw, left, top, width, tags, lang, title_lines, description_lines):
+def draw_text(draw: ImageDraw.ImageDraw, left: int, top: int, width: int, tags: dict[str, str], lang: str, title_lines: int, description_lines: int):
     """Title, description and host in a column; returns the y below them."""
     bold, light = fonts(lang)
     rtl = lang in RTL
@@ -189,7 +189,7 @@ def draw_text(draw, left, top, width, tags, lang, title_lines, description_lines
     return top
 
 
-def mockup(tags, picture, lang):
+def mockup(tags: dict[str, str], picture: Image.Image, lang: str):
     """Both forms of the preview, side by side, as one image."""
     picture = picture.convert("RGB")
     canvas = Image.new("RGB", (1010, 470), CHAT)
@@ -230,7 +230,7 @@ def main():
     args = parser.parse_args()
 
     url = page_url(args.post, args.lang)
-    html, _ = read(url, args.local)
+    html, _ = read(url, local=args.local)
     tags = meta_tags(html.decode("utf-8", errors="replace"))
     print(f"page   {url}" + ("  (from _site/)" if args.local else ""))
     for key in ("og:title", "og:description", "og:url", "og:image", "og:image:width", "og:image:height", "twitter:card"):
@@ -238,7 +238,7 @@ def main():
     if "og:image" not in tags:
         die("the page names no og:image, so a shared link gets no picture")
 
-    data, content_type = read(tags["og:image"], args.local)
+    data, content_type = read(tags["og:image"], local=args.local)
     picture = Image.open(io.BytesIO(data))
     print(f"picture          {picture.width}x{picture.height} {picture.format}, {len(data) // 1024} KB")
 

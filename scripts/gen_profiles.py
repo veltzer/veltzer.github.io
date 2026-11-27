@@ -31,7 +31,9 @@ inside a generated block, fails the build. The fix is to run it without
 import argparse
 import html
 import sys
+from argparse import Namespace
 from pathlib import Path
+from typing import Any
 
 import yaml
 
@@ -64,12 +66,12 @@ END = "<!-- END generated profiles -->"
 BEGIN_PREFIX = "<!-- BEGIN generated profiles"
 
 
-def die(message):
+def die(message: str):
     print(f"ERROR: {message}", file=sys.stderr)
     sys.exit(1)
 
 
-def load_profiles(source):
+def load_profiles(source: Path):
     if not source.is_file():
         die(f"Missing source file {source}.")
     data = yaml.safe_load(source.read_text(encoding="utf-8"))
@@ -78,7 +80,7 @@ def load_profiles(source):
     return data
 
 
-def render(data, lang):
+def render(data: dict[str, Any], lang: str) -> str:
     """Render the whole shared block as markdown for one language.
 
     Contact line, intro, the link list, then the trailing extras -- the same
@@ -124,7 +126,7 @@ def render(data, lang):
     return "\n".join(lines)
 
 
-def render_badge(extra):
+def render_badge(extra: dict[str, str]) -> str:
     """A badge image served by somebody else's server.
 
     With `badge_width` / `badge_height` in the YAML it is an <img> that
@@ -146,7 +148,7 @@ def render_badge(extra):
     return f'<img src="{url}" alt="{alt}"{size} loading="lazy" decoding="async">'
 
 
-def render_extra(extra, lang):
+def render_extra(extra: dict[str, str], lang: str) -> str:
     """Render one trailing extra: a sentence with a link, or a linked badge."""
     if "badge_url" in extra:
         badge = render_badge(extra)
@@ -157,7 +159,7 @@ def render_extra(extra, lang):
     return f"{extra[f'text_{lang}']} {link}"
 
 
-def render_identity(data):
+def render_identity(data: dict[str, Any]) -> str:
     """Emit the sameAs URL list as TOML for base.html's Person JSON-LD.
 
     Committed rather than read from the YAML at build time for the same reason
@@ -200,7 +202,7 @@ def render_identity(data):
     return "\n".join(lines)
 
 
-def spliced(path, body):
+def spliced(path: Path, body: str):
     """Return path's text with the marked block replaced by body, or appended."""
     if not path.is_file():
         die(f"Missing target file {path}")
@@ -224,7 +226,7 @@ def spliced(path, body):
     return text.rstrip("\n") + "\n\n" + block
 
 
-def targets(data):
+def targets(data: dict[str, Any]):
     """Every generated file with the full text it should have."""
     return [
         (ABOUT_EN, spliced(ABOUT_EN, render(data, "en"))),
@@ -234,11 +236,11 @@ def targets(data):
     ]
 
 
-def current(path):
+def current(path: Path):
     return path.read_text(encoding="utf-8") if path.is_file() else None
 
 
-def write(pairs):
+def write(pairs: list[tuple[Path, str]]) -> None:
     """Write each target whose content changes; leave the others untouched."""
     for path, text in pairs:
         if current(path) == text:
@@ -248,12 +250,12 @@ def write(pairs):
         print(f"wrote {path}")
 
 
-def check(pairs):
+def check(pairs: list[tuple[Path, str]]):
     """Return the targets that differ from what the YAML renders to."""
     return [path for path, text in pairs if current(path) != text]
 
 
-def parse_args():
+def parse_args() -> Namespace:
     parser = argparse.ArgumentParser(description="Render data/profiles.yaml into the About pages and data/identity.toml")
     parser.add_argument(
         "--check",
@@ -270,7 +272,7 @@ def parse_args():
     return parser.parse_args()
 
 
-def main():
+def main() -> None:
     args = parse_args()
     pairs = targets(load_profiles(args.source))
     if not args.check:

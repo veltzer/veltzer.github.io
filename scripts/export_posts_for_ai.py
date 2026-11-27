@@ -47,7 +47,7 @@ MARKER = ".export_posts_for_ai"
 TEMP_GLOB = ".*.md.*.tmp"
 
 
-def posts():
+def posts() -> list[Path]:
     return sorted(
         path
         for path in BLOG.glob("*.md")
@@ -55,7 +55,7 @@ def posts():
     )
 
 
-def claim(dest, names):
+def claim(dest: Path, names: set[str]) -> None:
     """Make sure dest is ours to mirror into, writing the marker when it is
     safe to adopt, and exit otherwise."""
     marker = dest / MARKER
@@ -76,7 +76,7 @@ def claim(dest, names):
                       "in veltzer.github.io. Its .md files are deleted when their post goes.\n")
 
 
-def write_atomically(source, target, data):
+def write_atomically(source: Path, target: Path, data: bytes) -> None:
     """Write through a temporary file and a rename, so an interrupted run
     never leaves a half-written post for Insync to upload. The copy takes
     the source's permissions rather than mkstemp's owner-only ones."""
@@ -91,7 +91,7 @@ def write_atomically(source, target, data):
         raise
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.split("\n", 1)[0])
     parser.add_argument(
         "--dest", type=Path, default=DEFAULT_DEST,

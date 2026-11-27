@@ -56,11 +56,11 @@ DARK_INK = (27, 29, 38)
 SUPERSAMPLE = 4
 
 
-def hex_of(rgb):
+def hex_of(rgb: tuple[int, int, int]):
     return "#{:02x}{:02x}{:02x}".format(*rgb)
 
 
-def svg():
+def svg() -> str:
     """The favicon as SVG text."""
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {GRID} {GRID}">
   <style>
@@ -77,7 +77,7 @@ def svg():
 """
 
 
-def _stroke(draw, points, scale, fill):
+def _stroke(draw: ImageDraw.ImageDraw, points: tuple[tuple[int, int], tuple[int, int]] | tuple[tuple[int, int], tuple[int, int], tuple[int, int]], scale: float, fill: tuple[int, int, int]) -> None:
     """A polyline with round joins and round caps, as SVG draws it."""
     scaled = [(x * scale, y * scale) for x, y in points]
     width = round(STROKE * scale)
@@ -87,7 +87,7 @@ def _stroke(draw, points, scale, fill):
         draw.ellipse((x - r, y - r, x + r, y + r), fill=fill)
 
 
-def mark(size, *, rounded=True, tile=TILE, ink=INK):
+def mark(size: int, *, rounded: bool = True, tile: tuple[int, int, int] = TILE, ink: tuple[int, int, int] = INK):
     """The mark as a size x size RGBA image, antialiased by supersampling."""
     big = size * SUPERSAMPLE
     scale = big / GRID
@@ -100,7 +100,7 @@ def mark(size, *, rounded=True, tile=TILE, ink=INK):
     return image.resize((size, size), Image.Resampling.LANCZOS)
 
 
-def main():
+def main() -> None:
     targets: dict[str, Callable[[Path], object]] = {
         "favicon.svg": lambda path: path.write_text(svg(), encoding="utf-8"),
         "favicon.ico": lambda path: mark(256).save(path, sizes=[(16, 16), (32, 32), (48, 48)]),

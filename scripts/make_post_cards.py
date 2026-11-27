@@ -26,6 +26,7 @@ cards.
 import sys
 import tomllib
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from PIL import ImageFont, features
 
@@ -50,6 +51,11 @@ from make_og_images import (
     wrap,
 )
 
+if TYPE_CHECKING:
+    from PIL.Image import Image
+    from PIL.ImageDraw import ImageDraw
+    from PIL.ImageFont import FreeTypeFont
+
 # The author's name stands under the portrait, the title in the box under
 # that, at the largest size at which it fits the box in MAX_LINES lines, and
 # the tags under the box.
@@ -61,7 +67,7 @@ TITLE_BOTTOM = 524
 TAGS_TOP = 540
 
 
-def front_matter(path):
+def front_matter(path: Path | str):
     """The TOML between the +++ lines."""
     text = Path(path).read_text(encoding="utf-8")
     parts = text.split("+++", 2)
@@ -70,7 +76,7 @@ def front_matter(path):
     return tomllib.loads(parts[1])
 
 
-def fit_title(draw, title, bold_path, width, direction):
+def fit_title(draw: ImageDraw, title: str, bold_path: Path, width: int, direction: str):
     """The biggest font, and its lines, that fit the title box."""
     for size in TITLE_SIZES:
         font = ImageFont.truetype(str(bold_path), size)
@@ -88,7 +94,7 @@ def fit_title(draw, title, bold_path, width, direction):
     return font, lines, round(size * 1.18)
 
 
-def fit_tags(draw, tags, font, width, direction):
+def fit_tags(draw: ImageDraw, tags: list[str], font: FreeTypeFont, width: int, direction: str):
     """The tags joined by a dot, as many of the first ones as fit the width."""
     kept = list(tags)
     while len(kept) > 1 and draw.textlength(" · ".join(kept), font=font, direction=direction) > width:
@@ -96,7 +102,7 @@ def fit_tags(draw, tags, font, width, direction):
     return " · ".join(kept)
 
 
-def card(lang, title, tags, face):
+def card(lang: str, title: str, tags: list[str], face: Image) -> Image:
     rtl = lang in RTL
     direction = "rtl" if rtl else "ltr"
     bold_path, light_path = fonts(lang)
@@ -104,7 +110,7 @@ def card(lang, title, tags, face):
     name_font = ImageFont.truetype(str(bold_path), 32)
     tag_font = ImageFont.truetype(str(light_path), 28)
 
-    image, draw = blank(face, rtl)
+    image, draw = blank(face, rtl=rtl)
     centred(draw, NAME_TOP, name, name_font, ACCENT, direction)
 
     # The title, its lines centred in the box between the name and the tags.
@@ -119,7 +125,7 @@ def card(lang, title, tags, face):
     return image
 
 
-def language_of(path):
+def language_of(path: Path | str) -> str:
     """post.en.md -> en: the suffix rssite reads the language from."""
     suffixes = Path(path).suffixes
     if len(suffixes) < 2 or suffixes[-2][1:] not in LANGUAGES:
@@ -127,7 +133,7 @@ def language_of(path):
     return suffixes[-2][1:]
 
 
-def main():
+def main() -> None:
     pairs = sys.argv[1:]
     if not pairs or len(pairs) % 2:
         die("usage: make_post_cards.py <post.md> <card.jpg> [...]")

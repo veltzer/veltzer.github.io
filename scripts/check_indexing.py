@@ -43,9 +43,14 @@ import tomllib
 import urllib.parse
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import date
 from pathlib import Path
+from typing import TYPE_CHECKING, Any
 
 import requests
+
+if TYPE_CHECKING:
+    from requests.sessions import Session
 
 CONFIG = tomllib.loads(
     (Path(__file__).resolve().parent.parent / "rssite.toml").read_text(encoding="utf-8")
@@ -69,7 +74,7 @@ WORKERS = 8
 CACHE = Path.home() / ".cache" / "veltzer.github.io" / "indexed.json"
 
 
-def repo_project():
+def repo_project() -> str | None:
     """The gcp_project line of .gcp.conf, or None when there is none."""
     if not GCP_CONF.exists():
         return None
@@ -80,7 +85,7 @@ def repo_project():
     return None
 
 
-def session(project):
+def session(project: str | None) -> Session:
     """A requests session carrying the gcloud token and the quota project."""
     result = subprocess.run(
         ["gcloud", "auth", "application-default", "print-access-token"],
@@ -100,7 +105,7 @@ def session(project):
     return http
 
 
-def post(http, url, body):
+def post(http: Session, url: str, body: dict[str, Any]):
     """POST json and return the decoded answer, or exit with Google's reason.
 
     A request that times out or loses its connection is tried RETRIES times
@@ -132,12 +137,12 @@ def sitemap_urls():
     return re.findall(r"<loc>([^<]+)</loc>", response.text)
 
 
-def local_today():
+def local_today() -> date:
     """Today's date, local time."""
     return dt.datetime.now().astimezone().date()
 
 
-def shown_pages(http, days):
+def shown_pages(http: Session, days: int):
     """Every page of the property that appeared in a search result."""
     end = local_today()
     start = end - dt.timedelta(days=days)
@@ -158,7 +163,7 @@ def shown_pages(http, days):
         start_row += PAGE_ROWS
 
 
-def inspect(http, page):
+def inspect(http: Session, page: str):
     """(indexed, coverage state) for one page, as Search Console reports it.
 
     A page Google would not answer for is reported as not inspected, in the
@@ -175,7 +180,7 @@ def inspect(http, page):
     return status.get("verdict") == "PASS", status.get("coverageState", "unknown")
 
 
-def load_cache(max_age) -> dict[str, str]:
+def load_cache(max_age: int) -> dict[str, str]:
     """The cached indexed pages that are still fresh: {url: iso date}."""
     if not CACHE.exists():
         return {}
@@ -186,12 +191,12 @@ def load_cache(max_age) -> dict[str, str]:
     return {page: day for page, day in cached.items() if day > oldest}
 
 
-def save_cache(cache):
+def save_cache(cache: dict[str, str]) -> None:
     CACHE.parent.mkdir(parents=True, exist_ok=True)
     CACHE.write_text(json.dumps(cache, indent=1, sort_keys=True) + "\n", encoding="utf-8")
 
 
-def inspect_all(http, pages, cache):
+def inspect_all(http: Session, pages: list[str], cache: dict[str, str]):
     """{page: coverage state} for the pages that are not indexed.
 
     Every indexed verdict goes into the cache, which is saved as the answers
@@ -222,7 +227,7 @@ def inspect_all(http, pages, cache):
     return by_page
 
 
-def main():
+def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--days", type=int, default=90, help="how far back a search appearance counts (default 90)")
     parser.add_argument("--no-inspect", action="store_true", help="skip the per-page inspection of the pages not seen in search")

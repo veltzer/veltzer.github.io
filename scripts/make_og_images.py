@@ -29,10 +29,14 @@ module's drawing code, so they need Pillow, libraqm and the fonts.
 import sys
 import tomllib
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from PIL import Image, ImageDraw, ImageFont, ImageOps, features
 
 from make_logo import mark
+
+if TYPE_CHECKING:
+    from PIL.ImageFont import FreeTypeFont
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 I18N = REPO_ROOT / "i18n"
@@ -78,30 +82,30 @@ PORTRAIT_TOP = 34
 SUPERSAMPLE = 4
 
 
-def die(message):
+def die(message: str):
     print(f"ERROR: {message}", file=sys.stderr)
     sys.exit(1)
 
 
-def home_title(lang):
+def home_title(lang: str):
     with (I18N / f"{lang}.toml").open("rb") as stream:
         return tomllib.load(stream)["home_title"]
 
 
-def fonts(lang):
+def fonts(lang: str) -> tuple[Path, Path]:
     """The bold and light faces a language's text is set in."""
     if lang == "en":
         return OUTFIT, OUTFIT_LIGHT
     return LIBERATION, LIBERATION_LIGHT
 
 
-def draw_mark(image, left, top, size):
+def draw_mark(image: Image.Image, left: int, top: int, size: int) -> None:
     """The logo, size x size, with its top left corner at (left, top)."""
     logo = mark(size)
     image.paste(logo, (left, top), logo)
 
 
-def portrait(size=PORTRAIT_SIZE):
+def portrait(size: int = PORTRAIT_SIZE):
     """The portrait cropped to a circle with a thin accent ring, as RGBA."""
     if not PORTRAIT.is_file():
         die(f"{PORTRAIT} missing")
@@ -116,7 +120,7 @@ def portrait(size=PORTRAIT_SIZE):
     return out.resize((size, size), Image.Resampling.LANCZOS)
 
 
-def blank(face, rtl):
+def blank(face: Image.Image, *, rtl: bool):
     """What every card starts from: the band, the portrait and the corners.
 
     The logo stands in the top corner where reading starts and veltzer.org
@@ -133,12 +137,12 @@ def blank(face, rtl):
     return image, draw
 
 
-def centred(draw, top, text, font, fill, direction):
+def centred(draw: ImageDraw.ImageDraw, top: int, text: str, font: FreeTypeFont, fill: tuple[int, int, int], direction: str | None) -> None:
     """One line of text, centred in the middle square, its top at top."""
     draw.text((CENTRE, top), text, font=font, fill=fill, anchor="ma", direction=direction)
 
 
-def wrap(draw, text, font, width, direction):
+def wrap(draw: ImageDraw.ImageDraw, text: str, font: FreeTypeFont, width: int, direction: str | None):
     """Greedy word wrap of text into lines no wider than width."""
     lines = []
     current = ""
@@ -155,7 +159,7 @@ def wrap(draw, text, font, width, direction):
     return lines
 
 
-def balanced(draw, text, font, width, direction):
+def balanced(draw: ImageDraw.ImageDraw, text: str, font: FreeTypeFont, width: int, direction: str | None):
     """wrap(), then the same number of lines at the narrowest width that
     keeps it: lines of about one length, not full ones and a stray word."""
     lines = wrap(draw, text, font, width, direction)
@@ -173,14 +177,14 @@ def balanced(draw, text, font, width, direction):
     return narrow
 
 
-def card(lang, face):
+def card(lang: str, face: Image.Image):
     rtl = lang in RTL
     name, _, line = home_title(lang).partition(" \u2013 ")
     bold_path, light_path = fonts(lang)
     direction = "rtl" if rtl else "ltr"
     light = ImageFont.truetype(str(light_path), 38)
 
-    image, draw = blank(face, rtl)
+    image, draw = blank(face, rtl=rtl)
 
     # The name under the portrait, at the largest size that fits the column
     # on one line, then the line under it, wrapped.
@@ -197,7 +201,7 @@ def card(lang, face):
     return image
 
 
-def main():
+def main() -> None:
     if not features.check("raqm"):
         die("Pillow was built without libraqm; Hebrew would be laid out left to right")
     for font in (OUTFIT, OUTFIT_LIGHT, LIBERATION, LIBERATION_LIGHT):

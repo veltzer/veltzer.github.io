@@ -11,23 +11,23 @@ import numpy as np
 from make_word_vectors import quantize, tokenize
 
 
-def test_niqqud_is_dropped():
+def test_niqqud_is_dropped() -> None:
     assert tokenize("שָׁלוֹם עוֹלָם") == ["שלום", "עולם"]
 
 
-def test_geresh_and_gershayim_fold_to_ascii():
+def test_geresh_and_gershayim_fold_to_ascii() -> None:
     assert tokenize("ג\u05f3ק של צה\u05f4ל") == ["ג'ק", "של", 'צה"ל']
 
 
-def test_apostrophes_and_accents():
+def test_apostrophes_and_accents() -> None:
     assert tokenize("Don\u2019t visit the Café") == ["don't", "visit", "the", "cafe"]
 
 
-def test_digits_and_punctuation_split_words():
+def test_digits_and_punctuation_split_words() -> None:
     assert tokenize("in 2026, re-run it") == ["in", "re", "run", "it"]
 
 
-def test_quantize_all_zero_row_is_zeros_with_finite_scale():
+def test_quantize_all_zero_row_is_zeros_with_finite_scale() -> None:
     vectors = np.array([[0.0, 0.0, 0.0], [0.5, -0.25, 0.1]], dtype=np.float32)
     rows, scale = quantize(vectors)
     assert np.isfinite(scale).all()
@@ -37,7 +37,7 @@ def test_quantize_all_zero_row_is_zeros_with_finite_scale():
     assert np.allclose(rows * scale[:, None], vectors, atol=float(scale.max()) / 2)
 
 
-def test_quantize_round_trips_closely():
+def test_quantize_round_trips_closely() -> None:
     vectors = np.array([[0.5, -0.25, 0.1], [-0.02, 0.01, 0.0]], dtype=np.float32)
     rows, scale = quantize(vectors)
     assert rows.dtype == np.int8

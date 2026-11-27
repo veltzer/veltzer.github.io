@@ -14,7 +14,7 @@ import make_logo
 BASE_HTML = (make_logo.REPO_ROOT / "templates" / "base.html").read_text(encoding="utf-8")
 
 
-def test_header_logo_matches_the_geometry():
+def test_header_logo_matches_the_geometry() -> None:
     match = re.search(r'<svg class="site-logo"[^>]*>(.*?)</svg>', BASE_HTML, re.DOTALL)
     assert match, "no inline logo in templates/base.html"
     inner = match.group(1)
@@ -24,16 +24,16 @@ def test_header_logo_matches_the_geometry():
     assert f'stroke-width="{make_logo.STROKE}"' in inner
 
 
-def test_path_data_matches_the_points():
+def test_path_data_matches_the_points() -> None:
     chevron = " L".join(f"{x} {y}" for x, y in make_logo.CHEVRON)
     (cx, cy), (ex, _) = make_logo.CURSOR
     assert f"M{chevron} M{cx} {cy} H{ex}" == make_logo.PATH
 
 
-def test_committed_favicon_is_current():
+def test_committed_favicon_is_current() -> None:
     committed = Path(make_logo.STATIC / "favicon.svg").read_text(encoding="utf-8")
     assert committed == make_logo.svg()
 
 
-def test_mark_has_the_requested_size():
+def test_mark_has_the_requested_size() -> None:
     assert make_logo.mark(48).size == (48, 48)

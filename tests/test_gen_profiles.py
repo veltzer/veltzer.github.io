@@ -3,14 +3,18 @@ pages and data/identity.toml, and in --check mode fails the build when they
 no longer match."""
 
 import shutil
+from typing import TYPE_CHECKING
 
 import pytest
 
 import gen_profiles
 
+if TYPE_CHECKING:
+    from pathlib import Path
+
 
 @pytest.fixture(name="repo")
-def fixture_repo(tmp_path, monkeypatch):
+def fixture_repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     """Copies of the real source and targets, with the script pointed at them."""
     for name in ("ABOUT_EN", "ABOUT_HE", "ABOUT_RU", "IDENTITY"):
         real = getattr(gen_profiles, name)
@@ -24,13 +28,13 @@ def pairs():
     return gen_profiles.targets(gen_profiles.load_profiles(gen_profiles.SOURCE))
 
 
-def test_committed_files_match_the_yaml():
+def test_committed_files_match_the_yaml() -> None:
     # The same assertion the build makes, against the real files.
     assert not gen_profiles.check(pairs())
 
 
 @pytest.mark.usefixtures("repo")
-def test_hand_edit_inside_the_block_is_caught():
+def test_hand_edit_inside_the_block_is_caught() -> None:
     about = gen_profiles.ABOUT_HE
     text = about.read_text(encoding="utf-8")
     end = text.index(gen_profiles.END)
@@ -42,19 +46,19 @@ def test_hand_edit_inside_the_block_is_caught():
 
 
 @pytest.mark.usefixtures("repo")
-def test_text_outside_the_block_is_kept():
+def test_text_outside_the_block_is_kept() -> None:
     about = gen_profiles.ABOUT_EN
     about.write_text("Hand-written prose.\n\n" + about.read_text(encoding="utf-8"), encoding="utf-8")
     assert not gen_profiles.check(pairs())
 
 
 @pytest.mark.usefixtures("repo")
-def test_stale_identity_is_caught():
+def test_stale_identity_is_caught() -> None:
     gen_profiles.IDENTITY.write_text('sameas = ["https://example.com"]\n', encoding="utf-8")
     assert gen_profiles.check(pairs()) == [gen_profiles.IDENTITY]
 
 
 @pytest.mark.usefixtures("repo")
-def test_missing_identity_is_caught():
+def test_missing_identity_is_caught() -> None:
     gen_profiles.IDENTITY.unlink()
     assert gen_profiles.check(pairs()) == [gen_profiles.IDENTITY]
