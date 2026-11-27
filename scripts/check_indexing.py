@@ -175,7 +175,7 @@ def inspect(http, page):
     return status.get("verdict") == "PASS", status.get("coverageState", "unknown")
 
 
-def load_cache(max_age):
+def load_cache(max_age) -> dict[str, str]:
     """The cached indexed pages that are still fresh: {url: iso date}."""
     if not CACHE.exists():
         return {}

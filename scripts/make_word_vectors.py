@@ -114,7 +114,8 @@ def fetch(release: dict, name: str) -> Path:
 
 def select(path: Path, common: int, wanted: set[str]) -> tuple[list[str], np.ndarray]:
     """The first common rows of a .vec.gz and those of the wanted words, in file order."""
-    words, rows = [], []
+    words: list[str] = []
+    rows: list[str] = []
     with gzip.open(path, "rt", encoding="utf-8") as f:
         f.readline()
         for i, line in enumerate(f):
